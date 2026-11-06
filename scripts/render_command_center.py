@@ -157,7 +157,7 @@ def dashboard_md(plan, metrics):
     counts=today["counts"]
     conflict=metrics.get("contradictions",0)
     inventory=plan["inventory"]
-    exclusion=load(ROOT/"data"/"exclusion_memory.json")
+    exclusion=metrics.get("exclusion_memory", {})
     source_rows=[]
     for k,v in sorted(metrics.get("providers",{}).items()):
         source_rows.append(f'| {md(k)} | {md(v.get("health","unknown"))} | {v.get("observed",0)} | {v.get("new_unique",0)} |')
@@ -424,6 +424,7 @@ def render(root=ROOT):
     metrics=load(root/"assets"/"readme"/"metrics.json")
     if not metrics:
         raise ValueError("Missing README source metrics")
+    metrics["exclusion_memory"]=load(root/"data"/"exclusion_memory.json")
     assets=root/"assets"/"readme"
     docs=root/"docs"
     assets.mkdir(parents=True,exist_ok=True)
