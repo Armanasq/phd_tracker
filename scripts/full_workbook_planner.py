@@ -85,17 +85,17 @@ def read_inputs(wb, today: date):
     all_tasks = []
     for a in app_rows:
         d = a["deadline"]
-        if not d:
-            continue
-        days = (d - today).days
+        days = (d - today).days if d else None
         excluded = clean_state(a["verdict"]) in CLOSED
         all_tasks.append({
-            "type":"application_deadline","sheet":"Action list","row":a["row"],
+            "type":"application_deadline" if d else "application_unposted",
+            "sheet":"Action list","row":a["row"],
             "source_id":a["source_id"],"name":a["name"],
             "action":a["next_step"] or "Verify the official portal and deadline",
-            "due":d.isoformat(),"days":days,"final_deadline":d.isoformat(),
+            "due":d.isoformat() if d else None,"days":days,
+            "final_deadline":d.isoformat() if d else None,
             "verdict":a["verdict"],"source":a["source"],"notes":a["deadline_note"],
-            "state":"excluded" if excluded else "deadline_unconfirmed",
+            "state":"excluded" if excluded else "deadline_unconfirmed" if d else "date_not_posted",
             "blocked":excluded,"group":a["group"],
         })
     for row in wb["Step timeline"].iter_rows(min_row=4, max_col=7):
@@ -203,6 +203,7 @@ def plan(wb, today: date):
         },
         "inventory": {
             "application_rows":len(apps),
+            "application_dates_unposted_or_rolling":by_type["application_unposted"],
             "timeline_steps":by_type["timeline_step"],
             "cross_route_tasks":by_type["cross_route_task"],
             "dropped_routes":len(dropped),
