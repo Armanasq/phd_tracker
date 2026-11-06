@@ -47,7 +47,7 @@ def test_asset_mentions_are_not_assumed_missing():
 
 
 def test_source_conflict_blocks_unqualified_ready_claim():
-    latest = {"source_statuses": [{"id": "doctoral-123", "status": "contradiction_closed_portal"}]}
+    latest = {"source_statuses": [{"id": "portal-check-1", "application_id": "doctoral-123", "status": "contradiction_closed_portal"}]}
     report = evaluate(make_workbook(), make_assets("ready"), date(2026, 11, 6), [], latest)
     item = report["applications"][0]
     assert item["readiness"] == "source_conflict"
