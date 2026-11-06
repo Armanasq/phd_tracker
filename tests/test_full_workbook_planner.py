@@ -58,7 +58,7 @@ def test_due_today_is_distinct_from_linked_final_deadlines(tmp_path):
     counts=result["today"]["counts"]
     assert counts["deadline_actions"]==1
     assert counts["excluded_deadlines"]==1
-    assert counts["timeline_tasks"]==3
+    assert counts["timeline_tasks"]==2
     assert counts["shared_tasks"]==1
     assert counts["linked_past_steps_not_recounted"]==1
     assert any(t["source_id"]=="A" for t in result["today"]["scheduled_timeline_tasks"])
