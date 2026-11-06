@@ -143,6 +143,48 @@ def providers(s: dict) -> str:
     return svg(560, height, parts, "Discovery sources and source availability")
 
 
+
+def horizon(s: dict) -> str:
+    counts = [0] * 6
+    labels = ["Today", "1-3 days", "4-7 days", "8-14 days", "15-30 days", "31+ days"]
+    intervals = [(0, 0), (1, 3), (4, 7), (8, 14), (15, 30), (31, 100000)]
+    wb = load_workbook(ROOT / "PhD_Action_List.xlsx", read_only=True, data_only=False)
+    closed = {"submitted", "skipped", "rejected", "accepted", "withdrawn", "not eligible"}
+    today = date.fromisoformat(s["today"])
+    for row in wb["Action list"].iter_rows(min_row=4, max_col=21, values_only=True):
+        if not row[6] or str(row[4] or "").lower().strip() in closed:
+            continue
+        deadline = row[1]
+        if isinstance(deadline, datetime):
+            deadline = deadline.date()
+        if not isinstance(deadline, date):
+            try:
+                deadline = date.fromisoformat(str(deadline)[:10])
+            except ValueError:
+                continue
+        days = (deadline - today).days
+        if days < 0:
+            continue
+        for i, (low, high) in enumerate(intervals):
+            if low <= days <= high:
+                counts[i] += 1
+                break
+    max_count = max(1, max(counts))
+    parts = [
+        txt(30, 42, "DEADLINE DISTRIBUTION", 17, FG, 700),
+        txt(30, 68, "Candidate applications grouped by remaining calendar days", 12, MUTED),
+    ]
+    for i, (label, count) in enumerate(zip(labels, counts)):
+        y = 95 + i * 43
+        color = AMBER if i < 3 else TEAL
+        parts += [
+            txt(36, y + 17, label, 12, MUTED, 600),
+            box(168, y, 800, 24, "#1E2E45", "#26384F", 5),
+            box(168, y, max(3, int(800 * count / max_count)), 24, color, color, 5),
+            txt(990, y + 17, count, 13, FG, 700),
+        ]
+    return svg(1050, 385, parts, "Automatically generated deadline distribution horizontal bar chart")
+
 def readme(s: dict) -> str:
     upcoming = []
     for row in s["near"][:12]:
@@ -176,6 +218,8 @@ def readme(s: dict) -> str:
 <td width="33%"><a href="assets/readme/providers.svg"><img src="assets/readme/providers.svg" alt="Search source health" width="100%" /></a></td>
 </tr>
 </table>
+
+<a href="assets/readme/horizon.svg"><img src="assets/readme/horizon.svg" alt="Deadline distribution vector chart" width="100%" /></a>
 
 <sub>Last rendered: __DATE__ · GitHub READMEs do not execute embedded JavaScript; supported interaction is provided through native expandable sections, Mermaid, Issues and Actions.</sub>
 
@@ -325,6 +369,7 @@ def render(today: date) -> dict:
         "hero.svg": hero(s),
         "deadlines.svg": deadlines(s),
         "providers.svg": providers(s),
+        "horizon.svg": horizon(s),
     }.items():
         (ASSETS / name).write_text(payload, encoding="utf8")
     (ROOT / "README.md").write_text(readme(s), encoding="utf8")
