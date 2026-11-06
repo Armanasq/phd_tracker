@@ -26,8 +26,9 @@ for attempt in 1 2 3; do
   python scripts/validate_tracker.py
   python scripts/notification_engine.py
   python scripts/render_readme.py
+  python scripts/render_command_center.py
 
-  git add README.md assets/readme/ PhD_Action_List.xlsx \
+  git add README.md docs/TODAY.md assets/readme/ PhD_Action_List.xlsx \
     data/discovered_candidates.json \
     data/discovery_report.json \
     data/ingestion_report.json \
