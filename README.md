@@ -114,9 +114,9 @@ The full execution queue preserves original worksheet row numbers and source IDs
 
 The original *Dropped* and *Not added* tabs retain **6 dropped routes** and **200 researched-but-not-added routes**. They are an evidence base for explaining omissions, not proof that those programmes are permanently unsuitable.
 
-The automated research queue contains 25 rows. Review both university vacancy records and eligibility/funding requirements before promoting a result to the main list.
+The automated research queue contains 25 rows. Review both university vacancy records and eligibility/funding requirements before promoting a result to the main list. Historical exclusions have **0 possible reappearance warning(s)**, which require manual review rather than automatic rejection.
 
-[Source provenance](data/latest_run.json) · [Discovery report](data/discovery_report.json) · [Rejected and unadded decisions](PhD_Action_List.xlsx) · [Detailed methodology](docs/PRODUCT_RFC.md)
+[Source provenance](data/latest_run.json) · [Discovery report](data/discovery_report.json) · [Historical exclusion memory](data/exclusion_memory.json) · [Rejected and unadded decisions](PhD_Action_List.xlsx) · [Detailed methodology](docs/PRODUCT_RFC.md)
 
 </details>
 
