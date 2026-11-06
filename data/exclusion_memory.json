@@ -1,0 +1,1452 @@
+{
+  "schema_version": 1,
+  "original_records": 206,
+  "drop_count": 6,
+  "unadded_count": 200,
+  "entries": [
+    {
+      "type": "Dropped",
+      "route": "Oslo University Hospital, PhD Fellowship in AI-native networking for healthcare (SYNAPSE; Intervention Centre, Section for Medical ICT)",
+      "status": "UNVERIFIED",
+      "reason": "Requirement lines: MSc (120 ECTS) in Computer Science, Electrical Engineering or related incl. thesis; BSc 180 ECTS; minimum grade B (A preferred); thesis B or better; ML/DL with PyTorch or TensorFlow plus one of GNN, RL, federated learning, network optimisation. No citizenship, sanctions or security clause found. Candidate's Tehran grades need conversion to the Norwegian scale. | No live ad with a 15 Nov deadline found; both located ads are past deadline; Jobbnorge ad not located; Webcruiter page not fetched; Ads list no required documents and no referee count",
+      "source_id": "M16"
+    },
+    {
+      "type": "Dropped",
+      "route": "UiS PhD Fellowship in Public Safety, Underground Applications and Spatial Analysis (308036, 2 posts, SFI-CISU)",
+      "status": "LIVE",
+      "reason": "NOT_ELIGIBLE: master's must be in Geographic Information, Risk Management, Societal Safety, Urban Planning or related; and applicants must be able to obtain RESTRICTED security authorization under Norwegian Security Act s.8-9 (an Iranian national with no Norwegian history is unlikely to qualify: my inference, not stated). Salary NOK 580,000. | Security authorization clause",
+      "source_id": "C07-UiS-308036"
+    },
+    {
+      "type": "Dropped",
+      "route": "FNR (Luxembourg) AFdoc doctoral grant, first call 2026",
+      "status": "LIVE",
+      "reason": "NOT_ELIGIBLE: FNR page requires applicants to 'demonstrate a link to Luxembourg' (defined in guidelines, not read). Chronicle.lu on the reform: at least five cumulative years of education or residence in Luxembourg. Candidate has none stated, so fails unless the guidelines differ. Up to 4 years, max EUR 54,574/yr salary contribution to host. | Guidelines and call documents on SharePoint not read; Luxembourg-link definition taken from secondary source",
+      "source_id": "C08"
+    },
+    {
+      "type": "Dropped",
+      "route": "UKRI AI CDT Dependable and Deployable AI for Robotics (CDT-D2AIR), Heriot-Watt / Edinburgh",
+      "status": "CLOSED",
+      "reason": "STILL_UNKNOWN. Pages are stale (2024/25 and 2025 wording) and conflict. Studentships are 'available to all nationalities' but 'cover home tuition fees' and UKRI-rate maintenance only; no page says international fee difference is covered. The Edinburgh informatics page says the final cohort has been admitted. Treat as probably closed until the CDT confirms. | No page dated 2026 or 2027 states a cohort, deadline or international fee policy; Contradictory statements between edinburgh-robotics.org and informatics.ed.ac.uk",
+      "source_id": "C09"
+    },
+    {
+      "type": "Dropped",
+      "route": "Deakin University PhD (international)",
+      "status": "CLOSED",
+      "reason": "NOT_ELIGIBLE for now. Reported Deakin decision not to proceed with enrolments from sanctioned countries (Iran is sanctioned); no Deakin page read shows it reversed, and the 2027 international scholarship round has closed. Basis is a news report, not a Deakin notice. | Deakin pages carry no Iran notice; the pause is documented only by THE (24 Aug 2026)",
+      "source_id": "C14-DEAKIN"
+    },
+    {
+      "type": "Dropped",
+      "route": "Swinburne University of Technology PhD (international)",
+      "status": "UNVERIFIED",
+      "reason": "NOT_ELIGIBLE for now. Swinburne is reported to have paused assessment of Iranian PhD applications and no Swinburne page shows it lifted. Basis is a news report; a written confirmation from Swinburne would upgrade this. | Swinburne how-to-apply page failed to load; pause documented only by THE",
+      "source_id": "C14-SWINBURNE"
+    },
+    {
+      "type": "Not added",
+      "route": "Leeds iDRO Dr Chengxu Zhou quadruped PhD (project 276)",
+      "status": "Research exclusion / historical",
+      "reason": "Ongoing deadline but funding only for UK (Leeds Doctoral Scholarship), Chinese (CSC) or US (Marshall) nationals; no funding for an Iranian applicant",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "QMUL Ketao Zhang bio-inspired legged systems PhD (SEMS-PHD-540)",
+      "status": "Research exclusion / historical",
+      "reason": "Requires CSC scholarship; deadline 31 Jan 2024, long past",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Edinburgh SLMC (Vijayakumar) via EPSRC CDT Robotics and Automation",
+      "status": "Research exclusion / historical",
+      "reason": "CDT places prioritise UK and EU students; no live deadline; self-funded otherwise",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Sydney CSIRO Industry PhD Visual-LiDAR inertial localisation (Viorela Ila)",
+      "status": "Research exclusion / historical",
+      "reason": "Domestic students only; closed 17 Mar 2025",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UQ SPATIAL-KHOSOUSSI Research Project Scholarship",
+      "status": "Research exclusion / historical",
+      "reason": "Closed 24 Apr 2025",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "QUT Fischer DECRA adaptive robot positioning",
+      "status": "Research exclusion / historical",
+      "reason": "2024 call, no date or international funding statement",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Glasgow RAINZ CDT net-zero robotics",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 11 Feb 2025, past; UK-oriented",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UL UOL08030 Doctoral Researcher ML Algorithms Efficiency (Mocanu)",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 16 Apr 2026, closed",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UL UOL08057 Learning-Based Robot Motion (Voos)",
+      "status": "Research exclusion / historical",
+      "reason": "Expired 1 May 2026",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UL UOL08431 Steel-Timber Composite beams PhD",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 31 Oct 2026 but civil engineering, no track fit",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UL UOL08056 Joint Communications and Positioning 6G NTN",
+      "status": "Research exclusion / historical",
+      "reason": "Telecom DSP focus, no deadline, little track fit; posted months ago",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UiO PhD in Digital Signal Processing and Image Analysis with GE Healthcare (arbeidsplassen 95be5866)",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 9 Feb 2026, closed",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UiT PhD in Machine Learning (Kampffmeyer) 1351300",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 21 Jul 2019, old",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "MMU Doctoral Teaching Assistant PINN-based CFD (Wei Bai)",
+      "status": "Research exclusion / historical",
+      "reason": "UK/home students only, no visa sponsorship, closed 4 Oct 2026",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UiO PhD Knowledge-Grounded LLM Agents for Defensive Cyber Operations (FFI)",
+      "status": "Research exclusion / historical",
+      "reason": "Requires security eligibility under the Security Act with background checks for cooperation with Norwegian national security stakeholders; defence project, clearance-type clause",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UiO PhD Multi-modal microscopy of virus-infected organoids (30 Oct 2026)",
+      "status": "Research exclusion / historical",
+      "reason": "Physics microscopy, weak fit; Security Act eligibility clause; 2 days left",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Toronto STARS Lab (Barfoot/Kelly) prospective students",
+      "status": "Research exclusion / historical",
+      "reason": "Page tells students to bring external scholarships; no lab funding stated; must apply via Aerospace Studies",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Laval Norlab (Pomerleau, Giguere)",
+      "status": "Research exclusion / historical",
+      "reason": "No recruiting, funding or deadline information on the page",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Idiap Ergodic Control for Robotics (DECOR)",
+      "status": "Research exclusion / historical",
+      "reason": "Page states position has been filled",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "ETH ISI Energy-Efficient ML for wearable and AR",
+      "status": "Research exclusion / historical",
+      "reason": "Listing shows Expired",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Aarhus Physical AI Adaptive Foundation Models for Robotics",
+      "status": "Research exclusion / historical",
+      "reason": "Denmark, not a target country",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Insight Centre and UCD CS PhD vacancy pages",
+      "status": "Research exclusion / historical",
+      "reason": "Listings are 2020 or 2025; no live PhD calls found",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "LinkedIn, X, Bluesky, Mastodon, Threads, Reddit leads",
+      "status": "Research exclusion / historical",
+      "reason": "WebSearch returned no social posts; these platforms were not retrievable; no social lead could be followed to a primary page",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Leeds PhD project 276 agile motion generation for quadruped robots (Zhou)",
+      "status": "Research exclusion / historical",
+      "reason": "Funding routes listed only for UK, Chinese and US citizens; no scholarship for an Iranian national",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Manchester Metropolitan University PINN CFD doctoral teaching assistant (Wei Bai)",
+      "status": "Research exclusion / historical",
+      "reason": "Closed 4 Oct 2026; UK students only, no visa sponsorship",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UCL i4health open studentships",
+      "status": "Research exclusion / historical",
+      "reason": "Home fee payers only; overseas not considered",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Edinburgh PhD 3D Computer Vision for Medical Imaging (D'Arnese)",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 27 Feb 2026 passed",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "OsloMet embodied AI PhD fellowships ref 26/06535",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 4 May 2026 passed; export control law clause",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UiO PhD in robotics (Nygaard) listing 2591091",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 4 Jan 2026 passed",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "NMBU semantic SLAM PhD",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 2023",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "NTNU AI for PSE positions 303320 and 303229",
+      "status": "Research exclusion / historical",
+      "reason": "Older Jobbnorge ads, no live deadline found",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Sydney Marine Robotics scholarship (Williams) and Hullbot scholarship",
+      "status": "Research exclusion / historical",
+      "reason": "Closed 2025 and 2022",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UQ Khosoussi Towards adaptive spatial perception",
+      "status": "Research exclusion / historical",
+      "reason": "Closed 24 April 2025",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "ANU Jonghyuk Kim prospective students",
+      "status": "Research exclusion / historical",
+      "reason": "Already in known list as C13-ANU",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "EPFL BioRob Ijspeert PhD",
+      "status": "Research exclusion / historical",
+      "reason": "Posting marked closed; requires EDRS admission (known C10) and fully funded student",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Oxford Dynamic Robot Systems (Fallon) join page",
+      "status": "Research exclusion / historical",
+      "reason": "No specific funded post; generic December DPhil deadline, international eligibility not addressed",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Toronto STARS lab (Kelly) join page",
+      "status": "Research exclusion / historical",
+      "reason": "No openings or funding stated; external scholarships only",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Imperial Dyson Robotics Lab 2015 studentships",
+      "status": "Research exclusion / historical",
+      "reason": "Stale 2015 posts",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UZH Language AI NLP PhD (Sennrich, TINE)",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline April 1 with no year; likely past",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Strathclyde AI multi-sensor proximity navigation",
+      "status": "Research exclusion / historical",
+      "reason": "Strathclyde excluded by brief; 2023 deadline",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Chalmers PhD legged robots",
+      "status": "Research exclusion / historical",
+      "reason": "Sweden, not a target country",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "SFU AISL (Rad) lab page",
+      "status": "Research exclusion / historical",
+      "reason": "No recruiting information",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Auckland CARES social robotics PhD",
+      "status": "Research exclusion / historical",
+      "reason": "No dates, funding or international eligibility stated",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UiO PhD in Knowledge-Grounded LLM Agents for Defensive Cyber Operations (2727535)",
+      "status": "Research exclusion / historical",
+      "reason": "Requires successful applicants to be security-eligible under the Security Act; no export-control paragraph. Clearance clause excludes.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UiO PhD in Robotics (Tonnes Nygaard, 2591091)",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 4 Jan 2026 passed; also states Norwegian security clearance requirement and export-control screening.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Leeds EPSRC DLA quadruped projects (276, 2324)",
+      "status": "Research exclusion / historical",
+      "reason": "Funding UK applicants only; 14 Nov 2025 deadline passed.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Idiap PhD in Fundamental Machine Learning; Idiap Agentic/LLM Reasoning",
+      "status": "Research exclusion / historical",
+      "reason": "Positions filled or closed.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "University of Bern PhD in AI and Medical Image Analysis (Reyes)",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 15 May 2025.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Univ. Luxembourg PhD in VSLAM with BIM alignment",
+      "status": "Research exclusion / historical",
+      "reason": "Posted June 2024; stale.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "ETH Institute for Biomedical Engineering PhD in physics-informed ML for cardiac MR",
+      "status": "Research exclusion / historical",
+      "reason": "Posted Jan 2026 via aggregator; no salary on page and ETH primary not retrievable; unverified.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Essex ML and robotics medical PhD; UQO visual-inertial SLAM (state-space 3135); NMBU robot navigation; UQ spatial perception (Khosoussi); Deakin autonomous navigation (phdportal)",
+      "status": "Research exclusion / historical",
+      "reason": "Expired deadlines, undated, or Deakin excluded by brief.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "EPFL BioRob humanoid neuromechanics posting; telegram AzarApply and phdfinder feeds (UK/Canada/Australia items)",
+      "status": "Research exclusion / historical",
+      "reason": "Closed, or 2025-dated leads with no live primary page.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Edinburgh Responsible NLP CDT 2026",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 7 Jan 2026 passed.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Universities of Galway Data Science PhDs (PHD-GSO-029-26); UCC RINN AI PhDs",
+      "status": "Research exclusion / historical",
+      "reason": "September or October 2026 start; filled or no open round.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "IEEE CSS state-space, ROS Discourse job tag, jobrxiv, ML-scholars, ApplyKite index, scholarshipdb, euraxess search, Jobbnorge search, EPFL careers",
+      "status": "Research exclusion / historical",
+      "reason": "No qualifying live T1-T4 PhD in target countries retrievable; several blocked by robots or errors.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "NTNU PhD Positions in Systems Engineering (310417)",
+      "status": "Research exclusion / historical",
+      "reason": "On user's do-not-report list; advert also requires NATO security clearance.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "NTNU PhD Candidate in AI for ship traffic monitoring (Norwegian Maritime AI Centre, Tor Arne Johansen, deadline 2 Nov 2026)",
+      "status": "Research exclusion / historical",
+      "reason": "Advert: \"The person hired must be eligible for security clearance at level CONFIDENTIAL in Norway.\" Clearance clause excludes an Iranian citizen.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "NTNU PhD Candidate in Cybersecurity Challenges in Maritime AI (Ålesund, 19 Nov 2026)",
+      "status": "Research exclusion / historical",
+      "reason": "Advert: \"The person hired must be eligible for security clearance at level CONFIDENTIAL or higher\".",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "NTNU PhD Candidate in Biological-inspired AI for misinformation (310510, 13 Nov 2026)",
+      "status": "Research exclusion / historical",
+      "reason": "Requires Norwegian language skills (minimum B1) from day one; also a language of work Norwegian.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UiO PhD Research Fellow in Knowledge-Grounded LLM Agents for Defensive Cyber Operations (30 Nov 2026)",
+      "status": "Research exclusion / historical",
+      "reason": "Cooperation with Norwegian national security stakeholders (FFI); security-eligibility required under the Security Act.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "NTNU Single-Stage PSU for AI Datacenters; Electrochemistry; Aluminium Extrusion; Welding; Power system; Biodiversity; marine biology; psychology; music; artistic research",
+      "status": "Research exclusion / historical",
+      "reason": "Field mismatch with tracks T1-T4 (not read in full).",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UiO PhD-fellowship, LCBC lifespan memory fMRI (3 Nov 2026)",
+      "status": "Research exclusion / historical",
+      "reason": "Psychology master's required; no export paragraph but field mismatch.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UiO smORF bioinformatics, computational medicinal chemistry, OsloMet quantum computing, USN resistive memory, Hydropower",
+      "status": "Research exclusion / historical",
+      "reason": "Field mismatch; not read in full.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "NTNU 309538, 309914, 310417, 308793, 308121; UiO 309937; UiA robot manipulation; OsloMet 310467; Integreat 310559; NTNU CAPTURE; NTNU 310778, 308144; SYNAPSE",
+      "status": "Research exclusion / historical",
+      "reason": "Already in known list or on user's exclusion list.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Simula InnoGuard PhD (1 Nov 2026), Simula quantum postdoc, research engineer",
+      "status": "Research exclusion / historical",
+      "reason": "InnoGuard DC5 already known; others are postdoc/engineer posts. Simula lists no other PhD.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UiT up to 5 ML PhD fellows (AI2/Visual Intelligence); UiT Human-AI remanufacturing; NTNU Shore Control Lab and Embodied AI posts (Alsos, Alexis); NTNU NorwAI AI PhD",
+      "status": "Research exclusion / historical",
+      "reason": "Deadlines passed (17 Jun, 24 Jun, 1 Apr, 25 Aug 2026; NorwAI undated). UiT advert export clause is generic.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Government of Ireland Postgraduate Scholarship",
+      "status": "Research exclusion / historical",
+      "reason": "Closed and replaced by Empower, an institution-level invited call; past round fee contribution up to EUR 5,750 only, below international fees.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Research Ireland CRTs (CRT-AI, Foundations of Data Science, Genomics, Advanced Networks) and Insight/ADAPT/CONNECT/Lero/I-Form/CURAM/FutureNeuro",
+      "status": "Research exclusion / historical",
+      "reason": "No current 2027 call page reachable; CRT pages and centre careers pages returned nothing current or blocked; only 2018-2022 call text found (international fee coverage not stated).",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UCD Computational Quantum Materials PhD (Caffrey, Jan 2027 start)",
+      "status": "Research exclusion / historical",
+      "reason": "Tuition covered only for candidates with EU fee status.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UL PhD Scholarship Statistics, Causal Inference and ML (euraxess 445195)",
+      "status": "Research exclusion / historical",
+      "reason": "Expired 31 Aug 2026; only EU tuition waiver stated.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Galway Decarb-AI PhD (Kannan); Galway sex-biased parasitism PhD",
+      "status": "Research exclusion / historical",
+      "reason": "Closed 15 Jun 2026; second is biology.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "TCD, UCD, UCC, DCU, Maynooth, UL, TU Dublin, ATU, MTU scholarship pages; Teagasc Walsh; SETU seaweed; TU Dublin wood; Ulster thermal batteries",
+      "status": "Research exclusion / historical",
+      "reason": "University pages blocked or returned errors; Walsh and others off-track or Northern Ireland (UK).",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Norwegian listings via jobbnorge, stilling.forskning.no, academicpositions",
+      "status": "Research exclusion / historical",
+      "reason": "Jobbnorge blocked, stilling.forskning.no robots-disallowed on listing, academicpositions listing returned client error; arbeidsplassen.nav.no used instead (130 PhD ads enumerated).",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Durham University Efficient Physical AI for Real-World Robotics (jobs.ac.uk DTI242, Atapour-Abarghouei)",
+      "status": "Research exclusion / historical",
+      "reason": "Funding is 'for Home fee-status applicants only'; DSL085 and DSL079 sibling adverts same; one advert says expired 15 Aug 2026",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Bristol PhD Machine-learning for High-speed Aerial Vehicle Control (Nguyen, Kocer, Lowenberg)",
+      "status": "Research exclusion / historical",
+      "reason": "Home fee status required and UK security clearance expected",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Surrey PhD Robust, Certified, Scalable Federated Machine Unlearning (PGR-2526-074)",
+      "status": "Research exclusion / historical",
+      "reason": "'Open to candidates who pay UK/home rate fees'",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Surrey SEDarc studentship",
+      "status": "Research exclusion / historical",
+      "reason": "ESRC social-science scheme (linguistics, business, psychology), 30 percent international cap, off-profile",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "KCL Dental Institute Trustworthy Generative AI in Healthcare (2026YL-TGAi-R2)",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 30 September 2026 passed",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UKRI CDT in Safe and Trusted AI (KCL and Imperial)",
+      "status": "Research exclusion / historical",
+      "reason": "Page states 'Applicants who require an ATAS certificate cannot be considered'; page covers 2025 entry only",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "University of Leeds School of Computer Science studentship (AI in medical imaging, Ping Lu)",
+      "status": "Research exclusion / historical",
+      "reason": "'open to UK applicants only'; 2025 listing",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Manchester REVALUE-BUILD (Africa Futures Doctoral Scholarship)",
+      "status": "Research exclusion / historical",
+      "reason": "Africa Futures scheme, construction management, funding table says UK students",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Kent LASE PhD Scholarship (International/Home) Programming Languages for Design Computation",
+      "status": "Research exclusion / historical",
+      "reason": "Advert unreadable and off-profile",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Edinburgh CDT D2AIR and Responsible NLP duplicates already in known list C09",
+      "status": "Research exclusion / historical",
+      "reason": "Already known or closed",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "ETH Decision Sciences (Tu Ni): Human-AI Systems and Operational Decision Making",
+      "status": "Research exclusion / historical",
+      "reason": "Require applied maths/economics/operations, off-profile",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "ETH D-BSSE Digital Twins of Embryonic Development (Iber)",
+      "status": "Research exclusion / historical",
+      "reason": "Requires developmental biology background, weaker fit than sibling computational post SE11",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "EPFL OES Operations, Economics and Strategy PhD",
+      "status": "Research exclusion / historical",
+      "reason": "Off-profile management post; also needs EDMT admission",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "EPFL Forest Ecophysiology and Remote Sensing (PERL, ref 2490)",
+      "status": "Research exclusion / historical",
+      "reason": "Requires ecology or remote sensing MSc, off-profile; salary not printed",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "EPFL BIOROB humanoid locomotion PhD",
+      "status": "Research exclusion / historical",
+      "reason": "Marked CLOSED; EPFL Human-Robot Collaborative Assembly and MRI instrumentation posts 'filled'",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "EPFL EDAR (Architecture and Sciences of the City)",
+      "status": "Research exclusion / historical",
+      "reason": "Off-profile; deadlines 15 Jan, 30 Apr, 15 Sep",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "EPFL EDMX Materials Science programme page",
+      "status": "Research exclusion / historical",
+      "reason": "Page failed to load; off-profile",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Idiap, IDSIA, CSEM, PSI, Empa, SDSC listing pages",
+      "status": "Research exclusion / historical",
+      "reason": "Idiap lists only postdocs and a technician; IDSIA and SDSC list no PhD posts; CSEM, PSI, Empa pages failed to load",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Empa PhD life-like materials for soft robotics (St. Gallen)",
+      "status": "Research exclusion / historical",
+      "reason": "Materials science focus, not read in full",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Luxembourg GIS (UOL08402, FINATRAX) and Concrete Modelling (UOL08530) doctoral posts",
+      "status": "Research exclusion / historical",
+      "reason": "Off-profile (information systems, civil engineering); no deadline",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "University of Luxembourg other doctoral posts aged 4 to 9 months (AI for Cybersecurity, Deepfake Detection, ML for Official Statistics, ML Security and Testing)",
+      "status": "Research exclusion / historical",
+      "reason": "Posted months ago with no deadline shown, adverts unreadable, likely filled; recruitment.uni.lu blocked by robots",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "LISER, LIST, FNR DTU pages",
+      "status": "Research exclusion / historical",
+      "reason": "LIST and FNR pages failed to load; LISER lists no PhD posts",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Heriot-Watt, Sheffield, UCL funding hub, Warwick funding hub, Oxford AIMS, Bristol funding hub, KCL funding hub, Southampton, Lancaster, Leeds central funding pages",
+      "status": "Research exclusion / historical",
+      "reason": "Pages failed to load, were blocked by robots, or carried no 2027 PhD scheme with international funding; not verified",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Southampton general PhD funding page",
+      "status": "Research exclusion / historical",
+      "reason": "Gives no 2027 international scheme or deadline; Southampton MSCA BlueOcean already in known list",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "QMUL scholarships page and York research funding page",
+      "status": "Research exclusion / historical",
+      "reason": "No PhD scheme with 2027 deadline found on the pages read",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Kyoto University MEXT University Recommendation (General) 2027",
+      "status": "Research exclusion / historical",
+      "reason": "Page says General Program expected discontinued from AY2027; Special Selection requires admission to designated special programmes; no dates.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Keio University MEXT University Recommendation (General) 2027",
+      "status": "Research exclusion / historical",
+      "reason": "Page: not offered from 2027 academic year.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Waseda MEXT University Recommendation (General) 2027",
+      "status": "Research exclusion / historical",
+      "reason": "Notice of 7 Sep 2026: suspended from AY2027; Special Program only Asia-Pacific Studies.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Tsukuba MEXT University Recommendation (Materials Innovation, April 2027)",
+      "status": "Research exclusion / historical",
+      "reason": "Only Materials Innovation programme; October exam, year/dates unconfirmed; off-track.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "TUAT doctoral 2027 guidelines",
+      "status": "Research exclusion / historical",
+      "reason": "No funded track or MEXT special selection described; self-funded tuition.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Yokohama National University Dept of Engineering Science MEXT Oct 2026",
+      "status": "Research exclusion / historical",
+      "reason": "Page covers October 2026 intake, deadline 20 Jan 2026, past; fields chemistry and physics. EIS page is Oct 2025 (past).",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Kochi University of Technology (Izumi lab)",
+      "status": "Research exclusion / historical",
+      "reason": "Special scholarship positions filled; standard programme self-funded.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Tsukuba JST SPRING",
+      "status": "Research exclusion / historical",
+      "reason": "Page is AY2021; requires current enrolment; excludes MEXT and home-government scholarship holders.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Adelaide Graduate Research Talent Scheme round 1 (closes 2 Nov 2026)",
+      "status": "Research exclusion / historical",
+      "reason": "International applicants only if they hold or complete a relevant Australian or NZ qualification.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Adelaide AIML scholarships page",
+      "status": "Research exclusion / historical",
+      "reason": "No listings on page.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Macquarie International Road to Research Scholarship (closes 31 Oct 2026)",
+      "status": "Research exclusion / historical",
+      "reason": "Master of Research, one year, onshore applicants only.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Macquarie ARC Future Fellowship International PhD in Robust Autonomy",
+      "status": "Research exclusion / historical",
+      "reason": "Closed 31 Oct 2025; requires US J-1 visiting scholar visa.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UOW McKinnon-Walker Research Fellowship (31 Oct 2026)",
+      "status": "Research exclusion / historical",
+      "reason": "Research must benefit Pacific Islander, Aboriginal or Torres Strait Islander peoples; poor fit.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "CSIRO AI for Missions PhD program",
+      "status": "Research exclusion / historical",
+      "reason": "Tuition fees not covered; no closing date; requires enrolment at an Australian university.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Monash PhD Scholarships Shaping AI's Future",
+      "status": "Research exclusion / historical",
+      "reason": "Closed 30 Sep 2026; humanities/social-science AI projects.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Sydney Marine Robotics PG Research Scholarship (Williams)",
+      "status": "Research exclusion / historical",
+      "reason": "Closed 31 March 2025.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UQ Towards adaptive spatial perception (Khosoussi)",
+      "status": "Research exclusion / historical",
+      "reason": "Closed 24 April 2025; see SF05 for next UQ round.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "QUT Centre for Robotics DECRA PhD (Fischer, Milford)",
+      "status": "Research exclusion / historical",
+      "reason": "Undated 2024 post, no eligibility or deadline.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "RMIT CV&ML PhD (Tennakoon), Flinders AI image analysis, RMIT Asadi post",
+      "status": "Research exclusion / historical",
+      "reason": "Stale (2020-2023), stipends only, fees not mentioned.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UNSW Term 1 2027 international scholarships page",
+      "status": "Research exclusion / historical",
+      "reason": "Coursework only; UNSW HDR scholarship page did not render rounds. Open rounds could not be checked.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Curtin LEO-PNT vacancies",
+      "status": "Research exclusion / historical",
+      "reason": "Already in known list (C13-CURTIN).",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Massey University Doctoral Scholarship",
+      "status": "Research exclusion / historical",
+      "reason": "Closed 1 Oct 2026; international eligibility not stated.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Auckland, Canterbury, Otago, Waikato, Lincoln, Victoria, AUT scholarship pages",
+      "status": "Research exclusion / historical",
+      "reason": "Pages failed or showed no stipend/dates; Auckland, Victoria, AUT, Otago already known.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Western University ECE Tayebi (state-space 4068)",
+      "status": "Research exclusion / historical",
+      "reason": "Duplicate lab as SF06; no funding statement.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "University of Waterloo Kimia lab postdoc posts",
+      "status": "Research exclusion / historical",
+      "reason": "Postdoc; require Canada work eligibility.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Quebec ACPQ PEDSS fee exemption",
+      "status": "Research exclusion / historical",
+      "reason": "Applies to technical college DEC programs only, not doctoral.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Universite de Sherbrooke international fee exemption (Faculty of Sciences)",
+      "status": "Research exclusion / historical",
+      "reason": "Covers differential fees for first six terms but no stipend; no deadline; funding must come from supervisor.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Toronto SGS aerospace page and Waterloo GSPA page",
+      "status": "Research exclusion / historical",
+      "reason": "No usable deadline or funding text; UTIAS captured in SF01.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Search coverage note",
+      "status": "Research exclusion / historical",
+      "reason": "WebSearch budget ran out partway; Toronto CS/ECE, Waterloo CS, Dalhousie, Calgary, UVic, Carleton, Ottawa, McMaster, Queens, FRQNT, OGS, JST SPRING Next-Gen AI per-university, NZ MBIE posts, ARC centres not searched.",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "MSCA AlignAI DC posts at Idiap (aligned LLM companions; LLM robustness), Martigny",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 18 November 2024, pages say position filled",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "MSCA WildBotics 12 DC posts (robotics for conservation)",
+      "status": "Research exclusion / historical",
+      "reason": "Recruitment closed, selection ongoing (wildbotics.eu/recruitment); deadline 7 Jan 2026",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "MSCA REALISE DN (volcanology/ML, coordinator Perugia)",
+      "status": "Research exclusion / historical",
+      "reason": "Off track (petrology) and hosts not in target countries; first round closed 31 Mar 2026",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "MSCA ENGAGE DN (AI, robotics, mobile working machines)",
+      "status": "Research exclusion / historical",
+      "reason": "Listing expired; hosts not shown, apparently Finland/other non-target",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "MSCA GENIUS DN (energy geostructures; Edinburgh, Derby, NTNU hosts)",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 30 Nov 2025, closed; off track",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "MSCA i3WaterS DN (UCD, Sheffield, Newcastle hosts)",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 15 Sep, DC1/DC9 30 Sep 2026, closed",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "MSCA SPARK DC4/DC9 Imperial College (time-varying metamaterials), deadline 15 Nov 2026",
+      "status": "Research exclusion / historical",
+      "reason": "Off track (experimental nanophotonics, physics MSc required); no ATAS statement, would need check",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "MSCA ON-TRACT Southampton (oligonucleotide chemistry)",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 28 Oct 2026, before window; organic chemistry",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "MSCA DIViNE Essex, MINARET Birmingham/Lund, INTRABRAIN Glasgow",
+      "status": "Research exclusion / historical",
+      "reason": "Politics/law/drug delivery, off track; Birmingham listing 'UK students' funding",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "MSCA SPRING DC12 University of Cyprus",
+      "status": "Research exclusion / historical",
+      "reason": "Cyprus not a target country; deadline 16 Oct 2026",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "MSCA ELLE (Helsinki), ELLIS PhD Program",
+      "status": "Research exclusion / historical",
+      "reason": "Finland not target; ELLIS already known as M05",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "OsloMet 4 PhD fellowships Embodied AI (ref 26/06535)",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 4 May 2026, closed; export-control clause present",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "NTNU LeDAS PhD (arbeidsplassen ad)",
+      "status": "Research exclusion / historical",
+      "reason": "Closed 10 Oct 2025 and restricts non-EEA/WA citizens",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Leeds quadruped motion generation (Dr Chengxu Zhou)",
+      "status": "Research exclusion / historical",
+      "reason": "Ongoing but only self-funding or scholarships for UK/China/US; no international fee funding",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Glasgow RAINZ CDT",
+      "status": "Research exclusion / historical",
+      "reason": "2025 call closed; funds home fees only",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Birmingham/Rolls-Royce Sub-THz sensing studentship",
+      "status": "Research exclusion / historical",
+      "reason": "UK students only; closes 1 Oct 2026",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Univ. Luxembourg UOL08057 Learning-Based Robot Motion (Voos)",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 1 May 2026, expired",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Univ. Luxembourg UOL07942 AI for Cybersecurity",
+      "status": "Research exclusion / historical",
+      "reason": "Citizenship limited to EU/EEA/EFTA/NATO nations (excludes Iran); expired",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "FNR AFR individual call 2026",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 11 March 2026, closed; for Luxembourg-linked applicants",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Luxembourg Space Agency",
+      "status": "Research exclusion / historical",
+      "reason": "No PhD call found; only internships and outreach call for local talent",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "ESA OSIP / NPI co-funded PhD (other than M59)",
+      "status": "Research exclusion / historical",
+      "reason": "Host-university proposal route (no advertised posts found); ECSAT NPI page dated 2018; already covered by M59",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "ESA Young Graduate Trainee",
+      "status": "Research exclusion / historical",
+      "reason": "Not a PhD, skipped per brief",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "CSIRO Industry PhD (iPhD) Australia",
+      "status": "Research exclusion / historical",
+      "reason": "Domestic students only per university brochure; Griffith lists citizens/PR/NZ",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "CSIRO AI for Missions PhD",
+      "status": "Research exclusion / historical",
+      "reason": "Tuition fees not covered; requires enrolment at Australian university; no deadline printed",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Macquarie ARC Future Fellowship International PhD in Robust Autonomy",
+      "status": "Research exclusion / historical",
+      "reason": "Closed 31 Oct 2025",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Norway Industrial PhD scheme (Research Council)",
+      "status": "Research exclusion / historical",
+      "reason": "Company must apply with named candidate; not an open post",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Ireland Enterprise Partnership Scheme PG",
+      "status": "Research exclusion / historical",
+      "reason": "No 2026 call; fee contribution capped at EUR 5,750; needs enterprise partner and Irish supervisor",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UK iCASE/CASE and industry-sponsored (Rolls-Royce, Thales, Airbus) searches",
+      "status": "Research exclusion / historical",
+      "reason": "No international-fee-covered post in the target tracks found; listings UK-only or expired; 30% cap applies",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Vector Institute scholarship",
+      "status": "Research exclusion / historical",
+      "reason": "Page is a 2020 announcement; Ontario master's entrance awards",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Corporate research PhDs (Meta, Google, Microsoft, NVIDIA, Huawei, Bosch, Siemens, ANYbotics, Disney Research, Septentrio, u-blox, Trimble)",
+      "status": "Research exclusion / historical",
+      "reason": "Only internships, postdocs or nominated fellowships found; no open PhD post. Search budget ran out before DeepMind, Vector, Microsoft and Disney queries could be run",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "CTTC Barcelona PNT predoctoral; Tampere; other EU-mainland posts",
+      "status": "Research exclusion / historical",
+      "reason": "Spain/Finland not target countries",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Huawei Canada/Sweden PhD campus recruitment",
+      "status": "Research exclusion / historical",
+      "reason": "Employee-style hiring, not a funded doctoral enrolment; no target-country PhD post found",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Southampton/Manchester/Oxford/Exeter/UEA/Birmingham generic studentships seen on jobs.ac.uk",
+      "status": "Research exclusion / historical",
+      "reason": "Already known (M35, M36, M30, M07) or off track; fee status unstated",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "ETH Zurich Excellence Scholarship and Opportunity Programme (ESOP)",
+      "status": "Research exclusion / historical",
+      "reason": "Master's only: 'excellent Master's students (no MAS)'; window 1 to 30 Nov 2026 is for master's entry HS27",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Chevening (Iran)",
+      "status": "Research exclusion / historical",
+      "reason": "Iranians are eligible but the scheme is for one-year taught master's courses; applications closed",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Schmidt Science Fellows",
+      "status": "Research exclusion / historical",
+      "reason": "Postdoctoral fellowship, not PhD entry",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Rhodes Scholarship",
+      "status": "Research exclusion / historical",
+      "reason": "Constituency page does not list Iran; 'Global' constituency is Suspended",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Vanier CGS / Canada Graduate Research Scholarship Doctoral",
+      "status": "Research exclusion / historical",
+      "reason": "Nomination only by institution quota; foreign citizens may be nominated but no independent application",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Ontario Trillium Scholarship",
+      "status": "Research exclusion / historical",
+      "reason": "Guelph page: 'will no longer be offered to new students effective 2018'",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Vector Scholarship in AI",
+      "status": "Research exclusion / historical",
+      "reason": "Master's students at Ontario universities only, nominated by the university",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "IVADO PhD Excellence Scholarships",
+      "status": "Research exclusion / historical",
+      "reason": "Programme closed after five competitions; last deadline January 2021",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UBC Four Year Doctoral Fellowship",
+      "status": "Research exclusion / historical",
+      "reason": "Automatic award to admitted PhD students (2009 guidelines retrieved), no independent application; covered via the UBC PhD route already in the known list",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UNSW Scientia PhD Scholarship",
+      "status": "Research exclusion / historical",
+      "reason": "UNSW October 2026 notice for the current call: 'Domestic applicants only'; nomination date 8 Nov 2026",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Bath Vice-Chancellor's International Scholarships (PhD)",
+      "status": "Research exclusion / historical",
+      "reason": "Fee discount only (annual fee about 11,900 GBP), no stipend mentioned; no deadline listed",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Cardiff VC International Scholarship",
+      "status": "Research exclusion / historical",
+      "reason": "Postgraduate taught only; closed July 2026",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Nottingham GREAT / Nottingham VC Research Excellence",
+      "status": "Research exclusion / historical",
+      "reason": "GREAT is taught masters for China, Indonesia, Kenya only; the VC research page retrieved no eligibility text",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Sheffield University Research Scholarships",
+      "status": "Research exclusion / historical",
+      "reason": "Sheffield page: closed, no scholarships available for 2027 entry",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Leeds Doctoral Scholarships",
+      "status": "Research exclusion / historical",
+      "reason": "Leeds page: 'Up to seven Doctoral Scholarships are available for UK students'; FIRS page retrieved is from 2012",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Government of Ireland Postgraduate Scholarship",
+      "status": "Research exclusion / historical",
+      "reason": "Closed and integrated into the institution-level Empower programme; 2026 call was 23 Oct 2025 with 2% Category 2 success for non-EU STEM and fee gap uncovered",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Trinity College Dublin Provost's PhD Project Awards / UCD Research Ireland route",
+      "status": "Research exclusion / historical",
+      "reason": "Project-specific posts with stale dates (2021); UCD page says applications are closed",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Rotary Yoneyama Memorial Foundation",
+      "status": "Research exclusion / historical",
+      "reason": "Deadline 18 Sep 2026 passed; applicants must already live in Japan and be enrolled (doctoral 2nd or 3rd year)",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Ito Foundation for International Education Exchange",
+      "status": "Research exclusion / historical",
+      "reason": "Master's entrants only; doctoral entrants excluded; applicants must live in Japan; autumn deadline",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "JST SPRING",
+      "status": "Research exclusion / historical",
+      "reason": "Only for students already enrolled in doctoral programmes in Japan; MEXT and home-government scholarship holders excluded; April application window",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Adelaide Graduate Research Talent Scheme",
+      "status": "Research exclusion / historical",
+      "reason": "International applicants only with an Australian or New Zealand qualification; SRT expressions open 31 Aug 2027",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Swiss Government Excellence Scholarship",
+      "status": "Research exclusion / historical",
+      "reason": "Already in the known list as C06",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Gates Cambridge and Cambridge International Scholarship",
+      "status": "Research exclusion / historical",
+      "reason": "Already in the known list as M37",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "NZ Commonwealth Scholarships and UK Commonwealth PhD Scholarships",
+      "status": "Research exclusion / historical",
+      "reason": "Commonwealth citizens only and Iran is not a Commonwealth member (based on general knowledge; NZ eligible-countries page not retrieved)",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Luxembourg FNR PRIDE",
+      "status": "Research exclusion / historical",
+      "reason": "Funds doctoral training units that recruit by post; 2025 full proposal deadline 15 Oct 2025 passed; AFdoc already known as C08",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Article 26 / Scholars at Risk / Oxford Refugee Scholarship",
+      "status": "Research exclusion / historical",
+      "reason": "Could not be verified: article26.org fetched is an unrelated organisation, and the Oxford funding pages do not mention a refugee scheme; requires refugee or asylum status in any case",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "University of Inland Norway PhD in Bioinformatics and Machine Learning for Infection and AMR Diagnostics (BioAI, Prof Rafi Ahmad)",
+      "status": "Research exclusion / historical",
+      "reason": "Requires C++/Rust/Java and long-read sequencing pipeline experience, weak fit; Deadline 5 Nov, one week; Export-control approval needed (generic)",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "NTNU Dept of Information Security and Communication Technology (IIK), PhD Candidate in Resilient Service Continuity Across Mobile Networks (Jobbnorge 310630), supervisor Stanislav Lange",
+      "status": "Research exclusion / historical",
+      "reason": "\"; E; x; p; o; r; t;  ; c; o; n; t; r; o; l;  ; (; l; e; g; i; s; l; a; t; i; o; n;  ; t; h; a; t;  ; r; e; g; u; l; a; t; e; s;  ; t; h; e;  ; e; x; p; o; r; t;  ; o; f;  ; k; n; o; w; l; e; d; g; e; ,;  ; t; e; c; h; n; o; l; o; g; y;  ; a; n; d;  ; s; e; r; v; i; c; e; s; ); .;  ; C; a; n; d; i; ",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "NTNU Dept of ICT security and communication (IIK), PhD Candidate in AI Driven MAC Control for Integrated Terrestrial NTN 6G Networks (Jobbnorge 308861), Tu Dac Ho",
+      "status": "Research exclusion / historical",
+      "reason": "A; d; v; e; r; t;  ; s; t; a; t; e; s;  ; a; p; p; o; i; n; t; m; e; n; t;  ; f; o; l; l; o; w; s;  ; t; h; e;  ; S; t; a; t; e;  ; E; m; p; l; o; y; e; e; s;  ; A; c; t;  ; a; n; d;  ; e; x; p; o; r; t;  ; c; o; n; t; r; o; l;  ; l; e; g; i; s; l; a; t; i; o; n; :;  ; \"; C; a; n; d; i; d; a; t; e; ",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "University of Oslo Dept of Mathematics (QSTAR centre), PhD Research Fellow in Mathematics, WP1 fault-tolerance and quantum error correction",
+      "status": "Research exclusion / historical",
+      "reason": "N; o;  ; e; x; p; o; r; t;  ; c; o; n; t; r; o; l; ,;  ; s; a; n; c; t; i; o; n; s;  ; o; r;  ; s; e; c; u; r; i; t; y;  ; p; a; r; a; g; r; a; p; h;  ; a; p; p; e; a; r; s;  ; i; n;  ; t; h; e;  ; a; d; v; e; r; t; .;  ; N; o;  ; n; a; t; i; o; n; a; l; i; t; y;  ; r; e; s; t; r; i; c; t; i; o; n; ",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "University of Bergen Dept of Mathematics (Porous Media Group, gigaCCS), PhD Research Fellow in Applied and Computational Mathematics, CO2 storage upscaling",
+      "status": "Research exclusion / historical",
+      "reason": "\"; U; i; B;  ; e; r;  ; u; n; d; e; r; l; a; g; t;  ; r; e; g; e; l; v; e; r; k; e; t;  ; f; o; r;  ; e; k; s; p; o; r; t; k; o; n; t; r; o; l; l;  ; o; g;  ; r; e; g; e; l; v; e; r; k; e; t;  ; g; j; e; l; d;  ; v; e; d;  ; b; e; h; a; n; d; l; i; n; g;  ; a; v;  ; s; ø; k; n; a; d; a; r;  ; t; i; ",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Havforskingsinstituttet (Institute of Marine Research), Bergen, PhD fellow in broadband acoustics (SFI CRIMAC)",
+      "status": "Research exclusion / historical",
+      "reason": "\"; H; a; v; f; o; r; s; k; i; n; g; s; i; n; s; t; i; t; u; t; t; e; t;  ; e; r;  ; u; n; d; e; r; l; a; g; t;  ; r; e; g; e; l; v; e; r; k; e; t;  ; f; o; r;  ; e; k; s; p; o; r; t; k; o; n; t; r; o; l; l; .; \";  ; G; e; n; e; r; i; c; ,;  ; n; o;  ; c; o; u; n; t; r; y;  ; l; i; s; t; .;  ; B; a; ",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "University of Inland Norway (Hamar), PhD in Bioinformatics and Machine Learning for Infection and AMR Diagnostics, Rafi Ahmad group",
+      "status": "Research exclusion / historical",
+      "reason": "\"; C; a; n; d; i; d; a; t; e; s;  ; w; h; o; ,;  ; a; f; t; e; r;  ; a; s; s; e; s; s; m; e; n; t;  ; o; f;  ; t; h; e;  ; a; p; p; l; i; c; a; t; i; o; n;  ; a; n; d;  ; a; t; t; a; c; h; m; e; n; t; s; ,;  ; c; o; m; e;  ; i; n; t; o;  ; c; o; n; f; l; i; c; t;  ; w; i; t; h;  ; t; h; e;  ; c; r; ",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "UiS PhD Fellow in Energy Systems and AI (Prof Mohsen Assadi), Jobbnorge via stilling.forskning.no 2726879",
+      "status": "Research exclusion / historical",
+      "reason": "Export-control paragraph not quoted in full; Requires energy engineering background and master grade B or better",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "University of Oslo Dept of Physics, MSCA-DN MERIT DC5: Multi-modal microscopy and tomography of virus-infected organoids (AI-assisted image analysis)",
+      "status": "Research exclusion / historical",
+      "reason": "S; e; c; u; r; i; t; y;  ; p; a; r; a; g; r; a; p; h;  ; (; n; o; t;  ; e; x; p; o; r; t;  ; c; o; n; t; r; o; l; ); :;  ; \"; U; i; O;  ; i; s;  ; s; u; b; j; e; c; t;  ; t; o;  ; t; h; e;  ; S; e; c; u; r; i; t; y;  ; A; c; t; ,;  ; w; h; i; c; h;  ; g; o; v; e; r; n; s;  ; t; h; e;  ; o; r; g; a; ",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "University of Oslo Dept of Physics, MSCA-DN MERIT DC6: Molecular fingerprinting in organoids using Raman and AF micro-spectroscopy",
+      "status": "Research exclusion / historical",
+      "reason": "S; a; m; e;  ; U; i; O;  ; S; e; c; u; r; i; t; y;  ; A; c; t;  ; p; a; r; a; g; r; a; p; h; :;  ; \"; U; i; O;  ; i; s;  ; s; u; b; j; e; c; t;  ; t; o;  ; t; h; e;  ; S; e; c; u; r; i; t; y;  ; A; c; t; ,;  ; w; h; i; c; h;  ; g; o; v; e; r; n; s;  ; t; h; e;  ; o; r; g; a; n; i; s; a; t; i; o; n; ",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "SINTEF Energi (Trondheim), MSCA HeatMinds PhD in optimal high temperature heat pump control (also sister post: multiscale ejector design, 22 Nov)",
+      "status": "Research exclusion / historical",
+      "reason": "N; o;  ; e; x; p; o; r; t;  ; c; o; n; t; r; o; l; ,;  ; s; a; n; c; t; i; o; n; s;  ; o; r;  ; s; e; c; u; r; i; t; y;  ; p; a; r; a; g; r; a; p; h; .;  ; M; S; C; A;  ; r; u; l; e; :;  ; n; o; t;  ; m; o; r; e;  ; t; h; a; n;  ; 1; 2;  ; m; o; n; t; h; s;  ; i; n;  ; N; o; r; w; a; y;  ; i; n;  ; ",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Trinity College Dublin, Gibbons Lab: PhD Studentship Machine Learning for Two-Phase Heat Transfer (Royal Society-Research Ireland URF)",
+      "status": "Research exclusion / historical",
+      "reason": "L; a; b;  ; p; a; g; e; :;  ; \"; R; e; g; i; s; t; r; a; t; i; o; n;  ; f; e; e; s;  ; a; r; e;  ; c; o; v; e; r; e; d;  ; f; o; r;  ; b; o; t; h;  ; E; U;  ; a; n; d;  ; n; o; n; -; E; U;  ; s; t; u; d; e; n; t; s; \"; ;;  ; s; t; i; p; e; n; d;  ; E; U; R;  ; 2; 5; ,; 0; 0; 0;  ; t; a; x; -; f; r; ",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "Tyndall National Institute (UCC), Rinn Semiconductor PhD: FLIM Photonic Integrated Circuit Design and Pulsing Schemes for Next-Generation Endoscopy",
+      "status": "Research exclusion / historical",
+      "reason": "\"; T; h; e;  ; a; n; n; u; a; l;  ; s; t; i; p; e; n; d;  ; i; s;  ; E; U; R;  ; 2; 5; ,; 0; 0; 0; \"; ;;  ; \"; a; n; n; u; a; l;  ; t; u; i; t; i; o; n;  ; f; e; e; s;  ; w; i; l; l;  ; b; e;  ; p; a; i; d;  ; b; y;  ; t; h; e;  ; T; y; n; d; a; l; l;  ; N; a; t; i; o; n; a; l;  ; I; n; s; t; i; t; ",
+      "source_id": ""
+    },
+    {
+      "type": "Not added",
+      "route": "EPFL LMD (Prof Konstantinos Karapiperis): PhD in Interpretable AI for Coupled Multiphysics of Geomaterials (ref 2267)",
+      "status": "Research exclusion / historical",
+      "reason": "Stated deadline 15 July 2026 has passed; start Fall/Winter 2026; Salary not printed",
+      "source_id": ""
+    }
+  ],
+  "potential_reappearances": [],
+  "policy": "Historical reasons must be reviewed for the NEW call; never reuse expired eligibility conclusions automatically."
+}

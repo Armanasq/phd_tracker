@@ -140,6 +140,7 @@ The system is not limited to the deadline column. These sheets are retained in t
 | **Research radar** | Related publications only, never misclassified as vacancies |
 | **Execution board** | Prioritized view of scheduled submissions and preparation tasks |
 | **Task ledger** | Every dated programme task and original worksheet row, not just deadlines |
+| **Exclusion memory** | Historical dropped and not-added evidence; reappearing leads are flagged, never silently rejected |
 
 **Original workbook coverage:** 183 applications · 559 dated/programme-specific steps · 26 shared tasks · 6 dropped routes · 200 researched but unadded.
 

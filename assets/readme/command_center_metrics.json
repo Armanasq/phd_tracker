@@ -6,9 +6,10 @@
     "timeline_tasks": 21,
     "shared_tasks": 2,
     "total_distinct_scheduled_actions": 25,
+    "source_row_events_scheduled_today": 25,
     "linked_past_steps_not_recounted": 5
   },
-  "source_tabs": 14,
+  "source_tabs": 15,
   "full_agenda_file": "docs/TODAY.md",
   "svg_assets": [
     "operations.svg",
