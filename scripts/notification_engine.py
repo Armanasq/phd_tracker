@@ -85,6 +85,18 @@ def evaluate(today: date, workbook: Path, data_dir: Path) -> dict:
         for document, triggers in ASSETS.items():
             if any(term in all_text for term in triggers):
                 potential_assets.setdefault(document, []).append(days)
+    execution = load(data_dir / "execution_plan.json", {})
+    daily = execution.get("today", {}).get("counts", {})
+    if daily.get("total_distinct_scheduled_actions", 0) > 0:
+        events.append({
+            "id": key_event("daily_plan", today.isoformat(), "scheduled"),
+            "kind":"daily_plan", "source_id":"daily-plan",
+            "name":"Today's source-backed task agenda",
+            "source":"docs/TODAY.md",
+            "days":0,
+            "evidence_status":"multiple_original_workbook_sheets",
+            "counts":daily,
+        })
     discovered = load(data_dir / "discovered_candidates.json", {"records": []})
     for hit in discovered.get("records", []):
         try:
@@ -231,10 +243,29 @@ def digest(evaluated: dict, selected: list[dict]) -> str:
         for name, value in sorted(source_report["source_yield"].items()):
             lines.append(f'| {clean(name, 35)} | {clean(value["health"], 18)} | {value["observed"]} | {value["new_unique"]} |')
         lines += ["", "Disabled or degraded coverage is a real blind spot, not evidence of zero opportunities."]
+    daily = load(ROOT / "data" / "execution_plan.json", {}).get("today", {})
+    if daily:
+        counted = daily.get("counts", {})
+        lines += ["", "## Full-workbook execution plan — " + evaluated["as_of"], "",
+                  "**" + str(counted.get("deadline_actions", 0)) + "** application submission deadlines · " +
+                  "**" + str(counted.get("timeline_tasks", 0)) + "** scheduled programme steps · " +
+                  "**" + str(counted.get("shared_tasks", 0)) + "** explicit cross-route tasks.",
+                  "",
+                  "These are separate clocks. Earlier steps associated with today's final deadline are not counted as tasks due today.",
+                  ""]
+        for item in (daily.get("eligible_application_deadlines", []) +
+                     daily.get("cross_route_tasks", []) +
+                     daily.get("scheduled_timeline_tasks", []))[:13]:
+            lines.append("- " + clean(item.get("action", ""), 150) + " — " +
+                         clean(item.get("name", ""), 85))
+        lines += ["", "[Complete source-linked daily agenda](../blob/main/docs/TODAY.md)",
+                  "[Editable Execution board and full Task ledger](../blob/main/PhD_Action_List.xlsx)"]
     lines += ["", "## Recently triggered notifications", ""]
     for item in selected[:20]:
         if item["kind"] == "deadline":
             lines.append(f'- Deadline in {item["days"]}d: {item["name"]} ({item["deadline"]})')
+        elif item["kind"] == "daily_plan":
+            lines.append("- Daily workbook task agenda ready: " + str(item["counts"].get("total_distinct_scheduled_actions", 0)) + " scheduled actions across all original sources.")
         elif item["kind"] == "new_lead":
             lines.append(f'- New unverified research lead: {item["name"]} ({item["source"]})')
         elif item["kind"] == "research_signal":
@@ -261,6 +292,8 @@ def comment_body(selected: list[dict]) -> str:
     for item in selected:
         if item["kind"] == "deadline":
             lines.append(f'- **{item["days"]} days remaining:** {item["name"]} — {item["deadline"]}')
+        elif item["kind"] == "daily_plan":
+            lines.append("- **Today\'s full-workbook agenda:** " + str(item["counts"].get("total_distinct_scheduled_actions", 0)) + " dated actions; see docs/TODAY.md (application deadlines and preparation tasks are distinct).")
         elif item["kind"] == "new_lead":
             lines.append(f'- **Needs verification:** {item["name"]} — {item["source"]}')
         elif item["kind"] == "research_signal":
