@@ -68,9 +68,12 @@ def reconcile(book=BOOK, manifest_path=MANIFEST, report_path=REPORT, apply=False
     for sid, (mask, digest) in manifest.items():
         row = byid[sid]
         for col in COLUMNS:
-            if mask & (1 << (col - 1)) and ws.cell(row, col).value is not None:
-                changes.append({"source_id": sid, "row": row, "column": col})
-                ws.cell(row, col).value = None
+            if mask & (1 << (col - 1)):
+                cell = ws.cell(row, col)
+                if cell.value is not None or cell.hyperlink is not None:
+                    changes.append({"source_id": sid, "row": row, "column": col})
+                    cell.hyperlink = None
+                    cell.value = None
         actual = fingerprint([ws.cell(row, c).value for c in COLUMNS])
         if actual != digest:
             mismatches.append({"source_id": sid, "row": row, "expected": digest, "actual": actual})
