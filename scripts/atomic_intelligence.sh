@@ -9,6 +9,9 @@ git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 for attempt in 1 2 3; do
   git fetch --quiet origin main
   git reset --hard --quiet origin/main
+  if [ -f data/imports/2026-11-06_user_upload_manifest.txt ] && [ ! -f data/imports/2026-11-06_user_upload_result.json ]; then
+    python scripts/reconcile_uploaded_source.py --apply
+  fi
   python scripts/workbook_contract.py snapshot
   python scripts/discovery_engine.py aggregate \
     --input artifacts/discovery \
@@ -30,6 +33,7 @@ for attempt in 1 2 3; do
   python scripts/render_readme.py
   python scripts/render_command_center.py
 
+  if [ -f data/imports/2026-11-06_user_upload_result.json ]; then git add data/imports/2026-11-06_user_upload_result.json; fi
   git add README.md docs/TODAY.md calendar/phd_deadlines.ics assets/readme/ PhD_Action_List.xlsx \
     data/discovered_candidates.json \
     data/discovery_report.json \
