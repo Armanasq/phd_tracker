@@ -40,7 +40,7 @@ def test_readme_renderer_is_source_backed_and_valid_xml(tmp_path, monkeypatch):
     assert result["applications"] == 1
     assert result["due_14d"] == 1
     assert result["contradictions"] == 1
-    for name in ("hero.svg", "deadlines.svg", "providers.svg"):
+    for name in ("hero.svg", "deadlines.svg", "providers.svg", "horizon.svg"):
         tree = ET.parse(tmp_path / "assets" / "readme" / name)
         assert tree.getroot().tag.endswith("svg")
     readme = (tmp_path / "README.md").read_text()
