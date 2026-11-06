@@ -52,7 +52,7 @@ def url(text: object):
     return value.replace("(", "%28").replace(")", "%29")
 
 
-def source_link(record, caption="Official page"):
+def source_link(record, caption="Source page"):
     loc=url(record.get("source"))
     return f"[{caption}]({loc})" if loc else "No verified link"
 
@@ -131,7 +131,8 @@ def task_table(items,max_rows=None,link=True):
         act=md(r.get("action"),210)
         if r.get("task_id") and r.get("type") in ("timeline_step","cross_route_task"):
             act += " · " + chr(96) + md(r["task_id"],24) + chr(96)
-        route=(source_link(r) if link else md(r.get("sheet"),30))
+        provenance=md(r.get("sheet") or "Unknown sheet",30)+" · row "+str(r.get("row") or "?")
+        route=(source_link(r) + " · " + provenance if link else provenance)
         lines.append(f"| {due} | {name} | {act} | {route} |")
     if len(lines)==2:
         lines.append("| — | None in the current snapshot | — | — |")
