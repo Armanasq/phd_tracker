@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "watches": [
+    {
+      "id": "R26-GWU-EPIC",
+      "url": "https://graduate.engineering.gwu.edu/doctoral-admissions-requirements",
+      "anchor": "December 1",
+      "expected_deadline": "2026-12-01"
+    },
+    {
+      "id": "R26-MAN-PDS-CONSTELLATIONS",
+      "url": "https://www.humanities.manchester.ac.uk/study/postgraduate-research/funding/list-of-awards/presidents-doctoral-scholar-award/",
+      "anchor": "18 December 2026",
+      "expected_deadline": "2026-12-18"
+    },
+    {
+      "id": "R26-UCY-SKEYES",
+      "url": "https://euraxess.ec.europa.eu/jobs/476857",
+      "anchor": "23 Nov 2026",
+      "expected_deadline": "2026-11-23"
+    },
+    {
+      "id": "N263-09",
+      "url": "https://imprs.is.mpg.de/application",
+      "anchor": "November 15, 2026",
+      "expected_deadline": "2026-11-15"
+    },
+    {
+      "id": "LEAD26-EPFL-CREATE",
+      "url": "https://www.epfl.ch/labs/create/create-lab/openings/",
+      "anchor": "November 13",
+      "expected_deadline": "2026-11-13"
+    }
+  ]
+}
