@@ -181,13 +181,14 @@ def dashboard_md(plan, metrics):
     last_research=load(ROOT/"data"/"discovery_report.json")
     mail_signals=load(ROOT/"data"/"mail_signals.json")
     radar=load(ROOT/"data"/"research_radar_report.json")
+    radar_count=len(load(ROOT/"data"/"research_radar.json").get("papers",[]))
     watched=last_run.get("source_watches",len(last_run.get("source_statuses",[])))
     verified_sources=sum(1 for x in last_run.get("source_statuses",[]) if x.get("status")=="anchor_present")
     deadline_count=len(near)
     urgent_count=sum(1 for x in near if x.get("days") is not None and x["days"]<=3)
     bad_names=", ".join(md(n,32) for n,v in sorted(source_health.items()) if v.get("health")!="ok") or "None reported"
     first_today=due_today[0] if due_today else None
-    launch_action=(f'[Open today’s {counts["deadline_actions"]} application deadline(s)](docs/TODAY.md#A-application-submission-deadlines-today-{counts["deadline_actions"]})' if due_today else "[Review today's scheduled tasks](docs/TODAY.md)")
+    launch_action=(f'[Open today’s {counts["deadline_actions"]} application deadline(s)](docs/TODAY.md)' if due_today else "[Review today's scheduled tasks](docs/TODAY.md)")
     freshness=(f'Last official-page monitor: {md(last_run.get("date","unknown"))} · '
                f'last discovery: {md(last_research.get("run_date","unknown"))} · '
                f'last publication radar: {md(radar.get("as_of","unknown"))}')
@@ -223,7 +224,7 @@ def dashboard_md(plan, metrics):
 
 | Time critical | Source assurance | Applicant decisions | Research horizon |
 |:--|:--|:--|:--|
-| **{urgent_count}** deadline(s) in ≤3 days; **{deadline_count}** in the next 7 days | **{provider_ok}/{len(source_health)}** active providers reporting healthy; **{provider_bad}** degraded/disabled | **{counts["timeline_tasks"]}** dated steps today; **{overdue["total"]}** older steps with *completion unknown* | **{metrics.get("radar",0)}** indexed papers, research signals only |
+| **{urgent_count}** deadline(s) in ≤3 days; **{deadline_count}** in the next 7 days | **{provider_ok}/{len(source_health)}** active providers reporting healthy; **{provider_bad}** degraded/disabled | **{counts["timeline_tasks"]}** dated steps today; **{overdue["total"]}** older steps with *completion unknown* | **{radar_count}** indexed papers, research signals only |
 | [Review every dated task](docs/TODAY.md) | [Source diagnostics](data/discovery_report.json) | [Confirm task status](../../issues/1) | [Research radar](data/research_radar.json) |
 
 **Source consistency:** {len(last_run.get("source_statuses",[]))} observations across {watched} configured monitors; {verified_sources} matched expected anchors and {conflict} require review. **Degraded sources:** {bad_names}.
@@ -294,7 +295,7 @@ The full execution queue preserves original worksheet row numbers and source IDs
 {chr(10).join(source_rows)}
 
 - **Contradictory source observations:** {conflict} monitor finding(s). A published programme deadline is not proof that an application portal is accepting submissions.
-- **Research records:** {metrics.get("radar",0)} scholarly articles indexed separately, not counted as available PhD placements.
+- **Research records:** {radar_count} scholarly articles indexed separately, not counted as available PhD placements.
 - **Discovery scope:** without configured Brave credentials, international web search is **disabled**. A healthy workflow cannot imply exhaustive worldwide coverage.
 
 <details>
