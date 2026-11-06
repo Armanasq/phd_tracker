@@ -143,6 +143,16 @@ def digest(evaluated: dict, selected: list[dict]) -> str:
               "|---|---:|---:|"]
     for doc in evaluated["assets"][:8]:
         lines.append(f'| {doc["document"]} | {doc["potential_applications"]} | {doc["nearest_deadline_days"]}d |')
+    frontier = load(ROOT / "data" / "portfolio_frontier.json", {})
+    if frontier.get("applications"):
+        lines += ["", "## Evidence debt and readiness unknowns", "",
+                  "Flags describe evidence to verify, not conclusions about applicant eligibility or missing documents.", ""]
+        flagged = [x for x in frontier["applications"] if x.get("evidence_proof_obligations") or x.get("unknown_resource_states")]
+        for row in flagged[:10]:
+            obligations = ", ".join(row.get("evidence_proof_obligations", [])[:2])
+            resources = ", ".join(row.get("unknown_resource_states", [])[:3])
+            detail = " | ".join(v for v in [obligations, "Unconfirmed: " + resources if resources else ""] if v)
+            lines.append("- " + clean(row["opportunity"], 100) + " (" + str(row["days_to_deadline"]) + "d): " + clean(detail, 230))
     lines += ["", "## Recently triggered notifications", ""]
     for item in selected[:20]:
         if item["kind"] == "deadline":
