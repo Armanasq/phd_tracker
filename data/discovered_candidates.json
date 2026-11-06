@@ -2,6 +2,39 @@
   "schema_version": 2,
   "records": [
     {
+      "id": "academictransfer:365229",
+      "title": "University of Amsterdam — Two PhD Positions in AI for Science and Mechanistic Interpretability",
+      "url": "https://www.academictransfer.com/en/jobs/365229/two-phd-positions-in-ai-for-science-at-the-university-of-amsterdam/",
+      "provider": "academictransfer",
+      "lane": "third_party_index",
+      "deadline": "2027-01-15",
+      "deadline_provenance": "University or EURAXESS published deadline inspected on 2026-11-06",
+      "evidence_status": "portal_listing_requires_eligibility_review",
+      "funding_status": "See original published funding terms; individual fee class and sponsorship not verified",
+      "score": 15,
+      "matched_topics": [
+        "machine_learning",
+        "medical_ai",
+        "robotics",
+        "funding"
+      ],
+      "snippet": "Foundation models for scientific data, RAG and mechanistic interpretability",
+      "observed_at": "2026-11-06T15:00:00Z",
+      "first_seen": "2026-11-06T15:00:00Z",
+      "last_seen": "2026-11-06T15:00:00Z",
+      "seen_count": 1,
+      "aliases": [],
+      "deadline_change_needs_review": false,
+      "source_observations": [
+        {
+          "provider": "academictransfer",
+          "at": "2026-11-06T15:00:00Z",
+          "deadline": "2027-01-15",
+          "confidence": "portal_listing_requires_eligibility_review"
+        }
+      ]
+    },
+    {
       "id": "academictransfer:365008",
       "title": "TU Delft — PhD Safe Planning and Decision-Making under Uncertainty for Long-Horizon Robot Autonomy",
       "url": "https://www.academictransfer.com/nl/jobs/365008/phd-position-safe-planning-and-decision-making-under-uncertainty-for-long-horizon-robot-autonomy",
@@ -194,6 +227,72 @@
       ]
     },
     {
+      "id": "euraxess:468588",
+      "title": "Aalborg University — Two Fully Funded PhD Positions in Human-Centred Artificial Intelligence",
+      "url": "https://euraxess.ec.europa.eu/jobs/468588",
+      "provider": "euraxess",
+      "lane": "research_portal_primary_employer",
+      "deadline": "2026-11-13",
+      "deadline_provenance": "University or EURAXESS published deadline inspected on 2026-11-06",
+      "evidence_status": "portal_listing_requires_eligibility_review",
+      "funding_status": "See original published funding terms; individual fee class and sponsorship not verified",
+      "score": 10,
+      "matched_topics": [
+        "machine_learning",
+        "medical_ai",
+        "robotics",
+        "funding"
+      ],
+      "snippet": "Human-centered AI, HCI, interactive learning and responsible AI; two funded PhD positions",
+      "observed_at": "2026-11-06T15:00:00Z",
+      "first_seen": "2026-11-06T15:00:00Z",
+      "last_seen": "2026-11-06T15:00:00Z",
+      "seen_count": 1,
+      "aliases": [],
+      "deadline_change_needs_review": false,
+      "source_observations": [
+        {
+          "provider": "euraxess",
+          "at": "2026-11-06T15:00:00Z",
+          "deadline": "2026-11-13",
+          "confidence": "portal_listing_requires_eligibility_review"
+        }
+      ]
+    },
+    {
+      "id": "euraxess:476055",
+      "title": "University of Lisbon — FCT UNITE Doctoral Research Scholarships in AI and Smart Cities",
+      "url": "https://euraxess.ec.europa.eu/jobs/476055",
+      "provider": "euraxess",
+      "lane": "research_portal_primary_employer",
+      "deadline": "2026-11-30",
+      "deadline_provenance": "University or EURAXESS published deadline inspected on 2026-11-06",
+      "evidence_status": "portal_listing_requires_eligibility_review",
+      "funding_status": "See original published funding terms; individual fee class and sponsorship not verified",
+      "score": 9,
+      "matched_topics": [
+        "machine_learning",
+        "medical_ai",
+        "robotics",
+        "funding"
+      ],
+      "snippet": "Funded doctoral scholarships in Artificial Intelligence, Industry 4.0 and smart cities",
+      "observed_at": "2026-11-06T15:00:00Z",
+      "first_seen": "2026-11-06T15:00:00Z",
+      "last_seen": "2026-11-06T15:00:00Z",
+      "seen_count": 1,
+      "aliases": [],
+      "deadline_change_needs_review": false,
+      "source_observations": [
+        {
+          "provider": "euraxess",
+          "at": "2026-11-06T15:00:00Z",
+          "deadline": "2026-11-30",
+          "confidence": "portal_listing_requires_eligibility_review"
+        }
+      ]
+    },
+    {
       "id": "academictransfer:364900",
       "title": "TU Delft — PhD ML-Based Interpretation of Geophysical Legacy Data",
       "url": "https://www.academictransfer.com/nl/jobs/364900/phd-position-in-ml-based-interpretation-of-geophysical-legacy-data-for-mineral-exploration/",
@@ -258,6 +357,39 @@
       ]
     },
     {
+      "id": "euraxess:472060",
+      "title": "KU Leuven — PhD AI and Multimodal Digital Liver Pathology",
+      "url": "https://euraxess.ec.europa.eu/de/node/472060",
+      "provider": "euraxess",
+      "lane": "research_portal_primary_employer",
+      "deadline": "2026-11-17",
+      "deadline_provenance": "University or EURAXESS published deadline inspected on 2026-11-06",
+      "evidence_status": "portal_listing_requires_eligibility_review",
+      "funding_status": "See original published funding terms; individual fee class and sponsorship not verified",
+      "score": 8,
+      "matched_topics": [
+        "machine_learning",
+        "medical_ai",
+        "robotics",
+        "funding"
+      ],
+      "snippet": "Multimodal medical AI and pathology + molecular datasets",
+      "observed_at": "2026-11-06T15:00:00Z",
+      "first_seen": "2026-11-06T15:00:00Z",
+      "last_seen": "2026-11-06T15:00:00Z",
+      "seen_count": 1,
+      "aliases": [],
+      "deadline_change_needs_review": false,
+      "source_observations": [
+        {
+          "provider": "euraxess",
+          "at": "2026-11-06T15:00:00Z",
+          "deadline": "2026-11-17",
+          "confidence": "portal_listing_requires_eligibility_review"
+        }
+      ]
+    },
+    {
       "id": "inria:2026-10638",
       "title": "Doctorant F/H Évaluation des risques liés aux modèles d’IA en Santé",
       "url": "https://recrutement.inria.fr/public/classic/en/offres/2026-10638",
@@ -318,6 +450,39 @@
           "at": "2026-11-06T13:00:00Z",
           "deadline": "2026-11-30",
           "confidence": "third_party_listing_unverified"
+        }
+      ]
+    },
+    {
+      "id": "euraxess:476423",
+      "title": "University of Amsterdam — PhD Cloud-Native and AI-Native 6G Networks",
+      "url": "https://euraxess.ec.europa.eu/jobs/476423",
+      "provider": "euraxess",
+      "lane": "research_portal_primary_employer",
+      "deadline": "2026-11-15",
+      "deadline_provenance": "University or EURAXESS published deadline inspected on 2026-11-06",
+      "evidence_status": "portal_listing_requires_eligibility_review",
+      "funding_status": "See original published funding terms; individual fee class and sponsorship not verified",
+      "score": 6,
+      "matched_topics": [
+        "machine_learning",
+        "medical_ai",
+        "robotics",
+        "funding"
+      ],
+      "snippet": "AI-native networks, systems and cloud computing",
+      "observed_at": "2026-11-06T15:00:00Z",
+      "first_seen": "2026-11-06T15:00:00Z",
+      "last_seen": "2026-11-06T15:00:00Z",
+      "seen_count": 1,
+      "aliases": [],
+      "deadline_change_needs_review": false,
+      "source_observations": [
+        {
+          "provider": "euraxess",
+          "at": "2026-11-06T15:00:00Z",
+          "deadline": "2026-11-15",
+          "confidence": "portal_listing_requires_eligibility_review"
         }
       ]
     },
