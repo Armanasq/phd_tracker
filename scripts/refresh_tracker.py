@@ -243,7 +243,10 @@ def main():
     result=refresh(wb,today,args.online)
     wb.save(FILE)
     watch = wb["Source watch"]
-    observed = [{"id":watch.cell(i,1).value,"source_url":watch.cell(i,2).value,
+    watch_application_ids = {w["id"]: w.get("application_id", w["id"]) for w in read_records(WATCHLIST, "watches")}
+    observed = [{"id":watch.cell(i,1).value,
+                 "application_id":watch_application_ids.get(watch.cell(i,1).value, watch.cell(i,1).value),
+                 "source_url":watch.cell(i,2).value,
                  "expected_deadline":watch.cell(i,3).value,"status":watch.cell(i,6).value}
                 for i in range(2,watch.max_row+1) if watch.cell(i,1).value]
     output = {"date":today.isoformat(),"online":args.online,**result,"source_statuses":observed}
