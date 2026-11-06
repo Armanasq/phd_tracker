@@ -3,7 +3,7 @@
   "as_of": "2026-11-06",
   "explicit_readiness_policy": "Unknown inputs remain unknown. Mentioned documents are not evidence of missing documents.",
   "active_future_opportunities": 102,
-  "source_conflict_count": 0,
+  "source_conflict_count": 1,
   "resource_frontier": [
     {
       "resource_id": "academic_cv",
@@ -422,36 +422,6 @@
       "source_url": "https://www.academictransfer.com/nl/jobs/365008/phd-position-safe-planning-and-decision-making-under-uncertainty-for-long-horizon-robot-autonomy/"
     },
     {
-      "source_id": "N263-09",
-      "deadline": "2026-11-15",
-      "days_to_deadline": 9,
-      "opportunity": "International Max Planck Research School for Intelligent Systems (IMPRS-IS), 2027 doctoral recruitment",
-      "decision": "Go",
-      "readiness": "requires_readiness_confirmation",
-      "document_mentions": [
-        "academic_cv",
-        "research_statement",
-        "transcripts",
-        "recommendations"
-      ],
-      "unconfirmed_resources": [
-        "academic_cv",
-        "research_statement",
-        "transcripts",
-        "recommendations"
-      ],
-      "unknown_resource_states": [
-        "academic_cv",
-        "research_statement",
-        "transcripts",
-        "recommendations"
-      ],
-      "explicit_tasks_remaining": [],
-      "evidence_proof_obligations": [],
-      "next_step": "Apply by 15 Nov end of day Anywhere on Earth (AoE); select eligible primary faculty and tailor motivation. Stuttgart SIR openings may be accessed via this SAME application.",
-      "source_url": "https://imprs.is.mpg.de/application"
-    },
-    {
       "source_id": "N263-10",
       "deadline": "2026-11-15",
       "days_to_deadline": 9,
@@ -564,6 +534,38 @@
       "evidence_proof_obligations": [],
       "next_step": "Check if domain and foreign MSc meet criteria before drafting; if so submit by 15 Nov.",
       "source_url": "https://werkenbij.uva.nl/en/vacancies/phd-position-in-cloud-native-and-ai-native-6g-networks-netherlands-15041"
+    },
+    {
+      "source_id": "N263-09",
+      "deadline": "2026-11-15",
+      "days_to_deadline": 9,
+      "opportunity": "International Max Planck Research School for Intelligent Systems (IMPRS-IS), 2027 doctoral recruitment",
+      "decision": "Go",
+      "readiness": "source_conflict",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [
+        "Official page requires rechecking: contradiction_closed_portal"
+      ],
+      "next_step": "Apply by 15 Nov end of day Anywhere on Earth (AoE); select eligible primary faculty and tailor motivation. Stuttgart SIR openings may be accessed via this SAME application.",
+      "source_url": "https://imprs.is.mpg.de/application"
     },
     {
       "source_id": "M19",
