@@ -1,0 +1,148 @@
+{
+  "as_of": "2026-11-06",
+  "decision_policy": "Evidence obligations, not model confidence probabilities",
+  "items": [
+    {
+      "id": "LEAD26-EPFL-CREATE",
+      "programme": "EPFL CREATE Lab — Continuum/morphing robot PhD openings (Josie Hughes)",
+      "deadline": "2026-11-13",
+      "days_to_deadline": 7,
+      "deadline_kind": "email: final consideration 13 Nov 2026",
+      "tier": "urgent",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Confirm funded stipend and international tuition eligibility",
+        "Recheck official page: observed source contradicts expected evidence",
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://www.epfl.ch/labs/create/create-lab/openings/",
+      "original_email": "https://mail.google.com/mail/u/0/#all/1a1a08c28771a9bb",
+      "next_step": "Confirm Nov 13 closing date and which PhD openings remain; submit only through linked application form"
+    },
+    {
+      "id": "R26-UCY-SKEYES",
+      "programme": "University of Cyprus — V4RL SkEyes ERC funded PhD in robotics, computer vision and aerial SLAM (Margarita Chli)",
+      "deadline": "2026-11-23",
+      "days_to_deadline": 17,
+      "deadline_kind": "23 Nov 2026 14:30 Asia/Nicosia",
+      "tier": "near-term",
+      "research_status": "source_verified",
+      "obligations": [
+        "Confirm funded stipend and international tuition eligibility"
+      ],
+      "official_source": "https://euraxess.ec.europa.eu/jobs/476857",
+      "original_email": "https://mail.google.com/mail/u/0/#all/1a191a3e244d4cdc",
+      "next_step": "Prepare a single application PDF following lab instructions and verify exact time/eligibility"
+    },
+    {
+      "id": "R26-GWU-EPIC",
+      "programme": "George Washington University — EPIC Lab visual-inertial perception, SLAM and physical AI PhD (Chuchu Chen), Fall 2027",
+      "deadline": "2026-12-01",
+      "days_to_deadline": 25,
+      "deadline_kind": "priority; final 2027-01-15",
+      "tier": "near-term",
+      "research_status": "source_verified",
+      "obligations": [
+        "Confirm funded stipend and international tuition eligibility"
+      ],
+      "official_source": "https://graduate.engineering.gwu.edu/doctoral-admissions-requirements",
+      "original_email": "https://mail.google.com/mail/u/0/#all/1a1a5570fd6389df",
+      "next_step": "Prepare tailored research statement emphasizing visual-inertial estimation and robotics; apply by Dec 1 priority deadline"
+    },
+    {
+      "id": "LEAD26-AUCKLAND-BIOMECH",
+      "programme": "University of Auckland — funded Robotics and Biomechatronics PhD (Lucas Ferrari Gerez)",
+      "deadline": null,
+      "days_to_deadline": null,
+      "deadline_kind": "not announced",
+      "tier": "unposted",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Confirm funded stipend and international tuition eligibility",
+        "Obtain an explicit official deadline and timezone",
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://www.auckland.ac.nz/en/engineering.html",
+      "original_email": "https://mail.google.com/mail/u/0/#all/1a1afa6610269d5a",
+      "next_step": "Request official advertisement, funding eligibility and application timeline"
+    },
+    {
+      "id": "LEAD26-LORIA-SYMBIOSE",
+      "programme": "LORIA–INRIA–CNRS (Nancy) — adaptive cobot assistance for fatigue mitigation PhD",
+      "deadline": null,
+      "days_to_deadline": null,
+      "deadline_kind": "unposted",
+      "tier": "unposted",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Confirm funded stipend and international tuition eligibility",
+        "Obtain an explicit official deadline and timezone",
+        "Resolve conflict between recruiter email and lab website",
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://members.loria.fr/PMaurice/positions/",
+      "original_email": "https://mail.google.com/mail/u/0/#all/1a1af936d2c17af5",
+      "next_step": "Ask whether the November 2026 advertised PhD is still open; current PI page says no open PhD"
+    },
+    {
+      "id": "LEAD26-TUD-BIOSIGNALS",
+      "programme": "TU Dortmund — doctoral research associates in bio-signal-based assistive robotics",
+      "deadline": null,
+      "days_to_deadline": null,
+      "deadline_kind": "unposted",
+      "tier": "unposted",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Confirm German-language requirement",
+        "Obtain an explicit official deadline and timezone",
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://www.tu-dortmund.de/",
+      "original_email": "https://mail.google.com/mail/u/0/#all/1a1a554c93619794",
+      "next_step": "Verify German-language requirements and primary university vacancy before preparing application"
+    },
+    {
+      "id": "LEAD26-UNI-STUTTGART-FLUIDLOGIC",
+      "programme": "University of Stuttgart — fluid-logic control of soft robotic systems doctoral position",
+      "deadline": null,
+      "days_to_deadline": null,
+      "deadline_kind": "unposted",
+      "tier": "unposted",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Obtain an explicit official deadline and timezone",
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://www.iams.uni-stuttgart.de/institute/job_vacancies/Open_staff_positions/Job-description_FluidLogic.pdf",
+      "original_email": "https://mail.google.com/mail/u/0/#all/1a1a62c0892fefeb",
+      "next_step": "Read current PDF and validate deadline/funding/required mechanical skills"
+    },
+    {
+      "id": "R26-MAN-PDS-CONSTELLATIONS",
+      "programme": "University of Manchester — PDS Safe and Multi-Fidelity Optimisation of Satellite Constellations for a Changing Planet",
+      "deadline": "2026-12-18",
+      "days_to_deadline": 42,
+      "deadline_kind": "final",
+      "tier": "upcoming",
+      "research_status": "source_verified",
+      "obligations": [],
+      "official_source": "https://www.humanities.manchester.ac.uk/study/postgraduate-research/funding/list-of-awards/presidents-doctoral-scholar-award/",
+      "original_email": "https://mail.google.com/mail/u/0/#all/1a19835b4c8513ee",
+      "next_step": "Write proposal focused on uncertainty-aware multi-fidelity optimisation and safe constellation reconfiguration; contact supervisors"
+    }
+  ],
+  "source_conflicts": [
+    {
+      "id": "LEAD26-EPFL-CREATE",
+      "source_url": "https://www.epfl.ch/labs/create/create-lab/openings/",
+      "expected_deadline": "2026-11-13",
+      "status": "review_source_changed"
+    },
+    {
+      "id": "N263-09-PORTAL",
+      "source_url": "https://imprs-is-apply.tue.mpg.de/registration/imprs-is-2026",
+      "expected_deadline": "2026-11-15",
+      "status": "contradiction_closed_portal"
+    }
+  ]
+}
