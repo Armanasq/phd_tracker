@@ -1,0 +1,2949 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-06",
+  "explicit_readiness_policy": "Unknown inputs remain unknown. Mentioned documents are not evidence of missing documents.",
+  "active_future_opportunities": 102,
+  "source_conflict_count": 0,
+  "resource_frontier": [
+    {
+      "resource_id": "academic_cv",
+      "label": "Academic CV",
+      "current_state": "unknown",
+      "potential_applications": 79,
+      "near_term_applications": 45,
+      "urgency_index": 5.909
+    },
+    {
+      "resource_id": "transcripts",
+      "label": "Official transcripts",
+      "current_state": "unknown",
+      "potential_applications": 79,
+      "near_term_applications": 41,
+      "urgency_index": 5.2765
+    },
+    {
+      "resource_id": "research_statement",
+      "label": "Research statement / SOP",
+      "current_state": "unknown",
+      "potential_applications": 53,
+      "near_term_applications": 33,
+      "urgency_index": 4.5822
+    },
+    {
+      "resource_id": "recommendations",
+      "label": "Reference letters and referees",
+      "current_state": "unknown",
+      "potential_applications": 70,
+      "near_term_applications": 39,
+      "urgency_index": 4.1818
+    },
+    {
+      "resource_id": "research_portfolio",
+      "label": "Research portfolio and publications",
+      "current_state": "unknown",
+      "potential_applications": 28,
+      "near_term_applications": 21,
+      "urgency_index": 2.6761
+    },
+    {
+      "resource_id": "english_proof",
+      "label": "English proficiency evidence",
+      "current_state": "unknown",
+      "potential_applications": 44,
+      "near_term_applications": 22,
+      "urgency_index": 2.4017
+    }
+  ],
+  "applications": [
+    {
+      "source_id": "N263-02",
+      "deadline": "2026-11-06",
+      "days_to_deadline": 0,
+      "opportunity": "University of Copenhagen, REVCAI PhD Project in Real-Time Visual Computing and AI (Bernhard Kerbl)",
+      "decision": "Go - urgent",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Submit by 6 Nov 23:59 CET; tailor one-page motivation to real-time neural/point representations and GPU-aware perception.",
+      "source_url": "https://employment.ku.dk/phd?show=171663"
+    },
+    {
+      "source_id": "N264-01",
+      "deadline": "2026-11-06",
+      "days_to_deadline": 0,
+      "opportunity": "TU/e Eindhoven, PhD Contrast Ultrasound Imaging of Nanobubbles for Cancer Diagnostics (MOMENTUM)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Apply by 6 Nov; show medical image analysis and quantitative inverse/signal modeling; verify C1 and degree equivalence.",
+      "source_url": "https://www.academictransfer.com/nl/jobs/363906/phd-in-contrast-ultrasound-imaging-of-nanobubbles-for-cancer-diagnostics/"
+    },
+    {
+      "source_id": "N263-03",
+      "deadline": "2026-11-08",
+      "days_to_deadline": 2,
+      "opportunity": "Karlsruhe Institute of Technology (KIT MRT), PhD Efficient Long-Context Models for Vision and Vision-Language-Action, 1252/2026",
+      "decision": "Go - urgent",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Apply through official KIT job portal by 8 Nov. Emphasize transformer efficiency, long-context VLM inference and edge deployment.",
+      "source_url": "https://jobs.pse.kit.edu/en/jobs/170920/phd-position-efficient-long-context-large-models-for-vision-and-vision-language-action-systems-fmd"
+    },
+    {
+      "source_id": "N263-04",
+      "deadline": "2026-11-08",
+      "days_to_deadline": 2,
+      "opportunity": "University of Copenhagen, CoAStaL PhD Cultural Reasoning with Language Models (CuRe, Daniel Hershcovich)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Submit by 8 Nov 23:59 CET. Connect RAG evidence verification and multilingual evaluation to cultural uncertainty, not generic LLM product work.",
+      "source_url": "https://employment.ku.dk/phd/?show=167227"
+    },
+    {
+      "source_id": "N263-05",
+      "deadline": "2026-11-09",
+      "days_to_deadline": 3,
+      "opportunity": "UCL Gatsby Computational Neuroscience Unit, PhD in Machine Learning and Theoretical Neuroscience, 2027",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Submit Gatsby 2027 portal application before 9 Nov 17:00 GMT; academic references by 10 Nov 23:59 GMT. Joint SWC track available as preference, not a separate application.",
+      "source_url": "https://www.ucl.ac.uk/life-sciences/gatsby/study-and-work/gatsby-unit-phd-programme"
+    },
+    {
+      "source_id": "N263-06",
+      "deadline": "2026-11-09",
+      "days_to_deadline": 3,
+      "opportunity": "UCL Sainsbury Wellcome Centre, fully funded PhD in Neural Circuits and Behaviour, 2027 intake",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Apply by 9 Nov 17:00 GMT if pursuing neural circuits; optional joint Gatsby–SWC via this OR Gatsby application, not independently.",
+      "source_url": "https://www.swc.science/content/apply-our-phd-programme"
+    },
+    {
+      "source_id": "C06",
+      "deadline": "2026-11-10",
+      "days_to_deadline": 4,
+      "opportunity": "Swiss Government Excellence Scholarship (research/PhD), 2027-2028",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 29 Oct 2026: email sgs@sbfi.admin.ch asking Iran's scholarship type and deadline and whether an Iranian resident in Turkey applies via Tehran or Ankara route",
+      "source_url": "https://www.sbfi.admin.ch/scholarships_eng"
+    },
+    {
+      "source_id": "M07a",
+      "deadline": "2026-11-13",
+      "days_to_deadline": 7,
+      "opportunity": "Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacancy ref 3522426DA (jobs.soton.ac.uk)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 13 Nov 23:59 UK time: submit BlueOcean MSCA staff vacancy ref 3522426DA via jobs.soton.ac.uk. Also confirm and complete any separate PhD/project registration (linked form timing not verified).",
+      "source_url": "https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10"
+    },
+    {
+      "source_id": "M15",
+      "deadline": "2026-11-15",
+      "days_to_deadline": 9,
+      "opportunity": "OIST Graduate School PhD, May or Sep 2027 entry (Admissions Workshop 2027)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-10-29 browse faculty and units (including Yamada MLDS and Pao Chan units) at https://www.oist.jp/research/faculty-members and check supervisor availability at https://www.oist.jp/admissions/phd-program/phd-supervision-availability",
+      "source_url": "https://www.oist.jp/admissions/phd-program/apply-phd"
+    },
+    {
+      "source_id": "M17",
+      "deadline": "2026-11-15",
+      "days_to_deadline": 9,
+      "opportunity": "Northeastern University London, PhD studentship: Algorithms/Hardware Co-Design for Bayesian and Ising Models (Rajendran; ref R143025)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-10-29 email b.rajendran@nulondon.ac.uk with a short informal enquiry (confirm post still open given rolling shortlisting; ask about visa)",
+      "source_url": "https://www.jobs.ac.uk/job/DTI287/"
+    },
+    {
+      "source_id": "M18",
+      "deadline": "2026-11-15",
+      "days_to_deadline": 9,
+      "opportunity": "Institute of Science Tokyo, International Graduate Program IGP(A) Fall 2027 with MEXT recommendation",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-10-29 download the IGP(A) application guide PDF from the info_url page and read it (the page says applicants must always refer to it); identify a theme/programme (PSIL, IPSSS, eMAT, Sustainable Bio-Economy, Environmental Designers) and a supervisor",
+      "source_url": "https://admissions.isct.ac.jp/en/013/graduate/programs/igp/igp-a"
+    },
+    {
+      "source_id": "N263-07",
+      "deadline": "2026-11-15",
+      "days_to_deadline": 9,
+      "opportunity": "TUM Autonomous Vehicle Systems (Johannes Betz), PhD Mobile Manipulation for Humanoid Robots",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Submit complete documents by email to application.avs@ed.tum.de by 15 Nov. Ask whether German fluency is genuinely mandatory.",
+      "source_url": "https://www.mos.ed.tum.de/en/avs/career/our-jobs/ki-motorsport-1/"
+    },
+    {
+      "source_id": "N263-08",
+      "deadline": "2026-11-15",
+      "days_to_deadline": 9,
+      "opportunity": "TU Delft OPERA EU Project, PhD Safe Planning and Decision-Making under Uncertainty for Long-Horizon Robot Autonomy",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Apply through TU Delft careers portal by 15 Nov; show formal planning/control and empirical robotics contributions.",
+      "source_url": "https://www.academictransfer.com/nl/jobs/365008/phd-position-safe-planning-and-decision-making-under-uncertainty-for-long-horizon-robot-autonomy/"
+    },
+    {
+      "source_id": "N263-09",
+      "deadline": "2026-11-15",
+      "days_to_deadline": 9,
+      "opportunity": "International Max Planck Research School for Intelligent Systems (IMPRS-IS), 2027 doctoral recruitment",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Apply by 15 Nov end of day Anywhere on Earth (AoE); select eligible primary faculty and tailor motivation. Stuttgart SIR openings may be accessed via this SAME application.",
+      "source_url": "https://imprs.is.mpg.de/application"
+    },
+    {
+      "source_id": "N263-10",
+      "deadline": "2026-11-15",
+      "days_to_deadline": 9,
+      "opportunity": "BMW AI Robotics / RoboTac and TU/e Eindhoven, PhD World Models & Visuo-Tactile Foundation Models (2 research topics)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Apply by 15 Nov 2026 to robotac@bmw.de with single English PDF: CV, max 1-page letter, BSc/MSc transcripts, two references, publications.",
+      "source_url": "https://www.robotac.eu/open-positions"
+    },
+    {
+      "source_id": "N263-11",
+      "deadline": "2026-11-15",
+      "days_to_deadline": 9,
+      "opportunity": "University of Birmingham, Fully Funded PhD in Integrated Intelligent Safe Environment (IISE) for Nuclear Robotics",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv"
+      ],
+      "unknown_resource_states": [
+        "academic_cv"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Before applying, ask Dr Davis whether Iranian nationality and degree meet project/UK nuclear-security eligibility; email CV and 0.5-page fit summary by 15 Nov if allowed.",
+      "source_url": "https://www.jobs.ac.uk/job/DTM113/phd-studentship-phd-in-an-integrated-intelligent-safe-environment-iise-in-the-nuclear-industry"
+    },
+    {
+      "source_id": "N264-02",
+      "deadline": "2026-11-15",
+      "days_to_deadline": 9,
+      "opportunity": "University of Amsterdam, PhD Accountable and Responsible AI (SafeGenAI / LLM4LM; #15581)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Apply promptly; UvA may close before 15 Nov if a candidate is selected. Specify evidential grounding, source traceability and evaluation.",
+      "source_url": "https://werkenbij.uva.nl/en/vacancies/phd-position-in-accountable-and-responsible-ai-netherlands-15581"
+    },
+    {
+      "source_id": "N264-03",
+      "deadline": "2026-11-15",
+      "days_to_deadline": 9,
+      "opportunity": "University of Amsterdam / Ericsson, PhD Cloud-Native and AI-Native 6G Networks (#15041)",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Check if domain and foreign MSc meet criteria before drafting; if so submit by 15 Nov.",
+      "source_url": "https://werkenbij.uva.nl/en/vacancies/phd-position-in-cloud-native-and-ai-native-6g-networks-netherlands-15041"
+    },
+    {
+      "source_id": "M19",
+      "deadline": "2026-11-16",
+      "days_to_deadline": 10,
+      "opportunity": "NTNU Gjovik, Ph.D. Candidate in Reinforcement Learning for Project Scheduling Problems (Jobbnorge 310778)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-10-30 email Yongping Liu with a short enquiry and CV",
+      "source_url": "https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310778"
+    },
+    {
+      "source_id": "N264-04",
+      "deadline": "2026-11-16",
+      "days_to_deadline": 10,
+      "opportunity": "AI4I + Politecnico di Torino, funded PhD Agentic System-1/System-2 Architectures for Robot Autonomy",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Submit expression of interest plus separate formal Apply@polito doctoral application no later than 16 Nov 14:00 CET.",
+      "source_url": "https://ai4i.it/phd-position-on-agentic-and-system-1system-2-architectures-for-robot-autonomy/"
+    },
+    {
+      "source_id": "N264-05",
+      "deadline": "2026-11-16",
+      "days_to_deadline": 10,
+      "opportunity": "AI4I + Politecnico di Torino, funded PhD Adversarial Robustness in Multimodal Foundation Models",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Select Computer Engineering and Systems doctoral call and submit formal PoliTo application by 16 Nov 14:00 CET; align vision/audio/LLM work with multimodal safety.",
+      "source_url": "https://ai4i.it/phd-position-on-adversarial-robustness-in-multi-modal-foundation-models/"
+    },
+    {
+      "source_id": "M20",
+      "deadline": "2026-11-17",
+      "days_to_deadline": 11,
+      "opportunity": "University of Oslo, PhD Research Fellow in Control Theory and Optimization for Edge Computing (Jobbnorge 310583)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-10-30 email Mathias Hudoba de Badyn (and optionally Tonnes Nygaard) with CV and a short enquiry",
+      "source_url": "https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310583"
+    },
+    {
+      "source_id": "C07-UiO-310559",
+      "deadline": "2026-11-18",
+      "days_to_deadline": 12,
+      "opportunity": "UiO Integreat PhD Research Fellow in Structured Vision-Language Models (310559)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 4 Nov 2026: email 2-3 referees; contact Adin Ramirez Rivera (adinr@uio.no) with CV",
+      "source_url": "https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310559"
+    },
+    {
+      "source_id": "M21",
+      "deadline": "2026-11-18",
+      "days_to_deadline": 12,
+      "opportunity": "OsloMet PhD Fellow in Trustworthy Generative AI with Knowledge Verification (310467)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-11-04: check whether the Tehran MSc and BSc need pre-approval for foreign education (page says foreign education needs pre-approval, approval letter attached); start it if so",
+      "source_url": "https://www.oslomet.no/en/work/job-openings/phd-fellow-in-trustworthy-generative-ai-with-knowledge-verification"
+    },
+    {
+      "source_id": "C07-NTNU-310379",
+      "deadline": "2026-11-19",
+      "days_to_deadline": 13,
+      "opportunity": "NTNU CAPTURE MSCA DN PhD in Explainable AI for Capsule Endoscopy (310379), Gjovik",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 5 Nov 2026: email Prof. Kiran Raja to confirm fit and export-control status for Iranian national",
+      "source_url": "https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310379"
+    },
+    {
+      "source_id": "C07-NTNU-310592",
+      "deadline": "2026-11-19",
+      "days_to_deadline": 13,
+      "opportunity": "NTNU CAPTURE MSCA DN PhD in Colour and Image Enhancement for Wireless Capsule Endoscopy (310592), Gjovik",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 5 Nov 2026: email Marius Pedersen about fit and export-control status",
+      "source_url": "https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310592"
+    },
+    {
+      "source_id": "M22",
+      "deadline": "2026-11-19",
+      "days_to_deadline": 13,
+      "opportunity": "NTNU PhD Candidate in Multispectral Wireless Capsule Endoscopy (WCE), CAPTURE MSCA Doctoral Network (310363)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-10-31: obtain the full Jobbnorge advert in a normal browser (page body did not load here) and confirm document list and referee count",
+      "source_url": "https://capture-dn.eu/index.php/vacant-positions/"
+    },
+    {
+      "source_id": "N264-06",
+      "deadline": "2026-11-21",
+      "days_to_deadline": 15,
+      "opportunity": "TU/e Eindhoven + TUM, PhD Physics-Informed Generative AI for Dynamic Cardiac MRI (PRIMA-CMR)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Submit before 21 Nov, possibly sooner if vacancy fills; foreground uncertainty-aware reconstruction and scientific ML.",
+      "source_url": "https://www.academictransfer.com/en/jobs/364936/phd-in-physics-informed-generative-ai-for-dynamic-cardiac-mri/"
+    },
+    {
+      "source_id": "M23",
+      "deadline": "2026-11-22",
+      "days_to_deadline": 16,
+      "opportunity": "ETH Zurich, Julia Vogt (Medical Data Science group): PhD in Machine Learning and Medical Data Science",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-10-31: find the original ETH jobs.ethz.ch advert (not located) and confirm the deadline and portal",
+      "source_url": "https://www.applykite.com/positions/phd-in-machine-learning-and-medical-data-science-at-eth-zurich-7wdy7wpsqv"
+    },
+    {
+      "source_id": "R26-UCY-SKEYES",
+      "deadline": "2026-11-23",
+      "days_to_deadline": 17,
+      "opportunity": "University of Cyprus — V4RL SkEyes ERC funded PhD in robotics, computer vision and aerial SLAM (Margarita Chli)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [
+        "Verify personal funding / eligibility before application"
+      ],
+      "next_step": "Prepare a single application PDF following lab instructions and verify exact time/eligibility",
+      "source_url": "https://euraxess.ec.europa.eu/jobs/476857"
+    },
+    {
+      "source_id": "C15-NAGOYA",
+      "deadline": "2026-11-24",
+      "days_to_deadline": 18,
+      "opportunity": "Nagoya University Graduate School of Informatics, October 2027 doctoral entry (MEXT, Data Science Education Program)",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Immediately: email the preferred Nagoya Informatics faculty member (mandatory contact before applying) and request a place",
+      "source_url": "https://www.i.nagoya-u.ac.jp/wp-content/uploads/2025/11/2026_Application_GuidelinesDC.pdf"
+    },
+    {
+      "source_id": "N264-07",
+      "deadline": "2026-11-24",
+      "days_to_deadline": 18,
+      "opportunity": "Linkoeping University CHASS, PhD Optimal Motion Planning for Drone Swarms (LiU-2026-04767)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv"
+      ],
+      "unknown_resource_states": [
+        "academic_cv"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Apply by 24 Nov. Link sensor fusion and VIO/localization to belief-state trajectory optimization and swarm autonomy.",
+      "source_url": "https://liu.se/en/work-at-liu/vacancies/30141"
+    },
+    {
+      "source_id": "M24",
+      "deadline": "2026-11-27",
+      "days_to_deadline": 21,
+      "opportunity": "ETH Zurich RobotX PhD Fellowship 2027",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-11-04: read RobotX groups and choose preferred groups to name in the cover letter (a third-party blog says up to three; not confirmed on ETH page)",
+      "source_url": "https://robotx.ethz.ch/education/open-positions.html"
+    },
+    {
+      "source_id": "M25",
+      "deadline": "2026-11-29",
+      "days_to_deadline": 23,
+      "opportunity": "University of Bath URSA (Faculty of Engineering & Design), Cathryn Mitchell, ionospheric modelling/PNT",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-10-31: locate the Mitchell project advert on FindAPhD (not found here) and confirm it is an Engineering & Design URSA project; email doctoraladmissions@bath.ac.uk if not listed",
+      "source_url": "https://www.bath.ac.uk/campaigns/university-research-studentship-award-ursa/"
+    },
+    {
+      "source_id": "N264-08",
+      "deadline": "2026-11-29",
+      "days_to_deadline": 23,
+      "opportunity": "Aalborg University ROX6G, PhD Safe Multi-Robot Planning and Control under Connectivity Constraints (#2026/1218)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Apply by 29 Nov using AAU recruitment portal; make Go2 SLAM/sensor-fusion and robotic experimental validation central.",
+      "source_url": "https://www.vacancies.aau.dk/phd-positions/show-vacancy/vacancyId/981852"
+    },
+    {
+      "source_id": "M26",
+      "deadline": "2026-11-30",
+      "days_to_deadline": 24,
+      "opportunity": "University of Luxembourg YADIAS (IAS Young Academics Doctoral Fellowships), MSCA-COFUND",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-10-30: find a University of Luxembourg main supervisor (staff member authorised to supervise research) and a complementary-domain co-supervisor; no pre-existing contact needed, but supervisor must submit the Project Announcement",
+      "source_url": "https://yadias.uni.lu/call-information/"
+    },
+    {
+      "source_id": "M27",
+      "deadline": "2026-11-30",
+      "days_to_deadline": 24,
+      "opportunity": "ETH Zurich Soft Robotics Lab (Katzschmann): Doctoral Positions in Robot Learning and Soft, Musculoskeletal, and Biohybrid Robotics",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-11-08: line up at least two references (usually thesis supervisor; reference letters optional)",
+      "source_url": "https://academicpositions.com/ad/eth-zurich/2026/doctoral-positions-in-robot-learning-and-soft-musculoskeletal-and-biohybrid-robotics/252189"
+    },
+    {
+      "source_id": "M28",
+      "deadline": "2026-11-30",
+      "days_to_deadline": 24,
+      "opportunity": "Saitama University ESITI - MEXT Scholarship (University Recommendation), October 2027 intake",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Browse supervisors at https://park.saitama-u.ac.jp/~rese/courses.html and email 2-3 candidate supervisors for agreement to supervise, by 2026-11-06 (office does not recommend supervisors)",
+      "source_url": "https://park.saitama-u.ac.jp/~rese/admission.html"
+    },
+    {
+      "source_id": "M29",
+      "deadline": "2026-11-30",
+      "days_to_deadline": 24,
+      "opportunity": "EPFL LAMD (Neuchatel) - PhD position in Integrated Design and Optimization, MSCA-DN TurboImpact",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Compile one English PDF: motivation letter, CV, transcripts and BSc/MSc diplomas in English with official grading-scale description, BSc thesis PDF, MSc thesis PDF, names of three referees, by 2026-11-20",
+      "source_url": "https://careers.epfl.ch/job/Neuch%C3%A2tel-PhD-position-in-Integrated-Design-and-Optimization/1165538755/"
+    },
+    {
+      "source_id": "M30-NIEDUSZYNSKI",
+      "deadline": "2026-11-30",
+      "days_to_deadline": 24,
+      "opportunity": "UEA / Earlham Institute - Decoding and Designing DNA Replication Origins Using Genome Language Models (NIEDUSZYNSKI_E27DTP)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Email Dr Conrad Nieduszynski / DTP office to confirm international eligibility and fee rate by 2026-11-04 (no email on advert; use https://biodtp.norwichresearchpark.ac.uk/contact-us/)",
+      "source_url": "https://www.uea.ac.uk/course/phd-doctorate/phd-decoding-and-designing-dna-replication-origins-using-genome-language-models-nieduszynskie27dtp"
+    },
+    {
+      "source_id": "M30-SHERIFF",
+      "deadline": "2026-11-30",
+      "days_to_deadline": 24,
+      "opportunity": "UEA / Norwich Research Park Biosciences DTP - Can blood reveal the body? Trustworthy AI for tissue gene expression (SHERIFF_E27DTP)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Read NRPDTP key dates/eligibility pages (biodtp.norwichresearchpark.ac.uk) and confirm international eligibility with the DTP office via https://biodtp.norwichresearchpark.ac.uk/contact-us/ by 2026-11-04",
+      "source_url": "https://www.uea.ac.uk/course/phd-doctorate/phd-can-blood-reveal-the-body-trustworthy-ai-for-tissue-gene-expression-sheriffe27dtp"
+    },
+    {
+      "source_id": "N264-09",
+      "deadline": "2026-11-30",
+      "days_to_deadline": 24,
+      "opportunity": "Uppsala University, PhD Signal Processing: Multimodal Environment Modeling for Wireless Spatial Intelligence (UFV-PA 2026/2989)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Apply by 30 Nov with max 2-page research statement on radio-visual mapping, localization, uncertainty quantification.",
+      "source_url": "https://www.uu.se/en/about-uu/join-us/jobs-and-vacancies/job-details?query=975824"
+    },
+    {
+      "source_id": "SC01",
+      "deadline": "2026-11-30",
+      "days_to_deadline": 24,
+      "opportunity": "University of Bern, Machine Learning in Medicine Lab (Prof. Lisa Koch): PhD in Machine Learning in Medicine, multimodal health data",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-11-02 read mlm-lab.ch/jobs FAQ and the portal advert",
+      "source_url": "https://mlm-lab.ch/jobs/"
+    },
+    {
+      "source_id": "SE-U01",
+      "deadline": "2026-11-30",
+      "days_to_deadline": 24,
+      "opportunity": "University of Edinburgh UKRI AI CDT in Designing Responsible Natural Language Processing, 2027 entry",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "2026-11-05: email responsiblenlp@ed.ac.uk to ask about international places, fee-difference funding and ATAS",
+      "source_url": "https://study.ed.ac.uk/programmes/postgraduate-research/1115-centre-for-doctoral-training-in-designing-responsible-natural"
+    },
+    {
+      "source_id": "M14",
+      "deadline": "2026-12-01",
+      "days_to_deadline": 25,
+      "opportunity": "University of Osaka, Trans-Pacific Hub Graduate Program in Advanced Bio-Information Synergy (Bioengineering, MEXT, doctoral course, Oct 2027 enrolment)",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-10-30 download the 'Application guideline for Bioengineering enrollment in October 2027 (MC/DC)' PDF and the application form zip from the info_url page and confirm the real dates (the sweep's 2-13 Nov is unconfirmed)",
+      "source_url": "https://www.es.osaka-u.ac.jp/en/admission-aid/mext-granted/index.html"
+    },
+    {
+      "source_id": "M31",
+      "deadline": "2026-12-01",
+      "days_to_deadline": 25,
+      "opportunity": "Mila supervision request (up to three professors) plus separate university application",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Create/log in to MyMila applicant portal and shortlist up to three Mila core/associate professors by 2026-11-10",
+      "source_url": "https://mila.quebec/en/supervision-requests/"
+    },
+    {
+      "source_id": "M32",
+      "deadline": "2026-12-01",
+      "days_to_deadline": 25,
+      "opportunity": "EPFL EDIC (Computer and Communication Sciences) doctoral programme, Round 1",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Ask three referees (professors preferred, institutional email, not Gmail) by 2026-11-02; system emails them automatically on submission, so they need time before 2026-12-01",
+      "source_url": "https://www.epfl.ch/education/phd/edic-computer-and-communication-sciences/"
+    },
+    {
+      "source_id": "M33",
+      "deadline": "2026-12-01",
+      "days_to_deadline": 25,
+      "opportunity": "Memorial University - PhD Engineering and Applied Science, Fall 2027 admission",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Email 1-2 prospective supervisors in FEAS (page says research applicants should name up to two potential supervisors), by 2026-11-06",
+      "source_url": "https://mun.ca/engineering/graduate/faq-for-prospective-research-students/"
+    },
+    {
+      "source_id": "M34",
+      "deadline": "2026-12-01",
+      "days_to_deadline": 25,
+      "opportunity": "York University - PhD Electrical Engineering and Computer Science (Lassonde), Fall",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Request three recommendation letters (allow 4-6 weeks per York guidance, so ask by 2026-10-30)",
+      "source_url": "https://futurestudents.yorku.ca/graduate/programs/electrical-engineering-and-computer-science"
+    },
+    {
+      "source_id": "N264-10",
+      "deadline": "2026-12-01",
+      "days_to_deadline": 25,
+      "opportunity": "Max Planck School Biomedical AI (BMAI), funded PhD cohort starting September 2027",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Apply on school portal by 1 Dec 2026 23:59 CET; 2 academic referee submissions due 10 Dec (current process page).",
+      "source_url": "https://biomedicalai.maxplanckschools.org/4056/application-process"
+    },
+    {
+      "source_id": "N264-11",
+      "deadline": "2026-12-01",
+      "days_to_deadline": 25,
+      "opportunity": "TU Delft / ING, PhD AI for Software Reuse and Reliable Agentic Development (vacancy 3997)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Apply via official TU Delft portal by 1 Dec; choose Direction 2: Reliable Agentic Software Development; disclose AI-tool use as required.",
+      "source_url": "https://www.academictransfer.com/en/jobs/365163/phd-position-in-ai-for-software-reuse-and-agentic-development/"
+    },
+    {
+      "source_id": "R26-GWU-EPIC",
+      "deadline": "2026-12-01",
+      "days_to_deadline": 25,
+      "opportunity": "George Washington University — EPIC Lab visual-inertial perception, SLAM and physical AI PhD (Chuchu Chen), Fall 2027",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Prepare tailored research statement emphasizing visual-inertial estimation and robotics; apply by Dec 1 priority deadline",
+      "source_url": "https://graduate.engineering.gwu.edu/doctoral-admissions-requirements"
+    },
+    {
+      "source_id": "SE-U03",
+      "deadline": "2026-12-01",
+      "days_to_deadline": 25,
+      "opportunity": "EPFL EDEE (Electrical Engineering) doctoral programme, December 2026 round (lab chosen after admission)",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "2026-11-05: identify EDEE labs and email professors with CV",
+      "source_url": "https://www.epfl.ch/education/admission/phd-admission-criteria-and-application/"
+    },
+    {
+      "source_id": "M35",
+      "deadline": "2026-12-02",
+      "days_to_deadline": 26,
+      "opportunity": "Oxford DPhil Engineering Science studentship: Data-driven Control Engineering for Large-scale Uncertain Systems (ref 27ENGCO_AP; Papachristodoulou, Margellos)",
+      "decision": "Long shot",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Email Prof Papachristodoulou (antonis@eng.ox.ac.uk) and Prof Margellos (kostas.margellos@eng.ox.ac.uk) by 2026-10-30 asking whether an international (overseas-fee) candidate can be funded, quoting 27ENGCO_AP",
+      "source_url": "https://www.jobs.ac.uk/job/DTJ272/"
+    },
+    {
+      "source_id": "M36-6014",
+      "deadline": "2026-12-08",
+      "days_to_deadline": 32,
+      "opportunity": "Exeter EPSRC DLA studentships, Department of Engineering, Sept 2027 entry (ref 6014): Physics-Aware Graph Neural Networks for Robust Short-Term Visibility Forecasting (supervisor surname Zhou per PDF name)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Email pgrapplicants@exeter.ac.uk by 2026-10-30 to confirm the reference deadline (8 Jan vs 15 Feb 2027) and the exact fee-status/funding wording for international students",
+      "source_url": "https://www.exeter.ac.uk/study/funding/award/?id=6014"
+    },
+    {
+      "source_id": "M36-6019",
+      "deadline": "2026-12-08",
+      "days_to_deadline": 32,
+      "opportunity": "Exeter EPSRC DLA studentships, Mathematics and Statistics, Sept 2027 entry (ref 6019): Uncertainty quantification for healthcare models: a route to precision medicine (Salter per PDF name)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Email pgrapplicants@exeter.ac.uk by 2026-10-30 to confirm reference deadline and international fee wording",
+      "source_url": "https://www.exeter.ac.uk/study/funding/award/?id=6019"
+    },
+    {
+      "source_id": "M37-CIS",
+      "deadline": "2026-12-08",
+      "days_to_deadline": 32,
+      "opportunity": "Cambridge Trust funding (Cambridge International Scholarship) via the same Cambridge PhD application",
+      "decision": "Check first",
+      "readiness": "no_unresolved_detected_requirements",
+      "document_mentions": [],
+      "unconfirmed_resources": [],
+      "unknown_resource_states": [],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Check the course page Funding Deadline by 2026-10-31",
+      "source_url": "https://www.cambridgetrust.org/postgraduate-applicants/"
+    },
+    {
+      "source_id": "M37-Gates",
+      "deadline": "2026-12-08",
+      "days_to_deadline": 32,
+      "opportunity": "Gates Cambridge Scholarship (PhD, 2027/28 entry, Round 2 all other eligible applicants)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Choose the Cambridge PhD course and read its 'Course Funding Deadline' on the Course Directory by 2026-10-31 (8 Dec 2026 or 6 Jan 2027)",
+      "source_url": "https://www.gatescambridge.org/apply/how-to-apply/"
+    },
+    {
+      "source_id": "N264-12",
+      "deadline": "2026-12-08",
+      "days_to_deadline": 32,
+      "opportunity": "University of Amsterdam AMLab, multiple PhD positions Symmetries and Their Breaking in Deep Learning (Simons grant)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Validate mathematical/research depth; submit by 8 Dec with research statement and 2 referees.",
+      "source_url": "https://werkenbij.uva.nl/en/vacancies/multiple-phd-positions-in-symmetries-and-their-breaking-in-deep-learning-netherlands-15608"
+    },
+    {
+      "source_id": "SC02",
+      "deadline": "2026-12-08",
+      "days_to_deadline": 32,
+      "opportunity": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): R2T2-Med: Resource-Aware AI for Scalable and Deployable Medical Image Analysis (Zhang, Computer Science)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Email pgrapplicants@exeter.ac.uk by 2026-11-02 to confirm the international-place wording and reference deadline (award page says 8 Jan 2027, important-information page says 15 Feb 2027)",
+      "source_url": "https://www.exeter.ac.uk/study/funding/award/?id=6011"
+    },
+    {
+      "source_id": "SC03",
+      "deadline": "2026-12-08",
+      "days_to_deadline": 32,
+      "opportunity": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6014): Multiscale Scientific Machine Learning Digital Twins for High-Torque Electric Propulsion under Extreme Duty Cycles (Engineering)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Email pgrapplicants@exeter.ac.uk by 2026-11-02 to confirm the international-place wording and reference deadline (award page says 8 Jan 2027, important-information page says 15 Feb 2027)",
+      "source_url": "https://www.exeter.ac.uk/study/funding/award/?id=6014"
+    },
+    {
+      "source_id": "SC04",
+      "deadline": "2026-12-08",
+      "days_to_deadline": 32,
+      "opportunity": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6015): Physics-Informed AI and Experimental Modelling of Ocean Mixing (Messias, Geography)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Email pgrapplicants@exeter.ac.uk by 2026-11-02 to confirm the international-place wording and reference deadline (award page says 8 Jan 2027, important-information page says 15 Feb 2027)",
+      "source_url": "https://www.exeter.ac.uk/study/funding/award/?id=6015"
+    },
+    {
+      "source_id": "SC05",
+      "deadline": "2026-12-08",
+      "days_to_deadline": 32,
+      "opportunity": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6010): AI and Image Processing for Diabetic Retinopathy Smart Cameras (Vaughan and Ye, Clinical and Biomedical Sciences)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Email pgrapplicants@exeter.ac.uk by 2026-11-02 to confirm the international-place wording and reference deadline (award page says 8 Jan 2027, important-information page says 15 Feb 2027)",
+      "source_url": "https://www.exeter.ac.uk/study/funding/award/?id=6010"
+    },
+    {
+      "source_id": "SC06",
+      "deadline": "2026-12-08",
+      "days_to_deadline": 32,
+      "opportunity": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): Explainable AI for Early Dementia Detection and Deployment (Dong, Computer Science)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Email pgrapplicants@exeter.ac.uk by 2026-11-02 to confirm the international-place wording and reference deadline (award page says 8 Jan 2027, important-information page says 15 Feb 2027)",
+      "source_url": "https://www.exeter.ac.uk/study/funding/award/?id=6011"
+    },
+    {
+      "source_id": "SC07",
+      "deadline": "2026-12-08",
+      "days_to_deadline": 32,
+      "opportunity": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): Sovereign Agentic AI: Distilling Small Language Model Agents for Local Deployment (Wang and Huang, Computer Science)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Email pgrapplicants@exeter.ac.uk by 2026-11-02 to confirm the international-place wording and reference deadline (award page says 8 Jan 2027, important-information page says 15 Feb 2027)",
+      "source_url": "https://www.exeter.ac.uk/study/funding/award/?id=6011"
+    },
+    {
+      "source_id": "SE-U09",
+      "deadline": "2026-12-08",
+      "days_to_deadline": 32,
+      "opportunity": "Exeter EPSRC DLA 2027, Public Health and Sport Sciences: Computer vision to predict falls from everyday movement in older adults (Taleshi)",
+      "decision": "Long shot",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "2026-10-30: identify the award page for Public Health and Sport Sciences and confirm deadline",
+      "source_url": "https://www.exeter.ac.uk/study/pg-research/funding/phdfunding/epsrc-dla-studentships/finding_a_phd_research_project/"
+    },
+    {
+      "source_id": "M38",
+      "deadline": "2026-12-14",
+      "days_to_deadline": 38,
+      "opportunity": "University of Edinburgh EPSRC Centre for Doctoral Training in Machine Learning Systems (PhD, Round 1)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "research_statement",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "research_statement",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "research_statement",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Identify and contact a potential supervisor (stage 1 'Get support from a supervisor') by 2026-11-10",
+      "source_url": "https://informatics.ed.ac.uk/cdt-in-machine-learning-systems/apply/application-process-and-guidance/application-deadlines"
+    },
+    {
+      "source_id": "C10",
+      "deadline": "2026-12-15",
+      "days_to_deadline": 39,
+      "opportunity": "EPFL EDRS (Robotics, Control and Intelligent Systems) doctoral programme",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Now: read websites of participating EDRS laboratories and shortlist advisers; EPFL says to consult labs before applying",
+      "source_url": "https://epfl.ch/education/phd/programs/edrs-robotics_control_and_intelligent_systems/edrs-applicants"
+    },
+    {
+      "source_id": "M39",
+      "deadline": "2026-12-15",
+      "days_to_deadline": 39,
+      "opportunity": "University of Alberta, Computing Science PhD, Fall 2027 (Amii)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Select research area and identify up to three potential supervisors; email them by 2026-11-10 (admitted only if a professor agrees to supervise)",
+      "source_url": "https://www.ualberta.ca/en/computing-science/graduate-studies/programs-and-admissions/applications-and-admissions/index.html"
+    },
+    {
+      "source_id": "M40",
+      "deadline": "2026-12-15",
+      "days_to_deadline": 39,
+      "opportunity": "UBC Computer Science PhD, September 2027",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Create a UBC CWL account and start the application (open since 2026-09-15) by 2026-11-01",
+      "source_url": "https://www.cs.ubc.ca/students/grad/admissions"
+    },
+    {
+      "source_id": "M41",
+      "deadline": "2026-12-15",
+      "days_to_deadline": 39,
+      "opportunity": "McGill University, Electrical and Computer Engineering PhD, Fall 2027",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Confirm the ECE PhD deadline and year with grad.ece@mcgill.ca by 2026-10-30 (December 15 vs January 15)",
+      "source_url": "https://www.mcgill.ca/ece/graduate/graduate/deadlines"
+    },
+    {
+      "source_id": "N263-12",
+      "deadline": "2026-12-15",
+      "days_to_deadline": 39,
+      "opportunity": "McGill University School of Computer Science PhD, Fall 2027 (international deadline)",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Verify that MSc Space Engineering is classified as closely related; find robotics/ML supervisors with documented research funding and apply by 15 Dec.",
+      "source_url": "https://www.mcgill.ca/gradapplicants/program/computer-science-phd"
+    },
+    {
+      "source_id": "M42",
+      "deadline": "2026-12-16",
+      "days_to_deadline": 40,
+      "opportunity": "UEA / ARIES NERC DTP studentships (entry 1 Oct 2027)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-11-06 browse all 6 pages of https://aries-dtp.ac.uk/studentships/ and shortlist up to 3 projects (max 3 allowed per year) whose scope fits; page 1 shows only climate/ocean projects",
+      "source_url": "https://www.aries-dtp.ac.uk/applications"
+    },
+    {
+      "source_id": "C11",
+      "deadline": "2026-12-18",
+      "days_to_deadline": 42,
+      "opportunity": "University of Manchester President's Doctoral Scholar (PDS) Award",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Email FSE.doctoralacademy.admissions@manchester.ac.uk or pds@manchester.ac.uk and ask for the 2027 PDS deadline and whether international fees are covered",
+      "source_url": "https://www.se.manchester.ac.uk/study/postgraduate-research/fees-and-funding/search-for-funding/presidents-doctoral-scholarship/"
+    },
+    {
+      "source_id": "M43a",
+      "deadline": "2026-12-18",
+      "days_to_deadline": 42,
+      "opportunity": "University of Sydney Research Training Program (RTP) international stipend + fee offset, 2027 commencement",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv"
+      ],
+      "unknown_resource_states": [
+        "academic_cv"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-11-13 email engineering.hdr@sydney.edu.au with CV and research area to identify a supervisor (stated on the Faculty page as the contact)",
+      "source_url": "https://www.sydney.edu.au/scholarships/australian-government-research-training-program/rtp-international.html"
+    },
+    {
+      "source_id": "R26-MAN-PDS-CONSTELLATIONS",
+      "deadline": "2026-12-18",
+      "days_to_deadline": 42,
+      "opportunity": "University of Manchester — PDS Safe and Multi-Fidelity Optimisation of Satellite Constellations for a Changing Planet",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [
+        "Verify personal funding / eligibility before application"
+      ],
+      "next_step": "Write proposal focused on uncertainty-aware multi-fidelity optimisation and safe constellation reconfiguration; contact supervisors",
+      "source_url": "https://www.humanities.manchester.ac.uk/study/postgraduate-research/funding/list-of-awards/presidents-doctoral-scholar-award/"
+    },
+    {
+      "source_id": "M44",
+      "deadline": "2026-12-20",
+      "days_to_deadline": 44,
+      "opportunity": "University of Surrey fully funded PhD: predictability in Romance verbal inflection (Linguistics)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-12-05 email Alison Stubley (address not printed on the page) a CV and a one-page statement of interest, stating the project title and supervisor names",
+      "source_url": "https://www.surrey.ac.uk/fees-and-funding/studentships/fully-funded-phd-studentship-predictability-romance-verbal-inflection"
+    },
+    {
+      "source_id": "C15-TOYOHASHI",
+      "deadline": "2027-01-04",
+      "days_to_deadline": 59,
+      "opportunity": "Toyohashi University of Technology International Doctoral Degree Program with MEXT (university recommendation)",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Now: contact a prospective TUT supervisor (page asks for this before applying) and ask for a Letter of Acceptance",
+      "source_url": "https://www.tut.ac.jp/english/exam/applications/docs/3_2026_special_guidelines_en.pdf"
+    },
+    {
+      "source_id": "M46",
+      "deadline": "2027-01-06",
+      "days_to_deadline": 61,
+      "opportunity": "University of Oxford Intelligent Earth CDT (AI for the environment), September 2027 entry",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "research_statement",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-11-20 register for the 25 Nov Open Day",
+      "source_url": "https://intelligent-earth.ox.ac.uk/how-apply"
+    },
+    {
+      "source_id": "SE-U07",
+      "deadline": "2027-01-08",
+      "days_to_deadline": 63,
+      "opportunity": "UCL 50 fully funded 4-year EPSRC PhD studentships in engineering and physical sciences",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "2026-10-30: open the advert in a browser and read international eligibility, cap and ATAS",
+      "source_url": "https://www.jobs.ac.uk/job/DTA190/50-fully-funded-4-year-epsrc-phd-studentships-in-engineering-and-physical-sciences"
+    },
+    {
+      "source_id": "M47",
+      "deadline": "2027-01-11",
+      "days_to_deadline": 66,
+      "opportunity": "Imperial College London President's PhD Scholarships 2027/28, round 2",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-11-06 check the Unavailable Supervisors page and email target Imperial supervisors with CV and proposal to secure a supervisor's agreement (required before applying)",
+      "source_url": "https://www.imperial.ac.uk/study/fees-and-funding/postgraduate-doctoral/grants-scholarships/presidents-phd/"
+    },
+    {
+      "source_id": "SE01",
+      "deadline": "2027-01-11",
+      "days_to_deadline": 66,
+      "opportunity": "King's College London, PhD in Human-Robot Interaction (CO-STAR, Dr Oya Celiktutan, SAIR lab), Oct 2027 entry",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "2026-11-02: email Dr Celiktutan (oya.celiktutan@kcl.ac.uk) with CV and a short note on Go2 SLAM and robot learning work, quoting the CO-STAR title",
+      "source_url": "http://kcl.ac.uk/study/funding/funding-opportunities/fully-funded-phd-studentship-in-human-robot-interaction-at-kings-college-london"
+    },
+    {
+      "source_id": "M45",
+      "deadline": "2027-01-15",
+      "days_to_deadline": 70,
+      "opportunity": "University of Toronto MIE, CLIMB Lab (Pakpong Chirarattananon), PhD September 2027",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-11-06 email p.chirarattananon@utoronto.ca with CV, transcripts, brief note on research interests and link to the lab's legged and bioinspired robotics work",
+      "source_url": "https://climb.mie.utoronto.ca/openings/"
+    },
+    {
+      "source_id": "M48",
+      "deadline": "2027-01-15",
+      "days_to_deadline": 70,
+      "opportunity": "University of British Columbia (Vancouver) PhD in Electrical and Computer Engineering, September 2027",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-11-13 browse ECE faculty profiles and email prospective supervisors (encouraged, not required) with CV and fit note",
+      "source_url": "https://www.grad.ubc.ca/prospective-students/graduate-degree-programs/phd-electrical-computer-engineering"
+    },
+    {
+      "source_id": "M49",
+      "deadline": "2027-01-15",
+      "days_to_deadline": 70,
+      "opportunity": "SFU Engineering Science PhD (Fall 2027)",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-11-15 pick 2-3 Engineering Science faculty (SLAM, inertial, medical AI fit) from the school faculty list and email each to confirm willingness to supervise (a willing supervisor is required before admission)",
+      "source_url": "https://www.sfu.ca/students/calendar/2027/spring/programs/engineering-science/doctor-of-philosophy.html"
+    },
+    {
+      "source_id": "M54",
+      "deadline": "2027-01-15",
+      "days_to_deadline": 70,
+      "opportunity": "Waterloo ECE PhD, Stephen L. Smith (Autonomous Systems Lab)",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "transcripts",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "transcripts",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "transcripts",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-10-31 email ece.researchadmissions@uwaterloo.ca to get the exact September 2027 PhD deadline",
+      "source_url": "https://uwaterloo.ca/autonomous-systems-lab/joining-lab"
+    },
+    {
+      "source_id": "N264-13",
+      "deadline": "2027-01-15",
+      "days_to_deadline": 70,
+      "opportunity": "University of Amsterdam EVELYN, 2 PhDs AI for Science (multimodal retrieval / mechanistic interpretability)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Pursue Position 1: scientific multimodal RAG, efficient adaptation of visual models, evidence verification; apply by 15 Jan 2027.",
+      "source_url": "https://werkenbij.uva.nl/en/vacancies/two-phd-positions-in-ai-for-science-at-the-university-of-amsterdam-netherlands-15626"
+    },
+    {
+      "source_id": "SE-U08",
+      "deadline": "2027-01-15",
+      "days_to_deadline": 70,
+      "opportunity": "University of Warwick Biomedical AI PhD (jobs.ac.uk DTF911)",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "2026-10-30: read advert in a browser for funding and fee status",
+      "source_url": "https://www.jobs.ac.uk/job/DTF911/biomedical-ai-phd"
+    },
+    {
+      "source_id": "SF01",
+      "deadline": "2027-01-15",
+      "days_to_deadline": 70,
+      "opportunity": "University of Toronto UTIAS (Aerospace Studies) PhD, Fall 2027, guaranteed funding, supervisor required (space robotics, SLAM, navigation labs)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 15 Nov 2026: shortlist 3-5 UTIAS faculty (STARS/space robotics, navigation, estimation) and email each with CV, paper links and research fit",
+      "source_url": "https://gradstudies.engineering.utoronto.ca/prospective-students/departments/aerospace-studies-graduate-studies-programs-and-degrees/"
+    },
+    {
+      "source_id": "SE12",
+      "deadline": "2027-01-17",
+      "days_to_deadline": 72,
+      "opportunity": "University of Surrey (Vision, Speech and Signal Processing), Smart optical design: AI tools for cinematic camera lenses (Volino, Guillemaut), April 2027 start",
+      "decision": "Long shot",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "2026-11-10: email Dr Marco Volino (m.volino@surrey.ac.uk) with CV",
+      "source_url": "https://www.surrey.ac.uk/fees-and-funding/studentships/smart-optical-design-ai-tools-next-generation-cinematic-camera-lenses"
+    },
+    {
+      "source_id": "M50",
+      "deadline": "2027-01-19",
+      "days_to_deadline": 74,
+      "opportunity": "SFU Computing Science PhD (Fall 2027)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-11-15 shortlist Computing Science faculty and email them your CV (the page does not require a supervisor, but contact is advisable; this is my suggestion, not a page requirement)",
+      "source_url": "https://www.sfu.ca/fas/study/future-graduates/apply/computing-science.html"
+    },
+    {
+      "source_id": "SA13",
+      "deadline": "2027-01-19",
+      "days_to_deadline": 74,
+      "opportunity": "Durham University: Efficient Physical AI for Real-World Robotics, funded PhD studentship (jobs.ac.uk DTI242)",
+      "decision": "Check first",
+      "readiness": "no_unresolved_detected_requirements",
+      "document_mentions": [],
+      "unconfirmed_resources": [],
+      "unknown_resource_states": [],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Open advert in browser and read funding and fee status by 2026-11-05",
+      "source_url": "https://www.jobs.ac.uk/job/DTI242/efficient-physical-ai-for-real-world-robotics-funded-phd-studentship"
+    },
+    {
+      "source_id": "C15-NAIST",
+      "deadline": "2027-01-20",
+      "days_to_deadline": 75,
+      "opportunity": "NAIST doctoral course (Information Science), 2027 admission, with MEXT IPGP scholarship",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Now to 13 Nov 2026: if targeting MEXT IPGP, obtain a Letter of Acceptance from one NAIST professor and email all MEXT documents to that professor with a copy to naist-ipgp (printed as naist-ipgp[at]is.naist.jp)",
+      "source_url": "https://www.naist.jp/en/international_students/prospective_students/financial_support/mext_international_priority_graduate_programs.html"
+    },
+    {
+      "source_id": "SF02",
+      "deadline": "2027-01-22",
+      "days_to_deadline": 77,
+      "opportunity": "University of Tokyo Graduate School of Frontier Sciences (GSFS) fall 2027 regular degree with MEXT University Recommendation (General) - scholarship may not continue",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Check page again late Dec 2026 for scholarship confirmation",
+      "source_url": "https://www.jobs.ac.uk/job/DSP806/phd-studentship-learning-and-decision-making-under-uncertainty-in-public-health"
+    },
+    {
+      "source_id": "M51",
+      "deadline": "2027-01-25",
+      "days_to_deadline": 80,
+      "opportunity": "University of West London, AI optimisation of green roofs PhD studentship",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-10-31 email UWL postgraduate admissions (contact link on the applying page) or the project supervisor to ask for the green roofs advert link and its closing date",
+      "source_url": "https://www.uwl.ac.uk/research/phd-opportunities"
+    },
+    {
+      "source_id": "M52",
+      "deadline": "2027-01-31",
+      "days_to_deadline": 86,
+      "opportunity": "Glasgow Graduate School scholarships (College of Science and Engineering, any supervisor)",
+      "decision": "Go",
+      "readiness": "no_unresolved_detected_requirements",
+      "document_mentions": [],
+      "unconfirmed_resources": [],
+      "unknown_resource_states": [],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-11-15 search for and email potential supervisors (the School page advises contacting one before applying)",
+      "source_url": "https://www.gla.ac.uk/schools/computing/postgraduateresearch/prospectivestudents/scholarshipsandfundingopportunities/studentshipinformation"
+    },
+    {
+      "source_id": "M53",
+      "deadline": "2027-01-31",
+      "days_to_deadline": 86,
+      "opportunity": "Bristol PhD studentship, learning and decision making under uncertainty in public health (Mengyan Zhang)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-12-15 prepare CV, 1-2 page personal statement, transcripts and optional research proposal",
+      "source_url": "https://www.jobs.ac.uk/job/DSP806/phd-studentship-learning-and-decision-making-under-uncertainty-in-public-health"
+    },
+    {
+      "source_id": "M56",
+      "deadline": "2027-02-28",
+      "days_to_deadline": 114,
+      "opportunity": "McMaster University, Computing and Software, PhD (Sept 2027 intake)",
+      "decision": "Check first",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-11-15 shortlist at least 3 CAS faculty members whose work matches (SLAM, inertial estimation, medical AI); the application requires naming 3 potential supervisors",
+      "source_url": "https://www.eng.mcmaster.ca//app/uploads/2025/11/CAS-Graduate-Information-1.pdf"
+    },
+    {
+      "source_id": "SH02",
+      "deadline": "2027-02-28",
+      "days_to_deadline": 114,
+      "opportunity": "Monash Graduate Scholarship (stipend) plus Monash International Tuition Scholarship (fees), PhD, International Round 1 2027",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Nov to Dec 2026: contact a Monash supervisor (Engineering, IT) and get agreement to supervise",
+      "source_url": "https://www.monash.edu/study/fees-scholarships/scholarships/find-a-scholarship/international-tuition-scholarship"
+    },
+    {
+      "source_id": "M55a",
+      "deadline": "2027-03-01",
+      "days_to_deadline": 115,
+      "opportunity": "Concordia Mechanical, Industrial and Aerospace Engineering PhD (Fall 2027)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "transcripts"
+      ],
+      "unconfirmed_resources": [
+        "transcripts"
+      ],
+      "unknown_resource_states": [
+        "transcripts"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-12-15 identify and email Concordia MIAE faculty (SLAM, attitude estimation) to secure a supervisor (the earlier note required this; the page itself does not state it)",
+      "source_url": "https://www.concordia.ca/academics/graduate/mechanical-engineering-phd.html"
+    },
+    {
+      "source_id": "M55b",
+      "deadline": "2027-03-01",
+      "days_to_deadline": 115,
+      "opportunity": "Victoria University of Wellington, Wellington Doctoral Scholarship (round 2 per earlier sweep)",
+      "decision": "Later round",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "transcripts",
+        "recommendations",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "By 2026-11-30 create the Communityforce application, write the expression of interest and contact potential supervisors (not required before applying)",
+      "source_url": "https://www.wgtn.ac.nz/scholarships/current/wellington-doctoral-scholarship"
+    },
+    {
+      "source_id": "M57",
+      "deadline": "2027-05-23",
+      "days_to_deadline": 198,
+      "opportunity": "University of Wollongong, University Postgraduate Award (UPA), international PhD",
+      "decision": "Later round",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "transcripts",
+        "recommendations"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "No action possible for the 2027 round (closed)",
+      "source_url": "https://www.uow.edu.au/research/graduate-research/scholarships/"
+    }
+  ]
+}
