@@ -191,24 +191,13 @@ def dashboard_md(plan, metrics):
 
 ## 01 · Execute — {day}
 
-<table>
-<tr>
-<td width="65%" valign="top">
-
-**Submission deadlines today** — {counts["deadline_actions"]} actionable · {counts["excluded_deadlines"]} explicitly excluded
+### Submission deadlines today — {counts["deadline_actions"]} actionable · {counts["excluded_deadlines"]} explicitly excluded
 
 {task_table(due_today)}
 
-</td>
-<td width="35%" valign="top">
-
-**Cross-route work** — {counts["shared_tasks"]} scheduled today
+### Cross-route work — {counts["shared_tasks"]} scheduled today
 
 {share_table(shared,max_rows=5)}
-
-</td>
-</tr>
-</table>
 
 **Programme-specific steps due today** — {counts["timeline_tasks"]} distinct records from the *Step timeline* worksheet, not inferred from the final submission date.
 
