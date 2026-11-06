@@ -42,6 +42,61 @@
 
 <a href="docs/TODAY.md"><img src="assets/readme/operations.svg" width="100%" alt="Today: distinct application deadlines, scheduled preparation steps, shared tasks and completion-unknown backlog" /></a>
 
+## Explore EvidenceGraph by outcome
+
+<a href="docs/CAPABILITY_ATLAS.md"><img src="assets/readme/evidence_flow.svg" alt="Four-stage research-to-decision system: discovery, verification, portfolio prioritization, and owner-confirmed execution" width="100%" /></a>
+
+<table>
+<tr>
+<td width="33%" valign="top">
+
+### Find a doctoral position
+
+**Discover → verify → shortlist**
+
+[Research queue](data/discovered_candidates.json) · [Search diagnostics](data/discovery_report.json)
+
+Identify original institutional postings, duplicate URLs, uncertain eligibility, source failures and deadline contradictions. Never confuse a research paper with an open funded position.
+
+</td>
+<td width="33%" valign="top">
+
+### Execute an application
+
+**Plan → prepare → submit**
+
+[Today's action plan](docs/TODAY.md) · [Portfolio frontier](data/portfolio_frontier.json)
+
+Separate actual final deadlines from preparation steps, identify reusable materials and explicitly confirm statuses. An unknown task or asset state is not automatically classified as incomplete.
+
+</td>
+<td width="34%" valign="top">
+
+### Operate the intelligence system
+
+**Monitor → alert → improve**
+
+[Private Action Center](../../issues/1) · [Live workflow](../../actions/workflows/phd-intelligence.yml)
+
+Review source conflicts, snooze or prioritize individual applications and inspect coverage. Gmail and external alerts require configured credentials.
+
+</td>
+</tr>
+</table>
+
+| Want to... | Open this surface |
+|:--|:--|
+| Understand every available capability and its maturity | [Capability atlas — operational, conditional, degraded, proposed](docs/CAPABILITY_ATLAS.md) |
+| Follow a complete real-world operating procedure | [Nine scenario playbooks](docs/PLAYBOOKS.md) |
+| Report a changed deadline or closed portal | [Structured source correction](../../issues/new?template=01-source-correction.yml) |
+| Submit a new PhD lead for human verification | [Structured opportunity intake](../../issues/new?template=02-opportunity-lead.yml) |
+| Propose an experiment with metrics and rollback | [Automation experiment form](../../issues/new?template=03-automation-idea.yml) |
+| Compare engineering intent with actual implementation | [System architecture](docs/ARCHITECTURE.md) · [Product RFC](docs/PRODUCT_RFC.md) |
+| Inspect tests, provider failures and data lineage | [Regression CI](../../actions/workflows/intelligence-ci.yml) · [Evidence diagnostics](data/discovery_report.json) |
+
+> [!NOTE]
+> **Capability transparency:** Inria discovery and private GitHub reminders are operating. AcademicPositions is currently blocked (HTTP 403), AcademicTransfer has zero observed records, and Brave search requires an API key. External notifications, Gmail polling and Google Sheets synchronization are not claimed to be active without their respective configuration. The operational snapshot above is dated and must not be interpreted as real-time eligibility proof.
+
 ## 01 · Execute — 2026-11-06
 
 ### Submission deadlines today — 2 actionable · 1 explicitly excluded
