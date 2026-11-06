@@ -20,7 +20,7 @@ else:
     from marketplace_sources import collect_board
 
 ROOT = Path(__file__).resolve().parents[1]
-INRIA_INDEX = "https://jobs.inria.fr/public/classic/en/offres?filtre=doctorants"
+INRIA_INDEX = "https://recrutement.inria.fr/public/classic/en/offres"
 BRAVE_ENDPOINT = "https://api.search.brave.com/res/v1/web/search"
 MAX_RESPONSE = 1_500_000
 TOPICS = {
@@ -52,6 +52,9 @@ WEIGHTS = {
     "machine learning": 3, "artificial intelligence": 2, "spacecraft": 5,
     "satellite": 5, "aerospace": 4, "computer vision": 4,
     "multimodal": 2, "medical": 2, "optimization": 2, "optimisation": 2,
+    "remote sensing": 4, "spatio-temporal": 3, "mesh": 2, "scientific computing": 3,
+    "high performance": 2, "embedded": 3, "real-time": 2, "multicore": 3,
+    "modèles": 1, "santé": 3, "risques": 1, "privacy": 3, "healthcare": 3,
 }
 IGNORE_PARAMS = {"utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "gclid", "ref"}
 USER_AGENT = "PhDTrackerEvidenceGraph/1.0 (+research; public academic positions)"
