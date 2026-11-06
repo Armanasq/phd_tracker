@@ -23,10 +23,13 @@ def main():
     if not token or not re.fullmatch(r"[a-zA-Z0-9_.-]+/[a-zA-Z0-9_.-]+", repo):
         raise RuntimeError("Repository and GitHub token required")
     op = result["operation"]
-    sid = result["source_id"]
+    sid = result.get("source_id") or result.get("task_id")
     until = result.get("until")
     summary = f"Recorded /{op} for {sid}."
-    if op == "asset":
+    if op in ("task_done","task_reopen"):
+        label = "completed" if op == "task_done" else "reopened"
+        summary = f"Task {sid} marked {label} explicitly by the owner. The full-workbook Execution board and README have been regenerated; no original source or application submission status changed."
+    elif op == "asset":
         summary = f"Recorded your explicit readiness update: {sid} = {result['new_status']}. The decision frontier was recalculated without changing application submission states."
     elif op == "snooze":
         summary += f" Noncritical reminders are suppressed through {until}; deadlines within 1 day still notify."
