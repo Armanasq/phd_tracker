@@ -6,10 +6,10 @@
       "id": "mail-eth-ai-2026-10-28",
       "date": "2026-10-28",
       "subject": "ETH AI Center Fellowship 2027 — support response",
-      "status": "No late-submission exception",
-      "impact": "Support explicitly stated portal closed and no exceptional submissions accepted. Do not infer whether application was successfully submitted.",
+      "status": "Individual exception refused; later general grace period announced",
+      "impact": "At 11:14 UTC the team declined an individual exception for the closed portal. At 15:04 UTC a subsequent email reopened the portal until 09:00 CET on 29 October. Neither message establishes whether a submission ultimately succeeded.",
       "message_url": "https://mail.google.com/mail/u/0/#all/1a18237d8b8c4fcb",
-      "action": "Verify portal submission status independently; avoid marking Submitted"
+      "action": "Verify actual portal submission/confirmation; do not infer accepted, rejected or submitted"
     },
     {
       "id": "mail-imprs-2026-11-04",
@@ -46,6 +46,24 @@
       "impact": "Email says final consideration Nov 13; lab website has older details.",
       "message_url": "https://mail.google.com/mail/u/0/#all/1a1a08c28771a9bb",
       "action": "Verify live 2026 call and international funding"
+    },
+    {
+      "id": "mail-eth-grace-2026-10-28",
+      "date": "2026-10-28",
+      "subject": "ETH AI Center general fellowship extension",
+      "status": "Deadline extended (historical)",
+      "impact": "Body sets final portal closure for 29 October 2026 09:00 CET. Subject says 9pm CET, conflicting with body; original body and UTC message timestamp control the interpretation.",
+      "message_url": "https://mail.google.com/mail/u/0/#all/1a1830b7945d1d56",
+      "action": "Record contradiction; obtain actual application receipt for submission status"
+    },
+    {
+      "id": "mail-ntnu-followup-2026-10-13",
+      "date": "2026-10-13",
+      "subject": "NTNU PhD Underwater Foundation Models — applicant follow-up",
+      "status": "User-reported submission; unverified in portal",
+      "impact": "User's sent follow-up claims an application was submitted on 25 August 2026. HR correspondence asks for position clarification; no acceptance or official submission acknowledgment was found in this thread.",
+      "message_url": "https://mail.google.com/mail/u/0/#all/1a1356b64b844925",
+      "action": "Check application portal status; preserve source claim without changing Submitted status"
     }
   ]
 }
