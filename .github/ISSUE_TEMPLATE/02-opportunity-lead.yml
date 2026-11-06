@@ -1,0 +1,52 @@
+name: New PhD opportunity for verification
+description: Propose a funded doctoral vacancy or supervisor opening to the research review queue.
+title: "[Research lead] "
+labels: []
+body:
+  - type: input
+    id: official
+    attributes:
+      label: Official institutional vacancy URL
+      placeholder: https://institution.example.edu/jobs/phd
+    validations:
+      required: true
+  - type: input
+    id: institute
+    attributes:
+      label: Institution, department and PI
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Research direction
+      options:
+        - Robotics, SLAM and perception
+        - Embodied AI and robot learning
+        - Machine learning and trustworthy AI
+        - Aerospace, satellite and autonomy
+        - Biomedical AI and imaging
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: deadline
+    attributes:
+      label: Advertised deadline and time zone
+      placeholder: 2026-12-15 23:59 CET / not published
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Funding, nationality and tuition conditions
+      description: State exactly what the source confirms and what remains unknown.
+    validations:
+      required: true
+  - type: checkboxes
+    id: verification
+    attributes:
+      label: Review contract
+      options:
+        - label: This is a research candidate, not a confirmed eligible application.
+          required: true
