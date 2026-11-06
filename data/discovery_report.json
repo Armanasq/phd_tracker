@@ -1,12 +1,17 @@
 {
   "run_date": "2026-11-06",
-  "new_ids": [],
-  "new_count": 0,
+  "new_ids": [
+    "inria:2026-10415",
+    "inria:2026-10612",
+    "inria:2026-10542",
+    "inria:2026-10584"
+  ],
+  "new_count": 4,
   "seen_by_provider": {
     "academicpositions": 0,
     "academictransfer": 0,
     "brave": 0,
-    "inria": 3
+    "inria": 10
   },
   "source_errors": {
     "academicpositions": [
@@ -18,7 +23,7 @@
     ],
     "inria": []
   },
-  "total": 17,
+  "total": 21,
   "source_yield": {
     "academicpositions": {
       "observed": 0,
@@ -42,14 +47,16 @@
       "health": "disabled"
     },
     "inria": {
-      "observed": 3,
-      "new_unique": 0,
-      "reobservations": 3,
-      "unique_yield": 0.0,
+      "observed": 10,
+      "new_unique": 4,
+      "reobservations": 6,
+      "unique_yield": 0.4,
       "health": "ok"
     }
   },
-  "actionable_new": [],
+  "actionable_new": [
+    "inria:2026-10542"
+  ],
   "deadline_conflicts": [],
   "stale_observations": [],
   "url_aliases": []

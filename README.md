@@ -79,7 +79,7 @@ Research publications enter a distinct lane and cannot be inferred to be vacanci
 | academicpositions | 0 | 0 | degraded |
 | academictransfer | 0 | 0 | degraded |
 | brave | 0 | 0 | disabled |
-| inria | 3 | 0 | ok |
+| inria | 10 | 4 | ok |
 
 Broad search is **disabled until** the optional `BRAVE_SEARCH_API_KEY` repository secret is configured. The Inria collector is an institutional signal, not comprehensive worldwide coverage. Each source must expose failure counts and unique yield; a completed Action does not mean comprehensive discovery.
 
