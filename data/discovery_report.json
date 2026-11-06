@@ -13,6 +13,22 @@
     "inria": []
   },
   "total": 3,
+  "source_yield": {
+    "brave": {
+      "observed": 0,
+      "new_unique": 0,
+      "reobservations": 0,
+      "unique_yield": null,
+      "health": "disabled"
+    },
+    "inria": {
+      "observed": 3,
+      "new_unique": 0,
+      "reobservations": 3,
+      "unique_yield": 0.0,
+      "health": "ok"
+    }
+  },
   "actionable_new": [],
   "deadline_conflicts": [],
   "stale_observations": [],

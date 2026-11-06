@@ -1,7 +1,8 @@
 {
   "as_of": "2026-11-06",
-  "reminder_candidates": 56,
-  "github_new_events": 0,
+  "reminder_candidates": 81,
+  "suppressed_by_user_policy": 0,
+  "github_new_events": 25,
   "apprise_new_events": 30,
   "upcoming_count": 77,
   "potential_document_leverage": [
@@ -37,7 +38,7 @@
     }
   ],
   "delivery": {
-    "github": "delivered",
+    "github": "not_requested",
     "apprise": "not_configured"
   }
 }
