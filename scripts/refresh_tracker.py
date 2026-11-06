@@ -190,6 +190,13 @@ def refresh(wb, today: date, online: bool):
     erows = [[r["id"], dt(r["date"]), r["subject"], r["status"], r["impact"], r["message_url"], r["action"]] for r in signals]
     append_formatted_sheet(wb, "Mail signals", ecols, erows, 1)
 
+    inbox_path = ROOT / "data" / "mail_inbox.json"
+    if inbox_path.exists():
+        inbox = read_records(inbox_path, "messages")
+        icols = ["Gmail ID", "Date", "Subject", "Status", "Email URL"]
+        irows = [[m["id"], dt(m["date"]), m["subject"], m["review_status"], m["gmail_url"]] for m in inbox]
+        append_formatted_sheet(wb, "Mail inbox", icols, irows, 1)
+
     lcols = ["Source ID", "Date", "Route", "Official URL", "Email URL", "Confidence", "Finding", "Next step"]
     lrows = [[r["id"], dt(r["source_date"]), r["name"], r["source_url"], r["source_email"],
               r["confidence"], r["evidence"], r["next_step"]] for r in opportunities]
@@ -232,7 +239,26 @@ def main():
     wb=load_workbook(FILE)
     result=refresh(wb,today,args.online)
     wb.save(FILE)
-    print(json.dumps({**result,"date":today.isoformat(),"online":args.online},sort_keys=True))
+    watch = wb["Source watch"]
+    observed = [{"id":watch.cell(i,1).value,"source_url":watch.cell(i,2).value,
+                 "expected_deadline":watch.cell(i,3).value,"status":watch.cell(i,6).value}
+                for i in range(2,watch.max_row+1) if watch.cell(i,1).value]
+    output = {"date":today.isoformat(),"online":args.online,**result,"source_statuses":observed}
+    report_path = ROOT / "data" / "latest_run.json"
+    if report_path.exists():
+        prev = json.loads(report_path.read_text(encoding="utf-8"))
+        before = {item["id"]:item["status"] for item in prev.get("source_statuses",[])}
+        changes = [{"date":today.isoformat(),"source_id":item["id"],"before":before[item["id"]],
+                    "after":item["status"],"source_url":item["source_url"]}
+                   for item in observed if item["id"] in before and item["status"]!=before[item["id"]]]
+        if changes:
+            event_path = ROOT / "data" / "evidence_events.jsonl"
+            with event_path.open("a",encoding="utf-8") as stream:
+                for event in changes:
+                    stream.write(json.dumps(event,ensure_ascii=False)+"\n")
+    report_path.write_text(json.dumps(output,ensure_ascii=False,indent=2,default=str)+"\n",encoding="utf-8")
+    print(json.dumps(output,sort_keys=True,default=str))
+
 
 
 if __name__ == "__main__":
