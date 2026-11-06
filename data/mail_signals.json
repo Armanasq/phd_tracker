@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "source": "Gmail, user-authorized review",
+  "signals": [
+    {
+      "id": "mail-eth-ai-2026-10-28",
+      "date": "2026-10-28",
+      "subject": "ETH AI Center Fellowship 2027 — support response",
+      "status": "No late-submission exception",
+      "impact": "Support explicitly stated portal closed and no exceptional submissions accepted. Do not infer whether application was successfully submitted.",
+      "message_url": "https://mail.google.com/mail/u/0/#all/1a18237d8b8c4fcb",
+      "action": "Verify portal submission status independently; avoid marking Submitted"
+    },
+    {
+      "id": "mail-imprs-2026-11-04",
+      "date": "2026-11-04",
+      "subject": "IMPRS-IS 2027 — recruiting announcement",
+      "status": "Published deadline",
+      "impact": "2026-11-15 end-of-day Anywhere on Earth; already in tracker as N263-09; do not duplicate.",
+      "message_url": "https://mail.google.com/mail/u/0/#all/1a1a63f5cde02e99",
+      "action": "Verify application portal live and three recommendations"
+    },
+    {
+      "id": "mail-ucl-2026-11-02",
+      "date": "2026-11-02",
+      "subject": "UCL three PhD places — UK Home Fee",
+      "status": "Funding eligibility restriction",
+      "impact": "Sender explicitly limits these positions to UK Home Fee status; not treated as generally eligible international funding.",
+      "message_url": "https://mail.google.com/mail/u/0/#all/1a19d2339f948983",
+      "action": "Exclude unless applicant demonstrably qualifies for Home Fee"
+    },
+    {
+      "id": "mail-kth-2026-10-19",
+      "date": "2026-10-19",
+      "subject": "KTH GeoRob ERC two doctoral places",
+      "status": "Deadline passed",
+      "impact": "Email states 2026-10-30 and formal portal requirement; historical lead only.",
+      "message_url": "https://mail.google.com/mail/u/0/#all/1a1584a828353b84",
+      "action": "Do not add as current open position"
+    },
+    {
+      "id": "mail-epfl-2026-11-02",
+      "date": "2026-11-02",
+      "subject": "EPFL CREATE Lab 2027 PhD opportunities",
+      "status": "Requires website confirmation",
+      "impact": "Email says final consideration Nov 13; lab website has older details.",
+      "message_url": "https://mail.google.com/mail/u/0/#all/1a1a08c28771a9bb",
+      "action": "Verify live 2026 call and international funding"
+    }
+  ]
+}
