@@ -1,0 +1,127 @@
+# Execution plan — 2026-11-06
+
+[← Repository cockpit](../README.md) · [Tracker workbook](../PhD_Action_List.xlsx) · [Private Action Center](../../issues/1) · [Full machine-readable ledger](../data/execution_plan.json)
+
+> **As of 2026-11-06, Europe/Berlin.** This plan is generated from original workbook rows. It distinguishes application deadlines from step dates and explicit cross-route tasks. A dated Step timeline task has no recorded completion flag; it is not automatically labelled incomplete.
+
+## A. Application submission deadlines today (2)
+
+| When | Application / workstream | Action | Source |
+|:--|:--|:--|:--|
+| 2026-11-06 | University of Copenhagen, REVCAI PhD Project in Real-Time Visual  | Submit by 6 Nov 23:59 CET; tailor one-page motivation to real-time neural/point representations and GPU-aware perception. | [Official page](https://employment.ku.dk/phd?show=171663) |
+| 2026-11-06 | TU/e Eindhoven, PhD Contrast Ultrasound Imaging of Nanobubbles fo | Apply by 6 Nov; show medical image analysis and quantitative inverse/signal modeling; verify C1 and degree equivalence. | [Official page](https://www.academictransfer.com/nl/jobs/363906/phd-in-contrast-ultrasound-imaging-of-nanobubbles-for-cancer-diagnostics/) |
+
+## B. Shared actions due today (2)
+
+| Date | Cross-application task | Recorded status |
+|:---|:---|:---|
+| 2026-11-06 | Write the master research plan once (2 pages), then derive: the 2,000-word version (Osaka), the Field of Study and Research Plan forms (UTokyo, Saitama), and the criterion-by-criterion letters for the Jobbnorge posts. | To do |
+| 2026-11-06 | Submit Copenhagen real-time visual-computing application by 23:59 CET; low-priority ultrasound position closes same day. | To do |
+
+## C. All programme steps explicitly dated today (21)
+
+| When | Application / workstream | Action | Source |
+|:--|:--|:--|:--|
+| 2026-11-06 | University of Copenhagen REVCAI, PhD Real-Time Visual Computing a | Submit by 23:59 CET through University of Copenhagen recruitment site | [Official page](https://employment.ku.dk/phd?show=171663) |
+| 2026-11-06 | Northeastern University London, PhD studentship: Algorithms/Hardw | By 2026-11-06 submit through the Workday Apply button quoting R143025 and state whether you are likely to need a visa (submit early because rolling sh | [Official page](https://www.jobs.ac.uk/job/DTI287/) |
+| 2026-11-06 | Northeastern University London, PhD studentship: Algorithms/Hardw | Interviews planned during November 2026 | [Official page](https://www.jobs.ac.uk/job/DTI287/) |
+| 2026-11-06 | NTNU Gjovik, Ph.D. Candidate in Reinforcement Learning for Projec | By 2026-11-06 contact University of Tehran to obtain transcripts and diplomas; gather diploma supplement and any HK-dir statement for foreign educatio | [Official page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310778) |
+| 2026-11-06 | University of Oslo, PhD Research Fellow in Control Theory and Opt | By 2026-11-06 request an official explanation of the grading system of the University of Tehran, and get transcripts and diplomas; Vitnemalsportalen w | [Official page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310583) |
+| 2026-11-06 | OsloMet PhD Fellow in Trustworthy Generative AI with Knowledge Ve | By 2026-11-06: contact two referees and get their contact details (page: 'preferably two references with contact information'; reference letters also  | [Official page](https://www.oslomet.no/en/work/job-openings/phd-fellow-in-trustworthy-generative-ai-with-knowledge-verification) |
+| 2026-11-06 | Saitama University ESITI - MEXT Scholarship (University Recommend | Browse supervisors at https://park.saitama-u.ac.jp/~rese/courses.html and email 2-3 candidate supervisors for agreement to supervise, by 2026-11-06 (o | [Official page](https://park.saitama-u.ac.jp/~rese/admission.html) |
+| 2026-11-06 | Memorial University - PhD Engineering and Applied Science, Fall 2 | Email 1-2 prospective supervisors in FEAS (page says research applicants should name up to two potential supervisors), by 2026-11-06 | [Official page](https://mun.ca/engineering/graduate/faq-for-prospective-research-students/) |
+| 2026-11-06 | Memorial University - PhD Engineering and Applied Science, Fall 2 | Ask two referees (university-level, institutional email) by 2026-11-06; submit application 1-2 weeks early | [Official page](https://mun.ca/engineering/graduate/faq-for-prospective-research-students/) |
+| 2026-11-06 | Oxford DPhil Engineering Science studentship: Data-driven Control | Request three referees (at least one academic) by 2026-11-06 | [Official page](https://www.jobs.ac.uk/job/DTJ272/) |
+| 2026-11-06 | UEA / ARIES NERC DTP studentships (entry 1 Oct 2027) | By 2026-11-06 browse all 6 pages of https://aries-dtp.ac.uk/studentships/ and shortlist up to 3 projects (max 3 allowed per year) whose scope fits; pa | [Official page](https://www.aries-dtp.ac.uk/applications) |
+| 2026-11-06 | University of Sydney Faculty of Engineering Research Scholarship  | By 2026-11-06 email engineering.hdr@sydney.edu.au asking in writing whether an Iranian citizen counts as 'a citizen from a country of the Middle East  | [Official page](https://www.sydney.edu.au/scholarships/b/faculty-of-engineering-research-scholarship-for-mena.html) |
+| 2026-11-06 | University of Toronto MIE, CLIMB Lab (Pakpong Chirarattananon), P | By 2026-11-06 email p.chirarattananon@utoronto.ca with CV, transcripts, brief note on research interests and link to the lab's legged and bioinspired  | [Official page](https://climb.mie.utoronto.ca/openings/) |
+| 2026-11-06 | Imperial College London President's PhD Scholarships 2027/28, rou | By 2026-11-06 check the Unavailable Supervisors page and email target Imperial supervisors with CV and proposal to secure a supervisor's agreement (re | [Official page](https://www.imperial.ac.uk/study/fees-and-funding/postgraduate-doctoral/grants-scholarships/presidents-phd/) |
+| 2026-11-06 | TU/e contrast ultrasound of nanobubbles doctoral project | Submit salary-funded cancer ultrasound project only if C1 English and related MSc acceptance confirmed | [Official page](https://www.academictransfer.com/nl/jobs/363906/phd-in-contrast-ultrasound-imaging-of-nanobubbles-for-cancer-diagnostics/) |
+| 2026-11-06 | Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): R2 | Read the project PDF and open the application link inside it by 2026-11-06 | [Official page](https://www.exeter.ac.uk/study/funding/award/?id=6011) |
+| 2026-11-06 | Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6014): Mu | Read the project PDF and open the application link inside it by 2026-11-06 | [Official page](https://www.exeter.ac.uk/study/funding/award/?id=6014) |
+| 2026-11-06 | Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6015): Ph | Read the project PDF and open the application link inside it by 2026-11-06 | [Official page](https://www.exeter.ac.uk/study/funding/award/?id=6015) |
+| 2026-11-06 | Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6010): AI | Read the project PDF and open the application link inside it by 2026-11-06 | [Official page](https://www.exeter.ac.uk/study/funding/award/?id=6010) |
+| 2026-11-06 | Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): Ex | Read the project PDF and open the application link inside it by 2026-11-06 | [Official page](https://www.exeter.ac.uk/study/funding/award/?id=6011) |
+| 2026-11-06 | Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): So | Read the project PDF and open the application link inside it by 2026-11-06 | [Official page](https://www.exeter.ac.uk/study/funding/award/?id=6011) |
+
+## D. Application deadlines within seven days (6)
+
+| When | Application / workstream | Action | Source |
+|:--|:--|:--|:--|
+| 2026-11-08 | Karlsruhe Institute of Technology (KIT MRT), PhD Efficient Long-C | Apply through official KIT job portal by 8 Nov. Emphasize transformer efficiency, long-context VLM inference and edge deployment. | [Official page](https://jobs.pse.kit.edu/en/jobs/170920/phd-position-efficient-long-context-large-models-for-vision-and-vision-language-action-systems-fmd) |
+| 2026-11-08 | University of Copenhagen, CoAStaL PhD Cultural Reasoning with Lan | Submit by 8 Nov 23:59 CET. Connect RAG evidence verification and multilingual evaluation to cultural uncertainty, not generic LLM product work. | [Official page](https://employment.ku.dk/phd/?show=167227) |
+| 2026-11-09 | UCL Gatsby Computational Neuroscience Unit, PhD in Machine Learni | Submit Gatsby 2027 portal application before 9 Nov 17:00 GMT; academic references by 10 Nov 23:59 GMT. Joint SWC track available as preference, not a  | [Official page](https://www.ucl.ac.uk/life-sciences/gatsby/study-and-work/gatsby-unit-phd-programme) |
+| 2026-11-09 | UCL Sainsbury Wellcome Centre, fully funded PhD in Neural Circuit | Apply by 9 Nov 17:00 GMT if pursuing neural circuits; optional joint Gatsby–SWC via this OR Gatsby application, not independently. | [Official page](https://www.swc.science/content/apply-our-phd-programme) |
+| 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | By 29 Oct 2026: email sgs@sbfi.admin.ch asking Iran's scholarship type and deadline and whether an Iranian resident in Turkey applies via Tehran or An | [Official page](https://www.sbfi.admin.ch/scholarships_eng) |
+| 2026-11-13 | Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: s | By 13 Nov 23:59 UK time: submit BlueOcean MSCA staff vacancy ref 3522426DA via jobs.soton.ac.uk. Also confirm and complete any separate PhD/project re | [Official page](https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10) |
+
+## E. Earlier tasks, completion status unconfirmed
+
+There are **97** pre-2026-11-06 tasks with no confirmed completion status and whose final application deadline has not definitively passed, including **87** programme steps and **10** cross-route tasks. These represent *review work*, not automatic missed deadlines.
+
+| When | Application / workstream | Action | Source |
+|:--|:--|:--|:--|
+| 2026-09-15 | UBC Computer Science PhD, September 2027 | Create a UBC CWL account and start the application (open since 2026-09-15) by 2026-11-01 | Step timeline |
+| 2026-09-15 | UBC Computer Science PhD, September 2027 | Confirm the CS-specific English requirement; IELTS 7.0 overall is stated on grad.ubc.ca; Iran-based applicants who cannot access tests may use Oxford  | Step timeline |
+| 2026-10-28 | Hokkaido, UTokyo Science, UTokyo IST, UEC, SOKENDAI/ISAS, Osaka,  | Decide the single MEXT line today. Only Hokkaido closes 29 Oct (23:59 JST = 17:59 Istanbul) and needs no signed form from a Japanese supervisor. Confi | What I need to do |
+| 2026-10-28 | Hokkaido first screening; no workplace letters accepted. | Email your master's supervisor (University of Tehran) for the recommendation letter. Hokkaido wants it on letterhead or emailed directly to eprogram@e | What I need to do |
+| 2026-10-28 | Jobbnorge PDF is blocked to automated reads; read it in a browser | Decide on UiA 308334 (closes 28 Oct) after opening the advert text; the export-control line could not be read. | What I need to do |
+| 2026-10-28 | Needed by UTokyo Science (30 Oct), UTokyo IST (30 Oct), Osaka, Sa | Ask University of Tehran for hand-signed dean-level letters on letterhead, addressed to the President of the target university; request several addres | What I need to do |
+| 2026-10-28 | Osaka (University of Osaka, Engineering Science) Special Training | By 2026-10-28 (today): request a letter from the Dean of the University of Tehran graduating faculty, addressed to 'the President of the University of | Step timeline |
+| 2026-10-29 | Reused by nearly every row; EPFL LAMD also wants the thesis PDFs, | Assemble one standard pack: official transcripts with grading-scale explanation (English), degree certificates, BSc and MSc thesis PDFs with one-page  | What I need to do |
+| 2026-10-29 | These routes need an agreed or named supervisor before or with th | Send supervisor-agreement emails: Armellin (Auckland), Meng Yuan (Wellington), two or three Saitama supervisors, UEC supervisor, Stephen L. Smith (Wat | What I need to do |
+| 2026-10-29 | OIST Graduate School PhD, May or Sep 2027 entry (Admissions Works | By 2026-10-29 browse faculty and units (including Yamada MLDS and Pao Chan units) at https://www.oist.jp/research/faculty-members and check supervisor | Step timeline |
+| 2026-10-29 | Northeastern University London, PhD studentship: Algorithms/Hardw | By 2026-10-29 email b.rajendran@nulondon.ac.uk with a short informal enquiry (confirm post still open given rolling shortlisting; ask about visa) | Step timeline |
+| 2026-10-29 | Institute of Science Tokyo, International Graduate Program IGP(A) | By 2026-10-29 download the IGP(A) application guide PDF from the info_url page and read it (the page says applicants must always refer to it); identif | Step timeline |
+| 2026-10-29 | University of Luxembourg SnT/FSTM: Doctoral researcher in GNSS Re | 2026-10-29: fetch the advert in a browser to read reference number, deadline and group | Step timeline |
+| 2026-10-29 | University of Luxembourg SnT/FSTM: Doctoral researcher in GNSS Re | Apply through the uni.lu HR system with CV, cover letter, transcripts | Step timeline |
+| 2026-10-29 | CSEM Neuchatel with ETH Zurich: PhD in AI-Assisted Generative Des | 2026-10-29 or later: apply via apps.csem.ch 'Apply for this job' | Step timeline |
+| 2026-10-29 | CSEM Neuchatel with ETH Zurich: PhD in AI-Assisted Generative Des | Ask CSEM HR whether external doctorate is paid and whether deadline exists | Step timeline |
+| 2026-10-30 | Osaka (University of Osaka, Engineering Science) Special Training | By 2026-10-30: draft 'Details of Proposed Study' (about 2,000 words) and abstract of master's thesis (up to 2,000 words), in English | Step timeline |
+| 2026-10-30 | University of Osaka, Trans-Pacific Hub Graduate Program in Advanc | By 2026-10-30 download the 'Application guideline for Bioengineering enrollment in October 2027 (MC/DC)' PDF and the application form zip from the inf | Step timeline |
+| 2026-10-30 | University of Osaka, Trans-Pacific Hub Graduate Program in Advanc | By 2026-10-30 email the Graduate Students Section to ask about the Oct 2027 dates and, if you fall in a pre-application screening category, contact th | Step timeline |
+| 2026-10-30 | University of Osaka, Trans-Pacific Hub Graduate Program in Advanc | Immediately request the Dean's recommendation letter from the University of Tehran faculty, addressed to the President of the University of Osaka (sup | Step timeline |
+| 2026-10-30 | University of Osaka, Trans-Pacific Hub Graduate Program in Advanc | Before the deadline write the 'Details of Proposed Study' (about 2,000 words) and the English abstract of the master's thesis (up to 2,000 words) | Step timeline |
+| 2026-10-30 | University of Osaka, Trans-Pacific Hub Graduate Program in Advanc | Before the deadline email all scanned documents with subject MEXT_Bioengineering_DC_\[name as in passport\] | Step timeline |
+| 2026-10-30 | University of Osaka, Trans-Pacific Hub Graduate Program in Advanc | If document screening is passed, post originals by registered mail (2026 cycle: results end of Dec, interviews mid-Jan, originals early Feb) | Step timeline |
+| 2026-10-30 | OIST Graduate School PhD, May or Sep 2027 entry (Admissions Works | By 2026-10-30 enter 2-5 recommenders in the portal so letters are requested (OIST must receive at least 2 before you can submit; applicants cannot sen | Step timeline |
+| 2026-10-30 | Institute of Science Tokyo, International Graduate Program IGP(A) | By 2026-10-30 email the relevant programme contact for the consent letter (programme contacts are on the page) | Step timeline |
+| 2026-10-30 | NTNU Gjovik, Ph.D. Candidate in Reinforcement Learning for Projec | By 2026-10-30 email Yongping Liu with a short enquiry and CV | Step timeline |
+| 2026-10-30 | University of Oslo, PhD Research Fellow in Control Theory and Opt | By 2026-10-30 email Mathias Hudoba de Badyn (and optionally Tonnes Nygaard) with CV and a short enquiry | Step timeline |
+| 2026-10-30 | University of Luxembourg YADIAS (IAS Young Academics Doctoral Fel | By 2026-10-30: find a University of Luxembourg main supervisor (staff member authorised to supervise research) and a complementary-domain co-superviso | Step timeline |
+| 2026-10-30 | University of Luxembourg YADIAS (IAS Young Academics Doctoral Fel | Step 1, as early as possible (no date printed): submit the LimeSurvey declaration of interest with credentials, CV on the mandatory template, and a 2- | Step timeline |
+| 2026-10-30 | University of Luxembourg YADIAS (IAS Young Academics Doctoral Fel | Before the full application (no date printed): preferred supervisor submits the Project Announcement in CRIS | Step timeline |
+| 2026-10-30 | York University - PhD Electrical Engineering and Computer Science | Request three recommendation letters (allow 4-6 weeks per York guidance, so ask by 2026-10-30) | Step timeline |
+| 2026-10-30 | Oxford DPhil Engineering Science studentship: Data-driven Control | Email Prof Papachristodoulou (antonis@eng.ox.ac.uk) and Prof Margellos (kostas.margellos@eng.ox.ac.uk) by 2026-10-30 asking whether an international ( | Step timeline |
+| 2026-10-30 | Exeter EPSRC DLA studentships, Department of Engineering, Sept 20 | Email pgrapplicants@exeter.ac.uk by 2026-10-30 to confirm the reference deadline (8 Jan vs 15 Feb 2027) and the exact fee-status/funding wording for i | Step timeline |
+| 2026-10-30 | Exeter EPSRC DLA studentships, Mathematics and Statistics, Sept 2 | Email pgrapplicants@exeter.ac.uk by 2026-10-30 to confirm reference deadline and international fee wording | Step timeline |
+| 2026-10-30 | McGill University, Electrical and Computer Engineering PhD, Fall  | Confirm the ECE PhD deadline and year with grad.ece@mcgill.ca by 2026-10-30 (December 15 vs January 15) | Step timeline |
+
+## F. Earlier steps linked to today's final deadlines
+
+The following earlier preparation steps are **not** additional November 6 submission deadlines:
+
+| When | Application / workstream | Action | Source |
+|:--|:--|:--|:--|
+| 2026-10-28 | Osaka (University of Osaka, Engineering Science) Special Training | By 2026-10-28 (today): request a letter from the Dean of the University of Tehran graduating faculty, addressed to 'the President of the University of | [Official page](https://www.es.osaka-u.ac.jp/en/admission-aid/mext-granted) |
+| 2026-10-30 | Osaka (University of Osaka, Engineering Science) Special Training | By 2026-10-30: draft 'Details of Proposed Study' (about 2,000 words) and abstract of master's thesis (up to 2,000 words), in English | [Official page](https://www.es.osaka-u.ac.jp/en/admission-aid/mext-granted) |
+| 2026-11-02 | Osaka (University of Osaka, Engineering Science) Special Training | By 2026-11-02: obtain signed graduation certificate and academic records (signed by university officials); scan passport on A4/Letter; prepare 4.5 x 3 | [Official page](https://www.es.osaka-u.ac.jp/en/admission-aid/mext-granted) |
+| 2026-11-02 | Osaka (University of Osaka, Engineering Science) Special Training | Check the page daily from 2026-11-02 for the 2027 guideline; read category conditions on pre-screening (if a category applies, the 2026 guideline says | [Official page](https://www.es.osaka-u.ac.jp/en/admission-aid/mext-granted) |
+| 2026-11-04 | University of Copenhagen REVCAI, PhD Real-Time Visual Computing a | Finalize one-page research motivation, CV, MSc record, translated certificates and references | [Official page](https://employment.ku.dk/phd?show=171663) |
+
+## G. Explicitly excluded application deadlines today
+
+| When | Application / workstream | Action | Source |
+|:--|:--|:--|:--|
+| 2026-11-06 | University of Newcastle (Australia) PhD scholarship: Hierarchical | Do not apply for this domestic-only scholarship. Request a distinct international scholarship from the University of Newcastle only if interested in t | [Official page](https://www.newcastle.edu.au/study/research/phd-scholarships/phd-scholarships/hierarchical-imitation-learning-for-long-horizon-robotic-tasks) |
+
+## H. Evidence policy and next actions
+
+- Verify the actual institutional closing time/time zone in each original posting before submitting.
+- Check whether an application or preparation task was already completed; nothing in the Step timeline proves it remains undone.
+- Preserve the user-maintained statuses in *What I need to do*. No third-party email or scraped vacancy changes them.
+- MEXT routes may be mutually exclusive. The main workbook records this in the original grouping rule.
+- Review [source contradictions](../data/latest_run.json) and [readiness unknowns](../data/portfolio_frontier.json).
+- For source reconciliation, see [full workbook audit](../data/workbook_audit.json).
+
+*Generated automatically from the complete workbook, not synthesized from a search snippet.*
