@@ -9,6 +9,7 @@ git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 for attempt in 1 2 3; do
   git fetch --quiet origin main
   git reset --hard --quiet origin/main
+  python scripts/workbook_contract.py snapshot
   python scripts/discovery_engine.py aggregate \
     --input artifacts/discovery \
     --output data/discovered_candidates.json \
@@ -20,6 +21,7 @@ for attempt in 1 2 3; do
   python scripts/review_engine.py
   python scripts/portfolio_frontier.py
   python scripts/radar_workbook.py
+  python scripts/workbook_contract.py verify
   python scripts/validate_tracker.py
   python scripts/notification_engine.py
 
