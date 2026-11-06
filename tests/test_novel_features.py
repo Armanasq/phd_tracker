@@ -4,7 +4,7 @@ import json
 from datetime import date
 from pathlib import Path
 
-from scripts.issue_controls import MARKER, parse
+from scripts.issue_controls import MARKER, parse, apply
 from scripts.notification_engine import apply_policy, outstanding
 from scripts.research_radar import merge, parse_atom
 
@@ -102,3 +102,38 @@ def test_radar_merge_deduplicates_and_preserves_first_seen(tmp_path):
     assert first["new_count"] == 1
     assert second["new_count"] == 0
     assert json.loads(target.read_text())["papers"][0]["first_seen"] == "2026-11-06T10:00:00Z"
+
+
+def test_explicit_owner_asset_ready_command_updates_only_asset_state(tmp_path):
+    data=tmp_path / "data"
+    data.mkdir()
+    prefs=data / "notification_preferences.json"
+    prefs.write_text(json.dumps(preferences()))
+    assets=data / "application_assets.json"
+    assets.write_text(json.dumps({
+        "valid_statuses":["unknown","ready","in_progress","not_started","not_applicable"],
+        "resources":{"academic_cv":{"label":"CV","status":"unknown"}}
+    }))
+    event=tmp_path / "comment.json"
+    event.write_text(json.dumps(issue("/asset academic_cv ready",actor="Armanasq",number=441)))
+    output=data / "result.json"
+    result=apply(event,prefs,output,"Armanasq",date(2026,11,6))
+    assert result["accepted"] and result["operation"]=="asset"
+    assert json.loads(assets.read_text())["resources"]["academic_cv"]["status"]=="ready"
+    assert json.loads(prefs.read_text())["processed_comment_ids"]==["441"]
+    assert json.loads(output.read_text())["new_status"]=="ready"
+
+
+def test_asset_change_is_ignored_from_non_owner(tmp_path):
+    data=tmp_path / "data"
+    data.mkdir()
+    prefs=data / "notification_preferences.json"
+    prefs.write_text(json.dumps(preferences()))
+    assets=data / "application_assets.json"
+    original={"valid_statuses":["unknown","ready"],"resources":{"academic_cv":{"status":"unknown"}}}
+    assets.write_text(json.dumps(original))
+    event=tmp_path / "comment.json"
+    event.write_text(json.dumps(issue("/asset academic_cv ready",actor="attacker",number=442)))
+    result=apply(event,prefs,data/"result.json","Armanasq",date(2026,11,6))
+    assert not result["accepted"]
+    assert json.loads(assets.read_text())==original
