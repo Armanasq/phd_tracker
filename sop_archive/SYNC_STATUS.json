@@ -1,0 +1,89 @@
+{
+  "run_utc": "2026-11-05T10:01:07.003Z",
+  "total": 216,
+  "years": {
+    "2017": {
+      "records": 5,
+      "downloaded": 5,
+      "already_archived": 0,
+      "unresolved": 0
+    },
+    "2018": {
+      "records": 6,
+      "downloaded": 4,
+      "already_archived": 0,
+      "unresolved": 2
+    },
+    "2019": {
+      "records": 12,
+      "downloaded": 9,
+      "already_archived": 0,
+      "unresolved": 3
+    },
+    "2020": {
+      "records": 11,
+      "downloaded": 9,
+      "already_archived": 0,
+      "unresolved": 2
+    },
+    "2021": {
+      "records": 36,
+      "downloaded": 30,
+      "already_archived": 0,
+      "unresolved": 6
+    },
+    "2022": {
+      "records": 33,
+      "downloaded": 31,
+      "already_archived": 0,
+      "unresolved": 2
+    },
+    "2023": {
+      "records": 36,
+      "downloaded": 32,
+      "already_archived": 0,
+      "unresolved": 4
+    },
+    "2024": {
+      "records": 53,
+      "downloaded": 49,
+      "already_archived": 0,
+      "unresolved": 4
+    },
+    "2025": {
+      "records": 22,
+      "downloaded": 20,
+      "already_archived": 1,
+      "unresolved": 1
+    },
+    "2026": {
+      "records": 1,
+      "downloaded": 1,
+      "already_archived": 0,
+      "unresolved": 0
+    },
+    "unclassified": {
+      "records": 1,
+      "downloaded": 0,
+      "already_archived": 0,
+      "unresolved": 1
+    }
+  },
+  "errors": [],
+  "manual_recovery": {
+    "applicants": 4,
+    "additional_pdf_files": 8,
+    "method": "Google Drive folder listing and direct PDF retrieval",
+    "note": "Kendall Nakai and Lakshika Rathi IDs returned readable metadata but raw downloads were forbidden."
+  },
+  "total_downloaded_documents": 214,
+  "records_with_archived_documents": 191,
+  "unresolved_records": 25,
+  "last_manual_recovery_date": "2026-11-05",
+  "github_sop_recovery": {
+    "applicant": "Sai Siddartha Maram",
+    "downloaded_files": 20,
+    "failed_files": 0,
+    "source": "https://github.com/siddu1998/Graduate-Admissions"
+  }
+}
