@@ -132,6 +132,26 @@ def evaluate(today: date, workbook: Path, data_dir: Path) -> dict:
             "source": clean(record.get("source_url"), 300),
             "evidence_status": record["status"],
         })
+    discovery_health = load(data_dir / "discovery_report.json", {})
+    for provider, stats in discovery_health.get("source_yield", {}).items():
+        if stats.get("health") not in ("disabled", "degraded"):
+            continue
+        reason = "; ".join(discovery_health.get("source_errors", {}).get(provider, [])[:2])
+        events.append({
+            "id": key_event("coverage", provider, str(stats["health"])),
+            "kind": "coverage_gap", "source_id": "provider:" + provider,
+            "name": provider, "source": provider,
+            "evidence_status": stats["health"], "detail": clean(reason, 210),
+        })
+    radar_health = load(data_dir / "research_radar_report.json", {})
+    if radar_health.get("source_errors"):
+        events.append({
+            "id": key_event("coverage", "arxiv", "degraded"),
+            "kind": "coverage_gap", "source_id": "provider:arxiv",
+            "name": "arXiv research radar", "source": "arXiv",
+            "evidence_status": "degraded",
+            "detail": clean("; ".join(radar_health["source_errors"][:2]), 210),
+        })
     assets = [
         {"document": name, "potential_applications": len(days),
          "nearest_deadline_days": min(days),
@@ -204,6 +224,13 @@ def digest(evaluated: dict, selected: list[dict]) -> str:
             resources = ", ".join(row.get("unknown_resource_states", [])[:3])
             detail = " | ".join(v for v in [obligations, "Unconfirmed: " + resources if resources else ""] if v)
             lines.append("- " + clean(row["opportunity"], 100) + " (" + str(row["days_to_deadline"]) + "d): " + clean(detail, 230))
+    source_report = load(ROOT / "data" / "discovery_report.json", {})
+    if source_report.get("source_yield"):
+        lines += ["", "## Source coverage and discovery quality", "",
+                  "| Source | Health | Observed | New unique |", "|---|---|---:|---:|"]
+        for name, value in sorted(source_report["source_yield"].items()):
+            lines.append(f'| {clean(name, 35)} | {clean(value["health"], 18)} | {value["observed"]} | {value["new_unique"]} |')
+        lines += ["", "Disabled or degraded coverage is a real blind spot, not evidence of zero opportunities."]
     lines += ["", "## Recently triggered notifications", ""]
     for item in selected[:20]:
         if item["kind"] == "deadline":
@@ -212,6 +239,8 @@ def digest(evaluated: dict, selected: list[dict]) -> str:
             lines.append(f'- New unverified research lead: {item["name"]} ({item["source"]})')
         elif item["kind"] == "research_signal":
             lines.append(f'- Research paper, not a PhD vacancy: {item["name"]} ({item["source"]})')
+        elif item["kind"] == "coverage_gap":
+            lines.append(f'- Discovery coverage degraded or disabled: {item["name"]} — {item["detail"]}')
         else:
             lines.append(f'- Conflicting evidence: {item["source_id"]} ({item["evidence_status"]})')
     if not selected:
@@ -233,6 +262,8 @@ def comment_body(selected: list[dict]) -> str:
             lines.append(f'- **Needs verification:** {item["name"]} — {item["source"]}')
         elif item["kind"] == "research_signal":
             lines.append(f'- **Research only (not recruitment):** {item["name"]} — {item["source"]}')
+        elif item["kind"] == "coverage_gap":
+            lines.append(f'- **Discovery blind spot:** {item["name"]} — {item["detail"]}')
         else:
             lines.append(f'- **Contradiction:** {item["source_id"]}: {item["evidence_status"]} — {item["source"]}')
     lines.append("")
