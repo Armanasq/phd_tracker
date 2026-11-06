@@ -221,8 +221,22 @@ def refresh(wb, today: date, online: bool):
     timeline.auto_filter.ref=f"A3:G{3+len(timeline_rows)}"
 
     if "Read me" in wb:
-        wb["Read me"]["A17"] = "Research update"
-        wb["Read me"]["B17"] = "Evidence-backed 2026-11-06 review: official sources, user-authorized Gmail leads, separate research queue and source change monitoring. Gmail messages do not establish actual submission unless explicitly confirmed."
+        instructions = wb["Read me"]
+        for i in range(10, 17):
+            label = instructions.cell(i, 1).value
+            if label:
+                instructions.cell(i, 2, f"=COUNTIF('Action list'!E4:E{last},A{i})")
+        instructions["A17"] = "Research update"
+        instructions["B17"] = (
+            f"Workbook synchronized {today.isoformat()}. The original tabs remain the controlling sources. "
+            "Research queue and scholarly radar are review-only; automated observations do not establish "
+            "applicant eligibility or portal submission."
+        )
+        instructions["A18"] = "Operations"
+        instructions["B18"] = (
+            "Execution board separates today's final deadlines from programme steps and cross-route tasks; "
+            "Task ledger includes rolling/unposted routes. A past Step timeline date is completion-unconfirmed."
+        )
     update_watches(wb,watches,online,today)
     try:
         from openpyxl.workbook.properties import CalcProperties
