@@ -29,9 +29,9 @@
     },
     "inria": {
       "observed": 10,
-      "new_unique": 4,
-      "reobservations": 6,
-      "unique_yield": 0.4,
+      "new_unique": 0,
+      "reobservations": 10,
+      "unique_yield": 0.0,
       "health": "ok"
     }
   },
