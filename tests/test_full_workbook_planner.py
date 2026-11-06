@@ -93,3 +93,25 @@ def test_planner_rerun_preserves_original_sheets_and_sources(tmp_path):
     assert after["Action list"].max_row==7
     assert after["Task ledger"].max_row>=10
     assert json.loads(cfg.read_text())["today"]["counts"]["deadline_actions"]==1
+
+
+def test_owner_completion_overlay_is_persistent_and_source_preserving(tmp_path):
+    wb,file=book(tmp_path)
+    output=tmp_path/"data"/"execution_plan.json"
+    output.parent.mkdir()
+    first=run(file,output,date(2026,11,6))
+    initial=json.loads(output.read_text())
+    task=next(t for t in initial["today"]["scheduled_timeline_tasks"]
+              if t["source_id"]=="C")
+    identity=task["task_id"]
+    assert identity.startswith("tsk-")
+    (output.parent/"task_completion.json").write_text(json.dumps({
+        "schema_version":1,"done":{identity:{"at":"2026-11-06T08:00:00+00:00","comment_id":"77"}}
+    }))
+    before=load_workbook(file)["Step timeline"]["E7"].value
+    result=run(file,output,date(2026,11,6))
+    refreshed=json.loads(output.read_text())
+    assert result["today"]["timeline_tasks"]==first["today"]["timeline_tasks"]-1
+    assert any(t["task_id"]==identity and t["state"]=="confirmed_done"
+               for t in refreshed["all_tasks"])
+    assert load_workbook(file)["Step timeline"]["E7"].value==before
