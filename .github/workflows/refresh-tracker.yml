@@ -1,9 +1,7 @@
-name: Evidence-first PhD tracker refresh
+name: Legacy manual evidence refresh
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "17 5 * * *"
 permissions:
   contents: write
 
