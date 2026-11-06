@@ -1,0 +1,830 @@
+{
+  "status": "verified",
+  "uploaded_source_file_sha256": "8299fa93ca858cbc2df89108a99e071c1758b40293e833455e597c397fee2fa2",
+  "original_uploaded_applications": 180,
+  "additional_repository_applications_retained": [
+    "R26-GWU-EPIC",
+    "R26-MAN-PDS-CONSTELLATIONS",
+    "R26-UCY-SKEYES"
+  ],
+  "blank_cells_corrected": 163,
+  "corrected_cells": [
+    {
+      "source_id": "C03-Simula-InnoGuard",
+      "row": 23,
+      "column": 14
+    },
+    {
+      "source_id": "C03-Simula-InnoGuard",
+      "row": 23,
+      "column": 16
+    },
+    {
+      "source_id": "C05",
+      "row": 32,
+      "column": 13
+    },
+    {
+      "source_id": "C05",
+      "row": 32,
+      "column": 14
+    },
+    {
+      "source_id": "C05",
+      "row": 32,
+      "column": 15
+    },
+    {
+      "source_id": "C05",
+      "row": 32,
+      "column": 16
+    },
+    {
+      "source_id": "C10",
+      "row": 98,
+      "column": 10
+    },
+    {
+      "source_id": "C11",
+      "row": 104,
+      "column": 13
+    },
+    {
+      "source_id": "C11",
+      "row": 104,
+      "column": 14
+    },
+    {
+      "source_id": "C11",
+      "row": 104,
+      "column": 15
+    },
+    {
+      "source_id": "C13-CSIRO",
+      "row": 136,
+      "column": 9
+    },
+    {
+      "source_id": "C13-CSIRO",
+      "row": 136,
+      "column": 14
+    },
+    {
+      "source_id": "C13-CSIRO",
+      "row": 136,
+      "column": 15
+    },
+    {
+      "source_id": "C13-CURTIN",
+      "row": 137,
+      "column": 14
+    },
+    {
+      "source_id": "C13-CURTIN",
+      "row": 137,
+      "column": 16
+    },
+    {
+      "source_id": "C13-UNB",
+      "row": 161,
+      "column": 10
+    },
+    {
+      "source_id": "C14-GRIFFITH",
+      "row": 144,
+      "column": 10
+    },
+    {
+      "source_id": "M04",
+      "row": 12,
+      "column": 14
+    },
+    {
+      "source_id": "M05",
+      "row": 11,
+      "column": 19
+    },
+    {
+      "source_id": "M07b",
+      "row": 155,
+      "column": 10
+    },
+    {
+      "source_id": "M07b",
+      "row": 155,
+      "column": 13
+    },
+    {
+      "source_id": "M08",
+      "row": 15,
+      "column": 10
+    },
+    {
+      "source_id": "M08",
+      "row": 15,
+      "column": 16
+    },
+    {
+      "source_id": "M12",
+      "row": 22,
+      "column": 16
+    },
+    {
+      "source_id": "M14",
+      "row": 82,
+      "column": 16
+    },
+    {
+      "source_id": "M17",
+      "row": 42,
+      "column": 14
+    },
+    {
+      "source_id": "M17",
+      "row": 42,
+      "column": 16
+    },
+    {
+      "source_id": "M19",
+      "row": 51,
+      "column": 16
+    },
+    {
+      "source_id": "M21",
+      "row": 53,
+      "column": 17
+    },
+    {
+      "source_id": "M24",
+      "row": 63,
+      "column": 17
+    },
+    {
+      "source_id": "M26",
+      "row": 73,
+      "column": 16
+    },
+    {
+      "source_id": "M27",
+      "row": 67,
+      "column": 16
+    },
+    {
+      "source_id": "M27",
+      "row": 67,
+      "column": 19
+    },
+    {
+      "source_id": "M29",
+      "row": 66,
+      "column": 15
+    },
+    {
+      "source_id": "M31",
+      "row": 80,
+      "column": 14
+    },
+    {
+      "source_id": "M31",
+      "row": 80,
+      "column": 15
+    },
+    {
+      "source_id": "M31",
+      "row": 80,
+      "column": 16
+    },
+    {
+      "source_id": "M33",
+      "row": 79,
+      "column": 10
+    },
+    {
+      "source_id": "M36-6019",
+      "row": 94,
+      "column": 16
+    },
+    {
+      "source_id": "M38",
+      "row": 97,
+      "column": 16
+    },
+    {
+      "source_id": "M43a",
+      "row": 106,
+      "column": 16
+    },
+    {
+      "source_id": "M43b",
+      "row": 181,
+      "column": 16
+    },
+    {
+      "source_id": "M45",
+      "row": 116,
+      "column": 9
+    },
+    {
+      "source_id": "M47",
+      "row": 111,
+      "column": 16
+    },
+    {
+      "source_id": "M48",
+      "row": 115,
+      "column": 10
+    },
+    {
+      "source_id": "M49",
+      "row": 113,
+      "column": 16
+    },
+    {
+      "source_id": "M51",
+      "row": 125,
+      "column": 14
+    },
+    {
+      "source_id": "M51",
+      "row": 125,
+      "column": 16
+    },
+    {
+      "source_id": "M52",
+      "row": 127,
+      "column": 15
+    },
+    {
+      "source_id": "M52",
+      "row": 127,
+      "column": 16
+    },
+    {
+      "source_id": "M53",
+      "row": 126,
+      "column": 15
+    },
+    {
+      "source_id": "M57",
+      "row": 132,
+      "column": 13
+    },
+    {
+      "source_id": "M57",
+      "row": 132,
+      "column": 14
+    },
+    {
+      "source_id": "M57",
+      "row": 132,
+      "column": 15
+    },
+    {
+      "source_id": "M59",
+      "row": 138,
+      "column": 13
+    },
+    {
+      "source_id": "M59",
+      "row": 138,
+      "column": 14
+    },
+    {
+      "source_id": "M60",
+      "row": 159,
+      "column": 14
+    },
+    {
+      "source_id": "M60",
+      "row": 159,
+      "column": 15
+    },
+    {
+      "source_id": "N263-09",
+      "row": 41,
+      "column": 19
+    },
+    {
+      "source_id": "N263-14",
+      "row": 162,
+      "column": 19
+    },
+    {
+      "source_id": "N264-09",
+      "row": 74,
+      "column": 19
+    },
+    {
+      "source_id": "SA05",
+      "row": 180,
+      "column": 9
+    },
+    {
+      "source_id": "SA05",
+      "row": 180,
+      "column": 14
+    },
+    {
+      "source_id": "SA05",
+      "row": 180,
+      "column": 15
+    },
+    {
+      "source_id": "SA05",
+      "row": 180,
+      "column": 16
+    },
+    {
+      "source_id": "SA09",
+      "row": 140,
+      "column": 14
+    },
+    {
+      "source_id": "SA09",
+      "row": 140,
+      "column": 15
+    },
+    {
+      "source_id": "SA13",
+      "row": 121,
+      "column": 10
+    },
+    {
+      "source_id": "SA13",
+      "row": 121,
+      "column": 19
+    },
+    {
+      "source_id": "SB08",
+      "row": 183,
+      "column": 14
+    },
+    {
+      "source_id": "SB08",
+      "row": 183,
+      "column": 15
+    },
+    {
+      "source_id": "SB08",
+      "row": 183,
+      "column": 16
+    },
+    {
+      "source_id": "SB08",
+      "row": 183,
+      "column": 19
+    },
+    {
+      "source_id": "SC09",
+      "row": 20,
+      "column": 9
+    },
+    {
+      "source_id": "SC09",
+      "row": 20,
+      "column": 10
+    },
+    {
+      "source_id": "SC09",
+      "row": 20,
+      "column": 13
+    },
+    {
+      "source_id": "SC09",
+      "row": 20,
+      "column": 15
+    },
+    {
+      "source_id": "SC11",
+      "row": 170,
+      "column": 9
+    },
+    {
+      "source_id": "SC12",
+      "row": 168,
+      "column": 9
+    },
+    {
+      "source_id": "SD13",
+      "row": 8,
+      "column": 11
+    },
+    {
+      "source_id": "SD13",
+      "row": 8,
+      "column": 14
+    },
+    {
+      "source_id": "SD13",
+      "row": 8,
+      "column": 19
+    },
+    {
+      "source_id": "SD14",
+      "row": 166,
+      "column": 11
+    },
+    {
+      "source_id": "SE-U04",
+      "row": 171,
+      "column": 9
+    },
+    {
+      "source_id": "SE-U04",
+      "row": 171,
+      "column": 19
+    },
+    {
+      "source_id": "SE-U07",
+      "row": 110,
+      "column": 10
+    },
+    {
+      "source_id": "SE-U07",
+      "row": 110,
+      "column": 13
+    },
+    {
+      "source_id": "SE-U07",
+      "row": 110,
+      "column": 14
+    },
+    {
+      "source_id": "SE-U07",
+      "row": 110,
+      "column": 15
+    },
+    {
+      "source_id": "SE-U07",
+      "row": 110,
+      "column": 16
+    },
+    {
+      "source_id": "SE-U08",
+      "row": 118,
+      "column": 9
+    },
+    {
+      "source_id": "SE-U08",
+      "row": 118,
+      "column": 10
+    },
+    {
+      "source_id": "SE-U08",
+      "row": 118,
+      "column": 13
+    },
+    {
+      "source_id": "SE-U08",
+      "row": 118,
+      "column": 14
+    },
+    {
+      "source_id": "SE-U08",
+      "row": 118,
+      "column": 15
+    },
+    {
+      "source_id": "SE-U09",
+      "row": 86,
+      "column": 9
+    },
+    {
+      "source_id": "SE-U09",
+      "row": 86,
+      "column": 10
+    },
+    {
+      "source_id": "SE-U09",
+      "row": 86,
+      "column": 13
+    },
+    {
+      "source_id": "SE-U09",
+      "row": 86,
+      "column": 14
+    },
+    {
+      "source_id": "SE-U09",
+      "row": 86,
+      "column": 15
+    },
+    {
+      "source_id": "SE-U09",
+      "row": 86,
+      "column": 16
+    },
+    {
+      "source_id": "SE02",
+      "row": 7,
+      "column": 19
+    },
+    {
+      "source_id": "SE12",
+      "row": 120,
+      "column": 14
+    },
+    {
+      "source_id": "SE12",
+      "row": 120,
+      "column": 16
+    },
+    {
+      "source_id": "SF02",
+      "row": 124,
+      "column": 13
+    },
+    {
+      "source_id": "SF02",
+      "row": 124,
+      "column": 20
+    },
+    {
+      "source_id": "SF03",
+      "row": 158,
+      "column": 13
+    },
+    {
+      "source_id": "SF03",
+      "row": 158,
+      "column": 20
+    },
+    {
+      "source_id": "SF04",
+      "row": 157,
+      "column": 10
+    },
+    {
+      "source_id": "SF04",
+      "row": 157,
+      "column": 13
+    },
+    {
+      "source_id": "SF04",
+      "row": 157,
+      "column": 14
+    },
+    {
+      "source_id": "SF04",
+      "row": 157,
+      "column": 15
+    },
+    {
+      "source_id": "SF04",
+      "row": 157,
+      "column": 16
+    },
+    {
+      "source_id": "SF04",
+      "row": 157,
+      "column": 20
+    },
+    {
+      "source_id": "SF05",
+      "row": 178,
+      "column": 13
+    },
+    {
+      "source_id": "SF05",
+      "row": 178,
+      "column": 14
+    },
+    {
+      "source_id": "SF05",
+      "row": 178,
+      "column": 15
+    },
+    {
+      "source_id": "SF05",
+      "row": 178,
+      "column": 16
+    },
+    {
+      "source_id": "SF05",
+      "row": 178,
+      "column": 20
+    },
+    {
+      "source_id": "SF10",
+      "row": 146,
+      "column": 10
+    },
+    {
+      "source_id": "SF10",
+      "row": 146,
+      "column": 13
+    },
+    {
+      "source_id": "SF10",
+      "row": 146,
+      "column": 15
+    },
+    {
+      "source_id": "SF10",
+      "row": 146,
+      "column": 20
+    },
+    {
+      "source_id": "SH01",
+      "row": 177,
+      "column": 14
+    },
+    {
+      "source_id": "SH10",
+      "row": 165,
+      "column": 19
+    },
+    {
+      "source_id": "SH11",
+      "row": 154,
+      "column": 10
+    },
+    {
+      "source_id": "SH11",
+      "row": 154,
+      "column": 13
+    },
+    {
+      "source_id": "SH12",
+      "row": 13,
+      "column": 14
+    },
+    {
+      "source_id": "SH12",
+      "row": 13,
+      "column": 19
+    },
+    {
+      "source_id": "SH13",
+      "row": 134,
+      "column": 13
+    },
+    {
+      "source_id": "SH14",
+      "row": 148,
+      "column": 10
+    },
+    {
+      "source_id": "SH14",
+      "row": 148,
+      "column": 13
+    },
+    {
+      "source_id": "SH14",
+      "row": 148,
+      "column": 14
+    },
+    {
+      "source_id": "SH14",
+      "row": 148,
+      "column": 15
+    },
+    {
+      "source_id": "SH14",
+      "row": 148,
+      "column": 16
+    },
+    {
+      "source_id": "SH16",
+      "row": 145,
+      "column": 9
+    },
+    {
+      "source_id": "SH16",
+      "row": 145,
+      "column": 10
+    },
+    {
+      "source_id": "SH16",
+      "row": 145,
+      "column": 11
+    },
+    {
+      "source_id": "SH16",
+      "row": 145,
+      "column": 12
+    },
+    {
+      "source_id": "SH16",
+      "row": 145,
+      "column": 13
+    },
+    {
+      "source_id": "SH16",
+      "row": 145,
+      "column": 15
+    },
+    {
+      "source_id": "SH16",
+      "row": 145,
+      "column": 20
+    },
+    {
+      "source_id": "SH17",
+      "row": 160,
+      "column": 9
+    },
+    {
+      "source_id": "SH17",
+      "row": 160,
+      "column": 10
+    },
+    {
+      "source_id": "SH17",
+      "row": 160,
+      "column": 11
+    },
+    {
+      "source_id": "SH17",
+      "row": 160,
+      "column": 12
+    },
+    {
+      "source_id": "SH17",
+      "row": 160,
+      "column": 13
+    },
+    {
+      "source_id": "SH17",
+      "row": 160,
+      "column": 14
+    },
+    {
+      "source_id": "SH17",
+      "row": 160,
+      "column": 15
+    },
+    {
+      "source_id": "SH17",
+      "row": 160,
+      "column": 20
+    },
+    {
+      "source_id": "SH18",
+      "row": 179,
+      "column": 9
+    },
+    {
+      "source_id": "SH18",
+      "row": 179,
+      "column": 10
+    },
+    {
+      "source_id": "SH18",
+      "row": 179,
+      "column": 11
+    },
+    {
+      "source_id": "SH18",
+      "row": 179,
+      "column": 12
+    },
+    {
+      "source_id": "SH18",
+      "row": 179,
+      "column": 13
+    },
+    {
+      "source_id": "SH18",
+      "row": 179,
+      "column": 14
+    },
+    {
+      "source_id": "SH18",
+      "row": 179,
+      "column": 15
+    },
+    {
+      "source_id": "SH18",
+      "row": 179,
+      "column": 16
+    },
+    {
+      "source_id": "SH18",
+      "row": 179,
+      "column": 20
+    },
+    {
+      "source_id": "SH19",
+      "row": 164,
+      "column": 9
+    },
+    {
+      "source_id": "SH19",
+      "row": 164,
+      "column": 10
+    },
+    {
+      "source_id": "SH19",
+      "row": 164,
+      "column": 11
+    },
+    {
+      "source_id": "SH19",
+      "row": 164,
+      "column": 12
+    }
+  ],
+  "mismatched_original_records": [],
+  "policy": "Uploaded data is authoritative for its original 180 records. Additional verified repository-only records remain intact. Never infer submission from a vacancy."
+}

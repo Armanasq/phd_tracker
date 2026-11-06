@@ -20,9 +20,9 @@
     },
     {
       "document": "Recommendations",
-      "potential_applications": 39,
+      "potential_applications": 38,
       "nearest_deadline_days": 0,
-      "leverage_index": 39.0
+      "leverage_index": 38.0
     },
     {
       "document": "Research statement",
@@ -38,7 +38,7 @@
     }
   ],
   "delivery": {
-    "github": "delivered",
+    "github": "not_requested",
     "apprise": "not_configured"
   }
 }

@@ -10288,15 +10288,15 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Tokyo Graduate School o
   Recommendation (General) - scholarship may not continue
 DESCRIPTION:Action: Check page again late Dec 2026 for scholarship confir
  mation\nStatus: completion_unconfirmed\nOriginal source: Step timeline r
- ow 476\nOfficial URL: https://www.jobs.ac.uk/job/DSP806/phd-studentship-
- learning-and-decision-making-under-uncertainty-in-public-health\nFinal p
- rogramme deadline: 2027-01-22\nOriginal note: 2027-01-22 00:00:00\nAll-d
- ay date. DO NOT infer a closing time from this event.\nConfirm actual po
- rtal availability and individual eligibility.
+ ow 476\nOfficial URL: https://www.k.u-tokyo.ac.jp/en/exam/master/foreign
+ _research_students/mext_scholarship_univ/\nFinal programme deadline: 202
+ 7-01-22\nOriginal note: 2027-01-22 00:00:00\nAll-day date. DO NOT infer 
+ a closing time from this event.\nConfirm actual portal availability and 
+ individual eligibility.
 CATEGORIES:SCHEDULED APPLICATION STEP
 STATUS:TENTATIVE
-URL:https://www.jobs.ac.uk/job/DSP806/phd-studentship-learning-and-decisi
- on-making-under-uncertainty-in-public-health
+URL:https://www.k.u-tokyo.ac.jp/en/exam/master/foreign_research_students/
+ mext_scholarship_univ/
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
@@ -10314,15 +10314,15 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Tokyo Graduate School o
 DESCRIPTION:Action: Email ilo@edu.k.u-tokyo.ac.jp to ask whether the trac
  k continues and whether applicants without prior GSFS exchange/internshi
  p qualify\nStatus: completion_unconfirmed\nOriginal source: Step timelin
- e row 477\nOfficial URL: https://www.jobs.ac.uk/job/DSP806/phd-studentsh
- ip-learning-and-decision-making-under-uncertainty-in-public-health\nFina
- l programme deadline: 2027-01-22\nOriginal note: 2027-01-22 00:00:00\nAl
- l-day date. DO NOT infer a closing time from this event.\nConfirm actual
-  portal availability and individual eligibility.
+ e row 477\nOfficial URL: https://www.k.u-tokyo.ac.jp/en/exam/master/fore
+ ign_research_students/mext_scholarship_univ/\nFinal programme deadline: 
+ 2027-01-22\nOriginal note: 2027-01-22 00:00:00\nAll-day date. DO NOT inf
+ er a closing time from this event.\nConfirm actual portal availability a
+ nd individual eligibility.
 CATEGORIES:SCHEDULED APPLICATION STEP
 STATUS:TENTATIVE
-URL:https://www.jobs.ac.uk/job/DSP806/phd-studentship-learning-and-decisi
- on-making-under-uncertainty-in-public-health
+URL:https://www.k.u-tokyo.ac.jp/en/exam/master/foreign_research_students/
+ mext_scholarship_univ/
 BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
@@ -10339,17 +10339,14 @@ SUMMARY:APPLICATION DEADLINE: University of Tokyo Graduate School of Fron
  mendation (General) - scholarship may not continue
 DESCRIPTION:Action: Check page again late Dec 2026 for scholarship confir
  mation\nStatus: deadline_unconfirmed\nOriginal source: Action list row 1
- 24\nOfficial URL: https://www.jobs.ac.uk/job/DSP806/phd-studentship-lear
- ning-and-decision-making-under-uncertainty-in-public-health\nFinal progr
- amme deadline: 2027-01-22\nOriginal note: Complete scholarship applicati
- on documents expected by January 22\, 2027\; entrance exam Schedule B (F
- ebruary)\; information late Dec 2026/early Jan 2027 only if s\nAll-day d
- ate. DO NOT infer a closing time from this event.\nConfirm actual portal
-  availability and individual eligibility.
+ 24\nOfficial URL: not linked\nFinal programme deadline: 2027-01-22\nOrig
+ inal note: Complete scholarship application documents expected by Januar
+ y 22\, 2027\; entrance exam Schedule B (February)\; information late Dec
+  2026/early Jan 2027 only if s\nAll-day date. DO NOT infer a closing tim
+ e from this event.\nConfirm actual portal availability and individual el
+ igibility.
 CATEGORIES:APPLICATION DEADLINE
 STATUS:TENTATIVE
-URL:https://www.jobs.ac.uk/job/DSP806/phd-studentship-learning-and-decisi
- on-making-under-uncertainty-in-public-health
 BEGIN:VALARM
 TRIGGER:-P7D
 ACTION:DISPLAY

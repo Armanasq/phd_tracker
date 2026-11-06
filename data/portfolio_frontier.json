@@ -9,7 +9,7 @@
       "resource_id": "academic_cv",
       "label": "Academic CV",
       "current_state": "unknown",
-      "potential_applications": 79,
+      "potential_applications": 74,
       "near_term_applications": 45,
       "urgency_index": 5.909
     },
@@ -17,7 +17,7 @@
       "resource_id": "transcripts",
       "label": "Official transcripts",
       "current_state": "unknown",
-      "potential_applications": 79,
+      "potential_applications": 74,
       "near_term_applications": 41,
       "urgency_index": 5.2765
     },
@@ -25,7 +25,7 @@
       "resource_id": "research_statement",
       "label": "Research statement / SOP",
       "current_state": "unknown",
-      "potential_applications": 53,
+      "potential_applications": 49,
       "near_term_applications": 33,
       "urgency_index": 4.5822
     },
@@ -33,9 +33,9 @@
       "resource_id": "recommendations",
       "label": "Reference letters and referees",
       "current_state": "unknown",
-      "potential_applications": 70,
-      "near_term_applications": 39,
-      "urgency_index": 4.1818
+      "potential_applications": 63,
+      "near_term_applications": 38,
+      "urgency_index": 4.1433
     },
     {
       "resource_id": "research_portfolio",
@@ -49,7 +49,7 @@
       "resource_id": "english_proof",
       "label": "English proficiency evidence",
       "current_state": "unknown",
-      "potential_applications": 44,
+      "potential_applications": 40,
       "near_term_applications": 22,
       "urgency_index": 2.4017
     }
@@ -1373,16 +1373,10 @@
       "days_to_deadline": 25,
       "opportunity": "Mila supervision request (up to three professors) plus separate university application",
       "decision": "Go",
-      "readiness": "requires_readiness_confirmation",
-      "document_mentions": [
-        "recommendations"
-      ],
-      "unconfirmed_resources": [
-        "recommendations"
-      ],
-      "unknown_resource_states": [
-        "recommendations"
-      ],
+      "readiness": "no_unresolved_detected_requirements",
+      "document_mentions": [],
+      "unconfirmed_resources": [],
+      "unknown_resource_states": [],
       "explicit_tasks_remaining": [],
       "evidence_proof_obligations": [],
       "next_step": "Create/log in to MyMila applicant portal and shortlist up to three Mila core/associate professors by 2026-11-10",
@@ -1931,22 +1925,10 @@
       "days_to_deadline": 32,
       "opportunity": "Exeter EPSRC DLA 2027, Public Health and Sport Sciences: Computer vision to predict falls from everyday movement in older adults (Taleshi)",
       "decision": "Long shot",
-      "readiness": "requires_readiness_confirmation",
-      "document_mentions": [
-        "research_statement",
-        "transcripts",
-        "recommendations"
-      ],
-      "unconfirmed_resources": [
-        "research_statement",
-        "transcripts",
-        "recommendations"
-      ],
-      "unknown_resource_states": [
-        "research_statement",
-        "transcripts",
-        "recommendations"
-      ],
+      "readiness": "no_unresolved_detected_requirements",
+      "document_mentions": [],
+      "unconfirmed_resources": [],
+      "unknown_resource_states": [],
       "explicit_tasks_remaining": [],
       "evidence_proof_obligations": [],
       "next_step": "2026-10-30: identify the award page for Public Health and Sport Sciences and confirm deadline",
@@ -2153,22 +2135,10 @@
       "days_to_deadline": 42,
       "opportunity": "University of Manchester President's Doctoral Scholar (PDS) Award",
       "decision": "Check first",
-      "readiness": "requires_readiness_confirmation",
-      "document_mentions": [
-        "academic_cv",
-        "research_statement",
-        "english_proof"
-      ],
-      "unconfirmed_resources": [
-        "academic_cv",
-        "research_statement",
-        "english_proof"
-      ],
-      "unknown_resource_states": [
-        "academic_cv",
-        "research_statement",
-        "english_proof"
-      ],
+      "readiness": "no_unresolved_detected_requirements",
+      "document_mentions": [],
+      "unconfirmed_resources": [],
+      "unknown_resource_states": [],
       "explicit_tasks_remaining": [],
       "evidence_proof_obligations": [],
       "next_step": "Email FSE.doctoralacademy.admissions@manchester.ac.uk or pds@manchester.ac.uk and ask for the 2027 PDS deadline and whether international fees are covered",
@@ -2317,25 +2287,10 @@
       "days_to_deadline": 63,
       "opportunity": "UCL 50 fully funded 4-year EPSRC PhD studentships in engineering and physical sciences",
       "decision": "Check first",
-      "readiness": "requires_readiness_confirmation",
-      "document_mentions": [
-        "academic_cv",
-        "transcripts",
-        "recommendations",
-        "english_proof"
-      ],
-      "unconfirmed_resources": [
-        "academic_cv",
-        "transcripts",
-        "recommendations",
-        "english_proof"
-      ],
-      "unknown_resource_states": [
-        "academic_cv",
-        "transcripts",
-        "recommendations",
-        "english_proof"
-      ],
+      "readiness": "no_unresolved_detected_requirements",
+      "document_mentions": [],
+      "unconfirmed_resources": [],
+      "unknown_resource_states": [],
       "explicit_tasks_remaining": [],
       "evidence_proof_obligations": [],
       "next_step": "2026-10-30: open the advert in a browser and read international eligibility, cap and ATAS",
@@ -2545,28 +2500,10 @@
       "days_to_deadline": 70,
       "opportunity": "University of Warwick Biomedical AI PhD (jobs.ac.uk DTF911)",
       "decision": "Check first",
-      "readiness": "requires_readiness_confirmation",
-      "document_mentions": [
-        "academic_cv",
-        "research_statement",
-        "transcripts",
-        "recommendations",
-        "english_proof"
-      ],
-      "unconfirmed_resources": [
-        "academic_cv",
-        "research_statement",
-        "transcripts",
-        "recommendations",
-        "english_proof"
-      ],
-      "unknown_resource_states": [
-        "academic_cv",
-        "research_statement",
-        "transcripts",
-        "recommendations",
-        "english_proof"
-      ],
+      "readiness": "no_unresolved_detected_requirements",
+      "document_mentions": [],
+      "unconfirmed_resources": [],
+      "unknown_resource_states": [],
       "explicit_tasks_remaining": [],
       "evidence_proof_obligations": [],
       "next_step": "2026-10-30: read advert in a browser for funding and fee status",
@@ -2611,18 +2548,15 @@
       "readiness": "requires_readiness_confirmation",
       "document_mentions": [
         "academic_cv",
-        "transcripts",
-        "recommendations"
+        "transcripts"
       ],
       "unconfirmed_resources": [
         "academic_cv",
-        "transcripts",
-        "recommendations"
+        "transcripts"
       ],
       "unknown_resource_states": [
         "academic_cv",
-        "transcripts",
-        "recommendations"
+        "transcripts"
       ],
       "explicit_tasks_remaining": [],
       "evidence_proof_obligations": [],
@@ -2710,26 +2644,14 @@
       "days_to_deadline": 77,
       "opportunity": "University of Tokyo Graduate School of Frontier Sciences (GSFS) fall 2027 regular degree with MEXT University Recommendation (General) - scholarship may not continue",
       "decision": "Check first",
-      "readiness": "requires_readiness_confirmation",
-      "document_mentions": [
-        "academic_cv",
-        "research_statement",
-        "transcripts"
-      ],
-      "unconfirmed_resources": [
-        "academic_cv",
-        "research_statement",
-        "transcripts"
-      ],
-      "unknown_resource_states": [
-        "academic_cv",
-        "research_statement",
-        "transcripts"
-      ],
+      "readiness": "no_unresolved_detected_requirements",
+      "document_mentions": [],
+      "unconfirmed_resources": [],
+      "unknown_resource_states": [],
       "explicit_tasks_remaining": [],
       "evidence_proof_obligations": [],
       "next_step": "Check page again late Dec 2026 for scholarship confirmation",
-      "source_url": "https://www.jobs.ac.uk/job/DSP806/phd-studentship-learning-and-decision-making-under-uncertainty-in-public-health"
+      "source_url": ""
     },
     {
       "source_id": "M51",
@@ -2741,19 +2663,16 @@
       "document_mentions": [
         "research_statement",
         "transcripts",
-        "recommendations",
         "english_proof"
       ],
       "unconfirmed_resources": [
         "research_statement",
         "transcripts",
-        "recommendations",
         "english_proof"
       ],
       "unknown_resource_states": [
         "research_statement",
         "transcripts",
-        "recommendations",
         "english_proof"
       ],
       "explicit_tasks_remaining": [],
@@ -2786,20 +2705,17 @@
       "document_mentions": [
         "academic_cv",
         "research_statement",
-        "transcripts",
-        "english_proof"
+        "transcripts"
       ],
       "unconfirmed_resources": [
         "academic_cv",
         "research_statement",
-        "transcripts",
-        "english_proof"
+        "transcripts"
       ],
       "unknown_resource_states": [
         "academic_cv",
         "research_statement",
-        "transcripts",
-        "english_proof"
+        "transcripts"
       ],
       "explicit_tasks_remaining": [],
       "evidence_proof_obligations": [],
@@ -2926,22 +2842,10 @@
       "days_to_deadline": 198,
       "opportunity": "University of Wollongong, University Postgraduate Award (UPA), international PhD",
       "decision": "Later round",
-      "readiness": "requires_readiness_confirmation",
-      "document_mentions": [
-        "academic_cv",
-        "transcripts",
-        "recommendations"
-      ],
-      "unconfirmed_resources": [
-        "academic_cv",
-        "transcripts",
-        "recommendations"
-      ],
-      "unknown_resource_states": [
-        "academic_cv",
-        "transcripts",
-        "recommendations"
-      ],
+      "readiness": "no_unresolved_detected_requirements",
+      "document_mentions": [],
+      "unconfirmed_resources": [],
+      "unknown_resource_states": [],
       "explicit_tasks_remaining": [],
       "evidence_proof_obligations": [],
       "next_step": "No action possible for the 2027 round (closed)",
