@@ -1,13 +1,22 @@
-# PhD Tracker
+# PhD Application Tracker
 
-## SOP reference archive
+This repository stores an exported snapshot of the PhD application tracker.
 
-The [SOP reference archive](sop_archive/) contains 214 PDF statements of purpose, organized by application year (2017–2026), with source records and retrieval metadata.
+## Files
 
-- [2025 SOPs](sop_archive/2025/files/)
-- [Archive import status](sop_archive/SYNC_STATUS.json)
-- [Source provenance](sop_archive/SOURCES.md)
+- [PhD_Action_List.xlsx](PhD_Action_List.xlsx) — complete Excel workbook exported from the source Google Sheet, including six tabs:
+  - Read me
+  - Action list
+  - Step timeline
+  - What I need to do
+  - Dropped
+  - Not added
+- [tracker_source.json](tracker_source.json) — source and snapshot provenance.
 
-Original reference repository: [Armanasq/sop](https://github.com/Armanasq/sop).
+## Source
 
-Copyright remains with the statement authors. This private archive is for reference; source availability does not establish redistribution rights.
+[PhD_Action_List — Google Sheets](https://docs.google.com/spreadsheets/d/1mbdVt1Acg_-a6wzQE4c9Vr1S2JAMzcD3zWnuaHpY5vk/edit)
+
+The source workbook was last modified on 2026-11-04, according to Google Drive metadata at export time. This repository contains a snapshot, not a continuously synchronized live tracker. Its formula-based "Days left" columns depend on the date specified in the workbook and should be refreshed when opened.
+
+The original Google Sheet remains unchanged.
