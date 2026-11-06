@@ -249,6 +249,9 @@ def digest(evaluated: dict, selected: list[dict]) -> str:
               "- Edit the workbook for application decisions. A research lead is never automatically marked eligible or submitted.",
               "- Sources: data/discovered_candidates.json and data/latest_run.json in this private repository.",
               "- To silence a completed application, set its verdict to Submitted, Skipped or Withdrawn.",
+              "- Owner-only Issue controls: /priority APPLICATION_ID; /snooze APPLICATION_ID 3d; /mute APPLICATION_ID; /unsnooze APPLICATION_ID.",
+              "- Explicit readiness controls: /asset academic_cv ready; /asset research_statement in_progress; /asset transcripts unknown.",
+              "- Valid readiness states: unknown, ready, in_progress, not_started, not_applicable. These commands do not change submission status.",
               "- This Issue is maintained by a scheduled GitHub workflow. External messaging is disabled unless configured."]
     return "\n".join(lines)[:60000]
 
