@@ -1,0 +1,75 @@
+name: Import SOP archive
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/import-sop-archive.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: import-sop-archive
+  cancel-in-progress: false
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out target repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Retrieve verified SOP source
+        run: |
+          git clone --depth 1 --branch main https://github.com/Armanasq/sop.git "$RUNNER_TEMP/sop_source"
+          git -C "$RUNNER_TEMP/sop_source" rev-parse HEAD > "$RUNNER_TEMP/sop_source_sha.txt"
+      - name: Copy PDF archive and year manifests
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p sop_archive
+          for year in $(seq 2017 2026); do
+            test -f "$RUNNER_TEMP/sop_source/$year/index.csv"
+            mkdir -p "sop_archive/$year"
+            cp -a "$RUNNER_TEMP/sop_source/$year/." "sop_archive/$year/"
+          done
+          if [ -d "$RUNNER_TEMP/sop_source/unclassified" ]; then
+            mkdir -p sop_archive/unclassified
+            cp -a "$RUNNER_TEMP/sop_source/unclassified/." sop_archive/unclassified/
+          fi
+          cp "$RUNNER_TEMP/sop_source/SYNC_STATUS.json" sop_archive/SYNC_STATUS.json
+          cp "$RUNNER_TEMP/sop_source/SOURCES.md" sop_archive/SOURCES.md
+          cp "$RUNNER_TEMP/sop_source/README.md" sop_archive/SOURCE_README.md
+          cp "$RUNNER_TEMP/sop_source_sha.txt" sop_archive/SOURCE_COMMIT.txt
+          find sop_archive -type f -name '*.pdf' -print | sort > "$RUNNER_TEMP/pdf_manifest.txt"
+          count=$(wc -l < "$RUNNER_TEMP/pdf_manifest.txt")
+          echo "PDF files: $count"
+          test "$count" -ge 214
+          find sop_archive -type f -name '*.pdf' -exec sh -c 'head -c 5 "$1" | grep -q "%PDF-"' _ {} \;
+          cat > sop_archive/README.md <<EOF
+          # CS PhD SOP Archive
+
+          Snapshot of [Armanasq/sop](https://github.com/Armanasq/sop), copied into this private repository.
+
+          - PDF files: $count
+          - Source commit: $(cat "$RUNNER_TEMP/sop_source_sha.txt")
+          - Year folders: 2017-2026
+          - Source metadata and unresolved records: `SYNC_STATUS.json` and per-year `index.csv`
+
+          Copyright remains with the original authors. Public source access does not by itself grant redistribution rights.
+          EOF
+      - name: Commit and push archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sop_archive
+          if ! git diff --cached --quiet; then
+            git commit -m "Import year-organized SOP PDF archive from Armanasq/sop"
+            git push origin HEAD:main
+          fi
