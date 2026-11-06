@@ -99,6 +99,45 @@ def parse_anchor_leads(body: bytes, provider: str, observed: str, canonical, sco
             "score": score, "matched_topics": hits, "snippet": context,
             "observed_at": observed,
         }
+    for heading in soup.select("h2,h3,h4"):
+        title = re.sub(r"\s+", " ", heading.get_text(" ", strip=True)).strip()
+        if not (14 <= len(title) <= 240) or not DOCTORAL.search(title) or EXCLUDE.search(title):
+            continue
+        score, hits = score_fn(title)
+        if score < 3:
+            continue
+        parent = heading
+        links = []
+        for depth in range(4):
+            parent = parent.parent
+            if parent is None:
+                break
+            links = [a for a in parent.select("a[href]") if a.get("href")]
+            if links:
+                break
+        if not links:
+            continue
+        candidates_link = [
+            a for a in links
+            if provider == "academictransfer" and "/jobs/" in str(a.get("href", ""))
+            or provider == "academicpositions" and any(x in str(a.get("href", "")) for x in ("/ad/", "/jobs/", "/job/"))
+        ]
+        if not candidates_link:
+            continue
+        href = str(candidates_link[0].get("href"))
+        source_url = canonical(urljoin(URLS[provider], href))
+        if not source_url or source_url in candidates:
+            continue
+        context = re.sub(r"\s+", " ", parent.get_text(" ", strip=True))[:550]
+        candidates[source_url] = {
+            "id": id_fn(provider, source_url), "provider": provider, "lane": "third_party_index",
+            "title": title, "url": source_url, "deadline": None,
+            "deadline_provenance": "Not verified; extract on primary vacancy page",
+            "evidence_status": "third_party_listing_unverified",
+            "funding_status": "not_independently_verified",
+            "score": score, "matched_topics": hits, "snippet": context,
+            "observed_at": observed,
+        }
     return list(candidates.values())
 
 
