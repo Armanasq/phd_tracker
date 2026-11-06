@@ -5,7 +5,7 @@
   "new_verified_count": 3,
   "queue_count": 5,
   "mail_signals": 7,
-  "source_watches": 5,
+  "source_watches": 6,
   "source_statuses": [
     {
       "id": "R26-GWU-EPIC",
@@ -36,6 +36,12 @@
       "source_url": "https://www.epfl.ch/labs/create/create-lab/openings/",
       "expected_deadline": "2026-11-13",
       "status": "review_source_changed"
+    },
+    {
+      "id": "N263-09-PORTAL",
+      "source_url": "https://imprs-is-apply.tue.mpg.de/registration/imprs-is-2026",
+      "expected_deadline": "2026-11-15",
+      "status": "disallowed_host"
     }
   ]
 }
