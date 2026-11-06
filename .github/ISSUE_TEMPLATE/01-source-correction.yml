@@ -1,0 +1,48 @@
+name: Source correction or deadline conflict
+description: Submit a verifiable correction to a programme's deadline, funding, or eligibility evidence.
+title: "[Source review] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: "Review-only intake. Creating an Issue does not change the workbook or promote an opportunity."
+  - type: input
+    id: source
+    attributes:
+      label: Official source URL
+      placeholder: https://university.example.edu/doctoral-position
+    validations:
+      required: true
+  - type: input
+    id: application
+    attributes:
+      label: Existing source ID or programme identifier
+    validations:
+      required: true
+  - type: dropdown
+    id: issue
+    attributes:
+      label: Evidence discrepancy
+      options:
+        - Deadline changed
+        - Portal is closed
+        - Funding or fee eligibility differs
+        - Application requirement changed
+        - Original source unavailable
+        - Other source contradiction
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Exact evidence and observation date
+      description: Quote only the minimal factual excerpt needed to assess the discrepancy. Avoid private applicant data.
+    validations:
+      required: true
+  - type: checkboxes
+    id: guardrails
+    attributes:
+      label: Verification safeguards
+      options:
+        - label: I understand this report requires human verification and does not automatically overwrite the tracker.
+          required: true
