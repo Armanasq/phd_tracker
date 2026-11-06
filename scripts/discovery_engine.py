@@ -14,7 +14,10 @@ from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 
 from bs4 import BeautifulSoup
-from scripts.marketplace_sources import collect_board
+if __package__:
+    from .marketplace_sources import collect_board
+else:
+    from marketplace_sources import collect_board
 
 ROOT = Path(__file__).resolve().parents[1]
 INRIA_INDEX = "https://jobs.inria.fr/public/classic/en/offres?filtre=doctorants"
