@@ -127,8 +127,10 @@ def task_table(items,max_rows=None,link=True):
            "|:--|:--|:--|:--|"]
     for r in (items if max_rows is None else items[:max_rows]):
         due=md(r.get("due") or "Unknown",20)
-        name=md(r.get("name") or r.get("source_id"),65)
-        act=md(r.get("action"),150)
+        name=md(r.get("name") or r.get("source_id"),125)
+        act=md(r.get("action"),210)
+        if r.get("task_id") and r.get("type") in ("timeline_step","cross_route_task"):
+            act += " · " + chr(96) + md(r["task_id"],24) + chr(96)
         route=(source_link(r) if link else md(r.get("sheet"),30))
         lines.append(f"| {due} | {name} | {act} | {route} |")
     if len(lines)==2:
@@ -140,7 +142,8 @@ def share_table(items,max_rows=None):
     lines=["| Date | Cross-application task | Recorded status |",
            "|:---|:---|:---|"]
     for r in (items if max_rows is None else items[:max_rows]):
-        lines.append(f'| {md(r.get("due"),16)} | {md(r.get("action"),220)} | {md(r.get("verdict"),30)} |')
+        control = (" · "+chr(96)+md(r["task_id"],24)+chr(96)) if r.get("task_id") else ""
+        lines.append(f'| {md(r.get("due"),16)} | {md(r.get("action"),260)}{control} | {md(r.get("verdict"),30)} |')
     if len(lines)==2:
         lines.append("| — | None scheduled today | — |")
     return "\n".join(lines)
@@ -291,9 +294,11 @@ Comment on [PhD Intelligence — Action Center](../../issues/1):
 /asset academic_cv ready
 /asset research_statement in_progress
 /asset transcripts unknown
+/done tsk-<copy-task-id-from-daily-agenda>
+/reopen tsk-<copy-task-id-from-daily-agenda>
 §§§
 
-Commands are validated against the repository owner, known source IDs and allowed state transitions. They are idempotent by comment ID, and are acknowledged only after committing changes. One-day and same-day application deadlines cannot be silenced.
+Commands are validated against the repository owner, known source IDs, allowed states and stable task IDs. Use a real `tsk-...` identifier printed beside each programme/shared task in the agenda; `/done` and `/reopen` update a private completion overlay, regenerate the workbook/README and never alter original submission states. Comments are idempotent by ID and acknowledged after successful commits. Same-day and next-day deadlines cannot be muted.
 
 **Resource readiness is never inferred from advertised requirements.** Update it explicitly, or retain the default §unknown§.
 
@@ -380,6 +385,8 @@ def todays_md(plan,metrics):
 {share_table(a["cross_route_tasks"])}
 
 ## C. All programme steps explicitly dated today ({c["timeline_tasks"]})
+
+To confirm a task, copy its stable `tsk-...` identifier from the table and comment `/done TASK_ID` on the [private Action Center](../../issues/1). Use `/reopen TASK_ID` to undo. These commands update a separate completion ledger, not the original source rows.
 
 {task_table(a["scheduled_timeline_tasks"])}
 
