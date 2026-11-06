@@ -142,3 +142,62 @@ def test_notification_detects_contradictions(tmp_path):
     }))
     result = evaluate(date(2026, 11, 6), path, data)
     assert any(event["kind"] == "conflict" for event in result["events"])
+
+
+def test_conflicting_deadline_is_not_silently_overwritten(tmp_path):
+    directory = tmp_path / "artifacts"
+    directory.mkdir()
+    record = {
+        "id": "inria:2026-10570", "title": "Robotics PhD",
+        "url": "https://jobs.inria.fr/public/classic/en/offres/2026-10570",
+        "provider": "inria", "lane": "official_institution",
+        "deadline": "2026-11-20", "deadline_provenance": "Institution",
+        "evidence_status": "official_index", "score": 7,
+        "observed_at": "2026-11-06T10:00:00Z",
+    }
+    input_path = directory / "inria.json"
+    input_path.write_text(json.dumps({"provider": "inria", "records": [record], "errors": []}))
+    out = tmp_path / "state.json"
+    report = tmp_path / "report.json"
+    aggregate(directory, out, report)
+    input_path.write_text(json.dumps({"provider": "inria", "records": [
+        {**record, "deadline": "2026-11-22", "observed_at": "2026-11-08T10:00:00Z"}
+    ], "errors": []}))
+    result = aggregate(directory, out, report)
+    found = json.loads(out.read_text())["records"][0]
+    assert found["deadline"] == "2026-11-20"
+    assert found["proposed_deadline"] == "2026-11-22"
+    assert found["deadline_change_needs_review"] is True
+    assert "inria:2026-10570" in result["deadline_conflicts"]
+
+
+def test_equivalent_urls_are_aliased_not_duplicated(tmp_path):
+    directory = tmp_path / "artifacts"
+    directory.mkdir()
+    record = {
+        "id": "inria:2026-10570", "title": "Robotics PhD",
+        "url": "https://jobs.inria.fr/public/classic/en/offres/2026-10570",
+        "provider": "inria", "lane": "official_institution",
+        "deadline": "2026-11-20", "deadline_provenance": "Institution",
+        "evidence_status": "official_index", "score": 7,
+        "observed_at": "2026-11-06T10:00:00Z",
+    }
+    (directory / "a.json").write_text(json.dumps({"provider": "inria", "records": [record], "errors": []}))
+    (directory / "b.json").write_text(json.dumps({"provider": "brave", "records": [{
+        **record, "id": "web:duplicate", "provider": "brave",
+        "url": record["url"] + "?utm_source=search", "evidence_status": "search_lead_unverified"
+    }], "errors": []}))
+    out = tmp_path / "state.json"
+    report = tmp_path / "report.json"
+    result = aggregate(directory, out, report)
+    found = json.loads(out.read_text())["records"]
+    assert len(found) == 1
+    assert found[0]["evidence_status"] == "official_index"
+    assert "web:duplicate" in found[0]["aliases"]
+    assert len(result["url_aliases"]) == 1
+
+
+def test_private_network_hosts_are_rejected():
+    assert safe_url("https://127.0.0.1/admin") is None
+    assert safe_url("https://192.168.1.10/admin") is None
+    assert safe_url("https://10.0.0.7/api") is None
