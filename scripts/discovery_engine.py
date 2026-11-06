@@ -14,6 +14,7 @@ from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
 from urllib.request import Request, urlopen
 
 from bs4 import BeautifulSoup
+from scripts.marketplace_sources import collect_board
 
 ROOT = Path(__file__).resolve().parents[1]
 INRIA_INDEX = "https://jobs.inria.fr/public/classic/en/offres?filtre=doctorants"
@@ -232,6 +233,8 @@ def collect(provider: str, output: Path, state: Path) -> dict:
             records = collect_inria(observed)
         elif provider == "brave":
             records, warning = collect_brave(observed, state)
+        elif provider in ("academictransfer", "academicpositions"):
+            records = collect_board(provider, observed, fetch_bytes, safe_url, relevant_score, evidence_id)
             if warning:
                 errors.append(warning)
         else:
@@ -347,7 +350,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest="command", required=True)
     first = sub.add_parser("collect")
-    first.add_argument("--source", choices=("inria", "brave"), required=True)
+    first.add_argument("--source", choices=("inria", "brave", "academictransfer", "academicpositions"), required=True)
     first.add_argument("--output", required=True)
     first.add_argument("--state", default="data/discovered_candidates.json")
     second = sub.add_parser("aggregate")
