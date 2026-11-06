@@ -29,6 +29,7 @@ ALLOWED_HOSTS = {
     "www.humanities.manchester.ac.uk",
     "euraxess.ec.europa.eu",
     "www.epfl.ch",
+    "imprs-is-apply.tue.mpg.de",
 }
 HEADERS = [
     "#", "Deadline", "Date note", "Days left", "Verdict", "Fit", "Route",
@@ -118,7 +119,9 @@ def monitor_one(watch: dict):
         content = html.unescape(re.sub(r"(?s)<[^>]+>", " ", s))
         normalized = re.sub(r"\s+", " ", content).lower()
         found = watch["anchor"].lower() in normalized
-        return watch["id"], "anchor_present" if found else "review_source_changed", hashlib.sha256(normalized.encode()).hexdigest(), ""
+        negative = watch.get("negative_anchor", "").lower() in normalized if watch.get("negative_anchor") else False
+        state = "contradiction_closed_portal" if negative else ("anchor_present" if found else "review_source_changed")
+        return watch["id"], state, hashlib.sha256(normalized.encode()).hexdigest(), ""
     except (HTTPError, URLError, TimeoutError, OSError, ValueError) as e:
         return watch["id"], "unavailable", "", str(e)[:120]
 
