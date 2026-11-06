@@ -142,7 +142,7 @@ def update_watches(wb, watchlist: list[dict], online: bool, today: date):
         i = existing.get(row[0])
         if i:
             for j, value in enumerate(row, 1):
-                ws.cell(i, j, value)
+                ws.cell(i, j).value = value
         else:
             ws.append(row)
     ws.auto_filter.ref = f"A1:H{ws.max_row}"
@@ -170,7 +170,7 @@ def refresh(wb, today: date, online: bool):
         row[0] = i - 3
         row[3] = f'=IF(ISNUMBER(B{i}),B{i}-$B$1,"")'
         for j, value in enumerate(row, 1):
-            ws.cell(i, j, value)
+            ws.cell(i, j).value = value
     for i in range(last + 1, ws.max_row + 1):
         for j in range(1, 22):
             ws.cell(i, j).value = None
@@ -217,7 +217,7 @@ def refresh(wb, today: date, online: bool):
     for i,r in enumerate(timeline_rows,4):
         r[1] = f'=IF(ISNUMBER(A{i}),A{i}-\'Action list\'!$B$1,"")'
         for j,v in enumerate(r,1):
-            timeline.cell(i,j,v)
+            timeline.cell(i,j).value = v
     timeline.auto_filter.ref=f"A3:G{3+len(timeline_rows)}"
 
     if "Read me" in wb:
