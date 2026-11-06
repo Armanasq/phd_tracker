@@ -14,6 +14,29 @@
 
 </div>
 
+### Navigate the command center
+
+[**01 · Act now**](#01--execute--2026-11-06) · [**02 · Decide next**](#02--next-decisions-not-just-a-countdown) · [**03 · Verify sources**](#03--evidence-backed-search-and-auditability) · [**04 · Data model**](#04--all-worksheets-participate) · [**05 · Controls**](#05--github-as-a-private-operating-interface) · [**06 · Engineering**](#06--research-contributions-not-cosmetic-features)
+
+| Priority | Immediate route | Outcome |
+|:--|:--|:--|
+| **Submit / verify** | [Open today’s 2 application deadline(s)](docs/TODAY.md#A-application-submission-deadlines-today-2) | Prevent missing a final deadline; confirm portal status and submission receipts |
+| **Plan the workload** | [Today's execution plan](docs/TODAY.md) | Separate actual application deadlines from supporting steps and shared tasks |
+| **Resolve uncertainty** | [Review proof obligations](data/portfolio_frontier.json) | Identify funding restrictions, portal contradictions, and missing evidence |
+| **Explore opportunities** | [Discovery inbox](data/discovered_candidates.json) | Evaluate new leads before any promotion into the application list |
+| **Operate reminders** | [Private Action Center](../../issues/1) | Mark tasks done, explicitly declare asset readiness, or snooze noncritical alerts |
+
+#### Live operational signals (committed snapshot)
+
+| Time critical | Source assurance | Applicant decisions | Research horizon |
+|:--|:--|:--|:--|
+| **4** deadline(s) in ≤3 days; **6** in the next 7 days | **1/4** active providers reporting healthy; **3** degraded/disabled | **21** dated steps today; **97** older steps with *completion unknown* | **0** indexed papers, research signals only |
+| [Review every dated task](docs/TODAY.md) | [Source diagnostics](data/discovery_report.json) | [Confirm task status](../../issues/1) | [Research radar](data/research_radar.json) |
+
+**Source consistency:** 6 observations across 6 configured monitors; 4 matched expected anchors and 2 require review. **Degraded sources:** academicpositions, academictransfer, brave.
+
+<sub>Last official-page monitor: 2026-11-06 · last discovery: 2026-11-06 · last publication radar: 2026-11-06. These are observed snapshots, not live counters or a guarantee that any position is still accepting applicants.</sub>
+
 > [!IMPORTANT]
 > **Observed snapshot: 2026-11-06 (Europe/Berlin).** Application deadlines, step dates and shared tasks are different data types. A task dated in the past is **completion-unconfirmed**, not automatically unfinished. Original verdicts are research assessments, not confirmed submission receipts. Primary sources determine final eligibility and deadlines.
 
@@ -215,6 +238,50 @@ flowchart TD
 The engine cannot submit applications, invent funding eligibility, silently change a user decision, or execute arbitrary commands from third-party search content. Data merges are re-evaluated against current `main` to avoid binary workbook conflicts.
 
 </details>
+
+## From a GitHub repository to an operating system
+
+<details>
+<summary><b>Use case A — an application closes today</b></summary>
+
+**Deadline → application portal → explicit verification → preparation steps → receipt.** Start with [today's execution plan](docs/TODAY.md), inspect the primary source, verify the time zone, and submit directly to the university. The system records a deadline and tasks; it **does not** confirm that the application was submitted. Only a portal receipt or your explicit decision can establish that state.
+
+</details>
+
+<details>
+<summary><b>Use case B — a recruiting lab publishes a contradictory deadline</b></summary>
+
+**Evidence comparison → proof debt → human resolution.** The [source monitor](data/latest_run.json) checks observed institutional assertions. A closed application portal does not automatically overwrite an advertised deadline; the contradiction appears in the [decision frontier](data/portfolio_frontier.json) and the [Action Center](../../issues/1).
+
+</details>
+
+<details>
+<summary><b>Use case C — a single document is needed for multiple applications</b></summary>
+
+**Reusable document → explicit readiness → deadline dependency.** Review [document leverage](data/portfolio_frontier.json) and set your real state in the [Action Center](../../issues/1), for example `/asset research_statement in_progress`. Mentions of a CV, statement, or transcript in vacancy text are **not** proof that you lack the document.
+
+</details>
+
+<details>
+<summary><b>Use case D — find a lab before an official vacancy exists</b></summary>
+
+The [research radar](data/research_radar.json) monitors topical publications in robotics, vision, medical AI and related areas. Research papers provide context for prospective supervisors and SOP positioning; they are **not** interpreted as funded openings. The [discovery pipeline](.github/workflows/phd-intelligence.yml) independently monitors actual vacancies, with source limitations disclosed.
+
+</details>
+
+### Delivery truth table
+
+| Capability | Current implementation | Trust boundary |
+|:--|:--|:--|
+| Scheduled search | Twice-daily matrix of institutional/marketplace connectors | A source may fail, block crawlers, or return no results |
+| Deadline-driven execution | Separate final deadlines, programme steps and shared tasks | Past completion is unknown unless explicitly recorded |
+| Opportunity reconciliation | Canonical URL deduplication, source history and review queue | Search snippets never prove funding or eligibility |
+| Repository notifications | Owner-assigned Issue and threshold-based reminders | Notification delivery outside GitHub needs an opt-in endpoint |
+| Interactive commands | Owner-scoped task, asset and alert controls | Neither a GitHub comment nor a scraped page executes arbitrary shell commands |
+| Email intelligence | Existing reviewed signals; optional OAuth metadata intake | Gmail automation requires separately configured read-only credentials |
+| Research radar | arXiv publications displayed apart from vacancy records | Papers do not establish a recruiting PhD position |
+| Workbook integrity | Cross-sheet audit, regression CI and conflict-safe publication | The original cloud Google Sheet is not live-synced |
+| Commercial roadmap | [EvidenceGraph product RFC](docs/PRODUCT_RFC.md) | Novelty, predictive quality, and revenue have **not** been established experimentally |
 
 ## 06 · Research contributions, not cosmetic features
 
