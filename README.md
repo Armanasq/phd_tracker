@@ -10,7 +10,7 @@
 [![Regression & Data Contracts](https://github.com/Armanasq/phd_tracker/actions/workflows/intelligence-ci.yml/badge.svg)](../../actions/workflows/intelligence-ci.yml)
 [![Full Workbook Audit](https://github.com/Armanasq/phd_tracker/actions/workflows/audit-workbook.yml/badge.svg)](../../actions/workflows/audit-workbook.yml)
 
-[**View Excel tracker**](PhD_Action_List.xlsx) · [**Today's complete action plan**](docs/TODAY.md) · [**Private Action Center**](../../issues/1) · [**Run the automation**](../../actions/workflows/phd-intelligence.yml)
+[**View Excel tracker**](PhD_Action_List.xlsx) · [**Today's complete action plan**](docs/TODAY.md) · [**Import calendar reminders**](calendar/phd_deadlines.ics) · [**Private Action Center**](../../issues/1) · [**Run the automation**](../../actions/workflows/phd-intelligence.yml)
 
 </div>
 
@@ -86,6 +86,7 @@ The full execution queue preserves original worksheet row numbers and source IDs
 |:--|:--|:--|
 | **Execution board** | [Workbook](PhD_Action_List.xlsx) | Due tasks separated by source, date, eligibility and status |
 | **Full Task ledger** | [Workbook](PhD_Action_List.xlsx) | Every application deadline and every programme/shared task with provenance |
+| **Calendar reminders** | [Download ICS](calendar/phd_deadlines.ics) | Import all-day reminders for future tasks and deadlines; reimport when the workbook changes |
 | **Deadline and proof obligations** | [Decision frontier](data/portfolio_frontier.json) | Funding/eligibility contradictions and reusable-document dependencies |
 | **Review queue** | [Research queue](data/discovered_candidates.json) | Search leads needing official source confirmation |
 | **Live notifications** | [Private Action Center](../../issues/1) | Reminder history, conflicts and owner controls |

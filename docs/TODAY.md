@@ -1,6 +1,6 @@
 # Execution plan — 2026-11-06
 
-[← Repository cockpit](../README.md) · [Tracker workbook](../PhD_Action_List.xlsx) · [Private Action Center](../../issues/1) · [Full machine-readable ledger](../data/execution_plan.json)
+[← Repository cockpit](../README.md) · [Tracker workbook](../PhD_Action_List.xlsx) · [Import task calendar](../calendar/phd_deadlines.ics) · [Private Action Center](../../issues/1) · [Full machine-readable ledger](../data/execution_plan.json)
 
 > **As of 2026-11-06, Europe/Berlin.** This plan is generated from original workbook rows. It distinguishes application deadlines from step dates and explicit cross-route tasks. A dated Step timeline task has no recorded completion flag; it is not automatically labelled incomplete.
 
@@ -121,7 +121,7 @@ The following earlier preparation steps are **not** additional November 6 submis
 
 - Verify the actual institutional closing time/time zone in each original posting before submitting.
 - Check whether an application or preparation task was already completed; nothing in the Step timeline proves it remains undone.
-- Preserve the user-maintained statuses in *What I need to do*. No third-party email or scraped vacancy changes them.
+- Preserve the user-maintained statuses in *What I need to do*. No third-party email or scraped vacancy changes them. Calendar events are all-day reminders unless the original source is manually confirmed; this private-repository file is a snapshot, not a continuously updating subscription.
 - MEXT routes may be mutually exclusive. The main workbook records this in the original grouping rule.
 - Review [source contradictions](../data/latest_run.json) and [readiness unknowns](../data/portfolio_frontier.json).
 - For source reconciliation, see [full workbook audit](../data/workbook_audit.json).
