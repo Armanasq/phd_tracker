@@ -99,6 +99,18 @@ def evaluate(today: date, workbook: Path, data_dir: Path) -> dict:
             "evidence_status": "unverified_research_lead",
             "score": hit.get("score", 0),
         })
+    radar = load(data_dir / "research_radar.json", {"papers": []})
+    radar_report = load(data_dir / "research_radar_report.json", {})
+    by_paper_id = {p["id"]: p for p in radar.get("papers", [])}
+    new_papers = [by_paper_id[p] for p in radar_report.get("new_ids", []) if p in by_paper_id]
+    new_papers.sort(key=lambda p: (p.get("relevance_score", 0), p.get("published", "")), reverse=True)
+    for paper in new_papers[:4]:
+        events.append({
+            "id": key_event("paper", paper["id"], "first-observed"),
+            "kind": "research_signal", "source_id": paper["id"],
+            "name": clean(paper["title"], 155), "source": paper["paper_url"],
+            "evidence_status": "research_paper_not_vacancy",
+        })
     run = load(data_dir / "latest_run.json", {})
     for record in run.get("source_statuses", []):
         if record.get("status") not in ("contradiction_closed_portal", "review_source_changed"):
@@ -159,6 +171,8 @@ def digest(evaluated: dict, selected: list[dict]) -> str:
             lines.append(f'- Deadline in {item["days"]}d: {item["name"]} ({item["deadline"]})')
         elif item["kind"] == "new_lead":
             lines.append(f'- New unverified research lead: {item["name"]} ({item["source"]})')
+        elif item["kind"] == "research_signal":
+            lines.append(f'- Research paper, not a PhD vacancy: {item["name"]} ({item["source"]})')
         else:
             lines.append(f'- Conflicting evidence: {item["source_id"]} ({item["evidence_status"]})')
     if not selected:
@@ -178,6 +192,8 @@ def comment_body(selected: list[dict]) -> str:
             lines.append(f'- **{item["days"]} days remaining:** {item["name"]} — {item["deadline"]}')
         elif item["kind"] == "new_lead":
             lines.append(f'- **Needs verification:** {item["name"]} — {item["source"]}')
+        elif item["kind"] == "research_signal":
+            lines.append(f'- **Research only (not recruitment):** {item["name"]} — {item["source"]}')
         else:
             lines.append(f'- **Contradiction:** {item["source_id"]}: {item["evidence_status"]} — {item["source"]}')
     lines.append("")
