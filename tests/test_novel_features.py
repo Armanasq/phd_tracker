@@ -137,3 +137,45 @@ def test_asset_change_is_ignored_from_non_owner(tmp_path):
     result=apply(event,prefs,data/"result.json","Armanasq",date(2026,11,6))
     assert not result["accepted"]
     assert json.loads(assets.read_text())==original
+
+
+def test_owner_can_mark_only_known_preparation_tasks_done(tmp_path):
+    data=tmp_path/"data"
+    data.mkdir()
+    prefs=data/"notification_preferences.json"
+    prefs.write_text(json.dumps(preferences()))
+    assets=data/"application_assets.json"
+    assets.write_text(json.dumps({"valid_statuses":["unknown","ready"],
+                                 "resources":{"academic_cv":{"status":"unknown"}}}))
+    valid="tsk-1234567890abcdef"
+    (data/"execution_plan.json").write_text(json.dumps({
+        "all_tasks":[
+            {"task_id":valid,"type":"timeline_step"},
+            {"task_id":"tsk-0000000000000000","type":"application_deadline"}
+        ]}))
+    event=tmp_path/"comment.json"
+    event.write_text(json.dumps(issue("/done "+valid,number=551)))
+    result=apply(event,prefs,data/"result.json","Armanasq",date(2026,11,6))
+    assert result["accepted"] and result["operation"]=="task_done"
+    assert valid in json.loads((data/"task_completion.json").read_text())["done"]
+    assert json.loads(assets.read_text())["resources"]["academic_cv"]["status"]=="unknown"
+    event.write_text(json.dumps(issue("/reopen "+valid,number=552)))
+    reopened=apply(event,prefs,data/"result.json","Armanasq",date(2026,11,6))
+    assert reopened["accepted"] and reopened["operation"]=="task_reopen"
+    assert valid not in json.loads((data/"task_completion.json").read_text())["done"]
+
+
+def test_cannot_claim_application_submitted_through_task_done(tmp_path):
+    data=tmp_path/"data"
+    data.mkdir()
+    prefs=data/"notification_preferences.json"
+    prefs.write_text(json.dumps(preferences()))
+    (data/"application_assets.json").write_text(json.dumps({"resources":{}}))
+    (data/"execution_plan.json").write_text(json.dumps({
+        "all_tasks":[{"task_id":"tsk-0000000000000000","type":"application_deadline"}]
+    }))
+    event=tmp_path/"comment.json"
+    event.write_text(json.dumps(issue("/done tsk-0000000000000000",number=553)))
+    result=apply(event,prefs,data/"result.json","Armanasq",date(2026,11,6))
+    assert not result["accepted"] and result["reason"]=="unknown_or_ineligible_task_id"
+    assert not (data/"task_completion.json").exists()
