@@ -1,7 +1,7 @@
 {
   "accepted": true,
-  "operation": "priority",
-  "source_id": "inria:2026-10570",
-  "until": null,
-  "comment_id": "6679877263"
+  "operation": "asset",
+  "source_id": "academic_cv",
+  "new_status": "unknown",
+  "comment_id": "6680003684"
 }
