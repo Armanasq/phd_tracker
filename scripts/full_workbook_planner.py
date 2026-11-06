@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 from collections import Counter
@@ -22,7 +23,7 @@ COLUMNS = [
     "Category", "Due date", "Days", "State", "Application / context",
     "Action and requirements", "Final application deadline", "Verdict",
     "Source ID", "Original worksheet", "Original row", "Primary URL",
-    "Evidence / caveats",
+    "Evidence / caveats", "Stable task ID",
 ]
 
 
@@ -150,8 +151,17 @@ def read_inputs(wb, today: date):
     return applications, all_tasks, dropped, not_added
 
 
-def plan(wb, today: date):
+def plan(wb, today: date, completion_state=None):
     apps,tasks,dropped,not_added=read_inputs(wb,today)
+    done = (completion_state or {}).get("done", {})
+    for task in tasks:
+        normalized = " ".join(task["action"].casefold().split())
+        material = "|".join((task["type"],task["source_id"],task["due"] or "",normalized))
+        task["task_id"] = "tsk-" + hashlib.sha256(material.encode("utf-8")).hexdigest()[:16]
+        if task["type"] in ("timeline_step","cross_route_task") and task["task_id"] in done:
+            task["state"] = "confirmed_done"
+            task["blocked"] = True
+            task["confirmed_at"] = done[task["task_id"]].get("at", "")
     included=[t for t in tasks if not t["blocked"]]
     today_apps=[t for t in included if t["type"]=="application_deadline" and t["days"]==0]
     excluded_deadlines=[t for t in tasks if t["type"]=="application_deadline" and t["days"]==0 and t["blocked"]]
@@ -191,6 +201,7 @@ def plan(wb, today: date):
                 "timeline_tasks":len(step_today),
                 "shared_tasks":len(shared_today),
                 "total_distinct_scheduled_actions":len(today_apps)+len(step_today)+len(shared_today),
+                "source_row_events_scheduled_today":len(today_apps)+len(step_today)+len(shared_today),
                 "linked_past_steps_not_recounted":len(parent_final_today),
             }
         },
@@ -209,6 +220,7 @@ def plan(wb, today: date):
             "dropped_routes":len(dropped),
             "not_added_routes":len(not_added),
             "task_states":dict(by_state),
+            "owner_completed_tasks":sum(t["state"]=="confirmed_done" for t in tasks),
             "tracked_source_ids_in_dropped":len(potentially_excluded),
             "research_queue_rows":max(0, wb["Research queue"].max_row-1) if "Research queue" in wb else 0,
             "mail_signal_rows":max(0, wb["Mail signals"].max_row-1) if "Mail signals" in wb else 0,
@@ -247,7 +259,7 @@ def regenerate_sheet(wb, result):
             end=as_date(t["final_deadline"]) if t["final_deadline"] else None
             ws.append([t["type"],d,t["days"],t["state"],t["name"],
                 t["action"],end,t["verdict"],t["source_id"],t["sheet"],t["row"],
-                t["source"],t["notes"]])
+                t["source"],t["notes"],t["task_id"]])
             r=ws.max_row
             for col in range(1,len(COLUMNS)+1):
                 c=ws.cell(r,col)
@@ -263,7 +275,7 @@ def regenerate_sheet(wb, result):
         cell.fill=PatternFill("solid",fgColor="152A45")
         cell.font=Font(bold=True,color="FFFFFF",name="Aptos",size=10)
         cell.alignment=Alignment(wrap_text=True)
-    widths=[19,16,10,26,64,90,18,19,19,24,12,62,70]
+    widths=[19,16,10,26,64,90,18,19,19,24,12,62,70,28]
     for j,w in enumerate(widths,1):
         ws.column_dimensions[get_column_letter(j)].width=w
     ws.freeze_panes="F2"
@@ -279,11 +291,11 @@ def regenerate_sheet(wb, result):
         ledger.append([t["type"],as_date(t["due"]) if t["due"] else None,t["days"],
                       t["state"],t["name"],t["action"],
                       as_date(t["final_deadline"]) if t["final_deadline"] else None,
-                      t["verdict"],t["source_id"],t["sheet"],t["row"],t["source"],t["notes"]])
+                      t["verdict"],t["source_id"],t["sheet"],t["row"],t["source"],t["notes"],t["task_id"]])
         for j in (2,7):
             ledger.cell(ledger.max_row,j).number_format="yyyy-mm-dd"
     ledger.freeze_panes="F2"
-    ledger.auto_filter.ref=f"A1:M{ledger.max_row}"
+    ledger.auto_filter.ref=f"A1:N{ledger.max_row}"
     ledger.sheet_view.showGridLines=False
     for j,title in enumerate(COLUMNS,1):
         c=ledger.cell(1,j)
@@ -297,7 +309,9 @@ def regenerate_sheet(wb, result):
 def run(workbook=BOOK,output=REPORT,today=None):
     today=today or local_today()
     wb=load_workbook(workbook)
-    summary=plan(wb,today)
+    status_file=output.parent/"task_completion.json"
+    completion_state=json.loads(status_file.read_text(encoding="utf-8")) if status_file.exists() else {}
+    summary=plan(wb,today,completion_state)
     summary.update(regenerate_sheet(wb,summary))
     wb.save(workbook)
     output.parent.mkdir(parents=True,exist_ok=True)
