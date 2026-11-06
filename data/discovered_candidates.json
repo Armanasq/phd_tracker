@@ -20,8 +20,8 @@
       "snippet": "PhD Position F/M Enforcing Persistence in Generative World Models for Robotics Job reference : 2026-10570 Town/city : Paris Inria Team : ASTRA Deadline to apply : 2026-11-20 PhD Position F/M Mesh partitioning for high performance solvers on Exascale computing systems Job reference",
       "observed_at": "2026-11-06T07:31:15+00:00",
       "first_seen": "2026-11-06T07:31:15+00:00",
-      "last_seen": "2026-11-06T07:54:59+00:00",
-      "seen_count": 10,
+      "last_seen": "2026-11-06T07:57:18+00:00",
+      "seen_count": 11,
       "source_observations": [
         {
           "provider": "inria",
@@ -74,6 +74,12 @@
         {
           "provider": "inria",
           "at": "2026-11-06T07:54:59+00:00",
+          "deadline": "2026-11-20",
+          "confidence": "official_index"
+        },
+        {
+          "provider": "inria",
+          "at": "2026-11-06T07:57:18+00:00",
           "deadline": "2026-11-20",
           "confidence": "official_index"
         }
@@ -192,8 +198,8 @@
       "snippet": "PhD Position F/M Trustable Machine Learning : Analysis and Verification of Soft Automata Job reference : 2026-10416 Town/city : Rennes Inria Team : AT-REN Deadline to apply : 2026-11-07 PhD Position F/M Inverse problems for stochastic models under location uncertainty applied to ocean dynamics Job reference",
       "observed_at": "2026-11-06T07:31:15+00:00",
       "first_seen": "2026-11-06T07:31:15+00:00",
-      "last_seen": "2026-11-06T07:54:59+00:00",
-      "seen_count": 10,
+      "last_seen": "2026-11-06T07:57:18+00:00",
+      "seen_count": 11,
       "source_observations": [
         {
           "provider": "inria",
@@ -246,6 +252,12 @@
         {
           "provider": "inria",
           "at": "2026-11-06T07:54:59+00:00",
+          "deadline": "2026-11-07",
+          "confidence": "official_index"
+        },
+        {
+          "provider": "inria",
+          "at": "2026-11-06T07:57:18+00:00",
           "deadline": "2026-11-07",
           "confidence": "official_index"
         }
@@ -268,8 +280,8 @@
       "snippet": "PhD Position F/M Pretrained models of multimodal neuroimaging for predicting individual cognition Job reference : 2026-10454 Town/city : Palaiseau Inria Team : MIND Deadline to apply : 2026-11-30 Post-Doctoral Research Visit F/M Postdoc - Robust optimisation of bifurcation diagrams for flutter design Job reference",
       "observed_at": "2026-11-06T07:31:15+00:00",
       "first_seen": "2026-11-06T07:31:15+00:00",
-      "last_seen": "2026-11-06T07:54:59+00:00",
-      "seen_count": 10,
+      "last_seen": "2026-11-06T07:57:18+00:00",
+      "seen_count": 11,
       "source_observations": [
         {
           "provider": "inria",
@@ -322,6 +334,12 @@
         {
           "provider": "inria",
           "at": "2026-11-06T07:54:59+00:00",
+          "deadline": "2026-11-30",
+          "confidence": "official_index"
+        },
+        {
+          "provider": "inria",
+          "at": "2026-11-06T07:57:18+00:00",
           "deadline": "2026-11-30",
           "confidence": "official_index"
         }

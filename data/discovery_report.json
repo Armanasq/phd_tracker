@@ -3,10 +3,16 @@
   "new_ids": [],
   "new_count": 0,
   "seen_by_provider": {
+    "academicpositions": 0,
+    "academictransfer": 0,
     "brave": 0,
     "inria": 3
   },
   "source_errors": {
+    "academicpositions": [
+      "HTTPError: HTTP Error 403: Forbidden"
+    ],
+    "academictransfer": [],
     "brave": [
       "BRAVE_SEARCH_API_KEY missing: broad multi-country search disabled"
     ],
@@ -14,6 +20,20 @@
   },
   "total": 6,
   "source_yield": {
+    "academicpositions": {
+      "observed": 0,
+      "new_unique": 0,
+      "reobservations": 0,
+      "unique_yield": null,
+      "health": "degraded"
+    },
+    "academictransfer": {
+      "observed": 0,
+      "new_unique": 0,
+      "reobservations": 0,
+      "unique_yield": null,
+      "health": "degraded"
+    },
     "brave": {
       "observed": 0,
       "new_unique": 0,
