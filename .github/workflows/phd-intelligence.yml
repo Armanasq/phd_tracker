@@ -7,7 +7,6 @@ on:
     paths:
       - .github/workflows/phd-intelligence.yml
       - scripts/**
-      - tests/**
       - requirements-intelligence.txt
   schedule:
     - cron: "23 4 * * *"
