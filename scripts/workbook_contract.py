@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from collections import Counter
 from datetime import date, datetime
 from pathlib import Path
 
@@ -47,22 +48,30 @@ def snapshot(book: Path) -> dict:
         "action_columns": PROTECTED_COLUMNS,
         "action_records": keyed_rows(wb["Action list"], 4, 21, PROTECTED_COLUMNS),
         "timeline_columns": TIMELINE_COLUMNS,
-        "timeline_records": keyed_rows(wb["Step timeline"], 4, 7, TIMELINE_COLUMNS),
+        "timeline_records": [
+            [stable(row[i - 1]) for i in TIMELINE_COLUMNS]
+            for row in wb["Step timeline"].iter_rows(min_row=4, max_col=7, values_only=True)
+            if row[6]
+        ],
     }
 
 
 def verify(reference: dict, current: dict) -> dict:
     problems = []
-    for tab, key in (("Action list", "action_records"), ("Step timeline", "timeline_records")):
-        expected = reference[key]
-        found = current[key]
-        for sid in expected:
-            if sid not in found:
-                problems.append(f"Source ID removed from {tab}: {sid}")
-            elif expected[sid] != found[sid]:
-                idx = next((i for i, (a,b) in enumerate(zip(expected[sid],found[sid])) if a != b), None)
-                col = reference["action_columns"][idx] if tab == "Action list" else reference["timeline_columns"][idx]
-                problems.append(f"Protected cell changed in {tab}: {sid}, column {col}")
+    expected = reference["action_records"]
+    found = current["action_records"]
+    for sid in expected:
+        if sid not in found:
+            problems.append(f"Source ID removed from Action list: {sid}")
+        elif expected[sid] != found[sid]:
+            idx = next((i for i, (a, b) in enumerate(zip(expected[sid], found[sid])) if a != b), None)
+            column = reference["action_columns"][idx]
+            problems.append(f"Protected cell changed in Action list: {sid}, column {column}")
+    before = Counter(json.dumps(row, sort_keys=True, ensure_ascii=False) for row in reference["timeline_records"])
+    after = Counter(json.dumps(row, sort_keys=True, ensure_ascii=False) for row in current["timeline_records"])
+    for key, missing_count in (before - after).items():
+        sid = json.loads(key)[-1]
+        problems.append(f"Timeline step removed or modified: {sid}, occurrences: {missing_count}")
     if problems:
         raise ValueError("Workbook contract violation:\n" + "\n".join(problems[:20]))
     return {
