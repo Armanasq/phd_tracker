@@ -1,12 +1,15 @@
 {
   "run_date": "2026-11-06",
-  "new_ids": [],
-  "new_count": 0,
+  "new_ids": [
+    "inria:2026-10684",
+    "inria:2026-10685"
+  ],
+  "new_count": 2,
   "seen_by_provider": {
     "academicpositions": 0,
     "academictransfer": 0,
     "brave": 0,
-    "inria": 10
+    "inria": 12
   },
   "source_errors": {
     "academicpositions": [
@@ -18,7 +21,7 @@
     ],
     "inria": []
   },
-  "total": 21,
+  "total": 23,
   "source_yield": {
     "academicpositions": {
       "observed": 0,
@@ -42,10 +45,10 @@
       "health": "disabled"
     },
     "inria": {
-      "observed": 10,
-      "new_unique": 0,
+      "observed": 12,
+      "new_unique": 2,
       "reobservations": 10,
-      "unique_yield": 0.0,
+      "unique_yield": 0.1667,
       "health": "ok"
     }
   },

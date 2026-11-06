@@ -182,7 +182,7 @@ The full execution queue preserves original worksheet row numbers and source IDs
 | academicpositions | degraded | 0 | 0 |
 | academictransfer | degraded | 0 | 0 |
 | brave | disabled | 0 | 0 |
-| inria | ok | 10 | 0 |
+| inria | ok | 12 | 2 |
 
 - **Contradictory source observations:** 2 monitor finding(s). A published programme deadline is not proof that an application portal is accepting submissions.
 - **Research records:** 34 scholarly articles indexed separately, not counted as available PhD placements.
@@ -193,7 +193,7 @@ The full execution queue preserves original worksheet row numbers and source IDs
 
 The original *Dropped* and *Not added* tabs retain **6 dropped routes** and **200 researched-but-not-added routes**. They are an evidence base for explaining omissions, not proof that those programmes are permanently unsuitable.
 
-The automated research queue contains 25 rows. Review both university vacancy records and eligibility/funding requirements before promoting a result to the main list. Historical exclusions have **0 possible reappearance warning(s)**, which require manual review rather than automatic rejection.
+The automated research queue contains 27 rows. Review both university vacancy records and eligibility/funding requirements before promoting a result to the main list. Historical exclusions have **0 possible reappearance warning(s)**, which require manual review rather than automatic rejection.
 
 [Source provenance](data/latest_run.json) · [Discovery report](data/discovery_report.json) · [Historical exclusion memory](data/exclusion_memory.json) · [Rejected and unadded decisions](PhD_Action_List.xlsx) · [Detailed methodology](docs/PRODUCT_RFC.md)
 
