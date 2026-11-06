@@ -85,15 +85,9 @@
       "snippet": "PhD Position F/M Enforcing Persistence in Generative World Models for Robotics Job reference : 2026-10570 Town/city : Paris Inria Team : ASTRA Deadline to apply : 2026-11-20 PhD Position F/M Mesh partitioning for high performance solvers on Exascale computing systems Job reference",
       "observed_at": "2026-11-06T07:31:15+00:00",
       "first_seen": "2026-11-06T07:31:15+00:00",
-      "last_seen": "2026-11-06T08:36:36+00:00",
-      "seen_count": 32,
+      "last_seen": "2026-11-06T08:38:17+00:00",
+      "seen_count": 33,
       "source_observations": [
-        {
-          "provider": "inria",
-          "at": "2026-11-06T08:13:06+00:00",
-          "deadline": "2026-11-20",
-          "confidence": "official_index"
-        },
         {
           "provider": "inria",
           "at": "2026-11-06T08:15:08+00:00",
@@ -157,6 +151,12 @@
         {
           "provider": "inria",
           "at": "2026-11-06T08:36:36+00:00",
+          "deadline": "2026-11-20",
+          "confidence": "official_index"
+        },
+        {
+          "provider": "inria",
+          "at": "2026-11-06T08:38:17+00:00",
           "deadline": "2026-11-20",
           "confidence": "official_index"
         }
@@ -181,17 +181,11 @@
       "snippet": "3D remote sensing, LiDAR geometry, change detection, computer vision and large-scale mapping",
       "observed_at": "2026-11-06T12:00:00Z",
       "first_seen": "2026-11-06T12:00:00Z",
-      "last_seen": "2026-11-06T08:36:36+00:00",
-      "seen_count": 19,
+      "last_seen": "2026-11-06T08:38:17+00:00",
+      "seen_count": 20,
       "aliases": [],
       "deadline_change_needs_review": false,
       "source_observations": [
-        {
-          "provider": "inria",
-          "at": "2026-11-06T08:13:06+00:00",
-          "deadline": "2026-11-30",
-          "confidence": "official_index"
-        },
         {
           "provider": "inria",
           "at": "2026-11-06T08:15:08+00:00",
@@ -255,6 +249,12 @@
         {
           "provider": "inria",
           "at": "2026-11-06T08:36:36+00:00",
+          "deadline": "2026-11-30",
+          "confidence": "official_index"
+        },
+        {
+          "provider": "inria",
+          "at": "2026-11-06T08:38:17+00:00",
           "deadline": "2026-11-30",
           "confidence": "official_index"
         }
@@ -474,17 +474,11 @@
       "snippet": "PhD Position F/M Predictable cache memories for Real-Time Embedded Multicore Systems Job reference : 2026-10542 Town/city : Villeneuve d'Ascq Inria Team : SYCOMORES Deadline to apply : 2026-11-30 Post-Doctorant F/H Post-doctorat en sciences sociales - Systèmes Hybrides IA-humains pour la Résistance à la Désinformation Job reference",
       "observed_at": "2026-11-06T08:01:46+00:00",
       "first_seen": "2026-11-06T08:01:46+00:00",
-      "last_seen": "2026-11-06T08:36:36+00:00",
-      "seen_count": 18,
+      "last_seen": "2026-11-06T08:38:17+00:00",
+      "seen_count": 19,
       "aliases": [],
       "deadline_change_needs_review": false,
       "source_observations": [
-        {
-          "provider": "inria",
-          "at": "2026-11-06T08:13:06+00:00",
-          "deadline": "2026-11-30",
-          "confidence": "official_index"
-        },
         {
           "provider": "inria",
           "at": "2026-11-06T08:15:08+00:00",
@@ -548,6 +542,12 @@
         {
           "provider": "inria",
           "at": "2026-11-06T08:36:36+00:00",
+          "deadline": "2026-11-30",
+          "confidence": "official_index"
+        },
+        {
+          "provider": "inria",
+          "at": "2026-11-06T08:38:17+00:00",
           "deadline": "2026-11-30",
           "confidence": "official_index"
         }
@@ -572,17 +572,11 @@
       "snippet": "AI privacy risks in healthcare models and multimodal medical data",
       "observed_at": "2026-11-06T12:00:00Z",
       "first_seen": "2026-11-06T12:00:00Z",
-      "last_seen": "2026-11-06T08:36:36+00:00",
-      "seen_count": 19,
+      "last_seen": "2026-11-06T08:38:17+00:00",
+      "seen_count": 20,
       "aliases": [],
       "deadline_change_needs_review": false,
       "source_observations": [
-        {
-          "provider": "inria",
-          "at": "2026-11-06T08:13:06+00:00",
-          "deadline": "2026-11-20",
-          "confidence": "official_index"
-        },
         {
           "provider": "inria",
           "at": "2026-11-06T08:15:08+00:00",
@@ -646,6 +640,12 @@
         {
           "provider": "inria",
           "at": "2026-11-06T08:36:36+00:00",
+          "deadline": "2026-11-20",
+          "confidence": "official_index"
+        },
+        {
+          "provider": "inria",
+          "at": "2026-11-06T08:38:17+00:00",
           "deadline": "2026-11-20",
           "confidence": "official_index"
         }
@@ -767,17 +767,11 @@
       "snippet": "HPC optimization, mesh graph partitioning and FEniCS collaboration",
       "observed_at": "2026-11-06T12:00:00Z",
       "first_seen": "2026-11-06T12:00:00Z",
-      "last_seen": "2026-11-06T08:36:36+00:00",
-      "seen_count": 19,
+      "last_seen": "2026-11-06T08:38:17+00:00",
+      "seen_count": 20,
       "aliases": [],
       "deadline_change_needs_review": false,
       "source_observations": [
-        {
-          "provider": "inria",
-          "at": "2026-11-06T08:13:06+00:00",
-          "deadline": "2026-11-19",
-          "confidence": "official_index"
-        },
         {
           "provider": "inria",
           "at": "2026-11-06T08:15:08+00:00",
@@ -841,6 +835,12 @@
         {
           "provider": "inria",
           "at": "2026-11-06T08:36:36+00:00",
+          "deadline": "2026-11-19",
+          "confidence": "official_index"
+        },
+        {
+          "provider": "inria",
+          "at": "2026-11-06T08:38:17+00:00",
           "deadline": "2026-11-19",
           "confidence": "official_index"
         }
@@ -863,17 +863,11 @@
       "snippet": "PhD Position F/M Computational Storage and Its Application to Scientific Computing Job reference : 2026-10415 Town/city : Rennes Inria Team : KERDATA Deadline to apply : 2026-11-07 Post-Doctoral Research Visit F/M Postdoc in Foundation Models for Human-Robot Interaction Job reference",
       "observed_at": "2026-11-06T08:01:46+00:00",
       "first_seen": "2026-11-06T08:01:46+00:00",
-      "last_seen": "2026-11-06T08:36:36+00:00",
-      "seen_count": 18,
+      "last_seen": "2026-11-06T08:38:17+00:00",
+      "seen_count": 19,
       "aliases": [],
       "deadline_change_needs_review": false,
       "source_observations": [
-        {
-          "provider": "inria",
-          "at": "2026-11-06T08:13:06+00:00",
-          "deadline": "2026-11-07",
-          "confidence": "official_index"
-        },
         {
           "provider": "inria",
           "at": "2026-11-06T08:15:08+00:00",
@@ -937,6 +931,12 @@
         {
           "provider": "inria",
           "at": "2026-11-06T08:36:36+00:00",
+          "deadline": "2026-11-07",
+          "confidence": "official_index"
+        },
+        {
+          "provider": "inria",
+          "at": "2026-11-06T08:38:17+00:00",
           "deadline": "2026-11-07",
           "confidence": "official_index"
         }
@@ -959,15 +959,9 @@
       "snippet": "PhD Position F/M Trustable Machine Learning : Analysis and Verification of Soft Automata Job reference : 2026-10416 Town/city : Rennes Inria Team : AT-REN Deadline to apply : 2026-11-07 PhD Position F/M Inverse problems for stochastic models under location uncertainty applied to ocean dynamics Job reference",
       "observed_at": "2026-11-06T07:31:15+00:00",
       "first_seen": "2026-11-06T07:31:15+00:00",
-      "last_seen": "2026-11-06T08:36:36+00:00",
-      "seen_count": 32,
+      "last_seen": "2026-11-06T08:38:17+00:00",
+      "seen_count": 33,
       "source_observations": [
-        {
-          "provider": "inria",
-          "at": "2026-11-06T08:13:06+00:00",
-          "deadline": "2026-11-07",
-          "confidence": "official_index"
-        },
         {
           "provider": "inria",
           "at": "2026-11-06T08:15:08+00:00",
@@ -1031,6 +1025,12 @@
         {
           "provider": "inria",
           "at": "2026-11-06T08:36:36+00:00",
+          "deadline": "2026-11-07",
+          "confidence": "official_index"
+        },
+        {
+          "provider": "inria",
+          "at": "2026-11-06T08:38:17+00:00",
           "deadline": "2026-11-07",
           "confidence": "official_index"
         }
@@ -1053,17 +1053,11 @@
       "snippet": "PhD Position F/M Detecting Dangerous Browser Extensions to Protect the Security and Privacy of Web Users Job reference : 2026-10612 Town/city : Sophia Antipolis Inria Team : AT-SOP Deadline to apply : 2026-11-22 Research Engineer F/M – Aligning medical foundation models across histology, spatial transcriptomics and MRI Job reference",
       "observed_at": "2026-11-06T08:01:46+00:00",
       "first_seen": "2026-11-06T08:01:46+00:00",
-      "last_seen": "2026-11-06T08:36:36+00:00",
-      "seen_count": 18,
+      "last_seen": "2026-11-06T08:38:17+00:00",
+      "seen_count": 19,
       "aliases": [],
       "deadline_change_needs_review": false,
       "source_observations": [
-        {
-          "provider": "inria",
-          "at": "2026-11-06T08:13:06+00:00",
-          "deadline": "2026-11-22",
-          "confidence": "official_index"
-        },
         {
           "provider": "inria",
           "at": "2026-11-06T08:15:08+00:00",
@@ -1127,6 +1121,12 @@
         {
           "provider": "inria",
           "at": "2026-11-06T08:36:36+00:00",
+          "deadline": "2026-11-22",
+          "confidence": "official_index"
+        },
+        {
+          "provider": "inria",
+          "at": "2026-11-06T08:38:17+00:00",
           "deadline": "2026-11-22",
           "confidence": "official_index"
         }
@@ -1149,15 +1149,9 @@
       "snippet": "PhD Position F/M Pretrained models of multimodal neuroimaging for predicting individual cognition Job reference : 2026-10454 Town/city : Palaiseau Inria Team : MIND Deadline to apply : 2026-11-30 Post-Doctoral Research Visit F/M Postdoc - Robust optimisation of bifurcation diagrams for flutter design Job reference",
       "observed_at": "2026-11-06T07:31:15+00:00",
       "first_seen": "2026-11-06T07:31:15+00:00",
-      "last_seen": "2026-11-06T08:36:36+00:00",
-      "seen_count": 32,
+      "last_seen": "2026-11-06T08:38:17+00:00",
+      "seen_count": 33,
       "source_observations": [
-        {
-          "provider": "inria",
-          "at": "2026-11-06T08:13:06+00:00",
-          "deadline": "2026-11-30",
-          "confidence": "official_index"
-        },
         {
           "provider": "inria",
           "at": "2026-11-06T08:15:08+00:00",
@@ -1221,6 +1215,12 @@
         {
           "provider": "inria",
           "at": "2026-11-06T08:36:36+00:00",
+          "deadline": "2026-11-30",
+          "confidence": "official_index"
+        },
+        {
+          "provider": "inria",
+          "at": "2026-11-06T08:38:17+00:00",
           "deadline": "2026-11-30",
           "confidence": "official_index"
         }
@@ -1243,17 +1243,11 @@
       "snippet": "PhD Position F/M Making Caches Predictable: Bounded Lifetime Monitoring and Management for Real-Time Systems Job reference : 2026-10584 Town/city : Rennes Inria Team : TARAN Deadline to apply : 2026-12-31 Post-Doctoral Research Visit F/M Model placement in inference delivery networks Job reference",
       "observed_at": "2026-11-06T08:01:46+00:00",
       "first_seen": "2026-11-06T08:01:46+00:00",
-      "last_seen": "2026-11-06T08:36:36+00:00",
-      "seen_count": 18,
+      "last_seen": "2026-11-06T08:38:17+00:00",
+      "seen_count": 19,
       "aliases": [],
       "deadline_change_needs_review": false,
       "source_observations": [
-        {
-          "provider": "inria",
-          "at": "2026-11-06T08:13:06+00:00",
-          "deadline": "2026-12-31",
-          "confidence": "official_index"
-        },
         {
           "provider": "inria",
           "at": "2026-11-06T08:15:08+00:00",
@@ -1317,6 +1311,12 @@
         {
           "provider": "inria",
           "at": "2026-11-06T08:36:36+00:00",
+          "deadline": "2026-12-31",
+          "confidence": "official_index"
+        },
+        {
+          "provider": "inria",
+          "at": "2026-11-06T08:38:17+00:00",
           "deadline": "2026-12-31",
           "confidence": "official_index"
         }
