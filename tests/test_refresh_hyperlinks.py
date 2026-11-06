@@ -30,6 +30,9 @@ def test_sorted_workbook_does_not_inherit_wrong_hyperlinks(tmp_path, monkeypatch
     earlier[6] = "Earlier opportunity without application URL"
     earlier[20] = "EARLIER"
     ws.append(earlier)
+    timeline = wb.create_sheet("Step timeline")
+    for _ in range(3):
+        timeline.append([None] * 7)
     monkeypatch.setattr(refresh, "read_records", lambda *args: [])
     monkeypatch.setattr(refresh, "ROOT", tmp_path)
     refresh.refresh(wb, date(2026, 11, 6), False)
