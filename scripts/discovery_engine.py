@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import ipaddress
 import json
 import os
 import re
@@ -66,6 +67,12 @@ def safe_url(value: str) -> str | None:
         host = p.hostname.lower()
         if host == "localhost" or host.endswith((".local", ".internal")):
             return None
+        try:
+            address = ipaddress.ip_address(host)
+            if not address.is_global:
+                return None
+        except ValueError:
+            pass
         query = urlencode(sorted((k, v) for k, v in parse_qsl(p.query, keep_blank_values=True) if k.lower() not in IGNORE_PARAMS))
         return urlunsplit(("https", host, p.path.rstrip("/") or "/", query, ""))
     except (ValueError, TypeError):
@@ -244,40 +251,82 @@ def aggregate(input_dir: Path, output: Path, report_path: Path) -> dict:
         raise ValueError("No collector artifacts: refusing to publish discovery")
     previous = load_json(output, {"schema_version": 1, "records": []})
     records = {r["id"]: r for r in previous.get("records", [])}
+    by_url = {safe_url(r.get("url", "")): r["id"] for r in records.values() if safe_url(r.get("url", ""))}
     errors: dict[str, list[str]] = {}
     new_ids: list[str] = []
     counts: dict[str, int] = {}
+    aliases: list[dict] = []
     for filename in sources:
         result = json.loads(filename.read_text(encoding="utf-8"))
         provider = result["provider"]
         errors[provider] = result.get("errors", [])
         counts[provider] = len(result["records"])
         for entry in result["records"]:
-            if not safe_url(entry.get("url", "")) or entry["score"] < 2:
+            canonical = safe_url(entry.get("url", ""))
+            if not canonical or entry.get("score", 0) < 2:
                 continue
-            key = entry["id"]
+            entry = {**entry, "url": canonical}
+            incoming_id = entry["id"]
+            key = by_url.get(canonical, incoming_id)
             if key not in records:
                 records[key] = {**entry, "first_seen": entry["observed_at"],
-                                "last_seen": entry["observed_at"], "seen_count": 1}
+                                "last_seen": entry["observed_at"], "seen_count": 1,
+                                "aliases": [], "deadline_change_needs_review": False,
+                                "source_observations": [{
+                                    "provider": provider, "at": entry["observed_at"],
+                                    "deadline": entry.get("deadline"),
+                                    "confidence": entry.get("evidence_status"),
+                                }]}
+                by_url[canonical] = key
                 new_ids.append(key)
-            else:
-                original = records[key]
-                if original["deadline"] != entry["deadline"] and entry["deadline"]:
-                    original["previous_deadline"] = original.get("deadline")
-                    original["deadline_change_needs_review"] = True
-                first = original.get("first_seen", entry["observed_at"])
-                n = original.get("seen_count", 1)
-                original.update({**entry, "first_seen": first, "last_seen": entry["observed_at"],
-                                 "seen_count": n + 1})
+                continue
+            original = records[key]
+            if incoming_id != key:
+                original.setdefault("aliases", [])
+                if incoming_id not in original["aliases"]:
+                    original["aliases"].append(incoming_id)
+                    aliases.append({"canonical_id": key, "alias": incoming_id})
+            recorded = original.get("deadline")
+            proposed = entry.get("deadline")
+            if recorded and proposed and recorded != proposed:
+                original["proposed_deadline"] = proposed
+                original["deadline_change_needs_review"] = True
+            elif not recorded and proposed:
+                original["deadline"] = proposed
+                original["deadline_provenance"] = entry.get("deadline_provenance", "")
+            original["last_seen"] = entry["observed_at"]
+            original["seen_count"] = original.get("seen_count", 1) + 1
+            original["score"] = max(original.get("score", 0), entry.get("score", 0))
+            original.setdefault("source_observations", []).append({
+                "provider": provider, "at": entry["observed_at"],
+                "deadline": proposed, "confidence": entry.get("evidence_status"),
+            })
+            original["source_observations"] = original["source_observations"][-12:]
+            if original.get("evidence_status") == "search_lead_unverified" and entry.get("evidence_status") == "official_index":
+                original.update({"evidence_status": "official_index", "provider": provider,
+                                 "title": entry.get("title", original["title"]),
+                                 "snippet": entry.get("snippet", original.get("snippet", ""))})
     cutoff = date.today().isoformat()
     results = sorted(records.values(), key=lambda r: (-r.get("score", 0), r.get("deadline") or "9999", r["id"]))[:2000]
+    stale = []
+    for item in results:
+        observed = (item.get("last_seen") or "")[:10]
+        try:
+            if (date.today() - date.fromisoformat(observed)).days > 21:
+                stale.append(item["id"])
+        except ValueError:
+            stale.append(item["id"])
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps({"schema_version": 1, "records": results}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    report = {"run_date": cutoff, "new_ids": new_ids, "new_count": len(new_ids),
-              "seen_by_provider": counts, "source_errors": errors, "total": len(results),
-              "actionable_new": [r["id"] for r in results if r["id"] in new_ids and
-                                 r["score"] >= 5 and (not r["deadline"] or r["deadline"] >= cutoff)][:25],
-              "deadline_conflicts": [r["id"] for r in results if r.get("deadline_change_needs_review")]}
+    output.write_text(json.dumps({"schema_version": 2, "records": results}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    report = {
+        "run_date": cutoff, "new_ids": new_ids, "new_count": len(new_ids),
+        "seen_by_provider": counts, "source_errors": errors, "total": len(results),
+        "actionable_new": [r["id"] for r in results if r["id"] in new_ids and
+                           r["score"] >= 5 and (not r["deadline"] or r["deadline"] >= cutoff)][:25],
+        "deadline_conflicts": [r["id"] for r in results if r.get("deadline_change_needs_review")],
+        "stale_observations": stale[:100],
+        "url_aliases": aliases[:100],
+    }
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return report
 
