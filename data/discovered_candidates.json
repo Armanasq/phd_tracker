@@ -2,6 +2,38 @@
   "schema_version": 2,
   "records": [
     {
+      "id": "academictransfer:365008",
+      "title": "TU Delft — PhD Safe Planning and Decision-Making under Uncertainty for Long-Horizon Robot Autonomy",
+      "url": "https://www.academictransfer.com/nl/jobs/365008/phd-position-safe-planning-and-decision-making-under-uncertainty-for-long-horizon-robot-autonomy",
+      "provider": "academictransfer",
+      "lane": "third_party_index",
+      "deadline": "2026-11-15",
+      "deadline_provenance": "AcademicTransfer university-published vacancy page, verified 2026-11-06",
+      "evidence_status": "third_party_listing_unverified",
+      "funding_status": "Doctoral employment and salary advertised; confirm eligibility, funding and job validity with university",
+      "score": 14,
+      "matched_topics": [
+        "robotics",
+        "control",
+        "machine_learning"
+      ],
+      "snippet": "Robot autonomy, probabilistic planning, safe decision making, OPERA",
+      "observed_at": "2026-11-06T13:00:00Z",
+      "first_seen": "2026-11-06T13:00:00Z",
+      "last_seen": "2026-11-06T13:00:00Z",
+      "seen_count": 1,
+      "aliases": [],
+      "deadline_change_needs_review": false,
+      "source_observations": [
+        {
+          "provider": "academictransfer",
+          "at": "2026-11-06T13:00:00Z",
+          "deadline": "2026-11-15",
+          "confidence": "third_party_listing_unverified"
+        }
+      ]
+    },
+    {
       "id": "inria:2026-10570",
       "title": "PhD Position F/M Enforcing Persistence in Generative World Models for Robotics",
       "url": "https://jobs.inria.fr/public/classic/en/offres/2026-10570",
@@ -118,6 +150,102 @@
       ]
     },
     {
+      "id": "academictransfer:365348",
+      "title": "TU Delft — PhD Efficient Online Optimization for Time-Varying Systems",
+      "url": "https://www.academictransfer.com/nl/jobs/365348/phd-position-efficient-online-optimization-for-time-varying-systems/",
+      "provider": "academictransfer",
+      "lane": "third_party_index",
+      "deadline": "2026-11-23",
+      "deadline_provenance": "AcademicTransfer university-published vacancy page, verified 2026-11-06",
+      "evidence_status": "third_party_listing_unverified",
+      "funding_status": "Doctoral employment and salary advertised; confirm eligibility, funding and job validity with university",
+      "score": 11,
+      "matched_topics": [
+        "robotics",
+        "control",
+        "machine_learning"
+      ],
+      "snippet": "Safe adaptive learning control and online optimization",
+      "observed_at": "2026-11-06T13:00:00Z",
+      "first_seen": "2026-11-06T13:00:00Z",
+      "last_seen": "2026-11-06T13:00:00Z",
+      "seen_count": 1,
+      "aliases": [],
+      "deadline_change_needs_review": false,
+      "source_observations": [
+        {
+          "provider": "academictransfer",
+          "at": "2026-11-06T13:00:00Z",
+          "deadline": "2026-11-23",
+          "confidence": "third_party_listing_unverified"
+        }
+      ]
+    },
+    {
+      "id": "academictransfer:364982",
+      "title": "TU Delft — PhD Digital Twins for Flood-Resilient Infrastructure",
+      "url": "https://www.academictransfer.com/nl/jobs/364982/phd-position-in-digital-twins-for-flood-resilient-infrastructure",
+      "provider": "academictransfer",
+      "lane": "third_party_index",
+      "deadline": "2026-11-18",
+      "deadline_provenance": "AcademicTransfer university-published vacancy page, verified 2026-11-06",
+      "evidence_status": "third_party_listing_unverified",
+      "funding_status": "Doctoral employment and salary advertised; confirm eligibility, funding and job validity with university",
+      "score": 8,
+      "matched_topics": [
+        "robotics",
+        "control",
+        "machine_learning"
+      ],
+      "snippet": "Digital twins, data assimilation and machine learning",
+      "observed_at": "2026-11-06T13:00:00Z",
+      "first_seen": "2026-11-06T13:00:00Z",
+      "last_seen": "2026-11-06T13:00:00Z",
+      "seen_count": 1,
+      "aliases": [],
+      "deadline_change_needs_review": false,
+      "source_observations": [
+        {
+          "provider": "academictransfer",
+          "at": "2026-11-06T13:00:00Z",
+          "deadline": "2026-11-18",
+          "confidence": "third_party_listing_unverified"
+        }
+      ]
+    },
+    {
+      "id": "academictransfer:364900",
+      "title": "TU Delft — PhD ML-Based Interpretation of Geophysical Legacy Data",
+      "url": "https://www.academictransfer.com/nl/jobs/364900/phd-position-in-ml-based-interpretation-of-geophysical-legacy-data-for-mineral-exploration/",
+      "provider": "academictransfer",
+      "lane": "third_party_index",
+      "deadline": "2026-11-17",
+      "deadline_provenance": "AcademicTransfer university-published vacancy page, verified 2026-11-06",
+      "evidence_status": "third_party_listing_unverified",
+      "funding_status": "Doctoral employment and salary advertised; confirm eligibility, funding and job validity with university",
+      "score": 8,
+      "matched_topics": [
+        "robotics",
+        "control",
+        "machine_learning"
+      ],
+      "snippet": "ML and geological signal interpretation from seismic data",
+      "observed_at": "2026-11-06T13:00:00Z",
+      "first_seen": "2026-11-06T13:00:00Z",
+      "last_seen": "2026-11-06T13:00:00Z",
+      "seen_count": 1,
+      "aliases": [],
+      "deadline_change_needs_review": false,
+      "source_observations": [
+        {
+          "provider": "academictransfer",
+          "at": "2026-11-06T13:00:00Z",
+          "deadline": "2026-11-17",
+          "confidence": "third_party_listing_unverified"
+        }
+      ]
+    },
+    {
       "id": "inria:2026-10638",
       "title": "Doctorant F/H Évaluation des risques liés aux modèles d’IA en Santé",
       "url": "https://recrutement.inria.fr/public/classic/en/offres/2026-10638",
@@ -150,6 +278,38 @@
       ]
     },
     {
+      "id": "academictransfer:364760",
+      "title": "Leiden University — PhD Machine Learning for Quantum Systems",
+      "url": "https://www.academictransfer.com/nl/jobs/364760",
+      "provider": "academictransfer",
+      "lane": "third_party_index",
+      "deadline": "2026-11-30",
+      "deadline_provenance": "AcademicTransfer university-published vacancy page, verified 2026-11-06",
+      "evidence_status": "third_party_listing_unverified",
+      "funding_status": "Doctoral employment and salary advertised; confirm eligibility, funding and job validity with university",
+      "score": 7,
+      "matched_topics": [
+        "robotics",
+        "control",
+        "machine_learning"
+      ],
+      "snippet": "Interpretable machine learning for quantum systems",
+      "observed_at": "2026-11-06T13:00:00Z",
+      "first_seen": "2026-11-06T13:00:00Z",
+      "last_seen": "2026-11-06T13:00:00Z",
+      "seen_count": 1,
+      "aliases": [],
+      "deadline_change_needs_review": false,
+      "source_observations": [
+        {
+          "provider": "academictransfer",
+          "at": "2026-11-06T13:00:00Z",
+          "deadline": "2026-11-30",
+          "confidence": "third_party_listing_unverified"
+        }
+      ]
+    },
+    {
       "id": "inria:2026-10625",
       "title": "PhD Position F/M Mesh partitioning for high performance solvers on Exascale computing systems",
       "url": "https://recrutement.inria.fr/public/classic/en/offres/2026-10625",
@@ -178,6 +338,38 @@
           "at": "2026-11-06T12:00:00Z",
           "deadline": "2026-11-19",
           "confidence": "official_index"
+        }
+      ]
+    },
+    {
+      "id": "academictransfer:364866",
+      "title": "Maastricht University — PhD Network Modelling for Food Safety and Regulatory Decision-Making",
+      "url": "https://www.academictransfer.com/en/jobs/364866/phd-candidate-in-network-modelling-for-food-safety-and-regulatory-decision-making/",
+      "provider": "academictransfer",
+      "lane": "third_party_index",
+      "deadline": "2026-11-18",
+      "deadline_provenance": "AcademicTransfer university-published vacancy page, verified 2026-11-06",
+      "evidence_status": "third_party_listing_unverified",
+      "funding_status": "Doctoral employment and salary advertised; confirm eligibility, funding and job validity with university",
+      "score": 5,
+      "matched_topics": [
+        "robotics",
+        "control",
+        "machine_learning"
+      ],
+      "snippet": "Network modelling, risk evaluation and scientific data",
+      "observed_at": "2026-11-06T13:00:00Z",
+      "first_seen": "2026-11-06T13:00:00Z",
+      "last_seen": "2026-11-06T13:00:00Z",
+      "seen_count": 1,
+      "aliases": [],
+      "deadline_change_needs_review": false,
+      "source_observations": [
+        {
+          "provider": "academictransfer",
+          "at": "2026-11-06T13:00:00Z",
+          "deadline": "2026-11-18",
+          "confidence": "third_party_listing_unverified"
         }
       ]
     },
