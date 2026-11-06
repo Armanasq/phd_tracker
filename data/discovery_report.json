@@ -1,11 +1,7 @@
 {
   "run_date": "2026-11-06",
-  "new_ids": [
-    "inria:2026-10416",
-    "inria:2026-10570",
-    "inria:2026-10454"
-  ],
-  "new_count": 3,
+  "new_ids": [],
+  "new_count": 0,
   "seen_by_provider": {
     "brave": 0,
     "inria": 3
@@ -17,8 +13,8 @@
     "inria": []
   },
   "total": 3,
-  "actionable_new": [
-    "inria:2026-10570"
-  ],
-  "deadline_conflicts": []
+  "actionable_new": [],
+  "deadline_conflicts": [],
+  "stale_observations": [],
+  "url_aliases": []
 }
