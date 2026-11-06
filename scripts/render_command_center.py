@@ -185,7 +185,7 @@ def dashboard_md(plan, metrics):
 [![Regression & Data Contracts](https://github.com/Armanasq/phd_tracker/actions/workflows/intelligence-ci.yml/badge.svg)](../../actions/workflows/intelligence-ci.yml)
 [![Full Workbook Audit](https://github.com/Armanasq/phd_tracker/actions/workflows/audit-workbook.yml/badge.svg)](../../actions/workflows/audit-workbook.yml)
 
-[**View Excel tracker**](PhD_Action_List.xlsx) · [**Today's complete action plan**](docs/TODAY.md) · [**Private Action Center**](../../issues/1) · [**Run the automation**](../../actions/workflows/phd-intelligence.yml)
+[**View Excel tracker**](PhD_Action_List.xlsx) · [**Today's complete action plan**](docs/TODAY.md) · [**Import calendar reminders**](calendar/phd_deadlines.ics) · [**Private Action Center**](../../issues/1) · [**Run the automation**](../../actions/workflows/phd-intelligence.yml)
 
 </div>
 
@@ -235,6 +235,7 @@ The full execution queue preserves original worksheet row numbers and source IDs
 |:--|:--|:--|
 | **Execution board** | [Workbook](PhD_Action_List.xlsx) | Due tasks separated by source, date, eligibility and status |
 | **Full Task ledger** | [Workbook](PhD_Action_List.xlsx) | Every application deadline and every programme/shared task with provenance |
+| **Calendar reminders** | [Download ICS](calendar/phd_deadlines.ics) | Import all-day reminders for future tasks and deadlines; reimport when the workbook changes |
 | **Deadline and proof obligations** | [Decision frontier](data/portfolio_frontier.json) | Funding/eligibility contradictions and reusable-document dependencies |
 | **Review queue** | [Research queue](data/discovered_candidates.json) | Search leads needing official source confirmation |
 | **Live notifications** | [Private Action Center](../../issues/1) | Reminder history, conflicts and owner controls |
@@ -372,7 +373,7 @@ def todays_md(plan,metrics):
     overdue=plan["overdue_or_unconfirmed"]
     doc=f"""# Execution plan — {day}
 
-[← Repository cockpit](../README.md) · [Tracker workbook](../PhD_Action_List.xlsx) · [Private Action Center](../../issues/1) · [Full machine-readable ledger](../data/execution_plan.json)
+[← Repository cockpit](../README.md) · [Tracker workbook](../PhD_Action_List.xlsx) · [Import task calendar](../calendar/phd_deadlines.ics) · [Private Action Center](../../issues/1) · [Full machine-readable ledger](../data/execution_plan.json)
 
 > **As of {day}, Europe/Berlin.** This plan is generated from original workbook rows. It distinguishes application deadlines from step dates and explicit cross-route tasks. A dated Step timeline task has no recorded completion flag; it is not automatically labelled incomplete.
 
@@ -414,7 +415,7 @@ The following earlier preparation steps are **not** additional November 6 submis
 
 - Verify the actual institutional closing time/time zone in each original posting before submitting.
 - Check whether an application or preparation task was already completed; nothing in the Step timeline proves it remains undone.
-- Preserve the user-maintained statuses in *What I need to do*. No third-party email or scraped vacancy changes them.
+- Preserve the user-maintained statuses in *What I need to do*. No third-party email or scraped vacancy changes them. Calendar events are all-day reminders unless the original source is manually confirmed; this private-repository file is a snapshot, not a continuously updating subscription.
 - MEXT routes may be mutually exclusive. The main workbook records this in the original grouping rule.
 - Review [source contradictions](../data/latest_run.json) and [readiness unknowns](../data/portfolio_frontier.json).
 - For source reconciliation, see [full workbook audit](../data/workbook_audit.json).
