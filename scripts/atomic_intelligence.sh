@@ -13,11 +13,13 @@ for attempt in 1 2 3; do
     --input artifacts/discovery \
     --output data/discovered_candidates.json \
     --report data/discovery_report.json
+  python scripts/research_radar.py merge --input artifacts/research_radar.json
   python scripts/gmail_intake.py
   python scripts/refresh_tracker.py --online
   python scripts/ingest_discovery.py
   python scripts/review_engine.py
   python scripts/portfolio_frontier.py
+  python scripts/radar_workbook.py
   python scripts/validate_tracker.py
   python scripts/notification_engine.py
 
@@ -28,6 +30,8 @@ for attempt in 1 2 3; do
     data/latest_run.json \
     data/decision_queue.json \
     data/portfolio_frontier.json \
+    data/research_radar.json \
+    data/research_radar_report.json \
     data/notification_report.json
   if [ -f data/mail_inbox.json ]; then git add data/mail_inbox.json; fi
   if [ -f data/evidence_events.jsonl ]; then git add data/evidence_events.jsonl; fi
