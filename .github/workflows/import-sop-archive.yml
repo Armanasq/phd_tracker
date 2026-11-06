@@ -58,7 +58,7 @@ jobs:
           - PDF files: $count
           - Source commit: $(cat "$RUNNER_TEMP/sop_source_sha.txt")
           - Year folders: 2017-2026
-          - Source metadata and unresolved records: `SYNC_STATUS.json` and per-year `index.csv`
+          - Source metadata and unresolved records: SYNC_STATUS.json and per-year index.csv
 
           Copyright remains with the original authors. Public source access does not by itself grant redistribution rights.
           EOF
