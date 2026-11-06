@@ -78,7 +78,7 @@ def make_event(task,today):
         "SUMMARY:"+escaped(summary),
         "DESCRIPTION:"+escaped(description),
         "CATEGORIES:"+escaped(label),
-        "STATUS:CONFIRMED",
+        "STATUS:TENTATIVE",
     ]
     uri=task.get("source") or ""
     if uri.startswith("https://") and urlsplit(uri).hostname:
