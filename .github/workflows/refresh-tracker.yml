@@ -35,33 +35,9 @@ jobs:
           python-version: "3.12"
       - name: Install deterministic workbook writer
         run: python -m pip install openpyxl==3.1.5
-      - name: Import new Gmail metadata if OAuth was configured
+      - name: Refresh against current head and publish atomically
         env:
           GMAIL_CLIENT_ID: ${{ secrets.GMAIL_CLIENT_ID }}
           GMAIL_CLIENT_SECRET: ${{ secrets.GMAIL_CLIENT_SECRET }}
           GMAIL_REFRESH_TOKEN: ${{ secrets.GMAIL_REFRESH_TOKEN }}
-        run: python scripts/gmail_intake.py
-      - name: Verify official source anchors and refresh workbook
-        run: python scripts/refresh_tracker.py --online
-      - name: Verify integrity, provenance and deduplication
-        run: python scripts/validate_tracker.py
-      - name: Generate counterevidence and proof-obligation queue
-        run: python scripts/review_engine.py
-      - name: Commit spreadsheet snapshot and safe intake metadata
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add PhD_Action_List.xlsx data/latest_run.json data/decision_queue.json
-          if [ -f data/evidence_events.jsonl ]; then
-            git add data/evidence_events.jsonl
-          fi
-          if [ -f data/mail_inbox.json ]; then
-            git add data/mail_inbox.json
-          fi
-          if ! git diff --cached --quiet; then
-            git commit -m "Refresh PhD application tracker with verified evidence"
-            git pull --rebase origin main
-            git push origin HEAD:main
-          fi
+        run: bash scripts/atomic_refresh.sh
