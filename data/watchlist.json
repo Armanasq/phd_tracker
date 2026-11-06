@@ -30,6 +30,13 @@
       "url": "https://www.epfl.ch/labs/create/create-lab/openings/",
       "anchor": "November 13",
       "expected_deadline": "2026-11-13"
+    },
+    {
+      "id": "N263-09-PORTAL",
+      "url": "https://imprs-is-apply.tue.mpg.de/registration/imprs-is-2026",
+      "anchor": "Application period",
+      "negative_anchor": "The application period has now closed",
+      "expected_deadline": "2026-11-15"
     }
   ]
 }
