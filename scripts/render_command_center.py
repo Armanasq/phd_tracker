@@ -26,6 +26,7 @@ DEEP_NAV = {
     "Research radar": "Related publications only, never misclassified as vacancies",
     "Execution board": "Prioritized view of scheduled submissions and preparation tasks",
     "Task ledger": "Every dated programme task and original worksheet row, not just deadlines",
+    "Exclusion memory": "Historical dropped and not-added evidence; reappearing leads are flagged, never silently rejected",
     "Mail inbox": "Optional read-only Gmail metadata, if OAuth secrets are configured",
 }
 
@@ -156,6 +157,7 @@ def dashboard_md(plan, metrics):
     counts=today["counts"]
     conflict=metrics.get("contradictions",0)
     inventory=plan["inventory"]
+    exclusion=load(ROOT/"data"/"exclusion_memory.json")
     source_rows=[]
     for k,v in sorted(metrics.get("providers",{}).items()):
         source_rows.append(f'| {md(k)} | {md(v.get("health","unknown"))} | {v.get("observed",0)} | {v.get("new_unique",0)} |')
@@ -255,9 +257,9 @@ The full execution queue preserves original worksheet row numbers and source IDs
 
 The original *Dropped* and *Not added* tabs retain **{inventory["dropped_routes"]} dropped routes** and **{inventory["not_added_routes"]} researched-but-not-added routes**. They are an evidence base for explaining omissions, not proof that those programmes are permanently unsuitable.
 
-The automated research queue contains {inventory["research_queue_rows"]} rows. Review both university vacancy records and eligibility/funding requirements before promoting a result to the main list.
+The automated research queue contains {inventory["research_queue_rows"]} rows. Review both university vacancy records and eligibility/funding requirements before promoting a result to the main list. Historical exclusions have **{len(exclusion.get("potential_reappearances", []))} possible reappearance warning(s)**, which require manual review rather than automatic rejection.
 
-[Source provenance](data/latest_run.json) · [Discovery report](data/discovery_report.json) · [Rejected and unadded decisions](PhD_Action_List.xlsx) · [Detailed methodology](docs/PRODUCT_RFC.md)
+[Source provenance](data/latest_run.json) · [Discovery report](data/discovery_report.json) · [Historical exclusion memory](data/exclusion_memory.json) · [Rejected and unadded decisions](PhD_Action_List.xlsx) · [Detailed methodology](docs/PRODUCT_RFC.md)
 
 </details>
 
