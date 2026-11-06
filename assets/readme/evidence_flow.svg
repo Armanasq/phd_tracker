@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-label="EvidenceGraph: research intake, verification, portfolio decision, and execution pipeline with human review boundaries">
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#071322"/><stop offset="1" stop-color="#12253D"/></linearGradient>
+    <linearGradient id="edge"><stop stop-color="#69DBCE"/><stop offset="1" stop-color="#8D9FFF"/></linearGradient>
+    <style>.h{font:700 18px 'Inter','Segoe UI',sans-serif;fill:#EFF6FF}.s{font:400 13px 'Inter','Segoe UI',sans-serif;fill:#A4BAD0}.k{font:700 11px 'Inter','Segoe UI',sans-serif;fill:#70D7C7;letter-spacing:2px}.n{font:700 27px 'Inter','Segoe UI',sans-serif;fill:#E9F4FF}.tag{font:600 12px 'Inter','Segoe UI',sans-serif;fill:#7CDADE}</style>
+  </defs>
+  <rect width="1200" height="520" rx="22" fill="url(#bg)"/>
+  <text x="40" y="49" class="k">EVIDENCEGRAPH / THE DECISION SYSTEM</text>
+  <text x="40" y="92" class="n">From a noisy search result to an auditable next action</text>
+  <text x="40" y="119" class="s">Research signals remain unverified until an official source and the applicant's constraints are checked.</text>
+  <path d="M90 201 H1100" stroke="#345570" stroke-width="3" stroke-dasharray="5 12"/>
+  <g>
+    <rect x="36" y="160" width="268" height="230" rx="16" fill="#132E43" stroke="#2F5468"/>
+    <rect x="55" y="179" width="88" height="24" rx="12" fill="#1B5B61"/>
+    <text x="72" y="196" class="tag">01 / SCAN</text>
+    <text x="55" y="246" class="h">Discover</text>
+    <text x="55" y="281" class="s">Institutional vacancies</text>
+    <text x="55" y="305" class="s">Search and email signals</text>
+    <text x="55" y="329" class="s">Research papers separately</text>
+    <rect x="55" y="351" width="226" height="20" rx="8" fill="#224452"/>
+    <text x="65" y="365" class="tag">SOURCE HEALTH OBSERVED</text>
+  </g>
+  <g>
+    <rect x="323" y="160" width="268" height="230" rx="16" fill="#172A47" stroke="#46577F"/>
+    <rect x="342" y="179" width="93" height="24" rx="12" fill="#303B70"/>
+    <text x="359" y="196" class="tag">02 / PROVE</text>
+    <text x="342" y="246" class="h">Verify</text>
+    <text x="342" y="281" class="s">Deduplicate sources</text>
+    <text x="342" y="305" class="s">Detect deadline conflict</text>
+    <text x="342" y="329" class="s">Separate facts from unknowns</text>
+    <rect x="342" y="351" width="226" height="20" rx="8" fill="#2B3F6B"/>
+    <text x="351" y="365" class="tag">HUMAN EVIDENCE GATE</text>
+  </g>
+  <g>
+    <rect x="610" y="160" width="268" height="230" rx="16" fill="#162D43" stroke="#32686B"/>
+    <rect x="629" y="179" width="102" height="24" rx="12" fill="#1D5D58"/>
+    <text x="646" y="196" class="tag">03 / DECIDE</text>
+    <text x="629" y="246" class="h">Prioritize</text>
+    <text x="629" y="281" class="s">Deadline and task clocks</text>
+    <text x="629" y="305" class="s">Document reuse frontier</text>
+    <text x="629" y="329" class="s">Eligibility proof obligations</text>
+    <rect x="629" y="351" width="226" height="20" rx="8" fill="#224C53"/>
+    <text x="639" y="365" class="tag">UNKNOWN STAYS UNKNOWN</text>
+  </g>
+  <g>
+    <rect x="897" y="160" width="267" height="230" rx="16" fill="#292942" stroke="#72618F"/>
+    <rect x="916" y="179" width="101" height="24" rx="12" fill="#4E3D73"/>
+    <text x="933" y="196" class="tag">04 / EXECUTE</text>
+    <text x="916" y="246" class="h">Act and learn</text>
+    <text x="916" y="281" class="s">Dated application work</text>
+    <text x="916" y="305" class="s">GitHub reminders / controls</text>
+    <text x="916" y="329" class="s">Audit, status and receipts</text>
+    <rect x="916" y="351" width="225" height="20" rx="8" fill="#423A60"/>
+    <text x="926" y="365" class="tag">OWNER CONFIRMS STATUS</text>
+  </g>
+  <path d="M295 276 H315 M305 268 L315 276 L305 284" stroke="url(#edge)" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M582 276 H602 M592 268 L602 276 L592 284" stroke="url(#edge)" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M869 276 H889 M879 268 L889 276 L879 284" stroke="url(#edge)" fill="none" stroke-width="3" stroke-linecap="round"/>
+  <path d="M1031 404 V432 H167 V402" stroke="#4C7C8E" stroke-width="2" fill="none" stroke-dasharray="5 7"/>
+  <text x="600" y="426" class="s" text-anchor="middle">Observed outcomes inform later source quality — no invented acceptance probabilities</text>
+  <rect x="36" y="463" width="1128" height="34" rx="9" fill="#122D40" stroke="#294D61"/>
+  <text x="600" y="485" class="tag" text-anchor="middle">PRIMARY SOURCE  →  AUDITABLE CLAIM  →  EXPLICIT DECISION  →  VERIFIED APPLICATION ACTION</text>
+</svg>
