@@ -26,7 +26,9 @@ def main():
     sid = result["source_id"]
     until = result.get("until")
     summary = f"Recorded /{op} for {sid}."
-    if op == "snooze":
+    if op == "asset":
+        summary = f"Recorded your explicit readiness update: {sid} = {result['new_status']}. The decision frontier was recalculated without changing application submission states."
+    elif op == "snooze":
         summary += f" Noncritical reminders are suppressed through {until}; deadlines within 1 day still notify."
     elif op == "mute":
         summary += " Research leads and noncritical reminders are muted; day-of and day-before alerts are never muted."
