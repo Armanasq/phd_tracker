@@ -63,3 +63,19 @@ def test_deleted_source_id_is_blocked(tmp_path):
     wb.save(file)
     with pytest.raises(ValueError,match="Source ID removed"):
         verify(before,snapshot(file))
+
+
+def test_repeated_source_steps_are_valid_and_protected(tmp_path):
+    wb, file = create_file(tmp_path)
+    wb["Step timeline"].append([
+        "2026-11-21", None, "Inria robotics", "Go",
+        "Ask supervisor for funding", "2026-11-21", "inria:2026-10570",
+    ])
+    wb.save(file)
+    baseline = snapshot(file)
+    assert len(baseline["timeline_records"]) == 2
+    assert verify(baseline, snapshot(file))["preserved_timeline_records"] == 2
+    wb["Step timeline"]["E5"] = "Silently changed"
+    wb.save(file)
+    with pytest.raises(ValueError, match="Timeline step removed or modified"):
+        verify(baseline, snapshot(file))
