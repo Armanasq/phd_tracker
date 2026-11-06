@@ -18,6 +18,8 @@
 </tr>
 </table>
 
+<a href="assets/readme/horizon.svg"><img src="assets/readme/horizon.svg" alt="Deadline distribution vector chart" width="100%" /></a>
+
 <sub>Last rendered: 2026-11-06 · GitHub READMEs do not execute embedded JavaScript; supported interaction is provided through native expandable sections, Mermaid, Issues and Actions.</sub>
 
 ## Command center
