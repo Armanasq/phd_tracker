@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "conventions": "States must be explicitly set by the user. Unknown is never treated as incomplete or complete. Mentions in a job advert do not establish applicant readiness.",
+  "resources": {
+    "academic_cv": {
+      "label": "Academic CV",
+      "status": "unknown",
+      "estimated_hours": null
+    },
+    "research_statement": {
+      "label": "Research statement / SOP",
+      "status": "unknown",
+      "estimated_hours": null
+    },
+    "transcripts": {
+      "label": "Official transcripts",
+      "status": "unknown",
+      "estimated_hours": null
+    },
+    "recommendations": {
+      "label": "Reference letters and referees",
+      "status": "unknown",
+      "estimated_hours": null
+    },
+    "english_proof": {
+      "label": "English proficiency evidence",
+      "status": "unknown",
+      "estimated_hours": null
+    },
+    "research_portfolio": {
+      "label": "Research portfolio and publications",
+      "status": "unknown",
+      "estimated_hours": null
+    }
+  },
+  "hours_available_per_week": null,
+  "valid_statuses": [
+    "unknown",
+    "ready",
+    "in_progress",
+    "not_started",
+    "not_applicable"
+  ],
+  "note": "Edit statuses manually. An external email cannot change these values automatically."
+}
