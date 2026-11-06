@@ -45,8 +45,25 @@ jobs:
           path: artifacts/discovery/${{ matrix.source }}.json
           retention-days: 14
 
+  research_radar:
+    name: Emerging research radar (arXiv, never classified as a vacancy)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Collect latest research publications at arXiv rate limits
+        run: python scripts/research_radar.py crawl --output artifacts/research_radar.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: phd-research-radar
+          path: artifacts/research_radar.json
+          retention-days: 14
+
   reconcile:
-    needs: discover
+    needs: [discover, research_radar]
     runs-on: ubuntu-latest
     timeout-minutes: 22
     permissions:
@@ -66,6 +83,10 @@ jobs:
           pattern: phd-intel-*
           path: artifacts/discovery
           merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: phd-research-radar
+          path: artifacts
       - name: Validate, reconcile from current main, and push
         env:
           GMAIL_CLIENT_ID: ${{ secrets.GMAIL_CLIENT_ID }}
