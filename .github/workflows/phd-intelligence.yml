@@ -2,6 +2,16 @@ name: PhD Intelligence - Discovery, Reconciliation, Notifications
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/phd-intelligence.yml
+      - scripts/discovery_engine.py
+      - scripts/notification_engine.py
+      - scripts/ingest_discovery.py
+      - scripts/atomic_intelligence.sh
+      - scripts/atomic_notify.sh
+      - tests/**
   schedule:
     - cron: "23 4 * * *"
     - cron: "41 15 * * *"
