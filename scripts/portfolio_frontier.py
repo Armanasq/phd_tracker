@@ -46,7 +46,12 @@ def evaluate(wb, assets: dict, today: date, opportunity_records: list[dict], lat
     if any(v.get("status") not in STATUSES for v in resources.values()):
         raise ValueError("Application asset status outside allowed states")
     known = {r["id"]: r for r in opportunity_records}
-    watches = {r["id"]: r.get("status") for r in latest.get("source_statuses", [])}
+    watches = {}
+    for record in latest.get("source_statuses", []):
+        application = record.get("application_id") or record["id"]
+        status = record.get("status")
+        if status == "contradiction_closed_portal" or application not in watches:
+            watches[application] = status
     entries = []
     leverage = defaultdict(lambda: {"mention_count": 0, "within_30_days": 0, "urgency_index": 0.0})
     ws = wb["Action list"]
