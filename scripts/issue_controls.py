@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PREFERENCES = ROOT / "data" / "notification_preferences.json"
 COMMAND = re.compile(r"^/(snooze|unsnooze|mute|unmute|priority|unpriority)\s+([A-Za-z0-9:_-]{1,80})(?:\s+([1-9]|[12][0-9]|30)d)?\s*$", re.I)
+TASK_COMMAND = re.compile(r"^/(done|reopen)\s+(tsk-[a-f0-9]{16})\s*$", re.I)
 ASSET_COMMAND = re.compile(r"^/asset\s+([a-z][a-z0-9_]{2,60})\s+(ready|in_progress|not_started|unknown|not_applicable)\s*$", re.I)
 MARKER = "<!-- phd-intelligence-action-center-v1 -->"
 
@@ -35,7 +36,8 @@ def known_ids(data: Path) -> set[str]:
     return identifiers
 
 
-def parse(event: dict, owner: str, allowed: set[str], today: date, state: dict, asset_keys: set[str] | None = None) -> tuple[dict, dict]:
+def parse(event: dict, owner: str, allowed: set[str], today: date, state: dict, asset_keys: set[str] | None = None,
+          task_keys: set[str] | None = None) -> tuple[dict, dict]:
     comment = event.get("comment") or {}
     issue = event.get("issue") or {}
     comment_id = str(comment.get("id") or "")
@@ -50,7 +52,19 @@ def parse(event: dict, owner: str, allowed: set[str], today: date, state: dict, 
         return state, {**details, "reason": "duplicate"}
     match = COMMAND.fullmatch(str(comment.get("body") or "").strip())
     if not match:
-        asset = ASSET_COMMAND.fullmatch(str(comment.get("body") or "").strip())
+        cmd = str(comment.get("body") or "").strip()
+        task = TASK_COMMAND.fullmatch(cmd)
+        if task:
+            operation, task_id = (x.lower() for x in task.groups())
+            if task_id not in (task_keys or set()):
+                return state, {**details, "reason": "unknown_or_ineligible_task_id"}
+            current = json.loads(json.dumps(state))
+            current["processed_comment_ids"] = list(dict.fromkeys(
+                current.get("processed_comment_ids", []) + [comment_id]))[-3000:]
+            current["updated_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+            return current, {"accepted": True, "operation":"task_"+operation,
+                             "task_id":task_id, "comment_id":comment_id}
+        asset = ASSET_COMMAND.fullmatch(cmd)
         if not asset:
             return state, {**details, "reason": "unsupported_command"}
         resource, new_status = (x.lower() for x in asset.groups())
@@ -90,8 +104,13 @@ def apply(event_path: Path, preferences: Path, output: Path, owner: str, today: 
     state = json.loads(preferences.read_text(encoding="utf-8"))
     assets_path = preferences.parent / "application_assets.json"
     assets = json.loads(assets_path.read_text(encoding="utf-8"))
+    plan_path = preferences.parent / "execution_plan.json"
+    all_tasks = json.loads(plan_path.read_text(encoding="utf-8")).get("all_tasks", []) if plan_path.exists() else []
+    eligible_tasks = {t.get("task_id") for t in all_tasks
+                      if t.get("type") in ("timeline_step","cross_route_task") and t.get("task_id")}
     updated, result = parse(event, owner, known_ids(preferences.parent), today, state,
-                            asset_keys=set(assets.get("resources", {})))
+                            asset_keys=set(assets.get("resources", {})),
+                            task_keys=eligible_tasks)
     if result["accepted"]:
         if result["operation"] == "asset":
             status = result["new_status"]
@@ -99,6 +118,17 @@ def apply(event_path: Path, preferences: Path, output: Path, owner: str, today: 
                 raise ValueError("Invalid resource state")
             assets["resources"][result["source_id"]]["status"] = status
             assets_path.write_text(json.dumps(assets, indent=2) + "\n", encoding="utf-8")
+        if result["operation"] in ("task_done","task_reopen"):
+            task_status = preferences.parent / "task_completion.json"
+            completed = json.loads(task_status.read_text(encoding="utf-8")) if task_status.exists() else {"schema_version":1,"done":{}}
+            if result["operation"] == "task_done":
+                completed.setdefault("done", {})[result["task_id"]] = {
+                    "at":datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                    "comment_id":result["comment_id"],
+                }
+            else:
+                completed.setdefault("done", {}).pop(result["task_id"], None)
+            task_status.write_text(json.dumps(completed, indent=2) + "\n", encoding="utf-8")
         preferences.write_text(json.dumps(updated, indent=2) + "\n", encoding="utf-8")
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
