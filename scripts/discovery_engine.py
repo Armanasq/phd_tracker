@@ -16,7 +16,7 @@ from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 
 ROOT = Path(__file__).resolve().parents[1]
-INRIA_INDEX = "https://jobs.inria.fr/public/classic/en/offres"
+INRIA_INDEX = "https://jobs.inria.fr/public/classic/en/offres?filtre=doctorants"
 BRAVE_ENDPOINT = "https://api.search.brave.com/res/v1/web/search"
 MAX_RESPONSE = 1_500_000
 TOPICS = {
@@ -256,6 +256,8 @@ def aggregate(input_dir: Path, output: Path, report_path: Path) -> dict:
     new_ids: list[str] = []
     counts: dict[str, int] = {}
     aliases: list[dict] = []
+    new_by_provider: dict[str, int] = {}
+    duplicates_by_provider: dict[str, int] = {}
     for filename in sources:
         result = json.loads(filename.read_text(encoding="utf-8"))
         provider = result["provider"]
@@ -279,7 +281,9 @@ def aggregate(input_dir: Path, output: Path, report_path: Path) -> dict:
                                 }]}
                 by_url[canonical] = key
                 new_ids.append(key)
+                new_by_provider[provider] = new_by_provider.get(provider, 0) + 1
                 continue
+            duplicates_by_provider[provider] = duplicates_by_provider.get(provider, 0) + 1
             original = records[key]
             if incoming_id != key:
                 original.setdefault("aliases", [])
@@ -321,6 +325,14 @@ def aggregate(input_dir: Path, output: Path, report_path: Path) -> dict:
     report = {
         "run_date": cutoff, "new_ids": new_ids, "new_count": len(new_ids),
         "seen_by_provider": counts, "source_errors": errors, "total": len(results),
+        "source_yield": {name: {
+            "observed": count,
+            "new_unique": new_by_provider.get(name, 0),
+            "reobservations": duplicates_by_provider.get(name, 0),
+            "unique_yield": round(new_by_provider.get(name, 0) / count, 4) if count else None,
+            "health": "disabled" if count == 0 and any("missing" in e.lower() for e in errors.get(name, []))
+                      else "degraded" if errors.get(name) or count == 0 else "ok",
+        } for name, count in counts.items()},
         "actionable_new": [r["id"] for r in results if r["id"] in new_ids and
                            r["score"] >= 5 and (not r["deadline"] or r["deadline"] >= cutoff)][:25],
         "deadline_conflicts": [r["id"] for r in results if r.get("deadline_change_needs_review")],
