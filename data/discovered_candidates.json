@@ -52,8 +52,8 @@
       "snippet": "PhD Position F/M Enforcing Persistence in Generative World Models for Robotics Job reference : 2026-10570 Town/city : Paris Inria Team : ASTRA Deadline to apply : 2026-11-20 PhD Position F/M Mesh partitioning for high performance solvers on Exascale computing systems Job reference",
       "observed_at": "2026-11-06T07:31:15+00:00",
       "first_seen": "2026-11-06T07:31:15+00:00",
-      "last_seen": "2026-11-06T07:57:18+00:00",
-      "seen_count": 11,
+      "last_seen": "2026-11-06T07:58:29+00:00",
+      "seen_count": 12,
       "source_observations": [
         {
           "provider": "inria",
@@ -112,6 +112,12 @@
         {
           "provider": "inria",
           "at": "2026-11-06T07:57:18+00:00",
+          "deadline": "2026-11-20",
+          "confidence": "official_index"
+        },
+        {
+          "provider": "inria",
+          "at": "2026-11-06T07:58:29+00:00",
           "deadline": "2026-11-20",
           "confidence": "official_index"
         }
@@ -182,38 +188,6 @@
       ]
     },
     {
-      "id": "academictransfer:364982",
-      "title": "TU Delft — PhD Digital Twins for Flood-Resilient Infrastructure",
-      "url": "https://www.academictransfer.com/nl/jobs/364982/phd-position-in-digital-twins-for-flood-resilient-infrastructure",
-      "provider": "academictransfer",
-      "lane": "third_party_index",
-      "deadline": "2026-11-18",
-      "deadline_provenance": "AcademicTransfer university-published vacancy page, verified 2026-11-06",
-      "evidence_status": "third_party_listing_unverified",
-      "funding_status": "Doctoral employment and salary advertised; confirm eligibility, funding and job validity with university",
-      "score": 8,
-      "matched_topics": [
-        "robotics",
-        "control",
-        "machine_learning"
-      ],
-      "snippet": "Digital twins, data assimilation and machine learning",
-      "observed_at": "2026-11-06T13:00:00Z",
-      "first_seen": "2026-11-06T13:00:00Z",
-      "last_seen": "2026-11-06T13:00:00Z",
-      "seen_count": 1,
-      "aliases": [],
-      "deadline_change_needs_review": false,
-      "source_observations": [
-        {
-          "provider": "academictransfer",
-          "at": "2026-11-06T13:00:00Z",
-          "deadline": "2026-11-18",
-          "confidence": "third_party_listing_unverified"
-        }
-      ]
-    },
-    {
       "id": "academictransfer:364900",
       "title": "TU Delft — PhD ML-Based Interpretation of Geophysical Legacy Data",
       "url": "https://www.academictransfer.com/nl/jobs/364900/phd-position-in-ml-based-interpretation-of-geophysical-legacy-data-for-mineral-exploration/",
@@ -241,6 +215,38 @@
           "provider": "academictransfer",
           "at": "2026-11-06T13:00:00Z",
           "deadline": "2026-11-17",
+          "confidence": "third_party_listing_unverified"
+        }
+      ]
+    },
+    {
+      "id": "academictransfer:364982",
+      "title": "TU Delft — PhD Digital Twins for Flood-Resilient Infrastructure",
+      "url": "https://www.academictransfer.com/nl/jobs/364982/phd-position-in-digital-twins-for-flood-resilient-infrastructure",
+      "provider": "academictransfer",
+      "lane": "third_party_index",
+      "deadline": "2026-11-18",
+      "deadline_provenance": "AcademicTransfer university-published vacancy page, verified 2026-11-06",
+      "evidence_status": "third_party_listing_unverified",
+      "funding_status": "Doctoral employment and salary advertised; confirm eligibility, funding and job validity with university",
+      "score": 8,
+      "matched_topics": [
+        "robotics",
+        "control",
+        "machine_learning"
+      ],
+      "snippet": "Digital twins, data assimilation and machine learning",
+      "observed_at": "2026-11-06T13:00:00Z",
+      "first_seen": "2026-11-06T13:00:00Z",
+      "last_seen": "2026-11-06T13:00:00Z",
+      "seen_count": 1,
+      "aliases": [],
+      "deadline_change_needs_review": false,
+      "source_observations": [
+        {
+          "provider": "academictransfer",
+          "at": "2026-11-06T13:00:00Z",
+          "deadline": "2026-11-18",
           "confidence": "third_party_listing_unverified"
         }
       ]
@@ -310,38 +316,6 @@
       ]
     },
     {
-      "id": "inria:2026-10625",
-      "title": "PhD Position F/M Mesh partitioning for high performance solvers on Exascale computing systems",
-      "url": "https://recrutement.inria.fr/public/classic/en/offres/2026-10625",
-      "provider": "inria",
-      "lane": "official_institution",
-      "deadline": "2026-11-19",
-      "deadline_provenance": "Official Inria job listing, manually verified 2026-11-06",
-      "evidence_status": "official_index",
-      "funding_status": "Paid doctoral contract advertised; details and applicant eligibility must be verified",
-      "score": 5,
-      "matched_topics": [
-        "robotics",
-        "medical_ai",
-        "optimization"
-      ],
-      "snippet": "HPC optimization, mesh graph partitioning and FEniCS collaboration",
-      "observed_at": "2026-11-06T12:00:00Z",
-      "first_seen": "2026-11-06T12:00:00Z",
-      "last_seen": "2026-11-06T12:00:00Z",
-      "seen_count": 1,
-      "aliases": [],
-      "deadline_change_needs_review": false,
-      "source_observations": [
-        {
-          "provider": "inria",
-          "at": "2026-11-06T12:00:00Z",
-          "deadline": "2026-11-19",
-          "confidence": "official_index"
-        }
-      ]
-    },
-    {
       "id": "academictransfer:364866",
       "title": "Maastricht University — PhD Network Modelling for Food Safety and Regulatory Decision-Making",
       "url": "https://www.academictransfer.com/en/jobs/364866/phd-candidate-in-network-modelling-for-food-safety-and-regulatory-decision-making/",
@@ -374,6 +348,38 @@
       ]
     },
     {
+      "id": "inria:2026-10625",
+      "title": "PhD Position F/M Mesh partitioning for high performance solvers on Exascale computing systems",
+      "url": "https://recrutement.inria.fr/public/classic/en/offres/2026-10625",
+      "provider": "inria",
+      "lane": "official_institution",
+      "deadline": "2026-11-19",
+      "deadline_provenance": "Official Inria job listing, manually verified 2026-11-06",
+      "evidence_status": "official_index",
+      "funding_status": "Paid doctoral contract advertised; details and applicant eligibility must be verified",
+      "score": 5,
+      "matched_topics": [
+        "robotics",
+        "medical_ai",
+        "optimization"
+      ],
+      "snippet": "HPC optimization, mesh graph partitioning and FEniCS collaboration",
+      "observed_at": "2026-11-06T12:00:00Z",
+      "first_seen": "2026-11-06T12:00:00Z",
+      "last_seen": "2026-11-06T12:00:00Z",
+      "seen_count": 1,
+      "aliases": [],
+      "deadline_change_needs_review": false,
+      "source_observations": [
+        {
+          "provider": "inria",
+          "at": "2026-11-06T12:00:00Z",
+          "deadline": "2026-11-19",
+          "confidence": "official_index"
+        }
+      ]
+    },
+    {
       "id": "inria:2026-10416",
       "title": "PhD Position F/M Trustable Machine Learning : Analysis and Verification of Soft Automata",
       "url": "https://jobs.inria.fr/public/classic/en/offres/2026-10416",
@@ -390,8 +396,8 @@
       "snippet": "PhD Position F/M Trustable Machine Learning : Analysis and Verification of Soft Automata Job reference : 2026-10416 Town/city : Rennes Inria Team : AT-REN Deadline to apply : 2026-11-07 PhD Position F/M Inverse problems for stochastic models under location uncertainty applied to ocean dynamics Job reference",
       "observed_at": "2026-11-06T07:31:15+00:00",
       "first_seen": "2026-11-06T07:31:15+00:00",
-      "last_seen": "2026-11-06T07:57:18+00:00",
-      "seen_count": 11,
+      "last_seen": "2026-11-06T07:58:29+00:00",
+      "seen_count": 12,
       "source_observations": [
         {
           "provider": "inria",
@@ -450,6 +456,12 @@
         {
           "provider": "inria",
           "at": "2026-11-06T07:57:18+00:00",
+          "deadline": "2026-11-07",
+          "confidence": "official_index"
+        },
+        {
+          "provider": "inria",
+          "at": "2026-11-06T07:58:29+00:00",
           "deadline": "2026-11-07",
           "confidence": "official_index"
         }
@@ -472,8 +484,8 @@
       "snippet": "PhD Position F/M Pretrained models of multimodal neuroimaging for predicting individual cognition Job reference : 2026-10454 Town/city : Palaiseau Inria Team : MIND Deadline to apply : 2026-11-30 Post-Doctoral Research Visit F/M Postdoc - Robust optimisation of bifurcation diagrams for flutter design Job reference",
       "observed_at": "2026-11-06T07:31:15+00:00",
       "first_seen": "2026-11-06T07:31:15+00:00",
-      "last_seen": "2026-11-06T07:57:18+00:00",
-      "seen_count": 11,
+      "last_seen": "2026-11-06T07:58:29+00:00",
+      "seen_count": 12,
       "source_observations": [
         {
           "provider": "inria",
@@ -532,6 +544,12 @@
         {
           "provider": "inria",
           "at": "2026-11-06T07:57:18+00:00",
+          "deadline": "2026-11-30",
+          "confidence": "official_index"
+        },
+        {
+          "provider": "inria",
+          "at": "2026-11-06T07:58:29+00:00",
           "deadline": "2026-11-30",
           "confidence": "official_index"
         }
