@@ -21,6 +21,7 @@ for attempt in 1 2 3; do
   python scripts/review_engine.py
   python scripts/portfolio_frontier.py
   python scripts/radar_workbook.py
+  python scripts/full_workbook_planner.py
   python scripts/workbook_contract.py verify
   python scripts/validate_tracker.py
   python scripts/notification_engine.py
@@ -33,6 +34,7 @@ for attempt in 1 2 3; do
     data/latest_run.json \
     data/decision_queue.json \
     data/portfolio_frontier.json \
+    data/execution_plan.json \
     data/research_radar.json \
     data/research_radar_report.json \
     data/notification_report.json
