@@ -44,8 +44,11 @@ Comment directly on the Issue using any of the following commands, replacing the
     /unsnooze inria:2026-10570
     /mute inria:2026-10570
     /unmute inria:2026-10570
+    /asset academic_cv ready
+    /asset research_statement in_progress
+    /asset transcripts unknown
 
-The owner-command parser verifies the issue, actor, source ID and bounded duration before applying changes. Commands cannot edit a submission state or mute deadlines within one day. Successful commands are acknowledged in the Issue.
+The owner-command parser verifies the issue, actor, source ID and bounded duration before applying changes. Asset commands change only readiness states explicitly provided by the owner and recalculate the decision frontier. They do not infer whether an application was submitted. Deadlines within one day cannot be muted or snoozed. Successful commands are committed and acknowledged in the Issue.
 
 ### Optional external integrations
 
