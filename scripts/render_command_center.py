@@ -166,7 +166,7 @@ def dashboard_md(plan, metrics):
         desc=DEEP_NAV.get(name,"Additional workbook content")
         sheet_rows.append(f"| **{md(name)}** | {md(desc,170)} |")
     rejected_today=today["excluded_application_deadlines"]
-    exclusions=("\n".join(f"- **{md(r['name'],110)}** — {md(r['verdict'])}; {md(r['notes'],150)}"
+    exclusions=("\n".join(f"- **{md(r['name'],110)}** — {md(r['verdict'])}; {md(r.get('notes',''),150)}"
                          for r in rejected_today)) or "No exclusions on this date."
     return f"""<div align="center">
 
