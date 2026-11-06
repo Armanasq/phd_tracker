@@ -16,8 +16,9 @@ for attempt in 1 2 3; do
   python scripts/gmail_intake.py
   python scripts/refresh_tracker.py --online
   python scripts/ingest_discovery.py
-  python scripts/validate_tracker.py
   python scripts/review_engine.py
+  python scripts/portfolio_frontier.py
+  python scripts/validate_tracker.py
   python scripts/notification_engine.py
 
   git add PhD_Action_List.xlsx \
@@ -26,6 +27,7 @@ for attempt in 1 2 3; do
     data/ingestion_report.json \
     data/latest_run.json \
     data/decision_queue.json \
+    data/portfolio_frontier.json \
     data/notification_report.json
   if [ -f data/mail_inbox.json ]; then git add data/mail_inbox.json; fi
   if [ -f data/evidence_events.jsonl ]; then git add data/evidence_events.jsonl; fi
