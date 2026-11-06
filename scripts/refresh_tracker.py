@@ -170,9 +170,14 @@ def refresh(wb, today: date, online: bool):
         row[0] = i - 3
         row[3] = f'=IF(ISNUMBER(B{i}),B{i}-$B$1,"")'
         for j, value in enumerate(row, 1):
-            ws.cell(i, j).value = value
+            cell = ws.cell(i, j)
+            cell.hyperlink = None
+            cell.value = value
+            if j in (9, 20) and isinstance(value, str) and value.startswith(("https://", "http://", "mailto:")):
+                cell.hyperlink = value
     for i in range(last + 1, ws.max_row + 1):
         for j in range(1, 22):
+            ws.cell(i, j).hyperlink = None
             ws.cell(i, j).value = None
     if last > 183:
         for i in range(184, last + 1):
