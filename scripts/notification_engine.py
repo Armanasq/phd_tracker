@@ -86,12 +86,16 @@ def evaluate(today: date, workbook: Path, data_dir: Path) -> dict:
             if any(term in all_text for term in triggers):
                 potential_assets.setdefault(document, []).append(days)
     discovered = load(data_dir / "discovered_candidates.json", {"records": []})
-    discovery_report = load(data_dir / "discovery_report.json", {})
-    mapping = {r["id"]: r for r in discovered.get("records", [])}
-    for sid in discovery_report.get("actionable_new", []):
-        hit = mapping.get(sid)
-        if not hit:
+    for hit in discovered.get("records", []):
+        try:
+            age = (today - date.fromisoformat(hit.get("first_seen", "")[:10])).days
+        except ValueError:
             continue
+        if not (0 <= age <= 21) or hit.get("score", 0) < 5:
+            continue
+        if hit.get("deadline") and hit["deadline"] < today.isoformat():
+            continue
+        sid = hit["id"]
         events.append({
             "id": key_event("new_lead", sid, "first-discovery"),
             "kind": "new_lead", "source_id": sid, "name": clean(hit["title"], 150),
@@ -100,11 +104,16 @@ def evaluate(today: date, workbook: Path, data_dir: Path) -> dict:
             "score": hit.get("score", 0),
         })
     radar = load(data_dir / "research_radar.json", {"papers": []})
-    radar_report = load(data_dir / "research_radar_report.json", {})
-    by_paper_id = {p["id"]: p for p in radar.get("papers", [])}
-    new_papers = [by_paper_id[p] for p in radar_report.get("new_ids", []) if p in by_paper_id]
-    new_papers.sort(key=lambda p: (p.get("relevance_score", 0), p.get("published", "")), reverse=True)
-    for paper in new_papers[:4]:
+    papers = []
+    for paper in radar.get("papers", []):
+        try:
+            age = (today - date.fromisoformat(paper.get("first_seen", "")[:10])).days
+        except ValueError:
+            continue
+        if 0 <= age <= 21 and paper.get("relevance_score", 0) >= 7:
+            papers.append(paper)
+    papers.sort(key=lambda p: (p.get("relevance_score", 0), p.get("published", "")), reverse=True)
+    for paper in papers[:30]:
         events.append({
             "id": key_event("paper", paper["id"], "first-observed"),
             "kind": "research_signal", "source_id": paper["id"],
@@ -116,9 +125,10 @@ def evaluate(today: date, workbook: Path, data_dir: Path) -> dict:
         if record.get("status") not in ("contradiction_closed_portal", "review_source_changed"):
             continue
         sid = record["id"]
+        application = record.get("application_id", sid)
         events.append({
             "id": key_event("conflict", sid, record["status"]),
-            "kind": "conflict", "source_id": sid, "name": sid,
+            "kind": "conflict", "source_id": application, "monitor_id": sid, "name": application,
             "source": clean(record.get("source_url"), 300),
             "evidence_status": record["status"],
         })
@@ -133,6 +143,35 @@ def evaluate(today: date, workbook: Path, data_dir: Path) -> dict:
                                x.get("days", 9999), x["source_id"]))
     upcoming.sort(key=lambda x: (x["days"], x["source_id"]))
     return {"as_of": today.isoformat(), "upcoming": upcoming, "assets": assets, "events": events}
+
+
+def apply_policy(events: list[dict], policy: dict, today: date) -> list[dict]:
+    muted = set(policy.get("muted", []))
+    priority = set(policy.get("priority", []))
+    snoozes = policy.get("snoozed_until", {})
+    selected = []
+    for event in events:
+        sid = event["source_id"]
+        critical = event["kind"] == "deadline" and event.get("days", 99) <= 1
+        if not critical:
+            if sid in muted:
+                continue
+            until = snoozes.get(sid)
+            if until:
+                try:
+                    if date.fromisoformat(until) >= today:
+                        continue
+                except ValueError:
+                    raise ValueError("Invalid snooze date for " + sid)
+        selected.append(event)
+    selected.sort(key=lambda x: (
+        0 if x["kind"] == "conflict" else 1,
+        0 if x["source_id"] in priority else 1,
+        0 if x["kind"] == "deadline" else 1 if x["kind"] == "new_lead" else 2,
+        x.get("days", 9999),
+        x["source_id"],
+    ))
+    return selected
 
 
 def outstanding(events: list[dict], state: dict, channel: str, limit: int = 30) -> list[dict]:
@@ -266,8 +305,10 @@ def run(today: date, send: bool, root: Path = ROOT) -> dict:
     state = load(state_path, {"version": 1, "github": [], "apprise": []})
     for key in ("github", "apprise"):
         state.setdefault(key, [])
-    github_pending = outstanding(evaluated["events"], state, "github")
-    apprise_pending = outstanding(evaluated["events"], state, "apprise")
+    policy = load(root / "data" / "notification_preferences.json", {})
+    active = apply_policy(evaluated["events"], policy, today)
+    github_pending = outstanding(active, state, "github")
+    apprise_pending = outstanding(active, state, "apprise")
     delivery = {"github": "not_requested", "apprise": "not_configured"}
     if send:
         github_issue(evaluated, github_pending)
@@ -280,6 +321,7 @@ def run(today: date, send: bool, root: Path = ROOT) -> dict:
                 state["apprise"] = list(dict.fromkeys(state["apprise"] + [x["id"] for x in apprise_pending]))[-4000:]
     report = {
         "as_of": today.isoformat(), "reminder_candidates": len(evaluated["events"]),
+        "suppressed_by_user_policy": len(evaluated["events"]) - len(active),
         "github_new_events": len(github_pending), "apprise_new_events": len(apprise_pending),
         "upcoming_count": len(evaluated["upcoming"]), "potential_document_leverage": evaluated["assets"],
         "delivery": delivery,
