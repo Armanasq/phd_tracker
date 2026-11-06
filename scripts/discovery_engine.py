@@ -236,10 +236,10 @@ def collect(provider: str, output: Path, state: Path) -> dict:
             records = collect_inria(observed)
         elif provider == "brave":
             records, warning = collect_brave(observed, state)
-        elif provider in ("academictransfer", "academicpositions"):
-            records = collect_board(provider, observed, fetch_bytes, safe_url, relevant_score, evidence_id)
             if warning:
                 errors.append(warning)
+        elif provider in ("academictransfer", "academicpositions"):
+            records = collect_board(provider, observed, fetch_bytes, safe_url, relevant_score, evidence_id)
         else:
             raise ValueError(f"Unknown provider: {provider}")
     except (ValueError, URLError, HTTPError, OSError, json.JSONDecodeError) as e:
