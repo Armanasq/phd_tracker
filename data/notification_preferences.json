@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "snoozed_until": {},
+  "muted": [],
+  "priority": [],
+  "processed_comment_ids": [],
+  "rules": {
+    "critical_deadline_bypasses_snooze_days": 1,
+    "noncritical_snooze_max_days": 30,
+    "private_github_issue_only": true
+  },
+  "updated_at": null
+}
