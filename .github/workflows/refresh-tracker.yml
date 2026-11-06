@@ -60,5 +60,6 @@ jobs:
           fi
           if ! git diff --cached --quiet; then
             git commit -m "Refresh PhD application tracker with verified evidence"
+            git pull --rebase origin main
             git push origin HEAD:main
           fi
