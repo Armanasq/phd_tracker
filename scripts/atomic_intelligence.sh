@@ -18,6 +18,7 @@ for attempt in 1 2 3; do
   python scripts/gmail_intake.py
   python scripts/refresh_tracker.py --online
   python scripts/ingest_discovery.py
+  python scripts/exclusion_memory.py
   python scripts/review_engine.py
   python scripts/portfolio_frontier.py
   python scripts/radar_workbook.py
@@ -36,6 +37,7 @@ for attempt in 1 2 3; do
     data/decision_queue.json \
     data/portfolio_frontier.json \
     data/execution_plan.json \
+    data/exclusion_memory.json \
     data/research_radar.json \
     data/research_radar_report.json \
     data/notification_report.json
