@@ -20,7 +20,7 @@
 
 | Priority | Immediate route | Outcome |
 |:--|:--|:--|
-| **Submit / verify** | [Open today’s 2 application deadline(s)](docs/TODAY.md#A-application-submission-deadlines-today-2) | Prevent missing a final deadline; confirm portal status and submission receipts |
+| **Submit / verify** | [Open today’s 2 application deadline(s)](docs/TODAY.md) | Prevent missing a final deadline; confirm portal status and submission receipts |
 | **Plan the workload** | [Today's execution plan](docs/TODAY.md) | Separate actual application deadlines from supporting steps and shared tasks |
 | **Resolve uncertainty** | [Review proof obligations](data/portfolio_frontier.json) | Identify funding restrictions, portal contradictions, and missing evidence |
 | **Explore opportunities** | [Discovery inbox](data/discovered_candidates.json) | Evaluate new leads before any promotion into the application list |
@@ -30,7 +30,7 @@
 
 | Time critical | Source assurance | Applicant decisions | Research horizon |
 |:--|:--|:--|:--|
-| **4** deadline(s) in ≤3 days; **6** in the next 7 days | **1/4** active providers reporting healthy; **3** degraded/disabled | **21** dated steps today; **97** older steps with *completion unknown* | **0** indexed papers, research signals only |
+| **4** deadline(s) in ≤3 days; **6** in the next 7 days | **1/4** active providers reporting healthy; **3** degraded/disabled | **21** dated steps today; **97** older steps with *completion unknown* | **34** indexed papers, research signals only |
 | [Review every dated task](docs/TODAY.md) | [Source diagnostics](data/discovery_report.json) | [Confirm task status](../../issues/1) | [Research radar](data/research_radar.json) |
 
 **Source consistency:** 6 observations across 6 configured monitors; 4 matched expected anchors and 2 require review. **Degraded sources:** academicpositions, academictransfer, brave.
@@ -130,7 +130,7 @@ The full execution queue preserves original worksheet row numbers and source IDs
 | inria | ok | 10 | 0 |
 
 - **Contradictory source observations:** 2 monitor finding(s). A published programme deadline is not proof that an application portal is accepting submissions.
-- **Research records:** 0 scholarly articles indexed separately, not counted as available PhD placements.
+- **Research records:** 34 scholarly articles indexed separately, not counted as available PhD placements.
 - **Discovery scope:** without configured Brave credentials, international web search is **disabled**. A healthy workflow cannot imply exhaustive worldwide coverage.
 
 <details>
