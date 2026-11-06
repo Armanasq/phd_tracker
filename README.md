@@ -1,47 +1,84 @@
-# EvidenceGraph — PhD Application Tracker
+# EvidenceGraph — PhD Application Intelligence
 
-Private, provenance-aware tracker for funded doctoral opportunities, application deadlines, funding eligibility, evidence conflicts and reviewable Gmail signals.
+Private evidence-first application tracker with independent academic discovery, research-context signals, controlled workbook updates, deadline reminders, contradiction monitoring, and an interactive GitHub Action Center.
 
-## Current dataset
+**Authoritative editable artifact:** [PhD_Action_List.xlsx](PhD_Action_List.xlsx). The original [Google Sheet](https://docs.google.com/spreadsheets/d/1mbdVt1Acg_-a6wzQE4c9Vr1S2JAMzcD3zWnuaHpY5vk/edit) is not automatically overwritten.
 
-- [Excel workbook](PhD_Action_List.xlsx), including the original six tabs and four new operational tabs: **Research queue**, **Mail signals**, **Evidence ledger**, **Source watch**.
-- [Curated opportunities and evidence](data/opportunities.json) — 3 official-source-backed entries promoted to the deadline-ordered action list, 5 leads kept in review.
-- [Gmail findings](data/mail_signals.json) — condensed status evidence from this user's authorized Gmail search; no raw email bodies.
-- [Primary source monitors](data/watchlist.json) and [latest run report](data/latest_run.json) (created after the automated refresh).
-- [Architecture, research, threat model and roadmap](docs/ARCHITECTURE.md).
+## Live system
 
-## Automation
+| Module | Implemented operation | Evidence |
+|---|---|---|
+| Vacancy discovery | Parallel institutional Inria doctoral-listing scan, optional broad Brave search | [Discovery state](data/discovered_candidates.json) |
+| Research radar | Keyless arXiv Atom searches; publications never identified as open jobs | [Research papers](data/research_radar.json) |
+| Source intelligence | Canonical URL dedupe, claim history, source yield, inaccessible source warnings | [Source health](data/discovery_report.json) |
+| Application tracking | Excel application list, deadlines, original tabs and human-owned statuses | [Workbook](PhD_Action_List.xlsx) |
+| Decision frontier | Shared document leverage, unconfirmed readiness and source evidence debt | [Decision frontier](data/portfolio_frontier.json) |
+| Deadline service | 30/14/7/3/1/0-day milestones and persistent deduplication | [Delivery ledger](data/notification_state.json) |
+| Human controls | Owner-only priority, snooze, mute and unsnooze via a private GitHub Issue | [Issue controls](.github/workflows/issue-controls.yml) |
+| Delivery | Private assigned GitHub Issue and optional multi-channel Apprise | [Action Center](../../issues/1) |
+| Safety | Protected-cell workbook snapshot, regression tests and atomic push retries | [CI](.github/workflows/intelligence-ci.yml) |
 
-[Daily evidence-first GitHub Action](.github/workflows/refresh-tracker.yml) runs at **05:17 UTC**, or manually from Actions. It:
+### Operating schedule
 
-1. Optionally reads recently arrived Gmail *metadata* through a separately configured OAuth client.
-2. Checks a strictly allowlisted set of official source URLs with four bounded workers.
-3. Updates only corroborated opportunities in the main action list; sends uncertain leads to review.
-4. Refreshes the as-of date and deadline formulas without changing user submission statuses.
-5. Detects source-state transitions, preserves provenance, validates, and commits changes.
+[Main GitHub Action](.github/workflows/phd-intelligence.yml): **04:23 and 15:41 UTC** every day, or manually from the Actions tab.
 
-Use **Actions → Evidence-first PhD tracker refresh → Run workflow** for an immediate run.
+It uses separate parallel collectors, downloads their structured run artifacts, reconciles the current Git workbook, checks all original user-owned cells, updates the workbook, computes the resource and notification frontier, and publishes. Notifications are delivered only after successful reconciliation.
 
-To run locally:
+[Read the product RFC](docs/PRODUCT_RFC.md) and [technical architecture](docs/ARCHITECTURE.md).
 
-```bash
-python -m pip install openpyxl==3.1.5
-python scripts/refresh_tracker.py --date 2026-11-06 --online
-python scripts/validate_tracker.py
-```
+## Excel worksheets
 
-Optional Gmail secrets: `GMAIL_CLIENT_ID`, `GMAIL_CLIENT_SECRET`, `GMAIL_REFRESH_TOKEN`, created for an OAuth client authorized with the `gmail.readonly` scope. Without those secrets, the workflow still monitors official sources and refreshes the tracker. Email intake stores **IDs, dates, subjects and review links only**, never message bodies. The initial five reviewed Gmail signals were imported manually.
+The original six tabs are preserved: Read me, Action list, Step timeline, What I need to do, Dropped and Not added. The automation adds Research queue, Mail signals, Evidence ledger, Source watch, Decision frontier and Research radar, plus Mail inbox only if Gmail intake has been configured.
 
-## Integrity controls
+New search results are **not automatically promoted** into the main Action list. The Research queue requires manual verification of the live primary source, eligibility, funding, degree requirements and deadline before promotion.
 
-- An email advertisement is **not** proof of an open, internationally funded vacancy.
-- The site monitor records `anchor_present` or `review_source_changed`; it does **not** infer eligibility.
-- Personal applicant actions and submission states are never changed without confirmation.
-- The original [Google Sheet](https://docs.google.com/spreadsheets/d/1mbdVt1Acg_-a6wzQE4c9Vr1S2JAMzcD3zWnuaHpY5vk/edit) remains unchanged. GitHub contains the updated workbook snapshot.
-- Application decisions require human review. AI-generated application materials must respect each university's policies.
+## Reminders and controls
 
-## Product direction
+[Open the private Action Center](../../issues/1). It is assigned to the repository owner and includes upcoming deadlines, document-preparation leverage, evidence contradictions, fresh research leads and disabled search coverage.
 
-**Temporal EvidenceGraph**: a verifiable network of deadlines, funding rules, eligibility constraints, supervisor research interests and application dependencies. The candidate's next action is optimized for evidence and deadline constraints—not merely keyword rank. This is a product hypothesis, not an unverified claim of global novelty or future valuation.
+Comment directly on the Issue using any of the following commands, replacing the sample application ID:
 
-[Detailed design and comparable open-source research](docs/ARCHITECTURE.md).
+    /priority inria:2026-10570
+    /unpriority inria:2026-10570
+    /snooze inria:2026-10570 3d
+    /unsnooze inria:2026-10570
+    /mute inria:2026-10570
+    /unmute inria:2026-10570
+
+The owner-command parser verifies the issue, actor, source ID and bounded duration before applying changes. Commands cannot edit a submission state or mute deadlines within one day. Successful commands are acknowledged in the Issue.
+
+### Optional external integrations
+
+Repository Settings → Secrets and variables → Actions:
+
+- BRAVE_SEARCH_API_KEY — broad multi-country web search. **Not configured** means this coverage is disabled and explicitly reported.
+- GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN — a user-authorized read-only Gmail OAuth client. Only message IDs, subjects, dates and links are persisted. Gmail is not accessible to GitHub Actions simply because ChatGPT has access to a Gmail connector.
+- APPRISE_URLS — optional newline-separated Apprise destination URLs (Telegram, Discord, email, etc.). Keep these private; the workflow never prints destinations. No external notifications are sent without this secret.
+- GITHUB_TOKEN — automatically provisioned by GitHub Actions; do not create a separate personal access token.
+
+No application is submitted or private email sent without the user's explicit action.
+
+## Local verification
+
+    python -m pip install -r requirements-intelligence.txt
+    python -m pytest tests -q
+    python scripts/workbook_contract.py snapshot
+    python scripts/refresh_tracker.py --online
+    python scripts/ingest_discovery.py
+    python scripts/portfolio_frontier.py
+    python scripts/workbook_contract.py verify
+    python scripts/validate_tracker.py
+
+Running mutating steps on a working branch is recommended. The scheduled workflow carries out these steps against the latest branch head and commits verified outputs.
+
+## Design limitations and responsibility
+
+- A published institutional deadline and a functioning application portal can disagree; both claims remain visible.
+- A paper matching your research interests is **not** an advertised or funded PhD opportunity.
+- A search provider with no credentials is marked disabled; search breadth must not be overstated.
+- Source content is treated as untrusted data, not program instructions.
+- Eligibility, nationality-based funding, degree equivalence and submission receipts always require authoritative confirmation.
+- Schedule timing is best-effort; GitHub Actions is not a guaranteed real-time notification infrastructure.
+- Product novelty and commercial outcomes must be demonstrated by evaluation rather than claimed without evidence.
+
+The definitive architecture, evaluation criteria and commercialization experiments are documented in [PRODUCT_RFC.md](docs/PRODUCT_RFC.md).
