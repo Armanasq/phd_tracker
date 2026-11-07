@@ -48,6 +48,10 @@ jobs:
           test -s data/experience_view.json
           test -s data/experience_lineage.jsonld
           test -s assets/readme/isometric_calendar.svg
+          test -s data/readme_opportunities.geojson
+          test -s docs/diagrams/pipeline.mmd
+          test -s docs/diagrams/deadlines.mmd
+          test -s assets/readme/deadline_skyline.stl
       - name: Validate dashboard JavaScript syntax
         run: |
           python - <<'PY'
