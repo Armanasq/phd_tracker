@@ -1,0 +1,13 @@
+stateDiagram-v2
+    [*] --> Discovered
+    Discovered --> EvidenceReview: Lead indexed
+    EvidenceReview --> Recheck: Source conflicted
+    Recheck --> EvidenceReview: New observation
+    EvidenceReview --> Shortlisted: Evidence sufficient
+    EvidenceReview --> Excluded: Ineligible or duplicate
+    Shortlisted --> Preparation: Owner selects
+    Preparation --> SubmissionReview: Documents collected
+    SubmissionReview --> Submitted: Owner confirms receipt
+    SubmissionReview --> Preparation: Additional requirements
+    Submitted --> [*]
+    Excluded --> [*]

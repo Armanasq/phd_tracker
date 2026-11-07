@@ -1,0 +1,257 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Germany: 4 application records",
+        "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+        "count": 4,
+        "sample_source_ids": "N263-03, N263-09, N263-07",
+        "marker-color": "#9f61e8",
+        "marker-size": "medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.405,
+          52.52
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "United Kingdom: 18 application records",
+        "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+        "count": 18,
+        "sample_source_ids": "N263-05, N263-06, M17",
+        "marker-color": "#19b5b6",
+        "marker-size": "large"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -0.1276,
+          51.5072
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Netherlands: 8 application records",
+        "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+        "count": 8,
+        "sample_source_ids": "N263-10, N263-08, N264-03",
+        "marker-color": "#19b5b6",
+        "marker-size": "large"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.9041,
+          52.3676
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Switzerland: 9 application records",
+        "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+        "count": 9,
+        "sample_source_ids": "C06, M23, M24",
+        "marker-color": "#19b5b6",
+        "marker-size": "large"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.4474,
+          46.948
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Norway: 6 application records",
+        "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+        "count": 6,
+        "sample_source_ids": "M19, M20, M21",
+        "marker-color": "#9f61e8",
+        "marker-size": "medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.7522,
+          59.9139
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Sweden: 2 application records",
+        "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+        "count": 2,
+        "sample_source_ids": "N264-07, N264-09",
+        "marker-color": "#4384ff",
+        "marker-size": "medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.0632,
+          59.3346
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Denmark: 2 application records",
+        "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+        "count": 2,
+        "sample_source_ids": "N263-04, N264-08",
+        "marker-color": "#4384ff",
+        "marker-size": "medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.5683,
+          55.6761
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Japan: 6 application records",
+        "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+        "count": 6,
+        "sample_source_ids": "M18, M15, C15-NAGOYA",
+        "marker-color": "#9f61e8",
+        "marker-size": "medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          139.6917,
+          35.6895
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Italy: 2 application records",
+        "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+        "count": 2,
+        "sample_source_ids": "N264-05, N264-04",
+        "marker-color": "#4384ff",
+        "marker-size": "medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.4964,
+          41.9028
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Cyprus: 1 application records",
+        "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+        "count": 1,
+        "sample_source_ids": "R26-UCY-SKEYES",
+        "marker-color": "#4384ff",
+        "marker-size": "medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.3823,
+          35.1856
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Luxembourg: 1 application records",
+        "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+        "count": 1,
+        "sample_source_ids": "M26",
+        "marker-color": "#4384ff",
+        "marker-size": "medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.1319,
+          49.6116
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "United States: 1 application records",
+        "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+        "count": 1,
+        "sample_source_ids": "R26-GWU-EPIC",
+        "marker-color": "#4384ff",
+        "marker-size": "medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.0369,
+          38.9072
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Canada: 8 application records",
+        "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+        "count": 8,
+        "sample_source_ids": "M33, M31, M34",
+        "marker-color": "#19b5b6",
+        "marker-size": "large"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.6972,
+          45.4215
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Australia: 1 application records",
+        "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+        "count": 1,
+        "sample_source_ids": "M43a",
+        "marker-color": "#4384ff",
+        "marker-size": "medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          149.13,
+          -35.2809
+        ]
+      }
+    }
+  ]
+}

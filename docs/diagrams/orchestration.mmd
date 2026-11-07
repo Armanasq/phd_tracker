@@ -1,0 +1,14 @@
+sequenceDiagram
+    actor Owner
+    participant Action as GitHub Actions
+    participant Discovery as Discovery providers
+    participant Evidence as Evidence validators
+    participant Store as Workbook and ledger
+    Owner->>Action: Run discovery and reconciliation
+    Action->>Discovery: Fetch institution listings
+    Discovery-->>Action: Records plus provider failures
+    Action->>Evidence: Resolve IDs and contradictions
+    Evidence-->>Action: Supported claims and unknowns
+    Action->>Store: Reconcile observations
+    Store-->>Owner: Decision frontier and dated agenda
+    Owner->>Store: Confirm applicant actions explicitly

@@ -1,5 +1,352 @@
 <div align="center">
 
+# PhD Tracker · EvidenceGraph
+
+**AI-powered research discovery, source verification, application planning, and reproducible execution.**
+
+<a href="../../actions/workflows/experience-lab.yml"><img src="assets/readme/kinetic_cover.svg" alt="EvidenceGraph: source-derived research intelligence orbital cover" width="100%"/></a>
+
+[**DISCOVER**](#research--application-pipeline) · [**VERIFY**](#opportunity-funnel--actual-deadline-horizons) · [**ANALYZE**](#research-focus-quadrant) · [**PLAN**](#deadline-gantt--application-milestones) · [**SIMULATE**](#interactive-exploration--simulation-lab) · [**EXECUTE**](#github-native-workflow-console)
+
+<sub>Observed 2026-11-07 · Metrics are derived from source snapshots, not example values or inferred admissions outcomes.</sub>
+
+</div>
+
+<table><tr>
+<td align="center" width="16%"><b>OPPORTUNITIES</b><h2>100</h2><sub>dated frontier</sub></td>
+<td align="center" width="16%"><b>UPCOMING</b><h2>6</h2><sub>next seven days</sub></td>
+<td align="center" width="16%"><b>PROOF STATES</b><h2>319</h2><sub>unknown document mentions</sub></td>
+<td align="center" width="16%"><b>RESEARCH</b><h2>34</h2><sub>indexed papers</sub></td>
+<td align="center" width="16%"><b>SOURCES</b><h2>1/4</h2><sub>healthy providers</sub></td>
+<td align="center" width="16%"><b>CONTRADICTIONS</b><h2>1</h2><sub>source review flags</sub></td>
+</tr></table>
+
+[**Overview**](#research--application-pipeline) · [**Pipeline**](#research--application-pipeline) · [**Opportunity Map**](#global-opportunities--interactive-github-map) · [**Timeline**](#deadline-gantt--application-milestones) · [**Knowledge Graph**](#research--application-knowledge-graph) · [**Applications**](#upcoming-application-records) · [**Simulation Lab**](#interactive-exploration--simulation-lab) · [**Workflows**](#github-native-workflow-console)
+
+---
+
+## Research & application pipeline
+
+The diagram below is **native Mermaid**. GitHub renders it as a diagram, not as an SVG screenshot.
+
+```mermaid
+flowchart LR
+    A["Discovery sources · 4 monitored"] --> B["Ingest & deduplicate"]
+    B --> C{"Evidence verification"}
+    C -->|"Source verified"| D["Application frontier · 100"]
+    C -->|"Unresolved source"| E["Evidence review · 1 conflicts"]
+    E --> C
+    D --> F["Deadline & proof planning"]
+    F --> G["Owner confirmation"]
+    G --> H["Execution ledger"]
+    classDef source fill:#172b51,color:#e8f4ff,stroke:#49b8ff,stroke-width:2px
+    classDef verified fill:#103c3b,color:#d7fff4,stroke:#51dcb4,stroke-width:2px
+    classDef attention fill:#46263a,color:#fff0f3,stroke:#f58bb7,stroke-width:2px
+    class A,B source
+    class D,F,G,H verified
+    class E attention
+```
+
+## Opportunity funnel · actual deadline horizons
+
+This Sankey partitions the 100 dated portfolio records by their remaining calendar horizon; it does not imply historical conversion between recruitment stages.
+
+```mermaid
+sankey-beta
+Recorded frontier,0-7 days,6
+Recorded frontier,8-14 days,20
+Recorded frontier,15-30 days,26
+Recorded frontier,31-60 days,25
+Recorded frontier,61+ days,23
+```
+
+<details>
+<summary><b>Show the source-provider verification mix</b></summary>
+
+| Provider | Recorded health | Observed leads | New unique leads |
+|:--|:--|--:|--:|
+| academicpositions | degraded | 0 | 0 |
+| academictransfer | degraded | 0 | 0 |
+| brave | disabled | 0 | 0 |
+| inria | ok | 12 | 0 |
+
+Provider health is not an estimate of search completeness. 3 channels are degraded or disabled.
+
+</details>
+
+## Deadline Gantt · application milestones
+
+```mermaid
+gantt
+    title Recorded PhD deadlines - snapshot 2026-11-07
+    dateFormat YYYY-MM-DD
+    axisFormat %b %d
+    section Final application deadlines
+    N263-03 Karlsruhe Institute of Technology KIT MRT :milestone, d0, 2026-11-08, 0d
+    N263-04 University of Copenhagen CoAStaL PhD Cult :milestone, d1, 2026-11-08, 0d
+    N263-05 UCL Gatsby Computational Neuroscience Uni :milestone, d2, 2026-11-09, 0d
+    N263-06 UCL Sainsbury Wellcome Centre fully funde :milestone, d3, 2026-11-09, 0d
+    C06 Swiss Government Excellence Scholarship resea :milestone, d4, 2026-11-10, 0d
+    M07a Southampton MSCA BlueOcean PhD Studentship a :milestone, d5, 2026-11-13, 0d
+    M15 OIST Graduate School PhD May or Sep 2027 entr :milestone, d6, 2026-11-15, 0d
+    M17 Northeastern University London PhD studentshi :milestone, d7, 2026-11-15, 0d
+    M18 Institute of Science Tokyo International Grad :milestone, d8, 2026-11-15, 0d
+    N263-07 TUM Autonomous Vehicle Systems Johannes B :milestone, d9, 2026-11-15, 0d
+    N263-08 TU Delft OPERA EU Project PhD Safe Planni :milestone, d10, 2026-11-15, 0d
+```
+
+<details>
+<summary><b>Expand the quantitative deadline horizon chart</b></summary>
+
+```mermaid
+xychart-beta
+    title "Application deadline horizon"
+    x-axis ["0-7d", "8-14d", "15-30d", "31-60d", "61+d"]
+    y-axis "Application records" 0 --> 30
+    bar [6, 20, 26, 25, 23]
+```
+
+</details>
+
+## Global opportunities · interactive GitHub map
+
+```geojson
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"title":"Germany: 4 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":4,"sample_source_ids":"N263-03, N263-09, N263-07","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[13.405,52.52]}},{"type":"Feature","properties":{"title":"United Kingdom: 18 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":18,"sample_source_ids":"N263-05, N263-06, M17","marker-color":"#19b5b6","marker-size":"large"},"geometry":{"type":"Point","coordinates":[-0.1276,51.5072]}},{"type":"Feature","properties":{"title":"Netherlands: 8 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":8,"sample_source_ids":"N263-10, N263-08, N264-03","marker-color":"#19b5b6","marker-size":"large"},"geometry":{"type":"Point","coordinates":[4.9041,52.3676]}},{"type":"Feature","properties":{"title":"Switzerland: 9 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":9,"sample_source_ids":"C06, M23, M24","marker-color":"#19b5b6","marker-size":"large"},"geometry":{"type":"Point","coordinates":[7.4474,46.948]}},{"type":"Feature","properties":{"title":"Norway: 6 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":6,"sample_source_ids":"M19, M20, M21","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[10.7522,59.9139]}},{"type":"Feature","properties":{"title":"Sweden: 2 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":2,"sample_source_ids":"N264-07, N264-09","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[18.0632,59.3346]}},{"type":"Feature","properties":{"title":"Denmark: 2 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":2,"sample_source_ids":"N263-04, N264-08","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[12.5683,55.6761]}},{"type":"Feature","properties":{"title":"Japan: 6 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":6,"sample_source_ids":"M18, M15, C15-NAGOYA","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[139.6917,35.6895]}},{"type":"Feature","properties":{"title":"Italy: 2 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":2,"sample_source_ids":"N264-05, N264-04","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[12.4964,41.9028]}},{"type":"Feature","properties":{"title":"Cyprus: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"R26-UCY-SKEYES","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[33.3823,35.1856]}},{"type":"Feature","properties":{"title":"Luxembourg: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"M26","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[6.1319,49.6116]}},{"type":"Feature","properties":{"title":"United States: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"R26-GWU-EPIC","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[-77.0369,38.9072]}},{"type":"Feature","properties":{"title":"Canada: 8 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":8,"sample_source_ids":"M33, M31, M34","marker-color":"#19b5b6","marker-size":"large"},"geometry":{"type":"Point","coordinates":[-75.6972,45.4215]}},{"type":"Feature","properties":{"title":"Australia: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"M43a","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[149.13,-35.2809]}}]}
+```
+
+**69/100** applications have unambiguous institution-name country matches, aggregated into **14** country markers. The markers are at representative capital locations, **not university campus coordinates**. The remaining 31 records are deliberately excluded from the geographic visualization rather than assigned guessed locations.
+
+<details>
+<summary><b>Explore country counts and mapped source IDs</b></summary>
+
+| Country aggregation | Example application IDs |
+|:--|:--|
+| United Kingdom: 18 application records | N263-05, N263-06, M17 |
+| Switzerland: 9 application records | C06, M23, M24 |
+| Netherlands: 8 application records | N263-10, N263-08, N264-03 |
+| Canada: 8 application records | M33, M31, M34 |
+| Norway: 6 application records | M19, M20, M21 |
+| Japan: 6 application records | M18, M15, C15-NAGOYA |
+| Germany: 4 application records | N263-03, N263-09, N263-07 |
+| Sweden: 2 application records | N264-07, N264-09 |
+| Denmark: 2 application records | N263-04, N264-08 |
+| Italy: 2 application records | N264-05, N264-04 |
+| Cyprus: 1 application records | R26-UCY-SKEYES |
+| Luxembourg: 1 application records | M26 |
+| United States: 1 application records | R26-GWU-EPIC |
+| Australia: 1 application records | M43a |
+
+[Complete GeoJSON file](data/readme_opportunities.geojson) · [Source portfolio](data/portfolio_frontier.json)
+
+</details>
+
+## Research & application knowledge graph
+
+This native Mermaid ER diagram represents relationships from the actual application, source-monitor, resource, and research schemas.
+
+```mermaid
+erDiagram
+    APPLICATION ||--o{ DOCUMENT_MENTION : references
+    APPLICATION ||--o{ SOURCE_OBSERVATION : evaluated_by
+    SOURCE_OBSERVATION }o--|| PROVIDER : collected_through
+    APPLICATION ||--o{ EXECUTION_STEP : scheduled_for
+    RESEARCH_PAPER }o--o{ TOPIC : grouped_as
+    DOCUMENT_MENTION }o--|| RESOURCE : describes
+    APPLICATION {
+        string source_id PK
+        date final_deadline
+        string decision
+    }
+    SOURCE_OBSERVATION {
+        string status
+        string url
+        date observed_at
+    }
+    RESOURCE {
+        string document_id PK
+        string readiness_state
+    }
+```
+
+<details>
+<summary><b>Agent/tool orchestration · expand Mermaid sequence diagram</b></summary>
+
+```mermaid
+sequenceDiagram
+    actor Owner
+    participant Action as GitHub Actions
+    participant Discovery as Discovery providers
+    participant Evidence as Evidence validators
+    participant Store as Workbook and ledger
+    Owner->>Action: Run discovery and reconciliation
+    Action->>Discovery: Fetch institution listings
+    Discovery-->>Action: Records plus provider failures
+    Action->>Evidence: Resolve IDs and contradictions
+    Evidence-->>Action: Supported claims and unknowns
+    Action->>Store: Reconcile observations
+    Store-->>Owner: Decision frontier and dated agenda
+    Owner->>Store: Confirm applicant actions explicitly
+```
+
+</details>
+
+<details>
+<summary><b>Application state machine · expand Mermaid states</b></summary>
+
+```mermaid
+stateDiagram-v2
+    [*] --> Discovered
+    Discovered --> EvidenceReview: Lead indexed
+    EvidenceReview --> Recheck: Source conflicted
+    Recheck --> EvidenceReview: New observation
+    EvidenceReview --> Shortlisted: Evidence sufficient
+    EvidenceReview --> Excluded: Ineligible or duplicate
+    Shortlisted --> Preparation: Owner selects
+    Preparation --> SubmissionReview: Documents collected
+    SubmissionReview --> Submitted: Owner confirms receipt
+    SubmissionReview --> Preparation: Additional requirements
+    Submitted --> [*]
+    Excluded --> [*]
+```
+
+The workflow is a **process model**, not confirmation that tracked applications have been submitted.
+
+</details>
+
+## Research focus quadrant
+
+A transparent, data-based proxy: horizontal position is calendar urgency within 90 days, and vertical position is unresolved document mentions plus explicit proof obligations, divided by eight and capped at one. Neither axis is publication impact or admission probability.
+
+```mermaid
+quadrantChart
+    title Calendar urgency vs unresolved evidence workload
+    x-axis Lower urgency --> Higher urgency
+    y-axis Lower proof debt --> Higher proof debt
+    quadrant-1 Immediate evidence review
+    quadrant-2 Build evidence first
+    quadrant-3 Monitor
+    quadrant-4 Deadline execution
+    R01: [0.989, 0.375]
+    R02: [0.989, 0.625]
+    R03: [0.978, 0.500]
+    R04: [0.978, 0.250]
+    R05: [0.967, 0.500]
+    R06: [0.933, 0.375]
+    R07: [0.911, 0.750]
+    R08: [0.911, 0.250]
+    R09: [0.911, 0.125]
+    R10: [0.911, 0.250]
+    R11: [0.911, 0.375]
+    R12: [0.911, 0.625]
+    R13: [0.911, 0.625]
+    R14: [0.911, 0.125]
+    R15: [0.911, 0.500]
+    R16: [0.911, 0.500]
+    R17: [0.900, 0.750]
+    R18: [0.900, 0.500]
+    R19: [0.900, 0.375]
+    R20: [0.889, 0.750]
+```
+
+[See application records and exact source IDs](data/experience_view.json) · [Open the research radar](data/research_radar.json)
+
+<details>
+<summary><b>Research mind map · expand</b></summary>
+
+```mermaid
+mindmap
+    root((PhD Research))
+      Embodied AI
+        Robotics
+        SLAM
+        VLA
+      Machine Learning
+        Foundation models
+        Agentic AI
+        Scientific ML
+      Medical AI
+        Imaging
+        Clinical reasoning
+        Explainability
+      Engineering
+        Control
+        Planning
+        Optimization
+```
+
+</details>
+
+## Interactive exploration & simulation lab
+
+<table><tr>
+<td width="50%" valign="top">
+<h3>Interact with actual application data</h3>
+<p>Drag and zoom the application-to-document graph, scrub 60 days, tune proof-debt weights, query through the keyboard command palette, move scenario cards, and export CSV/JSON.</p>
+<p><b><a href="dashboard/index.html">Open the self-contained browser application</a></b></p>
+</td>
+<td width="50%" valign="top">
+<h3>Rotate the 3D deadline skyline</h3>
+<p>GitHub renders the generated STL as a rotatable 3D model. Five towers encode real counts in the deadline horizon bins, not a fabricated 3D scene.</p>
+<p><b><a href="assets/readme/deadline_skyline.stl">Explore the interactive STL model</a></b></p>
+</td>
+</tr></table>
+
+## GitHub-native workflow console
+
+The controls below invoke **real GitHub workflows and repository forms**, not inert mock buttons.
+
+| Action | Real execution |
+|:--|:--|
+| **Run an analysis** | [Open scenario-lab workflow inputs](../../actions/workflows/experience-lab.yml) |
+| **Update opportunities** | [Run discovery and reconciliation](../../actions/workflows/phd-intelligence.yml) |
+| **Change owner status** | [Authenticated private issue controls](../../issues/1) |
+| **Submit an opportunity** | [Structured opportunity issue form](../../issues/new?template=02-opportunity-lead.yml) |
+| **Correct source evidence** | [Source-correction form](../../issues/new?template=01-source-correction.yml) |
+| **Propose an automation** | [Automation-idea form](../../issues/new?template=03-automation-idea.yml) |
+| **Open application tasks** | [Dated execution ledger](docs/TODAY.md) |
+| **Download the tracker** | [Complete workbook](PhD_Action_List.xlsx) |
+
+[CI checks](../../actions/workflows/intelligence-ci.yml) · [Workbook audit](../../actions/workflows/audit-workbook.yml) · [README regeneration](../../actions/workflows/readme-render.yml) · [JSON evidence](data/experience_view.json)
+
+## Upcoming application records
+
+| Days left | Deadline | Opportunity | Primary evidence |
+|:--|:--|:--|:--|
+| **1d** | 2026-11-08 | Karlsruhe Institute of Technology (KIT MRT), PhD Efficient Long-Context Models for Vision  | [Source](https://jobs.pse.kit.edu/en/jobs/170920/phd-position-efficient-long-context-large-models-for-vision-and-vision-language-action-systems-fmd) |
+| **1d** | 2026-11-08 | University of Copenhagen, CoAStaL PhD Cultural Reasoning with Language Models (CuRe, Danie | [Source](https://employment.ku.dk/phd/?show=167227) |
+| **2d** | 2026-11-09 | UCL Gatsby Computational Neuroscience Unit, PhD in Machine Learning and Theoretical Neuros | [Source](https://www.ucl.ac.uk/life-sciences/gatsby/study-and-work/gatsby-unit-phd-programme) |
+| **2d** | 2026-11-09 | UCL Sainsbury Wellcome Centre, fully funded PhD in Neural Circuits and Behaviour, 2027 int | [Source](https://www.swc.science/content/apply-our-phd-programme) |
+| **3d** | 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | [Source](https://www.sbfi.admin.ch/scholarships_eng) |
+| **6d** | 2026-11-13 | Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacancy ref 3522426D | [Source](https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10) |
+| **8d** | 2026-11-15 | OIST Graduate School PhD, May or Sep 2027 entry (Admissions Workshop 2027) | [Source](https://www.oist.jp/admissions/phd-program/apply-phd) |
+
+<details>
+<summary><b>Advanced visual research laboratory: diagrams and source contracts</b></summary>
+
+The following are generated Mermaid artifacts and can be opened independently on GitHub:
+
+- [Pipeline graph](docs/diagrams/pipeline.mmd)
+- [Deadline Sankey](docs/diagrams/horizon_sankey.mmd)
+- [Application Gantt](docs/diagrams/deadlines.mmd)
+- [Evidence ER model](docs/diagrams/evidence_erd.mmd)
+- [Research quadrant](docs/diagrams/priority_quadrant.mmd)
+- [Application states](docs/diagrams/application_states.mmd)
+- [Agent orchestration](docs/diagrams/orchestration.mmd)
+- [Research mind map](docs/diagrams/research_map.mmd)
+- [Deadline XY chart](docs/diagrams/deadline_xy.mmd)
+
+[Source data contracts](data/experience_view.json) · [JSON-LD lineage](data/experience_lineage.jsonld) · [Architecture](docs/ARCHITECTURE.md) · [Capability atlas](docs/CAPABILITY_ATLAS.md) · [Playbooks](docs/PLAYBOOKS.md)
+
+</details>
+
+<sub>EvidenceGraph · Reproducible · Generated from source data · Observation: 2026-11-07. Research papers are not vacancy notices. Unknown document readiness is not confirmed missing documentation. GitHub README renders Mermaid, GeoJSON and linked STL natively; rich JavaScript interactions run in the downloadable browser application.</sub>
+
+
+<details>
+<summary><b>Engineering deep dive · original execution intelligence and source diagnostics</b></summary>
+
+<div align="center">
+
 <a href="../../actions/workflows/experience-lab.yml"><img src="assets/readme/kinetic_cover.svg" width="100%" alt="Animated research intelligence cover with 100 actual future application records on deadline orbits" /></a>
 
 **THIS IS AN EXECUTABLE RESEARCH WORKSPACE, NOT A STATIC TRACKER.**
@@ -446,3 +793,6 @@ The [research radar](data/research_radar.json) monitors topical publications in 
 ---
 
 <sub><b>Generated:</b> 2026-11-07. Charts are static SVG snapshots regenerated by GitHub Actions; GitHub READMEs cannot run React or arbitrary JavaScript. This project combines known techniques in source monitoring and orchestration; uniqueness and commercial viability require independent evaluation, not branding claims.</sub>
+
+
+</details>

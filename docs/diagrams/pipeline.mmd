@@ -1,0 +1,15 @@
+flowchart LR
+    A["Discovery sources · 4 monitored"] --> B["Ingest & deduplicate"]
+    B --> C{"Evidence verification"}
+    C -->|"Source verified"| D["Application frontier · 100"]
+    C -->|"Unresolved source"| E["Evidence review · 1 conflicts"]
+    E --> C
+    D --> F["Deadline & proof planning"]
+    F --> G["Owner confirmation"]
+    G --> H["Execution ledger"]
+    classDef source fill:#172b51,color:#e8f4ff,stroke:#49b8ff,stroke-width:2px
+    classDef verified fill:#103c3b,color:#d7fff4,stroke:#51dcb4,stroke-width:2px
+    classDef attention fill:#46263a,color:#fff0f3,stroke:#f58bb7,stroke-width:2px
+    class A,B source
+    class D,F,G,H verified
+    class E attention

@@ -1,0 +1,21 @@
+erDiagram
+    APPLICATION ||--o{ DOCUMENT_MENTION : references
+    APPLICATION ||--o{ SOURCE_OBSERVATION : evaluated_by
+    SOURCE_OBSERVATION }o--|| PROVIDER : collected_through
+    APPLICATION ||--o{ EXECUTION_STEP : scheduled_for
+    RESEARCH_PAPER }o--o{ TOPIC : grouped_as
+    DOCUMENT_MENTION }o--|| RESOURCE : describes
+    APPLICATION {
+        string source_id PK
+        date final_deadline
+        string decision
+    }
+    SOURCE_OBSERVATION {
+        string status
+        string url
+        date observed_at
+    }
+    RESOURCE {
+        string document_id PK
+        string readiness_state
+    }
