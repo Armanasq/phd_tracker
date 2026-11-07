@@ -2,10 +2,11 @@ name: PhD Intelligence - Code Quality Gates
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'feature/**']
     paths:
       - scripts/**
       - tests/**
+      - dashboard/**
       - requirements-intelligence.txt
       - .github/workflows/**
   pull_request:
@@ -45,6 +46,8 @@ jobs:
           test -s assets/readme/evidence_pipeline.gif
           test -s dashboard/index.html
           test -s data/experience_view.json
+          test -s data/experience_lineage.jsonld
+          test -s assets/readme/isometric_calendar.svg
       - name: Validate dashboard JavaScript syntax
         run: |
           python - <<'PY'
