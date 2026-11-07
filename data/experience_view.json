@@ -15,6 +15,7 @@
     {
       "id": "N263-03",
       "name": "Karlsruhe Institute of Technology (KIT MRT), PhD Efficient Long-Context Models for Vision and Vision-Language-Action, 1252/2026",
+      "country": "Germany",
       "deadline": "2026-11-08",
       "days": 1,
       "decision": "Go - urgent",
@@ -36,6 +37,7 @@
     {
       "id": "N263-04",
       "name": "University of Copenhagen, CoAStaL PhD Cultural Reasoning with Language Models (CuRe, Daniel Hershcovich)",
+      "country": "Denmark",
       "deadline": "2026-11-08",
       "days": 1,
       "decision": "Go",
@@ -61,6 +63,7 @@
     {
       "id": "N263-05",
       "name": "UCL Gatsby Computational Neuroscience Unit, PhD in Machine Learning and Theoretical Neuroscience, 2027",
+      "country": "United Kingdom",
       "deadline": "2026-11-09",
       "days": 2,
       "decision": "Go",
@@ -84,6 +87,7 @@
     {
       "id": "N263-06",
       "name": "UCL Sainsbury Wellcome Centre, fully funded PhD in Neural Circuits and Behaviour, 2027 intake",
+      "country": "United Kingdom",
       "deadline": "2026-11-09",
       "days": 2,
       "decision": "Go with risk",
@@ -103,6 +107,7 @@
     {
       "id": "C06",
       "name": "Swiss Government Excellence Scholarship (research/PhD), 2027-2028",
+      "country": "Switzerland",
       "deadline": "2026-11-10",
       "days": 3,
       "decision": "Check first",
@@ -126,6 +131,7 @@
     {
       "id": "M07a",
       "name": "Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacancy ref 3522426DA (jobs.soton.ac.uk)",
+      "country": null,
       "deadline": "2026-11-13",
       "days": 6,
       "decision": "Go",
@@ -147,6 +153,7 @@
     {
       "id": "N263-10",
       "name": "BMW AI Robotics / RoboTac and TU/e Eindhoven, PhD World Models & Visuo-Tactile Foundation Models (2 research topics)",
+      "country": "Netherlands",
       "deadline": "2026-11-15",
       "days": 8,
       "decision": "Go with risk",
@@ -172,6 +179,7 @@
     {
       "id": "M18",
       "name": "Institute of Science Tokyo, International Graduate Program IGP(A) Fall 2027 with MEXT recommendation",
+      "country": "Japan",
       "deadline": "2026-11-15",
       "days": 8,
       "decision": "Check first",
@@ -189,6 +197,7 @@
     {
       "id": "N263-09",
       "name": "International Max Planck Research School for Intelligent Systems (IMPRS-IS), 2027 doctoral recruitment",
+      "country": "Germany",
       "deadline": "2026-11-15",
       "days": 8,
       "decision": "Go",
@@ -214,6 +223,7 @@
     {
       "id": "M17",
       "name": "Northeastern University London, PhD studentship: Algorithms/Hardware Co-Design for Bayesian and Ising Models (Rajendran; ref R143025)",
+      "country": "United Kingdom",
       "deadline": "2026-11-15",
       "days": 8,
       "decision": "Go",
@@ -233,6 +243,7 @@
     {
       "id": "M15",
       "name": "OIST Graduate School PhD, May or Sep 2027 entry (Admissions Workshop 2027)",
+      "country": "Japan",
       "deadline": "2026-11-15",
       "days": 8,
       "decision": "Go",
@@ -260,6 +271,7 @@
     {
       "id": "N263-08",
       "name": "TU Delft OPERA EU Project, PhD Safe Planning and Decision-Making under Uncertainty for Long-Horizon Robot Autonomy",
+      "country": "Netherlands",
       "deadline": "2026-11-15",
       "days": 8,
       "decision": "Go",
@@ -281,6 +293,7 @@
     {
       "id": "N263-07",
       "name": "TUM Autonomous Vehicle Systems (Johannes Betz), PhD Mobile Manipulation for Humanoid Robots",
+      "country": "Germany",
       "deadline": "2026-11-15",
       "days": 8,
       "decision": "Go with risk",
@@ -300,6 +313,7 @@
     {
       "id": "N264-03",
       "name": "University of Amsterdam / Ericsson, PhD Cloud-Native and AI-Native 6G Networks (#15041)",
+      "country": "Netherlands",
       "deadline": "2026-11-15",
       "days": 8,
       "decision": "Check first",
@@ -323,6 +337,7 @@
     {
       "id": "N264-02",
       "name": "University of Amsterdam, PhD Accountable and Responsible AI (SafeGenAI / LLM4LM; #15581)",
+      "country": "Netherlands",
       "deadline": "2026-11-15",
       "days": 8,
       "decision": "Go with risk",
@@ -346,6 +361,7 @@
     {
       "id": "N263-11",
       "name": "University of Birmingham, Fully Funded PhD in Integrated Intelligent Safe Environment (IISE) for Nuclear Robotics",
+      "country": "United Kingdom",
       "deadline": "2026-11-15",
       "days": 8,
       "decision": "Check first",
@@ -363,6 +379,7 @@
     {
       "id": "N264-05",
       "name": "AI4I + Politecnico di Torino, funded PhD Adversarial Robustness in Multimodal Foundation Models",
+      "country": "Italy",
       "deadline": "2026-11-16",
       "days": 9,
       "decision": "Go with risk",
@@ -384,6 +401,7 @@
     {
       "id": "N264-04",
       "name": "AI4I + Politecnico di Torino, funded PhD Agentic System-1/System-2 Architectures for Robot Autonomy",
+      "country": "Italy",
       "deadline": "2026-11-16",
       "days": 9,
       "decision": "Go",
@@ -407,6 +425,7 @@
     {
       "id": "M19",
       "name": "NTNU Gjovik, Ph.D. Candidate in Reinforcement Learning for Project Scheduling Problems (Jobbnorge 310778)",
+      "country": "Norway",
       "deadline": "2026-11-16",
       "days": 9,
       "decision": "Go with risk",
@@ -434,6 +453,7 @@
     {
       "id": "M20",
       "name": "University of Oslo, PhD Research Fellow in Control Theory and Optimization for Edge Computing (Jobbnorge 310583)",
+      "country": "Norway",
       "deadline": "2026-11-17",
       "days": 10,
       "decision": "Go",
@@ -461,6 +481,7 @@
     {
       "id": "M21",
       "name": "OsloMet PhD Fellow in Trustworthy Generative AI with Knowledge Verification (310467)",
+      "country": "Norway",
       "deadline": "2026-11-18",
       "days": 11,
       "decision": "Go",
@@ -488,6 +509,7 @@
     {
       "id": "C07-UiO-310559",
       "name": "UiO Integreat PhD Research Fellow in Structured Vision-Language Models (310559)",
+      "country": null,
       "deadline": "2026-11-18",
       "days": 11,
       "decision": "Go",
@@ -515,6 +537,7 @@
     {
       "id": "C07-NTNU-310592",
       "name": "NTNU CAPTURE MSCA DN PhD in Colour and Image Enhancement for Wireless Capsule Endoscopy (310592), Gjovik",
+      "country": "Norway",
       "deadline": "2026-11-19",
       "days": 12,
       "decision": "Go",
@@ -540,6 +563,7 @@
     {
       "id": "C07-NTNU-310379",
       "name": "NTNU CAPTURE MSCA DN PhD in Explainable AI for Capsule Endoscopy (310379), Gjovik",
+      "country": "Norway",
       "deadline": "2026-11-19",
       "days": 12,
       "decision": "Go",
@@ -565,6 +589,7 @@
     {
       "id": "M22",
       "name": "NTNU PhD Candidate in Multispectral Wireless Capsule Endoscopy (WCE), CAPTURE MSCA Doctoral Network (310363)",
+      "country": "Norway",
       "deadline": "2026-11-19",
       "days": 12,
       "decision": "Go",
@@ -582,6 +607,7 @@
     {
       "id": "N264-06",
       "name": "TU/e Eindhoven + TUM, PhD Physics-Informed Generative AI for Dynamic Cardiac MRI (PRIMA-CMR)",
+      "country": "Netherlands",
       "deadline": "2026-11-21",
       "days": 14,
       "decision": "Go with risk",
@@ -603,6 +629,7 @@
     {
       "id": "M23",
       "name": "ETH Zurich, Julia Vogt (Medical Data Science group): PhD in Machine Learning and Medical Data Science",
+      "country": "Switzerland",
       "deadline": "2026-11-22",
       "days": 15,
       "decision": "Check first",
@@ -624,6 +651,7 @@
     {
       "id": "R26-UCY-SKEYES",
       "name": "University of Cyprus — V4RL SkEyes ERC funded PhD in robotics, computer vision and aerial SLAM (Margarita Chli)",
+      "country": "Cyprus",
       "deadline": "2026-11-23",
       "days": 16,
       "decision": "Go with risk",
@@ -649,6 +677,7 @@
     {
       "id": "N264-07",
       "name": "Linkoeping University CHASS, PhD Optimal Motion Planning for Drone Swarms (LiU-2026-04767)",
+      "country": "Sweden",
       "deadline": "2026-11-24",
       "days": 17,
       "decision": "Go with risk",
@@ -666,6 +695,7 @@
     {
       "id": "C15-NAGOYA",
       "name": "Nagoya University Graduate School of Informatics, October 2027 doctoral entry (MEXT, Data Science Education Program)",
+      "country": "Japan",
       "deadline": "2026-11-24",
       "days": 17,
       "decision": "Check first",
@@ -687,6 +717,7 @@
     {
       "id": "M24",
       "name": "ETH Zurich RobotX PhD Fellowship 2027",
+      "country": "Switzerland",
       "deadline": "2026-11-27",
       "days": 20,
       "decision": "Go",
@@ -712,6 +743,7 @@
     {
       "id": "N264-08",
       "name": "Aalborg University ROX6G, PhD Safe Multi-Robot Planning and Control under Connectivity Constraints (#2026/1218)",
+      "country": "Denmark",
       "deadline": "2026-11-29",
       "days": 22,
       "decision": "Go",
@@ -737,6 +769,7 @@
     {
       "id": "M25",
       "name": "University of Bath URSA (Faculty of Engineering & Design), Cathryn Mitchell, ionospheric modelling/PNT",
+      "country": "United Kingdom",
       "deadline": "2026-11-29",
       "days": 22,
       "decision": "Go",
@@ -762,6 +795,7 @@
     {
       "id": "M29",
       "name": "EPFL LAMD (Neuchatel) - PhD position in Integrated Design and Optimization, MSCA-DN TurboImpact",
+      "country": "Switzerland",
       "deadline": "2026-11-30",
       "days": 23,
       "decision": "Go",
@@ -785,6 +819,7 @@
     {
       "id": "M27",
       "name": "ETH Zurich Soft Robotics Lab (Katzschmann): Doctoral Positions in Robot Learning and Soft, Musculoskeletal, and Biohybrid Robotics",
+      "country": "Switzerland",
       "deadline": "2026-11-30",
       "days": 23,
       "decision": "Go",
@@ -808,6 +843,7 @@
     {
       "id": "M28",
       "name": "Saitama University ESITI - MEXT Scholarship (University Recommendation), October 2027 intake",
+      "country": "Japan",
       "deadline": "2026-11-30",
       "days": 23,
       "decision": "Go",
@@ -829,6 +865,7 @@
     {
       "id": "M30-NIEDUSZYNSKI",
       "name": "UEA / Earlham Institute - Decoding and Designing DNA Replication Origins Using Genome Language Models (NIEDUSZYNSKI_E27DTP)",
+      "country": "United Kingdom",
       "deadline": "2026-11-30",
       "days": 23,
       "decision": "Go",
@@ -852,6 +889,7 @@
     {
       "id": "M30-SHERIFF",
       "name": "UEA / Norwich Research Park Biosciences DTP - Can blood reveal the body? Trustworthy AI for tissue gene expression (SHERIFF_E27DTP)",
+      "country": "United Kingdom",
       "deadline": "2026-11-30",
       "days": 23,
       "decision": "Go",
@@ -875,6 +913,7 @@
     {
       "id": "SC01",
       "name": "University of Bern, Machine Learning in Medicine Lab (Prof. Lisa Koch): PhD in Machine Learning in Medicine, multimodal health data",
+      "country": "Switzerland",
       "deadline": "2026-11-30",
       "days": 23,
       "decision": "Go",
@@ -896,6 +935,7 @@
     {
       "id": "SE-U01",
       "name": "University of Edinburgh UKRI AI CDT in Designing Responsible Natural Language Processing, 2027 entry",
+      "country": "United Kingdom",
       "deadline": "2026-11-30",
       "days": 23,
       "decision": "Check first",
@@ -913,6 +953,7 @@
     {
       "id": "M26",
       "name": "University of Luxembourg YADIAS (IAS Young Academics Doctoral Fellowships), MSCA-COFUND",
+      "country": "Luxembourg",
       "deadline": "2026-11-30",
       "days": 23,
       "decision": "Go",
@@ -932,6 +973,7 @@
     {
       "id": "N264-09",
       "name": "Uppsala University, PhD Signal Processing: Multimodal Environment Modeling for Wireless Spatial Intelligence (UFV-PA 2026/2989)",
+      "country": "Sweden",
       "deadline": "2026-11-30",
       "days": 23,
       "decision": "Go with risk",
@@ -957,6 +999,7 @@
     {
       "id": "SE-U03",
       "name": "EPFL EDEE (Electrical Engineering) doctoral programme, December 2026 round (lab chosen after admission)",
+      "country": "Switzerland",
       "deadline": "2026-12-01",
       "days": 24,
       "decision": "Check first",
@@ -978,6 +1021,7 @@
     {
       "id": "M32",
       "name": "EPFL EDIC (Computer and Communication Sciences) doctoral programme, Round 1",
+      "country": "Switzerland",
       "deadline": "2026-12-01",
       "days": 24,
       "decision": "Check first",
@@ -1003,6 +1047,7 @@
     {
       "id": "R26-GWU-EPIC",
       "name": "George Washington University — EPIC Lab visual-inertial perception, SLAM and physical AI PhD (Chuchu Chen), Fall 2027",
+      "country": "United States",
       "deadline": "2026-12-01",
       "days": 24,
       "decision": "Go",
@@ -1026,6 +1071,7 @@
     {
       "id": "N264-10",
       "name": "Max Planck School Biomedical AI (BMAI), funded PhD cohort starting September 2027",
+      "country": "Germany",
       "deadline": "2026-12-01",
       "days": 24,
       "decision": "Go",
@@ -1049,6 +1095,7 @@
     {
       "id": "M33",
       "name": "Memorial University - PhD Engineering and Applied Science, Fall 2027 admission",
+      "country": "Canada",
       "deadline": "2026-12-01",
       "days": 24,
       "decision": "Go",
@@ -1074,6 +1121,7 @@
     {
       "id": "M31",
       "name": "Mila supervision request (up to three professors) plus separate university application",
+      "country": "Canada",
       "deadline": "2026-12-01",
       "days": 24,
       "decision": "Go",
@@ -1087,6 +1135,7 @@
     {
       "id": "N264-11",
       "name": "TU Delft / ING, PhD AI for Software Reuse and Reliable Agentic Development (vacancy 3997)",
+      "country": "Netherlands",
       "deadline": "2026-12-01",
       "days": 24,
       "decision": "Go with risk",
@@ -1108,6 +1157,7 @@
     {
       "id": "M14",
       "name": "University of Osaka, Trans-Pacific Hub Graduate Program in Advanced Bio-Information Synergy (Bioengineering, MEXT, doctoral course, Oct 2027 enrolment)",
+      "country": "Japan",
       "deadline": "2026-12-01",
       "days": 24,
       "decision": "Check first",
@@ -1129,6 +1179,7 @@
     {
       "id": "M34",
       "name": "York University - PhD Electrical Engineering and Computer Science (Lassonde), Fall",
+      "country": "Canada",
       "deadline": "2026-12-01",
       "days": 24,
       "decision": "Go",
@@ -1154,6 +1205,7 @@
     {
       "id": "M35",
       "name": "Oxford DPhil Engineering Science studentship: Data-driven Control Engineering for Large-scale Uncertain Systems (ref 27ENGCO_AP; Papachristodoulou, Margellos)",
+      "country": "United Kingdom",
       "deadline": "2026-12-02",
       "days": 25,
       "decision": "Long shot",
@@ -1179,6 +1231,7 @@
     {
       "id": "M37-CIS",
       "name": "Cambridge Trust funding (Cambridge International Scholarship) via the same Cambridge PhD application",
+      "country": "United Kingdom",
       "deadline": "2026-12-08",
       "days": 31,
       "decision": "Check first",
@@ -1192,6 +1245,7 @@
     {
       "id": "SE-U09",
       "name": "Exeter EPSRC DLA 2027, Public Health and Sport Sciences: Computer vision to predict falls from everyday movement in older adults (Taleshi)",
+      "country": null,
       "deadline": "2026-12-08",
       "days": 31,
       "decision": "Long shot",
@@ -1205,6 +1259,7 @@
     {
       "id": "SC05",
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6010): AI and Image Processing for Diabetic Retinopathy Smart Cameras (Vaughan and Ye, Clinical and Biomedical Sciences)",
+      "country": null,
       "deadline": "2026-12-08",
       "days": 31,
       "decision": "Go with risk",
@@ -1226,6 +1281,7 @@
     {
       "id": "SC06",
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): Explainable AI for Early Dementia Detection and Deployment (Dong, Computer Science)",
+      "country": null,
       "deadline": "2026-12-08",
       "days": 31,
       "decision": "Go with risk",
@@ -1247,6 +1303,7 @@
     {
       "id": "SC02",
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): R2T2-Med: Resource-Aware AI for Scalable and Deployable Medical Image Analysis (Zhang, Computer Science)",
+      "country": null,
       "deadline": "2026-12-08",
       "days": 31,
       "decision": "Go with risk",
@@ -1268,6 +1325,7 @@
     {
       "id": "SC07",
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): Sovereign Agentic AI: Distilling Small Language Model Agents for Local Deployment (Wang and Huang, Computer Science)",
+      "country": null,
       "deadline": "2026-12-08",
       "days": 31,
       "decision": "Go with risk",
@@ -1289,6 +1347,7 @@
     {
       "id": "SC03",
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6014): Multiscale Scientific Machine Learning Digital Twins for High-Torque Electric Propulsion under Extreme Duty Cycles (Engineering)",
+      "country": null,
       "deadline": "2026-12-08",
       "days": 31,
       "decision": "Go with risk",
@@ -1310,6 +1369,7 @@
     {
       "id": "SC04",
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6015): Physics-Informed AI and Experimental Modelling of Ocean Mixing (Messias, Geography)",
+      "country": null,
       "deadline": "2026-12-08",
       "days": 31,
       "decision": "Go with risk",
@@ -1331,6 +1391,7 @@
     {
       "id": "M36-6014",
       "name": "Exeter EPSRC DLA studentships, Department of Engineering, Sept 2027 entry (ref 6014): Physics-Aware Graph Neural Networks for Robust Short-Term Visibility Forecasting (supervisor surname Zhou per PDF ",
+      "country": null,
       "deadline": "2026-12-08",
       "days": 31,
       "decision": "Go with risk",
@@ -1352,6 +1413,7 @@
     {
       "id": "M36-6019",
       "name": "Exeter EPSRC DLA studentships, Mathematics and Statistics, Sept 2027 entry (ref 6019): Uncertainty quantification for healthcare models: a route to precision medicine (Salter per PDF name)",
+      "country": null,
       "deadline": "2026-12-08",
       "days": 31,
       "decision": "Go with risk",
@@ -1373,6 +1435,7 @@
     {
       "id": "M37-Gates",
       "name": "Gates Cambridge Scholarship (PhD, 2027/28 entry, Round 2 all other eligible applicants)",
+      "country": "United Kingdom",
       "deadline": "2026-12-08",
       "days": 31,
       "decision": "Go",
@@ -1394,6 +1457,7 @@
     {
       "id": "N264-12",
       "name": "University of Amsterdam AMLab, multiple PhD positions Symmetries and Their Breaking in Deep Learning (Simons grant)",
+      "country": "Netherlands",
       "deadline": "2026-12-08",
       "days": 31,
       "decision": "Go with risk",
@@ -1419,6 +1483,7 @@
     {
       "id": "M38",
       "name": "University of Edinburgh EPSRC Centre for Doctoral Training in Machine Learning Systems (PhD, Round 1)",
+      "country": "United Kingdom",
       "deadline": "2026-12-14",
       "days": 37,
       "decision": "Go with risk",
@@ -1438,6 +1503,7 @@
     {
       "id": "C10",
       "name": "EPFL EDRS (Robotics, Control and Intelligent Systems) doctoral programme",
+      "country": "Switzerland",
       "deadline": "2026-12-15",
       "days": 38,
       "decision": "Go",
@@ -1463,6 +1529,7 @@
     {
       "id": "N263-12",
       "name": "McGill University School of Computer Science PhD, Fall 2027 (international deadline)",
+      "country": "Canada",
       "deadline": "2026-12-15",
       "days": 38,
       "decision": "Check first",
@@ -1482,6 +1549,7 @@
     {
       "id": "M41",
       "name": "McGill University, Electrical and Computer Engineering PhD, Fall 2027",
+      "country": "Canada",
       "deadline": "2026-12-15",
       "days": 38,
       "decision": "Check first",
@@ -1503,6 +1571,7 @@
     {
       "id": "M40",
       "name": "UBC Computer Science PhD, September 2027",
+      "country": null,
       "deadline": "2026-12-15",
       "days": 38,
       "decision": "Go",
@@ -1524,6 +1593,7 @@
     {
       "id": "M39",
       "name": "University of Alberta, Computing Science PhD, Fall 2027 (Amii)",
+      "country": null,
       "deadline": "2026-12-15",
       "days": 38,
       "decision": "Go",
@@ -1549,6 +1619,7 @@
     {
       "id": "M42",
       "name": "UEA / ARIES NERC DTP studentships (entry 1 Oct 2027)",
+      "country": "United Kingdom",
       "deadline": "2026-12-16",
       "days": 39,
       "decision": "Go with risk",
@@ -1570,6 +1641,7 @@
     {
       "id": "C11",
       "name": "University of Manchester President's Doctoral Scholar (PDS) Award",
+      "country": "United Kingdom",
       "deadline": "2026-12-18",
       "days": 41,
       "decision": "Check first",
@@ -1583,6 +1655,7 @@
     {
       "id": "R26-MAN-PDS-CONSTELLATIONS",
       "name": "University of Manchester — PDS Safe and Multi-Fidelity Optimisation of Satellite Constellations for a Changing Planet",
+      "country": "United Kingdom",
       "deadline": "2026-12-18",
       "days": 41,
       "decision": "Go",
@@ -1606,6 +1679,7 @@
     {
       "id": "M43a",
       "name": "University of Sydney Research Training Program (RTP) international stipend + fee offset, 2027 commencement",
+      "country": "Australia",
       "deadline": "2026-12-18",
       "days": 41,
       "decision": "Go",
@@ -1623,6 +1697,7 @@
     {
       "id": "M44",
       "name": "University of Surrey fully funded PhD: predictability in Romance verbal inflection (Linguistics)",
+      "country": null,
       "deadline": "2026-12-20",
       "days": 43,
       "decision": "Go",
@@ -1644,6 +1719,7 @@
     {
       "id": "C15-TOYOHASHI",
       "name": "Toyohashi University of Technology International Doctoral Degree Program with MEXT (university recommendation)",
+      "country": null,
       "deadline": "2027-01-04",
       "days": 58,
       "decision": "Check first",
@@ -1669,6 +1745,7 @@
     {
       "id": "M46",
       "name": "University of Oxford Intelligent Earth CDT (AI for the environment), September 2027 entry",
+      "country": "United Kingdom",
       "deadline": "2027-01-06",
       "days": 60,
       "decision": "Go",
@@ -1690,6 +1767,7 @@
     {
       "id": "SE-U07",
       "name": "UCL 50 fully funded 4-year EPSRC PhD studentships in engineering and physical sciences",
+      "country": "United Kingdom",
       "deadline": "2027-01-08",
       "days": 62,
       "decision": "Check first",
@@ -1703,6 +1781,7 @@
     {
       "id": "M47",
       "name": "Imperial College London President's PhD Scholarships 2027/28, round 2",
+      "country": "United Kingdom",
       "deadline": "2027-01-11",
       "days": 65,
       "decision": "Go",
@@ -1724,6 +1803,7 @@
     {
       "id": "SE01",
       "name": "King's College London, PhD in Human-Robot Interaction (CO-STAR, Dr Oya Celiktutan, SAIR lab), Oct 2027 entry",
+      "country": null,
       "deadline": "2027-01-11",
       "days": 65,
       "decision": "Go",
@@ -1749,6 +1829,7 @@
     {
       "id": "M49",
       "name": "SFU Engineering Science PhD (Fall 2027)",
+      "country": null,
       "deadline": "2027-01-15",
       "days": 69,
       "decision": "Check first",
@@ -1770,6 +1851,7 @@
     {
       "id": "N264-13",
       "name": "University of Amsterdam EVELYN, 2 PhDs AI for Science (multimodal retrieval / mechanistic interpretability)",
+      "country": "Netherlands",
       "deadline": "2027-01-15",
       "days": 69,
       "decision": "Go",
@@ -1791,6 +1873,7 @@
     {
       "id": "M48",
       "name": "University of British Columbia (Vancouver) PhD in Electrical and Computer Engineering, September 2027",
+      "country": "Canada",
       "deadline": "2027-01-15",
       "days": 69,
       "decision": "Go",
@@ -1814,6 +1897,7 @@
     {
       "id": "M45",
       "name": "University of Toronto MIE, CLIMB Lab (Pakpong Chirarattananon), PhD September 2027",
+      "country": "Canada",
       "deadline": "2027-01-15",
       "days": 69,
       "decision": "Go",
@@ -1837,6 +1921,7 @@
     {
       "id": "SF01",
       "name": "University of Toronto UTIAS (Aerospace Studies) PhD, Fall 2027, guaranteed funding, supervisor required (space robotics, SLAM, navigation labs)",
+      "country": "Canada",
       "deadline": "2027-01-15",
       "days": 69,
       "decision": "Go with risk",
@@ -1860,6 +1945,7 @@
     {
       "id": "SE-U08",
       "name": "University of Warwick Biomedical AI PhD (jobs.ac.uk DTF911)",
+      "country": null,
       "deadline": "2027-01-15",
       "days": 69,
       "decision": "Check first",
@@ -1873,6 +1959,7 @@
     {
       "id": "M54",
       "name": "Waterloo ECE PhD, Stephen L. Smith (Autonomous Systems Lab)",
+      "country": null,
       "deadline": "2027-01-15",
       "days": 69,
       "decision": "Check first",
@@ -1892,6 +1979,7 @@
     {
       "id": "SE12",
       "name": "University of Surrey (Vision, Speech and Signal Processing), Smart optical design: AI tools for cinematic camera lenses (Volino, Guillemaut), April 2027 start",
+      "country": null,
       "deadline": "2027-01-17",
       "days": 71,
       "decision": "Long shot",
@@ -1911,6 +1999,7 @@
     {
       "id": "SA13",
       "name": "Durham University: Efficient Physical AI for Real-World Robotics, funded PhD studentship (jobs.ac.uk DTI242)",
+      "country": null,
       "deadline": "2027-01-19",
       "days": 73,
       "decision": "Check first",
@@ -1924,6 +2013,7 @@
     {
       "id": "M50",
       "name": "SFU Computing Science PhD (Fall 2027)",
+      "country": null,
       "deadline": "2027-01-19",
       "days": 73,
       "decision": "Go",
@@ -1949,6 +2039,7 @@
     {
       "id": "C15-NAIST",
       "name": "NAIST doctoral course (Information Science), 2027 admission, with MEXT IPGP scholarship",
+      "country": null,
       "deadline": "2027-01-20",
       "days": 74,
       "decision": "Go",
@@ -1970,6 +2061,7 @@
     {
       "id": "SF02",
       "name": "University of Tokyo Graduate School of Frontier Sciences (GSFS) fall 2027 regular degree with MEXT University Recommendation (General) - scholarship may not continue",
+      "country": "Japan",
       "deadline": "2027-01-22",
       "days": 76,
       "decision": "Check first",
@@ -1983,6 +2075,7 @@
     {
       "id": "M51",
       "name": "University of West London, AI optimisation of green roofs PhD studentship",
+      "country": null,
       "deadline": "2027-01-25",
       "days": 79,
       "decision": "Check first",
@@ -2004,6 +2097,7 @@
     {
       "id": "M53",
       "name": "Bristol PhD studentship, learning and decision making under uncertainty in public health (Mengyan Zhang)",
+      "country": null,
       "deadline": "2027-01-31",
       "days": 85,
       "decision": "Go",
@@ -2025,6 +2119,7 @@
     {
       "id": "M52",
       "name": "Glasgow Graduate School scholarships (College of Science and Engineering, any supervisor)",
+      "country": null,
       "deadline": "2027-01-31",
       "days": 85,
       "decision": "Go",
@@ -2038,6 +2133,7 @@
     {
       "id": "M56",
       "name": "McMaster University, Computing and Software, PhD (Sept 2027 intake)",
+      "country": null,
       "deadline": "2027-02-28",
       "days": 113,
       "decision": "Check first",
@@ -2061,6 +2157,7 @@
     {
       "id": "SH02",
       "name": "Monash Graduate Scholarship (stipend) plus Monash International Tuition Scholarship (fees), PhD, International Round 1 2027",
+      "country": null,
       "deadline": "2027-02-28",
       "days": 113,
       "decision": "Go with risk",
@@ -2086,6 +2183,7 @@
     {
       "id": "M55a",
       "name": "Concordia Mechanical, Industrial and Aerospace Engineering PhD (Fall 2027)",
+      "country": null,
       "deadline": "2027-03-01",
       "days": 114,
       "decision": "Go",
@@ -2103,6 +2201,7 @@
     {
       "id": "M55b",
       "name": "Victoria University of Wellington, Wellington Doctoral Scholarship (round 2 per earlier sweep)",
+      "country": null,
       "deadline": "2027-03-01",
       "days": 114,
       "decision": "Later round",
@@ -2126,6 +2225,7 @@
     {
       "id": "M57",
       "name": "University of Wollongong, University Postgraduate Award (UPA), international PhD",
+      "country": null,
       "deadline": "2027-05-23",
       "days": 197,
       "decision": "Later round",
@@ -2137,6 +2237,263 @@
       "next_step": "No action possible for the 2027 round (closed)"
     }
   ],
+  "geography": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Germany: 4 application records",
+          "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+          "count": 4,
+          "sample_source_ids": "N263-03, N263-09, N263-07",
+          "marker-color": "#9f61e8",
+          "marker-size": "medium"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            13.405,
+            52.52
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "United Kingdom: 18 application records",
+          "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+          "count": 18,
+          "sample_source_ids": "N263-05, N263-06, M17",
+          "marker-color": "#19b5b6",
+          "marker-size": "large"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -0.1276,
+            51.5072
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Netherlands: 8 application records",
+          "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+          "count": 8,
+          "sample_source_ids": "N263-10, N263-08, N264-03",
+          "marker-color": "#19b5b6",
+          "marker-size": "large"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.9041,
+            52.3676
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Switzerland: 9 application records",
+          "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+          "count": 9,
+          "sample_source_ids": "C06, M23, M24",
+          "marker-color": "#19b5b6",
+          "marker-size": "large"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            7.4474,
+            46.948
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Norway: 6 application records",
+          "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+          "count": 6,
+          "sample_source_ids": "M19, M20, M21",
+          "marker-color": "#9f61e8",
+          "marker-size": "medium"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            10.7522,
+            59.9139
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Sweden: 2 application records",
+          "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+          "count": 2,
+          "sample_source_ids": "N264-07, N264-09",
+          "marker-color": "#4384ff",
+          "marker-size": "medium"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            18.0632,
+            59.3346
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Denmark: 2 application records",
+          "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+          "count": 2,
+          "sample_source_ids": "N263-04, N264-08",
+          "marker-color": "#4384ff",
+          "marker-size": "medium"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            12.5683,
+            55.6761
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Japan: 6 application records",
+          "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+          "count": 6,
+          "sample_source_ids": "M18, M15, C15-NAGOYA",
+          "marker-color": "#9f61e8",
+          "marker-size": "medium"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            139.6917,
+            35.6895
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Italy: 2 application records",
+          "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+          "count": 2,
+          "sample_source_ids": "N264-05, N264-04",
+          "marker-color": "#4384ff",
+          "marker-size": "medium"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            12.4964,
+            41.9028
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Cyprus: 1 application records",
+          "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+          "count": 1,
+          "sample_source_ids": "R26-UCY-SKEYES",
+          "marker-color": "#4384ff",
+          "marker-size": "medium"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            33.3823,
+            35.1856
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Luxembourg: 1 application records",
+          "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+          "count": 1,
+          "sample_source_ids": "M26",
+          "marker-color": "#4384ff",
+          "marker-size": "medium"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            6.1319,
+            49.6116
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "United States: 1 application records",
+          "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+          "count": 1,
+          "sample_source_ids": "R26-GWU-EPIC",
+          "marker-color": "#4384ff",
+          "marker-size": "medium"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -77.0369,
+            38.9072
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Canada: 8 application records",
+          "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+          "count": 8,
+          "sample_source_ids": "M33, M31, M34",
+          "marker-color": "#19b5b6",
+          "marker-size": "large"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -75.6972,
+            45.4215
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Australia: 1 application records",
+          "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+          "count": 1,
+          "sample_source_ids": "M43a",
+          "marker-color": "#4384ff",
+          "marker-size": "medium"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            149.13,
+            -35.2809
+          ]
+        }
+      }
+    ]
+  },
   "resources": [
     {
       "id": "academic_cv",
@@ -2216,205 +2573,273 @@
     {
       "title": "An Integrated Open-Source Stack for Vision-Based Autonomous Navigation of Wheeled Rovers",
       "id": "arxiv:2611.08100",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.08100",
+      "topic": "slam",
+      "relevance_score": 17,
       "published": "2026-11-05"
     },
     {
       "title": "MOMASPLAT: Dynamic Novel-View Demonstration Augmentation for Mobile Manipulation",
       "id": "arxiv:2611.08372",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.08372",
+      "topic": "robot_learning",
+      "relevance_score": 12,
       "published": "2026-11-05"
     },
     {
       "title": "GPWM: Modeling the World as 3D Particle Motion",
       "id": "arxiv:2611.08338",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.08338",
+      "topic": "robot_learning",
+      "relevance_score": 12,
       "published": "2026-11-05"
     },
     {
       "title": "Multimodal Hierarchical Mixture-of-Experts for 3D Medical Vision-Language Modeling",
       "id": "arxiv:2611.08185",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.08185",
+      "topic": "medical_ai",
+      "relevance_score": 9,
       "published": "2026-11-05"
     },
     {
       "title": "Radio-to-Pose Information for Gauge-Drift Correction in Cooperative Localization",
       "id": "arxiv:2611.08361",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.08361",
+      "topic": "robot_learning",
+      "relevance_score": 8,
       "published": "2026-11-05"
     },
     {
       "title": "Learning the Task or Learning the Verifier? Rethinking Criteria Exposure in Embodied Self-Improvement",
       "id": "arxiv:2611.08318",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.08318",
+      "topic": "robot_learning",
+      "relevance_score": 7,
       "published": "2026-11-05"
     },
     {
       "title": "OopsieRecover: Learning Transferable VLA Corrections from Semantic Interventions",
       "id": "arxiv:2611.08462",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.08462",
+      "topic": "robot_learning",
+      "relevance_score": 6,
       "published": "2026-11-05"
     },
     {
       "title": "VFlash: Fast, Accurate Visual Planning via Flash Primitive Decoding",
       "id": "arxiv:2611.08449",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.08449",
+      "topic": "robot_learning",
+      "relevance_score": 6,
       "published": "2026-11-05"
     },
     {
       "title": "SLA: Scaling Spatial-Language-Action Model via Continual Pre-training",
       "id": "arxiv:2611.08373",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.08373",
+      "topic": "robot_learning",
+      "relevance_score": 6,
       "published": "2026-11-05"
     },
     {
       "title": "VisionSIM: Beyond Idealized Sensors - A Multi-Modal Simulator for Robot Perception",
       "id": "arxiv:2611.08368",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.08368",
+      "topic": "robot_learning",
+      "relevance_score": 6,
       "published": "2026-11-05"
     },
     {
       "title": "Aligning Policy Encoders with a Shape Teacher",
       "id": "arxiv:2611.08275",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.08275",
+      "topic": "robot_learning",
+      "relevance_score": 6,
       "published": "2026-11-05"
     },
     {
       "title": "T3R: Training-Free Two-Stage Token Refinement Towards Efficient and Robust VLA Models",
       "id": "arxiv:2611.08413",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.08413",
+      "topic": "robot_learning",
+      "relevance_score": 5,
       "published": "2026-11-05"
     },
     {
       "title": "SHORE: Stability-Hybrid On-Policy Reinforcement Learning for Online Bin Packing",
       "id": "arxiv:2611.08364",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.08364",
+      "topic": "robot_learning",
+      "relevance_score": 5,
       "published": "2026-11-05"
     },
     {
       "title": "How Far Can Untrained Neural Networks Go in Anomaly Detection? From Tables to Pixels",
       "id": "arxiv:2611.08136",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.08136",
+      "topic": "medical_ai",
+      "relevance_score": 5,
       "published": "2026-11-05"
     },
     {
       "title": "TerraMesh-Masks: Open-Vocabulary Segmentation for Earth Observation",
       "id": "arxiv:2611.08081",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.08081",
+      "topic": "medical_ai",
+      "relevance_score": 5,
       "published": "2026-11-05"
     },
     {
       "title": "Failure Prediction and Classification in Vision-Language-Action Models Via Calibrated Latent Probing",
       "id": "arxiv:2611.08425",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.08425",
+      "topic": "robot_learning",
+      "relevance_score": 4,
       "published": "2026-11-05"
     },
     {
       "title": "Towards Scalable Diagnostic-Driven Whole-Slide Image Retrieval for Pathology Archives",
       "id": "arxiv:2611.07935",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.07935",
+      "topic": "medical_ai",
+      "relevance_score": 4,
       "published": "2026-11-05"
     },
     {
       "title": "Scale Anchoring via Implicit Semantics and Sequence-Consistent Loop Closure for VGGT-Based SLAM",
       "id": "arxiv:2611.06308",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.06308",
+      "topic": "slam",
+      "relevance_score": 8,
       "published": "2026-11-04"
     },
     {
       "title": "CoReMatch: Recurrent Continuous Coordinate Refinement for Real-Time Robotic Feature Matching",
       "id": "arxiv:2611.03932",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.03932",
+      "topic": "slam",
+      "relevance_score": 23,
       "published": "2026-11-02"
     },
     {
       "title": "A Tightly Coupled Magnetic-Inertial SLAM System for Field Robots",
       "id": "arxiv:2611.03106",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.03106",
+      "topic": "slam",
+      "relevance_score": 23,
       "published": "2026-11-02"
     },
     {
       "title": "A Straight Line Is Not a Camera Pose: Auditing Short-Clip Pose Benchmarks",
       "id": "arxiv:2611.00482",
-      "url": "",
+      "url": "https://arxiv.org/abs/2611.00482",
+      "topic": "slam",
+      "relevance_score": 8,
       "published": "2026-10-31"
     },
     {
       "title": "Visual-Inertial RGB-D SLAM with Encoders for a Differential Wheeled Robot",
       "id": "arxiv:2610.41768",
-      "url": "",
+      "url": "https://arxiv.org/abs/2610.41768",
+      "topic": "slam",
+      "relevance_score": 16,
       "published": "2026-10-30"
     },
     {
       "title": "DrawSplat: Atlanta World-Guided Implicit Gaussian SLAM for Indoor Reconstruction",
       "id": "arxiv:2610.41602",
-      "url": "",
+      "url": "https://arxiv.org/abs/2610.41602",
+      "topic": "slam",
+      "relevance_score": 8,
       "published": "2026-10-30"
     },
     {
       "title": "UMI-Live for In-The-Wild Bimanual Robotics Data Collection",
       "id": "arxiv:2610.39385",
-      "url": "",
+      "url": "https://arxiv.org/abs/2610.39385",
+      "topic": "slam",
+      "relevance_score": 14,
       "published": "2026-10-29"
     },
     {
       "title": "Smartphone Indoor Localization Enhanced by Hierarchical Multi-Sensor Context Recognition",
       "id": "arxiv:2610.39691",
-      "url": "",
+      "url": "https://arxiv.org/abs/2610.39691",
+      "topic": "slam",
+      "relevance_score": 13,
       "published": "2026-10-29"
     },
     {
       "title": "SKiD-SLAM: Resource-Aware Distributed Multi-Robot LiDAR SLAM for Planetary Missions with Field Deployments at Analog Sites",
       "id": "arxiv:2610.38141",
-      "url": "",
+      "url": "https://arxiv.org/abs/2610.38141",
+      "topic": "slam",
+      "relevance_score": 16,
       "published": "2026-10-28"
     },
     {
       "title": "RAVEN: A Unified Active SLAM System for Rapid Autonomous Visual Exploration with Aerial Robots under Localization Uncertainty",
       "id": "arxiv:2610.37111",
-      "url": "",
+      "url": "https://arxiv.org/abs/2610.37111",
+      "topic": "slam",
+      "relevance_score": 20,
       "published": "2026-10-27"
     },
     {
       "title": "SVIn+: Multi-Modal Framework for Robust Underwater State Estimation using 3D Sonar, Visual-Inertial, Water-Pressure, and DVL",
       "id": "arxiv:2610.36454",
-      "url": "",
+      "url": "https://arxiv.org/abs/2610.36454",
+      "topic": "slam",
+      "relevance_score": 18,
       "published": "2026-10-27"
     },
     {
       "title": "VPR-Space: A Benchmark for Visual Place Recognition in Space Analog Domains",
       "id": "arxiv:2610.35642",
-      "url": "",
+      "url": "https://arxiv.org/abs/2610.35642",
+      "topic": "slam",
+      "relevance_score": 13,
       "published": "2026-10-26"
     },
     {
       "title": "SG^2SLAM: Spatial Geometry-Informed 3D Gaussian Splatting SLAM for Monocular Outdoor Navigation",
       "id": "arxiv:2610.36312",
-      "url": "",
+      "url": "https://arxiv.org/abs/2610.36312",
+      "topic": "slam",
+      "relevance_score": 12,
       "published": "2026-10-26"
     },
     {
       "title": "T-ConSG: A LiDAR-Based Real-Time Temporal Construction Scene Graph for Dynamic and Evolving Environments",
       "id": "arxiv:2610.34041",
-      "url": "",
+      "url": "https://arxiv.org/abs/2610.34041",
+      "topic": "slam",
+      "relevance_score": 18,
       "published": "2026-10-25"
     },
     {
       "title": "Bracketing Shows the Way: Adaptive Multi-Exposure Policy as Input for Robust Visual SLAM",
       "id": "arxiv:2610.33174",
-      "url": "",
+      "url": "https://arxiv.org/abs/2610.33174",
+      "topic": "slam",
+      "relevance_score": 8,
       "published": "2026-10-23"
     },
     {
       "title": "Consistent Distributed Invariant EKF SLAM with Point and Object Features",
       "id": "arxiv:2610.31221",
-      "url": "",
+      "url": "https://arxiv.org/abs/2610.31221",
+      "topic": "slam",
+      "relevance_score": 11,
       "published": "2026-10-22"
     },
     {
       "title": "MAPLE: Mondrian-Anchored Prior for Learning-free Indoor Exploration",
       "id": "arxiv:2610.28566",
-      "url": "",
+      "url": "https://arxiv.org/abs/2610.28566",
+      "topic": "slam",
+      "relevance_score": 11,
       "published": "2026-10-20"
     }
   ],
