@@ -8,6 +8,13 @@ on:
       - tests/**
       - requirements-intelligence.txt
       - .github/workflows/**
+  pull_request:
+    paths:
+      - scripts/**
+      - tests/**
+      - dashboard/**
+      - requirements-intelligence.txt
+      - .github/workflows/**
   workflow_dispatch:
 
 permissions:
@@ -31,3 +38,13 @@ jobs:
       - run: python -m pip install -r requirements-intelligence.txt
       - run: python -m compileall -q scripts
       - run: python -m pytest tests -q
+      - name: Validate dashboard JavaScript syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          source = Path('dashboard/template.html').read_text()
+          script = re.findall(r'<script(?:\\s+[^>]*)?>(.*?)</script>', source, re.S)[-1]
+          Path('/tmp/experience-dashboard.js').write_text(script)
+          PY
+          node --check /tmp/experience-dashboard.js
