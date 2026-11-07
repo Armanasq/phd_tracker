@@ -93,7 +93,9 @@ def test_generation_creates_offline_dashboard_and_assets(tmp_path: Path) -> None
     assert (tmp_path / "assets/readme/asset_dependencies.svg").stat().st_size > 0
     assert (tmp_path / "data/experience_lineage.jsonld").stat().st_size > 0
     doc = (tmp_path / "docs/EXPERIENCE.md").read_text(encoding="utf-8")
-    assert "Research intelligence" in doc
+    assert "THIS IS AN EXECUTABLE RESEARCH WORKSPACE" in doc
+    assert "kinetic_cover.svg" in doc
+    assert "experience-lab.yml" in doc
     assert 'src="../assets/readme/isometric_calendar.svg"' in doc
     assert 'href="../dashboard/README.md"' in doc
     assert 'href="TODAY.md"' in doc
