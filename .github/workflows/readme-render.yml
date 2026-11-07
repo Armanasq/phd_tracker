@@ -11,6 +11,8 @@ on:
       - dashboard/template.html
       - dashboard/experience.css
       - dashboard/experience.js
+      - dashboard/visual_laboratory.css
+      - dashboard/visual_laboratory.js
       - .github/workflows/readme-render.yml
   workflow_dispatch:
 
