@@ -650,18 +650,23 @@ def generate(root: Path = ROOT) -> dict:
     placeholder="__EVIDENCE_DATA_JSON__"
     if template.count(placeholder)!=1:
         raise ValueError("Dashboard template missing data placeholder")
-    stylesheet=(root/"dashboard"/"experience.css").read_text(encoding="utf-8")
-    javascript=(root/"dashboard"/"experience.js").read_text(encoding="utf-8")
-    if "</style" in stylesheet.lower() or "</script" in javascript.lower():
-        raise ValueError("Embedded application assets must not contain closing HTML script/style tags")
-    if template.count('<link rel="stylesheet" href="experience.css">')!=1:
-        raise ValueError("Dashboard stylesheet marker must appear once")
-    if template.count('<script src="experience.js"></script>')!=1:
-        raise ValueError("Dashboard interaction script marker must appear once")
-    embedded=json.dumps(view,ensure_ascii=False).replace("<","\\u003c").replace(">","\\u003e").replace("&","\\u0026")
-    standalone=(template.replace(placeholder,embedded)
-                .replace('<link rel="stylesheet" href="experience.css">',"<style>"+chr(10)+stylesheet+chr(10)+"</style>")
-                .replace('<script src="experience.js"></script>',"<script>"+chr(10)+javascript+chr(10)+"</script>"))
+    standalone=template.replace(placeholder,json.dumps(view,ensure_ascii=False).replace("<","\\u003c").replace(">","\\u003e").replace("&","\\u0026"))
+    for name in ("experience.css", "visual_laboratory.css"):
+        source=(root/"dashboard"/name).read_text(encoding="utf-8")
+        if "</style" in source.lower():
+            raise ValueError(f"CSS cannot embed closing style tag: {name}")
+        marker=f'<link rel="stylesheet" href="{name}">'
+        if standalone.count(marker)!=1:
+            raise ValueError(f"Expected one stylesheet marker: {name}")
+        standalone=standalone.replace(marker,"<style>"+chr(10)+source+chr(10)+"</style>")
+    for name in ("experience.js", "visual_laboratory.js"):
+        source=(root/"dashboard"/name).read_text(encoding="utf-8")
+        if "</script" in source.lower():
+            raise ValueError(f"JavaScript cannot embed closing script tag: {name}")
+        marker=f'<script src="{name}"></script>'
+        if standalone.count(marker)!=1:
+            raise ValueError(f"Expected one JavaScript marker: {name}")
+        standalone=standalone.replace(marker,"<script>"+chr(10)+source+chr(10)+"</script>")
     (root/"dashboard"/"index.html").write_text(standalone,encoding="utf-8")
     document=markdown(view)
     document=(document.replace('src="assets/','src="../assets/')
