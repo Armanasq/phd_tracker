@@ -36,7 +36,7 @@ def test_kinetic_assets_are_valid_self_contained_svg(tmp_path: Path) -> None:
         assert root.tag.endswith("svg")
         assert "animation:" in source
         assert "<script" not in source
-        assert "http://" not in source
+        assert "javascript:" not in source
         assert "2026-11-07" in source or "source" in source.lower()
 
 
