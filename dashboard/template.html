@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>EvidenceGraph — Research Observatory</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:#071522;color:#eaf5fa}*{box-sizing:border-box}body{margin:0}a{color:#7ce6d0}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #92b9ff;outline-offset:3px}header{padding:36px max(24px,calc((100vw - 1440px)/2));border-bottom:1px solid #28475e;background:linear-gradient(120deg,#102c3b,#071522)}.eyebrow{text-transform:uppercase;color:#5ce0c1;font-size:12px;font-weight:800;letter-spacing:3px}h1{font-size:clamp(30px,4vw,56px);letter-spacing:-.035em;margin:12px 0}h2{margin:0 0 14px;font-size:21px}h3{margin:0 0 9px;font-size:15px}p{line-height:1.5}.muted{color:#a5bbcc}.meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}.pill{border:1px solid #315169;border-radius:99px;padding:8px 12px;color:#b9d5e4;font-size:12px}main{max-width:1440px;margin:auto;padding:24px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:10px 0 22px}.stat,.panel{border:1px solid #28475e;background:#102638;border-radius:16px;padding:20px;min-width:0}.stat strong{display:block;font-size:39px;margin:12px 0 2px}.stat span{font-size:12px;color:#afc7d5;letter-spacing:1px}.row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:15px 0}.actions input,.actions select{border:1px solid #416077;border-radius:8px;background:#071522;color:#eaf5fa;padding:11px;min-width:0}.actions input{flex:1;min-width:190px}button{border:1px solid #457b85;border-radius:8px;background:#143c47;color:#eaf5fa;padding:9px 12px}button:hover{background:#205564}button[aria-pressed=true]{border-color:#5ce0c1;background:#1d6c60}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;border-bottom:1px solid #29475c;padding:11px 8px;vertical-align:top}th{color:#a5bdcd;font-size:11px;text-transform:uppercase;letter-spacing:1px}td{line-height:1.5}.scroll{overflow:auto;max-height:530px}.tag{font-size:11px;background:#25445a;padding:4px 8px;border-radius:6px;display:inline-block}.danger{color:#fa92ab}.warning{color:#ffcb8b}.success{color:#5ce0c1}.viz{width:100%;height:auto;max-height:330px}small{color:#a5bbcc}.resource{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #28475e}.resource label{display:flex;gap:10px;align-items:center}.resource span{font-size:12px;color:#adc3d1}.resource input{accent-color:#5ce0c1;width:17px;height:17px}.meter{height:9px;background:#1d3649;border-radius:8px;overflow:hidden;flex:1;margin:4px 0}.meter>div{background:#5ce0c1;height:100%;border-radius:8px}.source{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid #28475e}#details{min-height:140px}#detail-title{font-weight:700;font-size:17px}.grid{display:grid;gap:12px}.paper{padding:13px;border:1px solid #28475e;border-radius:9px;background:#0c2130}.foot{border-top:1px solid #28475e;padding:20px 24px;color:#9db7c7;font-size:13px}.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:900px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.row{grid-template-columns:1fr}header{padding:24px}}@media(max-width:480px){.stats{grid-template-columns:1fr 1fr}.stat{padding:12px}.stat strong{font-size:27px}main{padding:12px}.panel{padding:15px}th,td{padding:8px 5px}}
+@media(prefers-reduced-motion:no-preference){.stat{animation:appear .5s ease both}@keyframes appear{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}}
+</style>
+</head>
+<body>
+<header>
+<div class="eyebrow">EvidenceGraph / Research Observatory</div>
+<h1>Make the next decision<br>with evidence.</h1>
+<p class="muted">A local-first operational cockpit. Every visualization derives from the repository’s recorded evidence. What-if experiments do not update application status.</p>
+<div class="meta"><span class="pill" id="asof"></span><span class="pill" id="source-state"></span><span class="pill">Offline · No external scripts or analytics</span><a class="pill" href="../README.md">Repository documentation</a></div>
+</header>
+<main>
+<div class="stats" id="stats" aria-label="Snapshot metrics"></div>
+<div class="row">
+<section class="panel">
+<h2>Deadline topology</h2><p class="muted">Applications grouped by days until deadline, as of the committed snapshot.</p>
+<svg id="deadline-viz" class="viz" role="img" aria-label="Distribution of future deadline windows" viewBox="0 0 600 280"></svg>
+</section>
+<section class="panel">
+<h2>Counterfactual readiness</h2>
+<p class="muted">Choose hypothetical ready documents. These are <b>scenarios</b>, not verified readiness, eligibility, or submission guarantees.</p>
+<div id="resources"></div>
+<p id="simulation" aria-live="polite"></p>
+</section>
+</div>
+<div class="row">
+<section class="panel">
+<h2>Application evidence explorer</h2>
+<div class="actions">
+<label class="sr" for="query">Find application</label><input id="query" placeholder="Search university, research area, source ID…" autocomplete="off">
+<label class="sr" for="window">Deadline window</label><select id="window"><option value="all">All recorded</option><option value="3">Next 3 days</option><option value="7">Next 7 days</option><option value="14">Next 14 days</option><option value="30">Next 30 days</option><option value="past">Past deadlines</option></select>
+<label class="sr" for="proof">Proof status</label><select id="proof"><option value="all">All proof states</option><option value="unknown">Unknown resource state</option><option value="evidence">Evidence obligations</option><option value="clear">No explicit proof flags</option></select>
+</div>
+<div class="scroll"><table><thead><tr><th>Application</th><th>Deadline</th><th>Decision</th><th>Inspect</th></tr></thead><tbody id="applications"></tbody></table></div>
+<small id="count"></small>
+</section>
+<section class="panel" id="details">
+<h2>Inspect a record</h2>
+<div id="detail-body"><p class="muted">Select Inspect to see exactly which requirements are confirmed, unknown or mentioned, with source provenance.</p></div>
+</section>
+</div>
+<div class="row">
+<section class="panel">
+<h2>Source assurance</h2><p class="muted">Providers can fail while a pipeline succeeds. These are observed collection states, not a global search completeness score.</p>
+<div id="sources"></div><h3 style="margin-top:20px">Monitor observations</h3><div id="checks"></div>
+</section>
+<section class="panel">
+<h2>Research signal feed</h2><p class="muted">Research publications are not PhD vacancy announcements.</p>
+<div class="actions"><label class="sr" for="paper-query">Search research</label><input id="paper-query" placeholder="Filter publication titles…"></div>
+<div id="papers" class="grid scroll"></div>
+</section>
+</div>
+</main>
+<footer class="foot">Data remains in this HTML file when opened locally. This viewer does not send updates to GitHub, automatically submit applications, or establish eligibility. Check primary institutional sources before acting.</footer>
+<script id="evidence-data" type="application/json">__EVIDENCE_DATA_JSON__</script>
+<script>
+'use strict';
+const payload=document.getElementById('evidence-data').textContent;
+const D=JSON.parse(payload);
+const $=id=>document.getElementById(id);
+const elements=(tag,attrs={},text='')=>{const el=document.createElement(tag);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,String(v)));el.textContent=String(text);return el;};
+const add=(parent,tag,attrs={},text='')=>{const el=elements(tag,attrs,text);parent.append(el);return el;};
+const classify=d=>d<0?'past':d<=3?'imminent':d<=7?'week':d<=14?'fortnight':d<=30?'month':'later';
+const entries=D.applications||[], resources=D.resources||[], selected=new Set();
+$('asof').textContent='Snapshot '+D.as_of+' · '+D.timezone;
+$('source-state').textContent=(D.metrics.source_conflicts||0)+' recorded source conflicts';
+[['APPLICATIONS',D.metrics.tracked],['UPCOMING 7 DAYS',D.metrics.next_seven_days],['UNKNOWN DOCUMENT MENTIONS',D.metrics.unknown_document_mentions],['SOURCE CONTRADICTIONS',D.metrics.source_conflicts]].forEach(([label,value])=>{
+ const div=add($('stats'),'div',{class:'stat'});add(div,'span',{},label);add(div,'strong',{},value);
+});
+const svgNS='http://www.w3.org/2000/svg';
+function drawBar(x,y,w,h,fill,text){const g=document.createElementNS(svgNS,'g');const r=document.createElementNS(svgNS,'rect');for(const [k,v] of Object.entries({x,y,width:w,height:h,rx:6,fill}))r.setAttribute(k,String(v));g.append(r);if(text){const t=document.createElementNS(svgNS,'title');t.textContent=text;g.append(t)}$('deadline-viz').append(g)}
+function drawText(x,y,value,color='#afc7d5'){const t=document.createElementNS(svgNS,'text');Object.entries({x,y,fill:color,'font-size':12}).forEach(([k,v])=>t.setAttribute(k,String(v)));t.textContent=value;$('deadline-viz').append(t)}
+const buckets=[['0–3 days',a=>a.days>=0&&a.days<=3],['4–7 days',a=>a.days>=4&&a.days<=7],['8–14 days',a=>a.days>=8&&a.days<=14],['15–30 days',a=>a.days>=15&&a.days<=30],['31+ days',a=>a.days>30]];
+const counts=buckets.map(([_,fn])=>entries.filter(fn).length);const max=Math.max(1,...counts);
+buckets.forEach(([name],i)=>{let y=23+i*50;drawText(8,y+12,name);drawBar(112,y,385,19,'#1b3748');drawBar(112,y,385*counts[i]/max,19,i<2?'#ffcb8b':'#5ce0c1',name+': '+counts[i]);drawText(518,y+13,counts[i],'#eaf5fa')});
+function simulatedCoverage(a){return a.documents.length>0&&a.documents.every(id=>selected.has(id)||resources.some(r=>r.id===id&&r.state==='ready'))}
+function renderSimulation(){
+ const future=entries.filter(a=>a.days>=0), covered=future.filter(simulatedCoverage);
+ const text=covered.length+' of '+future.length+' future application records have all mentioned documents covered by confirmed-ready or hypothetical-ready states. This does not prove eligibility, completeness, or submission readiness.';
+ $('simulation').textContent=text;
+}
+resources.forEach(r=>{const div=add($('resources'),'div',{class:'resource'});const label=add(div,'label');const toggle=add(label,'input',{type:'checkbox','aria-label':'Simulate '+r.label+' ready'});add(label,'span',{},r.label);const info=add(div,'span',{},r.state+' · '+r.potential+' mentions');toggle.addEventListener('change',()=>{if(toggle.checked)selected.add(r.id);else selected.delete(r.id);renderSimulation();});});renderSimulation();
+function inspect(a){
+ $('detail-body').replaceChildren();const root=$('detail-body');
+ add(root,'p',{id:'detail-title'},a.name);add(root,'p',{class:'muted'},a.id+' · '+a.deadline+' · '+a.decision);
+ add(root,'h3',{},'Document assertions');
+ if(!a.documents.length)add(root,'p',{class:'muted'},'No document requirements recorded in this frontier.');
+ else a.documents.forEach(id=>{const r=resources.find(x=>x.id===id);const st=r?r.state:'unknown';add(root,'div',{class:'resource'},id+' — '+(selected.has(id)?'hypothetically ready (only in this viewer)':st));});
+ add(root,'h3',{style:'margin-top:18px'},'Source proof obligations');
+ if(!a.proof_obligations.length)add(root,'p',{class:'muted'},'No explicit obligations recorded; this is not proof of complete verification.');
+ a.proof_obligations.forEach(p=>add(root,'p',{class:'warning'},p));
+ add(root,'h3',{},'Recorded next action');add(root,'p',{},a.next_step||'No action recorded');
+ if(a.source){const l=add(root,'a',{href:a.source,target:'_blank',rel:'noopener noreferrer'},'Open institutional source');}
+ else add(root,'p',{class:'muted'},'No verified source URL recorded');
+}
+function renderApplications(){
+ const q=$('query').value.toLowerCase().trim(),w=$('window').value,p=$('proof').value;
+ const rows=entries.filter(a=>{
+ const text=(a.name+' '+a.id+' '+a.decision).toLowerCase();
+ if(q&&!text.includes(q))return false;
+ if(w==='past'&&a.days>=0)return false;
+ if(w!=='all'&&w!=='past'&&(a.days<0||a.days>Number(w)))return false;
+ if(p==='unknown'&&!a.unknown_documents.length)return false;
+ if(p==='evidence'&&!a.proof_obligations.length)return false;
+ if(p==='clear'&&(a.unknown_documents.length||a.proof_obligations.length))return false;
+ return true;
+ });
+ const body=$('applications');body.replaceChildren();
+ rows.slice(0,150).forEach(a=>{const row=add(body,'tr');add(row,'td',{},a.name);const deadline=add(row,'td');add(deadline,'span',{class:a.days<0?'muted':a.days<=3?'danger':'success'},a.deadline);add(row,'td',{},a.decision);const cell=add(row,'td');const btn=add(cell,'button',{type:'button','aria-label':'Inspect '+a.id},'Inspect');btn.addEventListener('click',()=>inspect(a));});
+ $('count').textContent=rows.length+' matching records'+(rows.length>150?' · first 150 shown':'')+' · status is owner-confirmed only';
+}
+['query','window','proof'].forEach(id=>$(id).addEventListener(id==='query'?'input':'change',renderApplications));renderApplications();
+(D.providers||[]).forEach(p=>{const el=add($('sources'),'div',{class:'source'});add(el,'span',{},p.name);add(el,'small',{},p.observed+' seen / '+p.new_unique+' unique');add(el,'span',{class:p.health==='ok'?'success':'danger'},p.health);});
+Object.entries(D.source_checks||{}).forEach(([key,num])=>{const el=add($('checks'),'div',{class:'resource'});add(el,'span',{},key.replaceAll('_',' '));add(el,'span',{},num)});
+function renderPapers(){const q=$('paper-query').value.toLowerCase().trim(),root=$('papers');root.replaceChildren();const rows=(D.research||[]).filter(p=>p.title.toLowerCase().includes(q));rows.forEach(p=>{const card=add(root,'div',{class:'paper'});if(p.url){add(card,'a',{href:p.url,target:'_blank',rel:'noopener noreferrer'},p.title)}else add(card,'span',{},p.title);add(card,'p',{class:'muted'},p.id+' · '+(p.published||'date not specified'));});if(!rows.length)add(root,'p',{class:'muted'},'No matching research records.');}
+$('paper-query').addEventListener('input',renderPapers);renderPapers();
+</script>
+</body>
+</html>
