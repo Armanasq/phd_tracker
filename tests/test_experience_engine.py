@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts.experience_engine import generate, make_view, orbit_svg, safe_url
+from scripts.experience_engine import (generate, make_view, orbit_svg, safe_url, operational_insights, lineage_jsonld, isometric_calendar_svg, dependency_svg, research_map_svg)
 
 
 def write_fixture(root: Path, *, duplicate: bool = False, mismatch: bool = False) -> None:
@@ -89,4 +89,38 @@ def test_generation_creates_offline_dashboard_and_assets(tmp_path: Path) -> None
     assert "Counterfactual readiness" in generated
     assert (tmp_path / "assets/readme/evidence_pipeline.gif").stat().st_size > 0
     assert (tmp_path / "assets/readme/deadline_orbits.svg").stat().st_size > 0
+    assert (tmp_path / "assets/readme/isometric_calendar.svg").stat().st_size > 0
+    assert (tmp_path / "assets/readme/asset_dependencies.svg").stat().st_size > 0
+    assert (tmp_path / "data/experience_lineage.jsonld").stat().st_size > 0
     assert "Intelligence observatory" in (tmp_path / "docs/EXPERIENCE.md").read_text(encoding="utf-8")
+
+
+def test_collision_and_source_anomaly_linkage(tmp_path: Path) -> None:
+    write_fixture(tmp_path)
+    view = make_view(tmp_path)
+    clone = dict(view["applications"][0], id="P2", name="Second call")
+    details = operational_insights(
+        view["applications"] + [clone],
+        [
+            {"id": "MON-1", "application_id": "P1", "status": "contradiction_closed_portal", "source_url": "https://university.example/portal"},
+            {"id": "MON-2", "application_id": "UNKNOWN", "status": "review_source_changed"},
+        ],
+    )
+    assert details["deadline_collisions"][0]["count"] == 2
+    assert details["source_anomalies"][0]["is_linked"] is True
+    assert details["source_anomalies"][1]["is_linked"] is False
+    assert details["verification_queue"][0]["days"] == 1
+
+
+def test_jsonld_lineage_and_visuals(tmp_path: Path) -> None:
+    write_fixture(tmp_path)
+    view = make_view(tmp_path)
+    graph = lineage_jsonld(view)
+    assert graph["@context"]["prov"] == "http://www.w3.org/ns/prov#"
+    application = next(item for item in graph["@graph"] if item["@id"].endswith(":P1"))
+    assert application["schema:citation"]["@id"] == "https://university.example/apply"
+    assert len(application["documentMention"]) == 1
+    for svg in (isometric_calendar_svg(view), dependency_svg(view), research_map_svg(view)):
+        assert svg.startswith("<svg")
+        assert svg.rstrip().endswith("</svg>")
+        assert "<script>alert" not in svg
