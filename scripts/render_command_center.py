@@ -589,7 +589,8 @@ def render(root=ROOT):
     docs.mkdir(parents=True,exist_ok=True)
     (assets/"operations.svg").write_text(operations_svg(plan),encoding="utf-8")
     (assets/"lanes.svg").write_text(lanes_svg(plan),encoding="utf-8")
-    experience_block=experience_markdown(load(root/"data"/"experience_view.json"))
+    view_path=root/"data"/"experience_view.json"
+    experience_block=experience_markdown(load(view_path)) if view_path.is_file() else ""
     (root/"README.md").write_text(dashboard_md(plan,metrics,experience_block),encoding="utf-8")
     (docs/"TODAY.md").write_text(todays_md(plan,metrics),encoding="utf-8")
     output={
