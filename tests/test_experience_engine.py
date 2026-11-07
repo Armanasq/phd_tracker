@@ -80,6 +80,9 @@ def test_generation_creates_offline_dashboard_and_assets(tmp_path: Path) -> None
     (tmp_path / "dashboard").mkdir()
     template = Path(__file__).resolve().parents[1] / "dashboard/template.html"
     (tmp_path / "dashboard/template.html").write_text(template.read_text(encoding="utf-8"),encoding="utf-8")
+    for name in ("experience.css", "experience.js"):
+        source = template.parent / name
+        (tmp_path / "dashboard" / name).write_text(source.read_text(encoding="utf-8"), encoding="utf-8")
     result = generate(tmp_path)
     assert result["applications"] == 1
     generated = (tmp_path / "dashboard/index.html").read_text(encoding="utf-8")
@@ -87,6 +90,11 @@ def test_generation_creates_offline_dashboard_and_assets(tmp_path: Path) -> None
     assert r"\u003cscript" in generated
     assert "<script>alert" not in generated
     assert "Counterfactual readiness" in generated
+    assert "buildGraph" in generated
+    assert "renderPriority" in generated
+    assert "command-query" in generated
+    assert '<script src="experience.js"></script>' not in generated
+    assert '<link rel="stylesheet" href="experience.css">' not in generated
     assert (tmp_path / "assets/readme/evidence_pipeline.gif").stat().st_size > 0
     assert (tmp_path / "assets/readme/deadline_orbits.svg").stat().st_size > 0
     assert (tmp_path / "assets/readme/isometric_calendar.svg").stat().st_size > 0
