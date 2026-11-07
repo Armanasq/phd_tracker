@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="dashboard/README.md"><img src="assets/readme/experience_hero.svg" width="100%" alt="EvidenceGraph application deadlines, source conflicts and proof obligations" /></a>
+<a href="dashboard/README.md"><img src="assets/readme/experience_hero.svg" alt="EvidenceGraph research intelligence: dated application counts, evidence obligations, source contradictions and research signals" width="100%" /></a>
 
 **EVIDENCEGRAPH · PhD APPLICATION INTELLIGENCE**
 
