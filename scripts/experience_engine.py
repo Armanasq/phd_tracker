@@ -314,6 +314,12 @@ def generate(root: Path = ROOT) -> dict:
     for name, content in renders.items():
         (assets/name).write_text(content,encoding="utf-8")
     make_gif(view,assets/"evidence_pipeline.gif")
+    template=(root/"dashboard"/"template.html").read_text(encoding="utf-8")
+    placeholder="__EVIDENCE_DATA_JSON__"
+    if template.count(placeholder)!=1:
+        raise ValueError("Dashboard template missing data placeholder")
+    embedded=json.dumps(view,ensure_ascii=False).replace("<","\\u003c").replace(">","\\u003e").replace("&","\\u0026")
+    (root/"dashboard"/"index.html").write_text(template.replace(placeholder,embedded),encoding="utf-8")
     (docs/"EXPERIENCE.md").write_text(markdown(view),encoding="utf-8")
     return {"as_of":view["as_of"],"applications":len(view["applications"]),"assets":list(renders)+["evidence_pipeline.gif"]}
 
