@@ -1,0 +1,51 @@
+name: EvidenceGraph | Browser Interaction and Visual QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - dashboard/**
+      - scripts/experience_engine.py
+      - scripts/readme_studio.py
+      - tests/ui_smoke.cjs
+      - .github/workflows/visual-qa.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: evidencegraph-browser-visual-qa
+  cancel-in-progress: true
+
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-intelligence.txt
+      - name: Install generation dependencies
+        run: python -m pip install -r requirements-intelligence.txt
+      - name: Regenerate testable standalone application
+        run: |
+          python scripts/experience_engine.py
+          test -s dashboard/index.html
+      - name: Install headless browser
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Exercise map, charts, timeline, simulation and command palette
+        run: node tests/ui_smoke.cjs
+      - name: Publish desktop and mobile screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencegraph-responsive-ui
+          path: artifacts/ui-qa/*.png
+          if-no-files-found: ignore
+          retention-days: 14
