@@ -58,6 +58,19 @@
 <div id="papers" class="grid scroll"></div>
 </section>
 </div>
+<div class="row">
+<section class="panel">
+<h2>Deadline collisions & verification frontier</h2>
+<p class="muted">Grouped deadlines reveal workload collisions. Review candidates are sorted by remaining calendar days, not estimated success.</p>
+<h3>Competing deadlines</h3><div id="collisions"></div>
+<h3 style="margin-top:20px">Next records requiring confirmation</h3><div id="verification-queue"></div>
+</section>
+<section class="panel">
+<h2>Contradiction trace</h2>
+<p class="muted">Source-monitor anomalies mapped to application IDs when a valid relation exists. A changed page never overwrites owner decisions automatically.</p>
+<div id="anomalies"></div>
+</section>
+</div>
 </main>
 <footer class="foot">Data remains in this HTML file when opened locally. This viewer does not send updates to GitHub, automatically submit applications, or establish eligibility. Check primary institutional sources before acting.</footer>
 <script id="evidence-data" type="application/json">__EVIDENCE_DATA_JSON__</script>
@@ -122,6 +135,37 @@ function renderApplications(){
 Object.entries(D.source_checks||{}).forEach(([key,num])=>{const el=add($('checks'),'div',{class:'resource'});add(el,'span',{},key.replaceAll('_',' '));add(el,'span',{},num)});
 function renderPapers(){const q=$('paper-query').value.toLowerCase().trim(),root=$('papers');root.replaceChildren();const rows=(D.research||[]).filter(p=>p.title.toLowerCase().includes(q));rows.forEach(p=>{const card=add(root,'div',{class:'paper'});if(p.url){add(card,'a',{href:p.url,target:'_blank',rel:'noopener noreferrer'},p.title)}else add(card,'span',{},p.title);add(card,'p',{class:'muted'},p.id+' · '+(p.published||'date not specified'));});if(!rows.length)add(root,'p',{class:'muted'},'No matching research records.');}
 $('paper-query').addEventListener('input',renderPapers);renderPapers();
+
+const insights=D.insights||{};
+function renderInsights(){
+ const collisionRoot=$('collisions');
+ (insights.deadline_collisions||[]).slice(0,16).forEach(group=>{
+  const entry=add(collisionRoot,'div',{class:'resource'});
+  add(entry,'span',{},group.date+' · '+group.count+' applications');
+  const button=add(entry,'button',{type:'button'},'Inspect');
+  button.addEventListener('click',()=>{const ids=new Set(group.applications.map(a=>a.id));$('query').value='';$('window').value='all';$('proof').value='all';renderApplications();const match=entries.find(a=>ids.has(a.id));if(match)inspect(match);});
+ });
+ if(!collisionRoot.children.length)add(collisionRoot,'p',{class:'muted'},'No multiple-deadline days in the stored future snapshot.');
+ const queue=$('verification-queue');
+ (insights.verification_queue||[]).slice(0,10).forEach(item=>{
+  const div=add(queue,'div',{class:'resource'});
+  const col=add(div,'div');add(col,'div',{},item.name);add(col,'small',{},item.deadline+' · '+item.reasons.join('; '));
+  const button=add(div,'button',{type:'button'},'Inspect');
+  button.addEventListener('click',()=>{const match=entries.find(a=>a.id===item.id);if(match)inspect(match);});
+ });
+ if(!queue.children.length)add(queue,'p',{class:'muted'},'No explicit verification flags in future records.');
+ const anomalies=$('anomalies');
+ (insights.source_anomalies||[]).forEach(item=>{
+  const div=add(anomalies,'div',{class:'paper'});
+  add(div,'strong',{class:'warning'},item.status.replaceAll('_',' '));
+  add(div,'p',{},item.application_name);
+  add(div,'small',{},item.application_id+' · expected '+(item.expected_deadline||'not recorded'));
+  if(item.source)add(div,'p').append(add(document.createDocumentFragment(),'a',{href:item.source,target:'_blank',rel:'noopener noreferrer'},'Inspect observed source'));
+ });
+ if(!anomalies.children.length)add(anomalies,'p',{class:'muted'},'No anomalous source observations in this snapshot.');
+}
+renderInsights();
+
 </script>
 </body>
 </html>
