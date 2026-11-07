@@ -599,7 +599,8 @@ def generate(root: Path = ROOT) -> dict:
               .replace('href="data/','href="../data/')
               .replace('](dashboard/','](../dashboard/')
               .replace('](data/','](../data/')
-              .replace('](docs/TODAY.md)','](TODAY.md)'))
+              .replace('](docs/TODAY.md)','](TODAY.md)')
+              .replace('href="docs/','href="'))
     (docs/"EXPERIENCE.md").write_text(document,encoding="utf-8")
     return {"as_of":view["as_of"],"applications":len(view["applications"]),"assets":list(renders)+["evidence_pipeline.gif"]}
 
