@@ -197,9 +197,9 @@ def dashboard_md(plan, metrics, experience_block=""):
     freshness=(f'Last official-page monitor: {md(last_run.get("date","unknown"))} · '
                f'last discovery: {md(last_research.get("run_date","unknown"))} · '
                f'last publication radar: {md(radar.get("as_of","unknown"))}')
-    return f"""<div align="center">
+    return f"""{experience_block}
 
-<a href="dashboard/README.md"><img src="assets/readme/experience_hero.svg" alt="EvidenceGraph research intelligence: dated application counts, evidence obligations, source contradictions and research signals" width="100%" /></a>
+<div align="center">
 
 **EVIDENCEGRAPH · PhD APPLICATION INTELLIGENCE**
 
@@ -209,11 +209,9 @@ def dashboard_md(plan, metrics, experience_block=""):
 [![Regression & Data Contracts](https://github.com/Armanasq/phd_tracker/actions/workflows/intelligence-ci.yml/badge.svg)](../../actions/workflows/intelligence-ci.yml)
 [![Full Workbook Audit](https://github.com/Armanasq/phd_tracker/actions/workflows/audit-workbook.yml/badge.svg)](../../actions/workflows/audit-workbook.yml)
 
-[**APPLICATION WORKSPACE**](PhD_Action_List.xlsx) · [**DEADLINE OPERATIONS**](docs/TODAY.md) · [**INTERACTIVE OFFLINE LAB**](dashboard/README.md) · [**SOURCE PROVENANCE**](data/experience_lineage.jsonld) · [**OWNER COMMANDS**](../../issues/1)
+[**APPLICATION WORKSPACE**](PhD_Action_List.xlsx) · [**DEADLINE OPERATIONS**](docs/TODAY.md) · [**BROWSER FLIGHT DECK**](dashboard/README.md) · [**SOURCE PROVENANCE**](data/experience_lineage.jsonld) · [**OWNER COMMANDS**](../../issues/1)
 
 </div>
-
-{experience_block}
 
 ### Navigate the command center
 
