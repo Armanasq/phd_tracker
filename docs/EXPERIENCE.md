@@ -4,7 +4,7 @@
 
 **THIS IS AN EXECUTABLE RESEARCH WORKSPACE, NOT A STATIC TRACKER.**
 
-[**RUN AN INTERACTIVE SCENARIO**](../../actions/workflows/experience-lab.yml) · [**OPERATE SOURCE ALERTS**](../../issues/1) · [**EXPLORE THE APPLICATION**](../dashboard/README.md) · [**INSPECT RAW EVIDENCE**](../data/experience_view.json)
+[**RUN AN INTERACTIVE SCENARIO**](../../actions/workflows/experience-lab.yml) · [**OPERATE SOURCE ALERTS**](../../issues/1) · [**DOWNLOAD ONE-FILE APP**](../dashboard/index.html) · [**OPENING GUIDE**](../dashboard/README.md) · [**INSPECT RAW EVIDENCE**](../data/experience_view.json)
 
 <sub>Regenerated from committed evidence. Snapshot 2026-11-07 · 100 frontier records · 1 source conflict(s). Real actions run through GitHub or the browser application.</sub>
 
@@ -24,7 +24,7 @@ Change horizon, lens and hypothetical document readiness; receive computed ranki
 
 Drag evidence nodes, scrub time, tune proof-debt weights, run a command palette and change a local work board.
 
-[**Open interactive browser cockpit**](../dashboard/README.md)
+[**Download executable HTML**](../dashboard/index.html) · [Opening instructions](../dashboard/README.md)
 
 </details></td>
 <td width="33%" valign="top"><details open><summary><b>03 / OPERATE</b></summary>
@@ -52,9 +52,9 @@ The workflow calculates from committed evidence and produces a readable GitHub A
 <details>
 <summary><b>Temporal graph / drag, zoom, scrub, filter</b></summary>
 
-The [browser cockpit](../dashboard/README.md) supports a draggable and zoomable evidence graph, 0–60-day time travel, explicit review weights, reproducible URLs, CSV/JSON export, keyboard search (Ctrl/Cmd + K), and a local drag-and-drop workspace.
+The [downloadable browser cockpit](../dashboard/index.html) supports a draggable and zoomable evidence graph, 0–60-day time travel, explicit review weights, reproducible URLs, CSV/JSON export, keyboard search (Ctrl/Cmd + K), and a local drag-and-drop workspace.
 
-GitHub README rendering cannot execute JavaScript; SVG motion and expandable sections are the native layer. Executable HTML/CSS/JS are in [dashboard/](../dashboard/).
+GitHub README rendering cannot execute JavaScript. Download the generated index.html and open it in a browser: the styles, code and snapshot are embedded in a single file.
 
 </details>
 
