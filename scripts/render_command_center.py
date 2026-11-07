@@ -6,6 +6,11 @@ import json
 import re
 from datetime import date, datetime
 from pathlib import Path
+
+if __package__:
+    from .experience_engine import generate as generate_experience
+else:
+    from experience_engine import generate as generate_experience
 from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -150,7 +155,7 @@ def share_table(items,max_rows=None):
     return "\n".join(lines)
 
 
-def dashboard_md(plan, metrics):
+def dashboard_md(plan, metrics, experience_block=""):
     day=plan["as_of"]
     today=plan["today"]
     near=plan["upcoming_7_day_deadlines"]
@@ -207,6 +212,8 @@ def dashboard_md(plan, metrics):
 [**View Excel tracker**](PhD_Action_List.xlsx) · [**Today's complete action plan**](docs/TODAY.md) · [**Import calendar reminders**](calendar/phd_deadlines.ics) · [**Private Action Center**](../../issues/1) · [**Run the automation**](../../actions/workflows/phd-intelligence.yml)
 
 </div>
+
+{experience_block}
 
 ### Navigate the command center
 
@@ -574,13 +581,17 @@ def render(root=ROOT):
     if not metrics:
         raise ValueError("Missing README source metrics")
     metrics["exclusion_memory"]=load(root/"data"/"exclusion_memory.json")
+    if (root/"data"/"portfolio_frontier.json").is_file():
+        generate_experience(root)
     assets=root/"assets"/"readme"
     docs=root/"docs"
     assets.mkdir(parents=True,exist_ok=True)
     docs.mkdir(parents=True,exist_ok=True)
     (assets/"operations.svg").write_text(operations_svg(plan),encoding="utf-8")
     (assets/"lanes.svg").write_text(lanes_svg(plan),encoding="utf-8")
-    (root/"README.md").write_text(dashboard_md(plan,metrics),encoding="utf-8")
+    experience_path=docs/"EXPERIENCE.md"
+    experience_block=experience_path.read_text(encoding="utf-8") if experience_path.exists() else ""
+    (root/"README.md").write_text(dashboard_md(plan,metrics,experience_block),encoding="utf-8")
     (docs/"TODAY.md").write_text(todays_md(plan,metrics),encoding="utf-8")
     output={
       "rendered_as_of":plan["as_of"],
