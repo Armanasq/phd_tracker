@@ -1,0 +1,56 @@
+name: EvidenceGraph | Interactive Scenario Lab
+
+on:
+  workflow_dispatch:
+    inputs:
+      horizon:
+        description: "Deadline horizon (days)"
+        required: true
+        type: choice
+        default: "14"
+        options: ["7", "14", "30", "45"]
+      focus:
+        description: "Decision lens"
+        required: true
+        type: choice
+        default: deadlines
+        options: [deadlines, verification, resources, research]
+      hypothetical_ready:
+        description: "Optional hypothetical-ready document IDs, comma-separated (academic_cv, transcripts, research_statement, recommendations, english_proof, research_portfolio)"
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: scenario-lab-${{ github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  investigate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Calculate evidence-grounded scenario
+        env:
+          HORIZON: ${{ inputs.horizon }}
+          FOCUS: ${{ inputs.focus }}
+          HYPOTHETICAL_READY: ${{ inputs.hypothetical_ready }}
+        run: |
+          python scripts/scenario_lab.py \
+            --horizon "$HORIZON" \
+            --focus "$FOCUS" \
+            --hypothetical-ready "$HYPOTHETICAL_READY" \
+            --output artifacts/scenario_report.json
+      - name: Attach machine-readable scenario report
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidencegraph-scenario-${{ github.run_id }}
+          path: artifacts/scenario_report.json
+          retention-days: 14
