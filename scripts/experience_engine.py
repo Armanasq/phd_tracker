@@ -566,8 +566,8 @@ def generate(root: Path = ROOT) -> dict:
               .replace('href="assets/','href="../assets/')
               .replace('href="dashboard/','href="../dashboard/')
               .replace('href="data/','href="../data/')
-              .replace('](dashboard/',' ](../dashboard/').replace('[Launch the local interactive observatory ]','[Launch the local interactive observatory')
-              .replace('](data/',' ](../data/').replace('[View the schema-versioned JSON ]','[View the schema-versioned JSON').replace('[Trace JSON-LD provenance ]','[Trace JSON-LD provenance').replace('[Open provenance and evidence ]','[Open provenance and evidence')
+              .replace('](dashboard/','](../dashboard/')
+              .replace('](data/','](../data/')
               .replace('](docs/TODAY.md)','](TODAY.md)'))
     (docs/"EXPERIENCE.md").write_text(document,encoding="utf-8")
     return {"as_of":view["as_of"],"applications":len(view["applications"]),"assets":list(renders)+["evidence_pipeline.gif"]}
