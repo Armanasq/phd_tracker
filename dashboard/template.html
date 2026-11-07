@@ -58,6 +58,11 @@
 <div id="papers" class="grid scroll"></div>
 </section>
 </div>
+<section class="panel" style="margin:16px 0">
+<h2>Dual-clock execution ledger</h2><p class="muted">The application submission clock and preparation-task clocks remain separate. Past task dates have unknown completion unless the owner has confirmed a status.</p>
+<div class="actions"><button class="clock-button" type="button" data-clock="submission_deadlines" aria-pressed="true">Submission deadlines</button><button class="clock-button" type="button" data-clock="preparation_steps" aria-pressed="false">Programme steps</button><button class="clock-button" type="button" data-clock="shared_tasks" aria-pressed="false">Shared tasks</button></div>
+<div class="scroll"><table><thead><tr><th>Due</th><th>Workstream / task</th><th>Recorded status</th><th>Source</th></tr></thead><tbody id="clock-rows"></tbody></table></div>
+</section>
 <div class="row">
 <section class="panel">
 <h2>Deadline collisions & verification frontier</h2>
@@ -165,6 +170,23 @@ function renderInsights(){
  if(!anomalies.children.length)add(anomalies,'p',{class:'muted'},'No anomalous source observations in this snapshot.');
 }
 renderInsights();
+
+
+function renderClock(kind){
+ document.querySelectorAll('.clock-button').forEach(btn=>btn.setAttribute('aria-pressed',String(btn.dataset.clock===kind)));
+ const body=$('clock-rows');body.replaceChildren();const rows=(D.clocks||{})[kind]||[];
+ rows.forEach(item=>{
+  const row=add(body,'tr');add(row,'td',{},item.due);
+  add(row,'td',{},item.action||item.name);
+  add(row,'td',{},item.state||'completion unconfirmed');
+  const cell=add(row,'td');
+  if(item.source)add(cell,'a',{href:item.source,target:'_blank',rel:'noopener noreferrer'},'Primary source');
+  else add(cell,'span',{class:'muted'},'Not recorded');
+ });
+ if(!rows.length){const row=add(body,'tr');add(row,'td',{colspan:4},'No records in this clock for the observation date.');}
+}
+document.querySelectorAll('.clock-button').forEach(btn=>btn.addEventListener('click',()=>renderClock(btn.dataset.clock)));
+renderClock('submission_deadlines');
 
 </script>
 </body>
