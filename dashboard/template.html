@@ -9,6 +9,7 @@
 :root{color-scheme:dark;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:#071522;color:#eaf5fa}*{box-sizing:border-box}body{margin:0}a{color:#7ce6d0}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #92b9ff;outline-offset:3px}header{padding:36px max(24px,calc((100vw - 1440px)/2));border-bottom:1px solid #28475e;background:linear-gradient(120deg,#102c3b,#071522)}.eyebrow{text-transform:uppercase;color:#5ce0c1;font-size:12px;font-weight:800;letter-spacing:3px}h1{font-size:clamp(30px,4vw,56px);letter-spacing:-.035em;margin:12px 0}h2{margin:0 0 14px;font-size:21px}h3{margin:0 0 9px;font-size:15px}p{line-height:1.5}.muted{color:#a5bbcc}.meta{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}.pill{border:1px solid #315169;border-radius:99px;padding:8px 12px;color:#b9d5e4;font-size:12px}main{max-width:1440px;margin:auto;padding:24px}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:10px 0 22px}.stat,.panel{border:1px solid #28475e;background:#102638;border-radius:16px;padding:20px;min-width:0}.stat strong{display:block;font-size:39px;margin:12px 0 2px}.stat span{font-size:12px;color:#afc7d5;letter-spacing:1px}.row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:15px 0}.actions input,.actions select{border:1px solid #416077;border-radius:8px;background:#071522;color:#eaf5fa;padding:11px;min-width:0}.actions input{flex:1;min-width:190px}button{border:1px solid #457b85;border-radius:8px;background:#143c47;color:#eaf5fa;padding:9px 12px}button:hover{background:#205564}button[aria-pressed=true]{border-color:#5ce0c1;background:#1d6c60}table{border-collapse:collapse;width:100%;font-size:13px}th,td{text-align:left;border-bottom:1px solid #29475c;padding:11px 8px;vertical-align:top}th{color:#a5bdcd;font-size:11px;text-transform:uppercase;letter-spacing:1px}td{line-height:1.5}.scroll{overflow:auto;max-height:530px}.tag{font-size:11px;background:#25445a;padding:4px 8px;border-radius:6px;display:inline-block}.danger{color:#fa92ab}.warning{color:#ffcb8b}.success{color:#5ce0c1}.viz{width:100%;height:auto;max-height:330px}small{color:#a5bbcc}.resource{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #28475e}.resource label{display:flex;gap:10px;align-items:center}.resource span{font-size:12px;color:#adc3d1}.resource input{accent-color:#5ce0c1;width:17px;height:17px}.meter{height:9px;background:#1d3649;border-radius:8px;overflow:hidden;flex:1;margin:4px 0}.meter>div{background:#5ce0c1;height:100%;border-radius:8px}.source{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid #28475e}#details{min-height:140px}#detail-title{font-weight:700;font-size:17px}.grid{display:grid;gap:12px}.paper{padding:13px;border:1px solid #28475e;border-radius:9px;background:#0c2130}.foot{border-top:1px solid #28475e;padding:20px 24px;color:#9db7c7;font-size:13px}.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:900px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.row{grid-template-columns:1fr}header{padding:24px}}@media(max-width:480px){.stats{grid-template-columns:1fr 1fr}.stat{padding:12px}.stat strong{font-size:27px}main{padding:12px}.panel{padding:15px}th,td{padding:8px 5px}}
 @media(prefers-reduced-motion:no-preference){.stat{animation:appear .5s ease both}@keyframes appear{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}}
 </style>
+<link rel="stylesheet" href="experience.css">
 </head>
 <body>
 <header>
@@ -18,6 +19,70 @@
 <div class="meta"><span class="pill" id="asof"></span><span class="pill" id="source-state"></span><span class="pill">Offline · No external scripts or analytics</span><a class="pill" href="../README.md">Repository documentation</a></div>
 </header>
 <main>
+<section class="studio" id="flight-deck" aria-labelledby="stage-title">
+  <div class="studio-top">
+    <div><div class="studio-kicker">E V I D E N C E G R A P H  /  L I V E  I N T E R A C T I O N</div><h2 class="studio-heading" id="stage-title">Explore the application universe</h2></div>
+    <div class="studio-actions">
+      <button type="button" id="graph-mode" aria-pressed="true">Evidence links</button>
+      <button type="button" id="graph-fit">Reset view</button>
+      <button type="button" id="command-trigger">Command palette <span class="key">⌘K</span></button>
+    </div>
+  </div>
+  <div class="metric-strip" id="graph-metrics" aria-live="polite">
+    <span>SELECTED WINDOW <strong id="stage-count">—</strong></span>
+    <span>DOCUMENT LINKS <strong id="stage-links">—</strong></span>
+    <span>CONTRADICTIONS <strong id="stage-conflicts">—</strong></span>
+    <span class="studio-note">Drag nodes · hover evidence · scroll to zoom · click to inspect</span>
+  </div>
+  <div class="stage">
+    <canvas id="evidence-graph" width="1100" height="485" role="img" aria-label="Interactive, draggable application-to-document evidence network"></canvas>
+    <aside class="graph-info" id="graph-inspector" aria-live="polite">
+      <div class="eyeline">EVIDENCE GRAPH / NODE INSPECTOR</div>
+      <h3>Choose a node</h3>
+      <p class="muted">Application nodes are connected to mentioned resources. Hover and click to inspect underlying evidence. Relationships are source-recorded document mentions.</p>
+      <div class="spark"></div>
+      <p class="muted">Time travel changes the graph and counts without modifying the workbook.</p>
+    </aside>
+  </div>
+  <div class="studio-bottom">
+    <div class="scrubber">
+      <label for="chronos">TEMPORAL LENS</label>
+      <input type="range" id="chronos" min="0" max="60" step="1" value="14" aria-label="Show deadlines up to this many days after the snapshot">
+      <output id="chronos-date" for="chronos">14 days</output>
+    </div>
+    <button type="button" id="chronos-play" aria-pressed="false">Play deadline sweep</button>
+    <button type="button" id="export-graph">Export graph JSON</button>
+  </div>
+</section>
+<section class="control-deck" id="decision-engine" aria-label="Adjustable verification-priority model">
+  <div class="control-inner">
+    <div class="studio-kicker">S C E N A R I O  E N G I N E</div>
+    <h2>Turn evidence into a decision</h2>
+    <p>Change the weights to alter the review order. Scores are explicitly defined workload indexes, not admission probabilities.</p>
+    <div class="range-row"><label for="weight-urgency">Deadline urgency</label><input id="weight-urgency" type="range" min="0" max="10" value="7"><output id="out-urgency">7</output></div>
+    <div class="range-row"><label for="weight-proof">Proof debt</label><input id="weight-proof" type="range" min="0" max="10" value="5"><output id="out-proof">5</output></div>
+    <div class="range-row"><label for="weight-document">Document unknowns</label><input id="weight-document" type="range" min="0" max="10" value="3"><output id="out-document">3</output></div>
+    <div class="actions"><button type="button" id="reset-weights">Reset weights</button><button type="button" id="share-view">Copy reproducible view</button></div>
+    <p class="muted">Formula: urgency × (1 / (days + 1)) + proof debt × count + document unknowns × count. You control the weights.</p>
+  </div>
+  <div class="control-inner">
+    <div class="board-toolbar"><div><div class="studio-kicker">D E C I S I O N  F R O N T I E R</div><h2 id="priority-title">Highest verification priority</h2></div><button type="button" id="export-ranked">Export CSV</button></div>
+    <div class="priority-list" id="priority-list" aria-live="polite"></div>
+  </div>
+</section>
+<section class="panel workspace" id="scenario-board" aria-label="Interactive local scenario board">
+  <div class="board-toolbar">
+    <div><div class="studio-kicker">L O C A L  W O R K S P A C E</div><h2>Drag work across the horizon</h2><p class="muted">Drag application cards between review, preparation and submitted-for-review lanes. This is a local what-if overlay, never an inferred real submission status.</p></div>
+    <div><button type="button" id="board-reset">Reset workspace</button><button type="button" id="board-export">Export board</button></div>
+  </div>
+  <div class="board-cols">
+    <div class="board-lane" data-lane="review"><h3>Investigate <span class="count" id="count-review">0</span></h3><div id="lane-review"></div></div>
+    <div class="board-lane" data-lane="prepare"><h3>Prepare <span class="count" id="count-prepare">0</span></h3><div id="lane-prepare"></div></div>
+    <div class="board-lane" data-lane="reviewed"><h3>Reviewed locally <span class="count" id="count-reviewed">0</span></h3><div id="lane-reviewed"></div></div>
+  </div>
+</section>
+<div class="anchor-strip"><span class="key">⌘K</span> Command palette · <span class="key">Space</span> Play timeline (when not typing) · <a href="https://github.com/Armanasq/phd_tracker/actions/workflows/experience-lab.yml" target="_blank" rel="noopener noreferrer">Run the GitHub-native scenario form</a> · <a href="https://github.com/Armanasq/phd_tracker/issues/1" target="_blank" rel="noopener noreferrer">Owner commands</a></div>
+
 <div class="stats" id="stats" aria-label="Snapshot metrics"></div>
 <div class="row">
 <section class="panel">
@@ -84,6 +149,17 @@
 </section>
 </div>
 </main>
+<button type="button" class="floating" id="palette-fab" title="Open command palette">Search / command <span class="key">⌘K</span></button>
+<div class="command-shade" id="command-shade" role="dialog" aria-modal="true" aria-label="Command palette" aria-hidden="true">
+  <button id="command-close" type="button">Close ×</button>
+  <div class="command-shell">
+    <label for="command-query" class="sr">Search applications and commands</label>
+    <input id="command-query" autocomplete="off" placeholder="Search a university, source ID, or command…">
+    <div id="command-results"></div>
+    <div class="command-bottom">↑↓ Navigate · Enter Open · Esc Close · No external services</div>
+  </div>
+</div>
+<div id="experience-toast" role="status" class="toast" data-open="false"></div>
 <footer class="foot">Data remains in this HTML file when opened locally. This viewer does not send updates to GitHub, automatically submit applications, or establish eligibility. Check primary institutional sources before acting.</footer>
 <script id="evidence-data" type="application/json">__EVIDENCE_DATA_JSON__</script>
 <script>
@@ -232,5 +308,6 @@ renderConstellation();
 renderPapers();
 
 </script>
+<script src="experience.js"></script>
 </body>
 </html>
