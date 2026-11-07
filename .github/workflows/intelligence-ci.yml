@@ -2,10 +2,18 @@ name: PhD Intelligence - Code Quality Gates
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'feature/**']
     paths:
       - scripts/**
       - tests/**
+      - dashboard/**
+      - requirements-intelligence.txt
+      - .github/workflows/**
+  pull_request:
+    paths:
+      - scripts/**
+      - tests/**
+      - dashboard/**
       - requirements-intelligence.txt
       - .github/workflows/**
   workflow_dispatch:
@@ -14,7 +22,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: phd-intelligence-tests
+  group: phd-intelligence-tests-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -31,3 +39,23 @@ jobs:
       - run: python -m pip install -r requirements-intelligence.txt
       - run: python -m compileall -q scripts
       - run: python -m pytest tests -q
+      - name: Render observatory against repository snapshots
+        run: |
+          python scripts/experience_engine.py
+          python scripts/render_command_center.py
+          test -s assets/readme/evidence_pipeline.gif
+          test -s dashboard/index.html
+          test -s data/experience_view.json
+          test -s data/experience_lineage.jsonld
+          test -s assets/readme/isometric_calendar.svg
+      - name: Validate dashboard JavaScript syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          source = Path('dashboard/template.html').read_text()
+          script = re.findall(r'<script(?:\\s+[^>]*)?>(.*?)</script>', source, re.S)[-1]
+          Path('/tmp/experience-dashboard.js').write_text(script)
+          PY
+          node --check /tmp/experience-dashboard.js
+
