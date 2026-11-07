@@ -585,6 +585,11 @@ def generate(root: Path = ROOT) -> dict:
     }
     for name, content in renders.items():
         (assets/name).write_text(content,encoding="utf-8")
+    if __package__:
+        from .kinetic_readme import write_assets
+    else:
+        from kinetic_readme import write_assets
+    kinetic = write_assets(view, assets)
     make_gif(view,assets/"evidence_pipeline.gif")
     template=(root/"dashboard"/"template.html").read_text(encoding="utf-8")
     placeholder="__EVIDENCE_DATA_JSON__"
@@ -602,7 +607,7 @@ def generate(root: Path = ROOT) -> dict:
               .replace('](docs/TODAY.md)','](TODAY.md)')
               .replace('href="docs/','href="'))
     (docs/"EXPERIENCE.md").write_text(document,encoding="utf-8")
-    return {"as_of":view["as_of"],"applications":len(view["applications"]),"assets":list(renders)+["evidence_pipeline.gif"]}
+    return {"as_of":view["as_of"],"applications":len(view["applications"]),"assets":list(renders)+list(kinetic)+["evidence_pipeline.gif"]}
 
 
 if __name__=="__main__":
