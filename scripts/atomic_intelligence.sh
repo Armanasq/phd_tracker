@@ -34,9 +34,10 @@ for attempt in 1 2 3; do
   python scripts/render_command_center.py
 
   if [ -f data/imports/2026-11-06_user_upload_result.json ]; then git add data/imports/2026-11-06_user_upload_result.json; fi
-  git add README.md docs/TODAY.md calendar/phd_deadlines.ics assets/readme/ PhD_Action_List.xlsx \
+  git add README.md docs/TODAY.md docs/EXPERIENCE.md dashboard/index.html calendar/phd_deadlines.ics assets/readme/ PhD_Action_List.xlsx \
     data/discovered_candidates.json \
     data/discovery_report.json \
+    data/experience_view.json \
     data/ingestion_report.json \
     data/latest_run.json \
     data/decision_queue.json \
