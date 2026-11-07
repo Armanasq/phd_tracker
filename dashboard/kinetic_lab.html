@@ -1,0 +1,79 @@
+<section id="kinetic-lab" class="lab-surface" aria-labelledby="lab-title">
+  <div class="lab-intro">
+    <div>
+      <div class="lab-eyebrow"><span class="lab-pulse"></span> EVIDENCEGRAPH / INVESTIGATION ENGINE <span class="lab-build">LOCAL · PRIVATE · NO NETWORK</span></div>
+      <h2 id="lab-title">Explore the <em>decision field.</em></h2>
+      <p class="lab-description">Drag relationships. Scrub the deadline horizon. Inspect contradictions. Simulate preparation choices. Every edge represents a recorded relationship, never an invented prediction.</p>
+    </div>
+    <button type="button" id="lab-command-open" class="lab-hotkey" aria-label="Open command interface"><span>Command interface</span> <kbd>⌘ K</kbd></button>
+  </div>
+  <div class="lab-workstation">
+    <div class="lab-graph-pane">
+      <div class="lab-surface-toolbar">
+        <span class="lab-toolbar-label"><span class="lab-live-dot"></span> TEMPORAL EVIDENCE ATLAS</span>
+        <div class="lab-segment">
+          <button type="button" id="lab-network-all" aria-pressed="true">Networks</button>
+          <button type="button" id="lab-network-conflicts" aria-pressed="false">Conflicts</button>
+          <button type="button" id="lab-network-documents" aria-pressed="false">Documents</button>
+        </div>
+        <button type="button" id="lab-reset-view" class="lab-icon-button" aria-label="Reset graph zoom and position" title="Reset zoom and pan">↺</button>
+      </div>
+      <div id="lab-graph-shell" class="lab-graph-shell">
+        <canvas id="lab-network" aria-label="Draggable evidence graph with application, document and source nodes. The record list below provides a keyboard-accessible equivalent." role="img" tabindex="0"></canvas>
+        <div class="lab-graph-label"><span>APP / DOCUMENT / MONITOR</span><span>DRAG · ZOOM · SELECT</span></div>
+        <div id="lab-tooltip" class="lab-tooltip" hidden></div>
+        <div id="lab-selection" class="lab-selection">Select a node to inspect provenance.</div>
+      </div>
+      <div class="lab-horizon">
+        <div class="lab-horizon-title"><span>Deadline horizon</span><output id="lab-horizon-output" for="lab-horizon-range">30 days</output></div>
+        <input type="range" id="lab-horizon-range" min="1" max="90" value="30" step="1" aria-label="Show application relationships with deadlines up to a number of days ahead">
+        <div class="lab-ruler"><span>1 DAY</span><span>30 DAYS</span><span>60 DAYS</span><span>90 DAYS</span></div>
+        <div class="lab-graph-count" id="lab-graph-count" aria-live="polite"></div>
+      </div>
+      <div id="lab-node-list" class="lab-node-list" aria-label="Keyboard accessible graph records"></div>
+    </div>
+    <aside class="lab-sidepane">
+      <div class="lab-side-head">
+        <span class="lab-mini-eyebrow">SCENARIO ENGINE / NO STATUS CHANGES</span>
+        <h3>Counterfactual laboratory</h3>
+        <p>Explore the impact of hypothetical preparation. Simulated coverage is never proof of eligibility or submission readiness.</p>
+      </div>
+      <div class="lab-scenario-metrics">
+        <div><span>FUTURE RECORDS IN LENS</span><strong id="lab-total">—</strong></div>
+        <div><span>ALL MENTIONED DOCUMENTS COVERED</span><strong id="lab-covered">—</strong></div>
+      </div>
+      <div id="lab-scenario-resources" class="lab-scenario-resources"></div>
+      <div class="lab-scenario-explainer" id="lab-scenario-explainer" aria-live="polite"></div>
+      <div class="lab-delay-row">
+        <div class="lab-horizon-title"><label for="lab-delay">Review delay simulation</label><output id="lab-delay-output" for="lab-delay">0 days</output></div>
+        <input type="range" id="lab-delay" min="0" max="21" value="0" step="1" aria-label="Simulate delay in reviewing applications">
+        <p id="lab-delay-impact" class="lab-delay-impact"></p>
+      </div>
+      <div class="lab-scenario-actions">
+        <button type="button" id="lab-scenario-clear">Reset simulation</button>
+        <button type="button" id="lab-scenario-export">Export scenario ↓</button>
+      </div>
+    </aside>
+  </div>
+  <div class="lab-lower">
+    <section class="lab-provenance">
+      <div class="lab-section-title"><span class="lab-mini-eyebrow">EVIDENCE TRAIL</span><h3>Contradictions & next actions</h3></div>
+      <div id="lab-next-actions" class="lab-next-actions" aria-label="Evidence-driven application review list"></div>
+      <p class="lab-quiet">Priority is based on recorded deadline and explicit evidence obligations. No probability of admission is calculated.</p>
+    </section>
+    <section class="lab-control">
+      <div class="lab-section-title"><span class="lab-mini-eyebrow">PRIVATE CONTROL PLANE</span><h3>Operate without exposing data</h3></div>
+      <p>The GitHub Action Center accepts owner-authenticated commands. This browser app never writes to the repository or transmits personal data.</p>
+      <div class="lab-command-row"><button type="button" id="lab-copy-command">Copy priority command</button><a href="https://github.com/Armanasq/phd_tracker/issues/1" target="_blank" rel="noopener noreferrer">Open private Action Center ↗</a></div>
+      <p id="lab-command-feedback" class="lab-quiet" aria-live="polite">Select an application first, then copy its command.</p>
+      <div class="lab-shortcuts"><span><kbd>⌘</kbd><kbd>K</kbd> search</span><span><kbd>Esc</kbd> close</span><span><kbd>+</kbd><kbd>-</kbd> graph zoom</span></div>
+    </section>
+  </div>
+  <dialog id="lab-command-dialog" class="lab-dialog" aria-labelledby="lab-command-heading">
+    <div class="lab-dialog-header"><h3 id="lab-command-heading">Navigate research evidence</h3><button id="lab-command-close" type="button" aria-label="Close command interface">✕</button></div>
+    <label class="sr" for="lab-command-query">Find an application or resource</label>
+    <input id="lab-command-query" type="search" autocomplete="off" placeholder="Search application, research area, source ID, document…">
+    <div id="lab-command-results" class="lab-command-results"></div>
+    <p>Enter selects the highlighted record. Results are from the committed evidence snapshot only.</p>
+  </dialog>
+</section>
