@@ -92,6 +92,10 @@ def operational_insights(applications: list[dict], observations: list[dict]) -> 
 
 
 def make_view(root: Path) -> dict:
+    if __package__:
+        from .readme_studio import country_for, country_map
+    else:
+        from readme_studio import country_for, country_map
     plan = read_json(root / "data/execution_plan.json")
     frontier = read_json(root / "data/portfolio_frontier.json")
     assets = read_json(root / "data/application_assets.json")
@@ -128,6 +132,7 @@ def make_view(root: Path) -> dict:
         applications.append({
             "id": source_id,
             "name": str(item.get("opportunity", source_id))[:200],
+            "country": country_for(str(item.get("opportunity", source_id))),
             "deadline": deadline.isoformat(),
             "days": (deadline - observed).days,
             "decision": str(item.get("decision", "unknown"))[:100],
@@ -172,7 +177,9 @@ def make_view(root: Path) -> dict:
     papers = [{
         "title": str(p.get("title", ""))[:230],
         "id": str(p.get("id", ""))[:80],
-        "url": safe_url(p.get("url", "")),
+        "url": safe_url(p.get("paper_url") or p.get("url", "")),
+        "topic": str(p.get("topic", "unclassified"))[:55],
+        "relevance_score": int(p.get("relevance_score") or 0),
         "published": str(p.get("published", ""))[:24],
     } for p in radar.get("papers", []) if isinstance(p, dict)][:40]
     return {
@@ -189,6 +196,7 @@ def make_view(root: Path) -> dict:
             "research_papers": len(radar.get("papers", [])),
         },
         "applications": applications,
+        "geography": country_map({"applications": applications})[0],
         "resources": resources,
         "providers": providers,
         "source_checks": dict(source_checks),
