@@ -9,8 +9,10 @@ from pathlib import Path
 
 if __package__:
     from .experience_engine import generate as generate_experience, markdown as experience_markdown
+    from .readme_studio import generate as generate_readme_studio
 else:
     from experience_engine import generate as generate_experience, markdown as experience_markdown
+    from readme_studio import generate as generate_readme_studio
 from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -589,7 +591,14 @@ def render(root=ROOT):
     (assets/"lanes.svg").write_text(lanes_svg(plan),encoding="utf-8")
     view_path=root/"data"/"experience_view.json"
     experience_block=experience_markdown(load(view_path)) if view_path.is_file() else ""
-    (root/"README.md").write_text(dashboard_md(plan,metrics,experience_block),encoding="utf-8")
+    legacy=dashboard_md(plan,metrics,experience_block)
+    if view_path.is_file():
+        studio=generate_readme_studio(root,load(view_path),plan)
+        readme=(studio+"\n\n<details>\n<summary><b>Engineering deep dive · original execution intelligence and source diagnostics</b></summary>\n\n"
+                +legacy+"\n\n</details>\n")
+    else:
+        readme=legacy
+    (root/"README.md").write_text(readme,encoding="utf-8")
     (docs/"TODAY.md").write_text(todays_md(plan,metrics),encoding="utf-8")
     output={
       "rendered_as_of":plan["as_of"],
