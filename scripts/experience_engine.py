@@ -440,7 +440,7 @@ def markdown(view: dict) -> str:
 <table><tr><td width="50%"><img src="assets/readme/deadline_orbits.svg" width="100%" alt="Deadline orbit by time remaining"/></td><td width="50%"><img src="assets/readme/proof_matrix.svg" width="100%" alt="Mentioned document requirements by application"/></td></tr>
 <tr><td><img src="assets/readme/source_signals.svg" width="100%" alt="Discovery source health"/></td><td><img src="assets/readme/document_leverage.svg" width="100%" alt="Document potential application associations"/></td></tr></table>
 
-**Investigate, don't guess.** [Launch the local interactive observatory](dashboard/README.md) · [View the schema-versioned JSON](data/experience_view.json) · [Open provenance and evidence](data/portfolio_frontier.json) · [Today's verified action agenda](docs/TODAY.md).
+**Investigate, don't guess.** [Launch the local interactive observatory](dashboard/README.md) · [View the schema-versioned JSON](data/experience_view.json) · [Trace JSON-LD provenance](data/experience_lineage.jsonld) · [Open provenance and evidence](data/portfolio_frontier.json) · [Today's verified action agenda](docs/TODAY.md).
 
 <details><summary><b>What makes the observatory different?</b></summary>
 
@@ -458,6 +458,80 @@ These are original combinations of existing engineering methods, not claims of g
 """
 
 
+
+def lineage_jsonld(view: dict) -> dict:
+    from urllib.parse import quote
+    base="urn:phdtracker:"
+    graph=[
+        {
+            "@id":base+"dataset:experience-view",
+            "@type":"prov:Entity",
+            "schema:name":"EvidenceGraph observation snapshot",
+            "schema:dateModified":{"@value":view["as_of"],"@type":"xsd:date"},
+            "prov:wasDerivedFrom":[
+                {"@id":base+"dataset:portfolio-frontier"},
+                {"@id":base+"dataset:application-assets"},
+                {"@id":base+"dataset:source-monitor"},
+            ],
+        },
+    ]
+    for resource in view["resources"]:
+        graph.append({
+            "@id":base+"document:"+quote(resource["id"],safe=""),
+            "@type":"prov:Entity",
+            "schema:name":resource["label"],
+            "readinessState":resource["state"],
+        })
+    for record in view["applications"]:
+        node={
+            "@id":base+"application:"+quote(record["id"],safe=""),
+            "@type":"prov:Entity",
+            "schema:name":record["name"],
+            "applicationDeadline":{"@value":record["deadline"],"@type":"xsd:date"},
+            "applicantDecision":record["decision"],
+            "documentMention":[
+                {"@id":base+"document:"+quote(rid,safe="")} for rid in record["documents"]
+            ],
+            "prov:wasDerivedFrom":{"@id":base+"dataset:portfolio-frontier"},
+        }
+        if record["source"]:
+            node["schema:citation"]={"@id":record["source"]}
+        if record["proof_obligations"]:
+            node["proofObligation"]=record["proof_obligations"]
+        graph.append(node)
+    for observed in view["insights"]["source_anomalies"]:
+        node={
+            "@id":base+"observation:"+quote(observed["observation_id"],safe=""),
+            "@type":"prov:Entity",
+            "sourceFindingStatus":observed["status"],
+            "expectedDeadline":observed["expected_deadline"],
+            "prov:wasDerivedFrom":{"@id":base+"dataset:source-monitor"},
+        }
+        if observed["source"]:
+            node["schema:citation"]={"@id":observed["source"]}
+        if observed["is_linked"]:
+            node["associatedApplication"]={
+                "@id":base+"application:"+quote(observed["application_id"],safe="")
+            }
+        graph.append(node)
+    return {
+        "@context":{
+            "prov":"http://www.w3.org/ns/prov#",
+            "schema":"https://schema.org/",
+            "xsd":"http://www.w3.org/2001/XMLSchema#",
+            "documentMention":{"@id":base+"vocab:documentMention","@type":"@id"},
+            "associatedApplication":{"@id":base+"vocab:associatedApplication","@type":"@id"},
+            "readinessState":base+"vocab:readinessState",
+            "applicationDeadline":base+"vocab:applicationDeadline",
+            "applicantDecision":base+"vocab:applicantDecision",
+            "proofObligation":base+"vocab:proofObligation",
+            "sourceFindingStatus":base+"vocab:sourceFindingStatus",
+            "expectedDeadline":base+"vocab:expectedDeadline",
+        },
+        "@graph":graph,
+    }
+
+
 def generate(root: Path = ROOT) -> dict:
     view = make_view(root)
     data = root / "data"
@@ -467,6 +541,7 @@ def generate(root: Path = ROOT) -> dict:
     assets.mkdir(parents=True,exist_ok=True)
     docs.mkdir(parents=True,exist_ok=True)
     (data/"experience_view.json").write_text(json.dumps(view,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
+    (data/"experience_lineage.jsonld").write_text(json.dumps(lineage_jsonld(view),indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
     renders = {
         "experience_hero.svg":hero_svg(view),
         "isometric_calendar.svg":isometric_calendar_svg(view),
