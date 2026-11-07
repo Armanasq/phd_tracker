@@ -112,6 +112,7 @@ button:hover{transform:translateY(-1px)}
 @media(prefers-reduced-motion:reduce){header:before{animation:none}*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
 
 </style>
+<link rel="stylesheet" href="visual_laboratory.css">
 </head>
 <body>
 <header>
@@ -121,6 +122,57 @@ button:hover{transform:translateY(-1px)}
 <div class="meta"><span class="pill" id="asof"></span><span class="pill" id="source-state"></span><span class="pill">Offline · No external scripts or analytics</span><a class="pill" href="../README.md">Repository documentation</a></div>
 </header>
 <main>
+<div class="stats" id="stats" aria-label="Source-derived performance and evidence metrics"></div>
+<nav class="intelligence-nav" aria-label="Research intelligence navigation">
+  <a href="#visual-laboratory">Overview</a>
+  <a href="#lab-pipeline">Pipeline</a>
+  <a href="#lab-map-panel">Opportunities map</a>
+  <a href="#lab-gantt">Timeline</a>
+  <a href="#lab-research">Research graph</a>
+  <a href="#flight-deck">Evidence network</a>
+  <a href="#decision-engine">Simulation</a>
+  <a href="#scenario-board">Workflows</a>
+</nav>
+<section id="visual-laboratory" class="laboratory" aria-label="Interactive research intelligence diagrams">
+ <div class="lab-grid">
+  <div class="lab-panel" id="lab-pipeline">
+   <div class="lab-panel-heading"><h2>Research & application pipeline</h2><span class="lab-chip">INTERACTIVE FLOW</span></div>
+   <div id="pipeline-steps" class="pipeline-steps" aria-label="Research pipeline stages"></div>
+   <div id="pipeline-status" class="lab-inspector">Select a stage to inspect source-derived state and related actions.</div>
+  </div>
+  <div class="lab-panel" id="lab-funnel">
+   <div class="lab-panel-heading"><h2>Opportunity distribution</h2><span class="lab-chip">DEADLINE SANKEY</span></div>
+   <svg id="lab-sankey" viewBox="0 0 520 270" role="img" aria-label="Interactive Sankey diagram of applications by deadline window"></svg>
+   <p class="lab-hint">Select a stream to inspect its applications.</p>
+  </div>
+  <div class="lab-panel" id="lab-gantt">
+   <div class="lab-panel-heading"><h2>Deadline Gantt</h2><span class="lab-chip">SOURCE DATES</span></div>
+   <svg id="lab-timeline" viewBox="0 0 520 280" role="img" aria-label="Clickable application deadline milestones"></svg>
+   <p class="lab-hint">Select a deadline to inspect the application and its primary source.</p>
+  </div>
+ </div>
+ <div class="lab-grid lab-grid-map">
+  <div class="lab-panel" id="lab-map-panel">
+   <div class="lab-panel-heading">
+    <h2>Global opportunities</h2>
+    <label for="lab-country" class="sr">Filter opportunity map by country</label>
+    <select id="lab-country" aria-label="Filter countries"><option value="all">All mapped countries</option></select>
+   </div>
+   <svg id="lab-world" viewBox="0 0 640 300" role="img" aria-label="Interactive geographic opportunity distribution by inferred institution country"></svg>
+   <div id="lab-map-info" class="lab-hint" aria-live="polite"></div>
+  </div>
+  <div class="lab-panel" id="lab-research">
+   <div class="lab-panel-heading"><h2>Research constellation</h2><span class="lab-chip">PAPERS & TOPICS</span></div>
+   <svg id="lab-research-viz" viewBox="0 0 520 300" role="img" aria-label="Clickable research topic constellation based on indexed papers"></svg>
+   <div id="lab-research-info" class="lab-hint">Select a topic to inspect its indexed papers.</div>
+  </div>
+  <div class="lab-panel" id="lab-quadrant">
+   <div class="lab-panel-heading"><h2>Opportunity review quadrant</h2><span class="lab-chip">EVIDENCE WEIGHT</span></div>
+   <svg id="lab-quadrant-viz" viewBox="0 0 520 300" role="img" aria-label="Clickable scatter plot of deadline urgency and proof debt"></svg>
+   <p class="lab-hint">Calendar urgency vs unresolved evidence, not admission probability.</p>
+  </div>
+ </div>
+</section>
 <section class="studio" id="flight-deck" aria-labelledby="stage-title">
   <div class="studio-top">
     <div><div class="studio-kicker">E V I D E N C E G R A P H  /  L I V E  I N T E R A C T I O N</div><h2 class="studio-heading" id="stage-title">Explore the application universe</h2></div>
@@ -185,7 +237,6 @@ button:hover{transform:translateY(-1px)}
 </section>
 <div class="anchor-strip"><span class="key">⌘K</span> Command palette · <span class="key">Space</span> Play timeline (when not typing) · <a href="https://github.com/Armanasq/phd_tracker/actions/workflows/experience-lab.yml" target="_blank" rel="noopener noreferrer">Run the GitHub-native scenario form</a> · <a href="https://github.com/Armanasq/phd_tracker/issues/1" target="_blank" rel="noopener noreferrer">Owner commands</a></div>
 
-<div class="stats" id="stats" aria-label="Snapshot metrics"></div>
 <div class="row">
 <section class="panel">
 <h2>Deadline topology</h2><p class="muted">Applications grouped by days until deadline, as of the committed snapshot.</p>
@@ -904,5 +955,6 @@ renderPapers();
 })();
 
 </script>
+<script src="visual_laboratory.js"></script>
 </body>
 </html>
