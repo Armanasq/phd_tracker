@@ -106,7 +106,7 @@ def test_generation_creates_offline_dashboard_and_assets(tmp_path: Path) -> None
     assert "experience-lab.yml" in doc
     assert 'src="../assets/readme/isometric_calendar.svg"' in doc
     assert '](../dashboard/README.md)' in doc
-    assert 'href="TODAY.md"' in doc
+    assert '](TODAY.md)' in doc
     assert "assets/readme/hero.svg" not in doc
 
 
