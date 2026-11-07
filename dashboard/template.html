@@ -59,6 +59,13 @@
 </section>
 </div>
 <section class="panel" style="margin:16px 0">
+<h2>Research constellation</h2>
+<p class="muted">A transparent title-term co-occurrence view of indexed publications. Connections show shared title terms across broad research themes, not confirmed lab relationships, funding, or job opportunities.</p>
+<svg id="research-constellation" class="viz" viewBox="0 0 900 320" role="img" aria-label="Topical research network based on title-term matches"></svg>
+<div class="actions" id="topic-filters"></div>
+<small>Heuristic keyword grouping; overlap is descriptive and not a semantic similarity or supervisor-matching score.</small>
+</section>
+<section class="panel" style="margin:16px 0">
 <h2>Dual-clock execution ledger</h2><p class="muted">The application submission clock and preparation-task clocks remain separate. Past task dates have unknown completion unless the owner has confirmed a status.</p>
 <div class="actions"><button class="clock-button" type="button" data-clock="submission_deadlines" aria-pressed="true">Submission deadlines</button><button class="clock-button" type="button" data-clock="preparation_steps" aria-pressed="false">Programme steps</button><button class="clock-button" type="button" data-clock="shared_tasks" aria-pressed="false">Shared tasks</button></div>
 <div class="scroll"><table><thead><tr><th>Due</th><th>Workstream / task</th><th>Recorded status</th><th>Source</th></tr></thead><tbody id="clock-rows"></tbody></table></div>
@@ -138,7 +145,7 @@ function renderApplications(){
 ['query','window','proof'].forEach(id=>$(id).addEventListener(id==='query'?'input':'change',renderApplications));renderApplications();
 (D.providers||[]).forEach(p=>{const el=add($('sources'),'div',{class:'source'});add(el,'span',{},p.name);add(el,'small',{},p.observed+' seen / '+p.new_unique+' unique');add(el,'span',{class:p.health==='ok'?'success':'danger'},p.health);});
 Object.entries(D.source_checks||{}).forEach(([key,num])=>{const el=add($('checks'),'div',{class:'resource'});add(el,'span',{},key.replaceAll('_',' '));add(el,'span',{},num)});
-function renderPapers(){const q=$('paper-query').value.toLowerCase().trim(),root=$('papers');root.replaceChildren();const rows=(D.research||[]).filter(p=>p.title.toLowerCase().includes(q));rows.forEach(p=>{const card=add(root,'div',{class:'paper'});if(p.url){add(card,'a',{href:p.url,target:'_blank',rel:'noopener noreferrer'},p.title)}else add(card,'span',{},p.title);add(card,'p',{class:'muted'},p.id+' · '+(p.published||'date not specified'));});if(!rows.length)add(root,'p',{class:'muted'},'No matching research records.');}
+function renderPapers(){const q=$('paper-query').value.toLowerCase().trim(),root=$('papers');root.replaceChildren();const rows=researchSubset().filter(p=>p.title.toLowerCase().includes(q));rows.forEach(p=>{const card=add(root,'div',{class:'paper'});if(p.url){add(card,'a',{href:p.url,target:'_blank',rel:'noopener noreferrer'},p.title)}else add(card,'span',{},p.title);add(card,'p',{class:'muted'},p.id+' · '+(p.published||'date not specified'));});if(!rows.length)add(root,'p',{class:'muted'},'No matching research records.');}
 $('paper-query').addEventListener('input',renderPapers);renderPapers();
 
 const insights=D.insights||{};
@@ -187,6 +194,41 @@ function renderClock(kind){
 }
 document.querySelectorAll('.clock-button').forEach(btn=>btn.addEventListener('click',()=>renderClock(btn.dataset.clock)));
 renderClock('submission_deadlines');
+
+
+const topicRules=[
+ ['Robotics / VLA',/\b(robot|robotic|manipulation|vla|embodied|policy|action)\b/i],
+ ['SLAM / Navigation',/\b(slam|navigation|localization|inertial|loop.closure|pose|mapping)\b/i],
+ ['Vision / 3D',/\b(vision|visual|image|camera|3d|gaussian|depth|segmentation)\b/i],
+ ['Medical AI',/\b(medical|clinical|pathology|diagnos|disease|patient|ultrasound)\w*/i],
+ ['ML / Agents',/\b(transformer|language|learning|neural|model|agent|diffusion|generative)\w*/i]
+];
+let topicSelected='';
+function topicMatches(p,name){const rule=topicRules.find(([n])=>n===name);return !!rule&&rule[1].test(p.title)}
+function renderConstellation(){
+ const root=$('research-constellation');root.replaceChildren();
+ const paperList=D.research||[];
+ const nodes=topicRules.map(([name],i)=>({name,x:130+i*158,y:i%2?195:110,papers:paperList.filter(p=>topicMatches(p,name))}));
+ for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
+  const common=nodes[i].papers.filter(p=>nodes[j].papers.some(z=>z.id===p.id)).length;
+  if(!common)continue;
+  const line=document.createElementNS(svgNS,'line');
+  Object.entries({x1:nodes[i].x,y1:nodes[i].y,x2:nodes[j].x,y2:nodes[j].y,stroke:'#5ce0c1','stroke-width':Math.min(8,1+common),'stroke-opacity':.4}).forEach(([k,v])=>line.setAttribute(k,String(v)));
+  root.append(line);
+ }
+ nodes.forEach(n=>{
+  const g=document.createElementNS(svgNS,'g');g.setAttribute('role','group');
+  const circle=document.createElementNS(svgNS,'circle');Object.entries({cx:n.x,cy:n.y,r:Math.max(16,Math.min(45,13+n.papers.length*1.5)),fill:'#174959',stroke:'#5ce0c1','stroke-width':2}).forEach(([k,v])=>circle.setAttribute(k,String(v)));g.append(circle);
+  const title=document.createElementNS(svgNS,'title');title.textContent=n.name+': '+n.papers.length+' title matches';g.append(title);
+  const t=document.createElementNS(svgNS,'text');Object.entries({x:n.x,y:n.y+5,'text-anchor':'middle',fill:'#eaf5fa','font-size':14,'font-weight':700}).forEach(([k,v])=>t.setAttribute(k,String(v)));t.textContent=n.papers.length;g.append(t);
+  const sub=document.createElementNS(svgNS,'text');Object.entries({x:n.x,y:Math.min(304,n.y+65),'text-anchor':'middle',fill:'#b4cfda','font-size':12}).forEach(([k,v])=>sub.setAttribute(k,String(v)));sub.textContent=n.name;g.append(sub);root.append(g);
+ });
+ const filters=$('topic-filters');filters.replaceChildren();
+ ['All research',...topicRules.map(x=>x[0])].forEach(name=>{const active=name==='All research'?'':name;const b=add(filters,'button',{type:'button','aria-pressed':String(topicSelected===active)},name);b.addEventListener('click',()=>{topicSelected=active;renderConstellation();renderPapers();});});
+}
+function researchSubset(){return (D.research||[]).filter(p=>!topicSelected||topicMatches(p,topicSelected))}
+
+renderConstellation();
 
 </script>
 </body>
