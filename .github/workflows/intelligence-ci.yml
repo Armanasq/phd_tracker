@@ -58,4 +58,18 @@ jobs:
           Path('/tmp/experience-dashboard.js').write_text(script)
           PY
           node --check /tmp/experience-dashboard.js
+          node --check dashboard/experience.js
+      - name: Validate real interaction bindings
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          template = Path('dashboard/template.html').read_text(encoding='utf-8')
+          script = Path('dashboard/experience.js').read_text(encoding='utf-8')
+          for token in ('id="chronos"', 'id="evidence-graph"', 'id="command-query"', 'id="priority-list"', 'id="lane-review"', 'src="experience.js"', 'href="experience.css"'):
+              assert token in template, token
+          for token in ('renderPriority', 'buildGraph', 'setHorizon', 'renderBoard', 'renderPalette', 'download('):
+              assert token in script, token
+          for asset in ('assets/readme/kinetic_cover.svg', 'assets/readme/kinetic_lane.svg'):
+              assert Path(asset).is_file(), asset
+          PY
 
