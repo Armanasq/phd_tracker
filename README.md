@@ -1,49 +1,80 @@
 <div align="center">
 
-<a href="PhD_Action_List.xlsx"><img src="assets/readme/hero.svg" alt="Source-driven evidence intelligence for PhD applications" width="100%" /></a>
+<a href="dashboard/README.md"><img src="assets/readme/experience_hero.svg" alt="EvidenceGraph research intelligence: dated application counts, evidence obligations, source contradictions and research signals" width="100%" /></a>
 
-### The application research cockpit
+**EVIDENCEGRAPH · PhD APPLICATION INTELLIGENCE**
 
-**Search the evidence. Resolve the proof debt. Execute the next dated task.**
+*Every deadline is dated. Every uncertainty is visible. Every decision links to evidence.*
 
 [![Discovery & Reconciliation](https://github.com/Armanasq/phd_tracker/actions/workflows/phd-intelligence.yml/badge.svg)](../../actions/workflows/phd-intelligence.yml)
 [![Regression & Data Contracts](https://github.com/Armanasq/phd_tracker/actions/workflows/intelligence-ci.yml/badge.svg)](../../actions/workflows/intelligence-ci.yml)
 [![Full Workbook Audit](https://github.com/Armanasq/phd_tracker/actions/workflows/audit-workbook.yml/badge.svg)](../../actions/workflows/audit-workbook.yml)
 
-[**View Excel tracker**](PhD_Action_List.xlsx) · [**Today's complete action plan**](docs/TODAY.md) · [**Import calendar reminders**](calendar/phd_deadlines.ics) · [**Private Action Center**](../../issues/1) · [**Run the automation**](../../actions/workflows/phd-intelligence.yml)
+[**APPLICATION WORKSPACE**](PhD_Action_List.xlsx) · [**DEADLINE OPERATIONS**](docs/TODAY.md) · [**INTERACTIVE OFFLINE LAB**](dashboard/README.md) · [**SOURCE PROVENANCE**](data/experience_lineage.jsonld) · [**OWNER COMMANDS**](../../issues/1)
 
 </div>
 
-## Intelligence observatory
+## Research intelligence · observed 2026-11-06
 
-<a href="dashboard/index.html"><img src="assets/readme/experience_hero.svg" width="100%" alt="PhD EvidenceGraph metrics as of 2026-11-06" /></a>
+<div align="center">
 
-<img src="assets/readme/evidence_pipeline.gif" width="100%" alt="Four-stage research pipeline: observe, resolve, verify and act, with snapshot metrics" />
+<a href="../dashboard/README.md"><img src="../assets/readme/evidence_pipeline.gif" width="100%" alt="Animated four-stage research intelligence pipeline showing observed source discovery, reconciliation, verification and upcoming applications"/></a>
 
-<a href="data/experience_view.json"><img src="assets/readme/isometric_calendar.svg" width="100%" alt="Isometric six-week calendar of real deadline density" /></a>
+**RESEARCH → EVIDENCE → DECISION → EXECUTION**
 
-<img src="assets/readme/research_constellation.svg" width="100%" alt="Research-paper title-term constellation, not a hiring graph" />
+[Explore private interactive dashboard](../dashboard/README.md) · [Inspect evidence JSON](../data/experience_view.json) · [Explore W3C-style provenance graph](../data/experience_lineage.jsonld)
 
-<img src="assets/readme/asset_dependencies.svg" width="100%" alt="Document mentions connected to near-term application records" />
+</div>
 
-<table><tr><td width="50%"><img src="assets/readme/deadline_orbits.svg" width="100%" alt="Deadline orbit by time remaining"/></td><td width="50%"><img src="assets/readme/proof_matrix.svg" width="100%" alt="Mentioned document requirements by application"/></td></tr>
-<tr><td><img src="assets/readme/source_signals.svg" width="100%" alt="Discovery source health"/></td><td><img src="assets/readme/document_leverage.svg" width="100%" alt="Document potential application associations"/></td></tr></table>
+<table>
+<tr>
+<td width="60%" valign="top"><a href="TODAY.md"><img src="../assets/readme/isometric_calendar.svg" width="100%" alt="Six-week isometric calendar: application deadline density by date" /></a></td>
+<td width="40%" valign="top"><a href="../data/portfolio_frontier.json"><img src="../assets/readme/deadline_orbits.svg" width="100%" alt="Deadline orbits: every near-term application shown according to days remaining"/></a></td>
+</tr>
+<tr>
+<td><a href="../data/research_radar.json"><img src="../assets/readme/research_constellation.svg" width="100%" alt="Research-paper title-term co-occurrence; publications are not openings"/></a></td>
+<td><a href="../data/discovery_report.json"><img src="../assets/readme/source_signals.svg" width="100%" alt="Observed crawler health and data coverage by source"/></a></td>
+</tr>
+</table>
 
-**Investigate, don't guess.** [Launch the local interactive observatory](dashboard/README.md) · [View the schema-versioned JSON](data/experience_view.json) · [Trace JSON-LD provenance](data/experience_lineage.jsonld) · [Open provenance and evidence](data/portfolio_frontier.json) · [Today's verified action agenda](docs/TODAY.md).
+### Investigate before acting
 
-<details><summary><b>What makes the observatory different?</b></summary>
+<table>
+<tr>
+<td width="33%"><b>01 · Find</b><p>Trace new leads and institutional sources.</p><a href="../data/discovered_candidates.json">Discovery queue</a></td>
+<td width="34%"><b>02 · Verify</b><p>Find contradictory evidence and unresolved eligibility.</p><a href="../data/portfolio_frontier.json">Verification frontier</a></td>
+<td width="33%"><b>03 · Execute</b><p>Review deadlines and explicitly mark task completion.</p><a href="TODAY.md">Execution agenda</a></td>
+</tr>
+</table>
 
-- **Dual-clock navigation:** final submission deadlines are never mixed with dated preparation tasks.
-- **Counterfactual document coverage:** locally simulate verified document readiness without changing owner-confirmed status; a document mention is never interpreted as a missing asset.
-- **Evidence debt inspection:** record unknown source, funding and resource proofs without inventing a confidence score.
-- **Source failure accounting:** degraded or disabled discovery providers remain visible, even when a workflow finishes.
-- **Research is not recruitment:** scholarly publications remain separate from verified doctoral vacancies.
+<details>
+<summary><b>Explore the research and proof topology · expand visual laboratory</b></summary>
 
-These are original combinations of existing engineering methods, not claims of globally unprecedented research. This GitHub README renders snapshots and an animated GIF; real search, filtering and what-if controls run only in the local dashboard.
+<a href="../data/portfolio_frontier.json"><img src="../assets/readme/asset_dependencies.svg" width="100%" alt="Source-backed network of documents mentioned by applications"/></a>
+
+<table><tr>
+<td width="50%"><img src="../assets/readme/proof_matrix.svg" width="100%" alt="Proof-debt matrix showing document mentions and readiness states"/></td>
+<td width="50%"><img src="../assets/readme/document_leverage.svg" width="100%" alt="Recorded document associations, not guaranteed eligible applications"/></td>
+</tr></table>
+
+The [offline observatory](../dashboard/README.md) supports search, filters, separate submission and preparation clocks, evidence dossiers, document counterfactuals, deadline collisions, source-linked contradictions, verification queue and research-title term groups. GitHub's README renderer cannot execute browser JavaScript.
 
 </details>
 
-<sub>Observatory data as of 2026-11-06 (Europe/Berlin). Unknown application status is not an unsuccessful application or uncompleted task.</sub>
+<details>
+<summary><b>Evidence policy and provenance contract</b></summary>
+
+- **Unknown is not false.** A document mentioned in a vacancy is not proof that it is missing.
+- **A deadline is not a completed application.** Past steps retain unconfirmed status until owner action.
+- **Source observation is not eligibility confirmation.** Evidence conflicts require manual review.
+- **A paper is not an open position.** Research signals cannot be interpreted as funded recruitment.
+- **No automatic submission.** Private owner controls preserve workbook decisions.
+
+[Machine-readable view](../data/experience_view.json) · [JSON-LD source lineage](../data/experience_lineage.jsonld) · [System architecture](docs/ARCHITECTURE.md)
+
+</details>
+
+<sub>All figures are committed snapshots observed on 2026-11-06 (Europe/Berlin), not live counts. The application dashboard is a local, private HTML tool; it is not executed inside this README. No claims of worldwide novelty or verified admission probabilities.</sub>
 
 
 ### Navigate the command center
