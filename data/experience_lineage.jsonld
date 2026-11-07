@@ -1,0 +1,2919 @@
+{
+  "@context": {
+    "prov": "http://www.w3.org/ns/prov#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "documentMention": {
+      "@id": "urn:phdtracker:vocab:documentMention",
+      "@type": "@id"
+    },
+    "associatedApplication": {
+      "@id": "urn:phdtracker:vocab:associatedApplication",
+      "@type": "@id"
+    },
+    "readinessState": "urn:phdtracker:vocab:readinessState",
+    "applicationDeadline": "urn:phdtracker:vocab:applicationDeadline",
+    "applicantDecision": "urn:phdtracker:vocab:applicantDecision",
+    "proofObligation": "urn:phdtracker:vocab:proofObligation",
+    "sourceFindingStatus": "urn:phdtracker:vocab:sourceFindingStatus",
+    "expectedDeadline": "urn:phdtracker:vocab:expectedDeadline"
+  },
+  "@graph": [
+    {
+      "@id": "urn:phdtracker:dataset:experience-view",
+      "@type": "prov:Entity",
+      "schema:name": "EvidenceGraph observation snapshot",
+      "schema:dateModified": {
+        "@value": "2026-11-06",
+        "@type": "xsd:date"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "urn:phdtracker:dataset:portfolio-frontier"
+        },
+        {
+          "@id": "urn:phdtracker:dataset:application-assets"
+        },
+        {
+          "@id": "urn:phdtracker:dataset:source-monitor"
+        }
+      ]
+    },
+    {
+      "@id": "urn:phdtracker:document:academic_cv",
+      "@type": "prov:Entity",
+      "schema:name": "Academic CV",
+      "readinessState": "unknown"
+    },
+    {
+      "@id": "urn:phdtracker:document:transcripts",
+      "@type": "prov:Entity",
+      "schema:name": "Official transcripts",
+      "readinessState": "unknown"
+    },
+    {
+      "@id": "urn:phdtracker:document:research_statement",
+      "@type": "prov:Entity",
+      "schema:name": "Research statement / SOP",
+      "readinessState": "unknown"
+    },
+    {
+      "@id": "urn:phdtracker:document:recommendations",
+      "@type": "prov:Entity",
+      "schema:name": "Reference letters and referees",
+      "readinessState": "unknown"
+    },
+    {
+      "@id": "urn:phdtracker:document:research_portfolio",
+      "@type": "prov:Entity",
+      "schema:name": "Research portfolio and publications",
+      "readinessState": "unknown"
+    },
+    {
+      "@id": "urn:phdtracker:document:english_proof",
+      "@type": "prov:Entity",
+      "schema:name": "English proficiency evidence",
+      "readinessState": "unknown"
+    },
+    {
+      "@id": "urn:phdtracker:application:N264-01",
+      "@type": "prov:Entity",
+      "schema:name": "TU/e Eindhoven, PhD Contrast Ultrasound Imaging of Nanobubbles for Cancer Diagnostics (MOMENTUM)",
+      "applicationDeadline": {
+        "@value": "2026-11-06",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.academictransfer.com/nl/jobs/363906/phd-in-contrast-ultrasound-imaging-of-nanobubbles-for-cancer-diagnostics/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N263-02",
+      "@type": "prov:Entity",
+      "schema:name": "University of Copenhagen, REVCAI PhD Project in Real-Time Visual Computing and AI (Bernhard Kerbl)",
+      "applicationDeadline": {
+        "@value": "2026-11-06",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go - urgent",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://employment.ku.dk/phd?show=171663"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N263-03",
+      "@type": "prov:Entity",
+      "schema:name": "Karlsruhe Institute of Technology (KIT MRT), PhD Efficient Long-Context Models for Vision and Vision-Language-Action, 1252/2026",
+      "applicationDeadline": {
+        "@value": "2026-11-08",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go - urgent",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://jobs.pse.kit.edu/en/jobs/170920/phd-position-efficient-long-context-large-models-for-vision-and-vision-language-action-systems-fmd"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N263-04",
+      "@type": "prov:Entity",
+      "schema:name": "University of Copenhagen, CoAStaL PhD Cultural Reasoning with Language Models (CuRe, Daniel Hershcovich)",
+      "applicationDeadline": {
+        "@value": "2026-11-08",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://employment.ku.dk/phd/?show=167227"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N263-05",
+      "@type": "prov:Entity",
+      "schema:name": "UCL Gatsby Computational Neuroscience Unit, PhD in Machine Learning and Theoretical Neuroscience, 2027",
+      "applicationDeadline": {
+        "@value": "2026-11-09",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.ucl.ac.uk/life-sciences/gatsby/study-and-work/gatsby-unit-phd-programme"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N263-06",
+      "@type": "prov:Entity",
+      "schema:name": "UCL Sainsbury Wellcome Centre, fully funded PhD in Neural Circuits and Behaviour, 2027 intake",
+      "applicationDeadline": {
+        "@value": "2026-11-09",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.swc.science/content/apply-our-phd-programme"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:C06",
+      "@type": "prov:Entity",
+      "schema:name": "Swiss Government Excellence Scholarship (research/PhD), 2027-2028",
+      "applicationDeadline": {
+        "@value": "2026-11-10",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.sbfi.admin.ch/scholarships_eng"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M07a",
+      "@type": "prov:Entity",
+      "schema:name": "Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacancy ref 3522426DA (jobs.soton.ac.uk)",
+      "applicationDeadline": {
+        "@value": "2026-11-13",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N263-10",
+      "@type": "prov:Entity",
+      "schema:name": "BMW AI Robotics / RoboTac and TU/e Eindhoven, PhD World Models & Visuo-Tactile Foundation Models (2 research topics)",
+      "applicationDeadline": {
+        "@value": "2026-11-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.robotac.eu/open-positions"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M18",
+      "@type": "prov:Entity",
+      "schema:name": "Institute of Science Tokyo, International Graduate Program IGP(A) Fall 2027 with MEXT recommendation",
+      "applicationDeadline": {
+        "@value": "2026-11-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://admissions.isct.ac.jp/en/013/graduate/programs/igp/igp-a"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N263-09",
+      "@type": "prov:Entity",
+      "schema:name": "International Max Planck Research School for Intelligent Systems (IMPRS-IS), 2027 doctoral recruitment",
+      "applicationDeadline": {
+        "@value": "2026-11-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://imprs.is.mpg.de/application"
+      },
+      "proofObligation": [
+        "Official page requires rechecking: contradiction_closed_portal"
+      ]
+    },
+    {
+      "@id": "urn:phdtracker:application:M17",
+      "@type": "prov:Entity",
+      "schema:name": "Northeastern University London, PhD studentship: Algorithms/Hardware Co-Design for Bayesian and Ising Models (Rajendran; ref R143025)",
+      "applicationDeadline": {
+        "@value": "2026-11-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.jobs.ac.uk/job/DTI287/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M15",
+      "@type": "prov:Entity",
+      "schema:name": "OIST Graduate School PhD, May or Sep 2027 entry (Admissions Workshop 2027)",
+      "applicationDeadline": {
+        "@value": "2026-11-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.oist.jp/admissions/phd-program/apply-phd"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N263-08",
+      "@type": "prov:Entity",
+      "schema:name": "TU Delft OPERA EU Project, PhD Safe Planning and Decision-Making under Uncertainty for Long-Horizon Robot Autonomy",
+      "applicationDeadline": {
+        "@value": "2026-11-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.academictransfer.com/nl/jobs/365008/phd-position-safe-planning-and-decision-making-under-uncertainty-for-long-horizon-robot-autonomy/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N263-07",
+      "@type": "prov:Entity",
+      "schema:name": "TUM Autonomous Vehicle Systems (Johannes Betz), PhD Mobile Manipulation for Humanoid Robots",
+      "applicationDeadline": {
+        "@value": "2026-11-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.mos.ed.tum.de/en/avs/career/our-jobs/ki-motorsport-1/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N264-03",
+      "@type": "prov:Entity",
+      "schema:name": "University of Amsterdam / Ericsson, PhD Cloud-Native and AI-Native 6G Networks (#15041)",
+      "applicationDeadline": {
+        "@value": "2026-11-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://werkenbij.uva.nl/en/vacancies/phd-position-in-cloud-native-and-ai-native-6g-networks-netherlands-15041"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N264-02",
+      "@type": "prov:Entity",
+      "schema:name": "University of Amsterdam, PhD Accountable and Responsible AI (SafeGenAI / LLM4LM; #15581)",
+      "applicationDeadline": {
+        "@value": "2026-11-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://werkenbij.uva.nl/en/vacancies/phd-position-in-accountable-and-responsible-ai-netherlands-15581"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N263-11",
+      "@type": "prov:Entity",
+      "schema:name": "University of Birmingham, Fully Funded PhD in Integrated Intelligent Safe Environment (IISE) for Nuclear Robotics",
+      "applicationDeadline": {
+        "@value": "2026-11-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.jobs.ac.uk/job/DTM113/phd-studentship-phd-in-an-integrated-intelligent-safe-environment-iise-in-the-nuclear-industry"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N264-05",
+      "@type": "prov:Entity",
+      "schema:name": "AI4I + Politecnico di Torino, funded PhD Adversarial Robustness in Multimodal Foundation Models",
+      "applicationDeadline": {
+        "@value": "2026-11-16",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://ai4i.it/phd-position-on-adversarial-robustness-in-multi-modal-foundation-models/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N264-04",
+      "@type": "prov:Entity",
+      "schema:name": "AI4I + Politecnico di Torino, funded PhD Agentic System-1/System-2 Architectures for Robot Autonomy",
+      "applicationDeadline": {
+        "@value": "2026-11-16",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://ai4i.it/phd-position-on-agentic-and-system-1system-2-architectures-for-robot-autonomy/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M19",
+      "@type": "prov:Entity",
+      "schema:name": "NTNU Gjovik, Ph.D. Candidate in Reinforcement Learning for Project Scheduling Problems (Jobbnorge 310778)",
+      "applicationDeadline": {
+        "@value": "2026-11-16",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310778"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M20",
+      "@type": "prov:Entity",
+      "schema:name": "University of Oslo, PhD Research Fellow in Control Theory and Optimization for Edge Computing (Jobbnorge 310583)",
+      "applicationDeadline": {
+        "@value": "2026-11-17",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310583"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M21",
+      "@type": "prov:Entity",
+      "schema:name": "OsloMet PhD Fellow in Trustworthy Generative AI with Knowledge Verification (310467)",
+      "applicationDeadline": {
+        "@value": "2026-11-18",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.oslomet.no/en/work/job-openings/phd-fellow-in-trustworthy-generative-ai-with-knowledge-verification"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:C07-UiO-310559",
+      "@type": "prov:Entity",
+      "schema:name": "UiO Integreat PhD Research Fellow in Structured Vision-Language Models (310559)",
+      "applicationDeadline": {
+        "@value": "2026-11-18",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310559"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:C07-NTNU-310592",
+      "@type": "prov:Entity",
+      "schema:name": "NTNU CAPTURE MSCA DN PhD in Colour and Image Enhancement for Wireless Capsule Endoscopy (310592), Gjovik",
+      "applicationDeadline": {
+        "@value": "2026-11-19",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310592"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:C07-NTNU-310379",
+      "@type": "prov:Entity",
+      "schema:name": "NTNU CAPTURE MSCA DN PhD in Explainable AI for Capsule Endoscopy (310379), Gjovik",
+      "applicationDeadline": {
+        "@value": "2026-11-19",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310379"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M22",
+      "@type": "prov:Entity",
+      "schema:name": "NTNU PhD Candidate in Multispectral Wireless Capsule Endoscopy (WCE), CAPTURE MSCA Doctoral Network (310363)",
+      "applicationDeadline": {
+        "@value": "2026-11-19",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://capture-dn.eu/index.php/vacant-positions/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N264-06",
+      "@type": "prov:Entity",
+      "schema:name": "TU/e Eindhoven + TUM, PhD Physics-Informed Generative AI for Dynamic Cardiac MRI (PRIMA-CMR)",
+      "applicationDeadline": {
+        "@value": "2026-11-21",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.academictransfer.com/en/jobs/364936/phd-in-physics-informed-generative-ai-for-dynamic-cardiac-mri/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M23",
+      "@type": "prov:Entity",
+      "schema:name": "ETH Zurich, Julia Vogt (Medical Data Science group): PhD in Machine Learning and Medical Data Science",
+      "applicationDeadline": {
+        "@value": "2026-11-22",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.applykite.com/positions/phd-in-machine-learning-and-medical-data-science-at-eth-zurich-7wdy7wpsqv"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:R26-UCY-SKEYES",
+      "@type": "prov:Entity",
+      "schema:name": "University of Cyprus — V4RL SkEyes ERC funded PhD in robotics, computer vision and aerial SLAM (Margarita Chli)",
+      "applicationDeadline": {
+        "@value": "2026-11-23",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://euraxess.ec.europa.eu/jobs/476857"
+      },
+      "proofObligation": [
+        "Verify personal funding / eligibility before application"
+      ]
+    },
+    {
+      "@id": "urn:phdtracker:application:N264-07",
+      "@type": "prov:Entity",
+      "schema:name": "Linkoeping University CHASS, PhD Optimal Motion Planning for Drone Swarms (LiU-2026-04767)",
+      "applicationDeadline": {
+        "@value": "2026-11-24",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://liu.se/en/work-at-liu/vacancies/30141"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:C15-NAGOYA",
+      "@type": "prov:Entity",
+      "schema:name": "Nagoya University Graduate School of Informatics, October 2027 doctoral entry (MEXT, Data Science Education Program)",
+      "applicationDeadline": {
+        "@value": "2026-11-24",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.i.nagoya-u.ac.jp/wp-content/uploads/2025/11/2026_Application_GuidelinesDC.pdf"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M24",
+      "@type": "prov:Entity",
+      "schema:name": "ETH Zurich RobotX PhD Fellowship 2027",
+      "applicationDeadline": {
+        "@value": "2026-11-27",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://robotx.ethz.ch/education/open-positions.html"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N264-08",
+      "@type": "prov:Entity",
+      "schema:name": "Aalborg University ROX6G, PhD Safe Multi-Robot Planning and Control under Connectivity Constraints (#2026/1218)",
+      "applicationDeadline": {
+        "@value": "2026-11-29",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.vacancies.aau.dk/phd-positions/show-vacancy/vacancyId/981852"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M25",
+      "@type": "prov:Entity",
+      "schema:name": "University of Bath URSA (Faculty of Engineering & Design), Cathryn Mitchell, ionospheric modelling/PNT",
+      "applicationDeadline": {
+        "@value": "2026-11-29",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.bath.ac.uk/campaigns/university-research-studentship-award-ursa/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M29",
+      "@type": "prov:Entity",
+      "schema:name": "EPFL LAMD (Neuchatel) - PhD position in Integrated Design and Optimization, MSCA-DN TurboImpact",
+      "applicationDeadline": {
+        "@value": "2026-11-30",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://careers.epfl.ch/job/Neuch%C3%A2tel-PhD-position-in-Integrated-Design-and-Optimization/1165538755/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M27",
+      "@type": "prov:Entity",
+      "schema:name": "ETH Zurich Soft Robotics Lab (Katzschmann): Doctoral Positions in Robot Learning and Soft, Musculoskeletal, and Biohybrid Robotics",
+      "applicationDeadline": {
+        "@value": "2026-11-30",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://academicpositions.com/ad/eth-zurich/2026/doctoral-positions-in-robot-learning-and-soft-musculoskeletal-and-biohybrid-robotics/252189"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M28",
+      "@type": "prov:Entity",
+      "schema:name": "Saitama University ESITI - MEXT Scholarship (University Recommendation), October 2027 intake",
+      "applicationDeadline": {
+        "@value": "2026-11-30",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://park.saitama-u.ac.jp/~rese/admission.html"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M30-NIEDUSZYNSKI",
+      "@type": "prov:Entity",
+      "schema:name": "UEA / Earlham Institute - Decoding and Designing DNA Replication Origins Using Genome Language Models (NIEDUSZYNSKI_E27DTP)",
+      "applicationDeadline": {
+        "@value": "2026-11-30",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.uea.ac.uk/course/phd-doctorate/phd-decoding-and-designing-dna-replication-origins-using-genome-language-models-nieduszynskie27dtp"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M30-SHERIFF",
+      "@type": "prov:Entity",
+      "schema:name": "UEA / Norwich Research Park Biosciences DTP - Can blood reveal the body? Trustworthy AI for tissue gene expression (SHERIFF_E27DTP)",
+      "applicationDeadline": {
+        "@value": "2026-11-30",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.uea.ac.uk/course/phd-doctorate/phd-can-blood-reveal-the-body-trustworthy-ai-for-tissue-gene-expression-sheriffe27dtp"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:SC01",
+      "@type": "prov:Entity",
+      "schema:name": "University of Bern, Machine Learning in Medicine Lab (Prof. Lisa Koch): PhD in Machine Learning in Medicine, multimodal health data",
+      "applicationDeadline": {
+        "@value": "2026-11-30",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://mlm-lab.ch/jobs/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:SE-U01",
+      "@type": "prov:Entity",
+      "schema:name": "University of Edinburgh UKRI AI CDT in Designing Responsible Natural Language Processing, 2027 entry",
+      "applicationDeadline": {
+        "@value": "2026-11-30",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://study.ed.ac.uk/programmes/postgraduate-research/1115-centre-for-doctoral-training-in-designing-responsible-natural"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M26",
+      "@type": "prov:Entity",
+      "schema:name": "University of Luxembourg YADIAS (IAS Young Academics Doctoral Fellowships), MSCA-COFUND",
+      "applicationDeadline": {
+        "@value": "2026-11-30",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://yadias.uni.lu/call-information/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N264-09",
+      "@type": "prov:Entity",
+      "schema:name": "Uppsala University, PhD Signal Processing: Multimodal Environment Modeling for Wireless Spatial Intelligence (UFV-PA 2026/2989)",
+      "applicationDeadline": {
+        "@value": "2026-11-30",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.uu.se/en/about-uu/join-us/jobs-and-vacancies/job-details?query=975824"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:SE-U03",
+      "@type": "prov:Entity",
+      "schema:name": "EPFL EDEE (Electrical Engineering) doctoral programme, December 2026 round (lab chosen after admission)",
+      "applicationDeadline": {
+        "@value": "2026-12-01",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.epfl.ch/education/admission/phd-admission-criteria-and-application/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M32",
+      "@type": "prov:Entity",
+      "schema:name": "EPFL EDIC (Computer and Communication Sciences) doctoral programme, Round 1",
+      "applicationDeadline": {
+        "@value": "2026-12-01",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.epfl.ch/education/phd/edic-computer-and-communication-sciences/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:R26-GWU-EPIC",
+      "@type": "prov:Entity",
+      "schema:name": "George Washington University — EPIC Lab visual-inertial perception, SLAM and physical AI PhD (Chuchu Chen), Fall 2027",
+      "applicationDeadline": {
+        "@value": "2026-12-01",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://graduate.engineering.gwu.edu/doctoral-admissions-requirements"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N264-10",
+      "@type": "prov:Entity",
+      "schema:name": "Max Planck School Biomedical AI (BMAI), funded PhD cohort starting September 2027",
+      "applicationDeadline": {
+        "@value": "2026-12-01",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://biomedicalai.maxplanckschools.org/4056/application-process"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M33",
+      "@type": "prov:Entity",
+      "schema:name": "Memorial University - PhD Engineering and Applied Science, Fall 2027 admission",
+      "applicationDeadline": {
+        "@value": "2026-12-01",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://mun.ca/engineering/graduate/faq-for-prospective-research-students/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M31",
+      "@type": "prov:Entity",
+      "schema:name": "Mila supervision request (up to three professors) plus separate university application",
+      "applicationDeadline": {
+        "@value": "2026-12-01",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://mila.quebec/en/supervision-requests/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N264-11",
+      "@type": "prov:Entity",
+      "schema:name": "TU Delft / ING, PhD AI for Software Reuse and Reliable Agentic Development (vacancy 3997)",
+      "applicationDeadline": {
+        "@value": "2026-12-01",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.academictransfer.com/en/jobs/365163/phd-position-in-ai-for-software-reuse-and-agentic-development/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M14",
+      "@type": "prov:Entity",
+      "schema:name": "University of Osaka, Trans-Pacific Hub Graduate Program in Advanced Bio-Information Synergy (Bioengineering, MEXT, doctoral course, Oct 2027 enrolment)",
+      "applicationDeadline": {
+        "@value": "2026-12-01",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.es.osaka-u.ac.jp/en/admission-aid/mext-granted/index.html"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M34",
+      "@type": "prov:Entity",
+      "schema:name": "York University - PhD Electrical Engineering and Computer Science (Lassonde), Fall",
+      "applicationDeadline": {
+        "@value": "2026-12-01",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://futurestudents.yorku.ca/graduate/programs/electrical-engineering-and-computer-science"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M35",
+      "@type": "prov:Entity",
+      "schema:name": "Oxford DPhil Engineering Science studentship: Data-driven Control Engineering for Large-scale Uncertain Systems (ref 27ENGCO_AP; Papachristodoulou, Margellos)",
+      "applicationDeadline": {
+        "@value": "2026-12-02",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Long shot",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.jobs.ac.uk/job/DTJ272/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M37-CIS",
+      "@type": "prov:Entity",
+      "schema:name": "Cambridge Trust funding (Cambridge International Scholarship) via the same Cambridge PhD application",
+      "applicationDeadline": {
+        "@value": "2026-12-08",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.cambridgetrust.org/postgraduate-applicants/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:SE-U09",
+      "@type": "prov:Entity",
+      "schema:name": "Exeter EPSRC DLA 2027, Public Health and Sport Sciences: Computer vision to predict falls from everyday movement in older adults (Taleshi)",
+      "applicationDeadline": {
+        "@value": "2026-12-08",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Long shot",
+      "documentMention": [],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.exeter.ac.uk/study/pg-research/funding/phdfunding/epsrc-dla-studentships/finding_a_phd_research_project/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:SC05",
+      "@type": "prov:Entity",
+      "schema:name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6010): AI and Image Processing for Diabetic Retinopathy Smart Cameras (Vaughan and Ye, Clinical and Biomedical Sciences)",
+      "applicationDeadline": {
+        "@value": "2026-12-08",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.exeter.ac.uk/study/funding/award/?id=6010"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:SC06",
+      "@type": "prov:Entity",
+      "schema:name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): Explainable AI for Early Dementia Detection and Deployment (Dong, Computer Science)",
+      "applicationDeadline": {
+        "@value": "2026-12-08",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.exeter.ac.uk/study/funding/award/?id=6011"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:SC02",
+      "@type": "prov:Entity",
+      "schema:name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): R2T2-Med: Resource-Aware AI for Scalable and Deployable Medical Image Analysis (Zhang, Computer Science)",
+      "applicationDeadline": {
+        "@value": "2026-12-08",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.exeter.ac.uk/study/funding/award/?id=6011"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:SC07",
+      "@type": "prov:Entity",
+      "schema:name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): Sovereign Agentic AI: Distilling Small Language Model Agents for Local Deployment (Wang and Huang, Computer Science)",
+      "applicationDeadline": {
+        "@value": "2026-12-08",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.exeter.ac.uk/study/funding/award/?id=6011"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:SC03",
+      "@type": "prov:Entity",
+      "schema:name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6014): Multiscale Scientific Machine Learning Digital Twins for High-Torque Electric Propulsion under Extreme Duty Cycles (Engineering)",
+      "applicationDeadline": {
+        "@value": "2026-12-08",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.exeter.ac.uk/study/funding/award/?id=6014"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:SC04",
+      "@type": "prov:Entity",
+      "schema:name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6015): Physics-Informed AI and Experimental Modelling of Ocean Mixing (Messias, Geography)",
+      "applicationDeadline": {
+        "@value": "2026-12-08",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.exeter.ac.uk/study/funding/award/?id=6015"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M36-6014",
+      "@type": "prov:Entity",
+      "schema:name": "Exeter EPSRC DLA studentships, Department of Engineering, Sept 2027 entry (ref 6014): Physics-Aware Graph Neural Networks for Robust Short-Term Visibility Forecasting (supervisor surname Zhou per PDF ",
+      "applicationDeadline": {
+        "@value": "2026-12-08",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.exeter.ac.uk/study/funding/award/?id=6014"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M36-6019",
+      "@type": "prov:Entity",
+      "schema:name": "Exeter EPSRC DLA studentships, Mathematics and Statistics, Sept 2027 entry (ref 6019): Uncertainty quantification for healthcare models: a route to precision medicine (Salter per PDF name)",
+      "applicationDeadline": {
+        "@value": "2026-12-08",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.exeter.ac.uk/study/funding/award/?id=6019"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M37-Gates",
+      "@type": "prov:Entity",
+      "schema:name": "Gates Cambridge Scholarship (PhD, 2027/28 entry, Round 2 all other eligible applicants)",
+      "applicationDeadline": {
+        "@value": "2026-12-08",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.gatescambridge.org/apply/how-to-apply/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N264-12",
+      "@type": "prov:Entity",
+      "schema:name": "University of Amsterdam AMLab, multiple PhD positions Symmetries and Their Breaking in Deep Learning (Simons grant)",
+      "applicationDeadline": {
+        "@value": "2026-12-08",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://werkenbij.uva.nl/en/vacancies/multiple-phd-positions-in-symmetries-and-their-breaking-in-deep-learning-netherlands-15608"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M38",
+      "@type": "prov:Entity",
+      "schema:name": "University of Edinburgh EPSRC Centre for Doctoral Training in Machine Learning Systems (PhD, Round 1)",
+      "applicationDeadline": {
+        "@value": "2026-12-14",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://informatics.ed.ac.uk/cdt-in-machine-learning-systems/apply/application-process-and-guidance/application-deadlines"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:C10",
+      "@type": "prov:Entity",
+      "schema:name": "EPFL EDRS (Robotics, Control and Intelligent Systems) doctoral programme",
+      "applicationDeadline": {
+        "@value": "2026-12-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://epfl.ch/education/phd/programs/edrs-robotics_control_and_intelligent_systems/edrs-applicants"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N263-12",
+      "@type": "prov:Entity",
+      "schema:name": "McGill University School of Computer Science PhD, Fall 2027 (international deadline)",
+      "applicationDeadline": {
+        "@value": "2026-12-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.mcgill.ca/gradapplicants/program/computer-science-phd"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M41",
+      "@type": "prov:Entity",
+      "schema:name": "McGill University, Electrical and Computer Engineering PhD, Fall 2027",
+      "applicationDeadline": {
+        "@value": "2026-12-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.mcgill.ca/ece/graduate/graduate/deadlines"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M40",
+      "@type": "prov:Entity",
+      "schema:name": "UBC Computer Science PhD, September 2027",
+      "applicationDeadline": {
+        "@value": "2026-12-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.cs.ubc.ca/students/grad/admissions"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M39",
+      "@type": "prov:Entity",
+      "schema:name": "University of Alberta, Computing Science PhD, Fall 2027 (Amii)",
+      "applicationDeadline": {
+        "@value": "2026-12-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.ualberta.ca/en/computing-science/graduate-studies/programs-and-admissions/applications-and-admissions/index.html"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M42",
+      "@type": "prov:Entity",
+      "schema:name": "UEA / ARIES NERC DTP studentships (entry 1 Oct 2027)",
+      "applicationDeadline": {
+        "@value": "2026-12-16",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.aries-dtp.ac.uk/applications"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:C11",
+      "@type": "prov:Entity",
+      "schema:name": "University of Manchester President's Doctoral Scholar (PDS) Award",
+      "applicationDeadline": {
+        "@value": "2026-12-18",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.se.manchester.ac.uk/study/postgraduate-research/fees-and-funding/search-for-funding/presidents-doctoral-scholarship/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:R26-MAN-PDS-CONSTELLATIONS",
+      "@type": "prov:Entity",
+      "schema:name": "University of Manchester — PDS Safe and Multi-Fidelity Optimisation of Satellite Constellations for a Changing Planet",
+      "applicationDeadline": {
+        "@value": "2026-12-18",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.humanities.manchester.ac.uk/study/postgraduate-research/funding/list-of-awards/presidents-doctoral-scholar-award/"
+      },
+      "proofObligation": [
+        "Verify personal funding / eligibility before application"
+      ]
+    },
+    {
+      "@id": "urn:phdtracker:application:M43a",
+      "@type": "prov:Entity",
+      "schema:name": "University of Sydney Research Training Program (RTP) international stipend + fee offset, 2027 commencement",
+      "applicationDeadline": {
+        "@value": "2026-12-18",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.sydney.edu.au/scholarships/australian-government-research-training-program/rtp-international.html"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M44",
+      "@type": "prov:Entity",
+      "schema:name": "University of Surrey fully funded PhD: predictability in Romance verbal inflection (Linguistics)",
+      "applicationDeadline": {
+        "@value": "2026-12-20",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.surrey.ac.uk/fees-and-funding/studentships/fully-funded-phd-studentship-predictability-romance-verbal-inflection"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:C15-TOYOHASHI",
+      "@type": "prov:Entity",
+      "schema:name": "Toyohashi University of Technology International Doctoral Degree Program with MEXT (university recommendation)",
+      "applicationDeadline": {
+        "@value": "2027-01-04",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.tut.ac.jp/english/exam/applications/docs/3_2026_special_guidelines_en.pdf"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M46",
+      "@type": "prov:Entity",
+      "schema:name": "University of Oxford Intelligent Earth CDT (AI for the environment), September 2027 entry",
+      "applicationDeadline": {
+        "@value": "2027-01-06",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://intelligent-earth.ox.ac.uk/how-apply"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:SE-U07",
+      "@type": "prov:Entity",
+      "schema:name": "UCL 50 fully funded 4-year EPSRC PhD studentships in engineering and physical sciences",
+      "applicationDeadline": {
+        "@value": "2027-01-08",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.jobs.ac.uk/job/DTA190/50-fully-funded-4-year-epsrc-phd-studentships-in-engineering-and-physical-sciences"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M47",
+      "@type": "prov:Entity",
+      "schema:name": "Imperial College London President's PhD Scholarships 2027/28, round 2",
+      "applicationDeadline": {
+        "@value": "2027-01-11",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.imperial.ac.uk/study/fees-and-funding/postgraduate-doctoral/grants-scholarships/presidents-phd/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:SE01",
+      "@type": "prov:Entity",
+      "schema:name": "King's College London, PhD in Human-Robot Interaction (CO-STAR, Dr Oya Celiktutan, SAIR lab), Oct 2027 entry",
+      "applicationDeadline": {
+        "@value": "2027-01-11",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M49",
+      "@type": "prov:Entity",
+      "schema:name": "SFU Engineering Science PhD (Fall 2027)",
+      "applicationDeadline": {
+        "@value": "2027-01-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.sfu.ca/students/calendar/2027/spring/programs/engineering-science/doctor-of-philosophy.html"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:N264-13",
+      "@type": "prov:Entity",
+      "schema:name": "University of Amsterdam EVELYN, 2 PhDs AI for Science (multimodal retrieval / mechanistic interpretability)",
+      "applicationDeadline": {
+        "@value": "2027-01-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://werkenbij.uva.nl/en/vacancies/two-phd-positions-in-ai-for-science-at-the-university-of-amsterdam-netherlands-15626"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M48",
+      "@type": "prov:Entity",
+      "schema:name": "University of British Columbia (Vancouver) PhD in Electrical and Computer Engineering, September 2027",
+      "applicationDeadline": {
+        "@value": "2027-01-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.grad.ubc.ca/prospective-students/graduate-degree-programs/phd-electrical-computer-engineering"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M45",
+      "@type": "prov:Entity",
+      "schema:name": "University of Toronto MIE, CLIMB Lab (Pakpong Chirarattananon), PhD September 2027",
+      "applicationDeadline": {
+        "@value": "2027-01-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://climb.mie.utoronto.ca/openings/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:SF01",
+      "@type": "prov:Entity",
+      "schema:name": "University of Toronto UTIAS (Aerospace Studies) PhD, Fall 2027, guaranteed funding, supervisor required (space robotics, SLAM, navigation labs)",
+      "applicationDeadline": {
+        "@value": "2027-01-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://gradstudies.engineering.utoronto.ca/prospective-students/departments/aerospace-studies-graduate-studies-programs-and-degrees/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:SE-U08",
+      "@type": "prov:Entity",
+      "schema:name": "University of Warwick Biomedical AI PhD (jobs.ac.uk DTF911)",
+      "applicationDeadline": {
+        "@value": "2027-01-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.jobs.ac.uk/job/DTF911/biomedical-ai-phd"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M54",
+      "@type": "prov:Entity",
+      "schema:name": "Waterloo ECE PhD, Stephen L. Smith (Autonomous Systems Lab)",
+      "applicationDeadline": {
+        "@value": "2027-01-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://uwaterloo.ca/autonomous-systems-lab/joining-lab"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:SE12",
+      "@type": "prov:Entity",
+      "schema:name": "University of Surrey (Vision, Speech and Signal Processing), Smart optical design: AI tools for cinematic camera lenses (Volino, Guillemaut), April 2027 start",
+      "applicationDeadline": {
+        "@value": "2027-01-17",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Long shot",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.surrey.ac.uk/fees-and-funding/studentships/smart-optical-design-ai-tools-next-generation-cinematic-camera-lenses"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:SA13",
+      "@type": "prov:Entity",
+      "schema:name": "Durham University: Efficient Physical AI for Real-World Robotics, funded PhD studentship (jobs.ac.uk DTI242)",
+      "applicationDeadline": {
+        "@value": "2027-01-19",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.jobs.ac.uk/job/DTI242/efficient-physical-ai-for-real-world-robotics-funded-phd-studentship"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M50",
+      "@type": "prov:Entity",
+      "schema:name": "SFU Computing Science PhD (Fall 2027)",
+      "applicationDeadline": {
+        "@value": "2027-01-19",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.sfu.ca/fas/study/future-graduates/apply/computing-science.html"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:C15-NAIST",
+      "@type": "prov:Entity",
+      "schema:name": "NAIST doctoral course (Information Science), 2027 admission, with MEXT IPGP scholarship",
+      "applicationDeadline": {
+        "@value": "2027-01-20",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.naist.jp/en/international_students/prospective_students/financial_support/mext_international_priority_graduate_programs.html"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:SF02",
+      "@type": "prov:Entity",
+      "schema:name": "University of Tokyo Graduate School of Frontier Sciences (GSFS) fall 2027 regular degree with MEXT University Recommendation (General) - scholarship may not continue",
+      "applicationDeadline": {
+        "@value": "2027-01-22",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M51",
+      "@type": "prov:Entity",
+      "schema:name": "University of West London, AI optimisation of green roofs PhD studentship",
+      "applicationDeadline": {
+        "@value": "2027-01-25",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.uwl.ac.uk/research/phd-opportunities"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M53",
+      "@type": "prov:Entity",
+      "schema:name": "Bristol PhD studentship, learning and decision making under uncertainty in public health (Mengyan Zhang)",
+      "applicationDeadline": {
+        "@value": "2027-01-31",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.jobs.ac.uk/job/DSP806/phd-studentship-learning-and-decision-making-under-uncertainty-in-public-health"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M52",
+      "@type": "prov:Entity",
+      "schema:name": "Glasgow Graduate School scholarships (College of Science and Engineering, any supervisor)",
+      "applicationDeadline": {
+        "@value": "2027-01-31",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.gla.ac.uk/schools/computing/postgraduateresearch/prospectivestudents/scholarshipsandfundingopportunities/studentshipinformation"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M56",
+      "@type": "prov:Entity",
+      "schema:name": "McMaster University, Computing and Software, PhD (Sept 2027 intake)",
+      "applicationDeadline": {
+        "@value": "2027-02-28",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Check first",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.eng.mcmaster.ca//app/uploads/2025/11/CAS-Graduate-Information-1.pdf"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:SH02",
+      "@type": "prov:Entity",
+      "schema:name": "Monash Graduate Scholarship (stipend) plus Monash International Tuition Scholarship (fees), PhD, International Round 1 2027",
+      "applicationDeadline": {
+        "@value": "2027-02-28",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.monash.edu/study/fees-scholarships/scholarships/find-a-scholarship/international-tuition-scholarship"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M55a",
+      "@type": "prov:Entity",
+      "schema:name": "Concordia Mechanical, Industrial and Aerospace Engineering PhD (Fall 2027)",
+      "applicationDeadline": {
+        "@value": "2027-03-01",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.concordia.ca/academics/graduate/mechanical-engineering-phd.html"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M55b",
+      "@type": "prov:Entity",
+      "schema:name": "Victoria University of Wellington, Wellington Doctoral Scholarship (round 2 per earlier sweep)",
+      "applicationDeadline": {
+        "@value": "2027-03-01",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Later round",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.wgtn.ac.nz/scholarships/current/wellington-doctoral-scholarship"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:M57",
+      "@type": "prov:Entity",
+      "schema:name": "University of Wollongong, University Postgraduate Award (UPA), international PhD",
+      "applicationDeadline": {
+        "@value": "2027-05-23",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Later round",
+      "documentMention": [],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.uow.edu.au/research/graduate-research/scholarships/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:observation:LEAD26-EPFL-CREATE",
+      "@type": "prov:Entity",
+      "sourceFindingStatus": "review_source_changed",
+      "expectedDeadline": "2026-11-13",
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:source-monitor"
+      },
+      "schema:citation": {
+        "@id": "https://www.epfl.ch/labs/create/create-lab/openings/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:observation:N263-09-PORTAL",
+      "@type": "prov:Entity",
+      "sourceFindingStatus": "contradiction_closed_portal",
+      "expectedDeadline": "2026-11-15",
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:source-monitor"
+      },
+      "schema:citation": {
+        "@id": "https://imprs-is-apply.tue.mpg.de/registration/imprs-is-2026"
+      },
+      "associatedApplication": {
+        "@id": "urn:phdtracker:application:N263-09"
+      }
+    }
+  ]
+}
