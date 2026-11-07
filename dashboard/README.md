@@ -13,7 +13,7 @@ python scripts/experience_engine.py
 xdg-open dashboard/index.html
 ```
 
-On macOS, use `open dashboard/index.html`. The generated page uses files in the same directory: `index.html`, `experience.js` and `experience.css`. No bundler, external JavaScript library, CDN, server, or internet connection is required for offline interaction.
+On macOS, use `open dashboard/index.html`. The generated **index.html is fully self-contained**, embedding its CSS, JavaScript and versioned evidence snapshot. You can also download that single file from GitHub and open it directly. No bundler, CDN, web server, or internet connection is required for the interactive features. The separate JavaScript and CSS files remain editable source modules.
 
 For a GitHub-native interface without cloning, open [Run workflow](https://github.com/Armanasq/phd_tracker/actions/workflows/experience-lab.yml), select the horizon and decision lens, and review the computed job summary and JSON artifact.
 
