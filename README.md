@@ -16,20 +16,20 @@
 
 ## Intelligence observatory
 
-<a href="dashboard/index.html"><img src="assets/readme/experience_hero.svg" width="100%" alt="PhD EvidenceGraph metrics as of 2026-11-06" /></a>
+<a href="../dashboard/index.html"><img src="../assets/readme/experience_hero.svg" width="100%" alt="PhD EvidenceGraph metrics as of 2026-11-07" /></a>
 
-<img src="assets/readme/evidence_pipeline.gif" width="100%" alt="Four-stage research pipeline: observe, resolve, verify and act, with snapshot metrics" />
+<img src="../assets/readme/evidence_pipeline.gif" width="100%" alt="Four-stage research pipeline: observe, resolve, verify and act, with snapshot metrics" />
 
-<a href="data/experience_view.json"><img src="assets/readme/isometric_calendar.svg" width="100%" alt="Isometric six-week calendar of real deadline density" /></a>
+<a href="../data/experience_view.json"><img src="../assets/readme/isometric_calendar.svg" width="100%" alt="Isometric six-week calendar of real deadline density" /></a>
 
-<img src="assets/readme/research_constellation.svg" width="100%" alt="Research-paper title-term constellation, not a hiring graph" />
+<img src="../assets/readme/research_constellation.svg" width="100%" alt="Research-paper title-term constellation, not a hiring graph" />
 
-<img src="assets/readme/asset_dependencies.svg" width="100%" alt="Document mentions connected to near-term application records" />
+<img src="../assets/readme/asset_dependencies.svg" width="100%" alt="Document mentions connected to near-term application records" />
 
-<table><tr><td width="50%"><img src="assets/readme/deadline_orbits.svg" width="100%" alt="Deadline orbit by time remaining"/></td><td width="50%"><img src="assets/readme/proof_matrix.svg" width="100%" alt="Mentioned document requirements by application"/></td></tr>
-<tr><td><img src="assets/readme/source_signals.svg" width="100%" alt="Discovery source health"/></td><td><img src="assets/readme/document_leverage.svg" width="100%" alt="Document potential application associations"/></td></tr></table>
+<table><tr><td width="50%"><img src="../assets/readme/deadline_orbits.svg" width="100%" alt="Deadline orbit by time remaining"/></td><td width="50%"><img src="../assets/readme/proof_matrix.svg" width="100%" alt="Mentioned document requirements by application"/></td></tr>
+<tr><td><img src="../assets/readme/source_signals.svg" width="100%" alt="Discovery source health"/></td><td><img src="../assets/readme/document_leverage.svg" width="100%" alt="Document potential application associations"/></td></tr></table>
 
-**Investigate, don't guess.** [Launch the local interactive observatory](dashboard/README.md) · [View the schema-versioned JSON](data/experience_view.json) · [Trace JSON-LD provenance](data/experience_lineage.jsonld) · [Open provenance and evidence](data/portfolio_frontier.json) · [Today's verified action agenda](docs/TODAY.md).
+**Investigate, don't guess.** [Launch the local interactive observatory](../dashboard/README.md) · [View the schema-versioned JSON](../data/experience_view.json) · [Trace JSON-LD provenance](../data/experience_lineage.jsonld) · [Open provenance and evidence](../data/portfolio_frontier.json) · [Today's verified action agenda](TODAY.md).
 
 <details><summary><b>What makes the observatory different?</b></summary>
 
@@ -43,16 +43,16 @@ These are original combinations of existing engineering methods, not claims of g
 
 </details>
 
-<sub>Observatory data as of 2026-11-06 (Europe/Berlin). Unknown application status is not an unsuccessful application or uncompleted task.</sub>
+<sub>Observatory data as of 2026-11-07 (Europe/Berlin). Unknown application status is not an unsuccessful application or uncompleted task.</sub>
 
 
 ### Navigate the command center
 
-[**01 · Act now**](#01--execute--2026-11-06) · [**02 · Decide next**](#02--next-decisions-not-just-a-countdown) · [**03 · Verify sources**](#03--evidence-backed-search-and-auditability) · [**04 · Data model**](#04--all-worksheets-participate) · [**05 · Controls**](#05--github-as-a-private-operating-interface) · [**06 · Engineering**](#06--research-contributions-not-cosmetic-features)
+[**01 · Act now**](#01--execute--2026-11-07) · [**02 · Decide next**](#02--next-decisions-not-just-a-countdown) · [**03 · Verify sources**](#03--evidence-backed-search-and-auditability) · [**04 · Data model**](#04--all-worksheets-participate) · [**05 · Controls**](#05--github-as-a-private-operating-interface) · [**06 · Engineering**](#06--research-contributions-not-cosmetic-features)
 
 | Priority | Immediate route | Outcome |
 |:--|:--|:--|
-| **Submit / verify** | [Open today’s 2 application deadline(s)](docs/TODAY.md) | Prevent missing a final deadline; confirm portal status and submission receipts |
+| **Submit / verify** | [Review today's scheduled tasks](docs/TODAY.md) | Prevent missing a final deadline; confirm portal status and submission receipts |
 | **Plan the workload** | [Today's execution plan](docs/TODAY.md) | Separate actual application deadlines from supporting steps and shared tasks |
 | **Resolve uncertainty** | [Review proof obligations](data/portfolio_frontier.json) | Identify funding restrictions, portal contradictions, and missing evidence |
 | **Explore opportunities** | [Discovery inbox](data/discovered_candidates.json) | Evaluate new leads before any promotion into the application list |
@@ -62,15 +62,15 @@ These are original combinations of existing engineering methods, not claims of g
 
 | Time critical | Source assurance | Applicant decisions | Research horizon |
 |:--|:--|:--|:--|
-| **4** deadline(s) in ≤3 days; **6** in the next 7 days | **1/4** active providers reporting healthy; **3** degraded/disabled | **21** dated steps today; **97** older steps with *completion unknown* | **34** indexed papers, research signals only |
+| **5** deadline(s) in ≤3 days; **6** in the next 7 days | **1/4** active providers reporting healthy; **3** degraded/disabled | **0** dated steps today; **113** older steps with *completion unknown* | **34** indexed papers, research signals only |
 | [Review every dated task](docs/TODAY.md) | [Source diagnostics](data/discovery_report.json) | [Confirm task status](../../issues/1) | [Research radar](data/research_radar.json) |
 
 **Source consistency:** 6 observations across 6 configured monitors; 4 matched expected anchors and 2 require review. **Degraded sources:** academicpositions, academictransfer, brave.
 
-<sub>Last official-page monitor: 2026-11-06 · last discovery: 2026-11-06 · last publication radar: 2026-11-06. These are observed snapshots, not live counters or a guarantee that any position is still accepting applicants.</sub>
+<sub>Last official-page monitor: 2026-11-07 · last discovery: 2026-11-07 · last publication radar: 2026-11-07. These are observed snapshots, not live counters or a guarantee that any position is still accepting applicants.</sub>
 
 > [!IMPORTANT]
-> **Observed snapshot: 2026-11-06 (Europe/Berlin).** Application deadlines, step dates and shared tasks are different data types. A task dated in the past is **completion-unconfirmed**, not automatically unfinished. Original verdicts are research assessments, not confirmed submission receipts. Primary sources determine final eligibility and deadlines.
+> **Observed snapshot: 2026-11-07 (Europe/Berlin).** Application deadlines, step dates and shared tasks are different data types. A task dated in the past is **completion-unconfirmed**, not automatically unfinished. Original verdicts are research assessments, not confirmed submission receipts. Primary sources determine final eligibility and deadlines.
 
 <a href="docs/TODAY.md"><img src="assets/readme/operations.svg" width="100%" alt="Today: distinct application deadlines, scheduled preparation steps, shared tasks and completion-unknown backlog" /></a>
 
@@ -129,38 +129,25 @@ Review source conflicts, snooze or prioritize individual applications and inspec
 > [!NOTE]
 > **Capability transparency:** Inria discovery and private GitHub reminders are operating. AcademicPositions is currently blocked (HTTP 403), AcademicTransfer has zero observed records, and Brave search requires an API key. External notifications, Gmail polling and Google Sheets synchronization are not claimed to be active without their respective configuration. The operational snapshot above is dated and must not be interpreted as real-time eligibility proof.
 
-## 01 · Execute — 2026-11-06
+## 01 · Execute — 2026-11-07
 
-### Submission deadlines today — 2 actionable · 1 explicitly excluded
+### Submission deadlines today — 0 actionable · 0 explicitly excluded
 
 | When | Application / workstream | Action | Source |
 |:--|:--|:--|:--|
-| 2026-11-06 | University of Copenhagen, REVCAI PhD Project in Real-Time Visual Computing and AI (Bernhard Kerbl) | Submit by 6 Nov 23:59 CET; tailor one-page motivation to real-time neural/point representations and GPU-aware perception. | [Source page](https://employment.ku.dk/phd?show=171663) · Action list · row 31 |
-| 2026-11-06 | TU/e Eindhoven, PhD Contrast Ultrasound Imaging of Nanobubbles for Cancer Diagnostics (MOMENTUM) | Apply by 6 Nov; show medical image analysis and quantitative inverse/signal modeling; verify C1 and degree equivalence. | [Source page](https://www.academictransfer.com/nl/jobs/363906/phd-in-contrast-ultrasound-imaging-of-nanobubbles-for-cancer-diagnostics/) · Action list · row 30 |
+| — | None in the current snapshot | — | — |
 
-### Cross-route work — 2 scheduled today
+### Cross-route work — 0 scheduled today
 
 | Date | Cross-application task | Recorded status |
 |:---|:---|:---|
-| 2026-11-06 | Write the master research plan once (2 pages), then derive: the 2,000-word version (Osaka), the Field of Study and Research Plan forms (UTokyo, Saitama), and the criterion-by-criterion letters for the Jobbnorge posts. · `tsk-391e3a04a6dde9f0` | To do |
-| 2026-11-06 | Submit Copenhagen real-time visual-computing application by 23:59 CET; low-priority ultrasound position closes same day. · `tsk-13b22b6cd882e8fb` | To do |
+| — | None scheduled today | — |
 
-**Programme-specific steps due today** — 21 distinct records from the *Step timeline* worksheet, not inferred from the final submission date.
+**Programme-specific steps due today** — 0 distinct records from the *Step timeline* worksheet, not inferred from the final submission date.
 
 | When | Application / workstream | Action | Source |
 |:--|:--|:--|:--|
-| 2026-11-06 | University of Copenhagen REVCAI, PhD Real-Time Visual Computing and AI | Submit by 23:59 CET through University of Copenhagen recruitment site · `tsk-51298cbed7152c90` | [Source page](https://employment.ku.dk/phd?show=171663) · Step timeline · row 199 |
-| 2026-11-06 | Northeastern University London, PhD studentship: Algorithms/Hardware Co-Design for Bayesian and Ising Models (Rajendran; ref  | By 2026-11-06 submit through the Workday Apply button quoting R143025 and state whether you are likely to need a visa (submit early because rolling shortlisting) · `tsk-f8eaf110cccf9704` | [Source page](https://www.jobs.ac.uk/job/DTI287/) · Step timeline · row 191 |
-| 2026-11-06 | Northeastern University London, PhD studentship: Algorithms/Hardware Co-Design for Bayesian and Ising Models (Rajendran; ref  | Interviews planned during November 2026 · `tsk-2ec2bc131756d750` | [Source page](https://www.jobs.ac.uk/job/DTI287/) · Step timeline · row 192 |
-| 2026-11-06 | NTNU Gjovik, Ph.D. Candidate in Reinforcement Learning for Project Scheduling Problems (Jobbnorge 310778) | By 2026-11-06 contact University of Tehran to obtain transcripts and diplomas; gather diploma supplement and any HK-dir statement for foreign education; line up three referees · `tsk-57ddc78f7ed9d4b3` | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310778) · Step timeline · row 193 |
-| 2026-11-06 | University of Oslo, PhD Research Fellow in Control Theory and Optimization for Edge Computing (Jobbnorge 310583) | By 2026-11-06 request an official explanation of the grading system of the University of Tehran, and get transcripts and diplomas; Vitnemalsportalen will not hold Tehran results so upload transcripts · `tsk-611b1040ea27718f` | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310583) · Step timeline · row 202 |
-| 2026-11-06 | OsloMet PhD Fellow in Trustworthy Generative AI with Knowledge Verification (310467) | By 2026-11-06: contact two referees and get their contact details (page: 'preferably two references with contact information'; reference letters also listed) · `tsk-f1329fba9069eab4` | [Source page](https://www.oslomet.no/en/work/job-openings/phd-fellow-in-trustworthy-generative-ai-with-knowledge-verification) · Step timeline · row 194 |
-| 2026-11-06 | Saitama University ESITI - MEXT Scholarship (University Recommendation), October 2027 intake | Browse supervisors at https://park.saitama-u.ac.jp/~rese/courses.html and email 2-3 candidate supervisors for agreement to supervise, by 2026-11-06 (office does not recommend supervisors) · `tsk-aa2012d00c89e22f` | [Source page](https://park.saitama-u.ac.jp/~rese/admission.html) · Step timeline · row 196 |
-| 2026-11-06 | Memorial University - PhD Engineering and Applied Science, Fall 2027 admission | Email 1-2 prospective supervisors in FEAS (page says research applicants should name up to two potential supervisors), by 2026-11-06 · `tsk-af3b178677c8147a` | [Source page](https://mun.ca/engineering/graduate/faq-for-prospective-research-students/) · Step timeline · row 189 |
-| 2026-11-06 | Memorial University - PhD Engineering and Applied Science, Fall 2027 admission | Ask two referees (university-level, institutional email) by 2026-11-06; submit application 1-2 weeks early · `tsk-4297443570f9563b` | [Source page](https://mun.ca/engineering/graduate/faq-for-prospective-research-students/) · Step timeline · row 190 |
-| 2026-11-06 | Oxford DPhil Engineering Science studentship: Data-driven Control Engineering for Large-scale Uncertain Systems (ref 27ENGCO_ | Request three referees (at least one academic) by 2026-11-06 · `tsk-9c4aff859a436c2a` | [Source page](https://www.jobs.ac.uk/job/DTJ272/) · Step timeline · row 195 |
-| 2026-11-06 | UEA / ARIES NERC DTP studentships (entry 1 Oct 2027) | By 2026-11-06 browse all 6 pages of https://aries-dtp.ac.uk/studentships/ and shortlist up to 3 projects (max 3 allowed per year) whose scope fits; page 1 shows only climate/ocean projects · `tsk-14af97ebff1a11ef` | [Source page](https://www.aries-dtp.ac.uk/applications) · Step timeline · row 198 |
-| 2026-11-06 | University of Sydney Faculty of Engineering Research Scholarship for MENA | By 2026-11-06 email engineering.hdr@sydney.edu.au asking in writing whether an Iranian citizen counts as 'a citizen from a country of the Middle East and North African region' (Iran is not named on the page) · `tsk-084fdbe1c0abed3e` | [Source page](https://www.sydney.edu.au/scholarships/b/faculty-of-engineering-research-scholarship-for-mena.html) · Step timeline · row 203 |
+| — | None in the current snapshot | — | — |
 
 <details>
 <summary><b>Show every scheduled task today, the unconfirmed backlog, and exclusion reasons</b></summary>
@@ -171,9 +158,9 @@ The full execution queue preserves original worksheet row numbers and source IDs
 
 **Not actionable today**
 
-- **University of Newcastle (Australia) PhD scholarship: Hierarchical Imitation Learning for Long-Horizon Robotic ** — Not eligible; Newcastle PhD scholarships listing: 'Closing date: 06 November 2026'; time not printed
+No exclusions on this date.
 
-**Earlier dates with completion unconfirmed:** 97 tasks. 10 are cross-route tasks and 87 are programme timeline steps. They are **not automatically treated as outstanding** until the user confirms progress.
+**Earlier dates with completion unconfirmed:** 113 tasks. 12 are cross-route tasks and 101 are programme timeline steps. They are **not automatically treated as outstanding** until the user confirms progress.
 
 </details>
 
@@ -214,7 +201,7 @@ The full execution queue preserves original worksheet row numbers and source IDs
 | academicpositions | degraded | 0 | 0 |
 | academictransfer | degraded | 0 | 0 |
 | brave | disabled | 0 | 0 |
-| inria | ok | 12 | 2 |
+| inria | ok | 12 | 0 |
 
 - **Contradictory source observations:** 2 monitor finding(s). A published programme deadline is not proof that an application portal is accepting submissions.
 - **Research records:** 34 scholarly articles indexed separately, not counted as available PhD placements.
@@ -383,4 +370,4 @@ The [research radar](data/research_radar.json) monitors topical publications in 
 
 ---
 
-<sub><b>Generated:</b> 2026-11-06. Charts are static SVG snapshots regenerated by GitHub Actions; GitHub READMEs cannot run React or arbitrary JavaScript. This project combines known techniques in source monitoring and orchestration; uniqueness and commercial viability require independent evaluation, not branding claims.</sub>
+<sub><b>Generated:</b> 2026-11-07. Charts are static SVG snapshots regenerated by GitHub Actions; GitHub READMEs cannot run React or arbitrary JavaScript. This project combines known techniques in source monitoring and orchestration; uniqueness and commercial viability require independent evaluation, not branding claims.</sub>

@@ -1,6 +1,6 @@
 ## Intelligence observatory
 
-<a href="../dashboard/index.html"><img src="../assets/readme/experience_hero.svg" width="100%" alt="PhD EvidenceGraph metrics as of 2026-11-06" /></a>
+<a href="../dashboard/index.html"><img src="../assets/readme/experience_hero.svg" width="100%" alt="PhD EvidenceGraph metrics as of 2026-11-07" /></a>
 
 <img src="../assets/readme/evidence_pipeline.gif" width="100%" alt="Four-stage research pipeline: observe, resolve, verify and act, with snapshot metrics" />
 
@@ -27,4 +27,4 @@ These are original combinations of existing engineering methods, not claims of g
 
 </details>
 
-<sub>Observatory data as of 2026-11-06 (Europe/Berlin). Unknown application status is not an unsuccessful application or uncompleted task.</sub>
+<sub>Observatory data as of 2026-11-07 (Europe/Berlin). Unknown application status is not an unsuccessful application or uncompleted task.</sub>

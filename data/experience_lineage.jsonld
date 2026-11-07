@@ -24,7 +24,7 @@
       "@type": "prov:Entity",
       "schema:name": "EvidenceGraph observation snapshot",
       "schema:dateModified": {
-        "@value": "2026-11-06",
+        "@value": "2026-11-07",
         "@type": "xsd:date"
       },
       "prov:wasDerivedFrom": [
@@ -52,15 +52,15 @@
       "readinessState": "unknown"
     },
     {
-      "@id": "urn:phdtracker:document:research_statement",
-      "@type": "prov:Entity",
-      "schema:name": "Research statement / SOP",
-      "readinessState": "unknown"
-    },
-    {
       "@id": "urn:phdtracker:document:recommendations",
       "@type": "prov:Entity",
       "schema:name": "Reference letters and referees",
+      "readinessState": "unknown"
+    },
+    {
+      "@id": "urn:phdtracker:document:research_statement",
+      "@type": "prov:Entity",
+      "schema:name": "Research statement / SOP",
       "readinessState": "unknown"
     },
     {
@@ -74,69 +74,6 @@
       "@type": "prov:Entity",
       "schema:name": "English proficiency evidence",
       "readinessState": "unknown"
-    },
-    {
-      "@id": "urn:phdtracker:application:N264-01",
-      "@type": "prov:Entity",
-      "schema:name": "TU/e Eindhoven, PhD Contrast Ultrasound Imaging of Nanobubbles for Cancer Diagnostics (MOMENTUM)",
-      "applicationDeadline": {
-        "@value": "2026-11-06",
-        "@type": "xsd:date"
-      },
-      "applicantDecision": "Go with risk",
-      "documentMention": [
-        {
-          "@id": "urn:phdtracker:document:academic_cv"
-        },
-        {
-          "@id": "urn:phdtracker:document:research_statement"
-        },
-        {
-          "@id": "urn:phdtracker:document:transcripts"
-        }
-      ],
-      "prov:wasDerivedFrom": {
-        "@id": "urn:phdtracker:dataset:portfolio-frontier"
-      },
-      "schema:citation": {
-        "@id": "https://www.academictransfer.com/nl/jobs/363906/phd-in-contrast-ultrasound-imaging-of-nanobubbles-for-cancer-diagnostics/"
-      }
-    },
-    {
-      "@id": "urn:phdtracker:application:N263-02",
-      "@type": "prov:Entity",
-      "schema:name": "University of Copenhagen, REVCAI PhD Project in Real-Time Visual Computing and AI (Bernhard Kerbl)",
-      "applicationDeadline": {
-        "@value": "2026-11-06",
-        "@type": "xsd:date"
-      },
-      "applicantDecision": "Go - urgent",
-      "documentMention": [
-        {
-          "@id": "urn:phdtracker:document:academic_cv"
-        },
-        {
-          "@id": "urn:phdtracker:document:english_proof"
-        },
-        {
-          "@id": "urn:phdtracker:document:recommendations"
-        },
-        {
-          "@id": "urn:phdtracker:document:research_portfolio"
-        },
-        {
-          "@id": "urn:phdtracker:document:research_statement"
-        },
-        {
-          "@id": "urn:phdtracker:document:transcripts"
-        }
-      ],
-      "prov:wasDerivedFrom": {
-        "@id": "urn:phdtracker:dataset:portfolio-frontier"
-      },
-      "schema:citation": {
-        "@id": "https://employment.ku.dk/phd?show=171663"
-      }
     },
     {
       "@id": "urn:phdtracker:application:N263-03",

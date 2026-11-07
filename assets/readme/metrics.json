@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-11-06",
+  "generated_at": "2026-11-07",
   "applications": 183,
-  "future": 102,
-  "due_14d": 27,
+  "future": 100,
+  "due_14d": 26,
   "source_leads": 23,
   "contradictions": 2,
   "providers": {
@@ -29,9 +29,9 @@
     },
     "inria": {
       "observed": 12,
-      "new_unique": 2,
-      "reobservations": 10,
-      "unique_yield": 0.1667,
+      "new_unique": 0,
+      "reobservations": 12,
+      "unique_yield": 0.0,
       "health": "ok"
     }
   },

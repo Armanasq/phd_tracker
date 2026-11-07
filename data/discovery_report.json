@@ -1,10 +1,7 @@
 {
-  "run_date": "2026-11-06",
-  "new_ids": [
-    "inria:2026-10684",
-    "inria:2026-10685"
-  ],
-  "new_count": 2,
+  "run_date": "2026-11-07",
+  "new_ids": [],
+  "new_count": 0,
   "seen_by_provider": {
     "academicpositions": 0,
     "academictransfer": 0,
@@ -46,9 +43,9 @@
     },
     "inria": {
       "observed": 12,
-      "new_unique": 2,
-      "reobservations": 10,
-      "unique_yield": 0.1667,
+      "new_unique": 0,
+      "reobservations": 12,
+      "unique_yield": 0.0,
       "health": "ok"
     }
   },
