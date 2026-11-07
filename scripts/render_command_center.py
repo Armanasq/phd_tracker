@@ -199,17 +199,17 @@ def dashboard_md(plan, metrics, experience_block=""):
                f'last publication radar: {md(radar.get("as_of","unknown"))}')
     return f"""<div align="center">
 
-<a href="PhD_Action_List.xlsx"><img src="assets/readme/hero.svg" alt="Source-driven evidence intelligence for PhD applications" width="100%" /></a>
+<a href="dashboard/README.md"><img src="assets/readme/experience_hero.svg" alt="EvidenceGraph research intelligence: dated application counts, evidence obligations, source contradictions and research signals" width="100%" /></a>
 
-### The application research cockpit
+**EVIDENCEGRAPH · PhD APPLICATION INTELLIGENCE**
 
-**Search the evidence. Resolve the proof debt. Execute the next dated task.**
+*Every deadline is dated. Every uncertainty is visible. Every decision links to evidence.*
 
 [![Discovery & Reconciliation](https://github.com/Armanasq/phd_tracker/actions/workflows/phd-intelligence.yml/badge.svg)](../../actions/workflows/phd-intelligence.yml)
 [![Regression & Data Contracts](https://github.com/Armanasq/phd_tracker/actions/workflows/intelligence-ci.yml/badge.svg)](../../actions/workflows/intelligence-ci.yml)
 [![Full Workbook Audit](https://github.com/Armanasq/phd_tracker/actions/workflows/audit-workbook.yml/badge.svg)](../../actions/workflows/audit-workbook.yml)
 
-[**View Excel tracker**](PhD_Action_List.xlsx) · [**Today's complete action plan**](docs/TODAY.md) · [**Import calendar reminders**](calendar/phd_deadlines.ics) · [**Private Action Center**](../../issues/1) · [**Run the automation**](../../actions/workflows/phd-intelligence.yml)
+[**APPLICATION WORKSPACE**](PhD_Action_List.xlsx) · [**DEADLINE OPERATIONS**](docs/TODAY.md) · [**INTERACTIVE OFFLINE LAB**](dashboard/README.md) · [**SOURCE PROVENANCE**](data/experience_lineage.jsonld) · [**OWNER COMMANDS**](../../issues/1)
 
 </div>
 
