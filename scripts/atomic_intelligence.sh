@@ -38,6 +38,7 @@ for attempt in 1 2 3; do
     data/discovered_candidates.json \
     data/discovery_report.json \
     data/experience_view.json \
+    data/experience_lineage.jsonld \
     data/ingestion_report.json \
     data/latest_run.json \
     data/decision_queue.json \
