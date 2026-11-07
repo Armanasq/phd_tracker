@@ -1,6 +1,113 @@
 <div align="center">
 
-<a href="dashboard/README.md"><img src="assets/readme/experience_hero.svg" alt="EvidenceGraph research intelligence: dated application counts, evidence obligations, source contradictions and research signals" width="100%" /></a>
+<a href="../../actions/workflows/experience-lab.yml"><img src="assets/readme/kinetic_cover.svg" width="100%" alt="Animated research intelligence cover with 100 actual future application records on deadline orbits" /></a>
+
+**THIS IS AN EXECUTABLE RESEARCH WORKSPACE, NOT A STATIC TRACKER.**
+
+[**RUN AN INTERACTIVE SCENARIO**](../../actions/workflows/experience-lab.yml) · [**OPERATE SOURCE ALERTS**](../../issues/1) · [**EXPLORE THE APPLICATION**](dashboard/README.md) · [**INSPECT RAW EVIDENCE**](data/experience_view.json)
+
+<sub>Regenerated from committed evidence. Snapshot 2026-11-07 · 100 frontier records · 1 source conflict(s). Real actions run through GitHub or the browser application.</sub>
+
+</div>
+
+## Choose a mode · expand and execute
+
+<table><tr>
+<td width="33%" valign="top"><details open><summary><b>01 / SIMULATE</b></summary>
+
+Change horizon, lens and hypothetical document readiness; receive computed ranking and downloadable JSON from a GitHub Actions run.
+
+[**Launch workflow inputs**](../../actions/workflows/experience-lab.yml)
+
+</details></td>
+<td width="34%" valign="top"><details open><summary><b>02 / INVESTIGATE</b></summary>
+
+Drag evidence nodes, scrub time, tune proof-debt weights, run a command palette and change a local work board.
+
+[**Open interactive browser cockpit**](dashboard/README.md)
+
+</details></td>
+<td width="33%" valign="top"><details open><summary><b>03 / OPERATE</b></summary>
+
+Prioritize, snooze, acknowledge tasks or explicitly set asset readiness with validated source IDs.
+
+[**Owner commands**](../../issues/1)
+
+</details></td>
+</tr></table>
+
+<a href="../../actions/workflows/experience-lab.yml"><img src="assets/readme/kinetic_lane.svg" width="100%" alt="Animated, data-backed source discovery to evidence verification to decision pipeline"/></a>
+
+## Choose your experiment
+
+<details>
+<summary><b>Scenario lab / deadlines, proof debt, documents, research</b></summary>
+
+Open [Run workflow](../../actions/workflows/experience-lab.yml), select 7, 14, 30 or 45 days, then choose a deadline, verification, resources or research lens. Optionally enter `academic_cv,research_statement` as hypothetical-ready resources.
+
+The workflow calculates from committed evidence and produces a readable GitHub Actions job summary and JSON artifact. It does not alter application decisions.
+
+</details>
+
+<details>
+<summary><b>Temporal graph / drag, zoom, scrub, filter</b></summary>
+
+The [browser cockpit](dashboard/README.md) supports a draggable and zoomable evidence graph, 0–60-day time travel, explicit review weights, reproducible URLs, CSV/JSON export, keyboard search (Ctrl/Cmd + K), and a local drag-and-drop workspace.
+
+GitHub README rendering cannot execute JavaScript; SVG motion and expandable sections are the native layer. Executable HTML/CSS/JS are in [dashboard/](dashboard/).
+
+</details>
+
+<details>
+<summary><b>Document dependencies and emerging research</b></summary>
+
+<img src="assets/readme/asset_dependencies.svg" width="100%" alt="Application/document bipartite evidence graph"/>
+
+<table><tr><td width="50%"><img src="assets/readme/proof_matrix.svg" width="100%" alt="Document-mention matrix with explicit states"/></td><td width="50%"><img src="assets/readme/research_constellation.svg" width="100%" alt="Research-title co-occurrence; papers are not vacancies"/></td></tr></table>
+
+Edges encode recorded mentions, not guessed document absence or admission probability.
+
+</details>
+
+<details>
+<summary><b>Deadline terrain and discovery source assurance</b></summary>
+
+<table><tr><td width="60%"><img src="assets/readme/isometric_calendar.svg" width="100%" alt="Actual six-week deadline density"/></td><td width="40%"><img src="assets/readme/deadline_orbits.svg" width="100%" alt="Time-distance deadline orbits"/></td></tr></table>
+
+<img src="assets/readme/source_signals.svg" width="100%" alt="Provider health including degraded and disabled search channels"/>
+
+[Monitor observations](data/latest_run.json) · [Discovery diagnostics](data/discovery_report.json) · [Portfolio frontier](data/portfolio_frontier.json) · [Provenance JSON-LD](data/experience_lineage.jsonld)
+
+</details>
+
+## Upcoming records · observation 2026-11-07
+
+| Horizon | Date | Application | Primary source |
+|:--|:--|:--|:--|
+| **1d** | 2026-11-08 | Karlsruhe Institute of Technology (KIT MRT), PhD Efficient Long-Context Models for Vision and Vision-Language- | [Evidence](https://jobs.pse.kit.edu/en/jobs/170920/phd-position-efficient-long-context-large-models-for-vision-and-vision-language-action-systems-fmd) |
+| **1d** | 2026-11-08 | University of Copenhagen, CoAStaL PhD Cultural Reasoning with Language Models (CuRe, Daniel Hershcovich) | [Evidence](https://employment.ku.dk/phd/?show=167227) |
+| **2d** | 2026-11-09 | UCL Gatsby Computational Neuroscience Unit, PhD in Machine Learning and Theoretical Neuroscience, 2027 | [Evidence](https://www.ucl.ac.uk/life-sciences/gatsby/study-and-work/gatsby-unit-phd-programme) |
+| **2d** | 2026-11-09 | UCL Sainsbury Wellcome Centre, fully funded PhD in Neural Circuits and Behaviour, 2027 intake | [Evidence](https://www.swc.science/content/apply-our-phd-programme) |
+| **3d** | 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | [Evidence](https://www.sbfi.admin.ch/scholarships_eng) |
+| **6d** | 2026-11-13 | Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacancy ref 3522426DA (jobs.soton.ac.uk) | [Evidence](https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10) |
+| **8d** | 2026-11-15 | BMW AI Robotics / RoboTac and TU/e Eindhoven, PhD World Models &amp; Visuo-Tactile Foundation Models (2 research t | [Evidence](https://www.robotac.eu/open-positions) |
+| **8d** | 2026-11-15 | Institute of Science Tokyo, International Graduate Program IGP(A) Fall 2027 with MEXT recommendation | [Evidence](https://admissions.isct.ac.jp/en/013/graduate/programs/igp/igp-a) |
+
+[Complete action agenda](docs/TODAY.md) · [Workbook](PhD_Action_List.xlsx) · [Calendar feed](calendar/phd_deadlines.ics)
+
+<details>
+<summary><b>Reproduce, verify and operate the system</b></summary>
+
+Submission deadlines and preparation tasks are different. A source assertion is not proof of eligibility. A document mention is not evidence that it is missing. A research paper is not an open funded PhD position. Hypothetical readiness is not recorded applicant status.
+
+[Architecture](docs/ARCHITECTURE.md) · [Capability atlas](docs/CAPABILITY_ATLAS.md) · [Playbooks](docs/PLAYBOOKS.md) · [Source correction](../../issues/new?template=01-source-correction.yml) · [New opportunity intake](../../issues/new?template=02-opportunity-lead.yml) · [Propose an experiment](../../issues/new?template=03-automation-idea.yml)
+
+These are working combinations of existing interaction methods; no unverified claim of globally unprecedented invention is made.
+
+</details>
+
+
+<div align="center">
 
 **EVIDENCEGRAPH · PhD APPLICATION INTELLIGENCE**
 
@@ -10,72 +117,9 @@
 [![Regression & Data Contracts](https://github.com/Armanasq/phd_tracker/actions/workflows/intelligence-ci.yml/badge.svg)](../../actions/workflows/intelligence-ci.yml)
 [![Full Workbook Audit](https://github.com/Armanasq/phd_tracker/actions/workflows/audit-workbook.yml/badge.svg)](../../actions/workflows/audit-workbook.yml)
 
-[**APPLICATION WORKSPACE**](PhD_Action_List.xlsx) · [**DEADLINE OPERATIONS**](docs/TODAY.md) · [**INTERACTIVE OFFLINE LAB**](dashboard/README.md) · [**SOURCE PROVENANCE**](data/experience_lineage.jsonld) · [**OWNER COMMANDS**](../../issues/1)
+[**APPLICATION WORKSPACE**](PhD_Action_List.xlsx) · [**DEADLINE OPERATIONS**](docs/TODAY.md) · [**BROWSER FLIGHT DECK**](dashboard/README.md) · [**SOURCE PROVENANCE**](data/experience_lineage.jsonld) · [**OWNER COMMANDS**](../../issues/1)
 
 </div>
-
-## Research intelligence · observed 2026-11-07
-
-<div align="center">
-
-<a href="dashboard/README.md"><img src="assets/readme/evidence_pipeline.gif" width="100%" alt="Animated four-stage research intelligence pipeline showing observed source discovery, reconciliation, verification and upcoming applications"/></a>
-
-**RESEARCH → EVIDENCE → DECISION → EXECUTION**
-
-[Explore private interactive dashboard](dashboard/README.md) · [Inspect evidence JSON](data/experience_view.json) · [Explore W3C-style provenance graph](data/experience_lineage.jsonld)
-
-</div>
-
-<table>
-<tr>
-<td width="60%" valign="top"><a href="docs/TODAY.md"><img src="assets/readme/isometric_calendar.svg" width="100%" alt="Six-week isometric calendar: application deadline density by date" /></a></td>
-<td width="40%" valign="top"><a href="data/portfolio_frontier.json"><img src="assets/readme/deadline_orbits.svg" width="100%" alt="Deadline orbits: every near-term application shown according to days remaining"/></a></td>
-</tr>
-<tr>
-<td><a href="data/research_radar.json"><img src="assets/readme/research_constellation.svg" width="100%" alt="Research-paper title-term co-occurrence; publications are not openings"/></a></td>
-<td><a href="data/discovery_report.json"><img src="assets/readme/source_signals.svg" width="100%" alt="Observed crawler health and data coverage by source"/></a></td>
-</tr>
-</table>
-
-### Investigate before acting
-
-<table>
-<tr>
-<td width="33%"><b>01 · Find</b><p>Trace new leads and institutional sources.</p><a href="data/discovered_candidates.json">Discovery queue</a></td>
-<td width="34%"><b>02 · Verify</b><p>Find contradictory evidence and unresolved eligibility.</p><a href="data/portfolio_frontier.json">Verification frontier</a></td>
-<td width="33%"><b>03 · Execute</b><p>Review deadlines and explicitly mark task completion.</p><a href="docs/TODAY.md">Execution agenda</a></td>
-</tr>
-</table>
-
-<details>
-<summary><b>Explore the research and proof topology · expand visual laboratory</b></summary>
-
-<a href="data/portfolio_frontier.json"><img src="assets/readme/asset_dependencies.svg" width="100%" alt="Source-backed network of documents mentioned by applications"/></a>
-
-<table><tr>
-<td width="50%"><img src="assets/readme/proof_matrix.svg" width="100%" alt="Proof-debt matrix showing document mentions and readiness states"/></td>
-<td width="50%"><img src="assets/readme/document_leverage.svg" width="100%" alt="Recorded document associations, not guaranteed eligible applications"/></td>
-</tr></table>
-
-The [offline observatory](dashboard/README.md) supports search, filters, separate submission and preparation clocks, evidence dossiers, document counterfactuals, deadline collisions, source-linked contradictions, verification queue and research-title term groups. GitHub's README renderer cannot execute browser JavaScript.
-
-</details>
-
-<details>
-<summary><b>Evidence policy and provenance contract</b></summary>
-
-- **Unknown is not false.** A document mentioned in a vacancy is not proof that it is missing.
-- **A deadline is not a completed application.** Past steps retain unconfirmed status until owner action.
-- **Source observation is not eligibility confirmation.** Evidence conflicts require manual review.
-- **A paper is not an open position.** Research signals cannot be interpreted as funded recruitment.
-- **No automatic submission.** Private owner controls preserve workbook decisions.
-
-[Machine-readable view](data/experience_view.json) · [JSON-LD source lineage](data/experience_lineage.jsonld) · [System architecture](docs/ARCHITECTURE.md)
-
-</details>
-
-<sub>All figures are committed snapshots observed on 2026-11-07 (Europe/Berlin), not live counts. The application dashboard is a local, private HTML tool; it is not executed inside this README. No claims of worldwide novelty or verified admission probabilities.</sub>
-
 
 ### Navigate the command center
 
