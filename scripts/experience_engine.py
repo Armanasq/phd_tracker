@@ -39,6 +39,58 @@ def safe_url(value: object) -> str:
     return value.strip() if p.scheme == "https" and p.hostname else ""
 
 
+
+def operational_insights(applications: list[dict], observations: list[dict]) -> dict:
+    future = [a for a in applications if a["days"] >= 0]
+    by_day: dict[str, list[dict]] = {}
+    for a in future:
+        by_day.setdefault(a["deadline"], []).append(a)
+    collisions = [{
+        "date": deadline,
+        "applications": [{"id": a["id"], "name": a["name"]} for a in items],
+        "count": len(items),
+    } for deadline, items in sorted(by_day.items()) if len(items) >= 2]
+    known = {a["id"]: a for a in applications}
+    anomalies = []
+    for observed in observations:
+        if not isinstance(observed, dict):
+            continue
+        status = str(observed.get("status", "unknown"))
+        if status not in {"review_source_changed", "contradiction_closed_portal"}:
+            continue
+        app_id = str(observed.get("application_id", observed.get("id", "")))
+        app = known.get(app_id)
+        anomalies.append({
+            "observation_id": str(observed.get("id", "")),
+            "application_id": app_id,
+            "application_name": app["name"] if app else "Not linked to a recorded frontier application",
+            "status": status,
+            "expected_deadline": str(observed.get("expected_deadline", "")),
+            "source": safe_url(observed.get("source_url")),
+            "is_linked": app is not None,
+        })
+    verification_queue = []
+    for app in future:
+        reasons = []
+        if app["proof_obligations"]:
+            reasons.append(f'{len(app["proof_obligations"])} source/evidence obligations')
+        if app["unknown_documents"]:
+            reasons.append(f'{len(app["unknown_documents"])} mentioned documents with unknown readiness')
+        if not reasons:
+            continue
+        verification_queue.append({
+            "id": app["id"], "name": app["name"], "deadline": app["deadline"],
+            "days": app["days"], "reasons": reasons, "source": app["source"],
+        })
+    verification_queue.sort(key=lambda a: (a["days"], -len(a["reasons"]), a["name"]))
+    return {
+        "deadline_collisions": collisions,
+        "source_anomalies": anomalies,
+        "verification_queue": verification_queue[:50],
+        "policy": "Priorities are calendar-sorted review candidates, not admission likelihood, guaranteed eligibility or inferred incomplete tasks.",
+    }
+
+
 def make_view(root: Path) -> dict:
     plan = read_json(root / "data/execution_plan.json")
     frontier = read_json(root / "data/portfolio_frontier.json")
@@ -121,6 +173,7 @@ def make_view(root: Path) -> dict:
         "providers": providers,
         "source_checks": dict(source_checks),
         "research": papers,
+        "insights": operational_insights(applications, statuses),
     }
 
 
