@@ -149,6 +149,26 @@ def make_view(root: Path) -> dict:
         })
     statuses = monitor.get("source_statuses", [])
     source_checks = Counter(str(x.get("status", "unknown")) for x in statuses if isinstance(x, dict))
+    clocks = {
+        "submission_deadlines": [],
+        "preparation_steps": [],
+        "shared_tasks": [],
+    }
+    for kind, key in [
+        ("submission_deadlines", "eligible_application_deadlines"),
+        ("preparation_steps", "scheduled_timeline_tasks"),
+        ("shared_tasks", "cross_route_tasks"),
+    ]:
+        for item in plan.get("today", {}).get(key, []):
+            clocks[kind].append({
+                "id": str(item.get("task_id", "")),
+                "source_id": str(item.get("source_id", "")),
+                "name": str(item.get("name", item.get("action", "")))[:220],
+                "action": str(item.get("action", ""))[:450],
+                "due": str(item.get("due", plan["as_of"]))[:10],
+                "state": str(item.get("state", "completion_unconfirmed"))[:60],
+                "source": safe_url(item.get("source")),
+            })
     papers = [{
         "title": str(p.get("title", ""))[:230],
         "id": str(p.get("id", ""))[:80],
@@ -173,6 +193,7 @@ def make_view(root: Path) -> dict:
         "providers": providers,
         "source_checks": dict(source_checks),
         "research": papers,
+        "clocks": clocks,
         "insights": operational_insights(applications, statuses),
     }
 
