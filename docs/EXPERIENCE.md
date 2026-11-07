@@ -1,19 +1,19 @@
 ## Intelligence observatory
 
-<a href="dashboard/index.html"><img src="assets/readme/experience_hero.svg" width="100%" alt="PhD EvidenceGraph metrics as of 2026-11-06" /></a>
+<a href="../dashboard/index.html"><img src="../assets/readme/experience_hero.svg" width="100%" alt="PhD EvidenceGraph metrics as of 2026-11-06" /></a>
 
-<img src="assets/readme/evidence_pipeline.gif" width="100%" alt="Four-stage research pipeline: observe, resolve, verify and act, with snapshot metrics" />
+<img src="../assets/readme/evidence_pipeline.gif" width="100%" alt="Four-stage research pipeline: observe, resolve, verify and act, with snapshot metrics" />
 
-<a href="data/experience_view.json"><img src="assets/readme/isometric_calendar.svg" width="100%" alt="Isometric six-week calendar of real deadline density" /></a>
+<a href="../data/experience_view.json"><img src="../assets/readme/isometric_calendar.svg" width="100%" alt="Isometric six-week calendar of real deadline density" /></a>
 
-<img src="assets/readme/research_constellation.svg" width="100%" alt="Research-paper title-term constellation, not a hiring graph" />
+<img src="../assets/readme/research_constellation.svg" width="100%" alt="Research-paper title-term constellation, not a hiring graph" />
 
-<img src="assets/readme/asset_dependencies.svg" width="100%" alt="Document mentions connected to near-term application records" />
+<img src="../assets/readme/asset_dependencies.svg" width="100%" alt="Document mentions connected to near-term application records" />
 
-<table><tr><td width="50%"><img src="assets/readme/deadline_orbits.svg" width="100%" alt="Deadline orbit by time remaining"/></td><td width="50%"><img src="assets/readme/proof_matrix.svg" width="100%" alt="Mentioned document requirements by application"/></td></tr>
-<tr><td><img src="assets/readme/source_signals.svg" width="100%" alt="Discovery source health"/></td><td><img src="assets/readme/document_leverage.svg" width="100%" alt="Document potential application associations"/></td></tr></table>
+<table><tr><td width="50%"><img src="../assets/readme/deadline_orbits.svg" width="100%" alt="Deadline orbit by time remaining"/></td><td width="50%"><img src="../assets/readme/proof_matrix.svg" width="100%" alt="Mentioned document requirements by application"/></td></tr>
+<tr><td><img src="../assets/readme/source_signals.svg" width="100%" alt="Discovery source health"/></td><td><img src="../assets/readme/document_leverage.svg" width="100%" alt="Document potential application associations"/></td></tr></table>
 
-**Investigate, don't guess.** [Launch the local interactive observatory](dashboard/README.md) · [View the schema-versioned JSON](data/experience_view.json) · [Trace JSON-LD provenance](data/experience_lineage.jsonld) · [Open provenance and evidence](data/portfolio_frontier.json) · [Today's verified action agenda](docs/TODAY.md).
+**Investigate, don't guess.** [Launch the local interactive observatory](../dashboard/README.md) · [View the schema-versioned JSON](../data/experience_view.json) · [Trace JSON-LD provenance](../data/experience_lineage.jsonld) · [Open provenance and evidence](../data/portfolio_frontier.json) · [Today's verified action agenda](TODAY.md).
 
 <details><summary><b>What makes the observatory different?</b></summary>
 
