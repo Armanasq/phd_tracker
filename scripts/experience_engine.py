@@ -266,6 +266,89 @@ def orbit_svg(view: dict) -> str:
     return svg_document("Calendar-based deadline orbits", 1200, 534, parts)
 
 
+
+def isometric_calendar_svg(view: dict) -> str:
+    from datetime import timedelta
+    origin = date.fromisoformat(view["as_of"])
+    deadline_counts = Counter(a["deadline"] for a in view["applications"] if 0 <= a["days"] < 42)
+    parts = [
+        label(32, 46, "SIX-WEEK DEADLINE TERRAIN", 21, PALETTE["text"], 700),
+        label(32, 72, "Height = applications sharing a deadline; zero is an empty date, not a failed application", 13, PALETTE["muted"]),
+    ]
+    for week in range(6):
+        for weekday in range(7):
+            observed = origin + timedelta(days=week*7+weekday)
+            n = deadline_counts.get(observed.isoformat(), 0)
+            x = 175 + weekday*110 - week*24
+            y = 132 + week*42 + weekday*15
+            rise = min(65, n*15)
+            color = PALETTE["rose"] if n >= 3 else PALETTE["amber"] if n >= 2 else PALETTE["mint"] if n else PALETTE["panel"]
+            pts = f"{x},{y} {x+56},{y+11} {x+33},{y+29} {x-23},{y+18}"
+            if rise:
+                side = f"{x+56},{y+11-rise} {x+56},{y+11} {x+33},{y+29} {x+33},{y+29-rise}"
+                front = f"{x-23},{y+18-rise} {x+33},{y+29-rise} {x+33},{y+29} {x-23},{y+18}"
+                parts.append(f'<polygon points="{side}" fill="#285469" stroke="{PALETTE["line"]}"/>')
+                parts.append(f'<polygon points="{front}" fill="#214657" stroke="{PALETTE["line"]}"/>')
+                pts=f"{x},{y-rise} {x+56},{y+11-rise} {x+33},{y+29-rise} {x-23},{y+18-rise}"
+            parts.append(f'<polygon points="{pts}" fill="{color}" stroke="{PALETTE["line"]}"><title>{observed.isoformat()}: {n} recorded application deadline(s)</title></polygon>')
+            if n:
+                parts.append(label(x+17,y+18-rise,n,13,PALETTE["background"],700,"middle"))
+    parts.append(label(32, 464, "Each tile = one calendar day; historical status and completion remain unconfirmed unless recorded.", 12, PALETTE["muted"]))
+    return svg_document("Isometric calendar of actual application-deadline density over six weeks", 1120, 487, parts)
+
+
+def dependency_svg(view: dict) -> str:
+    applications=[a for a in view["applications"] if 0 <= a["days"] <= 14][:13]
+    resources=view["resources"][:6]
+    parts=[
+        label(28, 42, "REUSABLE ASSET DEPENDENCIES", 21, PALETTE["text"], 700),
+        label(28, 68, "Graph edges mean a document is mentioned in an application. They do not mean it is missing.", 12, PALETTE["muted"]),
+    ]
+    left_x,right_x=250,840
+    for i,r in enumerate(resources):
+        y=124+i*56
+        parts.append(rect(25,y-21,230,39,PALETTE["panel"]))
+        parts.append(label(37,y+3,r["label"][:30],12,PALETTE["text"],600))
+    for i,a in enumerate(applications):
+        y=102+i*37
+        parts.append(rect(840,y-17,335,30,PALETTE["panel"]))
+        parts.append(label(850,y+3,a["name"][:46],10,PALETTE["text"]))
+        for j,r in enumerate(resources):
+            if r["id"] in a["documents"]:
+                ry=124+j*56
+                parts.append(f'<path d="M {left_x} {ry} C 475 {ry},615 {y}, {right_x} {y}" fill="none" stroke="{PALETTE["amber"] if r["state"]=="unknown" else PALETTE["mint"]}" stroke-opacity=".39" stroke-width="1.7"/>')
+    parts.append(label(25,612,"Amber = unknown document readiness · Mint = explicit other readiness · No edge does not prove a document is unnecessary",11,PALETTE["muted"]))
+    return svg_document("Bipartite graph of document mentions across near-term opportunities",1200,635,parts)
+
+
+def research_map_svg(view: dict) -> str:
+    themes=[
+        ("Robot autonomy",("robot","navigation","manipulation","action","vla")),
+        ("SLAM & estimation",("slam","localization","inertial","loop closure","mapping")),
+        ("Vision & 3D",("vision","visual","3d","camera","segmentation","image")),
+        ("Clinical imaging",("medical","pathology","clinical","diagnos","ultrasound")),
+        ("Learning systems",("learning","language","neural","model","transformer")),
+    ]
+    papers=view["research"]
+    sets=[set(p["id"] for p in papers if any(token in p["title"].lower() for token in words)) for _,words in themes]
+    parts=[label(28,44,"RESEARCH TERM CONSTELLATION",20,PALETTE["text"],700),
+           label(28,70,"Links represent co-occurrence of title terms in indexed papers, not verified supervisor relationships",12,PALETTE["muted"])]
+    locations=[(122,200),(355,140),(593,230),(845,135),(1050,235)]
+    for i in range(len(locations)):
+        for j in range(i+1,len(locations)):
+            overlap=len(sets[i]&sets[j])
+            if overlap:
+                xa,ya=locations[i];xb,yb=locations[j]
+                parts.append(f'<line x1="{xa}" y1="{ya}" x2="{xb}" y2="{yb}" stroke="{PALETTE["blue"]}" stroke-width="{min(11,1+overlap)}" stroke-opacity=".25"/>')
+    for i,(name,_) in enumerate(themes):
+        x,y=locations[i]
+        parts.append(f'<circle cx="{x}" cy="{y}" r="{min(56,23+len(sets[i])*1.5)}" fill="{PALETTE["panel"]}" stroke="{PALETTE["mint"]}" stroke-width="2"/>')
+        parts.append(label(x,y+6,len(sets[i]),22,PALETTE["mint"],700,"middle"))
+        parts.append(label(x,y+85,name,13,PALETTE["text"],600,"middle"))
+    parts.append(label(28,345,f'{len(papers)} indexed research records in this observed snapshot; title-term grouping is heuristic.',12,PALETTE["muted"]))
+    return svg_document("Research title-term co-occurrence network",1200,366,parts)
+
+
 def proof_svg(view: dict) -> str:
     apps = [a for a in view["applications"] if a["days"] >= 0][:17]
     resources = view["resources"][:7]
@@ -348,6 +431,12 @@ def markdown(view: dict) -> str:
 
 <img src="assets/readme/evidence_pipeline.gif" width="100%" alt="Four-stage research pipeline: observe, resolve, verify and act, with snapshot metrics" />
 
+<a href="data/experience_view.json"><img src="assets/readme/isometric_calendar.svg" width="100%" alt="Isometric six-week calendar of real deadline density" /></a>
+
+<img src="assets/readme/research_constellation.svg" width="100%" alt="Research-paper title-term constellation, not a hiring graph" />
+
+<img src="assets/readme/asset_dependencies.svg" width="100%" alt="Document mentions connected to near-term application records" />
+
 <table><tr><td width="50%"><img src="assets/readme/deadline_orbits.svg" width="100%" alt="Deadline orbit by time remaining"/></td><td width="50%"><img src="assets/readme/proof_matrix.svg" width="100%" alt="Mentioned document requirements by application"/></td></tr>
 <tr><td><img src="assets/readme/source_signals.svg" width="100%" alt="Discovery source health"/></td><td><img src="assets/readme/document_leverage.svg" width="100%" alt="Document potential application associations"/></td></tr></table>
 
@@ -380,6 +469,9 @@ def generate(root: Path = ROOT) -> dict:
     (data/"experience_view.json").write_text(json.dumps(view,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
     renders = {
         "experience_hero.svg":hero_svg(view),
+        "isometric_calendar.svg":isometric_calendar_svg(view),
+        "asset_dependencies.svg":dependency_svg(view),
+        "research_constellation.svg":research_map_svg(view),
         "deadline_orbits.svg":orbit_svg(view),
         "proof_matrix.svg":proof_svg(view),
         "source_signals.svg":providers_svg(view),
