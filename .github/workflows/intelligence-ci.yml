@@ -63,6 +63,7 @@ jobs:
           PY
           node --check /tmp/experience-dashboard.js
           node --check dashboard/experience.js
+          node --check dashboard/visual_laboratory.js
       - name: Validate real interaction bindings
         run: |
           python - <<'PY'
@@ -73,6 +74,8 @@ jobs:
               assert token in template, token
           for token in ('renderPriority', 'buildGraph', 'setHorizon', 'renderBoard', 'renderPalette', 'download('):
               assert token in script, token
+          for token in ('id="lab-sankey"', 'id="lab-world"', 'id="lab-quadrant-viz"', 'id="lab-research-viz"', 'src="visual_laboratory.js"', 'href="visual_laboratory.css"'):
+              assert token in template, token
           for asset in ('assets/readme/kinetic_cover.svg', 'assets/readme/kinetic_lane.svg'):
               assert Path(asset).is_file(), asset
           PY
