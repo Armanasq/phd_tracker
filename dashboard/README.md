@@ -39,11 +39,14 @@ The generator consumes versioned records from the execution plan, portfolio fron
 
 Scores are **user-chosen workload indexes**, not probabilities of admission or eligibility. Document mentions are evidence edges; unknown readiness does not mean missing documents. Moving a card in the local board does not establish an actual submission.
 
-## Public hosting
+## GitHub Pages deployment
 
-The repository currently does not have GitHub Pages enabled. A GitHub Pages deployment can host this static application if the repository owner enables Pages and uses a supported plan. **Until a deployment is confirmed, the GitHub README links to setup instructions rather than claiming that a Pages website is live.**
+The repository now includes a manual [Publish Interactive Cockpit workflow](https://github.com/Armanasq/phd_tracker/actions/workflows/publish-cockpit.yml). It rebuilds the single-file application and deploys it using GitHub Pages.
 
-The root README can render SVG/CSS motion, GIFs, native expandable sections, links to GitHub Issues and input-driven GitHub Actions. It cannot execute inline JavaScript, React or an interactive canvas.
+GitHub Pages is not currently enabled for this repository. To enable it once, open **Settings → Pages → Build and deployment → Source: GitHub Actions**. Then run the publishing workflow. A hosted URL must not be assumed until GitHub confirms a successful deployment.
+
+The standalone HTML remains available to download and open locally without Pages.
+
 
 ## Source
 
