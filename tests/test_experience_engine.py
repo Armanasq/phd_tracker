@@ -52,7 +52,8 @@ def test_view_preserves_unknown_and_provenance(tmp_path: Path) -> None:
     assert view["applications"][0]["source"] == "https://university.example/apply"
     assert view["applications"][0]["proof_obligations"] == ["Confirm funding"]
     assert view["metrics"]["research_papers"] == 1
-    assert "&lt;script&gt;" in orbit_svg(view) if "<script>" in orbit_svg(view) else True
+    assert "&lt;script&gt;" in orbit_svg(view)
+    assert "<script>alert" not in orbit_svg(view)
 
 
 def test_mismatched_snapshots_are_rejected(tmp_path: Path) -> None:
