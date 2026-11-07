@@ -642,8 +642,19 @@ def generate(root: Path = ROOT) -> dict:
     placeholder="__EVIDENCE_DATA_JSON__"
     if template.count(placeholder)!=1:
         raise ValueError("Dashboard template missing data placeholder")
+    stylesheet=(root/"dashboard"/"experience.css").read_text(encoding="utf-8")
+    javascript=(root/"dashboard"/"experience.js").read_text(encoding="utf-8")
+    if "</style" in stylesheet.lower() or "</script" in javascript.lower():
+        raise ValueError("Embedded application assets must not contain closing HTML script/style tags")
+    if template.count('<link rel="stylesheet" href="experience.css">')!=1:
+        raise ValueError("Dashboard stylesheet marker must appear once")
+    if template.count('<script src="experience.js"></script>')!=1:
+        raise ValueError("Dashboard interaction script marker must appear once")
     embedded=json.dumps(view,ensure_ascii=False).replace("<","\\u003c").replace(">","\\u003e").replace("&","\\u0026")
-    (root/"dashboard"/"index.html").write_text(template.replace(placeholder,embedded),encoding="utf-8")
+    standalone=(template.replace(placeholder,embedded)
+                .replace('<link rel="stylesheet" href="experience.css">',"<style>\\n"+stylesheet+"\\n</style>")
+                .replace('<script src="experience.js"></script>',"<script>\\n"+javascript+"\\n</script>"))
+    (root/"dashboard"/"index.html").write_text(standalone,encoding="utf-8")
     document=markdown(view)
     document=(document.replace('src="assets/','src="../assets/')
               .replace('href="assets/','href="../assets/')
