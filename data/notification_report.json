@@ -1,44 +1,44 @@
 {
-  "as_of": "2026-11-07",
-  "reminder_candidates": 96,
+  "as_of": "2026-11-08",
+  "reminder_candidates": 109,
   "suppressed_by_user_policy": 0,
-  "github_new_events": 0,
+  "github_new_events": 28,
   "apprise_new_events": 30,
   "upcoming_count": 75,
   "potential_document_leverage": [
     {
       "document": "CV",
-      "potential_applications": 43,
-      "nearest_deadline_days": 1,
-      "leverage_index": 21.5
+      "potential_applications": 52,
+      "nearest_deadline_days": 0,
+      "leverage_index": 52.0
     },
     {
       "document": "Transcripts",
-      "potential_applications": 39,
-      "nearest_deadline_days": 1,
-      "leverage_index": 19.5
+      "potential_applications": 49,
+      "nearest_deadline_days": 0,
+      "leverage_index": 49.0
     },
     {
       "document": "Recommendations",
-      "potential_applications": 37,
-      "nearest_deadline_days": 1,
-      "leverage_index": 18.5
+      "potential_applications": 47,
+      "nearest_deadline_days": 0,
+      "leverage_index": 47.0
     },
     {
       "document": "Research statement",
-      "potential_applications": 27,
-      "nearest_deadline_days": 1,
-      "leverage_index": 13.5
+      "potential_applications": 29,
+      "nearest_deadline_days": 0,
+      "leverage_index": 29.0
     },
     {
       "document": "English proficiency",
       "potential_applications": 19,
-      "nearest_deadline_days": 2,
-      "leverage_index": 6.3333
+      "nearest_deadline_days": 1,
+      "leverage_index": 9.5
     }
   ],
   "delivery": {
-    "github": "delivered",
+    "github": "not_requested",
     "apprise": "not_configured"
   }
 }

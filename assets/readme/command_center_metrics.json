@@ -1,13 +1,13 @@
 {
-  "rendered_as_of": "2026-11-07",
+  "rendered_as_of": "2026-11-08",
   "task_counts": {
-    "deadline_actions": 0,
+    "deadline_actions": 2,
     "excluded_deadlines": 0,
-    "timeline_tasks": 0,
-    "shared_tasks": 0,
-    "total_distinct_scheduled_actions": 0,
-    "source_row_events_scheduled_today": 0,
-    "linked_past_steps_not_recounted": 0
+    "timeline_tasks": 6,
+    "shared_tasks": 1,
+    "total_distinct_scheduled_actions": 9,
+    "source_row_events_scheduled_today": 9,
+    "linked_past_steps_not_recounted": 1
   },
   "source_tabs": 15,
   "full_agenda_file": "docs/TODAY.md",

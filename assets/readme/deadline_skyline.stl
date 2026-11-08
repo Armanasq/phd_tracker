@@ -15,72 +15,72 @@ facet normal 0 0 0
 endfacet
 facet normal 0 0 0
   outer loop
-    vertex 0.000 0.000 0.780
-    vertex 0.950 0.000 0.780
-    vertex 0.950 1.000 0.780
+    vertex 0.000 0.000 2.080
+    vertex 0.950 0.000 2.080
+    vertex 0.950 1.000 2.080
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
-    vertex 0.000 0.000 0.780
-    vertex 0.950 1.000 0.780
-    vertex 0.000 1.000 0.780
+    vertex 0.000 0.000 2.080
+    vertex 0.950 1.000 2.080
+    vertex 0.000 1.000 2.080
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 0.000 0.000 0.000
     vertex 0.950 0.000 0.000
-    vertex 0.950 0.000 0.780
+    vertex 0.950 0.000 2.080
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 0.000 0.000 0.000
-    vertex 0.950 0.000 0.780
-    vertex 0.000 0.000 0.780
+    vertex 0.950 0.000 2.080
+    vertex 0.000 0.000 2.080
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 0.950 0.000 0.000
     vertex 0.950 1.000 0.000
-    vertex 0.950 1.000 0.780
+    vertex 0.950 1.000 2.080
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 0.950 0.000 0.000
-    vertex 0.950 1.000 0.780
-    vertex 0.950 0.000 0.780
+    vertex 0.950 1.000 2.080
+    vertex 0.950 0.000 2.080
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 0.950 1.000 0.000
     vertex 0.000 1.000 0.000
-    vertex 0.000 1.000 0.780
+    vertex 0.000 1.000 2.080
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 0.950 1.000 0.000
-    vertex 0.000 1.000 0.780
-    vertex 0.950 1.000 0.780
+    vertex 0.000 1.000 2.080
+    vertex 0.950 1.000 2.080
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 0.000 1.000 0.000
     vertex 0.000 0.000 0.000
-    vertex 0.000 0.000 0.780
+    vertex 0.000 0.000 2.080
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 0.000 1.000 0.000
-    vertex 0.000 0.000 0.780
-    vertex 0.000 1.000 0.780
+    vertex 0.000 0.000 2.080
+    vertex 0.000 1.000 2.080
   endloop
 endfacet
 facet normal 0 0 0
@@ -99,72 +99,72 @@ facet normal 0 0 0
 endfacet
 facet normal 0 0 0
   outer loop
-    vertex 1.500 0.000 2.600
-    vertex 2.450 0.000 2.600
-    vertex 2.450 1.000 2.600
+    vertex 1.500 0.000 1.430
+    vertex 2.450 0.000 1.430
+    vertex 2.450 1.000 1.430
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
-    vertex 1.500 0.000 2.600
-    vertex 2.450 1.000 2.600
-    vertex 1.500 1.000 2.600
+    vertex 1.500 0.000 1.430
+    vertex 2.450 1.000 1.430
+    vertex 1.500 1.000 1.430
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 1.500 0.000 0.000
     vertex 2.450 0.000 0.000
-    vertex 2.450 0.000 2.600
+    vertex 2.450 0.000 1.430
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 1.500 0.000 0.000
-    vertex 2.450 0.000 2.600
-    vertex 1.500 0.000 2.600
+    vertex 2.450 0.000 1.430
+    vertex 1.500 0.000 1.430
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 2.450 0.000 0.000
     vertex 2.450 1.000 0.000
-    vertex 2.450 1.000 2.600
+    vertex 2.450 1.000 1.430
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 2.450 0.000 0.000
-    vertex 2.450 1.000 2.600
-    vertex 2.450 0.000 2.600
+    vertex 2.450 1.000 1.430
+    vertex 2.450 0.000 1.430
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 2.450 1.000 0.000
     vertex 1.500 1.000 0.000
-    vertex 1.500 1.000 2.600
+    vertex 1.500 1.000 1.430
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 2.450 1.000 0.000
-    vertex 1.500 1.000 2.600
-    vertex 2.450 1.000 2.600
+    vertex 1.500 1.000 1.430
+    vertex 2.450 1.000 1.430
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 1.500 1.000 0.000
     vertex 1.500 0.000 0.000
-    vertex 1.500 0.000 2.600
+    vertex 1.500 0.000 1.430
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 1.500 1.000 0.000
-    vertex 1.500 0.000 2.600
-    vertex 1.500 1.000 2.600
+    vertex 1.500 0.000 1.430
+    vertex 1.500 1.000 1.430
   endloop
 endfacet
 facet normal 0 0 0
@@ -183,72 +183,72 @@ facet normal 0 0 0
 endfacet
 facet normal 0 0 0
   outer loop
-    vertex 3.000 0.000 3.380
-    vertex 3.950 0.000 3.380
-    vertex 3.950 1.000 3.380
+    vertex 3.000 0.000 4.810
+    vertex 3.950 0.000 4.810
+    vertex 3.950 1.000 4.810
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
-    vertex 3.000 0.000 3.380
-    vertex 3.950 1.000 3.380
-    vertex 3.000 1.000 3.380
+    vertex 3.000 0.000 4.810
+    vertex 3.950 1.000 4.810
+    vertex 3.000 1.000 4.810
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 3.000 0.000 0.000
     vertex 3.950 0.000 0.000
-    vertex 3.950 0.000 3.380
+    vertex 3.950 0.000 4.810
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 3.000 0.000 0.000
-    vertex 3.950 0.000 3.380
-    vertex 3.000 0.000 3.380
+    vertex 3.950 0.000 4.810
+    vertex 3.000 0.000 4.810
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 3.950 0.000 0.000
     vertex 3.950 1.000 0.000
-    vertex 3.950 1.000 3.380
+    vertex 3.950 1.000 4.810
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 3.950 0.000 0.000
-    vertex 3.950 1.000 3.380
-    vertex 3.950 0.000 3.380
+    vertex 3.950 1.000 4.810
+    vertex 3.950 0.000 4.810
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 3.950 1.000 0.000
     vertex 3.000 1.000 0.000
-    vertex 3.000 1.000 3.380
+    vertex 3.000 1.000 4.810
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 3.950 1.000 0.000
-    vertex 3.000 1.000 3.380
-    vertex 3.950 1.000 3.380
+    vertex 3.000 1.000 4.810
+    vertex 3.950 1.000 4.810
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 3.000 1.000 0.000
     vertex 3.000 0.000 0.000
-    vertex 3.000 0.000 3.380
+    vertex 3.000 0.000 4.810
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 3.000 1.000 0.000
-    vertex 3.000 0.000 3.380
-    vertex 3.000 1.000 3.380
+    vertex 3.000 0.000 4.810
+    vertex 3.000 1.000 4.810
   endloop
 endfacet
 facet normal 0 0 0
@@ -267,72 +267,72 @@ facet normal 0 0 0
 endfacet
 facet normal 0 0 0
   outer loop
-    vertex 4.500 0.000 3.250
-    vertex 5.450 0.000 3.250
-    vertex 5.450 1.000 3.250
+    vertex 4.500 0.000 1.690
+    vertex 5.450 0.000 1.690
+    vertex 5.450 1.000 1.690
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
-    vertex 4.500 0.000 3.250
-    vertex 5.450 1.000 3.250
-    vertex 4.500 1.000 3.250
+    vertex 4.500 0.000 1.690
+    vertex 5.450 1.000 1.690
+    vertex 4.500 1.000 1.690
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 4.500 0.000 0.000
     vertex 5.450 0.000 0.000
-    vertex 5.450 0.000 3.250
+    vertex 5.450 0.000 1.690
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 4.500 0.000 0.000
-    vertex 5.450 0.000 3.250
-    vertex 4.500 0.000 3.250
+    vertex 5.450 0.000 1.690
+    vertex 4.500 0.000 1.690
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 5.450 0.000 0.000
     vertex 5.450 1.000 0.000
-    vertex 5.450 1.000 3.250
+    vertex 5.450 1.000 1.690
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 5.450 0.000 0.000
-    vertex 5.450 1.000 3.250
-    vertex 5.450 0.000 3.250
+    vertex 5.450 1.000 1.690
+    vertex 5.450 0.000 1.690
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 5.450 1.000 0.000
     vertex 4.500 1.000 0.000
-    vertex 4.500 1.000 3.250
+    vertex 4.500 1.000 1.690
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 5.450 1.000 0.000
-    vertex 4.500 1.000 3.250
-    vertex 5.450 1.000 3.250
+    vertex 4.500 1.000 1.690
+    vertex 5.450 1.000 1.690
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 4.500 1.000 0.000
     vertex 4.500 0.000 0.000
-    vertex 4.500 0.000 3.250
+    vertex 4.500 0.000 1.690
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 4.500 1.000 0.000
-    vertex 4.500 0.000 3.250
-    vertex 4.500 1.000 3.250
+    vertex 4.500 0.000 1.690
+    vertex 4.500 1.000 1.690
   endloop
 endfacet
 facet normal 0 0 0
