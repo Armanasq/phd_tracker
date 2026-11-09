@@ -973,3 +973,5 @@ body.dark .agenda-number,body.dark .agenda-meta{color:#c0dac4}
 .ai-context-controls .btn{max-width:100%;overflow-wrap:anywhere}
 @media(max-width:900px){.ai-context{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:600px){.ai-context-controls input,.ai-context-controls select,.ai-context-controls button{width:100%;max-width:100%}}
+
+.runway-day{position:relative}
