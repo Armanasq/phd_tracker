@@ -4,6 +4,7 @@ import ipaddress
 import json
 import os
 from dataclasses import dataclass
+from time import perf_counter
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit, quote
@@ -20,6 +21,7 @@ class ModelReply:
     model: str
     usage: dict[str, int]
     provider_id: str
+    latency_ms: int | None = None
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -92,6 +94,7 @@ def invoke(provider: dict[str, Any], system: str, prompt: str, *, timeout: int =
     if len(prompt) > 25000:
         raise ValueError("Prompt exceeds the configured input budget")
     request = Request(url, json.dumps(payload).encode("utf-8"), headers=headers, method="POST")
+    started = perf_counter()
     opener = build_opener(NoRedirect())
     try:
         with opener.open(request, timeout=timeout) as response:
@@ -113,6 +116,7 @@ def invoke(provider: dict[str, Any], system: str, prompt: str, *, timeout: int =
         usage = data.get("usage") or {}
         return ModelReply(content[:20000], str(data.get("model") or model),
                           {k: int(usage.get(k, 0)) for k in ("prompt_tokens", "completion_tokens", "input_tokens", "output_tokens")
-                           if isinstance(usage.get(k), (int, float))}, provider["id"])
+                           if isinstance(usage.get(k), (int, float))}, provider["id"],
+                          round((perf_counter() - started) * 1000))
     except (KeyError, TypeError, ValueError, json.JSONDecodeError) as error:
         raise ProviderError("Malformed model-provider response") from error

@@ -10,6 +10,7 @@ DEFAULTS: dict[str, Any] = {
     "default_agent": "portfolio_planner",
     "timezone": "Europe/London",
     "max_runs_per_tick": 3,
+    "max_cloud_model_calls_per_day": 0,
     "confirm_cloud_each_run": True,
 }
 
@@ -34,6 +35,9 @@ def save_settings(store: Store, changes: dict[str, Any]) -> dict[str, Any]:
     limit = settings["max_runs_per_tick"]
     if not isinstance(limit, int) or isinstance(limit, bool) or limit < 1 or limit > 10:
         raise ValueError("Scheduled-run limit must be an integer between 1 and 10")
+    cap = settings["max_cloud_model_calls_per_day"]
+    if not isinstance(cap, int) or isinstance(cap, bool) or not 0 <= cap <= 100:
+        raise ValueError("Daily scheduled cloud-model call cap must be in [0,100]")
     if settings["confirm_cloud_each_run"] is not True:
         raise ValueError("Manual cloud disclosure approval cannot be disabled")
     store.put_custom("setting", {"id": "preferences", **settings})

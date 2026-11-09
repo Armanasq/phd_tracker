@@ -1,14 +1,14 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
 
 from .catalog import AGENTS, POLICY, PROVIDERS, WORKFLOWS
 from .domain import agenda, merged_records, preflight, snapshot, today_in
-from .providers import invoke
+from .providers import invoke, ProviderError
 from .store import Store
 from .toolkit import DEFAULT_TOOLS, run_tools
 from .settings import read_settings
@@ -84,14 +84,21 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str,
               (input_text.strip() or "Analyze the evidence and produce the most valuable actionable, explicitly provisional findings.") +
               "\n\nOutput a concise, evidence-grounded analysis with proposed next actions and open proof obligations. " +
               "Do not report any external action as completed.")
-    reply = invoke(provider, system, prompt)
+    try:
+        reply = invoke(provider, system, prompt)
+    except ProviderError as error:
+        store.put_run("workflow" if workflow_id else "agent", agent_id, application_id,
+                      "failed", provider_id,
+                      {"model": provider["model"], "error_type": type(error).__name__,
+                       "workflow_id": workflow_id, "source_as_of": source.get("as_of")})
+        raise
     run_id = store.put_run("workflow" if workflow_id else "agent", agent_id, application_id,
                            "proposed", provider_id,
-                           {"text": reply.content, "model": reply.model, "usage": reply.usage,
+                           {"text": reply.content, "model": reply.model, "usage": reply.usage, "latency_ms": reply.latency_ms,
                             "workflow_id": workflow_id, "tools": [x["name"] for x in tool_pack["tools"]], "source_as_of": source.get("as_of"),
                             "notice": "AI output is a proposal; no application or communication was changed"})
     return {"id": run_id, "agent_id": agent_id, "provider_id": provider_id,
-            "model": reply.model, "usage": reply.usage, "text": reply.content,
+            "model": reply.model, "usage": reply.usage, "latency_ms": reply.latency_ms, "text": reply.content,
             "status": "proposed", "tools": [x["name"] for x in tool_pack["tools"]], "source_as_of": source.get("as_of")}
 
 def run_workflow(store: Store, root: Path, *, workflow_id: str,
@@ -136,7 +143,11 @@ def scheduler_once(store: Store, root: Path, *, now: datetime | None = None) -> 
     current = (now or datetime.now(ZoneInfo("UTC"))).astimezone(ZoneInfo(read_settings(store)["timezone"]))
     result = []
     settings = catalog(store)
-    max_runs = read_settings(store)["max_runs_per_tick"]
+    preferences = read_settings(store)
+    max_runs = preferences["max_runs_per_tick"]
+    cloud_cap = preferences["max_cloud_model_calls_per_day"]
+    cloud_ids = [p["id"] for p in settings["providers"] if not p["local"]]
+    day_start = current.replace(hour=0, minute=0, second=0, microsecond=0).astimezone(timezone.utc).isoformat(timespec="seconds")
     for workflow in settings["workflows"]:
         if len(result) >= max_runs:
             break
@@ -151,6 +162,14 @@ def scheduler_once(store: Store, root: Path, *, now: datetime | None = None) -> 
         if not config["local"] and not consent:
             result.append({"workflow_id": workflow["id"], "status": "skipped", "reason": "cloud_consent_missing"})
             continue
+        if not config["local"]:
+            needed = len(workflow.get("steps") or [workflow["agent_id"]])
+            if not cloud_cap:
+                result.append({"workflow_id": workflow["id"], "status": "skipped", "reason": "cloud_budget_disabled"})
+                continue
+            if store.count_runs_since(day_start, cloud_ids) + needed > cloud_cap:
+                result.append({"workflow_id": workflow["id"], "status": "skipped", "reason": "daily_cloud_model_call_cap"})
+                continue
         try:
             output = run_workflow(store, root, workflow_id=workflow["id"], provider_id=provider_id,
                                   cloud_consent=consent)

@@ -14,6 +14,7 @@ from .operations import evidence_conflicts, milestones_for, referee_matrix, rese
 from .providers import invoke, ProviderError
 from .connectivity import model_list, provider_states, remember_check
 from .settings import read_settings, save_settings
+from .metrics import usage_summary
 from time import perf_counter
 from .calendar import line_items
 from .engine import catalog, owner_records, run_agent, run_workflow, scheduler_once, selected
@@ -115,6 +116,7 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.send_json({"catalog": catalog(store), "meta": source.get("meta", {}), "as_of": source.get("as_of"),
                             "records": records, "agenda": agenda(records, today, 40),
                             "runs": store.runs(30), "activity": store.activity(30),
+                            "usage_summary": usage_summary(store),
                             "providers_status": source.get("providers", []),
                             "provider_states": provider_states(store, catalog(store)["providers"]),
                             "settings": read_settings(store),
@@ -131,6 +133,8 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             self.wfile.write(body)
+        elif path == "/api/metrics":
+            self.send_json(usage_summary(store))
         elif path == "/api/settings":
             self.send_json({"settings": read_settings(store),
                             "provider_states": provider_states(store, catalog(store)["providers"])})

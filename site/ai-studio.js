@@ -95,6 +95,7 @@ function settings(){
  '<div class="field"><label for="prefAgent">Default agent</label><select name="default_agent" id="prefAgent">'+selectChoices(d.catalog.agents.map(a=>({id:a.id,label:a.label})),prefs.default_agent||"portfolio_planner")+'</select></div>'+
  '<div class="field"><label for="prefZone">Local IANA time zone</label><input id="prefZone" name="timezone" required value="'+escape(prefs.timezone||"Europe/London")+'"><small>Example: Europe/Amsterdam. Official cutoff-zone evidence remains separate.</small></div>'+
  '<div class="field"><label for="prefLimit">Maximum scheduled runs per tick</label><input id="prefLimit" type="number" min="1" max="10" step="1" name="max_runs_per_tick" value="'+escape(prefs.max_runs_per_tick||3)+'" required><small>Limits each scheduled evaluation; no background service is created automatically.</small></div>'+
+ '<div class="field"><label for="prefCloudLimit">Daily scheduled cloud model calls</label><input id="prefCloudLimit" type="number" min="0" max="100" step="1" name="max_cloud_model_calls_per_day" value="'+escape(prefs.max_cloud_model_calls_per_day??0)+'" required><small>Zero disables scheduled cloud calls, even for approved workflows. Manual calls remain explicitly confirmed.</small></div>'+
  '<div class="field wide privacy-setting"><strong>Cloud disclosure approval enforced</strong><p>Manual cloud requests need explicit authorization. Scheduled cloud workflows require separate workflow-level approval. This protection cannot be disabled.</p></div>'+
  '<div class="form-actions"><button type="submit" class="btn primary">Save preferences</button></div></form>')+
  panel("Operational diagnostics","A listed provider is not the same as a working connection.",'<div class="diagnostics-list">'+
@@ -110,10 +111,14 @@ function applications(){
  list.map(r=>'<tr><td><strong>'+escape(r.name)+'</strong><small>'+escape(r.id)+'</small></td><td>'+escape(r.deadline||"Unknown")+(isExpired(r)?'<small>Recorded date passed</small>':'')+'</td><td>'+tag(r.status,"neutral")+'</td><td>'+tag(r.verification,["source_verified","owner_verified"].includes(r.verification)?"":"warn")+'</td><td>'+minor("Preflight","inspect",r.id)+' '+minor("Update","edit-application",r.id)+'</td></tr>').join("")+'</tbody></table></div></section>';
 }
 function activity(){
- const runs=state.data.runs||[],audit=state.data.activity||[];
- return heading("06 / PROVENANCE","Run history and audit trail","Stored analysis proposals and owner actions. No generated answer silently updates an application.",btn("Refresh","refresh"))+
- '<div class="grid-two">'+panel("Agent run ledger",runs.map(r=>'<div class="list-row"><div><strong>'+escape(r.agent_id)+'</strong><p>'+escape(r.created_at)+' · '+escape(r.provider_id)+' · '+escape(r.status)+'</p><div class="row-meta">'+tag(r.model||"model unavailable")+(r.application_id?tag(r.application_id):"")+'</div></div>'+minor("Read output","view-run",r.id)+'</div>').join("")||'<div class="blank">No AI runs have been recorded.</div>')+
- panel("Audit events",'<div class="timeline">'+audit.map(a=>'<div class="timeline-item"><strong>'+escape(a.action)+'</strong><time>'+escape(a.created_at)+'</time><span class="code">'+escape(a.subject)+'</span></div>').join("")+'</div>'||'<div class="blank">No recorded events.</div>')+'</div>';
+ const runs=state.data.runs||[],audit=state.data.activity||[],stats=state.data.usage_summary||{},groups=stats.provider_usage||[];
+ const providerRows=groups.map(p=>'<div class="list-row"><div><strong>'+escape(p.provider_id)+'</strong><p>'+escape(p.calls)+' model calls · '+escape(p.failed)+' failed</p><div class="row-meta">'+tag(p.input_tokens+' input tokens')+tag(p.output_tokens+' output tokens')+(p.average_latency_ms===null?"":tag(p.average_latency_ms+' ms average latency'))+'</div></div></div>').join("");
+ return heading("06 / OBSERVABILITY","Inference and execution history","Inspect actual model usage, latency and failures. No pricing, admission probabilities or completed external actions are inferred.",btn("Refresh metrics","refresh"))+
+ '<div class="kpis">'+metric("RECORDED MODEL CALLS",stats.sampled_runs??0,"Sample of up to "+escape(stats.sample_limit||2000)+" stored runs")+metric("INPUT TOKENS",stats.total_input_tokens??0,"Only reported usage")+metric("OUTPUT TOKENS",stats.total_output_tokens??0,"Only reported usage")+metric("FAILED CALLS",stats.total_failed??0,"Recorded provider invocation failures")+'</div>'+
+ '<div class="notice neutral">Costs are not estimated without verified provider-specific pricing. Inference latency is measured wall-clock time per model call. Reports do not include unobserved external usage.</div>'+
+ '<div class="grid-two">'+panel("Provider-level execution","Observed calls and model-response telemetry",providerRows||'<div class="blank">No inference telemetry has been recorded yet.</div>')+
+ panel("Agent run ledger","Individual execution records",runs.map(r=>'<div class="list-row"><div><strong>'+escape(r.agent_id)+'</strong><p>'+escape(r.created_at)+' · '+escape(r.provider_id)+' · '+escape(r.status)+'</p><div class="row-meta">'+tag(r.model||"model unavailable")+(r.latency_ms!==null&&r.latency_ms!==undefined?tag(r.latency_ms+' ms'):"")+(r.application_id?tag(r.application_id):"")+'</div></div>'+minor("Inspect","view-run",r.id)+'</div>').join("")||'<div class="blank">No agent runs have been recorded.</div>')+'</div>'+
+ '<div style="height:18px"></div>'+panel("Audit events","Private state changes and scheduler events",'<div class="timeline">'+audit.map(a=>'<div class="timeline-item"><strong>'+escape(a.action)+'</strong><time>'+escape(a.created_at)+'</time><span class="code">'+escape(a.subject)+'</span></div>').join("")+'</div>'||'<div class="blank">No recorded events.</div>');
 }
 
 function referees(){
@@ -444,6 +449,7 @@ document.addEventListener("submit",async e=>{
   if(form.id==="settingsForm"){
    const values=Object.fromEntries(new FormData(form));
    values.max_runs_per_tick=Number(values.max_runs_per_tick);
+   values.max_cloud_model_calls_per_day=Number(values.max_cloud_model_calls_per_day);
    await api("/api/settings",values);
    await load();toast("Private runtime preferences saved");
    return;

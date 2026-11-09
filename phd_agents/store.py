@@ -134,6 +134,12 @@ class Store:
         return [{"id": r["id"], "kind": r["kind"], "agent_id": r["agent_id"], "application_id": r["application_id"],
                  "status": r["status"], "provider_id": r["provider_id"], "created_at": r["created_at"], **json.loads(r["payload"])} for r in rows]
 
+    def count_runs_since(self, since: str, provider_ids: list[str]) -> int:
+        if not provider_ids:
+            return 0
+        query = "SELECT COUNT(*) FROM runs WHERE created_at >= ? AND status IN ('proposed','failed') AND provider_id IN (" + ",".join("?" for _ in provider_ids) + ")"
+        return int(self.db.execute(query, [since, *provider_ids]).fetchone()[0])
+
     def schedule_last(self, identity: str) -> str | None:
         row = self.db.execute("SELECT last_period FROM schedule WHERE id=?", (identity,)).fetchone()
         return str(row["last_period"]) if row else None
