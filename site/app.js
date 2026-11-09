@@ -30,7 +30,21 @@ function dateRisk(d){if(d===null)return pill("Date unknown","neutral");if(d<0)re
 function verificationPill(r){return pill(verifiedLabel(r.verification),r.verification==="source_verified"||r.verification==="owner_verified"?"green":"warning")}
 function riskPill(r){let x=risk(r);return pill(x,["Expired","Blocked","Confirmed gap"].includes(x)?"red":["Verify","Urgent","Duplicate route caution"].includes(x)?"warning":"neutral")}
 function priority(r){const d=days(r.deadline);let p=0;if(r.status==="blocked"||isClosed(r))return-100;if(d===null)p+=5;else if(d<0)return-70;else if(d===0)p+=100;else if(d<=3)p+=80;else if(d<=7)p+=56;else if(d<=14)p+=35;else if(d<=30)p+=18;else p+=3;if(r.verification==="needs_review"||r.verification==="unverified")p+=16;if(r.duplicate_submission_advisory)p+=18;if(Object.values(r.document_states||{}).some(x=>x==="not_started"))p+=16;if(r.followup&&days(r.followup)!==null&&days(r.followup)<=2)p+=28;if(r.status==="preparing")p+=6;return p}
-function filters(list){let q=state.query.toLowerCase();return list.filter(r=>(!q||[r.id,r.name,r.country,r.institution,r.topic,r.faculty,r.next_step,r.evidence,r.funding,r.eligibility].join(" ").toLowerCase().includes(q))&&(state.status==="all"||r.status===state.status)&&(state.verification==="all"||r.verification===state.verification)&&(state.country==="all"||r.country===state.country)&&(state.horizon==="all"||((d=>state.horizon==="expired"?d!==null&&d<0:state.horizon==="unknown"?d===null:d!==null&&d>=0&&d<=Number(state.horizon))(days(r.deadline))))}
+function filters(list){
+  const q=state.query.toLowerCase();
+  return list.filter(r=>{
+    const searchable=[r.id,r.name,r.country,r.institution,r.topic,r.faculty,r.next_step,r.evidence,r.funding,r.eligibility].join(" ").toLowerCase();
+    if(q&&!searchable.includes(q))return false;
+    if(state.status!=="all"&&r.status!==state.status)return false;
+    if(state.verification!=="all"&&r.verification!==state.verification)return false;
+    if(state.country!=="all"&&r.country!==state.country)return false;
+    const d=days(r.deadline);
+    if(state.horizon==="expired")return d!==null&&d<0;
+    if(state.horizon==="unknown")return d===null;
+    if(state.horizon!=="all")return d!==null&&d>=0&&d<=Number(state.horizon);
+    return true;
+  });
+}
 function sortList(list){return list.slice().sort((a,b)=>state.sort==="priority"?priority(b)-priority(a):state.sort==="name"?a.name.localeCompare(b.name):state.sort==="updated"?String(b.updated_at||"").localeCompare(String(a.updated_at||"")):(a.deadline||"9999").localeCompare(b.deadline||"9999")||a.name.localeCompare(b.name))}
 function heading(title,desc,buttons=""){return'<div class="heading"><div><div class="eyebrow">FALL 2027 / OPERATIONS</div><h1>'+escapeHTML(title)+'</h1><p>'+desc+'</p></div><div class="buttons">'+buttons+'</div></div>'}
 function kpi(name,value,caption){return'<div class="kpi"><div class="label">'+escapeHTML(name)+'</div><strong>'+escapeHTML(value)+'</strong><small>'+escapeHTML(caption)+'</small></div>'}
