@@ -61,7 +61,9 @@ jobs:
       - name: Generate PhD Atlas evidence-backed Pages snapshot
         run: python scripts/build_workspace.py --out site/data/workspace.json
       - name: Validate independent application-domain rules
-        run: node --test tests/domain.test.mjs
+        run: |
+          node --test tests/domain.test.mjs
+          node --test tests/assurance.test.mjs
       - name: Exercise PhD Atlas across desktop and mobile
         run: node tests/site_smoke.cjs
       - name: Verify unified Settings and automatic local model routing

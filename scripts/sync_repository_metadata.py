@@ -61,6 +61,24 @@ def write_metadata(settings: dict[str, object], token: str) -> None:
             raise RuntimeError("GitHub metadata API is unavailable") from error
 
 
+def verify_metadata(settings: dict[str, object], token: str) -> None:
+    headers = {
+        "Authorization": "Bearer " + token,
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+        "User-Agent": "phd-atlas-metadata-sync",
+    }
+    try:
+        with urlopen(Request(API_ROOT, headers=headers), timeout=20) as response:
+            current = json.load(response)
+        with urlopen(Request(API_ROOT + "/topics", headers=headers), timeout=20) as response:
+            topics = json.load(response)
+    except (HTTPError, URLError, TimeoutError) as error:
+        raise RuntimeError("Cannot independently verify live repository metadata") from error
+    if current.get("description") != settings["description"] or current.get("homepage") != settings["homepage"] or set(topics.get("names", [])) != set(settings["topics"]):
+        raise RuntimeError("Live GitHub About metadata differs from the committed configuration")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Preview or synchronize GitHub About fields")
     parser.add_argument("--apply", action="store_true", help="Write with an admin-scoped GitHub token")
@@ -74,7 +92,8 @@ def main() -> None:
     if not token:
         parser.error("--apply requires GITHUB_ADMIN_TOKEN with repository administration permission")
     write_metadata(metadata, token)
-    print("Repository description, homepage, and topics updated.")
+    verify_metadata(metadata, token)
+    print("Repository description, homepage, and topics updated and independently verified.")
 
 
 if __name__ == "__main__":
