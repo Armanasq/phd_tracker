@@ -49,7 +49,6 @@
     "2026 BEST EURAXESS index shows inconsistent metadata year (2027) versus call body and current Toulouse primary page (2026): primary 2026 deadline used.",
     "LinkedIn AI4I job preview reports no longer accepting LinkedIn applications; official Politecnico and AI4I offsite submission route must be checked directly before treating this as closure.",
     "Inria Astra-Vision ELLIS lists multimodal world models deadline 20 Nov 2026, but primary lab page currently shows a different older May 2026 world-model opening: research queue only, do not promote.",
-    "TUM Autonomous Vehicle Systems original tracked application N263-07 says 15 Nov 2026, while live official page https://www.mos.ed.tum.de/en/avs/career/our-jobs/ki-motorsport-1/ explicitly states application deadline Friday July 17 2026, selection Aug 1–15 2026 and start Oct 1 2026; preserve original row, monitor via N263-07-LIVE and require review.",
     "UZH RPG current primary page explicitly states no fixed closing date; indexed Oct 27 2026 deadlines are stale. Registered as rolling/unposted.",
     "ETH IDEAL Jan 15 2027 represents best consideration not verified final cutoff. ETH HC3 31 Jan 2027 is externally indexed only. Neither may be described as primary-confirmed final."
   ],
@@ -101,5 +100,18 @@
     ],
     "discovery_pipeline": "1/4 sources healthy: Inria working; AcademicPositions returns HTTP 403; AcademicTransfer zero yield; Brave lacks BRAVE_SEARCH_API_KEY",
     "confidence_rule": "University/lab primary source required for promotion; indexed/LinkedIn/Gmail-only claims cannot silently overwrite applicant-controlled source cells"
-  }
+  },
+  "resolved_source_discrepancies": [
+    {
+      "id": "N263-07-LIVE",
+      "observed_on": "2026-11-09",
+      "prior_cache": "Older indexed page displayed July 17 2026",
+      "primary_current": "https://www.mos.ed.tum.de/en/avs/career/our-jobs/ki-motorsport-1/",
+      "current_deadline": "2026-11-15",
+      "status": "resolved_current_primary_confirmed",
+      "monitor_status": "anchor_present",
+      "corroboration": "https://tum-autonomous-motorsport.com/",
+      "notes": "Primary source refreshed to November 15 deadline, December 2026 interviews and February 2027 start; watch remains as regression detector."
+    }
+  ]
 }
