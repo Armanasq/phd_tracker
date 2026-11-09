@@ -68,11 +68,12 @@ async function main(){
   assert.match(localId,/^LOCAL-[0-9a-f-]+$/i);
   await page.locator("#exportMenu").click();
   const [sourceDownload]=await Promise.all([page.waitForEvent("download"),page.locator('[data-action="export"][data-value="github-source"]').click()]);
-  await sourceDownload.saveAs(path.join(output,"experience_view.json"));
-  const exported=JSON.parse(await fs.readFile(path.join(output,"experience_view.json"),"utf8"));
-  assert.equal(exported.applications.length,1);
-  assert.equal(exported.applications[0].name,"Robotics and perception PhD");
-  assert.equal(exported.applications[0].source,"https://example.edu/phd");
+  await sourceDownload.saveAs(path.join(output,"user_opportunities.json"));
+  const exported=JSON.parse(await fs.readFile(path.join(output,"user_opportunities.json"),"utf8"));
+  assert.equal(exported.schema_version,1);
+  assert.equal(exported.records.length,1);
+  assert.equal(exported.records[0].name,"Robotics and perception PhD");
+  assert.equal(exported.records[0].source_url,"https://example.edu/phd");
   assert.ok(!JSON.stringify(exported).includes("PRIVATE draft note"));
   assert.ok(!JSON.stringify(exported).includes("preparing"));
   await page.keyboard.press("Escape");

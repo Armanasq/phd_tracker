@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {createLocalRecord,normalizeLocalRecords,mergeLocalRecords,exportExperienceView,validateEvidenceUrl} from "../site/modules/local-records.mjs";
+import {createLocalRecord,normalizeLocalRecords,mergeLocalRecords,exportIndependentSource,validateEvidenceUrl} from "../site/modules/local-records.mjs";
 
 const id="LOCAL-11111111-1111-4111-8111-111111111111";
 const id2="LOCAL-22222222-2222-4222-8222-222222222222";
@@ -46,20 +46,21 @@ test("import merges only new local IDs and never overwrites existing records",()
 
 test("GitHub source export excludes local notes, receipts and private workflow state",()=>{
  const row=createLocalRecord({...input,notes:"Confidential planning",status:"preparing",receipt:"https://example.edu/private/receipt",documents:["academic_cv"]},id);
- const result=exportExperienceView([row],"2026-11-09","Europe/Berlin");
- assert.equal(result.applications.length,1);
- assert.deepEqual(result.applications[0].documents,["academic_cv"]);
+ const result=exportIndependentSource([row],"2026-11-09","Europe/Berlin");
+ assert.equal(result.records.length,1);
+ assert.deepEqual(result.records[0].documents,["academic_cv"]);
+ assert.equal(result.schema_version,1);
  const encoded=JSON.stringify(result);
  assert.ok(!encoded.includes("Confidential planning"));
  assert.ok(!encoded.includes("receipt"));
  assert.ok(!encoded.includes('"status":"preparing"'));
- assert.ok(encoded.includes('"source":"https://example.edu/phd"'));
+ assert.ok(encoded.includes('"source_url":"https://example.edu/phd"'));
 });
 
 test("public exports drop URL tokens, fragments and personal next steps",()=>{
  const row=createLocalRecord({...input,source_url:"https://example.edu/phd?id=123&token=private#account",next_step:"Do not disclose my planning"},id);
- const exported=JSON.stringify(exportExperienceView([row],"2026-11-09"));
- assert.ok(exported.includes('"source":"https://example.edu/phd"'));
+ const exported=JSON.stringify(exportIndependentSource([row],"2026-11-09"));
+ assert.ok(exported.includes('"source_url":"https://example.edu/phd"'));
  assert.ok(!exported.includes("token=private"));
  assert.ok(!exported.includes("Do not disclose"));
  assert.ok(!exported.includes('"next_step"'));

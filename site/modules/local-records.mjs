@@ -93,15 +93,16 @@ export function mergeLocalRecords(existing,incoming,committedIds=[]){
  return {records:[...map.values()],imported,skipped};
 }
 
-export function exportExperienceView(records,today,timezone="UTC"){
+export function exportIndependentSource(records,today,timezone="UTC"){
  const local=normalizeLocalRecords(records);
  if(!isDay(today))throw new TypeError("Invalid export date");
  if(typeof timezone!=="string"||!/^[-_A-Za-z/]{2,80}$/.test(timezone))throw new TypeError("Invalid timezone");
  return {
-  as_of:today,timezone,
-  applications:local.map(r=>({
-   id:r.id,name:r.name,country:r.country,deadline:r.deadline,
-   source:r.source_url?new URL(r.source_url).origin+new URL(r.source_url).pathname:"",documents:r.documents,
+  schema_version:1,as_of:today,timezone,
+  records:local.map(r=>({
+   id:r.id,record_type:"tracked",name:r.name,institution:r.institution,country:r.country,deadline:r.deadline,
+   verification:"unverified",source_url:r.source_url?new URL(r.source_url).origin+new URL(r.source_url).pathname:"",
+   documents:r.documents,
   })),
  };
 }
