@@ -174,6 +174,18 @@ export function mountAtlasLens({getRecords,getView,getSelectedApplication,openSe
  async function submit(value){
    const text=String(value??state.draft).trim();
    if(!text||state.busy||!state.connected||!state.verified)return;
+   const route=state.routes[state.agent];
+   const destination=state.providers.find(provider=>provider.id===route?.provider_id);
+   if(!destination){
+     state.error="The configured model route cannot be verified. Reopen Settings and confirm the provider.";
+     render();return;
+   }
+   let cloudConsent=false;
+   if(!destination.local){
+     const scope=state.applicationId?"selected application evidence":"portfolio evidence";
+     cloudConsent=window.confirm("Send "+scope+" and your message to "+destination.label+" ("+destination.base_url+")? This provider may incur charges. Your consent applies only to this request. No applications or emails will be submitted.");
+     if(!cloudConsent)return;
+   }
    state.draft="";state.error="";
    const turn={role:"user",text};state.turns.push(turn);
    const controller=new AbortController();state.abort=controller;state.busy=true;
@@ -181,10 +193,13 @@ export function mountAtlasLens({getRecords,getView,getSelectedApplication,openSe
    render();const history=byId("lensHistory");if(history)history.scrollTop=history.scrollHeight;
    try{
      const body={agent_id:state.agent,input_text:text,conversation:true,
+       cloud_consent:cloudConsent,
        ...(state.applicationId?{application_id:state.applicationId}:{}),
        ...(state.conversationId?{conversation_id:state.conversationId}:{})};
+     const headers={"Content-Type":"application/json"};
+     if(globalThis.crypto?.randomUUID)headers["Idempotency-Key"]=globalThis.crypto.randomUUID();
      const response=await fetch("./api/agents/run",{method:"POST",
-       headers:{"Content-Type":"application/json"},body:JSON.stringify(body),signal:controller.signal});
+       headers,body:JSON.stringify(body),signal:controller.signal});
      let result={};try{result=await response.json()}catch{}
      if(!response.ok)throw Error(result.error||"The model request failed");
      if(sequence!==requestSequence)return;

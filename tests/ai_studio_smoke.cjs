@@ -139,6 +139,13 @@ async function main(){
   await page.locator('.lens-thread-open').first().waitFor();
   await page.locator('#atlasLensPanel [data-lens="close"]').click();
   assert.ok(seen.filter(x=>x.path==='/v1/chat/completions').length>=2);
+  const lensRequests=[];
+  page.on('request',req=>{
+   if(req.method()==='POST'&&req.url().includes('/api/agents/run')){
+    const body=req.postDataJSON();
+    lensRequests.push({body,key:req.headers()['idempotency-key']||null});
+   }
+  });
   await page.locator('[data-action="nav"][data-value="activity"]').click();
   await page.locator('.os-ledger').first().getByText('My Research Agent').first().waitFor();
   await page.locator('#navigation [data-action="nav"][data-value="operations"]').click();
@@ -177,6 +184,9 @@ async function main(){
   await page.goto(base+'/ai-studio.html#providers',{waitUntil:'domcontentloaded'});
   await page.waitForURL('**/index.html#settings');
   await page.locator('#body h1').first().waitFor({timeout:12000});
+  const lensCalls=lensRequests.filter(x=>x.body.conversation===true);
+  assert.ok(lensCalls.every(x=>x.body.cloud_consent===false),'Local Atlas Lens conversations must not claim cloud disclosure consent');
+  assert.ok(lensCalls.every(x=>typeof x.key==='string'&&x.key.length>=16),'Atlas Lens inference calls should be retry-safe');
   assert.deepEqual(pageErrors,[],'Browser JS errors');
   await page.close();
   console.log('Unified workspace passed: endpoint setup, activation, agent routing, application-scoped Atlas Lens inference, run trace, workflow editor, legacy route and mobile layout');
