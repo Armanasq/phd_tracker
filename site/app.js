@@ -541,6 +541,7 @@ async function loadSnapshot(){
   if(!validation.ok)throw new Error(validation.error);
   const prior=state.data?.generated_at;
   state.data=data;
+  atlasLens?.refreshData();
   if(!Array.isArray(state.compare))state.compare=[];
   state.compare=state.compare.filter(id=>validation.ids.has(id)).slice(0,4);
   saveStore(COMPARE_STORE,state.compare);
@@ -556,7 +557,7 @@ async function loadSnapshot(){
 }
 function init(){
  events();
- atlasLens=mountAtlasLens({getRecords:records,getView:()=>state.view,getSelectedApplication:()=>state.selected,openSettings:()=>go("settings"),onFocusApplication:id=>detail(getRecord(id))});
+ atlasLens=mountAtlasLens({getRecords:()=>state.data?records():[],getView:()=>state.view,getSelectedApplication:()=>state.selected,openSettings:()=>go("settings"),onFocusApplication:id=>detail(getRecord(id))});
  document.body.classList.toggle("dark",state.prefs.theme==="dark");
  const route=location.hash.replace(/^#/,"");
  if(VIEWS.some(([id])=>id===route))state.view=route;
