@@ -50,7 +50,9 @@
     "LinkedIn AI4I job preview reports no longer accepting LinkedIn applications; official Politecnico and AI4I offsite submission route must be checked directly before treating this as closure.",
     "Inria Astra-Vision ELLIS lists multimodal world models deadline 20 Nov 2026, but primary lab page currently shows a different older May 2026 world-model opening: research queue only, do not promote.",
     "UZH RPG current primary page explicitly states no fixed closing date; indexed Oct 27 2026 deadlines are stale. Registered as rolling/unposted.",
-    "ETH IDEAL Jan 15 2027 represents best consideration not verified final cutoff. ETH HC3 31 Jan 2027 is externally indexed only. Neither may be described as primary-confirmed final."
+    "ETH IDEAL Jan 15 2027 represents best consideration not verified final cutoff. ETH HC3 31 Jan 2027 is externally indexed only. Neither may be described as primary-confirmed final.",
+    "NASK Eval FM PhD scholarship secondary index reports November 13 2026 as application deadline, but official NASK recruitment https://www.nask.pl/kariera/konkurs-stypendium-w-projekcie-badawczym-592207-20011564 states applications CLOSED 28 October 2026; 13 November 2026 is SELECTION RESULT date. Exclude as expired scholarship, not a current opportunity.",
+    "Ruhr Bochum CRC1844 episodic memory positions: secondary index claims 9 November 2026 deadline; institutional group says four positions pending funding with early-November deadlines, but no corroborating current individual vacancy postings. Research queue only until verified."
   ],
   "excluded_from_automatic_promotion": [
     "R26-DARTMOUTH-A2R-CODESIGN",
@@ -76,7 +78,9 @@
     "R26-IMPERIAL-PAIR-HRI",
     "R26-BONN-HRL-ACTIVE-PERCEPTION",
     "R26-UZH-RPG-VISION-ROBOT-LEARNING",
-    "R26-ETH-HC3-3D-RECON"
+    "R26-ETH-HC3-3D-RECON",
+    "R26-TIB-ECOAIRE-CAUSAL-NLP",
+    "R26-RUB-CRC1844-EPISODIC-MEMORY"
   ],
   "research_support": {
     "plugins_used": [
