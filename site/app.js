@@ -557,7 +557,7 @@ async function loadSnapshot(){
 }
 function init(){
  events();
- atlasLens=mountAtlasLens({getRecords:()=>state.data?records():[],getView:()=>state.view,getSelectedApplication:()=>state.selected,openSettings:()=>go("settings"),onFocusApplication:id=>detail(getRecord(id))});
+ atlasLens=mountAtlasLens({getRecords:()=>state.data?records():[],getView:()=>state.view,getSelectedApplication:()=>state.selected,openSettings:()=>go("settings"),onFocusApplication:id=>detail(getRecord(id)),onRunComplete:()=>aiConsole.connect()});
  document.body.classList.toggle("dark",state.prefs.theme==="dark");
  const route=location.hash.replace(/^#/,"");
  if(VIEWS.some(([id])=>id===route))state.view=route;
