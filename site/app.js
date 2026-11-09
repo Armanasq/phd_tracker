@@ -111,6 +111,9 @@ function toolbar(list){
  button("Clear","clear-filters")+'<span class="count" aria-live="polite">'+list.length+' records</span></div>';
 }
 function dashboard(){
+ if(state.data.instance?.data_mode==="starter")return heading("Set up your PhD workspace","This independent deployment starts without inherited applications or unverified opportunity claims.",button("Setup guide","url",ownerRepo()+"/blob/main/docs/SELF_HOSTING.md","primary")+button("Repository","url",ownerRepo()))+
+ '<div class="info">No PhD application evidence has been imported. This does not mean no opportunities exist. Add your own reviewed sources, then enable source mode in this repository’s Actions settings.</div>'+
+ statCard("First-run checklist",'<div class="mini-list"><div class="mini-row"><strong>01 · Review and replace inherited source files in data/</strong></div><div class="mini-row"><strong>02 · Confirm deadlines, eligibility and primary university links</strong></div><div class="mini-row"><strong>03 · Set PHD_ATLAS_DATA_MODE to source in GitHub Actions variables</strong></div><div class="mini-row"><strong>04 · Rerun the Pages publisher and inspect the release manifest</strong></div></div>');
  const all=records(),tracked=all.filter(r=>r.record_type==="tracked");
  const active=tracked.filter(open),today=active.filter(r=>r.status!=="submitted"&&days(r.deadline)===0),week=active.filter(thisWeek);
  const verify=active.filter(r=>r.verification!=="source_verified"&&r.verification!=="owner_verified");
@@ -451,7 +454,7 @@ function render(){
  if(runtimeNote)runtimeNote.textContent=aiConsole.isLive()?"Private runtime connected":"Private runtime offline · model settings require local service";
  const unhealthy=state.data.providers.filter(p=>p.health!=="ok").length;
  $("providerStatus").innerHTML='<strong>'+escapeHTML(stamp(state.data.as_of))+'</strong><span class="signal"><span class="signal-dot '+(unhealthy?"":"ok")+'" aria-hidden="true"></span>'+unhealthy+' source feeds need attention</span>';
- const topAsOf=$("topEvidenceAsOf");if(topAsOf)topAsOf.textContent="Evidence observed "+stamp(state.data.as_of)+(state.data.instance?.type==="independent"?" · Independent deployment: verify inherited evidence":"");
+ const topAsOf=$("topEvidenceAsOf");if(topAsOf)topAsOf.textContent="Evidence observed "+stamp(state.data.as_of)+(state.data.instance?.type==="independent"?" · Independent deployment: verify evidence provenance":"");
 }
 function go(view){
  if(!VIEWS.some(([id])=>id===view))return;

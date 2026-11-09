@@ -11,7 +11,7 @@ from xml.etree import ElementTree
 from scripts.build_workspace import build
 from scripts.instance_config import (
     action_center_url, pages_url, prepare_site, repository_url,
-    resolve_repository, validate_repository,
+    resolve_repository, resolve_data_mode, validate_repository,
 )
 
 
@@ -39,6 +39,26 @@ class InstanceTests(unittest.TestCase):
             self.assertEqual(action_center_url("ForkOwner/my-tracker", 42), "https://github.com/ForkOwner/my-tracker/issues/42")
             with self.assertRaises(ValueError):
                 action_center_url("ForkOwner/my-tracker", "../42")
+
+    def test_new_forks_start_without_inherited_evidence(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "data").mkdir()
+            (root / "data" / "experience_view.json").write_text(json.dumps({
+                "applications": [{"id": "private-data", "name": "Not reviewed for publication"}],
+            }), encoding="utf-8")
+            with patch.dict(os.environ, {"PHD_ATLAS_DATA_MODE": ""}):
+                snapshot = build(root, repository="NewOwner/new-atlas")
+            self.assertEqual(snapshot["records"], [])
+            self.assertEqual(snapshot["meta"]["tracked"], 0)
+            self.assertEqual(snapshot["instance"]["data_mode"], "starter")
+            self.assertNotIn("private-data", json.dumps(snapshot))
+            self.assertEqual(snapshot["source_links"]["repository"], "https://github.com/NewOwner/new-atlas")
+            self.assertEqual(resolve_data_mode("Armanasq/phd_tracker", ""), "source")
+            self.assertEqual(resolve_data_mode("NewOwner/new-atlas", ""), "starter")
+            self.assertEqual(resolve_data_mode("NewOwner/new-atlas", "source"), "source")
+            with self.assertRaises(ValueError):
+                resolve_data_mode("NewOwner/new-atlas", "inherit")
 
     def test_metadata_is_prepared_for_fork_without_touching_source(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -71,7 +91,7 @@ class InstanceTests(unittest.TestCase):
                 "applications": [{"id": "own-1", "name": "Documented opportunity", "deadline": "2027-01-31"}],
             }), encoding="utf-8")
             with patch.dict(os.environ, {"PHD_ATLAS_ACTION_ISSUE": ""}):
-                snapshot = build(root, repository="ForkOwner/my-tracker")
+                snapshot = build(root, repository="ForkOwner/my-tracker", data_mode="source")
             self.assertEqual([r["id"] for r in snapshot["records"]], ["own-1"])
             self.assertEqual(snapshot["source_links"]["repository"], "https://github.com/ForkOwner/my-tracker")
             self.assertIn("template=00-owner-action-center.md", snapshot["source_links"]["control_issue"])
