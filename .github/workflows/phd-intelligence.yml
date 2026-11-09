@@ -8,6 +8,7 @@ on:
       - .github/workflows/phd-intelligence.yml
       - scripts/**
       - data/opportunities.json
+      - data/watchlist.json
       - data/source_scan_*.json
       - requirements-intelligence.txt
   schedule:
