@@ -44,6 +44,10 @@ jobs:
       - run: python -m compileall -q scripts phd_agents
       - run: node --check site/ai-studio.js
       - run: python -m pytest tests -q
+      - name: Validate snapshot builder as deployed script
+        run: |
+          python scripts/build_workspace.py --out /tmp/phd-atlas-smoke.json
+          python -c 'import json; d=json.load(open("/tmp/phd-atlas-smoke.json")); assert d["schema_version"] == 1 and len(d["records"]) >= 109'
       - name: Render observatory against repository snapshots
         run: |
           python scripts/experience_engine.py
