@@ -17,6 +17,7 @@ from .settings import read_settings, save_settings
 from .routing import routing_status
 from .secrets import read_secret, write_secret
 from .metrics import usage_summary
+from .scheduler_preview import scheduler_preview
 from .toolkit import TOOL_NAMES, DEFAULT_TOOLS
 from time import perf_counter
 from .calendar import line_items
@@ -140,6 +141,8 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.wfile.write(body)
         elif path == "/api/metrics":
             self.send_json(usage_summary(store))
+        elif path == "/api/scheduler/preview":
+            self.send_json(scheduler_preview(store))
         elif path == "/api/settings":
             self.send_json({"settings": read_settings(store),
                             "provider_states": provider_states(store, catalog(store)["providers"]),
