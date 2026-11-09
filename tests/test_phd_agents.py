@@ -158,6 +158,21 @@ class AgentExecutionTests(unittest.TestCase):
         self.assertEqual(len(self.store.runs()), 1)
         self.assertTrue("untrusted" in call.call_args.args[2])
 
+    def test_manual_cloud_run_requires_fresh_consent_even_when_route_is_approved(self):
+        from phd_agents.routing import ModelRoute
+        from phd_agents.engine import run_workflow
+        provider = next(p for p in PROVIDERS if p["id"] == "openai")
+        route = ModelRoute(provider=provider, source="agent_assignment", approved=True)
+        with patch("phd_agents.engine.resolve_route", return_value=route):
+            with patch("phd_agents.engine.invoke") as call:
+                with self.assertRaisesRegex(PermissionError, "per-run"):
+                    run_agent(self.store, Path(self.tmp.name),
+                              agent_id="portfolio_planner", provider_id="openai")
+                with self.assertRaisesRegex(PermissionError, "per-run"):
+                    run_workflow(self.store, Path(self.tmp.name),
+                                 workflow_id="daily_brief", provider_id="openai")
+                call.assert_not_called()
+
     def test_scheduler_only_runs_enabled_workflows_once_per_period(self):
         item = workflow_spec({"id": "private_daily", "agent_id": "portfolio_planner",
                               "schedule": "daily", "enabled": True, "provider_id": "ollama"})

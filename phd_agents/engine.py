@@ -48,8 +48,8 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str | Non
     route = resolve_route(store, configuration["providers"], agent_id, provider_id)
     provider = route.provider
     provider_id = provider["id"]
-    if not provider["local"] and not (cloud_consent or route.approved):
-        raise PermissionError("Activate and approve this cloud provider in Settings, or authorize this run explicitly")
+    if not provider["local"] and not cloud_consent:
+        raise PermissionError("Manual cloud inference requires fresh per-run applicant-data disclosure consent")
     if not isinstance(input_text, str) or len(input_text) > 5000:
         raise ValueError("Input must be text up to 5000 characters")
     if conversation_id and not conversation_mode:

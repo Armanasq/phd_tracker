@@ -53,7 +53,8 @@ Expensive HTTP requests share a per-process inference admission semaphore, defau
 - A status change to Submitted requires explicit applicant confirmation. No backend route submits university applications or contacts faculty.
 - Scheduled workflows are opt-in. A period is claimed atomically before model execution; concurrent ticks return already-running instead of invoking another model.
 - Abandoned execution claims expire after 15 minutes. A failed run releases its claim for a retry. Recovery is at-least-once rather than exactly-once external inference.
-- Scheduled cloud workflows require both cloud-context disclosure consent and a configured daily call limit. Concurrent in-flight scheduled calls reserve their allowance before execution.
+- Manual cloud agent/workflow requests require explicit fresh consent on every invocation, even for a previously approved provider. The private UI prompts before transmitting applicant data and sends `cloud_consent: true` only after confirmation.
+- Scheduled cloud workflows require separately approved providers, explicit workflow consent and a configured daily call limit. Concurrent in-flight scheduled calls reserve their allowance before execution.
 - Known vendor API-key variable names are bound to the official vendor host. Other remote gateways must use a separate, dedicated API-key variable. This is enforced for legacy configurations at request time.
 - A successful model catalog response does not certify inference. Successful inference probes expire for UI readiness after 24 hours; credential rotation requires reverification.
 - Unknown deadlines, portal cutoffs, funding eligibility, referee responses and submitted receipts remain explicit evidence gaps.

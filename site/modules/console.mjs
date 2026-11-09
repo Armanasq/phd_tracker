@@ -51,6 +51,22 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   if(!route) return 'Routing unavailable';
   return route.provider_label+' · '+route.model+' · '+(route.source==="agent_assignment"?"Agent override":"Workspace default");
  }
+ function providerForAgent(agentId,override="auto") {
+  const id=override&&override!=="auto"?override:routeFor(agentId)?.provider_id;
+  return providers().find(provider=>provider.id===id)||null;
+ }
+ function cloudConsentForAgents(agentIds,override="auto") {
+  const destinations=agentIds.map(agentId=>providerForAgent(agentId,override));
+  if(destinations.some(provider=>!provider)){
+   notify("Cannot verify the selected provider route. Reconfigure agent routing in Settings.");
+   return {allowed:false,cloud_consent:false};
+  }
+  const remote=[...new Map(destinations.filter(provider=>!provider.local).map(provider=>[provider.id,provider])).values()];
+  if(!remote.length)return {allowed:true,cloud_consent:false};
+  const labels=remote.map(provider=>provider.label+" ("+provider.base_url+")").join(", ");
+  const allowed=window.confirm("Send applicant evidence and your task to "+labels+"? Cloud processing can incur charges. Consent is limited to this run. No faculty emails or university submissions will be sent.");
+  return {allowed,cloud_consent:allowed};
+ }
  function badge(text,tone="") {return '<span class="os-badge '+tone+'">'+esc(text)+'</span>';}
 
  async function request(path,body) {
@@ -311,7 +327,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
     '</form>')+
    box("Security & deployment","Important boundaries for models that access application evidence.",
     '<div class="os-policy"><div><strong>Credentials</strong><p>Kept in the private local runtime. Local key storage uses restrictive file permissions but is not encrypted at rest.</p></div>'+
-    '<div><strong>Cloud data disclosure</strong><p>Per-provider approval is required before unattended or confirmation-free use. Editing a provider revokes the approval.</p></div>'+
+    '<div><strong>Cloud data disclosure</strong><p>Manual cloud inference requires consent on every run. Scheduled cloud routes require separately approved providers, workflow consent and daily quotas; editing a provider revokes approval.</p></div>'+
     '<div><strong>Model behavior</strong><p>Replies are reviewable proposals. No automatic faculty messages or application submissions.</p></div>'+
     '<div><strong>Scheduler</strong><p>Disabled until you enable workflows and run the external scheduler. Cloud calls remain capped separately.</p></div></div>'+
     btn("View run history","go","activity","quiet"))+
@@ -469,7 +485,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   }
   if(action==="activate"){
    const provider=providers().find(p=>p.id===id);if(!provider)return;
-   if(!provider.local&&!window.confirm("Authorize "+provider.label+" to receive application evidence on future agent runs without per-run prompts?"))return;
+   if(!provider.local&&!window.confirm("Approve "+provider.label+" as a cloud route for scheduled workflows? Manual cloud runs will still ask for consent every time."))return;
    await change(async()=>{
     await request("/api/providers/activate",{provider_id:id,allow_cloud_data:!provider.local});
     state.selectedProvider=id;state.message=provider.label+" is now the automatic workspace model.";
@@ -486,8 +502,12 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    });return;
   }
   if(action==="run-workflow"){
+   const workflow=workflows().find(item=>item.id===id);
+   if(!workflow)return;
+   const consent=cloudConsentForAgents(workflow.steps?.length?workflow.steps:[workflow.agent_id],workflow.provider_id||"auto");
+   if(!consent.allowed)return;
    await change(async()=>{
-    const result=await request("/api/workflows/run",{workflow_id:id});
+    const result=await request("/api/workflows/run",{workflow_id:id,cloud_consent:consent.cloud_consent});
     state.lastAnswer=result;state.selectedAgent=result.agent_id;
     state.message="Workflow completed as a proposal. No external action was performed.";
     navigate("ai");
@@ -565,10 +585,13 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    });return;
   }
   if(kind==="run"){
+   const consent=cloudConsentForAgents([values.agent_id]);
+   if(!consent.allowed)return;
    state.selectedAgent=values.agent_id;state.selectedApplication=values.application_id;state.prompt=values.prompt;
    await change(async()=>{
     const result=await request("/api/agents/run",{agent_id:values.agent_id,
-       ...(values.application_id?{application_id:values.application_id}:{}),input_text:values.prompt});
+       ...(values.application_id?{application_id:values.application_id}:{}),input_text:values.prompt,
+       cloud_consent:consent.cloud_consent});
     state.lastAnswer=result;state.message="Inference completed. Review the proposal against official evidence.";
    });return;
   }
