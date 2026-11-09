@@ -138,9 +138,16 @@ function dashboard(){
  ].map(([name,n,help,view])=>'<div class="attention-item"><div><button data-action="nav" data-value="'+view+'">'+escapeHTML(name)+'</button><small>'+escapeHTML(help)+'</small></div><strong>'+n+'</strong></div>').join("")+'</div></section>'+
  '<section class="desk-section"><div class="desk-header"><h2>Source checks</h2>'+link(state.data.source_links.source_monitor,"Monitoring")+'</div><div style="padding:9px 20px 16px"><p style="margin:0 0 11px;font-size:11px;color:var(--muted)">'+failing+' of '+state.data.providers.length+' feeds need attention</p>'+state.data.providers.map(p=>'<div class="week-row" style="grid-template-columns:minmax(0,1fr) auto"><span>'+escapeHTML(p.name)+'</span>'+pill(p.health,p.health==="ok"?"green":"warning")+'</div>').join("")+'</div></section></div></div>';
 }
-function applications(){const list=sortList(filters(records()));return heading("Applications","Track verified opportunities and research candidates separately. Saved views and filters stay on this device.",button("Compare selected ("+state.compare.length+")","nav","compare","primary")+button("Export filtered CSV","export","csv"))+
-'<div class="info">The date alone is insufficient when a portal closes at a stated time or time zone. “Source reviewed” is not a guarantee that an opportunity is still open. Local edits require GitHub synchronization.</div>'+
-statCard("Application registry",toolbar(list)+(list.length?table(list,true):'<div class="empty">No records match the current filters.</div>'))}
+function applications(){
+ const list=sortList(filters(records()));
+ const dueSoon=list.filter(r=>{const d=days(r.deadline);return d!==null&&d>=0&&d<=7}).length;
+ const needsEvidence=list.filter(r=>r.verification!=="source_verified"&&r.verification!=="owner_verified").length;
+ const candidates=list.filter(r=>r.record_type==="candidate").length;
+ return heading("Applications","Tracked opportunities and research candidates, with source provenance and device-local views.",button("Compare selected ("+state.compare.length+")","nav","compare","primary")+button("Export filtered CSV","export","csv"))+
+ '<div class="registry-summary" aria-label="Current filtered results"><div><span>RECORDS IN VIEW</span><strong>'+list.length+'</strong><small>current filters</small></div><div><span>DUE WITHIN 7 DAYS</span><strong>'+dueSoon+'</strong><small>recorded dates</small></div><div><span>NEEDS VERIFICATION</span><strong>'+needsEvidence+'</strong><small>source or owner review</small></div><div><span>RESEARCH CANDIDATES</span><strong>'+candidates+'</strong><small>not promoted</small></div></div>'+
+ '<div class="info">Deadline dates may omit portal cutoff times and time zones. Source review does not establish current availability. Local edits require explicit GitHub synchronization.</div>'+
+ statCard("Application registry",toolbar(list)+(list.length?table(list,true):'<div class="empty">No records match these filters. Clear filters or select a saved view.</div>'));
+}
 function contacts(){const all=records().filter(r=>r.faculty!=="Not recorded"||r.contact_status!=="unrecorded"||r.followup);const list=sortList(filters(all));return heading("Faculty contacts","Contacts and follow-up dates, recorded explicitly.",button("Export contacts CSV","export","contacts"))+
 statCard("Faculty and supervisor pipeline",toolbar(list)+'<div class="tablewrap"><table class="table"><thead><tr><th>Opportunity</th><th>Faculty / contact</th><th>Outreach status</th><th>Next follow-up</th><th>Action</th></tr></thead><tbody>'+list.map(r=>'<tr><td>'+rowButton(r)+'</td><td>'+escapeHTML(r.faculty)+'</td><td>'+pill(r.contact_status==="unrecorded"?"Not recorded":r.contact_status)+'</td><td>'+escapeHTML(stamp(r.followup))+(r.followup?" "+dateRisk(days(r.followup)):"")+'</td><td>'+button("Update","record",r.id)+'</td></tr>').join("")+'</tbody></table></div>')}
 function actions(){const rs=records().filter(r=>r.record_type==="tracked").filter(open).sort((a,b)=>priority(b)-priority(a));const tasks=(state.data.tasks||[]).filter(t=>!t.application_id||!getRecord(t.application_id)||open(getRecord(t.application_id))).slice(0,120);return heading("Next actions","Your deadline-first application tasks and the original workbook steps.",button("Download calendar (.ics)","export","ics","primary"))+
@@ -363,14 +370,19 @@ const ICONS={
 function navigation(){
  const tracked=records().filter(r=>r.record_type==="tracked");
  const counts={applications:tracked.length,actions:tracked.filter(open).filter(thisWeek).length,review:tracked.filter(r=>r.recheck_required).length};
- const divisions=new Set(["actions","updates","review"]);
+ const chapters={dashboard:"WORKSPACE / 01",actions:"FOLLOW-THROUGH / 02",review:"VERIFICATION / 03"};
  $("navigation").innerHTML=VIEWS.map(([id,icon,label])=>
-  (divisions.has(id)?'<div class="nav-divider" aria-hidden="true"></div>':"")+
+  (chapters[id]?'<div class="nav-chapter" aria-hidden="true">'+chapters[id]+'</div>':"")+
   '<button class="nav-btn '+(state.view===id?"active":"")+'" type="button" data-action="nav" data-value="'+id+'"'+(state.view===id?' aria-current="page"':'')+'>'+
   '<span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24">'+(ICONS[icon]||"")+'</svg></span>'+
   '<span class="nav-label">'+escapeHTML(label)+'</span>'+(counts[id]?'<em>'+counts[id]+'</em>':"")+'</button>'
  ).join("");
  $("crumbName").textContent=VIEWS.find(x=>x[0]===state.view)?.[2]||"Overview";
+ const next=tracked.filter(r=>open(r)&&days(r.deadline)!==null&&days(r.deadline)>=0).sort((a,b)=>days(a.deadline)-days(b.deadline)||priority(b)-priority(a))[0];
+ const sidebarDue=$("sidebarDue");
+ if(sidebarDue)sidebarDue.innerHTML=next?
+  '<span class="sidebar-deadline-label">NEXT RECORDED CLOSING</span><strong>'+(days(next.deadline)===0?'TODAY':days(next.deadline)+' DAYS')+'</strong><button type="button" class="sidebar-deadline-link" data-action="record" data-value="'+escapeHTML(next.id)+'">'+escapeHTML(next.name)+'</button><small>'+escapeHTML(stamp(next.deadline))+'</small>':
+  '<span class="sidebar-deadline-label">NEXT RECORDED CLOSING</span><small>No upcoming dated applications</small>';
 }
 function render(){
  if(!state.data)return;
@@ -382,6 +394,7 @@ function render(){
  $("body").innerHTML=note+views[state.view]();
  const unhealthy=state.data.providers.filter(p=>p.health!=="ok").length;
  $("providerStatus").innerHTML='<strong>'+escapeHTML(stamp(state.data.as_of))+'</strong><span class="signal"><span class="signal-dot '+(unhealthy?"":"ok")+'" aria-hidden="true"></span>'+unhealthy+' source feeds need attention</span>';
+ const topAsOf=$("topEvidenceAsOf");if(topAsOf)topAsOf.textContent="Evidence observed "+stamp(state.data.as_of);
 }
 function go(view){
  if(!VIEWS.some(([id])=>id===view))return;
