@@ -9,7 +9,7 @@ const safeURL=value=>{try{const u=new URL(String(value));return u.protocol==="ht
 const readStore=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch{return d}};
 const saveStore=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{notify("Local storage unavailable. Export drafts as JSON.")}};
 const state={data:null,view:"dashboard",query:"",status:"all",verification:"all",country:"all",horizon:"all",sort:"deadline",compare:[],selected:null,drafts:readStore(STORE,{}),prefs:readStore(PREFS,{theme:"dark",horizon:7,reminders:true,notified:{}}),modal:"",focus:null};
-const TODAY=()=>{const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+const TODAY=()=>{const zone=state.data?.timezone||"Europe/Berlin";const parts=new Intl.DateTimeFormat("en-US",{timeZone:zone,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());const get=k=>parts.find(p=>p.type===k)?.value||"";return get("year")+"-"+get("month")+"-"+get("day")};
 const days=due=>due?Math.round((new Date(due+"T12:00:00Z").getTime()-new Date(TODAY()+"T12:00:00Z").getTime())/86400000):null;
 const stamp=due=>due?new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"short",year:"numeric",timeZone:"UTC"}).format(new Date(due+"T12:00:00Z")):"Unverified";
 const statusLabel=s=>({unconfirmed:"Unconfirmed",shortlisted:"Shortlisted",preparing:"Preparing",submitted:"Submitted",interview:"Interview",offer:"Offer",rejected:"Rejected",withdrawn:"Withdrawn",blocked:"Blocked",archived:"Archived"})[s]||s;
