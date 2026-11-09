@@ -211,6 +211,36 @@
       }
     },
     {
+      "@id": "urn:phdtracker:application:R26-TIB-ECOAIRE-CAUSAL-NLP",
+      "@type": "prov:Entity",
+      "schema:name": "TIB Hannover / Leibniz University — Doctoral Researcher in NLP and Causal AI for Scientific Reasoning (EcoAIRE), 44/2026",
+      "applicationDeadline": {
+        "@value": "2026-11-14",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.leibniz-gemeinschaft.de/en/careers/jobs/detail/job/show/Job/research-associatedoctoral-researcher-natural-language-processing-and-causal-ai-for-scientific-reasoning-mfd"
+      },
+      "proofObligation": [
+        "Position has not passed primary-source verification"
+      ]
+    },
+    {
       "@id": "urn:phdtracker:application:N263-10",
       "@type": "prov:Entity",
       "schema:name": "BMW AI Robotics / RoboTac and TU/e Eindhoven, PhD World Models & Visuo-Tactile Foundation Models (2 research topics)",

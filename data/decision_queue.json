@@ -35,6 +35,21 @@
       "next_step": "Check research scope and applicant eligibility, then submit directly via Inria portal by 13 Nov; demonstrate reproducible scientific ML and physics-informed modelling experience."
     },
     {
+      "id": "R26-TIB-ECOAIRE-CAUSAL-NLP",
+      "programme": "TIB Hannover / Leibniz University — Doctoral Researcher in NLP and Causal AI for Scientific Reasoning (EcoAIRE), 44/2026",
+      "deadline": "2026-11-14",
+      "days_to_deadline": 5,
+      "deadline_kind": "Official final application deadline 14 November 2026, closing time not stated",
+      "tier": "urgent",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://www.leibniz-gemeinschaft.de/en/careers/jobs/detail/job/show/Job/research-associatedoctoral-researcher-natural-language-processing-and-causal-ai-for-scientific-reasoning-mfd",
+      "original_email": "",
+      "next_step": "Apply by 14 Nov using official online form, reference 44/2026. Focus application on evidence-grounded agent architectures, causal research extraction, knowledge graphs and robust RAG/LLM evaluation; confirm conditional project funding and ZAB process."
+    },
+    {
       "id": "R26-MCGILL-LIVING-MACHINES",
       "programme": "McGill Living Machines Lab — Fully Funded Soft/Bio-Inspired Robotics PhD Fall 2027",
       "deadline": "2026-11-15",
@@ -393,6 +408,22 @@
       "official_source": "https://mrs.fel.cvut.cz/careers/phdpos",
       "original_email": "https://mail.google.com/mail/u/0/#all/1a1afd9d7f07f384",
       "next_step": "Send CV, concise motivation, transcripts, 2–3 referee contacts with email subject '[PhD - GACR]'; ask for formal 2027 enrolment deadline, contract allocation and predoc start."
+    },
+    {
+      "id": "R26-RUB-CRC1844-EPISODIC-MEMORY",
+      "programme": "Ruhr University Bochum — CRC 1844 Episodic Memory, Four Planned PhD Positions (funding pending)",
+      "deadline": null,
+      "days_to_deadline": null,
+      "deadline_kind": "University group says deadlines beginning November 2026; secondary job index says 9 November but no confirmed primary closing date; verify immediately",
+      "tier": "unposted",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Obtain an explicit official deadline and timezone",
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://www.ini.rub.de/research/groups/computational_neuroscience",
+      "original_email": "",
+      "next_step": "Contact the group about active CRC1844 PhD openings and whether the secondary 9 Nov cutoff is valid; do not submit to unrelated older jobs."
     },
     {
       "id": "R26-UTK-JUE-WANG-SOFT-EMBODIED",

@@ -1,12 +1,12 @@
 <div align="center">
 
-<a href="../../actions/workflows/experience-lab.yml"><img src="../assets/readme/kinetic_cover.svg" width="100%" alt="Animated research intelligence cover with 108 actual future application records on deadline orbits" /></a>
+<a href="../../actions/workflows/experience-lab.yml"><img src="../assets/readme/kinetic_cover.svg" width="100%" alt="Animated research intelligence cover with 109 actual future application records on deadline orbits" /></a>
 
 **THIS IS AN EXECUTABLE RESEARCH WORKSPACE, NOT A STATIC TRACKER.**
 
 [**RUN AN INTERACTIVE SCENARIO**](../../actions/workflows/experience-lab.yml) · [**OPERATE SOURCE ALERTS**](../../issues/1) · [**DOWNLOAD ONE-FILE APP**](../dashboard/index.html) · [**OPENING GUIDE**](../dashboard/README.md) · [**INSPECT RAW EVIDENCE**](../data/experience_view.json)
 
-<sub>Regenerated from committed evidence. Snapshot 2026-11-09 · 108 frontier records · 1 source conflict(s). Real actions run through GitHub or the browser application.</sub>
+<sub>Regenerated from committed evidence. Snapshot 2026-11-09 · 109 frontier records · 1 source conflict(s). Real actions run through GitHub or the browser application.</sub>
 
 </div>
 
@@ -89,9 +89,9 @@ Edges encode recorded mentions, not guessed document absence or admission probab
 | **1d** | 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | [Evidence](https://www.sbfi.admin.ch/scholarships_eng) |
 | **4d** | 2026-11-13 | Inria IROKO Montpellier — PhD Scientific AI and Spatiotemporal Biodiversity Modelling | [Evidence](https://jobs.inria.fr/public/classic/en/offres/2026-10608) |
 | **4d** | 2026-11-13 | Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacancy ref 3522426DA (jobs.soton.ac.uk) | [Evidence](https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10) |
+| **5d** | 2026-11-14 | TIB Hannover / Leibniz University — Doctoral Researcher in NLP and Causal AI for Scientific Reasoning (EcoAIRE | [Evidence](https://www.leibniz-gemeinschaft.de/en/careers/jobs/detail/job/show/Job/research-associatedoctoral-researcher-natural-language-processing-and-causal-ai-for-scientific-reasoning-mfd) |
 | **6d** | 2026-11-15 | BMW AI Robotics / RoboTac and TU/e Eindhoven, PhD World Models &amp; Visuo-Tactile Foundation Models (2 research t | [Evidence](https://www.robotac.eu/open-positions) |
 | **6d** | 2026-11-15 | Institute of Science Tokyo, International Graduate Program IGP(A) Fall 2027 with MEXT recommendation | [Evidence](https://admissions.isct.ac.jp/en/013/graduate/programs/igp/igp-a) |
-| **6d** | 2026-11-15 | International Max Planck Research School for Intelligent Systems (IMPRS-IS), 2027 doctoral recruitment | [Evidence](https://imprs.is.mpg.de/application) |
 
 [Complete action agenda](TODAY.md) · [Workbook](PhD_Action_List.xlsx) · [Calendar feed](calendar/phd_deadlines.ics)
 

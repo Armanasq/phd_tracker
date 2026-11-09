@@ -2,16 +2,16 @@
   "schema_version": 1,
   "as_of": "2026-11-09",
   "explicit_readiness_policy": "Unknown inputs remain unknown. Mentioned documents are not evidence of missing documents.",
-  "active_future_opportunities": 108,
+  "active_future_opportunities": 109,
   "source_conflict_count": 1,
   "resource_frontier": [
     {
       "resource_id": "academic_cv",
       "label": "Academic CV",
       "current_state": "unknown",
-      "potential_applications": 80,
-      "near_term_applications": 59,
-      "urgency_index": 6.8854
+      "potential_applications": 81,
+      "near_term_applications": 60,
+      "urgency_index": 7.0521
     },
     {
       "resource_id": "recommendations",
@@ -25,17 +25,17 @@
       "resource_id": "transcripts",
       "label": "Official transcripts",
       "current_state": "unknown",
-      "potential_applications": 75,
-      "near_term_applications": 51,
-      "urgency_index": 4.8408
+      "potential_applications": 76,
+      "near_term_applications": 52,
+      "urgency_index": 5.0075
     },
     {
       "resource_id": "research_statement",
       "label": "Research statement / SOP",
       "current_state": "unknown",
-      "potential_applications": 53,
-      "near_term_applications": 38,
-      "urgency_index": 3.2199
+      "potential_applications": 54,
+      "near_term_applications": 39,
+      "urgency_index": 3.3866
     },
     {
       "resource_id": "english_proof",
@@ -188,6 +188,35 @@
       ],
       "next_step": "Check research scope and applicant eligibility, then submit directly via Inria portal by 13 Nov; demonstrate reproducible scientific ML and physics-informed modelling experience.",
       "source_url": "https://jobs.inria.fr/public/classic/en/offres/2026-10608"
+    },
+    {
+      "source_id": "R26-TIB-ECOAIRE-CAUSAL-NLP",
+      "deadline": "2026-11-14",
+      "days_to_deadline": 5,
+      "opportunity": "TIB Hannover / Leibniz University — Doctoral Researcher in NLP and Causal AI for Scientific Reasoning (EcoAIRE), 44/2026",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [
+        "Position has not passed primary-source verification"
+      ],
+      "next_step": "Apply by 14 Nov using official online form, reference 44/2026. Focus application on evidence-grounded agent architectures, causal research extraction, knowledge graphs and robust RAG/LLM evaluation; confirm conditional project funding and ZAB process.",
+      "source_url": "https://www.leibniz-gemeinschaft.de/en/careers/jobs/detail/job/show/Job/research-associatedoctoral-researcher-natural-language-processing-and-causal-ai-for-scientific-reasoning-mfd"
     },
     {
       "source_id": "M15",

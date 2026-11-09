@@ -4,10 +4,10 @@
   "timezone": "Europe/Berlin",
   "policy": "Observed snapshot, not live availability. Unknown is not false. Document mention does not imply missing. Simulations never change application state.",
   "metrics": {
-    "tracked": 108,
-    "future": 108,
-    "next_seven_days": 19,
-    "unknown_document_mentions": 338,
+    "tracked": 109,
+    "future": 109,
+    "next_seven_days": 20,
+    "unknown_document_mentions": 341,
     "source_conflicts": 1,
     "research_papers": 39
   },
@@ -121,6 +121,30 @@
       "proof_obligations": [],
       "source": "https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10",
       "next_step": "By 13 Nov 23:59 UK time: submit BlueOcean MSCA staff vacancy ref 3522426DA via jobs.soton.ac.uk. Also confirm and complete any separate PhD/project registration (linked form timing not verified)."
+    },
+    {
+      "id": "R26-TIB-ECOAIRE-CAUSAL-NLP",
+      "name": "TIB Hannover / Leibniz University — Doctoral Researcher in NLP and Causal AI for Scientific Reasoning (EcoAIRE), 44/2026",
+      "country": null,
+      "deadline": "2026-11-14",
+      "days": 5,
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "documents": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unknown_documents": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "proof_obligations": [
+        "Position has not passed primary-source verification"
+      ],
+      "source": "https://www.leibniz-gemeinschaft.de/en/careers/jobs/detail/job/show/Job/research-associatedoctoral-researcher-natural-language-processing-and-causal-ai-for-scientific-reasoning-mfd",
+      "next_step": "Apply by 14 Nov using official online form, reference 44/2026. Focus application on evidence-grounded agent architectures, causal research extraction, knowledge graphs and robust RAG/LLM evaluation; confirm conditional project funding and ZAB process."
     },
     {
       "id": "N263-10",
@@ -2719,8 +2743,8 @@
       "id": "academic_cv",
       "label": "Academic CV",
       "state": "unknown",
-      "potential": 80,
-      "near_term": 59
+      "potential": 81,
+      "near_term": 60
     },
     {
       "id": "recommendations",
@@ -2733,15 +2757,15 @@
       "id": "transcripts",
       "label": "Official transcripts",
       "state": "unknown",
-      "potential": 75,
-      "near_term": 51
+      "potential": 76,
+      "near_term": 52
     },
     {
       "id": "research_statement",
       "label": "Research statement / SOP",
       "state": "unknown",
-      "potential": 53,
-      "near_term": 38
+      "potential": 54,
+      "near_term": 39
     },
     {
       "id": "english_proof",
@@ -3728,6 +3752,17 @@
         "source": "https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10"
       },
       {
+        "id": "R26-TIB-ECOAIRE-CAUSAL-NLP",
+        "name": "TIB Hannover / Leibniz University — Doctoral Researcher in NLP and Causal AI for Scientific Reasoning (EcoAIRE), 44/2026",
+        "deadline": "2026-11-14",
+        "days": 5,
+        "reasons": [
+          "1 source/evidence obligations",
+          "3 mentioned documents with unknown readiness"
+        ],
+        "source": "https://www.leibniz-gemeinschaft.de/en/careers/jobs/detail/job/show/Job/research-associatedoctoral-researcher-natural-language-processing-and-causal-ai-for-scientific-reasoning-mfd"
+      },
+      {
         "id": "N263-09",
         "name": "International Max Planck Research School for Intelligent Systems (IMPRS-IS), 2027 doctoral recruitment",
         "deadline": "2026-11-15",
@@ -4174,16 +4209,6 @@
           "5 mentioned documents with unknown readiness"
         ],
         "source": "https://www.epfl.ch/education/phd/edic-computer-and-communication-sciences/"
-      },
-      {
-        "id": "R26-GWU-EPIC",
-        "name": "George Washington University — EPIC Lab visual-inertial perception, SLAM and physical AI PhD (Chuchu Chen), Fall 2027",
-        "deadline": "2026-12-01",
-        "days": 22,
-        "reasons": [
-          "4 mentioned documents with unknown readiness"
-        ],
-        "source": "https://graduate.engineering.gwu.edu/doctoral-admissions-requirements"
       }
     ],
     "policy": "Priorities are calendar-sorted review candidates, not admission likelihood, guaranteed eligibility or inferred incomplete tasks."
