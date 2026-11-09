@@ -9,6 +9,9 @@ on:
     paths:
       - site/**
       - scripts/build_workspace.py
+      - scripts/workspace_controls.py
+      - tests/domain.test.mjs
+      - tests/test_workspace.py
       - data/workspace_overrides.json
       - data/opportunities.json
       - data/experience_view.json
