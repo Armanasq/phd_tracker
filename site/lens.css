@@ -1,0 +1,125 @@
+#atlasLens{--lens-paper:#fff;--lens-ground:#f7f8fc;--lens-ink:#19243a;--lens-muted:#64738b;--lens-line:#e6eaf2;--lens-primary:#4457c6;--lens-subtle:#eff1ff;--lens-calm:#24846c;position:relative;z-index:72;font-family:Inter,"Segoe UI",system-ui,sans-serif;font-size:13px;letter-spacing:-.012em;color:var(--lens-ink)}
+#atlasLens *,#atlasLens *:before,#atlasLens *:after{box-sizing:border-box}
+#atlasLens button,#atlasLens textarea,#atlasLens select{font:inherit}
+#atlasLens button{cursor:pointer}
+#atlasLens button:disabled{opacity:.48;cursor:not-allowed}
+#atlasLens :is(button,textarea,select,a):focus-visible{outline:3px solid #7386e8;outline-offset:3px}
+#atlasLens .lens-launcher{position:fixed;right:28px;bottom:25px;z-index:75;display:flex;align-items:center;gap:11px;min-height:52px;padding:7px 14px 7px 8px;border:1px solid #324279;border-radius:16px;background:#17223b;color:#f6f8ff;box-shadow:0 18px 50px #111b3540,0 2px 10px #111b3512;transition:transform .18s,box-shadow .18s,border-color .18s}
+#atlasLens .lens-launcher:hover{transform:translateY(-2px);border-color:#8292c8;box-shadow:0 20px 58px #17223b50}
+#atlasLens .lens-launcher-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:11px;background:#4255bd;color:#fff;flex:none}
+#atlasLens .lens-launcher-icon svg{width:22px;height:22px}
+#atlasLens .lens-launcher-word{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15}
+#atlasLens .lens-launcher-word strong{font-size:12px;letter-spacing:-.02em}
+#atlasLens .lens-launcher-word small{margin-top:4px;font-size:9px;letter-spacing:.1em;color:#aebbe0}
+#atlasLens .lens-live-dot{width:7px;height:7px;border-radius:50%;background:#8d9aba;margin-left:7px;flex:none}
+#atlasLens .lens-live-dot.online{background:#5ce2b2;box-shadow:0 0 0 4px #5ce2b21f}
+#atlasLens .lens-panel{position:fixed;right:26px;bottom:90px;z-index:74;width:min(468px,calc(100vw - 32px));height:min(738px,calc(100dvh - 114px));display:flex;flex-direction:column;overflow:hidden;background:var(--lens-paper);border:1px solid #dce2ee;border-radius:21px;box-shadow:0 34px 96px #101c3840,0 7px 28px #15204015;transform-origin:bottom right;animation:lens-enter .18s ease-out}
+@keyframes lens-enter{from{transform:translateY(9px) scale(.98);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+#atlasLens .lens-panel[hidden]{display:none!important}
+#atlasLens .lens-panel.expanded{width:min(858px,calc(100vw - 308px));height:min(792px,calc(100dvh - 105px))}
+#atlasLens .lens-header{padding:15px 18px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--lens-line);flex:none}
+#atlasLens .lens-identity{display:flex;align-items:center;gap:11px;min-width:0}
+#atlasLens .lens-symbol{width:36px;height:36px;display:grid;place-items:center;flex:none;background:#17233b;border:1px solid #273759;border-radius:11px;color:white}
+#atlasLens .lens-symbol svg{width:22px;height:22px}
+#atlasLens .lens-identity-copy{min-width:0;display:flex;flex-direction:column;gap:3px}
+#atlasLens .lens-identity-copy strong{font-size:13px;font-weight:750;letter-spacing:-.025em;white-space:nowrap}
+#atlasLens .lens-identity-copy small{font-size:10px;color:var(--lens-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#atlasLens .lens-header-tools{display:flex;align-items:center;gap:5px;flex:none}
+#atlasLens .lens-icon-btn{border:1px solid transparent;background:transparent;color:#68768e;border-radius:9px;width:33px;height:33px;display:grid;place-items:center;flex:none}
+#atlasLens .lens-icon-btn:hover{background:var(--lens-ground);border-color:var(--lens-line);color:var(--lens-ink)}
+#atlasLens .lens-icon-btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+#atlasLens .lens-context{display:flex;align-items:center;gap:8px;padding:10px 18px;border-bottom:1px solid var(--lens-line);background:#fcfcfe;min-width:0;flex:none}
+#atlasLens .lens-context-prefix{font-size:9px;color:#7b88a2;letter-spacing:.1em;font-weight:760;white-space:nowrap}
+#atlasLens .lens-context select{appearance:none;flex:1;min-width:0;max-width:100%;padding:7px 24px 7px 9px;border:1px solid #e0e5ef;border-radius:8px;background:#fff;color:var(--lens-ink);font-size:11px;font-weight:650}
+#atlasLens .lens-context .lens-context-arrow{font-size:10px;margin-left:-27px;pointer-events:none;color:#76849b;margin-right:13px}
+#atlasLens .lens-provider{display:flex;align-items:center;gap:6px;max-width:100%;font-size:10px;color:var(--lens-muted);padding:6px 9px;background:var(--lens-ground);border:1px solid var(--lens-line);border-radius:30px;white-space:nowrap;overflow:hidden}
+#atlasLens .lens-provider span:last-child{overflow:hidden;text-overflow:ellipsis}
+#atlasLens .lens-status-dot{width:6px;height:6px;border-radius:50%;background:#aeb7c6;flex:none}
+#atlasLens .lens-status-dot.online{background:#1d9c70}
+#atlasLens .lens-layout{display:grid;grid-template-columns:minmax(0,1fr);min-height:0;flex:1}
+#atlasLens .lens-panel.expanded .lens-layout{grid-template-columns:minmax(0,1fr) 260px}
+#atlasLens .lens-main{min-width:0;min-height:0;display:flex;flex-direction:column}
+#atlasLens .lens-history{padding:18px 20px 23px;flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#cbd3e4 transparent}
+#atlasLens .lens-hero{padding:20px 4px 6px}
+#atlasLens .lens-hero-mark{display:flex;align-items:center;gap:9px;font-size:9px;font-weight:770;letter-spacing:.16em;color:#5969ab;margin-bottom:21px}
+#atlasLens .lens-hero-mark:before{content:"";display:block;height:1px;width:25px;background:#6475ca}
+#atlasLens .lens-hero-orbit{position:relative;width:54px;height:54px;margin-bottom:22px;display:grid;place-items:center}
+#atlasLens .lens-hero-orbit:before,#atlasLens .lens-hero-orbit:after{content:"";position:absolute;border:1px solid #afb9e6;border-radius:50%;width:50px;height:30px;transform:rotate(-37deg)}
+#atlasLens .lens-hero-orbit:after{width:50px;height:30px;transform:rotate(52deg);border-color:#d2d8ed}
+#atlasLens .lens-hero-orbit span{position:relative;z-index:1;width:13px;height:13px;border-radius:50%;background:#465ac4;box-shadow:0 0 0 6px #edf0ff}
+#atlasLens .lens-hero h2{font-size:clamp(24px,2.2vw,29px);letter-spacing:-.055em;font-weight:760;line-height:1.14;margin:0 0 12px;max-width:345px;color:var(--lens-ink)}
+#atlasLens .lens-hero p{margin:0;color:var(--lens-muted);font-size:12px;line-height:1.65;max-width:360px}
+#atlasLens .lens-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:25px 0 22px;padding:15px 0;border-top:1px solid var(--lens-line);border-bottom:1px solid var(--lens-line)}
+#atlasLens .lens-facts>div{padding:0 13px;border-right:1px solid var(--lens-line);min-width:0}
+#atlasLens .lens-facts>div:first-child{padding-left:0}
+#atlasLens .lens-facts>div:last-child{border-right:0}
+#atlasLens .lens-facts strong{font-size:22px;letter-spacing:-.04em;font-weight:760;display:block;line-height:1.2;color:var(--lens-ink)}
+#atlasLens .lens-facts small{display:block;color:var(--lens-muted);font-size:10px;line-height:1.4;margin-top:4px}
+#atlasLens .lens-section-label{font-size:10px;color:var(--lens-muted);font-weight:750;letter-spacing:.095em;margin:0 0 10px}
+#atlasLens .lens-prompts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+#atlasLens .lens-prompt{display:flex;flex-direction:column;align-items:flex-start;gap:11px;padding:13px 13px 12px;border:1px solid var(--lens-line);border-radius:12px;background:var(--lens-paper);min-height:94px;text-align:left;color:var(--lens-ink);transition:border-color .15s,background .15s}
+#atlasLens .lens-prompt:hover{border-color:#aab6e1;background:#f9faff}
+#atlasLens .lens-prompt>span:first-child{font-size:9px;color:#7e89ae;font-weight:750}
+#atlasLens .lens-prompt strong{font-size:11px;line-height:1.38;font-weight:680;display:block;max-width:95%}
+#atlasLens .lens-prompt svg{width:13px;height:13px;margin-left:auto;stroke:currentColor;stroke-width:2;fill:none}
+#atlasLens .lens-feed{display:flex;flex-direction:column;gap:18px}
+#atlasLens .lens-turn{position:relative;min-width:0}
+#atlasLens .lens-turn.user{padding:11px 14px;background:#f1f3fa;border-radius:13px 13px 5px 13px;margin-left:30px;align-self:flex-end;color:#293954}
+#atlasLens .lens-turn.user .lens-body{font-size:12.5px;line-height:1.62}
+#atlasLens .lens-turn.assistant{padding-left:13px;border-left:2px solid #465ac4}
+#atlasLens .lens-speaker{display:flex;gap:8px;align-items:center;margin-bottom:9px;color:var(--lens-muted);font-size:10px;font-weight:720}
+#atlasLens .lens-speaker span{color:#5161b5}
+#atlasLens .lens-body{font-size:12.5px;line-height:1.7;color:var(--lens-ink);white-space:pre-wrap;overflow-wrap:anywhere}
+#atlasLens .lens-turn-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:13px}
+#atlasLens .lens-mini{border:1px solid var(--lens-line);background:#fff;border-radius:7px;padding:6px 9px;font-size:10px;color:#66758e;min-height:27px}
+#atlasLens .lens-mini:hover{background:#f6f7ff;border-color:#c5cfec}
+#atlasLens .lens-trace{margin-top:10px;padding:12px;background:#f7f8fc;border:1px solid var(--lens-line);border-radius:10px;color:#536176;font-size:10.5px;line-height:1.7;display:grid;gap:4px}
+#atlasLens .lens-trace strong{color:#273750}
+#atlasLens .lens-trace code{overflow-wrap:anywhere;font-size:10px}
+#atlasLens .lens-source{margin-top:10px;font-size:10px;color:#7e8799;line-height:1.55}
+#atlasLens .lens-source a{color:#5066be;text-decoration:underline;text-underline-offset:3px}
+#atlasLens .lens-wait{display:flex;align-items:center;gap:12px;padding:13px 0 0 13px;border-left:2px solid #9ba7e3;color:#62708b;font-size:11px}
+#atlasLens .lens-wait-orbit{height:16px;width:16px;border:2px solid #dbe1f6;border-top-color:#5267cf;border-radius:50%;animation:lens-turn .9s linear infinite;flex:none}
+@keyframes lens-turn{to{transform:rotate(360deg)}}
+#atlasLens .lens-alert{padding:12px 14px;background:#fff5f6;border:1px solid #f1cacf;border-radius:10px;color:#9c3449;font-size:11px;line-height:1.5;margin-top:10px}
+#atlasLens .lens-composer-area{padding:10px 13px 13px;border-top:1px solid var(--lens-line);background:#fff;flex:none}
+#atlasLens .lens-composer{display:flex;align-items:flex-end;gap:9px;padding:12px 11px 10px 13px;border:1px solid #d7deed;border-radius:14px;background:#fff;box-shadow:0 2px 12px #22345408;transition:border-color .16s,box-shadow .16s}
+#atlasLens .lens-composer:focus-within{border-color:#7c8bdc;box-shadow:0 0 0 3px #e9ecff}
+#atlasLens .lens-composer textarea{resize:none;min-height:28px;max-height:120px;border:0;outline:0!important;box-shadow:none!important;background:transparent;color:var(--lens-ink);font-size:12.5px;line-height:1.55;flex:1;min-width:0;padding:0;overflow:auto}
+#atlasLens .lens-composer textarea::placeholder{color:#8490a4}
+#atlasLens .lens-send{width:32px;height:32px;display:grid;place-items:center;flex:none;background:#4255c2;color:white;border:0;border-radius:9px}
+#atlasLens .lens-send:hover{background:#3142af}
+#atlasLens .lens-send svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#atlasLens .lens-composer-bottom{display:flex;align-items:center;justify-content:space-between;gap:9px;min-width:0;padding:9px 2px 0}
+#atlasLens .lens-agent-select{max-width:55%;min-width:0;background:transparent;border:0;color:#5b6981;font-size:10px;font-weight:700;padding:4px 3px}
+#atlasLens .lens-composer-hint{font-size:9.5px;color:#8691a2;white-space:nowrap}
+#atlasLens .lens-offline{padding:20px 18px;border:1px dashed #cad2e5;border-radius:12px;background:#f9fafe;color:var(--lens-muted);margin:6px 0 0}
+#atlasLens .lens-offline h3{font-size:13px;color:var(--lens-ink);margin:0 0 8px}
+#atlasLens .lens-offline p{font-size:11px;line-height:1.6;margin:0 0 11px}
+#atlasLens .lens-offline code{display:block;background:#edf0f8;padding:10px;border-radius:7px;color:#34445d;font-size:10px;overflow-wrap:anywhere}
+#atlasLens .lens-offline button{border:0;background:#4457c6;color:#fff;padding:9px 12px;border-radius:8px;margin-top:13px;font-size:11px;font-weight:650}
+#atlasLens .lens-sidecar{display:none;padding:23px 18px;background:#f9fafe;border-left:1px solid var(--lens-line);overflow:auto;min-width:0}
+#atlasLens .lens-panel.expanded .lens-sidecar{display:block}
+#atlasLens .lens-aside-kicker{font-size:9px;letter-spacing:.15em;font-weight:750;color:#7887a5;margin:0 0 14px}
+#atlasLens .lens-aside-card{background:#fff;border:1px solid var(--lens-line);border-radius:12px;padding:15px;margin-bottom:12px}
+#atlasLens .lens-aside-card h3{font-size:12px;font-weight:750;margin:0 0 12px}
+#atlasLens .lens-aside-row{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #eef0f6;font-size:10px}
+#atlasLens .lens-aside-row:last-child{border:0}
+#atlasLens .lens-aside-row span{color:var(--lens-muted)}
+#atlasLens .lens-aside-row strong{font-weight:690;text-align:right;overflow-wrap:anywhere}
+#atlasLens .lens-aside-card p{font-size:10.5px;color:var(--lens-muted);line-height:1.6;margin:0}
+#atlasLens .lens-evidence-link{display:block;font-size:10px;color:#455cc0;text-decoration:underline;text-underline-offset:3px;margin-top:12px;overflow-wrap:anywhere}
+#atlasLens .lens-footer-status{margin:0;padding:7px 15px;background:#f7f8fb;border-top:1px solid #e7eaf2;color:#818b9d;font-size:9px;display:flex;justify-content:space-between;gap:10px;flex:none}
+body.dark #atlasLens{--lens-paper:#18243a;--lens-ground:#1d2b44;--lens-ink:#edf2ff;--lens-muted:#b0bfd6;--lens-line:#33425d;--lens-subtle:#293756;--lens-primary:#99aaff}
+body.dark #atlasLens .lens-panel{border-color:#3a4961}
+body.dark #atlasLens .lens-context,body.dark #atlasLens .lens-composer-area,body.dark #atlasLens .lens-composer,body.dark #atlasLens .lens-mini,body.dark #atlasLens .lens-aside-card{background:var(--lens-paper);color:var(--lens-ink)}
+body.dark #atlasLens .lens-context select,body.dark #atlasLens .lens-prompt{background:#202e48;color:var(--lens-ink);border-color:var(--lens-line)}
+body.dark #atlasLens .lens-prompt:hover,body.dark #atlasLens .lens-turn.user{background:#293852}
+body.dark #atlasLens .lens-sidecar,body.dark #atlasLens .lens-trace,body.dark #atlasLens .lens-offline,body.dark #atlasLens .lens-footer-status{background:#1b2941}
+body.dark #atlasLens .lens-hero h2,body.dark #atlasLens .lens-facts strong,body.dark #atlasLens .lens-offline h3{color:var(--lens-ink)}
+body.dark #atlasLens .lens-composer textarea{color:var(--lens-ink)}
+body.dark #atlasLens .lens-mini{color:var(--lens-muted)}
+@media(max-width:1050px){#atlasLens .lens-panel.expanded{width:min(740px,calc(100vw - 32px))}}
+@media(max-width:680px){#atlasLens .lens-panel,#atlasLens .lens-panel.expanded{position:fixed;inset:0;right:0;bottom:0;height:100dvh;width:100vw;max-width:none;border:0;border-radius:0;box-shadow:none}#atlasLens .lens-panel.expanded .lens-layout{grid-template-columns:1fr}#atlasLens .lens-panel.expanded .lens-sidecar{display:none}#atlasLens .lens-header{padding:13px 16px}#atlasLens .lens-launcher{right:14px;bottom:15px;min-height:49px}#atlasLens .lens-history{padding:18px 18px}#atlasLens .lens-context{padding:10px 14px}#atlasLens .lens-prompts{gap:7px}#atlasLens .lens-facts strong{font-size:19px}#atlasLens .lens-footer-status{padding-bottom:max(8px,env(safe-area-inset-bottom))}}
+@media(max-width:370px){#atlasLens .lens-prompts{grid-template-columns:1fr 1fr}#atlasLens .lens-prompt{min-height:96px;padding:10px}#atlasLens .lens-provider{font-size:9px;max-width:110px}#atlasLens .lens-composer-hint{display:none}}
+@media(prefers-reduced-motion:reduce){#atlasLens .lens-panel{animation:none}#atlasLens .lens-launcher,#atlasLens .lens-prompt{transition:none}#atlasLens .lens-wait-orbit{animation-duration:1.8s}}
