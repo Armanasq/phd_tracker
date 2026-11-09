@@ -10,8 +10,12 @@ for attempt in 1 2 3; do
     cat data/workspace_control_result.json
     exit 0
   fi
-  python scripts/build_workspace.py --out site/data/workspace.json
-  git add data/workspace_overrides.json site/data/workspace.json
+  python scripts/build_workspace.py --out /tmp/phd-owner-workspace-validated.json
+  if [[ "${GITHUB_REPOSITORY,,}" == "armanasq/phd_tracker" ]]; then
+    git add data/workspace_overrides.json
+  else
+    git add data/user_workspace_overrides.json
+  fi
   git commit -m "Confirm owner PhD application workspace update"
   if git push origin HEAD:main; then
     gh workflow run publish-cockpit.yml --ref main || echo 'Publication dispatch unavailable; committed owner state is preserved'

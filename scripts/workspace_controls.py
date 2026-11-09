@@ -18,6 +18,26 @@ FIELDS = {"id", "status", "verification", "followup", "contact_status", "next_st
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def control_context(root: Path, repository: str, mode: str) -> tuple[Path, set[str]]:
+    from scripts.instance_config import DEFAULT_REPOSITORY
+    if repository.casefold() == DEFAULT_REPOSITORY.casefold():
+        exp = json.loads((root / "data" / "experience_view.json").read_text(encoding="utf-8"))
+        opp = json.loads((root / "data" / "opportunities.json").read_text(encoding="utf-8"))
+        ids = {x["id"] for x in exp["applications"] if x.get("id")} | {x["id"] for x in opp["records"] if x.get("id")}
+        return root / "data" / "workspace_overrides.json", ids
+    if mode != "source":
+        raise ValueError("Independent fork is in starter mode; verify your own source and enable PHD_ATLAS_DATA_MODE=source")
+    source = root / "data" / "user_opportunities.json"
+    if not source.is_file():
+        raise ValueError("Independent owner updates require data/user_opportunities.json")
+    payload = json.loads(source.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict) or payload.get("schema_version") != 1 or not isinstance(payload.get("records"), list):
+        raise ValueError("Invalid independent opportunity source")
+    ids = {record["id"] for record in payload["records"] if isinstance(record, dict) and isinstance(record.get("id"), str)}
+    return root / "data" / "user_workspace_overrides.json", ids
+
+
+
 def text(value: object, limit: int) -> str:
     if not isinstance(value, str):
         raise ValueError("Expected string")
@@ -130,15 +150,22 @@ def main() -> None:
     parser.add_argument("--event", required=True)
     parser.add_argument("--owner", required=True)
     parser.add_argument("--output", default="data/workspace_control_result.json")
-    parser.add_argument("--state", default="data/workspace_overrides.json")
+    parser.add_argument("--state", default=None)
     args = parser.parse_args()
+    from scripts.instance_config import resolve_data_mode, resolve_repository
+    repository = resolve_repository(os.environ.get("GITHUB_REPOSITORY"), root=ROOT)
+    mode = resolve_data_mode(repository)
     event = json.loads(Path(args.event).read_text(encoding="utf-8"))
-    state_path = Path(args.state)
-    existing = json.loads(state_path.read_text(encoding="utf-8")) if state_path.exists() else {"schema_version":1,"records":{},"processed_comment_ids":[]}
-    exp = json.loads((ROOT/"data/experience_view.json").read_text(encoding="utf-8"))
-    opp = json.loads((ROOT/"data/opportunities.json").read_text(encoding="utf-8"))
-    ids = {x["id"] for x in exp["applications"] if x.get("id")} | {x["id"] for x in opp["records"] if x.get("id")}
-    changed, result = transform(event, args.owner, ids, existing)
+    try:
+        state_path, ids = control_context(ROOT, repository, mode)
+        if args.state:
+            state_path = Path(args.state)
+        existing = json.loads(state_path.read_text(encoding="utf-8")) if state_path.exists() else {"schema_version":1,"records":{},"processed_comment_ids":[]}
+        changed, result = transform(event, args.owner, ids, existing)
+    except (OSError, ValueError, TypeError, KeyError, json.JSONDecodeError) as error:
+        state_path = Path(args.state or "data/workspace_overrides.json")
+        changed = {}
+        result = {"accepted": False, "reason": str(error)[:180]}
     if result["accepted"]:
         state_path.parent.mkdir(parents=True, exist_ok=True)
         state_path.write_text(json.dumps(changed, indent=2, ensure_ascii=False)+"\n", encoding="utf-8")
