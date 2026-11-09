@@ -11,7 +11,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
-from urllib.request import Request, urlopen
+from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 from bs4 import BeautifulSoup
 if __package__:
@@ -104,11 +104,22 @@ def load_json(path: Path, default: dict) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+class SafeDiscoveryRedirect(HTTPRedirectHandler):
+    def redirect_request(self, request, response, code, message, headers, newurl):
+        if not safe_url(newurl):
+            raise URLError("Disallowed redirect from academic discovery source")
+        return super().redirect_request(request, response, code, message, headers, newurl)
+
+
+def safe_fetch_open(request: Request, timeout: int):
+    return build_opener(SafeDiscoveryRedirect()).open(request, timeout=timeout)
+
+
 def fetch_bytes(url: str, headers: dict[str, str] | None = None, max_size: int = MAX_RESPONSE) -> tuple[bytes, str]:
     if not safe_url(url):
         raise ValueError("Unsafe or malformed URL")
     req = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "text/html,application/json", **(headers or {})})
-    with urlopen(req, timeout=20) as response:
+    with safe_fetch_open(req, timeout=20) as response:
         final = response.geturl()
         if not safe_url(final):
             raise ValueError("Unsafe redirect")
@@ -243,6 +254,11 @@ def collect(provider: str, output: Path, state: Path) -> dict:
                 errors.append(warning)
         elif provider in ("academictransfer", "academicpositions"):
             records = collect_board(provider, observed, fetch_bytes, safe_url, relevant_score, evidence_id)
+            if not records:
+                errors.append(
+                    f"{provider} returned no parseable relevant doctoral postings; "
+                    "verify whether listings are client-rendered or HTML schema changed"
+                )
         else:
             raise ValueError(f"Unknown provider: {provider}")
     except (ValueError, URLError, HTTPError, OSError, json.JSONDecodeError) as e:
