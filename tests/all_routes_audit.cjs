@@ -7,7 +7,7 @@ const http=require('node:http');
 const net=require('node:net');
 const {spawn}=require('node:child_process');
 const {chromium}=require('playwright');
-const TRACKER=['dashboard','applications','calendar','pipeline','actions','contacts','updates','compare','review','archive','sources'];
+const TRACKER=['dashboard','applications','calendar','pipeline','actions','contacts','updates','compare','review','archive','sources','ai'];
 const STUDIO=['overview','agents','workflows','providers','applications','referees','timeline','evidence','planning','activity','settings'];
 const SIZES=[['desktop',1440,900],['tablet',820,1080],['mobile',390,844],['narrow',320,700]];
 async function freePort(){const s=net.createServer();await new Promise(ok=>s.listen(0,'127.0.0.1',ok));const port=s.address().port;await new Promise(ok=>s.close(ok));return port}

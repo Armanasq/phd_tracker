@@ -67,7 +67,7 @@ async function main(){
     await page.route('**/api/agents/run',route=>route.fulfill({status:200,contentType:'application/json',
       body:JSON.stringify({id:'synthetic-test-run',text:'Verified evidence required for the closing time.',status:'proposed'})}));
     await page.locator('#body [data-action="ai-run"]').click();
-    await page.locator('#aiInlineResult').getByText('Verified evidence required for the closing time.').waitFor();
+    await page.waitForFunction(()=>document.querySelector('#aiInlineResult')?.textContent?.trim()==='Verified evidence required for the closing time.');
     assert.equal((await page.locator('#aiInlineResult').innerText()).trim(),'Verified evidence required for the closing time.');
     await page.goto(url+'/ai-studio.html',{waitUntil:'networkidle'});
     await page.locator('#connection.live').waitFor();

@@ -58,7 +58,7 @@ jobs:
         run: node tests/site_smoke.cjs
       - name: Exercise private AI Studio and provider configuration
         run: node tests/ai_studio_smoke.cjs
-      - name: Audit all 22 tracker and AI Studio routes across four viewport sizes
+      - name: Audit all 23 tracker and AI Studio routes across four viewport sizes
         run: node tests/all_routes_audit.cjs
       - name: Audit WCAG 2.2 A/AA across key views and dialogs
         run: node tests/site_accessibility.cjs
