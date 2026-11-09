@@ -47,7 +47,8 @@
   ],
   "institutional_conflicts": [
     "2026 BEST EURAXESS index shows inconsistent metadata year (2027) versus call body and current Toulouse primary page (2026): primary 2026 deadline used.",
-    "LinkedIn AI4I job preview reports no longer accepting LinkedIn applications; official Politecnico and AI4I offsite submission route must be checked directly before treating this as closure."
+    "LinkedIn AI4I job preview reports no longer accepting LinkedIn applications; official Politecnico and AI4I offsite submission route must be checked directly before treating this as closure.",
+    "Inria Astra-Vision ELLIS lists multimodal world models deadline 20 Nov 2026, but primary lab page currently shows a different older May 2026 world-model opening: research queue only, do not promote."
   ],
   "excluded_from_automatic_promotion": [
     "R26-DARTMOUTH-A2R-CODESIGN",
@@ -61,7 +62,12 @@
     "R26-TOULOUSE-BEST-SOCIAL-RL"
   ],
   "already_in_main": [
-    "M31 Mila 2026-12-01 supervisor-match deadline; requires university application"
+    "M31 Mila 2026-12-01 supervisor-match deadline; requires university application",
+    "N264-10 Max Planck School Biomedical AI 25 fully funded PhDs, 1 Dec 2026: independently verified against Max Planck official page; not duplicated."
   ],
-  "notes": "No personal email bodies copied to repository. Recruitment posts and primary institutional deadlines are distinct evidence types; user application statuses have not been changed."
+  "notes": "No personal email bodies copied to repository. Recruitment posts and primary institutional deadlines are distinct evidence types; user application statuses have not been changed.",
+  "supplemental_ids": [
+    "R26-VIENNA-EXOSPHERE",
+    "R26-INRIA-ASTRA-PHYSWORLD"
+  ]
 }
