@@ -3,7 +3,7 @@
   "as_of": "2026-11-09",
   "timezone": "Europe/Berlin",
   "classification": {
-    "submission_deadline": "Application list B is the final deadline; exclude rows marked Not eligible / Submitted / Skipped",
+    "submission_deadline": "Action list B is a final deadline only when its date note is final; priority dates and unverified dates are separate classes. Closed verdicts are excluded.",
     "scheduled_task": "Step timeline A is a task date; F is the final application deadline and must not be counted as another scheduled task",
     "shared_task": "What I need to do A is an explicit cross-application task date; E is its user-maintained status",
     "overdue": "Past scheduled dates have no completion state in Step timeline: they are unconfirmed, not asserted unfinished"
@@ -49,6 +49,8 @@
         "task_key": "Action list!36"
       }
     ],
+    "priority_review_dates": [],
+    "unverified_application_dates": [],
     "excluded_application_deadlines": [],
     "scheduled_timeline_tasks": [
       {
@@ -114,6 +116,8 @@
     "linked_past_steps_with_final_deadline_today": [],
     "counts": {
       "deadline_actions": 2,
+      "priority_reviews": 0,
+      "unverified_dates": 0,
       "excluded_deadlines": 0,
       "timeline_tasks": 2,
       "shared_tasks": 1,
@@ -466,6 +470,7 @@
       "task_key": "Action list!53"
     }
   ],
+  "upcoming_7_day_priority_dates": [],
   "overdue_or_unconfirmed": {
     "total": 117,
     "cross_route": 13,
@@ -1146,11 +1151,13 @@
     "dropped_routes": 6,
     "not_added_routes": 200,
     "task_states": {
-      "deadline_unconfirmed": 139,
+      "deadline_unconfirmed": 136,
       "excluded": 1,
+      "priority_review_date": 3,
       "date_not_posted": 54,
-      "completion_unconfirmed": 568,
+      "completion_unconfirmed": 566,
       "excluded_parent": 2,
+      "linked_priority_note": 2,
       "explicit_to_do": 26
     },
     "owner_completed_tasks": 0,
@@ -2719,7 +2726,7 @@
       "task_key": "Action list!84"
     },
     {
-      "type": "application_deadline",
+      "type": "application_priority",
       "sheet": "Action list",
       "row": 85,
       "source_id": "R26-GWU-EPIC",
@@ -2727,14 +2734,14 @@
       "action": "Prepare tailored research statement emphasizing visual-inertial estimation and robotics; apply by Dec 1 priority deadline",
       "due": "2026-12-01",
       "days": 22,
-      "final_deadline": "2026-12-01",
+      "final_deadline": null,
       "verdict": "Go",
       "source": "https://graduate.engineering.gwu.edu/doctoral-admissions-requirements",
       "notes": "priority; final 2027-01-15. Official admissions webpage gives Dec 1 priority and Jan 15 final. PI recruiting email states funded Fall 2027 slots.",
-      "state": "deadline_unconfirmed",
+      "state": "priority_review_date",
       "blocked": false,
       "group": "",
-      "task_id": "tsk-a775021c1e722ec9",
+      "task_id": "tsk-0c7aed658c4811e4",
       "task_key": "Action list!85"
     },
     {
@@ -3441,7 +3448,7 @@
       "task_key": "Action list!122"
     },
     {
-      "type": "application_deadline",
+      "type": "application_priority",
       "sheet": "Action list",
       "row": 123,
       "source_id": "R26-ETH-IDEAL-ENGINEERING-AI",
@@ -3449,14 +3456,14 @@
       "action": "Apply by 15 Jan for best consideration, without treating this as a strict final closing date. Describe ML-driven robot design, adaptive systems, optimization and research record.",
       "due": "2027-01-15",
       "days": 67,
-      "final_deadline": "2027-01-15",
+      "final_deadline": null,
       "verdict": "Go",
       "source": "https://www.jobs.ethz.ch/job/view/JOPG_ethz_AUmT7tc75KfdQZK3sA",
       "notes": "Priority/best-consideration date 15 Jan 2027; not independently established as final closure. Official ETH Zurich IDEAL listing advertised 1–2 doctoral positions with priority consideration by 15 Jan 2027.",
-      "state": "deadline_unconfirmed",
+      "state": "priority_review_date",
       "blocked": false,
       "group": "",
-      "task_id": "tsk-da54374f61304dac",
+      "task_id": "tsk-4788d6354be13b94",
       "task_key": "Action list!123"
     },
     {
@@ -3783,7 +3790,7 @@
       "task_key": "Action list!140"
     },
     {
-      "type": "application_deadline",
+      "type": "application_priority",
       "sheet": "Action list",
       "row": 141,
       "source_id": "M55a",
@@ -3791,14 +3798,14 @@
       "action": "By 2026-12-15 identify and email Concordia MIAE faculty (SLAM, attitude estimation) to secure a supervisor (the earlier note required this; the page itself does not state it)",
       "due": "2027-03-01",
       "days": 112,
-      "final_deadline": "2027-03-01",
+      "final_deadline": null,
       "verdict": "Go",
       "source": "https://www.concordia.ca/academics/graduate/mechanical-engineering-phd.html",
       "notes": "\"March 1 (U.S. and international)\" for Fall; \"Priority will be given to complete applications submitted by the deadline.\" No time or zone stated.",
-      "state": "deadline_unconfirmed",
+      "state": "priority_review_date",
       "blocked": false,
       "group": "",
-      "task_id": "tsk-1a93145fca07302e",
+      "task_id": "tsk-fe8de9df956d980d",
       "task_key": "Action list!141"
     },
     {
@@ -12113,12 +12120,12 @@
       "action": "Prepare tailored research statement emphasizing visual-inertial estimation and robotics; apply by Dec 1 priority deadline [External deadline: priority; final 2027-01-15]",
       "due": "2026-12-01",
       "days": 22,
-      "final_deadline": "2026-12-01",
+      "final_deadline": null,
       "verdict": "Go",
       "source": "https://graduate.engineering.gwu.edu/doctoral-admissions-requirements",
       "notes": "2026-12-01 00:00:00",
-      "state": "completion_unconfirmed",
-      "blocked": false,
+      "state": "linked_priority_note",
+      "blocked": true,
       "group": "",
       "task_id": "tsk-04add998542f80c0",
       "task_key": "Step timeline!385"
@@ -12702,7 +12709,7 @@
       "action": "By 2026-12-15 identify and email Concordia MIAE faculty (SLAM, attitude estimation) to secure a supervisor (the earlier note required this; the page itself does not state it)",
       "due": "2026-12-15",
       "days": 36,
-      "final_deadline": "2027-03-01",
+      "final_deadline": null,
       "verdict": "Go",
       "source": "https://www.concordia.ca/academics/graduate/mechanical-engineering-phd.html",
       "notes": "2027-03-01 00:00:00",
@@ -13747,12 +13754,12 @@
       "action": "Apply by 15 Jan for best consideration, without treating this as a strict final closing date. Describe ML-driven robot design, adaptive systems, optimization and research record. [External deadline: Priority/best-consideration date 15 Jan 2027; not independently established as final closure]",
       "due": "2027-01-15",
       "days": 67,
-      "final_deadline": "2027-01-15",
+      "final_deadline": null,
       "verdict": "Go",
       "source": "https://www.jobs.ethz.ch/job/view/JOPG_ethz_AUmT7tc75KfdQZK3sA",
       "notes": "2027-01-15 00:00:00",
-      "state": "completion_unconfirmed",
-      "blocked": false,
+      "state": "linked_priority_note",
+      "blocked": true,
       "group": "",
       "task_id": "tsk-a452b7e0c3ccaabf",
       "task_key": "Step timeline!471"
@@ -14146,7 +14153,7 @@
       "action": "By 2027-01-31 review the program page 'four steps' and the English language proficiency page for exemptions and required scores",
       "due": "2027-01-31",
       "days": 83,
-      "final_deadline": "2027-03-01",
+      "final_deadline": null,
       "verdict": "Go",
       "source": "https://www.concordia.ca/academics/graduate/mechanical-engineering-phd.html",
       "notes": "2027-03-01 00:00:00",
@@ -14260,7 +14267,7 @@
       "action": "By 2027-02-15 request references and assemble transcripts and statements as the application portal specifies",
       "due": "2027-02-15",
       "days": 98,
-      "final_deadline": "2027-03-01",
+      "final_deadline": null,
       "verdict": "Go",
       "source": "https://www.concordia.ca/academics/graduate/mechanical-engineering-phd.html",
       "notes": "2027-03-01 00:00:00",
@@ -14374,7 +14381,7 @@
       "action": "Submit the online application before 2027-03-01 (entrance awards are considered automatically)",
       "due": "2027-03-01",
       "days": 112,
-      "final_deadline": "2027-03-01",
+      "final_deadline": null,
       "verdict": "Go",
       "source": "https://www.concordia.ca/academics/graduate/mechanical-engineering-phd.html",
       "notes": "2027-03-01 00:00:00",
@@ -16190,6 +16197,6 @@
       "task_key": "What I need to do!29"
     }
   ],
-  "execution_rows": 64,
+  "execution_rows": 67,
   "ledger_rows": 791
 }

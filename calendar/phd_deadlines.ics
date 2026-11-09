@@ -5913,31 +5913,6 @@ DESCRIPTION:APPLICATION DEADLINE — check original source
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:tsk-04add998542f80c0@phd-tracker.local
-DTSTAMP:20261109T000000Z
-DTSTART;VALUE=DATE:20261201
-DTEND;VALUE=DATE:20261202
-SUMMARY:SCHEDULED APPLICATION STEP: George Washington University — EPIC
-  Lab visual-inertial perception\, SLAM and physical AI PhD (Chuchu Chen)
- \, Fall 2027
-DESCRIPTION:Action: Prepare tailored research statement emphasizing visua
- l-inertial estimation and robotics\; apply by Dec 1 priority deadline [E
- xternal deadline: priority\; final 2027-01-15]\nStatus: completion_uncon
- firmed\nOriginal source: Step timeline row 385\nOfficial URL: https://gr
- aduate.engineering.gwu.edu/doctoral-admissions-requirements\nFinal progr
- amme deadline: 2026-12-01\nOriginal note: 2026-12-01 00:00:00\nAll-day d
- ate. DO NOT infer a closing time from this event.\nConfirm actual portal
-  availability and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://graduate.engineering.gwu.edu/doctoral-admissions-requirements
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
 UID:tsk-16b20bd4ae63600a@phd-tracker.local
 DTSTAMP:20261109T000000Z
 DTSTART;VALUE=DATE:20261201
@@ -6192,37 +6167,6 @@ CATEGORIES:APPLICATION DEADLINE
 STATUS:TENTATIVE
 URL:https://futurestudents.yorku.ca/graduate/programs/electrical-engineer
  ing-and-computer-science
-BEGIN:VALARM
-TRIGGER:-P7D
-ACTION:DISPLAY
-DESCRIPTION:APPLICATION DEADLINE — check original source
-END:VALARM
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:APPLICATION DEADLINE — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-a775021c1e722ec9@phd-tracker.local
-DTSTAMP:20261109T000000Z
-DTSTART;VALUE=DATE:20261201
-DTEND;VALUE=DATE:20261202
-SUMMARY:APPLICATION DEADLINE: George Washington University — EPIC Lab v
- isual-inertial perception\, SLAM and physical AI PhD (Chuchu Chen)\, Fal
- l 2027
-DESCRIPTION:Action: Prepare tailored research statement emphasizing visua
- l-inertial estimation and robotics\; apply by Dec 1 priority deadline\nS
- tatus: deadline_unconfirmed\nOriginal source: Action list row 85\nOffici
- al URL: https://graduate.engineering.gwu.edu/doctoral-admissions-require
- ments\nFinal programme deadline: 2026-12-01\nOriginal note: priority\; f
- inal 2027-01-15. Official admissions webpage gives Dec 1 priority and Ja
- n 15 final. PI recruiting email states funded Fall 2027 slots.\nAll-day 
- date. DO NOT infer a closing time from this event.\nConfirm actual porta
- l availability and individual eligibility.
-CATEGORIES:APPLICATION DEADLINE
-STATUS:TENTATIVE
-URL:https://graduate.engineering.gwu.edu/doctoral-admissions-requirements
 BEGIN:VALARM
 TRIGGER:-P7D
 ACTION:DISPLAY
@@ -8052,9 +7996,9 @@ DESCRIPTION:Action: By 2026-12-15 identify and email Concordia MIAE facul
   required this\; the page itself does not state it)\nStatus: completion_
  unconfirmed\nOriginal source: Step timeline row 416\nOfficial URL: https
  ://www.concordia.ca/academics/graduate/mechanical-engineering-phd.html\n
- Final programme deadline: 2027-03-01\nOriginal note: 2027-03-01 00:00:00
- \nAll-day date. DO NOT infer a closing time from this event.\nConfirm ac
- tual portal availability and individual eligibility.
+ Final programme deadline: unposted\nOriginal note: 2027-03-01 00:00:00\n
+ All-day date. DO NOT infer a closing time from this event.\nConfirm actu
+ al portal availability and individual eligibility.
 CATEGORIES:SCHEDULED APPLICATION STEP
 STATUS:TENTATIVE
 URL:https://www.concordia.ca/academics/graduate/mechanical-engineering-ph
@@ -9663,32 +9607,6 @@ DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:tsk-a452b7e0c3ccaabf@phd-tracker.local
-DTSTAMP:20261109T000000Z
-DTSTART;VALUE=DATE:20270115
-DTEND;VALUE=DATE:20270116
-SUMMARY:SCHEDULED APPLICATION STEP: ETH Zurich IDEAL Lab — Doctoral Pos
- itions in Machine Learning for Engineering Design (Mark Fuge)
-DESCRIPTION:Action: Apply by 15 Jan for best consideration\, without trea
- ting this as a strict final closing date. Describe ML-driven robot desig
- n\, adaptive systems\, optimization and research record. [External deadl
- ine: Priority/best-consideration date 15 Jan 2027\; not independently es
- tablished as final closure]\nStatus: completion_unconfirmed\nOriginal so
- urce: Step timeline row 471\nOfficial URL: https://www.jobs.ethz.ch/job/
- view/JOPG_ethz_AUmT7tc75KfdQZK3sA\nFinal programme deadline: 2027-01-15\
- nOriginal note: 2027-01-15 00:00:00\nAll-day date. DO NOT infer a closin
- g time from this event.\nConfirm actual portal availability and individu
- al eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.jobs.ethz.ch/job/view/JOPG_ethz_AUmT7tc75KfdQZK3sA
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
 UID:tsk-ac8bdcd4eb60960f@phd-tracker.local
 DTSTAMP:20261109T000000Z
 DTSTART;VALUE=DATE:20270115
@@ -9769,38 +9687,6 @@ BEGIN:VALARM
 TRIGGER:-P1D
 ACTION:DISPLAY
 DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-da54374f61304dac@phd-tracker.local
-DTSTAMP:20261109T000000Z
-DTSTART;VALUE=DATE:20270115
-DTEND;VALUE=DATE:20270116
-SUMMARY:APPLICATION DEADLINE: ETH Zurich IDEAL Lab — Doctoral Positions
-  in Machine Learning for Engineering Design (Mark Fuge)
-DESCRIPTION:Action: Apply by 15 Jan for best consideration\, without trea
- ting this as a strict final closing date. Describe ML-driven robot desig
- n\, adaptive systems\, optimization and research record.\nStatus: deadli
- ne_unconfirmed\nOriginal source: Action list row 123\nOfficial URL: http
- s://www.jobs.ethz.ch/job/view/JOPG_ethz_AUmT7tc75KfdQZK3sA\nFinal progra
- mme deadline: 2027-01-15\nOriginal note: Priority/best-consideration dat
- e 15 Jan 2027\; not independently established as final closure. Official
-  ETH Zurich IDEAL listing advertised 1–2 doctoral positions with prior
- ity consideration by 15 Jan 2027.\nAll-day date. DO NOT infer a closing 
- time from this event.\nConfirm actual portal availability and individual
-  eligibility.
-CATEGORIES:APPLICATION DEADLINE
-STATUS:TENTATIVE
-URL:https://www.jobs.ethz.ch/job/view/JOPG_ethz_AUmT7tc75KfdQZK3sA
-BEGIN:VALARM
-TRIGGER:-P7D
-ACTION:DISPLAY
-DESCRIPTION:APPLICATION DEADLINE — check original source
-END:VALARM
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:APPLICATION DEADLINE — check original source
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
@@ -10302,10 +10188,10 @@ DESCRIPTION:Action: By 2027-01-31 review the program page 'four steps' an
  d the English language proficiency page for exemptions and required scor
  es\nStatus: completion_unconfirmed\nOriginal source: Step timeline row 4
  92\nOfficial URL: https://www.concordia.ca/academics/graduate/mechanical
- -engineering-phd.html\nFinal programme deadline: 2027-03-01\nOriginal no
- te: 2027-03-01 00:00:00\nAll-day date. DO NOT infer a closing time from 
- this event.\nConfirm actual portal availability and individual eligibili
- ty.
+ -engineering-phd.html\nFinal programme deadline: unposted\nOriginal note
+ : 2027-03-01 00:00:00\nAll-day date. DO NOT infer a closing time from th
+ is event.\nConfirm actual portal availability and individual eligibility
+ .
 CATEGORIES:SCHEDULED APPLICATION STEP
 STATUS:TENTATIVE
 URL:https://www.concordia.ca/academics/graduate/mechanical-engineering-ph
@@ -10513,9 +10399,9 @@ DESCRIPTION:Action: By 2027-02-15 request references and assemble transcr
  ipts and statements as the application portal specifies\nStatus: complet
  ion_unconfirmed\nOriginal source: Step timeline row 498\nOfficial URL: h
  ttps://www.concordia.ca/academics/graduate/mechanical-engineering-phd.ht
- ml\nFinal programme deadline: 2027-03-01\nOriginal note: 2027-03-01 00:0
- 0:00\nAll-day date. DO NOT infer a closing time from this event.\nConfir
- m actual portal availability and individual eligibility.
+ ml\nFinal programme deadline: unposted\nOriginal note: 2027-03-01 00:00:
+ 00\nAll-day date. DO NOT infer a closing time from this event.\nConfirm 
+ actual portal availability and individual eligibility.
 CATEGORIES:SCHEDULED APPLICATION STEP
 STATUS:TENTATIVE
 URL:https://www.concordia.ca/academics/graduate/mechanical-engineering-ph
@@ -10718,38 +10604,6 @@ DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
-UID:tsk-1a93145fca07302e@phd-tracker.local
-DTSTAMP:20261109T000000Z
-DTSTART;VALUE=DATE:20270301
-DTEND;VALUE=DATE:20270302
-SUMMARY:APPLICATION DEADLINE: Concordia Mechanical\, Industrial and Aeros
- pace Engineering PhD (Fall 2027)
-DESCRIPTION:Action: By 2026-12-15 identify and email Concordia MIAE facul
- ty (SLAM\, attitude estimation) to secure a supervisor (the earlier note
-  required this\; the page itself does not state it)\nStatus: deadline_un
- confirmed\nOriginal source: Action list row 141\nOfficial URL: https://w
- ww.concordia.ca/academics/graduate/mechanical-engineering-phd.html\nFina
- l programme deadline: 2027-03-01\nOriginal note: "March 1 (U.S. and inte
- rnational)" for Fall\; "Priority will be given to complete applications 
- submitted by the deadline." No time or zone stated.\nAll-day date. DO NO
- T infer a closing time from this event.\nConfirm actual portal availabil
- ity and individual eligibility.
-CATEGORIES:APPLICATION DEADLINE
-STATUS:TENTATIVE
-URL:https://www.concordia.ca/academics/graduate/mechanical-engineering-ph
- d.html
-BEGIN:VALARM
-TRIGGER:-P7D
-ACTION:DISPLAY
-DESCRIPTION:APPLICATION DEADLINE — check original source
-END:VALARM
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:APPLICATION DEADLINE — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
 UID:tsk-3cc60dabed702aab@phd-tracker.local
 DTSTAMP:20261109T000000Z
 DTSTART;VALUE=DATE:20270301
@@ -10760,9 +10614,9 @@ DESCRIPTION:Action: Submit the online application before 2027-03-01 (entr
  ance awards are considered automatically)\nStatus: completion_unconfirme
  d\nOriginal source: Step timeline row 504\nOfficial URL: https://www.con
  cordia.ca/academics/graduate/mechanical-engineering-phd.html\nFinal prog
- ramme deadline: 2027-03-01\nOriginal note: 2027-03-01 00:00:00\nAll-day 
- date. DO NOT infer a closing time from this event.\nConfirm actual porta
- l availability and individual eligibility.
+ ramme deadline: unposted\nOriginal note: 2027-03-01 00:00:00\nAll-day da
+ te. DO NOT infer a closing time from this event.\nConfirm actual portal 
+ availability and individual eligibility.
 CATEGORIES:SCHEDULED APPLICATION STEP
 STATUS:TENTATIVE
 URL:https://www.concordia.ca/academics/graduate/mechanical-engineering-ph
