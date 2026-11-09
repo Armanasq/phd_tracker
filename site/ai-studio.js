@@ -2,8 +2,8 @@
 "use strict";
 const $ = id => document.getElementById(id);
 const escape = v => String(v == null ? "" : v).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const state = {data:null,view:"overview",query:"",selected:"",busy:false,filter:"all"};
-const VIEWS = {overview:"Decision desk",agents:"AI agents",workflows:"Automation",providers:"Models & providers",applications:"Applications",activity:"Run history"};
+const state = {data:null,ops:null,view:"overview",query:"",selected:"",busy:false,filter:"all"};
+const VIEWS = {overview:"Decision desk",agents:"AI agents",workflows:"Automation",providers:"Models & providers",applications:"Applications",referees:"Referees",timeline:"Deadline clocks",evidence:"Evidence ledger",planning:"Capacity planning",activity:"Run history"};
 const isCloud = id => !state.data.catalog.providers.find(p => p.id === id)?.local;
 function toast(message){const el=$("message");el.textContent=message;el.style.display="block";clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.style.display="none",4500)}
 async function api(path, body){
@@ -83,9 +83,50 @@ function activity(){
  '<div class="grid-two">'+panel("Agent run ledger",runs.map(r=>'<div class="list-row"><div><strong>'+escape(r.agent_id)+'</strong><p>'+escape(r.created_at)+' · '+escape(r.provider_id)+' · '+escape(r.status)+'</p><div class="row-meta">'+tag(r.model||"model unavailable")+(r.application_id?tag(r.application_id):"")+'</div></div>'+minor("Read output","view-run",r.id)+'</div>').join("")||'<div class="blank">No AI runs have been recorded.</div>')+
  panel("Audit events",'<div class="timeline">'+audit.map(a=>'<div class="timeline-item"><strong>'+escape(a.action)+'</strong><time>'+escape(a.created_at)+'</time><span class="code">'+escape(a.subject)+'</span></div>').join("")+'</div>'||'<div class="blank">No recorded events.</div>')+'</div>';
 }
+
+function referees(){
+ const o=state.ops,m=o.referee_matrix||{requests:[]},contacts=o.referees||[];
+ return heading("07 / SHARED DEPENDENCIES","Referees and recommendations","Each referee × application request has an independent state, deadline and portal verification. A shared referee may block several applications.",btn("Add referee","new-private","referee","primary")+btn("Track reference","new-private","reference"))+
+ '<div class="kpis">'+metric("REGISTERED REFEREES",m.referees||0,"Private contact records")+metric("REFERENCE REQUESTS",m.requests.length,"One request per portal")+metric("PENDING VERIFICATION",m.pending||0,"Not yet portal-verified")+metric("DUE WITHIN 7 DAYS",m.urgent||0,"Human follow-up required")+'</div>'+
+ '<div class="grid-two">'+panel("Reference dependency matrix","Uploaded and acknowledged are not the same as portal-verified.",(m.requests.length?m.requests.map(r=>
+ '<div class="list-row"><div><strong>'+escape(r.referee)+'</strong><p>'+escape(state.data.records.find(x=>x.id===r.application_id)?.name||r.application_id)+'</p><div class="row-meta">'+tag(r.status,r.is_portal_verified?"":r.needs_attention?"warn":"neutral")+
+ (r.deadline?tag(r.deadline):"")+'</div></div>'+minor("Update","edit-private","reference:"+r.id)+'</div>').join(""):'<div class="blank">No portal-specific reference requests. Add a referee and connect each application separately.</div>'))+
+ panel("Referee contact registry","Private records are never projected to public Pages.",(contacts.length?contacts.map(r=>
+ '<div class="list-row"><div><strong>'+escape(r.name)+'</strong><p>'+escape(r.affiliation||"Affiliation not recorded")+'</p><div class="row-meta">'+tag(String(o.referee_matrix.shared_dependency[r.id]||0)+" linked applications")+'</div></div>'+minor("Edit","edit-private","referee:"+r.id)+'</div>').join(""):'<div class="blank">No referees recorded yet.</div>'))+'</div>';
+}
+function timeline(){
+ const o=state.ops,events=o.deadline_events||[];
+ const ahead=events.filter(e=>e.days_left!==null&&e.days_left>=0).slice(0,75);
+ const needsTime=events.filter(e=>e.days_left!==null&&e.days_left>=0&&!e.cutoff_fully_verified).length;
+ return heading("08 / TEMPORAL INTELLIGENCE","Multiple deadlines, one source of truth","Keep final cutoffs separate from referee, scholarship, supervisor-contact, interview and priority-review milestones.",btn("Record milestone","new-private","milestone","primary"))+
+ '<div class="kpis">'+metric("RECORDED CLOCKS",events.length,"Source and private milestones")+metric("UPCOMING EVENTS",events.filter(e=>e.days_left!==null&&e.days_left>=0).length,"Calendar dates only")+metric("CUTOFF TIMES UNKNOWN",needsTime,"Require official time-zone evidence")+metric("PRIVATE MILESTONES",o.milestones.length,"Explicitly maintained by applicant")+'</div>'+
+ '<div class="notice">Date-only events do not imply a verified end-of-day cutoff. An institutional source may change after a prior observation. Verify the submission portal.</div>'+
+ panel("Milestone timeline","Showing the next 75 calendar events",ahead.map(e=>
+ '<div class="list-row"><div><strong>'+escape(state.data.records.find(r=>r.id===e.application_id)?.name||e.application_id)+'</strong><p>'+escape(e.kind.replaceAll("_"," "))+' · '+escape(e.date)+(e.time?' '+escape(e.time)+' '+escape(e.timezone):" · Cutoff time unknown")+'</p><div class="row-meta">'+tag(e.verification||"unverified",e.cutoff_fully_verified?"":"warn")+'<span class="code">'+escape(e.provenance)+'</span></div></div>'+
+ (e.id.startsWith("source:")?minor("Open application","inspect",e.application_id):minor("Edit milestone","edit-private","milestone:"+e.id))+'</div>').join("")||'<div class="blank">No upcoming dated events.</div>');
+}
+function evidence(){
+ const o=state.ops,claims=o.claims||[],conflicts=o.evidence_conflicts||[];
+ return heading("09 / VERIFIED ASSERTIONS","Evidence and contradictions","Maintain separate source-linked claims. Disagreements are presented for review and never silently overwritten by AI.",btn("Add evidence claim","new-private","evidence","primary"))+
+ '<div class="kpis">'+metric("PRIVATE ASSERTIONS",claims.length,"Versioned through private storage")+metric("CONFLICT GROUPS",conflicts.length,"Different source assertions")+metric("PRIMARY CONFIRMED",claims.filter(c=>c.status==="primary_confirmed").length,"Owner-entered proof status")+metric("REQUIRES REVIEW",claims.filter(c=>["unverified","needs_review","contradicted"].includes(c.status)).length,"No automatic confirmation")+'</div>'+
+ (conflicts.length?'<div class="notice">'+conflicts.length+' assertion groups disagree: '+escape(conflicts.map(c=>c.application_id+" / "+c.field).join(", "))+'</div>':"")+
+ panel("Claim ledger","Evidence status is owner-entered, not a guarantee that a source remains live",claims.length?claims.map(c=>
+ '<div class="list-row"><div><strong>'+escape(c.field)+' · '+escape(c.application_id)+'</strong><p>'+escape(c.assertion)+'</p><div class="row-meta">'+tag(c.status,c.status==="primary_confirmed"?"":c.status==="contradicted"?"danger":"warn")+
+ (c.source_url?'<a href="'+escape(c.source_url)+'" target="_blank" rel="noopener noreferrer">Official/source link</a>':"")+'</div></div>'+minor("Review","edit-private","evidence:"+c.id)+'</div>').join(""):'<div class="blank">No private claims yet. Source records from the existing tracker remain available in Applications.</div>');
+}
+function planning(){
+ const o=state.ops,profile=o.profile||{},signals=o.research_fit_signals||[];
+ const value=profile.hours_per_week||"";
+ const priority=signals.slice(0,18).map(x=>'<div class="list-row"><div><strong>'+escape(state.data.records.find(r=>r.id===x.application_id)?.name||x.application_id)+'</strong><p>Matched research vocabulary: '+escape(x.matched_terms.join(", "))+'</p></div>'+tag(x.matched_count+" terms")+'</div>').join("");
+ return heading("10 / RESOURCE INTELLIGENCE","Capacity and research fit","Make unknown effort explicit, reuse preparation assets and distinguish keyword overlap from defensible methodological fit.",btn("Edit applicant research profile","edit-private","profile:applicant","primary"))+
+ '<div class="grid-two">'+
+ panel("Application work allocation","Earliest-deadline-first screening; provisional until effort and shared dependencies are confirmed.",'<form id="capacityForm" class="form-grid"><div class="field"><label for="capacityHours">Applicant hours per week</label><input id="capacityHours" name="hours_per_week" type="number" step="0.5" min="0.5" max="168" value="'+escape(value)+'" required></div><div class="field" style="justify-content:end">'+btn("Generate allocation","generate-schedule","","primary")+'</div><div class="field wide"><small>Enter estimated hours against individual applications. Shared document work is identified separately, not silently counted as completed.</small></div></form>')+
+ panel("Lexical research alignment","A discovery hint, not evidence of recruiting status, eligibility or admission probability",priority||'<div class="blank">Enter research topics and skills in the private applicant profile to enable inspectable matching signals.</div>')+'</div>';
+}
+
 function render(){
  const d=state.data;if(!d)return;
- const actual={overview,agents,workflows,providers,applications,activity};
+ const actual={overview,agents,workflows,providers,applications,referees,timeline,evidence,planning,activity};
  $("crumb").textContent=VIEWS[state.view];
  document.querySelectorAll("[data-view]").forEach(b=>{b.classList.toggle("active",b.dataset.view===state.view);if(b.dataset.view===state.view)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
  $("workspace").innerHTML=actual[state.view]();
@@ -157,6 +198,75 @@ function workflowRunModal(id){
  '<div class="field wide checkbox"><input id="workflowCloud" name="cloud_consent" type="checkbox"><label for="workflowCloud">I authorize sending selected evidence to the cloud provider for this manual run if selected.</label></div>'+
  '<div class="form-actions"><button class="btn" type="button" data-action="close">Cancel</button><button type="submit" class="btn primary">Run workflow</button></div></form>');
 }
+
+const fieldOpts=(items,current)=>selectChoices(items.map(x=>({id:x,label:x})),current);
+function privateModal(kind,id=""){
+ const o=state.ops,all={referee:o.referees,reference:o.references,milestone:o.milestones,evidence:o.claims,profile:o.profile?.id?[o.profile]:[]}[kind]||[];
+ const r=all.find(x=>x.id===id)||{};
+ let fields="";
+ if(kind!=="profile")fields=textField("id","Unique private identifier",r.id||"");
+ if(kind==="referee"){
+  fields+=textField("name","Referee name",r.name||"")+textField("contact","Contact email, private",r.contact||"")+
+  textField("affiliation","Institution / affiliation",r.affiliation||"")+area("notes","Notes",r.notes||"",3);
+ }else if(kind==="reference"){
+  fields+='<div class="field"><label>Referee</label><select name="referee_id" required>'+selectChoices(o.referees.map(x=>({id:x.id,label:x.name})),r.referee_id)+'</select></div>'+
+  '<div class="field"><label>Application</label>'+appSelect("application_id",r.application_id||"")+'</div>'+
+  '<div class="field"><label>Reference stage</label><select name="status">'+fieldOpts(["not_requested","requested","acknowledged","uploaded","portal_verified","declined"],r.status||"not_requested")+'</select></div>'+
+  textField("deadline","Referee submission deadline",r.deadline||"","","date")+
+  area("notes","Portal notes / verification",r.notes||"",3);
+ }else if(kind==="milestone"){
+  fields+='<div class="field"><label>Application</label>'+appSelect("application_id",r.application_id||"")+'</div>'+
+  '<div class="field"><label>Milestone type</label><select name="kind">'+fieldOpts(["final","priority","scholarship","referee","supervisor_contact","interview","offer","registration","other"],r.kind||"final")+'</select></div>'+
+  textField("date","Milestone date",r.date||"","","date")+textField("time","Cutoff time, when verified",r.time||"","Use HH:MM","time")+
+  textField("timezone","Official IANA time zone",r.timezone||"","Example: Europe/London; required when entering a cutoff time")+
+  '<div class="field"><label>Verification</label><select name="verification">'+fieldOpts(["unverified","primary_confirmed","needs_review","contradicted","superseded"],r.verification||"unverified")+'</select></div>'+
+  textField("source_url","Official evidence URL",r.source_url||"")+area("notes","Evidence and route notes",r.notes||"",2);
+ }else if(kind==="evidence"){
+  fields+='<div class="field"><label>Application</label>'+appSelect("application_id",r.application_id||"")+'</div>'+
+  textField("field","Claim field",r.field||"","Example: funding_eligibility or final_deadline")+
+  '<div class="field"><label>Proof status</label><select name="status">'+fieldOpts(["unverified","primary_confirmed","needs_review","contradicted","superseded"],r.status||"unverified")+'</select></div>'+
+  textField("source_url","Evidence URL",r.source_url||"")+textField("observed_at","Date inspected",r.observed_at||"","","date")+
+  area("assertion","Exact claim or carefully attributed paraphrase",r.assertion||"",3)+area("excerpt","Short original supporting passage",r.excerpt||"",3)+area("notes","Contradictions or caveats",r.notes||"",2);
+ }else if(kind==="profile"){
+  fields=area("research_topics","Research topics, one per line",(r.research_topics||[]).join("\n"),3)+
+  area("skills","Methodological skills, one per line",(r.skills||[]).join("\n"),3)+
+  area("projects","Verified research projects, one per line",(r.projects||[]).join("\n"),3)+
+  textField("hours_per_week","Available working hours per week",r.hours_per_week||"","Used in the scheduling heuristic","number")+
+  '<div class="field wide"><label>Shared document effort in hours</label><small>Only owner-entered estimates; blank values remain unknown.</small>'+
+  ["academic_cv","research_statement","transcripts","recommendations","english_proof","research_portfolio"].map(x=>
+    '<div class="list-row"><span>'+escape(x.replaceAll("_"," "))+'</span><input aria-label="Hours for '+escape(x)+'" type="number" min="0" max="300" step="0.5" data-resource-hour="'+escape(x)+'" value="'+escape(r.document_effort?.[x]??"")+'"></div>').join("")+'</div>'+
+  area("notes","Private profile notes",r.notes||"",2);
+ }
+ modal((id?"Edit ":"Add ")+kind.replaceAll("_"," "),
+ '<form id="privateForm" class="form-grid" data-kind="'+escape(kind)+'">'+fields+
+ '<div class="form-actions"><button class="btn" type="button" data-action="close">Cancel</button><button class="btn primary" type="submit">Save privately</button></div></form>');
+}
+async function submitPrivate(form){
+ const kind=form.dataset.kind,value=Object.fromEntries(new FormData(form));
+ if(kind==="profile"){
+  for(const field of ["research_topics","skills","projects"])
+   value[field]=value[field].split(/\n|,/).map(x=>x.trim()).filter(Boolean);
+  value.hours_per_week=value.hours_per_week?Number(value.hours_per_week):null;
+  value.document_effort=Object.fromEntries([...form.querySelectorAll("[data-resource-hour]")].filter(x=>x.value!=="").map(x=>[x.dataset.resourceHour,Number(x.value)]));
+ }
+ for(const field of ["date","deadline","time","timezone","source_url","observed_at"])
+  if(value[field]==="")delete value[field];
+ await api("/api/private/"+encodeURIComponent(kind),value);
+ close();await load();toast("Private "+kind+" record saved");
+}
+async function generateSchedule(form){
+ const hours=Number(new FormData(form).get("hours_per_week"));
+ const result=await api("/api/schedule",{hours_per_week:hours});
+ const warnings=result.unallocated.map(x=>'<div class="list-row"><div><strong>'+escape(x.application_id)+'</strong><p>'+escape(x.hours_unallocated)+' hours unallocated · '+escape(x.deadline)+'</p></div>'+tag("Capacity risk","warn")+'</div>').join("");
+ const unknown=result.unknown_effort_or_date.slice(0,30).map(x=>'<div class="list-row"><strong>'+escape(x.application_id)+'</strong><span>'+escape(x.reason)+'</span></div>').join("");
+ modal("Capacity plan · provisional",'<div class="notice">'+escape(result.caution)+'</div>'+
+ '<div class="kpis">'+metric("SCHEDULED BLOCKS",result.scheduled.length,"Daily time allocations")+metric("AT-RISK APPLICATIONS",result.unallocated.length,"Insufficient hours before cutoff")+
+ metric("UNKNOWN EFFORT",result.unknown_effort_or_date.length,"No guessed estimates")+metric("HOURS PER WEEK",result.available_hours_per_week,"Owner-entered")+'</div>'+
+ '<div class="grid-two">'+panel("At-risk allocations","Check feasibility",warnings||'<div class="blank">No currently estimated application exceeds its simple capacity bound.</div>')+
+ panel("Missing estimates","Enter hours in the relevant application detail",unknown||'<div class="blank">No unknown effort in the evaluated set.</div>')+'</div>'+
+ '<p class="subtitle" style="margin-top:20px">The algorithm is deterministic earliest-deadline-first; it is not an admission predictor or fully optimized prerequisite scheduler.</p>');
+}
+
 async function viewRun(id){
  const run=state.data.runs.find(r=>r.id===id);if(!run)return;
  modal("Recorded AI analysis",'<div class="row-meta" style="margin-bottom:19px">'+tag(run.agent_id)+tag(run.provider_id)+tag(run.status)+'</div><pre class="terminal">'+escape(run.text||"No output")+'</pre><p class="subtitle" style="margin-top:15px">Proposed output. Source snapshot: '+escape(run.source_as_of||"unknown")+'. No application was automatically changed.</p>');
@@ -201,7 +311,7 @@ async function execute(kind,data){
 async function load(){
  try{
   const data=await api("/api/bootstrap");
-  state.data=data;$("connection").classList.add("live");$("connection").lastChild.textContent=" Private runtime connected";
+  state.data=data;state.ops=await api("/api/operations");$("connection").classList.add("live");$("connection").lastChild.textContent=" Private runtime connected";
   render();
  }catch(error){
   state.data=null;$("connection").classList.remove("live");$("connection").lastChild.textContent=" Private runtime unavailable";
@@ -223,6 +333,9 @@ document.addEventListener("click",async e=>{
  if(action==="edit-workflow"){configModal("workflow",id);return}
  if(action==="inspect"){await inspect(id);return}
  if(action==="edit-application"){applicationModal(id);return}
+ if(action==="new-private"){privateModal(id);return}
+ if(action==="edit-private"){const at=id.indexOf(":");privateModal(id.slice(0,at),id.slice(at+1));return}
+ if(action==="generate-schedule"){try{await generateSchedule($("capacityForm"))}catch(err){toast(err.message)}return}
  if(action==="workflow-run"){workflowRunModal(id);return}
  if(action==="view-run"){await viewRun(id);return}
  if(action==="select-agent"){
@@ -234,10 +347,12 @@ document.addEventListener("click",async e=>{
  }
 });
 document.addEventListener("submit",async e=>{
- const form=e.target;if(!["configForm","applicationForm","agentRunForm","workflowRunForm"].includes(form.id))return;
+ const form=e.target;if(!["configForm","applicationForm","agentRunForm","workflowRunForm","privateForm","capacityForm"].includes(form.id))return;
  e.preventDefault();try{
  if(form.id==="configForm"){await submitConfig(form);return}
  if(form.id==="applicationForm"){await submitApplication(form);return}
+ if(form.id==="privateForm"){await submitPrivate(form);return}
+ if(form.id==="capacityForm"){await generateSchedule(form);return}
  const data=Object.fromEntries(new FormData(form));data.cloud_consent=form.elements.cloud_consent.checked;
  if(form.id==="workflowRunForm"){data.workflow_id=form.dataset.id;await execute("workflow",data)}
  else await execute("agent",data);
