@@ -17,6 +17,11 @@ from urllib.request import HTTPRedirectHandler, Request, build_opener
 from openpyxl import load_workbook
 from openpyxl.styles import Alignment, Font, PatternFill
 
+if __package__:
+    from .source_policy import primary_source_verified
+else:
+    from source_policy import primary_source_verified
+
 ROOT = Path(__file__).resolve().parents[1]
 FILE = ROOT / "PhD_Action_List.xlsx"
 OPPORTUNITIES = ROOT / "data" / "opportunities.json"
@@ -61,9 +66,10 @@ def date_key(value):
 
 
 def should_promote(rec: dict) -> bool:
-    return bool(rec.get("deadline")) and (
-        rec.get("confidence") == "official_plus_email"
-        or (rec.get("confidence") == "official_institution" and rec.get("decision") in {"Go", "Go with risk"})
+    return (
+        bool(rec.get("deadline"))
+        and primary_source_verified(rec.get("confidence"))
+        and rec.get("decision") in {"Go", "Go with risk"}
     )
 
 
@@ -100,6 +106,8 @@ def append_formatted_sheet(wb, name, columns, rows, key_column=None):
         if key_column is not None and str(row[key_column - 1]) in known:
             continue
         ws.append(row)
+        if key_column is not None:
+            known.add(str(row[key_column - 1]))
     ws.auto_filter.ref = f"A1:{ws.cell(1,len(columns)).column_letter}{ws.max_row}"
     for i, heading in enumerate(columns, 1):
         width = 12 if heading in ("Date", "Deadline", "Status", "Source ID") else 32
