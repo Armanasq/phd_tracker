@@ -89,7 +89,14 @@ async function main(){
   const updated=await fetch(base+'/api/routing').then(x=>x.json());
   assert.equal(updated.agent_assignments.smoke_agent.provider_id,'smoke_vllm');
   assert.equal(updated.agent_assignments.smoke_agent.source,'agent_assignment');
-  await page.locator('#navigation [data-action="nav"][data-value="ai"]').click();
+  await page.locator('#navigation [data-action="nav"][data-value="applications"]').click();
+  await page.locator('#body tbody .rowbutton').first().click();
+  const recordButton=page.locator('.modal [data-action="ai-record"]');
+  await recordButton.waitFor();
+  const selectedId=await recordButton.getAttribute('data-value');
+  await recordButton.click();
+  await page.locator('.os-context-banner').getByText(selectedId,{exact:false}).waitFor();
+  assert.equal(await page.locator('form[data-os-form="run"] select[name="application_id"]').inputValue(),selectedId);
   await page.locator('form[data-os-form="run"] select[name="agent_id"]').selectOption('smoke_agent');
   await page.locator('#osPrompt').fill('Evaluate the applicant evidence; do not submit anything.');
   assert.equal(await page.locator('form[data-os-form="run"] select[name="provider_id"]').count(),0,
