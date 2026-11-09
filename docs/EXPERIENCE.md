@@ -1,12 +1,12 @@
 <div align="center">
 
-<a href="../../actions/workflows/experience-lab.yml"><img src="../assets/readme/kinetic_cover.svg" width="100%" alt="Animated research intelligence cover with 105 actual future application records on deadline orbits" /></a>
+<a href="../../actions/workflows/experience-lab.yml"><img src="../assets/readme/kinetic_cover.svg" width="100%" alt="Animated research intelligence cover with 106 actual future application records on deadline orbits" /></a>
 
 **THIS IS AN EXECUTABLE RESEARCH WORKSPACE, NOT A STATIC TRACKER.**
 
 [**RUN AN INTERACTIVE SCENARIO**](../../actions/workflows/experience-lab.yml) · [**OPERATE SOURCE ALERTS**](../../issues/1) · [**DOWNLOAD ONE-FILE APP**](../dashboard/index.html) · [**OPENING GUIDE**](../dashboard/README.md) · [**INSPECT RAW EVIDENCE**](../data/experience_view.json)
 
-<sub>Regenerated from committed evidence. Snapshot 2026-11-09 · 105 frontier records · 1 source conflict(s). Real actions run through GitHub or the browser application.</sub>
+<sub>Regenerated from committed evidence. Snapshot 2026-11-09 · 106 frontier records · 1 source conflict(s). Real actions run through GitHub or the browser application.</sub>
 
 </div>
 

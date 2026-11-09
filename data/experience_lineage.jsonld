@@ -835,6 +835,30 @@
       ]
     },
     {
+      "@id": "urn:phdtracker:application:R26-VIENNA-EXOSPHERE",
+      "@type": "prov:Entity",
+      "schema:name": "University of Vienna — Two FWF-funded PhDs in Efficient, Expressive and Robust Graph Neural Networks (EXOSPHERE)",
+      "applicationDeadline": {
+        "@value": "2026-11-20",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://taa.cs.univie.ac.at/news/story/exosphere"
+      },
+      "proofObligation": [
+        "Position has not passed primary-source verification"
+      ]
+    },
+    {
       "@id": "urn:phdtracker:application:N264-06",
       "@type": "prov:Entity",
       "schema:name": "TU/e Eindhoven + TUM, PhD Physics-Informed Generative AI for Dynamic Cardiac MRI (PRIMA-CMR)",

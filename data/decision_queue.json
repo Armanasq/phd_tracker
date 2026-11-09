@@ -65,6 +65,37 @@
       "next_step": "Submit BOTH the Politecnico di Torino official PhD admission application and the AI4I expression of interest; finish by 16 Nov 14:00 CET. Tailor research statement to runtime assurance, safe adaptation, world models and VLA policies."
     },
     {
+      "id": "R26-INRIA-ASTRA-PHYSWORLD",
+      "programme": "Inria Paris Astra-Vision — Funded PhD Multimodal Physically-Consistent World Modeling (Fabio Pizzati / Raoul de Charette)",
+      "deadline": "2026-11-20",
+      "days_to_deadline": 11,
+      "deadline_kind": "ELLIS network announces 20 Nov 2026; lab jobs site has older May 2026 world-model posting, so new deadline not yet primary-confirmed",
+      "tier": "near-term",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Confirm funded stipend and international tuition eligibility",
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://ellis.eu/research/jobs/2026-11-20-phd-phd-multimodal-physically-consistent-world-modeling",
+      "original_email": "",
+      "next_step": "Verify directly with ASTRA-Vision whether the *November 20* multimodal world-model opening is separate from their older May 'Simulatable Physics-aware World Models' call; request fresh job instructions and contract conditions."
+    },
+    {
+      "id": "R26-VIENNA-EXOSPHERE",
+      "programme": "University of Vienna — Two FWF-funded PhDs in Efficient, Expressive and Robust Graph Neural Networks (EXOSPHERE)",
+      "deadline": "2026-11-20",
+      "days_to_deadline": 11,
+      "deadline_kind": "Official university 20 Nov 2026; exact time not specified in HTML news article",
+      "tier": "near-term",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://taa.cs.univie.ac.at/news/story/exosphere",
+      "original_email": "",
+      "next_step": "Inspect the official PDF to choose algorithmic/numerical robustness or theoretical expressivity track. Apply following the institutional announcement by 20 Nov."
+    },
+    {
       "id": "inria:2026-10570",
       "programme": "Inria ASTRA Paris — PhD Enforcing Persistence in Generative World Models for Robotics",
       "deadline": "2026-11-20",

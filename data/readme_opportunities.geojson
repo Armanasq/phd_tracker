@@ -270,6 +270,24 @@
           -35.2809
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "Austria: 1 application records",
+        "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+        "count": 1,
+        "sample_source_ids": "R26-VIENNA-EXOSPHERE",
+        "marker-color": "#4384ff",
+        "marker-size": "medium"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          16.3738,
+          48.2082
+        ]
+      }
     }
   ]
 }

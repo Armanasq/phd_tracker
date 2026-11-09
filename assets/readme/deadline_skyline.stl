@@ -99,72 +99,72 @@ facet normal 0 0 0
 endfacet
 facet normal 0 0 0
   outer loop
-    vertex 1.500 0.000 1.430
-    vertex 2.450 0.000 1.430
-    vertex 2.450 1.000 1.430
+    vertex 1.500 0.000 1.560
+    vertex 2.450 0.000 1.560
+    vertex 2.450 1.000 1.560
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
-    vertex 1.500 0.000 1.430
-    vertex 2.450 1.000 1.430
-    vertex 1.500 1.000 1.430
+    vertex 1.500 0.000 1.560
+    vertex 2.450 1.000 1.560
+    vertex 1.500 1.000 1.560
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 1.500 0.000 0.000
     vertex 2.450 0.000 0.000
-    vertex 2.450 0.000 1.430
+    vertex 2.450 0.000 1.560
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 1.500 0.000 0.000
-    vertex 2.450 0.000 1.430
-    vertex 1.500 0.000 1.430
+    vertex 2.450 0.000 1.560
+    vertex 1.500 0.000 1.560
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 2.450 0.000 0.000
     vertex 2.450 1.000 0.000
-    vertex 2.450 1.000 1.430
+    vertex 2.450 1.000 1.560
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 2.450 0.000 0.000
-    vertex 2.450 1.000 1.430
-    vertex 2.450 0.000 1.430
+    vertex 2.450 1.000 1.560
+    vertex 2.450 0.000 1.560
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 2.450 1.000 0.000
     vertex 1.500 1.000 0.000
-    vertex 1.500 1.000 1.430
+    vertex 1.500 1.000 1.560
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 2.450 1.000 0.000
-    vertex 1.500 1.000 1.430
-    vertex 2.450 1.000 1.430
+    vertex 1.500 1.000 1.560
+    vertex 2.450 1.000 1.560
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 1.500 1.000 0.000
     vertex 1.500 0.000 0.000
-    vertex 1.500 0.000 1.430
+    vertex 1.500 0.000 1.560
   endloop
 endfacet
 facet normal 0 0 0
   outer loop
     vertex 1.500 1.000 0.000
-    vertex 1.500 0.000 1.430
-    vertex 1.500 1.000 1.430
+    vertex 1.500 0.000 1.560
+    vertex 1.500 1.000 1.560
   endloop
 endfacet
 facet normal 0 0 0

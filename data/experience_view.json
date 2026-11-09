@@ -4,10 +4,10 @@
   "timezone": "Europe/Berlin",
   "policy": "Observed snapshot, not live availability. Unknown is not false. Document mention does not imply missing. Simulations never change application state.",
   "metrics": {
-    "tracked": 105,
-    "future": 105,
+    "tracked": 106,
+    "future": 106,
     "next_seven_days": 19,
-    "unknown_document_mentions": 329,
+    "unknown_document_mentions": 330,
     "source_conflicts": 1,
     "research_papers": 39
   },
@@ -621,6 +621,26 @@
       ],
       "source": "https://jobs.inria.fr/public/classic/en/offres/2026-10570",
       "next_step": "Apply through Inria before 20 Nov; frame proposal around persistent world models, long-horizon planning, robust robot control and multimodal state estimation. Confirm role is still open despite earlier listed start date."
+    },
+    {
+      "id": "R26-VIENNA-EXOSPHERE",
+      "name": "University of Vienna — Two FWF-funded PhDs in Efficient, Expressive and Robust Graph Neural Networks (EXOSPHERE)",
+      "country": "Austria",
+      "deadline": "2026-11-20",
+      "days": 11,
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "documents": [
+        "academic_cv"
+      ],
+      "unknown_documents": [
+        "academic_cv"
+      ],
+      "proof_obligations": [
+        "Position has not passed primary-source verification"
+      ],
+      "source": "https://taa.cs.univie.ac.at/news/story/exosphere",
+      "next_step": "Inspect the official PDF to choose algorithmic/numerical robustness or theoretical expressivity track. Apply following the institutional announcement by 20 Nov."
     },
     {
       "id": "N264-06",
@@ -2621,6 +2641,24 @@
             -35.2809
           ]
         }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "title": "Austria: 1 application records",
+          "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
+          "count": 1,
+          "sample_source_ids": "R26-VIENNA-EXOSPHERE",
+          "marker-color": "#4384ff",
+          "marker-size": "medium"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            16.3738,
+            48.2082
+          ]
+        }
       }
     ]
   },
@@ -2629,8 +2667,8 @@
       "id": "academic_cv",
       "label": "Academic CV",
       "state": "unknown",
-      "potential": 77,
-      "near_term": 57
+      "potential": 78,
+      "near_term": 58
     },
     {
       "id": "recommendations",
@@ -3195,6 +3233,20 @@
           }
         ],
         "count": 3
+      },
+      {
+        "date": "2026-11-20",
+        "applications": [
+          {
+            "id": "inria:2026-10570",
+            "name": "Inria ASTRA Paris — PhD Enforcing Persistence in Generative World Models for Robotics"
+          },
+          {
+            "id": "R26-VIENNA-EXOSPHERE",
+            "name": "University of Vienna — Two FWF-funded PhDs in Efficient, Expressive and Robust Graph Neural Networks (EXOSPHERE)"
+          }
+        ],
+        "count": 2
       },
       {
         "date": "2026-11-23",
@@ -3833,6 +3885,17 @@
         "source": "https://jobs.inria.fr/public/classic/en/offres/2026-10570"
       },
       {
+        "id": "R26-VIENNA-EXOSPHERE",
+        "name": "University of Vienna — Two FWF-funded PhDs in Efficient, Expressive and Robust Graph Neural Networks (EXOSPHERE)",
+        "deadline": "2026-11-20",
+        "days": 11,
+        "reasons": [
+          "1 source/evidence obligations",
+          "1 mentioned documents with unknown readiness"
+        ],
+        "source": "https://taa.cs.univie.ac.at/news/story/exosphere"
+      },
+      {
         "id": "N264-06",
         "name": "TU/e Eindhoven + TUM, PhD Physics-Informed Generative AI for Dynamic Cardiac MRI (PRIMA-CMR)",
         "deadline": "2026-11-21",
@@ -4065,16 +4128,6 @@
           "4 mentioned documents with unknown readiness"
         ],
         "source": "https://graduate.engineering.gwu.edu/doctoral-admissions-requirements"
-      },
-      {
-        "id": "N264-10",
-        "name": "Max Planck School Biomedical AI (BMAI), funded PhD cohort starting September 2027",
-        "deadline": "2026-12-01",
-        "days": 22,
-        "reasons": [
-          "4 mentioned documents with unknown readiness"
-        ],
-        "source": "https://biomedicalai.maxplanckschools.org/4056/application-process"
       }
     ],
     "policy": "Priorities are calendar-sorted review candidates, not admission likelihood, guaranteed eligibility or inferred incomplete tasks."

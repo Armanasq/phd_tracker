@@ -2,16 +2,16 @@
   "schema_version": 1,
   "as_of": "2026-11-09",
   "explicit_readiness_policy": "Unknown inputs remain unknown. Mentioned documents are not evidence of missing documents.",
-  "active_future_opportunities": 105,
+  "active_future_opportunities": 106,
   "source_conflict_count": 1,
   "resource_frontier": [
     {
       "resource_id": "academic_cv",
       "label": "Academic CV",
       "current_state": "unknown",
-      "potential_applications": 77,
-      "near_term_applications": 57,
-      "urgency_index": 6.7621
+      "potential_applications": 78,
+      "near_term_applications": 58,
+      "urgency_index": 6.8454
     },
     {
       "resource_id": "recommendations",
@@ -780,6 +780,29 @@
       "evidence_proof_obligations": [],
       "next_step": "By 2026-10-31: obtain the full Jobbnorge advert in a normal browser (page body did not load here) and confirm document list and referee count",
       "source_url": "https://capture-dn.eu/index.php/vacant-positions/"
+    },
+    {
+      "source_id": "R26-VIENNA-EXOSPHERE",
+      "deadline": "2026-11-20",
+      "days_to_deadline": 11,
+      "opportunity": "University of Vienna — Two FWF-funded PhDs in Efficient, Expressive and Robust Graph Neural Networks (EXOSPHERE)",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv"
+      ],
+      "unknown_resource_states": [
+        "academic_cv"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [
+        "Position has not passed primary-source verification"
+      ],
+      "next_step": "Inspect the official PDF to choose algorithmic/numerical robustness or theoretical expressivity track. Apply following the institutional announcement by 20 Nov.",
+      "source_url": "https://taa.cs.univie.ac.at/news/story/exosphere"
     },
     {
       "source_id": "inria:2026-10570",
