@@ -123,3 +123,11 @@ The widget reflects the chosen agent's configured provider and its recorded infe
 The backend handles simultaneous local HTTP requests using request-local SQLite connections. The browser's Stop waiting action aborts its HTTP request but may not cancel the upstream model call; finished calls are still logged. Native token streaming, shared multi-user authentication, cross-device sync and provider-wide OAuth are not implemented.
 
 Only an opaque thread ID is retained in local browser storage. Conversation content stays in the private SQLite database. If PHDAI_API_TOKEN is set, the browser UI cannot provide that token automatically; use an authenticated client or an appropriately secured front-end integration.
+
+## State concurrency and private API hardening
+
+Application edits use SQLite-backed optimistic concurrency. Version-checked updates and first-time inserts are atomic; concurrent writes with the same expected version return HTTP 409 instead of silently replacing an applicant's state. Invalid document-state keys and types are rejected before persistence.
+
+Private HTTP requests require an exact loopback Host **including the bound port**, an exact same-origin browser Origin when supplied, and an optional constant-time bearer-token comparison. JSON updates reject ambiguous Content-Length headers and chunked transfer framing. The service does not support remote LAN binding or browser cross-origin model access.
+
+Provider credentials use dedicated environment variables ending in `_API_KEY`; unrelated application or operating-system tokens must not be configured as model-provider credentials. For a custom provider, use an isolated name such as `CUSTOM_LLM_API_KEY`. Do not add secrets to source-controlled configuration.

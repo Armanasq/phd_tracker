@@ -68,8 +68,8 @@ def provider_spec(value: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("Unsupported provider kind")
     url = validate_url(value.get("base_url"), bool(value.get("local")))
     env = str(value.get("api_key_env") or "")
-    if env and not re.fullmatch(r"[A-Z][A-Z0-9_]{1,63}", env):
-        raise ValueError("API key env name is invalid")
+    if env and not re.fullmatch(r"[A-Z][A-Z0-9_]{0,58}_API_KEY", env):
+        raise ValueError("Provider credentials require a dedicated *_API_KEY environment variable")
     model = str(value.get("model") or "").strip()
     if not model or len(model) > 128:
         raise ValueError("Model identifier is required")

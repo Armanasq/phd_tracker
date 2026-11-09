@@ -105,7 +105,12 @@ class Store:
         if "priority" in patch and patch["priority"] not in {"high", "normal", "low"}:
             raise ValueError("Invalid priority")
         if "document_states" in patch:
-            if not isinstance(patch["document_states"], dict) or len(patch["document_states"]) > 30 or any(v not in DOCUMENT for v in patch["document_states"].values()):
+            documents = patch["document_states"]
+            if (
+                not isinstance(documents, dict) or len(documents) > 30
+                or any(not isinstance(k, str) or not 1 <= len(k) <= 120 or any(ord(c) < 32 for c in k) for k in documents)
+                or any(not isinstance(v, str) or v not in DOCUMENT for v in documents.values())
+            ):
                 raise ValueError("Invalid document readiness state")
         if "estimated_hours" in patch and patch["estimated_hours"] is not None and (not isinstance(patch["estimated_hours"], (int, float)) or isinstance(patch["estimated_hours"], bool) or not 0 <= patch["estimated_hours"] <= 400):
             raise ValueError("Invalid effort estimate")
@@ -126,13 +131,23 @@ class Store:
                 raise ValueError("Submission requires explicit owner confirmation")
         updated.pop("confirmed_submission", None)
         version = current["version"] + 1
+        encoded = json.dumps(updated, ensure_ascii=False)
         with self.db:
-            row = self.db.execute("SELECT version FROM applications WHERE id=?", (identity,)).fetchone()
-            current_version = int(row["version"]) if row else 0
-            if current_version != expected_version:
-                raise ConflictError("Concurrent application update; reload")
-            self.db.execute("INSERT INTO applications(id,payload,version,updated_at) VALUES(?,?,?,?) ON CONFLICT(id) DO UPDATE SET payload=excluded.payload,version=excluded.version,updated_at=excluded.updated_at",
-                            (identity, json.dumps(updated, ensure_ascii=False), version, utcnow()))
+            if expected_version == 0:
+                try:
+                    self.db.execute(
+                        "INSERT INTO applications(id,payload,version,updated_at) VALUES(?,?,?,?)",
+                        (identity, encoded, version, utcnow()),
+                    )
+                except sqlite3.IntegrityError as error:
+                    raise ConflictError("Concurrent application creation; reload") from error
+            else:
+                changed = self.db.execute(
+                    "UPDATE applications SET payload=?,version=?,updated_at=? WHERE id=? AND version=?",
+                    (encoded, version, utcnow(), identity, expected_version),
+                ).rowcount
+                if changed != 1:
+                    raise ConflictError("Concurrent application update; reload")
             self._audit("application:update", identity)
         return {"id": identity, "version": version, **updated}
 

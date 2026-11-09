@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import hmac
+import ipaddress
 import json
 import mimetypes
 import os
@@ -56,22 +58,39 @@ class ApiHandler(BaseHTTPRequestHandler):
         return
 
     def allowed(self) -> bool:
-        host = self.headers.get("Host", "")
-        address = host.split(":")[0].lower()
-        if address not in {"127.0.0.1", "localhost", "[::1]"}:
+        hosts = self.headers.get_all("Host", [])
+        if len(hosts) != 1:
             return False
-        origin = self.headers.get("Origin", "")
-        if origin:
-            origin_parts = urlsplit(origin)
-            if origin_parts.scheme != "http" or origin_parts.hostname not in {"127.0.0.1", "localhost"} or origin_parts.port != self.server.server_port:
+        try:
+            host = urlsplit("//" + hosts[0])
+            if (
+                host.hostname not in {"127.0.0.1", "localhost", "::1"}
+                or host.port != self.server.server_port
+                or host.path or host.query or host.fragment
+                or host.username or host.password
+            ):
                 return False
+            if not ipaddress.ip_address(self.client_address[0]).is_loopback:
+                return False
+            origins = self.headers.get_all("Origin", [])
+            if len(origins) > 1:
+                return False
+            if origins:
+                origin = urlsplit(origins[0])
+                if (
+                    origin.scheme != "http"
+                    or origin.hostname not in {"127.0.0.1", "localhost", "::1"}
+                    or origin.port != self.server.server_port
+                    or origin.path or origin.query or origin.fragment
+                    or origin.username or origin.password
+                ):
+                    return False
+        except ValueError:
+            return False
         token = os.environ.get("PHDAI_API_TOKEN", "")
-        if token:
-            import hmac
-            expected = "Bearer " + token
-            if not hmac.compare_digest(self.headers.get("Authorization", ""), expected):
-                return False
-        return True
+        return not token or hmac.compare_digest(
+            self.headers.get("Authorization", ""), "Bearer " + token
+        )
 
     def send_json(self, value: object, status: int = 200) -> None:
         raw = json.dumps(value, ensure_ascii=False, default=str).encode("utf-8")
@@ -85,10 +104,16 @@ class ApiHandler(BaseHTTPRequestHandler):
         self.wfile.write(raw)
 
     def payload(self) -> dict:
-        length = int(self.headers.get("Content-Length", "0"))
+        lengths = self.headers.get_all("Content-Length", [])
+        if len(lengths) != 1 or self.headers.get("Transfer-Encoding"):
+            raise ValueError("Request requires one Content-Length and no Transfer-Encoding")
+        try:
+            length = int(lengths[0])
+        except ValueError as error:
+            raise ValueError("Invalid Content-Length") from error
         if length <= 0 or length > 60_000:
             raise ValueError("Request must contain 1–60000 bytes")
-        if self.headers.get("Content-Type", "").split(";")[0] != "application/json":
+        if self.headers.get("Content-Type", "").split(";")[0].strip().lower() != "application/json":
             raise ValueError("Expected application/json")
         data = json.loads(self.rfile.read(length))
         if not isinstance(data, dict):
