@@ -115,7 +115,7 @@ def workflow_spec(value: dict[str, Any]) -> dict[str, Any]:
     if not isinstance(steps, list) or not 1 <= len(steps) <= 3:
         raise ValueError("Workflows require 1–3 agent stages")
     steps = [validate_id(x) for x in steps]
-    provider_id = validate_id(value.get("provider_id") or "ollama")
+    provider_id = validate_id(value.get("provider_id") or "auto")
     prompt = str(value.get("prompt") or "")
     if len(prompt) > 3000:
         raise ValueError("Workflow objective exceeds 3000 characters")

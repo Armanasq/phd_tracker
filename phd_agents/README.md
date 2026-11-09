@@ -90,3 +90,13 @@ A model invocation failure is recorded as a failed audit run without storing the
 ## Private credential storage policy
 
 The local key-entry form is an opt-in convenience for single-user development machines. It is not equivalent to a hardened multi-user secret vault. The credential file is plaintext JSON protected by local file permissions; protect workstation backups and home-directory access. The backend refuses to read a credential file whose permissions grant group or other access and replaces values atomically. Removing a key from the form removes the stored value but does not unset an environment-provided value. Never use this service as a publicly reachable credentials API without a separately authenticated reverse proxy, TLS, CSRF defenses and a professional secrets backend.
+
+## Unified workspace and automatic inference routing
+
+The single-page application is served at `http://127.0.0.1:8765/`. In **Settings → Connections**, register an OpenAI-compatible endpoint, including a local vLLM/LiteLLM/LM Studio HTTP `/v1` base URL or an Azure/OpenAI HTTPS endpoint, provide any required credential, run **Test inference**, and **Activate**. A successful test and activation persist the selected default route in private SQLite. Subsequent agent calls omit `provider_id` and the server resolves the saved provider automatically.
+
+`agent_routes` optionally maps agent IDs to another registered provider. `approved_cloud_providers` records explicit model-specific applicant-data disclosure approval. Every newly approved cloud route must have a successful inference test; editing a provider resets its test and removes its automatic cloud approval. `POST /api/providers/activate` refuses untested providers and requires `allow_cloud_data=true` for cloud providers. Manual requests with an explicit provider override remain supported for backward compatibility.
+
+Cloud approval is scoped to the selected provider. It is not permission to contact faculty, send email, submit an application, or connect unrelated remote accounts. The daily cloud scheduler call cap remains independent of approval and defaults to zero.
+
+Public GitHub Pages continues to provide a read-only research tracking surface. The private backend serves the identical workspace with functioning Settings and agent execution. API keys and private state never become part of the public Pages artifact.

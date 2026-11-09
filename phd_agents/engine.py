@@ -12,6 +12,7 @@ from .providers import invoke, ProviderError
 from .store import Store
 from .toolkit import DEFAULT_TOOLS, run_tools
 from .settings import read_settings
+from .routing import resolve_route
 
 def catalog(store: Store) -> dict[str, list[dict[str, Any]]]:
     return {"providers": store.catalog("provider", PROVIDERS),
@@ -35,14 +36,16 @@ def owner_records(store: Store, root: Path) -> tuple[dict[str, Any], list[dict[s
             record["deadline_time_verified"] = True
     return source, records
 
-def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str,
+def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str | None = None,
               application_id: str | None = None, input_text: str = "",
               cloud_consent: bool = False, workflow_id: str | None = None) -> dict[str, Any]:
     configuration = catalog(store)
     agent = selected(configuration["agents"], agent_id, "agent")
-    provider = selected(configuration["providers"], provider_id, "provider")
-    if not provider["local"] and not cloud_consent:
-        raise PermissionError("Cloud model invocation requires explicit consent for each manual run or a separately approved scheduled workflow")
+    route = resolve_route(store, configuration["providers"], agent_id, provider_id)
+    provider = route.provider
+    provider_id = provider["id"]
+    if not provider["local"] and not (cloud_consent or route.approved):
+        raise PermissionError("Activate and approve this cloud provider in Settings, or authorize this run explicitly")
     if not isinstance(input_text, str) or len(input_text) > 5000:
         raise ValueError("Input must be text up to 5000 characters")
     source, records = owner_records(store, root)
@@ -98,11 +101,11 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str,
                             "workflow_id": workflow_id, "tools": [x["name"] for x in tool_pack["tools"]], "source_as_of": source.get("as_of"),
                             "notice": "AI output is a proposal; no application or communication was changed"})
     return {"id": run_id, "agent_id": agent_id, "provider_id": provider_id,
-            "model": reply.model, "usage": reply.usage, "latency_ms": reply.latency_ms, "text": reply.content,
+            "route_source": route.source, "model": reply.model, "usage": reply.usage, "latency_ms": reply.latency_ms, "text": reply.content,
             "status": "proposed", "tools": [x["name"] for x in tool_pack["tools"]], "source_as_of": source.get("as_of")}
 
 def run_workflow(store: Store, root: Path, *, workflow_id: str,
-                 provider_id: str, application_id: str | None = None,
+                 provider_id: str | None = None, application_id: str | None = None,
                  input_text: str = "", cloud_consent: bool = False) -> dict[str, Any]:
     options = catalog(store)
     workflow = selected(options["workflows"], workflow_id, "workflow")
@@ -118,7 +121,8 @@ def run_workflow(store: Store, root: Path, *, workflow_id: str,
         prior = "\n\nPrevious agent proposals (unverified, no actions taken):\n" + "\n".join(
             x["agent_id"] + ": " + x["text"][:900] for x in outputs
         ) if outputs else ""
-        result = run_agent(store, root, agent_id=agent_id, provider_id=provider_id,
+        route_override = provider_id if provider_id not in (None, "", "auto") else workflow.get("provider_id", "auto")
+        result = run_agent(store, root, agent_id=agent_id, provider_id=route_override,
                            application_id=application_id,
                            input_text=("Workflow step " + str(index + 1) + "/" + str(len(agent_ids)) +
                                        ": " + objective + prior)[:5000],
@@ -156,14 +160,15 @@ def scheduler_once(store: Store, root: Path, *, now: datetime | None = None) -> 
         period = period_for(workflow["schedule"], current)
         if not period or store.schedule_last(workflow["id"]) == period:
             continue
-        provider_id = workflow.get("provider_id") or "ollama"
-        config = selected(settings["providers"], provider_id, "provider")
+        requested = workflow.get("provider_id") or "auto"
+        stages = workflow.get("steps") or [workflow["agent_id"]]
+        routes = [resolve_route(store, settings["providers"], agent, requested) for agent in stages]
         consent = bool(workflow.get("cloud_consent", False))
-        if not config["local"] and not consent:
+        if any(not route.approved and not consent for route in routes):
             result.append({"workflow_id": workflow["id"], "status": "skipped", "reason": "cloud_consent_missing"})
             continue
-        if not config["local"]:
-            needed = len(workflow.get("steps") or [workflow["agent_id"]])
+        needed = sum(not route.provider["local"] for route in routes)
+        if needed:
             if not cloud_cap:
                 result.append({"workflow_id": workflow["id"], "status": "skipped", "reason": "cloud_budget_disabled"})
                 continue
@@ -171,7 +176,7 @@ def scheduler_once(store: Store, root: Path, *, now: datetime | None = None) -> 
                 result.append({"workflow_id": workflow["id"], "status": "skipped", "reason": "daily_cloud_model_call_cap"})
                 continue
         try:
-            output = run_workflow(store, root, workflow_id=workflow["id"], provider_id=provider_id,
+            output = run_workflow(store, root, workflow_id=workflow["id"], provider_id=requested,
                                   cloud_consent=consent)
         except (ValueError, PermissionError, OSError, RuntimeError) as error:
             result.append({"workflow_id": workflow["id"], "status": "failed", "reason": str(error)[:180]})

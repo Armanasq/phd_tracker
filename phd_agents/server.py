@@ -14,6 +14,7 @@ from .operations import evidence_conflicts, milestones_for, referee_matrix, rese
 from .providers import invoke, ProviderError
 from .connectivity import model_list, provider_states, remember_check
 from .settings import read_settings, save_settings
+from .routing import routing_status
 from .secrets import read_secret, write_secret
 from .metrics import usage_summary
 from time import perf_counter
@@ -121,6 +122,7 @@ class ApiHandler(BaseHTTPRequestHandler):
                             "providers_status": source.get("providers", []),
                             "provider_states": provider_states(store, catalog(store)["providers"]),
                             "settings": read_settings(store),
+                            "routing": routing_status(store, catalog(store)["providers"], catalog(store)["agents"]),
                             "security": {"local_only": True, "credentials": "environment variables", "auto_application_submission": False}})
         elif path == "/api/calendar.ics":
             source, records = owner_records(store, self.server.root)
@@ -138,7 +140,10 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.send_json(usage_summary(store))
         elif path == "/api/settings":
             self.send_json({"settings": read_settings(store),
-                            "provider_states": provider_states(store, catalog(store)["providers"])})
+                            "provider_states": provider_states(store, catalog(store)["providers"]),
+                            "routing": routing_status(store, catalog(store)["providers"], catalog(store)["agents"])})
+        elif path == "/api/routing":
+            self.send_json(routing_status(store, catalog(store)["providers"], catalog(store)["agents"]))
         elif path == "/api/operations":
             source, records = owner_records(store, self.server.root)
             today = today_in(read_settings(store)["timezone"])
@@ -181,6 +186,33 @@ class ApiHandler(BaseHTTPRequestHandler):
         root = self.server.root
         if path == "/api/settings":
             self.send_json({"settings": save_settings(store, data)})
+        elif path == "/api/providers/setup":
+            spec = provider_spec(data["provider"])
+            store.put_custom("provider", spec)
+            if "credential" in data:
+                if not spec["api_key_env"]:
+                    if data["credential"]:
+                        raise ValueError("This provider has no credential variable")
+                else:
+                    write_secret(spec["api_key_env"], data["credential"])
+            self.send_json({"saved": True, "provider": spec,
+                            "state": provider_states(store, [spec])[spec["id"]]})
+        elif path == "/api/providers/activate":
+            provider = selected(catalog(store)["providers"], data["provider_id"], "provider")
+            status = provider_states(store, [provider])[provider["id"]]
+            if status["state"] != "responded":
+                raise ValueError("Test a successful inference response before activating this provider")
+            approve = data.get("allow_cloud_data") is True
+            if not provider["local"] and not approve:
+                raise PermissionError("Automatic cloud routing requires explicit applicant-data disclosure approval")
+            settings = read_settings(store)
+            approved = set(settings["approved_cloud_providers"])
+            if not provider["local"]:
+                approved.add(provider["id"])
+            updated = save_settings(store, {"default_provider": provider["id"],
+                                            "approved_cloud_providers": sorted(approved)})
+            self.send_json({"activated": True, "settings": updated,
+                            "routing": routing_status(store, catalog(store)["providers"], catalog(store)["agents"])})
         elif path == "/api/providers/credential":
             provider = selected(catalog(store)["providers"], data["provider_id"], "provider")
             variable = provider.get("api_key_env") or ""
@@ -237,12 +269,12 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.send_json(resource_schedule(records, today, hours, profile))
         elif path == "/api/agents/run":
             self.send_json(run_agent(store, root,
-                                     agent_id=data["agent_id"], provider_id=data["provider_id"],
+                                     agent_id=data["agent_id"], provider_id=data.get("provider_id"),
                                      application_id=data.get("application_id"), input_text=data.get("input_text", ""),
                                      cloud_consent=data.get("cloud_consent") is True))
         elif path == "/api/workflows/run":
             self.send_json(run_workflow(store, root,
-                                        workflow_id=data["workflow_id"], provider_id=data["provider_id"],
+                                        workflow_id=data["workflow_id"], provider_id=data.get("provider_id"),
                                         application_id=data.get("application_id"), input_text=data.get("input_text", ""),
                                         cloud_consent=data.get("cloud_consent") is True))
         elif path in {"/api/catalog/provider", "/api/catalog/agent", "/api/catalog/workflow"}:
@@ -255,7 +287,7 @@ class ApiHandler(BaseHTTPRequestHandler):
                 if any(step not in ids for step in validated.get("steps", [])):
                     raise ValueError("Workflow contains an unknown agent step")
                 provider_ids = {p["id"] for p in catalog(store)["providers"]}
-                if validated.get("provider_id") not in provider_ids:
+                if validated.get("provider_id") not in provider_ids | {"auto"}:
                     raise ValueError("Workflow references an unknown model provider")
             store.put_custom(kind, validated)
             self.send_json({"saved": True, "kind": kind, "entry": validated})

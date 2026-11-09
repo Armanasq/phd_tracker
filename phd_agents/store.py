@@ -61,6 +61,14 @@ class Store:
                             (kind, entry["id"], json.dumps(entry), utcnow()))
             if kind == "provider":
                 self.db.execute("DELETE FROM catalog WHERE kind='connection' AND id=?", (entry["id"],))
+                settings_row = self.db.execute("SELECT payload FROM catalog WHERE kind='setting' AND id='preferences'").fetchone()
+                if settings_row:
+                    preferences = json.loads(settings_row["payload"])
+                    approved = preferences.get("approved_cloud_providers", [])
+                    if entry["id"] in approved:
+                        preferences["approved_cloud_providers"] = [p for p in approved if p != entry["id"]]
+                        self.db.execute("UPDATE catalog SET payload=?,updated_at=? WHERE kind='setting' AND id='preferences'",
+                                        (json.dumps(preferences), utcnow()))
             self._audit("catalog:" + kind, entry["id"])
 
     def catalog(self, kind: str, defaults: list[dict[str, Any]]) -> list[dict[str, Any]]:
