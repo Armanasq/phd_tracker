@@ -13,6 +13,11 @@ from openpyxl import load_workbook
 from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
 
+if __package__:
+    from .source_policy import classify_deadline_note
+else:
+    from source_policy import classify_deadline_note
+
 ROOT = Path(__file__).resolve().parents[1]
 BOOK = ROOT / "PhD_Action_List.xlsx"
 REPORT = ROOT / "data" / "execution_plan.json"
@@ -75,6 +80,7 @@ def read_inputs(wb, today: date):
         a = {
             "source_id": sid, "name": text(v[6], 320),
             "deadline": as_date(v[1]), "deadline_note": text(v[2], 550),
+            "deadline_type": classify_deadline_note(v[2]),
             "verdict": text(v[4], 95), "fit": text(v[5], 460),
             "source": text(v[19], 500), "apply_url": text(v[8], 500),
             "next_step": text(v[10], 900), "documents": text(v[12], 550),
@@ -88,15 +94,24 @@ def read_inputs(wb, today: date):
         d = a["deadline"]
         days = (d - today).days if d else None
         excluded = clean_state(a["verdict"]) in CLOSED
+        kind = {
+            "final": "application_deadline",
+            "priority": "application_priority",
+            "unverified": "application_unverified",
+        }[a["deadline_type"]] if d else "application_unposted"
         all_tasks.append({
-            "type":"application_deadline" if d else "application_unposted",
+            "type":kind,
             "sheet":"Action list","row":a["row"],
             "source_id":a["source_id"],"name":a["name"],
             "action":a["next_step"] or "Verify the official portal and deadline",
             "due":d.isoformat() if d else None,"days":days,
-            "final_deadline":d.isoformat() if d else None,
+            "final_deadline":d.isoformat() if kind=="application_deadline" else None,
             "verdict":a["verdict"],"source":a["source"],"notes":a["deadline_note"],
-            "state":"excluded" if excluded else "deadline_unconfirmed" if d else "date_not_posted",
+            "state":"excluded" if excluded else {
+                "application_deadline": "deadline_unconfirmed",
+                "application_priority": "priority_review_date",
+                "application_unverified": "source_deadline_unverified",
+            }.get(kind, "date_not_posted"),
             "blocked":excluded,"group":a["group"],
         })
     for row in wb["Step timeline"].iter_rows(min_row=4, max_col=7):
@@ -106,9 +121,14 @@ def read_inputs(wb, today: date):
         sid = text(v[6], 100)
         parent=applications.get(sid, {})
         due = as_date(v[0])
-        final = as_date(v[5])
+        final = as_date(v[5]) if parent.get("deadline_type") in (None, "final") else None
         status = clean_state(parent.get("verdict") or v[3])
         excluded = status in CLOSED
+        mirrored_priority = bool(
+            parent.get("deadline_type") == "priority"
+            and due == parent.get("deadline")
+            and "[External deadline:" in text(v[4])
+        )
         days = (due - today).days if due else None
         all_tasks.append({
             "type":"timeline_step", "sheet":"Step timeline", "row":row[0].row,
@@ -117,8 +137,8 @@ def read_inputs(wb, today: date):
             "final_deadline":final.isoformat() if final else None,
             "verdict":text(parent.get("verdict") or v[3], 95),
             "source":link_for_parent(parent), "notes":text(v[5], 110),
-            "state":"excluded_parent" if excluded else "completion_unconfirmed",
-            "blocked":excluded,"group":text(parent.get("group"), 90),
+            "state":"excluded_parent" if excluded else "linked_priority_note" if mirrored_priority else "completion_unconfirmed",
+            "blocked":excluded or mirrored_priority,"group":text(parent.get("group"), 90),
         })
     for row in wb["What I need to do"].iter_rows(min_row=4, max_col=5):
         v = [c.value for c in row]
@@ -164,10 +184,13 @@ def plan(wb, today: date, completion_state=None):
             task["confirmed_at"] = done[task["task_id"]].get("at", "")
     included=[t for t in tasks if not t["blocked"]]
     today_apps=[t for t in included if t["type"]=="application_deadline" and t["days"]==0]
+    today_priorities=[t for t in included if t["type"]=="application_priority" and t["days"]==0]
+    today_unverified=[t for t in included if t["type"]=="application_unverified" and t["days"]==0]
     excluded_deadlines=[t for t in tasks if t["type"]=="application_deadline" and t["days"]==0 and t["blocked"]]
     step_today=[t for t in included if t["type"]=="timeline_step" and t["days"]==0]
     shared_today=[t for t in included if t["type"]=="cross_route_task" and t["days"]==0]
     future_week=[t for t in included if t["type"]=="application_deadline" and t["days"] is not None and 0<t["days"]<=7]
+    future_week_priorities=[t for t in included if t["type"]=="application_priority" and t["days"] is not None and 0<t["days"]<=7]
     past_unconfirmed=[t for t in included if t["type"]!="application_deadline" and t["days"] is not None and t["days"]<0
                       and (not t["final_deadline"] or t["final_deadline"]>=today.isoformat())]
     parent_final_today=[t for t in included if t["type"]=="timeline_step"
@@ -178,34 +201,39 @@ def plan(wb, today: date, completion_state=None):
     by_state=Counter(t["state"] for t in tasks)
     for t in tasks:
         t["task_key"]=f'{t["sheet"]}!{t["row"]}'
-    for seq in (today_apps,excluded_deadlines,step_today,shared_today,future_week,past_unconfirmed,parent_final_today):
+    for seq in (today_apps,today_priorities,today_unverified,excluded_deadlines,step_today,shared_today,future_week,future_week_priorities,past_unconfirmed,parent_final_today):
         seq.sort(key=lambda x: (x["days"] if x["days"] is not None else 999999,
                                 0 if x["verdict"]=="Go - urgent" else 1, x["source_id"],x["row"]))
     return {
         "schema_version":2, "as_of":today.isoformat(), "timezone":"Europe/Berlin",
         "classification": {
-            "submission_deadline": "Application list B is the final deadline; exclude rows marked Not eligible / Submitted / Skipped",
+            "submission_deadline": "Action list B is a final deadline only when its date note is final; priority dates and unverified dates are separate classes. Closed verdicts are excluded.",
             "scheduled_task": "Step timeline A is a task date; F is the final application deadline and must not be counted as another scheduled task",
             "shared_task": "What I need to do A is an explicit cross-application task date; E is its user-maintained status",
             "overdue": "Past scheduled dates have no completion state in Step timeline: they are unconfirmed, not asserted unfinished",
         },
         "today": {
             "eligible_application_deadlines":today_apps,
+            "priority_review_dates":today_priorities,
+            "unverified_application_dates":today_unverified,
             "excluded_application_deadlines":excluded_deadlines,
             "scheduled_timeline_tasks":step_today,
             "cross_route_tasks":shared_today,
             "linked_past_steps_with_final_deadline_today":parent_final_today,
             "counts": {
                 "deadline_actions":len(today_apps),
+                "priority_reviews":len(today_priorities),
+                "unverified_dates":len(today_unverified),
                 "excluded_deadlines":len(excluded_deadlines),
                 "timeline_tasks":len(step_today),
                 "shared_tasks":len(shared_today),
-                "total_distinct_scheduled_actions":len(today_apps)+len(step_today)+len(shared_today),
-                "source_row_events_scheduled_today":len(today_apps)+len(step_today)+len(shared_today),
+                "total_distinct_scheduled_actions":len(today_apps)+len(today_priorities)+len(today_unverified)+len(step_today)+len(shared_today),
+                "source_row_events_scheduled_today":len(today_apps)+len(today_priorities)+len(today_unverified)+len(step_today)+len(shared_today),
                 "linked_past_steps_not_recounted":len(parent_final_today),
             }
         },
         "upcoming_7_day_deadlines":future_week,
+        "upcoming_7_day_priority_dates":future_week_priorities,
         "overdue_or_unconfirmed": {
             "total":len(past_unconfirmed),
             "cross_route":sum(t["type"]=="cross_route_task" for t in past_unconfirmed),
@@ -239,12 +267,15 @@ def regenerate_sheet(wb, result):
     if ws.max_row:
         ws.delete_rows(1, ws.max_row)
     ws.append(COLUMNS)
-    palette={"application_deadline":"DCEEEA","timeline_step":"EAF1FB","cross_route_task":"FFF0D9"}
+    palette={"application_deadline":"DCEEEA","application_priority":"FFF0D9","application_unverified":"FDE8E8","timeline_step":"EAF1FB","cross_route_task":"FFF0D9"}
     sections=[
         ("Today — application submissions",result["today"]["eligible_application_deadlines"]),
+        ("Today — priority-review dates (NOT final deadlines)",result["today"]["priority_review_dates"]),
+        ("Today — unverified application dates",result["today"]["unverified_application_dates"]),
         ("Today — shared cross-route tasks",result["today"]["cross_route_tasks"]),
         ("Today — scheduled preparation",result["today"]["scheduled_timeline_tasks"]),
         ("Next seven days — application deadlines",result["upcoming_7_day_deadlines"]),
+        ("Next seven days — priority dates",result["upcoming_7_day_priority_dates"]),
         ("Past dates — completion unconfirmed",result["overdue_or_unconfirmed"]["highest_priority_sample"]),
     ]
     row_number=1
