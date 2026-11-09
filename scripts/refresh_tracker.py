@@ -161,7 +161,7 @@ def refresh(wb, today: date, online: bool):
     for rec in opportunities:
         if not rec["id"] or not rec["source_url"].startswith("https://"):
             raise ValueError("Malformed candidate provenance")
-        if rec["confidence"] == "official_plus_email" and rec["deadline"] and rec["id"] not in ids:
+        if (rec["confidence"] == "official_plus_email" or (rec["confidence"] == "official_institution" and rec["decision"] in {"Go", "Go with risk"})) and rec["deadline"] and rec["id"] not in ids:
             current.append(make_main_row(rec))
             ids.add(rec["id"])
     current.sort(key=lambda row: (date_key(row[1]), str(row[6]).casefold()))
