@@ -14,6 +14,7 @@ from .operations import evidence_conflicts, milestones_for, referee_matrix, rese
 from .providers import invoke, ProviderError
 from .connectivity import model_list, provider_states, remember_check
 from .settings import read_settings, save_settings
+from .secrets import read_secret, write_secret
 from .metrics import usage_summary
 from time import perf_counter
 from .calendar import line_items
@@ -180,6 +181,13 @@ class ApiHandler(BaseHTTPRequestHandler):
         root = self.server.root
         if path == "/api/settings":
             self.send_json({"settings": save_settings(store, data)})
+        elif path == "/api/providers/credential":
+            provider = selected(catalog(store)["providers"], data["provider_id"], "provider")
+            variable = provider.get("api_key_env") or ""
+            if not variable:
+                raise ValueError("Provider has no credential variable")
+            write_secret(variable, data["credential"])
+            self.send_json({"saved": True, "provider_id": provider["id"], "credential_configured": bool(read_secret(variable))})
         elif path in {"/api/providers/probe", "/api/providers/models"}:
             provider = selected(catalog(store)["providers"], data["provider_id"], "provider")
             if not provider["local"] and data.get("cloud_consent") is not True:

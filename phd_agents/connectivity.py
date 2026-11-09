@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+from .secrets import read_secret
 import time
 from typing import Any
 from urllib.error import HTTPError, URLError
@@ -39,7 +40,7 @@ def provider_state(provider: dict[str, Any], last: dict[str, Any] | None = None)
     return {
         "provider_id": provider["id"], "state": state, "reason": reason,
         "credential_source": "environment" if env else "none",
-        "credential_configured": bool(os.environ.get(env)) if env else None,
+        "credential_configured": bool(read_secret(env)) if env else None,
         "last_checked": prior.get("checked_at"),
         "latency_ms": prior.get("latency_ms"),
         "model_count": prior.get("model_count"),
@@ -56,14 +57,14 @@ def provider_states(store: Store, providers: list[dict[str, Any]]) -> dict[str, 
 def model_list(provider: dict[str, Any], timeout: int = 12) -> dict[str, Any]:
     base = validate_url(provider["base_url"], bool(provider["local"]))
     env = str(provider.get("api_key_env") or "")
-    if env and not os.environ.get(env) and not provider["local"]:
+    if env and not read_secret(env) and not provider["local"]:
         raise ProviderError("Missing credential environment variable " + env)
     headers = {"Accept": "application/json"}
     kind = provider["kind"]
     if kind == "anthropic":
         endpoint = base + "/v1/models"
         headers["anthropic-version"] = "2023-06-01"
-        if env and os.environ.get(env):
+        if env and read_secret(env):
             headers["x-api-key"] = os.environ[env]
     else:
         if kind == "azure_deployment":
@@ -72,9 +73,9 @@ def model_list(provider: dict[str, Any], timeout: int = 12) -> dict[str, Any]:
         else:
             endpoint = base + "/models"
         if kind in {"azure_openai", "azure_deployment"}:
-            if env and os.environ.get(env):
+            if env and read_secret(env):
                 headers["api-key"] = os.environ[env]
-        elif env and os.environ.get(env):
+        elif env and read_secret(env):
             headers["Authorization"] = "Bearer " + os.environ[env]
     started = time.perf_counter()
     try:

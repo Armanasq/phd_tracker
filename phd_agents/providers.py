@@ -3,6 +3,7 @@ from __future__ import annotations
 import ipaddress
 import json
 import os
+from .secrets import read_secret
 from dataclasses import dataclass
 from time import perf_counter
 from typing import Any
@@ -60,7 +61,7 @@ def validate_url(value: object, local: bool) -> str:
 def invoke(provider: dict[str, Any], system: str, prompt: str, *, timeout: int = 55) -> ModelReply:
     validate_url(provider["base_url"], bool(provider["local"]))
     key_name = provider.get("api_key_env", "")
-    api_key = os.environ.get(key_name, "") if key_name else ""
+    api_key = read_secret(key_name) if key_name else ""
     if key_name and not api_key and not provider["local"]:
         raise ProviderError("Missing provider credential in environment variable " + key_name)
     kind = provider["kind"]
