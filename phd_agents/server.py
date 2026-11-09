@@ -4,7 +4,7 @@ import json
 import mimetypes
 import os
 import re
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, unquote, urlsplit
 
@@ -28,7 +28,8 @@ from .store import ConflictError, Store
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
 
-class ApiServer(HTTPServer):
+class ApiServer(ThreadingHTTPServer):
+    daemon_threads = True
     def __init__(self, address: tuple[str, int], *, store: Store, root: Path):
         super().__init__(address, ApiHandler)
         self.store = store
@@ -37,6 +38,19 @@ class ApiServer(HTTPServer):
 
 class ApiHandler(BaseHTTPRequestHandler):
     server: ApiServer
+
+    @property
+    def request_store(self) -> Store:
+        if not hasattr(self, "_request_store"):
+            self._request_store = Store(self.server.store.path)
+        return self._request_store
+
+    def finish(self) -> None:
+        try:
+            super().finish()
+        finally:
+            if hasattr(self, "_request_store"):
+                self._request_store.close()
 
     def log_message(self, format: str, *args) -> None:
         return
@@ -112,7 +126,7 @@ class ApiHandler(BaseHTTPRequestHandler):
         self.send_json({"error": "Cross-origin requests are disabled"}, 405)
 
     def get_route(self, path: str) -> None:
-        store = self.server.store
+        store = self.request_store
         if path == "/api/health":
             self.send_json({"status": "ok", "mode": "loopback_private", "ai_side_effects": "none"})
         elif path == "/api/bootstrap":
@@ -204,7 +218,7 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.static(path)
 
     def post_route(self, path: str, data: dict) -> None:
-        store = self.server.store
+        store = self.request_store
         root = self.server.root
         if path == "/api/settings":
             self.send_json({"settings": save_settings(store, data)})
