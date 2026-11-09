@@ -663,6 +663,25 @@ body.dark #atlasLens .lens-footer-status {background:var(--surface);border-color
   #atlasLens .lens-history {padding:16px}
   #atlasLens .lens-prompt {min-height:45px}
 }
+@media(max-width:430px) {
+  .sidebar,body.dark .sidebar {flex-wrap:wrap;gap:7px}
+  .brand {min-width:0;flex:0 0 auto;padding:0}
+  .brand-name small {display:none}
+  .mobile-workspace-navigation {min-width:0;flex:1 1 100px;margin-left:auto;max-width:none;padding:0}
+  .mobile-workspace-navigation label {display:none}
+  .mobile-workspace-navigation select {min-width:0;width:100%;min-height:32px;padding:5px 8px;font-size:11px}
+  .topbar .crumb {min-width:0;max-width:65px;flex-shrink:1}
+  .top-actions {min-width:0;gap:4px;flex-shrink:0}
+  .top-copilot {font-size:0!important;min-width:36px!important;padding:7px 8px!important}
+  .top-copilot::after {content:"Ask";font:600 11px Inter,system-ui,sans-serif}
+  .top-search {width:33px;min-width:33px;height:33px;min-height:33px;padding:0}
+  .top-actions .icon-btn {width:30px;height:33px}
+  .export-btn {font-size:0;min-width:32px;padding:7px 8px}
+  .export-btn span {font-size:13px}
+  .runway-days {max-width:100%;overflow-x:auto}
+  .decision-brief-label span:last-child {display:none}
+  .decision-brief-body {grid-template-columns:64px minmax(0,1fr);gap:9px}
+}
 @media(prefers-reduced-motion:reduce) {
   *,*::before,*::after {scroll-behavior:auto!important;transition:none!important;animation:none!important}
 }
