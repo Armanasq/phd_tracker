@@ -27,7 +27,7 @@ test("invalid deadlines, mailbox URLs, private text, unsupported states and unsa
  assert.throws(()=>createLocalRecord({...input,name:"Prof test@example.edu"},id),/name/);
  assert.throws(()=>createLocalRecord({...input,status:"submitted_without_receipt"},id),/workflow/);
  assert.throws(()=>createLocalRecord(input,"../bad"),/ID/);
- assert.throws(()=>createLocalRecord({...input,documents:["unrecognised"]},id),/documents/);
+ assert.throws(()=>createLocalRecord({...input,documents:["unrecognised"]},id),/document/);
  assert.throws(()=>normalizeLocalRecords([createLocalRecord(input,id),createLocalRecord(input,id)]),/Duplicate/);
  assert.throws(()=>normalizeLocalRecords([createLocalRecord(input,id)],[id]),/Duplicate/);
 });
