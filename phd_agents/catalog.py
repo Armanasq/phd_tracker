@@ -80,8 +80,15 @@ def agent_spec(value: dict[str, Any]) -> dict[str, Any]:
     instructions = str(value.get("instructions") or "").strip()
     if not label or len(label) > 100 or not instructions or len(instructions) > 5000:
         raise ValueError("Agent requires label and 1–5000 character instructions")
-    return {"id": identity, "label": label, "description": str(value.get("description") or "")[:400],
-            "instructions": instructions}
+    from .toolkit import TOOL_NAMES
+    tools = value.get("tools")
+    if tools is not None and (not isinstance(tools, list) or len(tools) > 8 or any(name not in TOOL_NAMES for name in tools)):
+        raise ValueError("Agent tools must be selected from the safe, deterministic tool registry")
+    result = {"id": identity, "label": label, "description": str(value.get("description") or "")[:400],
+              "instructions": instructions}
+    if tools is not None:
+        result["tools"] = tools
+    return result
 
 def workflow_spec(value: dict[str, Any]) -> dict[str, Any]:
     identity = validate_id(value.get("id"))
@@ -89,6 +96,10 @@ def workflow_spec(value: dict[str, Any]) -> dict[str, Any]:
     schedule = value.get("schedule", "manual")
     if schedule not in SCHEDULES:
         raise ValueError("Unsupported workflow schedule")
+    steps = value.get("steps") or [agent_id]
+    if not isinstance(steps, list) or not 1 <= len(steps) <= 3:
+        raise ValueError("Workflows require 1–3 agent stages")
+    steps = [validate_id(x) for x in steps]
     provider_id = validate_id(value.get("provider_id") or "ollama")
     prompt = str(value.get("prompt") or "")
     if len(prompt) > 3000:
@@ -96,4 +107,5 @@ def workflow_spec(value: dict[str, Any]) -> dict[str, Any]:
     return {"id": identity, "label": str(value.get("label") or identity)[:100],
             "description": str(value.get("description") or "")[:400],
             "agent_id": agent_id, "schedule": schedule, "enabled": bool(value.get("enabled", False)),
-            "provider_id": provider_id, "cloud_consent": value.get("cloud_consent") is True, "prompt": prompt}
+            "provider_id": provider_id, "cloud_consent": value.get("cloud_consent") is True, "prompt": prompt,
+            "steps": steps}

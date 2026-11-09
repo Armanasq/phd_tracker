@@ -192,6 +192,11 @@ class ApiHandler(BaseHTTPRequestHandler):
                 ids = {a["id"] for a in catalog(store)["agents"]}
                 if validated["agent_id"] not in ids:
                     raise ValueError("Workflow references an unknown agent")
+                if any(step not in ids for step in validated.get("steps", [])):
+                    raise ValueError("Workflow contains an unknown agent step")
+                provider_ids = {p["id"] for p in catalog(store)["providers"]}
+                if validated.get("provider_id") not in provider_ids:
+                    raise ValueError("Workflow references an unknown model provider")
             store.put_custom(kind, validated)
             self.send_json({"saved": True, "kind": kind, "entry": validated})
         elif path.startswith("/api/applications/") and path.endswith("/update"):

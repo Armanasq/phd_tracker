@@ -10,6 +10,7 @@ from .catalog import AGENTS, POLICY, PROVIDERS, WORKFLOWS
 from .domain import agenda, merged_records, preflight, snapshot, today_in
 from .providers import invoke
 from .store import Store
+from .toolkit import DEFAULT_TOOLS, run_tools
 
 def catalog(store: Store) -> dict[str, list[dict[str, Any]]]:
     return {"providers": store.catalog("provider", PROVIDERS),
@@ -53,6 +54,11 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str,
         evidence = {"summary": source.get("meta", {}), "date": today.isoformat(),
                     "agenda": agenda(records, today, 12),
                     "source_health": source.get("providers", [])}
+    tool_names = agent.get("tools") if isinstance(agent.get("tools"), list) else DEFAULT_TOOLS.get(agent_id, [])
+    private = {kind: store.items(kind) for kind in ("profile", "referee", "reference", "milestone", "evidence")}
+    tool_pack = run_tools(tool_names, data=source, records=records, private=private,
+                          today=today, application_id=application_id)
+    evidence["tool_results"] = tool_pack
     evidence_json = json.dumps(evidence, ensure_ascii=False, separators=(",", ":"))
     if len(evidence_json) > 15500:
         evidence_json = evidence_json[:15500] + "\n[Context truncated]"
@@ -68,22 +74,39 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str,
     run_id = store.put_run("workflow" if workflow_id else "agent", agent_id, application_id,
                            "proposed", provider_id,
                            {"text": reply.content, "model": reply.model, "usage": reply.usage,
-                            "workflow_id": workflow_id, "source_as_of": source.get("as_of"),
+                            "workflow_id": workflow_id, "tools": [x["name"] for x in tool_pack["tools"]], "source_as_of": source.get("as_of"),
                             "notice": "AI output is a proposal; no application or communication was changed"})
     return {"id": run_id, "agent_id": agent_id, "provider_id": provider_id,
             "model": reply.model, "usage": reply.usage, "text": reply.content,
-            "status": "proposed", "source_as_of": source.get("as_of")}
+            "status": "proposed", "tools": [x["name"] for x in tool_pack["tools"]], "source_as_of": source.get("as_of")}
 
 def run_workflow(store: Store, root: Path, *, workflow_id: str,
                  provider_id: str, application_id: str | None = None,
                  input_text: str = "", cloud_consent: bool = False) -> dict[str, Any]:
-    workflow = selected(catalog(store)["workflows"], workflow_id, "workflow")
-    task = workflow.get("prompt") or workflow.get("description", "")
+    options = catalog(store)
+    workflow = selected(options["workflows"], workflow_id, "workflow")
+    agent_ids = workflow.get("steps") or [workflow["agent_id"]]
+    known = {agent["id"] for agent in options["agents"]}
+    if not agent_ids or len(agent_ids) > 3 or any(x not in known for x in agent_ids):
+        raise ValueError("Workflow must select 1–3 known agents")
+    objective = workflow.get("prompt") or workflow.get("description", "")
     if input_text:
-        task += "\n\n" + input_text
-    return run_agent(store, root, agent_id=workflow["agent_id"], provider_id=provider_id,
-                     application_id=application_id, input_text=task,
-                     cloud_consent=cloud_consent, workflow_id=workflow_id)
+        objective += "\n\n" + input_text
+    outputs = []
+    for index, agent_id in enumerate(agent_ids):
+        prior = "\n\nPrevious agent proposals (unverified, no actions taken):\n" + "\n".join(
+            x["agent_id"] + ": " + x["text"][:900] for x in outputs
+        ) if outputs else ""
+        result = run_agent(store, root, agent_id=agent_id, provider_id=provider_id,
+                           application_id=application_id,
+                           input_text=("Workflow step " + str(index + 1) + "/" + str(len(agent_ids)) +
+                                       ": " + objective + prior)[:5000],
+                           cloud_consent=cloud_consent, workflow_id=workflow_id)
+        outputs.append(result)
+    return {**outputs[-1], "workflow_id": workflow_id,
+            "steps": [{"run_id": x["id"], "agent_id": x["agent_id"],
+                       "text": x["text"], "usage": x["usage"], "tools": x["tools"]} for x in outputs],
+            "status": "proposed"}
 
 def period_for(schedule: str, now: datetime) -> str:
     if schedule == "daily":
