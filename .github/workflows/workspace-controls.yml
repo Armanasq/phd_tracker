@@ -7,6 +7,7 @@ on:
 permissions:
   contents: write
   issues: read
+  actions: write
 
 concurrency:
   group: phd-atlas-owner-writes
@@ -27,4 +28,5 @@ jobs:
       - name: Validate owner command and commit to main without overwriting concurrent changes
         env:
           OWNER_LOGIN: ${{ github.repository_owner }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bash scripts/atomic_workspace.sh
