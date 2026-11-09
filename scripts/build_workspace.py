@@ -8,6 +8,11 @@ from difflib import SequenceMatcher
 from pathlib import Path
 from urllib.parse import urlsplit, urlunsplit
 
+if __package__:
+    from .source_policy import classify_deadline_note_strict
+else:
+    from source_policy import classify_deadline_note_strict
+
 ROOT = Path(__file__).resolve().parents[1]
 DOCUMENTS = {
     "academic_cv": "Academic CV",
@@ -132,7 +137,6 @@ def build(root: Path = ROOT) -> dict:
             contacts = ""
         next_step = clean(owner.get("next_step") or source.get("next_step") or queued.get("next_step") or detail.get("next_step"), 650)
         raw_deadline_note = str(detail.get("deadline_kind") or extra.get("deadline_type") or queued.get("deadline_kind") or "")
-        from scripts.source_policy import classify_deadline_note_strict
         deadline_type = classify_deadline_note_strict(raw_deadline_note) if date_str else "unverified"
         explicit_joint = any(phrase in (str(detail.get("blockers", ""))+" "+next_step).casefold() for phrase in (
             "do not submit twice", "not independently", "joint application", "same application", "not a separate application",
