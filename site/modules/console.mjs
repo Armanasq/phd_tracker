@@ -1,3 +1,4 @@
+import {createOperations} from "./operations.mjs";
 const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const pretty = value => String(value ?? "").replaceAll("_"," ").replace(/\b\w/g, c => c.toUpperCase());
 const short = (value, length=125) => String(value ?? "").slice(0,length);
@@ -7,7 +8,7 @@ const stamp = value => value ? new Date(value).toLocaleString(undefined,{dateSty
 const cleanId = value => String(value||"").trim().toLowerCase().replace(/[^a-z0-9_-]+/g,"_").replace(/^_+/,"").slice(0,64);
 const opt = (items,value) => choose(items,value);
 
-export function createConsole({notify,onChange,navigate,getRecords,getView}) {
+export function createConsole({notify,onChange,navigate,getRecords,getSourceRecords,onReload,getView}) {
  const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:""};
  const providers = () => state.data?.catalog?.providers || [];
  const agents = () => state.data?.catalog?.agents || [];
@@ -341,9 +342,11 @@ export function createConsole({notify,onChange,navigate,getRecords,getView}) {
    box("Agent executions","Costs are not inferred without verified provider pricing.",'<div class="os-ledger">'+ledger+'</div>')+
    box("Per-provider usage","Only measured calls and reported tokens are included.",'<div class="os-ledger">'+usage+'</div>')+'</section>';
  }
+ const operations=createOperations({request,onChange,onReload,getRecords:getSourceRecords||getRecords,notify});
  function view(name,{records=[]}={}) {
   if(!isLive())return offline(name);
   if(name==="ai")return copilot(records);
+  if(name==="operations")return operations.view();
   if(name==="settings")return settings();
   if(name==="agents")return '<section class="os-page">'+heading("AI / AGENT DEFINITIONS","Agent builder","Configure each research agent's instructions, deterministic tools and automatic model assignment.",btn("Model settings","go","settings","quiet"))+agentPanel()+'</section>';
   if(name==="automations")return '<section class="os-page">'+heading("AI / WORKFLOW ENGINE","Automations","Compose multi-agent workflows, inspect scheduling rules and control approvals.",btn("Runtime settings","go","settings","quiet"))+workflowPanel()+'</section>';
@@ -526,5 +529,5 @@ export function createConsole({notify,onChange,navigate,getRecords,getView}) {
   activeModel:()=>active()?.model||"",isVerified:()=>!!active()&&status(active())==="responded",
   settings:()=>prefs(),setContext:view=>{state.sourceView=view},
   selectApplication:id=>{state.selectedApplication=id;state.prompt="Audit this application's official-source evidence, eligibility, exact deadline, documents, blockers and next actions. Separate verified facts from unknowns.";state.lastAnswer=null;},
-  selectTab:tab=>{state.tab=tab;onChange()}};
+  selectTab:tab=>{state.tab=tab;onChange()},openApplication:id=>operations.selectApplication(id)};
 }

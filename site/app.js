@@ -2,7 +2,7 @@ import {daysUntil,isActionable,isClosed as domainClosed,riskSignal,priorityScore
 import {createConsole} from "./modules/console.mjs";
 (() => {
 "use strict";
-const VIEWS=[["dashboard","home","Overview"],["applications","file","Applications"],["actions","check","Actions"],["calendar","calendar","Calendar"],["pipeline","columns","Pipeline"],["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],["review","shield","Verification"],["archive","archive","Archive"],["sources","database","Sources"],["ai","sparkles","Copilot"],["agents","bot","Agents"],["automations","flow","Automations"],["activity","activity","Run history"],["settings","settings","Settings"]];
+const VIEWS=[["dashboard","home","Overview"],["applications","file","Applications"],["operations","layers","Operations"],["actions","check","Actions"],["calendar","calendar","Calendar"],["pipeline","columns","Pipeline"],["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],["review","shield","Verification"],["archive","archive","Archive"],["sources","database","Sources"],["ai","sparkles","Copilot"],["agents","bot","Agents"],["automations","flow","Automations"],["activity","activity","Run history"],["settings","settings","Settings"]];
 const OWNER_REPO="https://github.com/Armanasq/phd_tracker";
 const STORE="phd-atlas-drafts-v1",PREFS="phd-atlas-prefs-v1",VIEW_STORE="phd-atlas-views-v2",COMPARE_STORE="phd-atlas-compare-v1";
 const $=id=>document.getElementById(id);
@@ -289,7 +289,7 @@ openModal('<div class="eyebrow">'+escapeHTML(r.id)+' · '+escapeHTML(r.record_ty
 '<div class="field"><label>Required document evidence</label><p>'+escapeHTML(r.document_requirements_note||"Verify document list on official portal")+'</p></div>'+
 '<div class="field"><label>Blockers, source reservations & submission precautions</label><p>'+escapeHTML(r.blockers||r.verification_note||"No specific blocker documented")+'</p>'+riskPill(r)+'</div>'+
 '<div class="field"><label>Evidence excerpt</label><p>'+escapeHTML(r.evidence||"No detailed excerpt recorded")+'</p></div></div><div>'+fields+'</div></div>',
-'<div class="buttons">'+(r.record_type==="tracked"?button("Analyze with Copilot","ai-record",r.id,"primary"):"")+button("Save local draft","save-record",r.id)+button("Review GitHub update","save-command",r.id)+(r.record_type==="candidate"?button("Promote candidate","promote",r.id):"")+button("Action Center","url",state.data.source_links.control_issue)+'</div><p class="footnote">Drafts stay in your browser until confirmed through GitHub. Notes and receipt URLs remain local; public issues must not contain private applicant data.</p>');
+'<div class="buttons">'+(r.record_type==="tracked"?button("Analyze with Copilot","ai-record",r.id,"primary")+button("Manage privately","ops-record",r.id):"")+button("Save local draft","save-record",r.id)+button("Review GitHub update","save-command",r.id)+(r.record_type==="candidate"?button("Promote candidate","promote",r.id):"")+button("Action Center","url",state.data.source_links.control_issue)+'</div><p class="footnote">Drafts stay in your browser until confirmed through GitHub. Notes and receipt URLs remain local; public issues must not contain private applicant data.</p>');
 }
 function openModal(title,body,footer=""){
  if(!state.modal)state.returnFocus=document.activeElement;
@@ -366,6 +366,7 @@ const ICONS={
  compare:'<rect x="3.5" y="5" width="6.5" height="14" rx="1.5"/><rect x="14" y="5" width="6.5" height="14" rx="1.5"/>',
  shield:'<path d="M12 2.5 19 5v6.8c0 4.5-2.8 7.5-7 9.7-4.2-2.2-7-5.2-7-9.7V5zM9 11.8l2 2 4-4"/>',
  archive:'<rect x="4" y="4.5" width="16" height="4.5" rx="1"/><path d="M6 9v10.5h12V9M10 13.3h4"/>',
+ layers:'<path d="m12 2 9 5-9 5-9-5zM3 12l9 5 9-5M3 17l9 5 9-5"/>',
  sparkles:'<path d="m12 2 1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6zM19 17l.7 1.8L22 19.5l-2.3.7L19 22l-.7-1.8-2.3-.7 2.3-.7z"/>',
  bot:'<rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4m-2 0h4M8 13h.1M16 13h.1M9 17h6"/>',
  flow:'<rect x="3" y="3" width="7" height="6" rx="1"/><rect x="14" y="15" width="7" height="6" rx="1"/><path d="M10 6h5v5m0 0v4M15 11H8v4"/>',
@@ -396,7 +397,7 @@ function render(){
  if(!state.data)return;
  navigation();
  const views={dashboard,calendar:calendarView,applications,pipeline,contacts,actions,updates,compare,review,archive,sources};
- const intelligence=["ai","agents","automations","activity","settings"].includes(state.view);
+ const intelligence=["ai","agents","automations","activity","settings","operations"].includes(state.view);
  const freshness=freshnessState(state.data.as_of,TODAY());
  const note=["aging","stale","unknown","future"].includes(freshness.state)
    ?'<div class="freshness-note" role="status"><span>'+escapeHTML(freshness.label)+'. Verify critical deadlines using official sources.</span>'+button("Review sources","nav","sources")+'</div>':"";
@@ -416,7 +417,7 @@ function go(view){
  if(location.hash!=="#"+view)location.hash=view;
  window.scrollTo({top:0,behavior:"instant"});render();
 }
-const aiConsole=createConsole({notify,onChange:()=>{if(state.data)render()},navigate:go,getRecords:records,getView:()=>state.view});
+const aiConsole=createConsole({notify,onChange:()=>{if(state.data)render()},navigate:go,getRecords:records,getSourceRecords:()=>state.data?.records||[],onReload:loadSnapshot,getView:()=>state.view});
 function explainNotifications(){const supported=("Notification" in window);const permission=supported?Notification.permission:"unsupported";openModal("<h2>Reminder settings</h2>",'<p class="muted">Reminders are computed locally from source dates while this page is open. Closing the tab disables on-page notifications. GitHub Actions provides separate scheduled reminders.</p><div class="notifications"><div class="notification"><strong>Browser permission</strong>'+escapeHTML(permission)+'</div><div class="notification"><strong>Current horizon</strong>Today, 1, 3 and 7 days before a recorded date</div></div><div class="buttons">'+button("Request browser permission","permission","","primary")+button("View GitHub notifications","url",OWNER_REPO+"/actions/workflows/phd-intelligence.yml")+'</div>')}
 function checkNotifications(){if(!state.data||!state.prefs.reminders||!("Notification" in window)||Notification.permission!=="granted")return;const alerted=state.prefs.notified||{};let changed=false;for(const r of records().filter(r=>r.record_type==="tracked")){const d=days(r.deadline);if(!open(r)||![0,1,3,7].includes(d))continue;const key=r.id+"|"+r.deadline+"|"+d;if(alerted[key])continue;try{const n=new Notification("PhD deadline: "+stamp(r.deadline),{body:r.name.slice(0,140)+" — verify portal cutoff and submission state.",tag:key});n.onclick=()=>{window.focus();go("applications");detail(getRecord(r.id));n.close()};alerted[key]=TODAY();changed=true}catch{}}if(changed){state.prefs.notified=Object.fromEntries(Object.entries(alerted).slice(-500));saveStore(PREFS,state.prefs)}}
 function events(){
@@ -427,6 +428,7 @@ function events(){
   if(type==="nav")go(value);
   else if(type==="record"){closeModal();detail(getRecord(value))}
   else if(type==="ai-record"){closeModal();aiConsole.selectApplication(value);go("ai")}
+  else if(type==="ops-record"){closeModal();aiConsole.openApplication(value);go("operations")}
    else if(type==="close")closeModal();
   else if(type==="save-record")saveRecord(false);
   else if(type==="save-command")saveRecord(true);

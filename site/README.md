@@ -42,3 +42,7 @@ node tests/site_accessibility.cjs
 ```
 
 The new model smoke test uses a synthetic local OpenAI-compatible HTTP server to verify endpoint registration, model probing, activation, agent assignment and inference without exposing credentials or generating real provider charges.
+
+## Unified private applicant operations
+
+The **Operations** route now includes owner-maintained application state, referee records and reference-request states, distinct deadline clocks with verified source/time-zone fields, claim-level evidence, private research profile and capacity scenarios. These are accessible through the same navigation and backend as model Settings and Copilot. Select **Manage privately** on an application to inspect and update its private state with an optimistic version check. Changes to private records do not silently publish on GitHub Pages. Previously recorded source claims remain separate from owner-entered evidence and contradictions remain flagged for review.
