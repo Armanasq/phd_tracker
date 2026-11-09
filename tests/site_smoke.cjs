@@ -34,8 +34,11 @@ async function run() {
     const response = await page.goto(base+'/',{waitUntil:'networkidle'});
     assert.equal(response.status(),200);
     await page.locator('#body h1').waitFor();
-    assert.match(await page.locator('#body h1').innerText(),/Application command center/);
+    assert.match(await page.locator('#body h1').innerText(),/Today’s work/);
     assert.equal(await page.locator('.kpi').count(),5);
+    assert.match(await page.locator('.kpi').first().innerText(),/Tracked applications\\s*109/);
+    assert.equal(await page.locator('body').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(250, 249, 246)');
+    assert.ok((await page.locator('.agenda-item').count())>=5);
     assert.ok((await page.locator('.nav-btn').count())>=11);
     await page.screenshot({path:path.join(out,'phd-atlas-desktop.png'),fullPage:true});
 
@@ -94,6 +97,8 @@ async function run() {
     assert.ok((await mobile.locator('.cal-day').count())>=28);
     await mobile.locator('#navigation [data-action="nav"][data-value="applications"]').click();
     assert.ok((await mobile.locator('tbody tr').count())>=100);
+    const mobileOverflow=await mobile.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
+    assert.ok(mobileOverflow<=2, 'Mobile page must not overflow: '+mobileOverflow+'px');
     await mobile.close();
 
     assert.deepEqual(errors,[]);
