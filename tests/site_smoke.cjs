@@ -142,9 +142,9 @@ async function run() {
     });
     assert.equal(mobileBriefOverlap,false,'Deadline countdown must not overlap the programme title on mobile');
     await mobile.screenshot({path:path.join(out,'phd-atlas-mobile.png'),fullPage:true});
-    await mobile.locator('#navigation [data-action="nav"][data-value="calendar"]').click();
+    await mobile.locator('#workspaceSection').selectOption('calendar');
     assert.ok((await mobile.locator('.cal-day').count())>=28);
-    await mobile.locator('#navigation [data-action="nav"][data-value="applications"]').click();
+    await mobile.locator('#workspaceSection').selectOption('applications');
     assert.ok((await mobile.locator('tbody tr').count())>=100);
     assert.ok((await mobile.locator('.app-card:visible').count())>=100);
     assert.equal(await mobile.locator('.desktop-table:visible').count(),0);

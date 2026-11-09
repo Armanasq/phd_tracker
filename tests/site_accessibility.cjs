@@ -23,12 +23,15 @@ async function main(){
  const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
  const issues=[];
  try{
-  for(const [width,height,view] of [[1512,980,'dashboard'],[1512,980,'applications'],[1512,980,'calendar'],[1512,980,'pipeline'],[1512,980,'review'],[390,844,'applications']]){
+  for(const [width,height,view] of [[1512,980,'dashboard'],[1512,980,'applications'],[1512,980,'calendar'],[1512,980,'pipeline'],[1512,980,'review'],[1512,980,'settings'],[1512,980,'ai'],[390,844,'settings'],[390,844,'applications']]){
    const context=await browser.newContext({viewport:{width,height}});
    const page=await context.newPage();
    await page.goto('http://127.0.0.1:'+server.address().port+'/',{waitUntil:'networkidle'});
    await page.locator('#body h1').waitFor();
-   if(view!=='dashboard')await page.locator('#navigation [data-value="'+view+'"]').click();
+   if(view!=='dashboard'){
+    if(width<=980)await page.locator('#workspaceSection').selectOption(view);
+    else await page.locator('#navigation [data-value="'+view+'"]').click();
+   }
    const results=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa']).analyze();
    issues.push({viewport:width,view,violations:results.violations.map(v=>({id:v.id,impact:v.impact,description:v.description,nodes:v.nodes.slice(0,8).map(n=>({target:n.target,html:n.html,summary:n.failureSummary}))})),incomplete:results.incomplete.length});
    if(view==='applications'&&width>1000){

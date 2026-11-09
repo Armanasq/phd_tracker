@@ -7,8 +7,8 @@ const http=require('node:http');
 const net=require('node:net');
 const {spawn}=require('node:child_process');
 const {chromium}=require('playwright');
-const TRACKER=['dashboard','applications','calendar','pipeline','actions','contacts','updates','compare','review','archive','sources','ai'];
-const STUDIO=['overview','agents','workflows','providers','applications','referees','timeline','evidence','planning','activity','settings'];
+const TRACKER=['dashboard','applications','actions','calendar','pipeline','contacts','updates','compare','review','archive','sources','ai','agents','automations','activity','settings'];
+
 const SIZES=[['desktop',1440,900],['tablet',820,1080],['mobile',390,844],['narrow',320,700]];
 async function freePort(){const s=net.createServer();await new Promise(ok=>s.listen(0,'127.0.0.1',ok));const port=s.address().port;await new Promise(ok=>s.close(ok));return port}
 async function staticServer(root){
@@ -21,37 +21,36 @@ async function staticServer(root){
  await new Promise(ok=>s.listen(0,'127.0.0.1',ok));
  return {server:s,url:'http://127.0.0.1:'+s.address().port}
 }
-async function check(browser,url,kind,views,results){
+async function check(browser,url,views,results,mode){
  for(const [device,width,height] of SIZES){
   const page=await browser.newPage({viewport:{width,height}}),errors=[],httpErrors=[];
   page.on('pageerror',e=>errors.push(e.message));
   page.on('response',r=>{
    const responseUrl=new URL(r.url());
-   const expectedPrivateProbe=kind==='tracker'&&r.status()===404&&responseUrl.pathname==='/api/bootstrap';
+   const expectedPrivateProbe=mode==='public'&&r.status()===404&&responseUrl.pathname==='/api/bootstrap';
    if(r.url().startsWith(url)&&r.status()>=400&&!expectedPrivateProbe)httpErrors.push(r.status()+' '+r.url());
   });
   try{
-   await page.goto(url+'/'+(kind==='tracker'?'index.html':'ai-studio.html'),{waitUntil:'networkidle'});
-   if(kind==='tracker')await page.locator('#body h1').waitFor({timeout:15000});
-   else await page.locator('#connection.live').waitFor({state:'attached',timeout:15000});
+   await page.goto(url+'/index.html',{waitUntil:'networkidle'});
+   await page.locator('#body h1').waitFor({timeout:15000});
    for(const view of views){
-    const selector=kind==='tracker'?'#navigation [data-action="nav"][data-value="'+view+'"]':'#studioNav [data-view="'+view+'"]';
-    const root=kind==='tracker'?'#body':'#workspace';
-    if(kind==='studio'&&width<=850)await page.locator('#mobileStudioView').selectOption(view);
+    const selector='#navigation [data-action="nav"][data-value="'+view+'"]';
+    const root='#body';
+    if(width<=980)await page.locator('#workspaceSection').selectOption(view);
     else await page.locator(selector).click();
     await page.locator(root+' h1').first().waitFor();
     const title=(await page.locator(root+' h1').first().innerText()).trim();
-    assert.ok(title,kind+' '+view+' missing heading');
-    assert.equal(new URL(page.url()).hash.slice(1),view,kind+' '+view+' incorrect route');
+    assert.ok(title,mode+' '+view+' missing heading');
+    assert.equal(new URL(page.url()).hash.slice(1),view,mode+' '+view+' incorrect route');
     const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
-    assert.ok(overflow<=2,kind+' '+view+' '+device+' horizontal overflow '+overflow);
+    assert.ok(overflow<=2,mode+' '+view+' '+device+' horizontal overflow '+overflow);
     await page.reload({waitUntil:'networkidle'});
     await page.locator(root+' h1').first().waitFor();
-    assert.equal(new URL(page.url()).hash.slice(1),view,kind+' '+view+' lost deep link');
-    results.push({kind,view,device,title,status:'pass'});
+    assert.equal(new URL(page.url()).hash.slice(1),view,mode+' '+view+' lost deep link');
+    results.push({mode,view,device,title,status:'pass'});
    }
-   assert.deepEqual(errors,[],kind+' '+device+' JavaScript errors');
-   assert.deepEqual(httpErrors,[],kind+' '+device+' HTTP errors');
+   assert.deepEqual(errors,[],mode+' '+device+' JavaScript errors');
+   assert.deepEqual(httpErrors,[],mode+' '+device+' HTTP errors');
   }finally{await page.close()}
  }
 }
@@ -68,18 +67,17 @@ async function main(){
   for(let i=0;i<75;i++){try{const r=await fetch(privateUrl+'/api/health');if(r.ok){ready=true;break}}catch{}await new Promise(ok=>setTimeout(ok,180))}
   assert.ok(ready,'Private runtime failed to start');
   browser=await chromium.launch({headless:true,args:['--no-sandbox']});
-  await check(browser,publicUrl,'tracker',TRACKER,results);
-  await check(browser,privateUrl,'studio',STUDIO,results);
+  await check(browser,publicUrl,TRACKER,results,'public');
+  await check(browser,privateUrl,TRACKER,results,'private');
   const page=await browser.newPage();
   try{
    await page.goto(publicUrl+'/index.html',{waitUntil:'networkidle'});
-   assert.ok(await page.locator('a[href="./ai-studio.html"]').count(),'Tracker missing AI Studio link');
-   await page.locator('a[href="./ai-studio.html"]').click();
-   assert.ok(page.url().endsWith('/ai-studio.html'));
-   await page.locator('a[href="./index.html"]').first().click();
-   assert.ok(page.url().endsWith('/index.html'));
-   await page.goto(publicUrl+'/ai-studio.html',{waitUntil:'networkidle'});
-   assert.match(await page.locator('#workspace').innerText(),/private local service/i);
+   assert.equal(await page.locator('iframe').count(),0,'No embedded AI Studio is permitted');
+   await page.goto(publicUrl+'/ai-studio.html#providers',{waitUntil:'domcontentloaded'});
+   await page.waitForURL('**/index.html#settings');
+   assert.ok(await page.locator('#body h1').count());
+   assert.match(await page.locator('#body').innerText(),/private workspace/i);
+
   }finally{await page.close()}
   await fs.writeFile(path.join(out,'all-routes-audit.json'),JSON.stringify({status:'pass',checks:results.length,results},null,2));
   console.log('All '+results.length+' route/viewport checks passed');
