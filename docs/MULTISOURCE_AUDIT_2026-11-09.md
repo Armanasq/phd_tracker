@@ -38,3 +38,14 @@ The existing tracker deadline `N263-07` is therefore **supported by the fresher 
 The [discovery diagnostics](../data/discovery_report.json) remain degraded: only Inria was healthy among four configured search providers; AcademicPositions returned HTTP 403, AcademicTransfer returned no new candidates, and Brave lacked `BRAVE_SEARCH_API_KEY`. All-source/exhaustive coverage therefore cannot be claimed. Reconciliation and workbook validation should be confirmed from the latest GitHub Actions run.
 
 **Privacy and state:** no full email bodies, login credentials, or sensitive personal information are copied into the repo. No candidate was automatically marked submitted, rejected or personally eligible.
+
+## Additional urgent scientific-AI recruitment
+
+| Research route | Actual institution-supported date | Source assessment |
+|:--|:--|:--|
+| [TIB Hannover EcoAIRE doctoral researcher](https://www.leibniz-gemeinschaft.de/en/careers/jobs/detail/job/show/Job/research-associatedoctoral-researcher-natural-language-processing-and-causal-ai-for-scientific-reasoning-mfd) | **14 Nov 2026** | **Go**: scientific NLP, LLM agents, multimodal evidence, causal AI and knowledge graphs; 3-year TV-L E13 appointment **subject to final Leibniz funding approval**. [Application instructions](https://stellenticket.uni-hannover.de/en/job-offers/208060?namespace=science), ref 44/2026; English C1 and ZAB degree comparison for final hiring. |
+| [Ruhr Bochum CRC1844 memory](https://www.ini.rub.de/research/groups/computational_neuroscience) | Early November *unconfirmed*, no definitive date | **Check first**: 4 planned memory/cognition PhD places, **funding pending**. The individual postings on [university jobs](https://www.ini.rub.de/the_institute/jobs/) were not present in the retrieved primary-page snapshot. Index's 9 Nov date is not accepted without institutional confirmation. |
+
+### Secondary-index error: NASK AI Safety scholarship
+
+An aggregator labels **13 Nov 2026** as the NASK Eval FM PhD-scholarship **application deadline**. The [original NASK vacancy, in Polish](https://www.nask.pl/kariera/konkurs-stypendium-w-projekcie-badawczym-592207-20011564) instead states **application deadline 28 Oct 2026** and **selection/decision date 13 Nov 2026**. This is an expired application, NOT a new opportunity. No false 13 Nov submission date was entered into the tracker.
