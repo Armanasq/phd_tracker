@@ -106,6 +106,27 @@ async function main(){
   assert.ok(seen.filter(x=>x.path==='/v1/chat/completions').length>=2);
   await page.locator('[data-action="nav"][data-value="activity"]').click();
   await page.locator('.os-ledger').first().getByText('My Research Agent').waitFor();
+  await page.locator('#navigation [data-action="nav"][data-value="operations"]').click();
+  await page.locator('.ops-metrics').waitFor({timeout:15000});
+  await page.locator('[data-ops-action="tab"][data-id="referees"]').click();
+  await page.locator('[data-ops-action="new"][data-id="referee"]').click();
+  const referee=page.locator('form[data-ops-form="private"][data-kind="referee"]');
+  await referee.locator('input[name="id"]').fill('test_referee');
+  await referee.locator('input[name="name"]').fill('Synthetic Referee');
+  await referee.locator('button[type="submit"]').click();
+  await page.locator('.ops-rows').getByText('Synthetic Referee',{exact:true}).first().waitFor({timeout:15000});
+  const storedReferees=await fetch(base+'/api/operations').then(r=>r.json());
+  assert.ok(storedReferees.referees.some(x=>x.id==='test_referee'));
+  await page.locator('[data-ops-action="tab"][data-id="application"]').click();
+  const appForm=page.locator('form[data-ops-form="application"]');
+  await appForm.locator('select[name="application_id"]').selectOption(selectedId);
+  await appForm.locator('textarea[name="notes"]').fill('Synthetic private preparation note.');
+  await appForm.locator('input[name="estimated_hours"]').fill('3');
+  await appForm.locator('button[type="submit"]').click();
+  await page.waitForFunction(()=>document.querySelector('form[data-ops-form="application"] input[name="private_version"]')?.value==='1',{timeout:15000});
+  const ownerSnapshot=await fetch(base+'/api/snapshot').then(r=>r.json());
+  assert.equal(ownerSnapshot.records.find(r=>r.id===selectedId).notes,'Synthetic private preparation note.');
+
   await page.locator('#navigation [data-action="nav"][data-value="settings"]').click();
   await page.locator('[data-os-action="tab"][data-id="workflows"]').click();
   await page.locator('form[data-os-form="workflow"]').waitFor();
