@@ -164,8 +164,11 @@ def scheduler_once(store: Store, root: Path, *, now: datetime | None = None) -> 
         stages = workflow.get("steps") or [workflow["agent_id"]]
         routes = [resolve_route(store, settings["providers"], agent, requested) for agent in stages]
         consent = bool(workflow.get("cloud_consent", False))
-        if any(not route.approved and not consent for route in routes):
+        if any(not route.provider["local"] for route in routes) and not consent:
             result.append({"workflow_id": workflow["id"], "status": "skipped", "reason": "cloud_consent_missing"})
+            continue
+        if any(not route.approved for route in routes):
+            result.append({"workflow_id": workflow["id"], "status": "skipped", "reason": "cloud_provider_not_approved"})
             continue
         needed = sum(not route.provider["local"] for route in routes)
         if needed:

@@ -1,7 +1,8 @@
 import {daysUntil,isActionable,isClosed as domainClosed,riskSignal,priorityScore,validateSnapshot,documentReadiness,applyRecordFilters,draftState,deadlineCollisions,freshnessState} from "./modules/domain.mjs";
+import {createConsole} from "./modules/console.mjs";
 (() => {
 "use strict";
-const VIEWS=[["dashboard","home","Overview"],["applications","file","Applications"],["calendar","calendar","Calendar"],["pipeline","columns","Pipeline"],["actions","check","Actions"],["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],["review","shield","Verification"],["archive","archive","Expired / blocked"],["sources","database","Sources"],["ai","home","AI Workspace"]];
+const VIEWS=[["dashboard","home","Overview"],["applications","file","Applications"],["actions","check","Actions"],["calendar","calendar","Calendar"],["pipeline","columns","Pipeline"],["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],["review","shield","Verification"],["archive","archive","Archive"],["sources","database","Sources"],["ai","sparkles","Copilot"],["agents","bot","Agents"],["automations","flow","Automations"],["activity","activity","Run history"],["settings","settings","Settings"]];
 const OWNER_REPO="https://github.com/Armanasq/phd_tracker";
 const STORE="phd-atlas-drafts-v1",PREFS="phd-atlas-prefs-v1",VIEW_STORE="phd-atlas-views-v2",COMPARE_STORE="phd-atlas-compare-v1";
 const $=id=>document.getElementById(id);
@@ -34,7 +35,7 @@ function riskPill(r){let x=risk(r);return pill(x,["Expired","Blocked","Confirmed
 function priority(r){return priorityScore(r,TODAY())}
 function filters(list){return applyRecordFilters(list,state,TODAY())}
 function sortList(list){return list.slice().sort((a,b)=>state.sort==="priority"?priority(b)-priority(a):state.sort==="name"?a.name.localeCompare(b.name):state.sort==="updated"?String(b.updated_at||"").localeCompare(String(a.updated_at||"")):(a.deadline||"9999").localeCompare(b.deadline||"9999")||a.name.localeCompare(b.name))}
-function heading(title,desc,buttons=""){const n=VIEWS.findIndex(([id])=>id===state.view)+1;return '<header class="heading"><div><div class="page-context"><span class="page-index">'+String(n).padStart(2,"0")+' / 11</span><span class="context-divider" aria-hidden="true"></span><span>2027 APPLICATION WORKSPACE</span></div><h1>'+escapeHTML(title)+'</h1><p>'+desc+'</p></div><div class="buttons">'+buttons+'</div></header>'}
+function heading(title,desc,buttons=""){const n=VIEWS.findIndex(([id])=>id===state.view)+1;return '<header class="heading"><div><div class="page-context"><span class="page-index">'+String(n).padStart(2,"0")+' / '+VIEWS.length</span><span class="context-divider" aria-hidden="true"></span><span>2027 APPLICATION WORKSPACE</span></div><h1>'+escapeHTML(title)+'</h1><p>'+desc+'</p></div><div class="buttons">'+buttons+'</div></header>'}
 function kpi(name,value,caption){return'<div class="kpi"><div class="label">'+escapeHTML(name)+'</div><strong>'+escapeHTML(value)+'</strong><small>'+escapeHTML(caption)+'</small></div>'}
 function statCard(title,body){return'<section class="panel"><div class="panel-header"><h2>'+escapeHTML(title)+'</h2></div>'+body+'</section>'}
 function button(label,action,value,variant="secondary"){return'<button class="btn '+variant+'" type="button" data-action="'+escapeHTML(action)+'" data-value="'+escapeHTML(value||"")+'">'+escapeHTML(label)+'</button>'}
@@ -365,12 +366,17 @@ const ICONS={
  compare:'<rect x="3.5" y="5" width="6.5" height="14" rx="1.5"/><rect x="14" y="5" width="6.5" height="14" rx="1.5"/>',
  shield:'<path d="M12 2.5 19 5v6.8c0 4.5-2.8 7.5-7 9.7-4.2-2.2-7-5.2-7-9.7V5zM9 11.8l2 2 4-4"/>',
  archive:'<rect x="4" y="4.5" width="16" height="4.5" rx="1"/><path d="M6 9v10.5h12V9M10 13.3h4"/>',
+ sparkles:'<path d="m12 2 1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6zM19 17l.7 1.8L22 19.5l-2.3.7L19 22l-.7-1.8-2.3-.7 2.3-.7z"/>',
+ bot:'<rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4m-2 0h4M8 13h.1M16 13h.1M9 17h6"/>',
+ flow:'<rect x="3" y="3" width="7" height="6" rx="1"/><rect x="14" y="15" width="7" height="6" rx="1"/><path d="M10 6h5v5m0 0v4M15 11H8v4"/>',
+ activity:'<path d="M3 12h4l3-7 4 14 3-7h4"/>',
+ settings:'<circle cx="12" cy="12" r="3.5"/><path d="M12 2v3m0 14v3M4.9 4.9l2.1 2.1m10 10 2.1 2.1M2 12h3m14 0h3M4.9 19.1 7 17m10-10 2.1-2.1"/>',
  database:'<ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6M4.5 12v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6"/>'
 };
 function navigation(){
  const tracked=records().filter(r=>r.record_type==="tracked");
  const counts={applications:tracked.length,actions:tracked.filter(open).filter(thisWeek).length,review:tracked.filter(r=>r.recheck_required).length};
- const chapters={dashboard:"WORKSPACE / 01",actions:"FOLLOW-THROUGH / 02",review:"VERIFICATION / 03"};
+ const chapters={dashboard:"01 / WORKSPACE",applications:"02 / APPLICATIONS",ai:"03 / INTELLIGENCE",settings:"04 / SYSTEM"};
  $("navigation").innerHTML=VIEWS.map(([id,icon,label])=>
   (chapters[id]?'<div class="nav-chapter" aria-hidden="true">'+chapters[id]+'</div>':"")+
   '<button class="nav-btn '+(state.view===id?"active":"")+'" type="button" data-action="nav" data-value="'+id+'"'+(state.view===id?' aria-current="page"':'')+'>'+
@@ -378,6 +384,8 @@ function navigation(){
   '<span class="nav-label">'+escapeHTML(label)+'</span>'+(counts[id]?'<em>'+counts[id]+'</em>':"")+'</button>'
  ).join("");
  $("crumbName").textContent=VIEWS.find(x=>x[0]===state.view)?.[2]||"Overview";
+ const mobile=$("workspaceSection");
+ if(mobile)mobile.innerHTML=VIEWS.map(([id,,label])=>'<option value="'+id+'"'+(id===state.view?' selected':'')+'>'+escapeHTML(label)+'</option>').join("");
  const next=tracked.filter(r=>open(r)&&r.status!=="submitted"&&days(r.deadline)!==null&&days(r.deadline)>=0).sort((a,b)=>days(a.deadline)-days(b.deadline)||priority(b)-priority(a))[0];
  const sidebarDue=$("sidebarDue");
  if(sidebarDue)sidebarDue.innerHTML=next?
@@ -387,72 +395,28 @@ function navigation(){
 function render(){
  if(!state.data)return;
  navigation();
- const views={dashboard,calendar:calendarView,applications,pipeline,contacts,actions,updates,compare,review,archive,sources,ai:aiWorkspace};
+ const views={dashboard,calendar:calendarView,applications,pipeline,contacts,actions,updates,compare,review,archive,sources};
+ const intelligence=["ai","agents","automations","activity","settings"].includes(state.view);
  const freshness=freshnessState(state.data.as_of,TODAY());
  const note=["aging","stale","unknown","future"].includes(freshness.state)
    ?'<div class="freshness-note" role="status"><span>'+escapeHTML(freshness.label)+'. Verify critical deadlines using official sources.</span>'+button("Review sources","nav","sources")+'</div>':"";
- $("body").innerHTML=note+(state.view==="ai"?"":aiAssistantBar())+views[state.view]();
+ $("body").innerHTML=note+(intelligence?aiConsole.view(state.view,{records:records()}):views[state.view]());
+ const activeBadge=$("currentModel");
+ if(activeBadge){activeBadge.textContent=aiConsole.isLive()?aiConsole.activeLabel()+" / "+aiConsole.activeModel():"Connect model";activeBadge.classList.toggle("is-online",aiConsole.isLive()&&aiConsole.isVerified());}
+ const runtimeNote=$("aiRuntimeState");
+ if(runtimeNote)runtimeNote.textContent=aiConsole.isLive()?"Private runtime connected":"Private runtime offline · model settings require local service";
  const unhealthy=state.data.providers.filter(p=>p.health!=="ok").length;
  $("providerStatus").innerHTML='<strong>'+escapeHTML(stamp(state.data.as_of))+'</strong><span class="signal"><span class="signal-dot '+(unhealthy?"":"ok")+'" aria-hidden="true"></span>'+unhealthy+' source feeds need attention</span>';
  const topAsOf=$("topEvidenceAsOf");if(topAsOf)topAsOf.textContent="Evidence observed "+stamp(state.data.as_of);
 }
 function go(view){
  if(!VIEWS.some(([id])=>id===view))return;
+ if(view==="ai"&&state.view!=="ai")aiConsole.setContext(state.view);
  state.view=view;
  if(location.hash!=="#"+view)location.hash=view;
  window.scrollTo({top:0,behavior:"instant"});render();
 }
-const aiRuntime={ready:false,providers:[],provider:"ollama",busy:false};
-async function aiConnect(){
- const status=$("aiRuntimeState");
- if(location.protocol!=="http:"||!["localhost","127.0.0.1"].includes(location.hostname)){
-  if(status)status.textContent="AI requires the local workspace";
-  return;
- }
- try{
-  const response=await fetch("./api/bootstrap",{cache:"no-store"});
-  if(!response.ok)throw Error("offline");
-  const data=await response.json();
-  if(!data.security?.local_only||!data.catalog?.providers)throw Error("not private");
-  aiRuntime.ready=true;aiRuntime.providers=data.catalog.providers;
-  aiRuntime.provider=data.settings?.default_provider||"ollama";
-  if(status)status.textContent="Local inference service available";
- }catch{aiRuntime.ready=false;if(status)status.textContent="AI offline · start local service"}
- if(state.data)render();
-}
-function aiAssistantBar(){
- const options=aiRuntime.providers.map(p=>'<option value="'+escapeHTML(p.id)+'"'+(p.id===aiRuntime.provider?' selected':'')+'>'+escapeHTML(p.label)+'</option>').join("");
- return '<section class="ai-context"><div class="ai-context-intro"><span>AI / '+escapeHTML(state.view.toUpperCase())+'</span><strong>Research assistant</strong><p>Context-aware analysis. Verify against official sources.</p></div>'+
- '<div class="ai-context-controls"><label for="aiPrompt">Task</label><input id="aiPrompt" maxlength="1200" placeholder="Analyze risks, evidence or next steps">'+
- '<label for="aiProvider">Model</label><select id="aiProvider">'+options+'</select>'+
- button(aiRuntime.ready?'Analyze':'Configure AI','ai-run','','primary')+button('Providers & settings','ai-settings','')+'</div>'+
- '<div id="aiInlineResult" class="ai-inline-result" aria-live="polite">'+(aiRuntime.ready?'No inference request sent.':'Run the tracker from the local Python service to use AI. Public Pages cannot access localhost inference.')+'</div></section>';
-}
-function aiWorkspace(){
- return heading("AI Workspace","Model providers, agents and automation inside the tracker.")+
- '<section class="ai-workspace-shell"><div class="ai-workspace-banner"><strong>Private AI operations</strong><span>'+escapeHTML(aiRuntime.ready?'Local runtime available':'Runtime not connected')+'</span></div>'+
- (aiRuntime.ready?'<iframe id="aiWorkspaceFrame" title="AI operations and provider settings" src="./ai-studio.html#overview" loading="lazy"></iframe>':
- '<div class="ai-offline"><h2>Start the private workspace</h2><p>Public GitHub Pages cannot access your localhost inference engines. Run the tracker through its loopback server.</p><pre>python -m phd_agents serve --port 8765</pre><p>Open http://127.0.0.1:8765/#ai to configure models and providers.</p></div>')+'</section>';
-}
-async function runIntegratedAgent(){
- if(!aiRuntime.ready){go("ai");return}
- if(aiRuntime.busy)return;
- const provider=$("aiProvider")?.value||aiRuntime.provider;
- const entry=aiRuntime.providers.find(p=>p.id===provider);
- if(!entry)return;
- const cloud=!entry.local;
- if(cloud&&!confirm("Send this task and application context to "+entry.label+"? Cloud usage may incur charges."))return;
- const result=$("aiInlineResult");
- const prompt="Tracker view: "+state.view+". "+($("aiPrompt")?.value?.trim()||"Identify the three highest priority verifiable next steps for this view.")+" Use only evidence available in the tracker and identify uncertainty.";
- aiRuntime.busy=true;if(result)result.textContent="Running inference…";
- try{
-  const response=await fetch("./api/agents/run",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({agent_id:"portfolio_planner",provider_id:provider,input_text:prompt,cloud_consent:cloud})});
-  const payload=await response.json();if(!response.ok)throw Error(payload.error||"Inference failed");
-  const content=payload.text??payload.output??payload.answer??payload.response??payload;
-  if(result)result.textContent=typeof content==="string"?content:JSON.stringify(content,null,2);
- }catch(error){if(result)result.textContent="Inference unavailable: "+error.message}
- finally{aiRuntime.busy=false}
-}
+const aiConsole=createConsole({notify,onChange:()=>{if(state.data)render()},navigate:go,getRecords:records,getView:()=>state.view});
 function explainNotifications(){const supported=("Notification" in window);const permission=supported?Notification.permission:"unsupported";openModal("<h2>Reminder settings</h2>",'<p class="muted">Reminders are computed locally from source dates while this page is open. Closing the tab disables on-page notifications. GitHub Actions provides separate scheduled reminders.</p><div class="notifications"><div class="notification"><strong>Browser permission</strong>'+escapeHTML(permission)+'</div><div class="notification"><strong>Current horizon</strong>Today, 1, 3 and 7 days before a recorded date</div></div><div class="buttons">'+button("Request browser permission","permission","","primary")+button("View GitHub notifications","url",OWNER_REPO+"/actions/workflows/phd-intelligence.yml")+'</div>')}
 function checkNotifications(){if(!state.data||!state.prefs.reminders||!("Notification" in window)||Notification.permission!=="granted")return;const alerted=state.prefs.notified||{};let changed=false;for(const r of records().filter(r=>r.record_type==="tracked")){const d=days(r.deadline);if(!open(r)||![0,1,3,7].includes(d))continue;const key=r.id+"|"+r.deadline+"|"+d;if(alerted[key])continue;try{const n=new Notification("PhD deadline: "+stamp(r.deadline),{body:r.name.slice(0,140)+" — verify portal cutoff and submission state.",tag:key});n.onclick=()=>{window.focus();go("applications");detail(getRecord(r.id));n.close()};alerted[key]=TODAY();changed=true}catch{}}if(changed){state.prefs.notified=Object.fromEntries(Object.entries(alerted).slice(-500));saveStore(PREFS,state.prefs)}}
 function events(){
@@ -462,9 +426,7 @@ function events(){
   const {action:type,value}=el.dataset;
   if(type==="nav")go(value);
   else if(type==="record"){closeModal();detail(getRecord(value))}
-  else if(type==="ai-run")runIntegratedAgent();
-  else if(type==="ai-settings"){go("ai");setTimeout(()=>{const frame=$("aiWorkspaceFrame");if(frame)frame.src="./ai-studio.html#providers"},0)}
-  else if(type==="close")closeModal();
+   else if(type==="close")closeModal();
   else if(type==="save-record")saveRecord(false);
   else if(type==="save-command")saveRecord(true);
   else if(type==="command")issueCommand(value);
@@ -500,6 +462,7 @@ function events(){
  });
  document.addEventListener("change",e=>{
   const t=e.target;
+  if(t.id==="workspaceSection"){go(t.value);return}
   if(t.matches("[data-stage-id]")){stageStatus(t.dataset.stageId,t.value);return}
   if(t.matches("[data-compare]")){
    const id=t.dataset.compare;
@@ -591,7 +554,7 @@ function init(){
  const route=location.hash.replace(/^#/,"");
  if(VIEWS.some(([id])=>id===route))state.view=route;
  loadSnapshot();
- aiConnect();
+ aiConsole.connect();
  setInterval(checkNotifications,60_000);
  setInterval(loadSnapshot,15*60_000);
 }

@@ -17,6 +17,7 @@ from .settings import read_settings, save_settings
 from .routing import routing_status
 from .secrets import read_secret, write_secret
 from .metrics import usage_summary
+from .toolkit import TOOL_NAMES, DEFAULT_TOOLS
 from time import perf_counter
 from .calendar import line_items
 from .engine import catalog, owner_records, run_agent, run_workflow, scheduler_once, selected
@@ -123,6 +124,7 @@ class ApiHandler(BaseHTTPRequestHandler):
                             "provider_states": provider_states(store, catalog(store)["providers"]),
                             "settings": read_settings(store),
                             "routing": routing_status(store, catalog(store)["providers"], catalog(store)["agents"]),
+                            "tool_names": sorted(TOOL_NAMES), "default_tools": DEFAULT_TOOLS,
                             "security": {"local_only": True, "credentials": "environment variables", "auto_application_submission": False}})
         elif path == "/api/calendar.ics":
             source, records = owner_records(store, self.server.root)

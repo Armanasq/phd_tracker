@@ -2,59 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#101d1d">
-<meta name="description" content="Private PhD Atlas agent orchestration and application operations studio.">
-<title>AI Operations — PhD Atlas</title>
-<link rel="stylesheet" href="./ai-studio.css">
-</head>
-<body>
-<a class="skip" href="#workspace">Skip to AI operations</a>
-<div class="studio">
-  <aside class="rail" aria-label="AI workspace navigation">
-    <div class="identity"><span class="mark">a<span>.</span></span><div><strong>atlas</strong><small>RESEARCH INTELLIGENCE</small></div></div>
-    <p class="rail-label">PRIVATE OPERATIONS</p>
-    <div class="mobile-nav-control">
-      <label for="mobileStudioView">Workspace section</label>
-      <select id="mobileStudioView" aria-label="Navigate AI Studio sections">
-        <option value="overview">Decision desk</option>
-        <option value="agents">AI agents</option>
-        <option value="workflows">Automation</option>
-        <option value="providers">Models & providers</option>
-        <option value="applications">Applications</option>
-        <option value="referees">Referees & letters</option>
-        <option value="timeline">Deadline clocks</option>
-        <option value="evidence">Evidence ledger</option>
-        <option value="planning">Capacity planner</option>
-        <option value="activity">Run history</option>
-        <option value="settings">Settings & diagnostics</option>
-      </select>
-    </div>
-    <nav id="studioNav" class="rail-nav" aria-label="Sections">
-      <button type="button" data-view="overview">Decision desk</button>
-      <button type="button" data-view="agents">AI agents</button>
-      <button type="button" data-view="workflows">Automation</button>
-      <button type="button" data-view="providers">Models & providers</button>
-      <button type="button" data-view="applications">Applications</button>
-      <button type="button" data-view="referees">Referees & letters</button>
-      <button type="button" data-view="timeline">Deadline clocks</button>
-      <button type="button" data-view="evidence">Evidence ledger</button>
-      <button type="button" data-view="planning">Capacity planner</button>
-      <button type="button" data-view="activity">Run history</button>
-      <button type="button" data-view="settings">Settings & diagnostics</button>
-    </nav>
-    <div class="rail-bottom"><a href="./index.html">Application tracker</a><a href="https://github.com/Armanasq/phd_tracker" target="_blank" rel="noopener noreferrer">Source repository</a><div id="connection" class="connection"><span class="dot"></span> Checking local runtime</div></div>
-  </aside>
-  <div class="content">
-    <header class="topbar"><div class="breadcrumbs">WORKSPACE <span>/</span> AI OPERATIONS <span>/</span> <strong id="crumb">Decision desk</strong></div><div class="top-right"><span class="privacy">LOCAL-FIRST · PRIVATE</span><button class="header-button" id="refresh" type="button">Refresh evidence</button></div></header>
-    <main id="workspace" class="workspace" tabindex="-1">
-      <div class="boot"><span class="boot-line"></span><h1>Connecting to your private operations runtime</h1><p>Checking for a local model and workflow service. No model calls are made automatically.</p></div>
-    </main>
-    <footer class="footer"><span>Evidence-first automation · Human authorization for consequential actions</span><span>PhD Atlas / 2027</span></footer>
-  </div>
-</div>
-<div id="dialogLayer"></div>
-<div id="message" class="message" role="status" aria-live="polite"></div>
-<script type="module" src="./ai-studio.js"></script>
-</body>
-</html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>PhD Atlas · Redirecting to unified workspace</title>
+<link rel="canonical" href="./index.html#settings">
+<style>body{font-family:system-ui,sans-serif;background:#f6f7f9;color:#18212f;display:grid;place-items:center;min-height:100vh;margin:0}main{max-width:500px;padding:40px;border:1px solid #dde2ec;border-radius:18px;background:white}a{color:#234ac6}</style>
+</head><body><main><h1>AI Studio has moved into PhD Atlas.</h1><p>Models, agents, workflows, and settings now share one workspace.</p><a href="./index.html#settings">Open unified settings</a></main><script>
+const map={providers:"settings",settings:"settings",agents:"agents",workflows:"automations",activity:"activity",overview:"ai"};
+const old=location.hash.replace(/^#/,"");
+location.replace("./index.html#"+(map[old]||"settings"));
+</script></body></html>

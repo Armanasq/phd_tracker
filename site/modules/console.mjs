@@ -326,19 +326,18 @@ export function createConsole({notify,onChange,navigate,getRecords,getView}) {
  }
  function activity() {
   const data=state.data,stats=data.usage_summary||{},runs=data.runs||[];
-  return '<section class="os-page">'+heading("AI / OBSERVABILITY","Run history","A factual ledger of execution, model selection, usage and failed operations.",
-   btn("Refresh","reconnect","","quiet"))+
+  const ledger=runs.length?runs.map(r=>
+    '<article class="os-ledger-row"><div><strong>'+esc(agents().find(a=>a.id===r.agent_id)?.label||r.agent_id)+'</strong><small>'+esc(stamp(r.created_at))+' · '+esc(r.provider_id)+' · '+esc(r.model||"Unknown model")+'</small></div>'+
+    badge(r.status,r.status==="failed"?"warn":"good")+
+    '<span class="os-meta">'+esc(r.latency_ms==null?"—":r.latency_ms+" ms")+'</span></article>').join(""):'<p class="os-empty">No AI executions recorded. Connect a model to begin.</p>';
+  const usage=(stats.provider_usage||[]).map(p=>'<div class="os-ledger-row"><strong>'+esc(p.provider_id)+'</strong><span>'+esc(p.calls)+' calls</span><span>'+esc(p.input_tokens)+' in / '+esc(p.output_tokens)+' out</span><span>'+esc(p.average_latency_ms??"—")+' ms avg.</span></div>').join("");
+  return '<section class="os-page">'+heading("AI / OBSERVABILITY","Run history","A factual ledger of execution, model selection, usage and failed operations.",btn("Refresh","reconnect","","quiet"))+
    '<div class="os-kpi-strip"><div><strong>'+esc(stats.sampled_runs??0)+'</strong><span>Recorded calls</span></div>'+
    '<div><strong>'+esc(stats.total_input_tokens??0)+'</strong><span>Reported input tokens</span></div>'+
    '<div><strong>'+esc(stats.total_output_tokens??0)+'</strong><span>Reported output tokens</span></div>'+
    '<div><strong>'+esc(stats.total_failed??0)+'</strong><span>Failures</span></div></div>'+
-   box("Agent executions","Costs are not inferred without verified provider pricing.",
-   '<div class="os-ledger">'+runs.length?runs.map(r=>
-    '<article class="os-ledger-row"><div><strong>'+esc(agents().find(a=>a.id===r.agent_id)?.label||r.agent_id)+'</strong><small>'+esc(stamp(r.created_at))+' · '+esc(r.provider_id)+' · '+esc(r.model||"Unknown model")+'</small></div>'+
-    badge(r.status,r.status==="failed"?"warn":"good")+
-    '<span class="os-meta">'+esc(r.latency_ms==null?"—":r.latency_ms+" ms")+'</span></article>').join(""):'<p class="os-empty">No AI executions recorded. Connect a model to begin.</p>'+'</div>')+
-   box("Per-provider usage","Only measured calls and reported tokens are included.",
-    '<div class="os-ledger">'+(stats.provider_usage||[]).map(p=>'<div class="os-ledger-row"><strong>'+esc(p.provider_id)+'</strong><span>'+esc(p.calls)+' calls</span><span>'+esc(p.input_tokens)+' in / '+esc(p.output_tokens)+' out</span><span>'+esc(p.average_latency_ms??"—")+' ms avg.</span></div>').join("")+'</div>')+'</section>';
+   box("Agent executions","Costs are not inferred without verified provider pricing.",'<div class="os-ledger">'+ledger+'</div>')+
+   box("Per-provider usage","Only measured calls and reported tokens are included.",'<div class="os-ledger">'+usage+'</div>')+'</section>';
  }
  function view(name,{records=[]}={}) {
   if(!isLive())return offline(name);
