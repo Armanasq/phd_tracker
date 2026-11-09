@@ -147,3 +147,9 @@ Backups include private application edits, agent settings, runs, evidence object
 The private HTTP runtime has a per-process inference admission limit (default 2 concurrent requests), configurable using `PHDAI_MAX_CONCURRENT_INFERENCE` (1–8). Additional model/agent/provider checks return HTTP 429 immediately instead of creating unbounded concurrent model requests. Metadata, diagnostics, and health requests continue to respond while model inference is active. This admission limit applies to HTTP-invoked model work; the scheduler has separate persisted execution leases and cloud budget reservations. Multiple independent backend processes are not a supported deployment.
 
 Every JSON response includes an opaque `X-Request-ID` header for correlating a client-visible failure with a local API interaction without logging message content, credentials or prompts. Slow or incomplete HTTP request bodies are bounded by a 30-second socket timeout.
+
+## Evidence-based provider connection state
+
+An inference or model-catalog probe is considered current for only 24 hours. Older successful checks are displayed as `stale` instead of implying a currently reachable endpoint. A saved connection check also stores a local SHA-256 fingerprint of the configured credential (never the credential itself); changing or removing that credential invalidates the previous "responded" or "reachable" status and requires a fresh check. Legacy checks without a fingerprint also require reverification. The fingerprint is persisted only in the local private SQLite connection record and is never returned through provider-state APIs.
+
+Saved automatic cloud-data disclosure approvals remain a separate, explicit owner decision; stale reachability does not silently revoke prior consent, nor does a successful catalog listing prove model inference is available. When a provider changes, the existing catalog update already revokes its approval.

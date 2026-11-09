@@ -59,6 +59,30 @@ class SettingsAndConnectivityTests(unittest.TestCase):
         self.store.put_custom("provider", {**local, "model": "changed"})
         self.assertEqual(provider_states(self.store, [{**local, "model": "changed"}])["ollama"]["state"], "ready_to_test")
 
+    def test_provider_state_expires_and_detects_credential_rotation(self) -> None:
+        from phd_agents.connectivity import connection_fresh
+        from phd_agents.store import utcnow
+        from datetime import datetime, timedelta, timezone
+        provider = next(p for p in PROVIDERS if p["id"] == "openai")
+        with patch.dict(os.environ, {"OPENAI_API_KEY": "old-test-key"}):
+            remember_check(self.store, "openai", status="responded", model="example")
+            checked = provider_states(self.store, [provider])["openai"]
+            self.assertEqual(checked["state"], "responded")
+            self.assertNotIn("credential_fingerprint", checked)
+            self.assertNotIn("old-test-key", json.dumps(checked))
+            saved = self.store.get_custom("connection")[0]
+            self.assertTrue(saved["credential_fingerprint"])
+            self.store.put_custom("connection", {**saved, "checked_at": "2020-01-01T00:00:00+00:00"})
+            self.assertEqual(provider_states(self.store, [provider])["openai"]["state"], "stale")
+            self.store.put_custom("connection", saved)
+            self.assertTrue(connection_fresh(utcnow()))
+        with patch.dict(os.environ, {"OPENAI_API_KEY": "rotated-test-key"}):
+            state = provider_states(self.store, [provider])["openai"]
+            self.assertEqual(state["state"], "needs_reverification")
+            self.assertNotIn("rotated-test-key", json.dumps(state))
+        self.assertFalse(connection_fresh("invalid"))
+        self.assertFalse(connection_fresh((datetime.now(timezone.utc) - timedelta(days=2)).isoformat()))
+
     def test_cloud_loopback_is_not_a_valid_destination(self) -> None:
         with self.assertRaises(ValueError):
             validate_url("https://127.0.0.1:9000/v1", False)

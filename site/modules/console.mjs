@@ -18,8 +18,8 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
  const routing = () => state.data?.routing || {};
  const active = () => providers().find(p => p.id === prefs().default_provider);
  const isLive = () => state.online && !!state.data;
- const stateText = name => ({responded:"Verified inference",reachable:"Catalog reachable",ready_to_test:"Not tested",needs_setup:"Needs setup",failed:"Test failed"})[name] || "Not tested";
- const checkTone = name => name==="responded"?"good":name==="needs_setup"||name==="failed"?"warn":"muted";
+ const stateText = name => ({responded:"Verified inference",reachable:"Catalog reachable",stale:"Retest required",needs_reverification:"Credential changed · retest",ready_to_test:"Not tested",needs_setup:"Needs setup",failed:"Test failed"})[name] || "Not tested";
+ const checkTone = name => name==="responded"?"good":name==="needs_setup"||name==="needs_reverification"||name==="stale"||name==="failed"?"warn":"muted";
  const status = p => checks()[p.id]?.state || "ready_to_test";
  const routeFor = agent => routing().agent_assignments?.[agent] || null;
  const loadingNotice = message => '<div class="os-hint" role="status">'+esc(message)+'</div>';

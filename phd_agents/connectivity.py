@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import os
+from datetime import datetime, timezone
 from .secrets import read_secret
 import time
 from typing import Any
@@ -10,7 +12,27 @@ from urllib.request import Request, build_opener
 from urllib.parse import quote
 
 from .providers import NoRedirect, ProviderError, validate_url
+from .catalog import PROVIDERS
 from .store import Store, utcnow
+
+
+def credential_fingerprint(provider: dict[str, Any]) -> str:
+    env = str(provider.get("api_key_env") or "")
+    secret = read_secret(env) if env else ""
+    return hashlib.sha256(secret.encode("utf-8")).hexdigest() if secret else ""
+
+
+def connection_fresh(checked_at: object, *, now: datetime | None = None) -> bool:
+    if not isinstance(checked_at, str):
+        return False
+    try:
+        checked = datetime.fromisoformat(checked_at.replace("Z", "+00:00"))
+    except ValueError:
+        return False
+    if checked.tzinfo is None:
+        return False
+    age = ((now or datetime.now(timezone.utc)) - checked.astimezone(timezone.utc)).total_seconds()
+    return -300 <= age <= 86_400
 
 
 def credential_ready(provider: dict[str, Any]) -> bool:
@@ -31,11 +53,19 @@ def provider_state(provider: dict[str, Any], last: dict[str, Any] | None = None)
         reason = "Configure a credential for " + env + " in private Settings"
     prior = last or {}
     state = "needs_setup" if reason else "ready_to_test"
-    if not reason and prior.get("status") == "responded":
-        state = "responded"
-    elif not reason and prior.get("status") == "reachable":
-        state = "reachable"
-    elif not reason and prior.get("status") == "failed":
+    previous = prior.get("status")
+    if not reason and previous in {"responded", "reachable"}:
+        previous_fingerprint = prior.get("credential_fingerprint")
+        current_fingerprint = credential_fingerprint(provider)
+        if env and (not isinstance(previous_fingerprint, str) or previous_fingerprint != current_fingerprint):
+            state = "needs_reverification"
+            reason = "Provider credential has changed or was never fingerprinted; test the connection"
+        elif not connection_fresh(prior.get("checked_at")):
+            state = "stale"
+            reason = "Provider check is older than 24 hours; test again"
+        else:
+            state = previous
+    elif not reason and previous == "failed":
         state = "failed"
     return {
         "provider_id": provider["id"], "state": state, "reason": reason,
@@ -110,7 +140,11 @@ def model_list(provider: dict[str, Any], timeout: int = 12) -> dict[str, Any]:
 def remember_check(store: Store, provider_id: str, *, status: str, model: str = "",
                    latency_ms: int | None = None, model_count: int | None = None,
                    error: str = "") -> None:
+    provider = next((p for p in store.catalog("provider", PROVIDERS) if p["id"] == provider_id), None)
+    if provider is None:
+        raise ValueError("Unknown provider for connection check")
     store.put_custom("connection", {
         "id": provider_id, "status": status, "model": model[:160], "latency_ms": latency_ms,
-        "model_count": model_count, "error": error[:180], "checked_at": utcnow()
+        "model_count": model_count, "error": error[:180], "checked_at": utcnow(),
+        "credential_fingerprint": credential_fingerprint(provider),
     })
