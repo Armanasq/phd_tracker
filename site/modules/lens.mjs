@@ -66,7 +66,7 @@ export function mountAtlasLens({getRecords,getView,getSelectedApplication,openSe
  const panel=byId("atlasLensPanel");
  if(v&&!state.open)focusReturn=document.activeElement;
  state.open=v;render();
- if(v){byId("lensInput")?.focus();const h=byId("lensHistory");if(h&&state.turns.length)h.scrollTop=h.scrollHeight}
+ if(v){byId("lensInput")?.focus();const h=byId("lensHistory");if(h&&state.turns.length)h.scrollTop=h.scrollHeight;void refresh().then(()=>{if(state.open)byId("lensInput")?.focus()})}
  else if(focusReturn?.isConnected)focusReturn.focus();
  }
  async function refresh({silent=false}={}){
