@@ -8,6 +8,9 @@ on:
       - site/**
       - scripts/build_workspace.py
       - tests/site_smoke.cjs
+      - tests/domain.test.mjs
+      - tests/test_workspace.py
+      - scripts/workspace_controls.py
       - scripts/experience_engine.py
       - scripts/readme_studio.py
       - tests/ui_smoke.cjs
