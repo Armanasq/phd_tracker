@@ -62,6 +62,16 @@ jobs:
           node --test tests/assurance.test.mjs
           test -s site/assurance.css
           test -s site/responsive.css
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          index = Path("site/index.html")
+          content = index.read_text(encoding="utf-8")
+          needle = 'href="./responsive.css"'
+          if content.count(needle) != 1:
+              raise RuntimeError("Cannot bind mobile stylesheet to release commit")
+          index.write_text(content.replace(needle, f'href="./responsive.css?rev={os.environ["GITHUB_SHA"]}"'), encoding="utf-8")
+          PY
           node --check site/modules/operations.mjs
           node --test tests/domain.test.mjs
           test -s site/modules/domain.mjs
@@ -110,11 +120,13 @@ jobs:
             if curl -fsSL --max-time 15 "$base/?revision=$GITHUB_SHA" -o /tmp/phd-hosted-index.html &&
                grep -q 'type="module"' /tmp/phd-hosted-index.html &&
                grep -q 'rel="canonical"' /tmp/phd-hosted-index.html &&
+               grep -Fq "responsive.css?rev=$GITHUB_SHA" /tmp/phd-hosted-index.html &&
                curl -fsSL --max-time 15 "$base/modules/domain.mjs?revision=$GITHUB_SHA" -o /tmp/phd-hosted-domain.mjs &&
                grep -q 'validateSnapshot' /tmp/phd-hosted-domain.mjs &&
                curl -fsSL --max-time 15 "$base/modules/assurance.mjs?revision=$GITHUB_SHA" -o /tmp/phd-hosted-assurance.mjs &&
+               curl -fsSL --max-time 15 "$base/responsive.css?revision=$GITHUB_SHA" -o /tmp/phd-hosted-responsive.css &&
                curl -fsSL --max-time 15 "$base/release-manifest.json?revision=$GITHUB_SHA" -o /tmp/phd-hosted-manifest.json &&
-               python -c 'import hashlib,json,os; m=json.load(open("/tmp/phd-hosted-manifest.json")); assert m["commit"]==os.environ["GITHUB_SHA"]; assert hashlib.sha256(open("/tmp/phd-hosted-assurance.mjs","rb").read()).hexdigest()==m["sha256"]["modules/assurance.mjs"]' &&
+               python -c 'import hashlib,json,os; m=json.load(open("/tmp/phd-hosted-manifest.json")); assert m["commit"]==os.environ["GITHUB_SHA"]; assert hashlib.sha256(open("/tmp/phd-hosted-assurance.mjs","rb").read()).hexdigest()==m["sha256"]["modules/assurance.mjs"]; assert hashlib.sha256(open("/tmp/phd-hosted-responsive.css","rb").read()).hexdigest()==m["sha256"]["responsive.css"]' &&
                curl -fsSL --max-time 15 "$base/favicon.svg?revision=$GITHUB_SHA" -o /tmp/phd-hosted-icon.svg &&
                grep -q '<svg' /tmp/phd-hosted-icon.svg &&
                curl -fsSL --max-time 15 "$base/sitemap.xml?revision=$GITHUB_SHA" -o /tmp/phd-hosted-sitemap.xml &&
