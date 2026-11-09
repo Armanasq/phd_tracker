@@ -9,7 +9,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, unquote, urlsplit
 
 from .catalog import agent_spec, provider_spec, workflow_spec
-from .domain import agenda, plan_capacity, preflight, today_in, snapshot
+from .domain import agenda, plan_capacity, preflight, today_in
 from .operations import evidence_conflicts, milestones_for, referee_matrix, research_fit_signals, resource_schedule
 from .proof_queue import evidence_work_queue
 from .providers import invoke, ProviderError
@@ -144,13 +144,17 @@ class ApiHandler(BaseHTTPRequestHandler):
                             "security": {"local_only": True, "credentials": "environment variables", "auto_application_submission": False}})
         elif path == "/api/assistant/bootstrap":
             available = catalog(store)
+            try:
+                as_of = json.loads((self.server.site / "data" / "workspace.json").read_text(encoding="utf-8")).get("as_of")
+            except (OSError, ValueError, TypeError):
+                as_of = None
             self.send_json({
                 "catalog": {"providers": available["providers"], "agents": available["agents"]},
                 "settings": read_settings(store),
                 "provider_states": provider_states(store, available["providers"]),
                 "routing": routing_status(store, available["providers"], available["agents"]),
                 "conversations": store.conversations(20),
-                "as_of": snapshot(self.server.root).get("as_of"),
+                "as_of": as_of,
                 "security": {"local_only": True, "auto_application_submission": False},
             })
         elif path == "/api/conversations":
