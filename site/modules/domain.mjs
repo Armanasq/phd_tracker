@@ -92,7 +92,7 @@ export function draftState(draft,source){
   const comparable=["status","verification","followup","contact_status","next_step","priority"];
   const equal=comparable.every(k=>draft[k]===undefined||draft[k]===source[k])
     &&Object.entries(draft.documents||{}).every(([key,value])=>source.document_states?.[key]===value);
-  if(equal&&current!==expected)return"committed";
+  if(equal&&current!==expected&&draft._sync_status==="pending")return"committed";
   if(current!==expected)return"conflict";
   return draft._sync_status==="pending"?"pending":"draft";
 }
@@ -127,7 +127,8 @@ export function deadlineCollisions(items,today,limit=30) {
 }
 
 export function freshnessState(asOf,today) {
-  const days=daysUntil(asOf,today);
+  const delta=daysUntil(asOf,today);
+  const days=delta===null?null:-delta;
   if(days===null)return{state:"unknown",days:null,label:"Source timestamp unavailable"};
   if(days<0)return{state:"future",days:Math.abs(days),label:"Source timestamp is ahead of the local date"};
   if(days>=14)return{state:"stale",days,label:"Evidence snapshot is "+days+" days old"};
