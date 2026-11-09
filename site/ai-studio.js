@@ -185,9 +185,10 @@ function configModal(kind,id=""){
  let body="";
  if(kind==="provider"){
   body=textField("id","Provider identifier",old.id||"")+textField("label","Display name",old.label||"")+
-   '<div class="field"><label>Adapter</label><select name="kind">'+selectChoices(["openai_compatible","azure_openai","anthropic"].map(z=>({id:z,label:z})),old.kind||"openai_compatible")+'</select></div>'+
+   '<div class="field"><label>Adapter</label><select name="kind">'+selectChoices(["openai_compatible","azure_openai","azure_deployment","anthropic"].map(z=>({id:z,label:z})),old.kind||"openai_compatible")+'</select></div>'+
    textField("model","Model ID / deployment",old.model||"")+textField("base_url","API base URL",old.base_url||"http://127.0.0.1:11434/v1","Local HTTP requires a loopback address")+
    textField("api_key_env","Credential environment variable",old.api_key_env||"","Never enter the credential value here")+
+    textField("api_version","Azure deployment API version",old.api_version||"","Only for Azure deployment-based endpoints; e.g. 2024-10-21")+
    textField("max_output_tokens","Max response tokens",old.max_output_tokens||1200,"64–4096","number")+
    '<div class="field"><label>Token parameter</label><select name="token_parameter">'+selectChoices(["max_tokens","max_completion_tokens"].map(z=>({id:z,label:z})),old.token_parameter||"max_tokens")+'</select></div>'+
    '<div class="field wide checkbox"><input type="checkbox" id="localProvider" name="local" '+(old.local?"checked":"")+'><label for="localProvider">Local or self-hosted endpoint (HTTP only permitted on loopback)</label></div>';

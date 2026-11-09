@@ -13,7 +13,7 @@ from urllib.request import Request, urlopen
 
 from phd_agents.catalog import PROVIDERS
 from phd_agents.connectivity import model_list, provider_state, provider_states, remember_check
-from phd_agents.providers import validate_url
+from phd_agents.providers import validate_url, invoke
 from phd_agents.server import ApiServer
 from phd_agents.settings import DEFAULTS, read_settings, save_settings
 from phd_agents.store import Store
@@ -79,6 +79,27 @@ class SettingsAndConnectivityTests(unittest.TestCase):
         self.assertEqual(result["models"], [{"id": "local-model", "name": "Local Model"}])
         self.assertTrue(observed["url"].endswith("/v1/models"))
         self.assertEqual(observed["timeout"], 12)
+
+    def test_azure_deployment_constructs_versioned_route(self) -> None:
+        from phd_agents.catalog import provider_spec
+        config = provider_spec({"id": "azure_demo", "kind": "azure_deployment",
+                                "base_url": "https://test.openai.azure.com", "model": "router",
+                                "api_key_env": "AZURE_OPENAI_API_KEY", "api_version": "2024-10-21"})
+        captured = {}
+        class Stub:
+            def open(self, request, timeout):
+                captured["url"] = request.full_url
+                captured["api_key"] = request.get_header("Api-key")
+                return io.BytesIO(json.dumps({"model": "router", "choices": [{"message": {"content": "ok"}}]}).encode())
+        with patch("phd_agents.providers.build_opener", return_value=Stub()):
+            with patch.dict(os.environ, {"AZURE_OPENAI_API_KEY": "synthetic-test-key"}):
+                reply = invoke(config, "Safe system", "Test")
+        self.assertEqual(reply.content, "ok")
+        self.assertEqual(captured["url"],
+                         "https://test.openai.azure.com/openai/deployments/router/chat/completions?api-version=2024-10-21")
+        self.assertEqual(captured["api_key"], "synthetic-test-key")
+        with self.assertRaises(ValueError):
+            provider_spec({**config, "api_version": "bad"})
 
     def test_local_settings_api_roundtrip(self) -> None:
         server = ApiServer(("127.0.0.1", 0), store=self.store, root=Path(self.temp.name))
