@@ -221,7 +221,10 @@ class ApiHandler(BaseHTTPRequestHandler):
             if not variable:
                 raise ValueError("Provider has no credential variable")
             write_secret(variable, data["credential"])
-            self.send_json({"saved": True, "provider_id": provider["id"], "credential_configured": bool(read_secret(variable))})
+            store.put_custom("provider", provider)
+            self.send_json({"saved": True, "provider_id": provider["id"],
+                            "credential_configured": bool(read_secret(variable)),
+                            "requires_reverification": True})
         elif path in {"/api/providers/probe", "/api/providers/models"}:
             provider = selected(catalog(store)["providers"], data["provider_id"], "provider")
             if not provider["local"] and data.get("cloud_consent") is not True:
