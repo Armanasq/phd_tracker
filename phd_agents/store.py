@@ -12,6 +12,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
+from .state_guard import acquire_state_guard, release_state_guard
+
 STATUS = {"unconfirmed", "shortlisted", "preparing", "submitted", "interview", "offer", "rejected", "withdrawn", "blocked", "archived"}
 CONTACT = {"unrecorded", "to_contact", "contacted", "awaiting_reply", "followup_due", "replied", "declined", "completed"}
 DOCUMENT = {"unknown", "ready", "in_progress", "not_started", "not_applicable"}
@@ -31,44 +33,51 @@ class Store:
     def __init__(self, path: Path | None = None):
         self.path = Path(path) if path else default_path()
         self.path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
-        if not self.path.exists():
-            try:
-                fd = os.open(str(self.path), os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
-                os.close(fd)
-            except FileExistsError:
-                pass
-        if self.path.is_symlink() or not self.path.is_file():
-            raise PermissionError("Private SQLite state must be an ordinary file, not a symlink")
-        if stat.S_IMODE(self.path.stat().st_mode) & 0o077:
-            raise PermissionError("Unsafe state database permissions; run chmod 600 on the private SQLite file")
-        self.db = sqlite3.connect(str(self.path), check_same_thread=False, timeout=15)
-        self.db.row_factory = sqlite3.Row
-        self.db.execute("PRAGMA foreign_keys=ON")
-        self.db.execute("PRAGMA journal_mode=WAL")
-        self.db.execute("PRAGMA busy_timeout=5000")
-        self.db.executescript("""
-        CREATE TABLE IF NOT EXISTS catalog(kind TEXT NOT NULL, id TEXT NOT NULL, payload TEXT NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY(kind,id));
-        CREATE TABLE IF NOT EXISTS applications(id TEXT PRIMARY KEY, payload TEXT NOT NULL, version INTEGER NOT NULL, updated_at TEXT NOT NULL);
-        CREATE TABLE IF NOT EXISTS runs(id TEXT PRIMARY KEY, kind TEXT NOT NULL, agent_id TEXT NOT NULL, application_id TEXT, status TEXT NOT NULL, provider_id TEXT, payload TEXT NOT NULL, created_at TEXT NOT NULL);
-        CREATE TABLE IF NOT EXISTS audit(id INTEGER PRIMARY KEY AUTOINCREMENT, action TEXT NOT NULL, subject TEXT NOT NULL, created_at TEXT NOT NULL);
-        CREATE TABLE IF NOT EXISTS schedule(id TEXT PRIMARY KEY, last_period TEXT NOT NULL, updated_at TEXT NOT NULL);
-        CREATE TABLE IF NOT EXISTS schedule_claims(id TEXT PRIMARY KEY, period TEXT NOT NULL, token TEXT NOT NULL, claimed_at TEXT NOT NULL, expires_at TEXT NOT NULL, cloud_calls INTEGER NOT NULL, day_start TEXT NOT NULL);
-        CREATE TABLE IF NOT EXISTS request_idempotency(key TEXT PRIMARY KEY, endpoint TEXT NOT NULL, digest TEXT NOT NULL, state TEXT NOT NULL, response TEXT, expires_at TEXT NOT NULL);
-        CREATE INDEX IF NOT EXISTS idx_schedule_claims_active ON schedule_claims(day_start,expires_at);
-        CREATE TABLE IF NOT EXISTS private_objects(kind TEXT NOT NULL, id TEXT NOT NULL, payload TEXT NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY(kind,id));
-        CREATE TABLE IF NOT EXISTS conversations(
-            id TEXT PRIMARY KEY, agent_id TEXT NOT NULL, application_id TEXT,
-            title TEXT NOT NULL, created_at TEXT NOT NULL, updated_at TEXT NOT NULL);
-        CREATE TABLE IF NOT EXISTS conversation_messages(
-            id INTEGER PRIMARY KEY AUTOINCREMENT, conversation_id TEXT NOT NULL
-            REFERENCES conversations(id) ON DELETE CASCADE, role TEXT NOT NULL,
-            content TEXT NOT NULL, model TEXT, provider_id TEXT, run_id TEXT, created_at TEXT NOT NULL);
-        CREATE INDEX IF NOT EXISTS idx_conversation_messages ON conversation_messages(conversation_id,id);
-        CREATE INDEX IF NOT EXISTS idx_conversations_recent ON conversations(updated_at DESC);
+        self._state_guard = acquire_state_guard(self.path, exclusive=False)
+        try:
+            if not self.path.exists():
+                try:
+                    fd = os.open(str(self.path), os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+                    os.close(fd)
+                except FileExistsError:
+                    pass
+            if self.path.is_symlink() or not self.path.is_file():
+                raise PermissionError("Private SQLite state must be an ordinary file, not a symlink")
+            if stat.S_IMODE(self.path.stat().st_mode) & 0o077:
+                raise PermissionError("Unsafe state database permissions; run chmod 600 on the private SQLite file")
+            self.db = sqlite3.connect(str(self.path), check_same_thread=False, timeout=15)
+            self.db.row_factory = sqlite3.Row
+            self.db.execute("PRAGMA foreign_keys=ON")
+            self.db.execute("PRAGMA journal_mode=WAL")
+            self.db.execute("PRAGMA busy_timeout=5000")
+            self.db.executescript("""
+            CREATE TABLE IF NOT EXISTS catalog(kind TEXT NOT NULL, id TEXT NOT NULL, payload TEXT NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY(kind,id));
+            CREATE TABLE IF NOT EXISTS applications(id TEXT PRIMARY KEY, payload TEXT NOT NULL, version INTEGER NOT NULL, updated_at TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS runs(id TEXT PRIMARY KEY, kind TEXT NOT NULL, agent_id TEXT NOT NULL, application_id TEXT, status TEXT NOT NULL, provider_id TEXT, payload TEXT NOT NULL, created_at TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS audit(id INTEGER PRIMARY KEY AUTOINCREMENT, action TEXT NOT NULL, subject TEXT NOT NULL, created_at TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS schedule(id TEXT PRIMARY KEY, last_period TEXT NOT NULL, updated_at TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS schedule_claims(id TEXT PRIMARY KEY, period TEXT NOT NULL, token TEXT NOT NULL, claimed_at TEXT NOT NULL, expires_at TEXT NOT NULL, cloud_calls INTEGER NOT NULL, day_start TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS request_idempotency(key TEXT PRIMARY KEY, endpoint TEXT NOT NULL, digest TEXT NOT NULL, state TEXT NOT NULL, response TEXT, expires_at TEXT NOT NULL);
+            CREATE INDEX IF NOT EXISTS idx_schedule_claims_active ON schedule_claims(day_start,expires_at);
+            CREATE TABLE IF NOT EXISTS private_objects(kind TEXT NOT NULL, id TEXT NOT NULL, payload TEXT NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY(kind,id));
+            CREATE TABLE IF NOT EXISTS conversations(
+                id TEXT PRIMARY KEY, agent_id TEXT NOT NULL, application_id TEXT,
+                title TEXT NOT NULL, created_at TEXT NOT NULL, updated_at TEXT NOT NULL);
+            CREATE TABLE IF NOT EXISTS conversation_messages(
+                id INTEGER PRIMARY KEY AUTOINCREMENT, conversation_id TEXT NOT NULL
+                REFERENCES conversations(id) ON DELETE CASCADE, role TEXT NOT NULL,
+                content TEXT NOT NULL, model TEXT, provider_id TEXT, run_id TEXT, created_at TEXT NOT NULL);
+            CREATE INDEX IF NOT EXISTS idx_conversation_messages ON conversation_messages(conversation_id,id);
+            CREATE INDEX IF NOT EXISTS idx_conversations_recent ON conversations(updated_at DESC);
 
-        """)
-        self.db.commit()
-
+            """)
+            self.db.commit()
+        except BaseException:
+            if hasattr(self, "db"):
+                self.db.close()
+            release_state_guard(self._state_guard)
+            self._state_guard = None
+            raise
     def diagnostics(self) -> dict[str, Any]:
         quick = self.db.execute("PRAGMA quick_check(1)").fetchone()[0]
         foreign = self.db.execute("PRAGMA foreign_key_check").fetchall()
@@ -156,7 +165,11 @@ class Store:
                 os.unlink(temporary)
 
     def close(self) -> None:
-        self.db.close()
+        try:
+            self.db.close()
+        finally:
+            release_state_guard(getattr(self, "_state_guard", None))
+            self._state_guard = None
 
     def begin_idempotent(
         self, key: str, endpoint: str, payload: dict[str, Any],

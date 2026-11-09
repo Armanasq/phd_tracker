@@ -15,6 +15,7 @@ from typing import Iterator
 from urllib.parse import quote
 
 from .store import ConflictError, default_path
+from .state_guard import StateLockBusy, acquire_state_guard, release_state_guard
 
 _BACKUP_NAME = re.compile(
     r"phd-atlas-(?:\d{8}T\d{6}Z-[0-9a-f]{10}|pre-restore-\d{8}T\d{6}Z-[0-9a-f]{10})\.sqlite3"
@@ -50,6 +51,20 @@ def runtime_lock(state_path: Path) -> Iterator[None]:
         yield
     finally:
         os.close(descriptor)
+
+
+@contextmanager
+def restore_state_guard(state_path: Path) -> Iterator[None]:
+    try:
+        descriptor = acquire_state_guard(state_path, exclusive=True)
+    except StateLockBusy as error:
+        raise ConflictError(
+            "A private SQLite client is active; stop the runtime and scheduled/CLI processes first"
+        ) from error
+    try:
+        yield
+    finally:
+        release_state_guard(descriptor)
 
 
 def _file_digest(path: Path) -> str:
@@ -145,7 +160,7 @@ def restore_backup(
     if os.name != "posix":
         raise RuntimeError("Automated offline restore currently requires POSIX file locks")
     state = (Path(state_path) if state_path is not None else default_path()).expanduser()
-    with runtime_lock(state):
+    with runtime_lock(state), restore_state_guard(state):
         inspected = verify_backup(name, state_path=state, sha256=sha256)
         if state.is_symlink() or (state.exists() and not state.is_file()):
             raise PermissionError("Private state must be an ordinary file")

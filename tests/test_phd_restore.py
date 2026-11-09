@@ -96,6 +96,22 @@ class VerifiedRestoreTests(unittest.TestCase):
             restore_backup(entry["filename"], state_path=self.path, confirm=True)
         marker.unlink()
 
+    def test_restore_refuses_any_open_sqlite_client_not_just_the_web_server(self) -> None:
+        active = Store(self.path)
+        entry = active.create_backup()
+        try:
+            with self.assertRaisesRegex(ConflictError, "SQLite client"):
+                restore_backup(entry["filename"], state_path=self.path, confirm=True)
+            extra = Store(self.path)
+            try:
+                self.assertIsNotNone(extra.get_application("unknown"))
+            finally:
+                extra.close()
+        finally:
+            active.close()
+        result = restore_backup(entry["filename"], state_path=self.path, confirm=True)
+        self.assertTrue(result["restored"])
+
     def test_rejects_corrupt_and_unsafe_backup(self) -> None:
         state = Store(self.path)
         entry = state.create_backup()
