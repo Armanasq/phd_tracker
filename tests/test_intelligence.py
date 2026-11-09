@@ -217,3 +217,15 @@ def test_notification_detects_deadline_mismatch(tmp_path):
     }))
     result = evaluate(date(2026, 11, 9), path, data)
     assert any(event["kind"] == "conflict" for event in result["events"])
+
+def test_priority_date_notification_is_not_a_final_deadline(tmp_path):
+    file = workbook(tmp_path)
+    wb = load_workbook(file)
+    wb["Action list"]["C4"] = "Priority review; actual final deadline is 2027-01-15."
+    wb.save(file)
+    result = evaluate(date(2026, 11, 6), file, tmp_path / "data")
+    target = next(e for e in result["events"] if e["source_id"] == "known-lab")
+    assert target["kind"] == "priority"
+    assert target["date_type"] == "priority"
+    assert not any(e["kind"] == "deadline" and e["source_id"] == "known-lab"
+                   for e in result["events"])
