@@ -15,7 +15,7 @@ const dates=x=>!x?"Unrecorded":String(x);
 const options=choices=>choices.map(x=>[x,title(x)]);
 
 export function createOperations({request,onChange,onReload,getRecords,notify}){
- const state={data:null,loading:false,tab:"overview",busy:false,editing:null,kind:null,applicationId:"",schedule:null,message:""};
+ const state={data:null,loading:false,loadedAttempt:false,tab:"overview",busy:false,editing:null,kind:null,applicationId:"",schedule:null,message:""};
  const records=()=>getRecords().filter(x=>x.record_type==="tracked");
  const apps=()=>records().map(r=>[r.id,r.name]);
  const byId=id=>records().find(x=>x.id===id)||null;
@@ -92,6 +92,9 @@ export function createOperations({request,onChange,onReload,getRecords,notify}){
     area("skills","Research skills (one per line)",(selected.skills||[]).join("\n"))+
     area("projects","Verified projects (one per line)",(selected.projects||[]).join("\n"))+
     input("hours_per_week","Available hours per week",selected.hours_per_week??"","number",'step="0.5" min="0.5" max="168"')+
+    '<fieldset class="os-tool-field"><legend>Shared document effort (hours; optional)</legend><div class="ops-document-grid">'+
+    ["academic_cv","research_statement","transcripts","recommendations","english_proof","research_portfolio"].map(key=>
+      input("document_"+key,title(key),selected.document_effort?.[key]??"","number",'min="0" max="300" step="0.5"')).join("")+'</div></fieldset>'+
     area("notes","Private applicant profile",selected.notes||"");
   }
   return '<section class="os-panel ops-edit"><div class="os-panel-heading"><div><h2>'+(existing?"Edit "+title(kind):"Add "+title(kind))+'</h2><p>Saved in the private database. Nothing is published to GitHub Pages.</p></div>'+button("Close","close-edit")+'</div>'+
@@ -180,8 +183,8 @@ export function createOperations({request,onChange,onReload,getRecords,notify}){
    (state.kind==="profile"?editor("profile","applicant"):"");
  }
  function view(){
-  if(!state.data&&!state.loading){
-   state.loading=true;
+  if(!state.data&&!state.loading&&!state.loadedAttempt){
+   state.loading=true;state.loadedAttempt=true;
    request("/api/operations").then(result=>{state.data=result;state.loading=false;onChange();})
     .catch(error=>{state.loading=false;state.message=error.message;onChange();});
   }
@@ -195,7 +198,7 @@ export function createOperations({request,onChange,onReload,getRecords,notify}){
    (state.message?'<div class="os-message" role="status">'+esc(state.message)+'</div>':"")+'</section>';
  }
  async function reload(){
-  state.loading=true;
+  state.loading=true;state.loadedAttempt=true;
   try{state.data=await request("/api/operations");state.message="";}finally{state.loading=false;onChange();}
  }
  document.addEventListener("click",async event=>{
@@ -232,6 +235,11 @@ export function createOperations({request,onChange,onReload,getRecords,notify}){
     if(name==="profile"){
      for(const key of ["research_topics","skills","projects"])values[key]=values[key].split(/\n|,/).map(x=>x.trim()).filter(Boolean);
      values.hours_per_week=values.hours_per_week?Number(values.hours_per_week):null;
+     values.document_effort={};
+     for(const key of ["academic_cv","research_statement","transcripts","recommendations","english_proof","research_portfolio"]){
+      const val=values["document_"+key];delete values["document_"+key];
+      if(val!=="")values.document_effort[key]=Number(val);
+     }
     }
     for(const key of ["date","deadline","time","timezone","source_url","observed_at"])
      if(values[key]==="")delete values[key];
