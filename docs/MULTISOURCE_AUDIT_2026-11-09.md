@@ -16,8 +16,10 @@
 ### Deduplication
 The [Aalborg ROX6G multi-robot planning PhD](https://www.vacancies.aau.dk/phd-positions/show-vacancy/vacancyId/981852), closing 29 Nov 2026, is already in the original tracker as `N264-08`. ETH RobotX, KTH/UZH research subtopics, and other existing routes were checked against the existing source-ID registry to avoid manufacturing extra applications.
 
-### Critical official-date contradiction: TUM `N263-07`
-The controlling Action list currently records **15 Nov 2026** for TUM AVS *Mobile Manipulation for Humanoid Robots*. The [official TUM page](https://www.mos.ed.tum.de/en/avs/career/our-jobs/ki-motorsport-1/) instead lists **Friday, 17 July 2026**, with interviews in August and an October 2026 start. Both dates cannot be the final deadline for the same recruitment round. The protected application entry was **not overwritten**. A new `N263-07-LIVE` monitored-source observation detects the official-page date and classifies it as `contradiction_deadline_mismatch`, distinct from a closed-portal alert. Until the lab publishes an updated call, **do not rely on the 15 Nov deadline**.
+### Resolved archive discrepancy: TUM `N263-07`
+A cached version of the [official TUM AVS humanoid-robotics posting](https://www.mos.ed.tum.de/en/avs/career/our-jobs/ki-motorsport-1/) had an earlier **17 July 2026** deadline. A **fresh 9 November 2026 source search** returned the updated TUM posting with **15 November 2026** as the application deadline, **1–15 December 2026** interviews and a **1 February 2027** start. The lab's [autonomous motorsport recruitment overview](https://tum-autonomous-motorsport.com/) and a current public LinkedIn recruitment post independently corroborate **15 November**.
+
+The existing tracker deadline `N263-07` is therefore **supported by the fresher official version**. The live evidence monitor reports `anchor_present`, rather than a contradiction. The `N263-07-LIVE` watch retains a `contradiction_deadline_mismatch` regression guard only if the older July date reappears. No protected workbook date was overwritten.
 
 ### Supporting research, not vacancy evidence
 - [Dream to Fly — model-based reinforcement learning for drone flight](https://doi.org/10.1109/icra57385.2026.11695931) (CoChat-indexed).
