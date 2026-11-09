@@ -73,3 +73,23 @@ jobs:
       - name: Deploy PhD Atlas workspace
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify published Pages assets and current source schema
+        env:
+          PUBLISHED_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          set -euo pipefail
+          base="${PUBLISHED_URL%/}"
+          for attempt in 1 2 3 4 5 6 7 8; do
+            if curl -fsSL --max-time 15 "$base/?revision=$GITHUB_SHA" -o /tmp/phd-hosted-index.html &&
+               grep -q 'type="module"' /tmp/phd-hosted-index.html &&
+               curl -fsSL --max-time 15 "$base/modules/domain.mjs?revision=$GITHUB_SHA" -o /tmp/phd-hosted-domain.mjs &&
+               grep -q 'validateSnapshot' /tmp/phd-hosted-domain.mjs &&
+               curl -fsSL --max-time 15 "$base/data/workspace.json?revision=$GITHUB_SHA" -o /tmp/phd-hosted-data.json &&
+               python -c 'import json; d=json.load(open("/tmp/phd-hosted-data.json")); assert d["schema_version"] == 1 and len(d["records"]) >= 109'; then
+              echo "Confirmed deployed HTML, JavaScript module and 109+ authoritative source records at $base"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "Published application verification failed" >&2
+          exit 1
