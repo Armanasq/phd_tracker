@@ -10,7 +10,7 @@
 
 **AI-powered research discovery, source verification, application planning, and reproducible execution.**
 
-<a href="../../../actions/workflows/experience-lab.yml"><img src="../assets/readme/kinetic_cover.svg" alt="EvidenceGraph: source-derived research intelligence orbital cover" width="100%"/></a>
+<a href="https://github.com/Armanasq/phd_tracker/actions/workflows/experience-lab.yml"><img src="../assets/readme/kinetic_cover.svg" alt="EvidenceGraph: source-derived research intelligence orbital cover" width="100%"/></a>
 
 [**DISCOVER**](#research--application-pipeline) · [**VERIFY**](#opportunity-funnel--actual-deadline-horizons) · [**ANALYZE**](#research-focus-quadrant) · [**PLAN**](#deadline-gantt--application-milestones) · [**SIMULATE**](#interactive-exploration--simulation-lab) · [**EXECUTE**](#github-native-workflow-console)
 
@@ -350,11 +350,11 @@ The following are generated Mermaid artifacts and can be opened independently on
 
 
 <details>
-<summary><b>Engineering deep dive · original execution intelligence and source diagnostics</b></summary>
+<summary><b>Engineering detail · execution intelligence and source diagnostics</b></summary>
 
 <div align="center">
 
-<a href="../../../actions/workflows/experience-lab.yml"><img src="../assets/readme/kinetic_cover.svg" width="100%" alt="Animated research intelligence cover with 109 actual future application records on deadline orbits" /></a>
+<a href="https://github.com/Armanasq/phd_tracker/actions/workflows/experience-lab.yml"><img src="../assets/readme/kinetic_cover.svg" width="100%" alt="Animated research intelligence cover with 109 actual future application records on deadline orbits" /></a>
 
 **THIS IS AN EXECUTABLE RESEARCH WORKSPACE, NOT A STATIC TRACKER.**
 
@@ -390,7 +390,7 @@ Prioritize, snooze, acknowledge tasks or explicitly set asset readiness with val
 </details></td>
 </tr></table>
 
-<a href="../../../actions/workflows/experience-lab.yml"><img src="../assets/readme/kinetic_lane.svg" width="100%" alt="Animated, data-backed source discovery to evidence verification to decision pipeline"/></a>
+<a href="https://github.com/Armanasq/phd_tracker/actions/workflows/experience-lab.yml"><img src="../assets/readme/kinetic_lane.svg" width="100%" alt="Animated, data-backed source discovery to evidence verification to decision pipeline"/></a>
 
 ## Choose your experiment
 
