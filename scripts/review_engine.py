@@ -4,6 +4,11 @@ import json
 from datetime import date
 from pathlib import Path
 
+if __package__:
+    from .source_policy import classify_deadline_note, primary_source_verified
+else:
+    from source_policy import classify_deadline_note, primary_source_verified
+
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -15,16 +20,21 @@ def load(path, key):
 def plan(today: date):
     items = load("data/opportunities.json", "records")
     monitor = load("data/latest_run.json", "source_statuses")
-    observations = {x["id"]: x["status"] for x in monitor}
+    observations = {x.get("application_id") or x["id"]: x["status"] for x in monitor}
     due = []
     for item in items:
         obligations = []
         confidence = item["confidence"]
-        primary = confidence == "official_plus_email"
+        primary = primary_source_verified(confidence)
         if not primary:
             obligations.append("Verify live institutional announcement and application route")
         if item["deadline"] is None:
             obligations.append("Obtain an explicit official deadline and timezone")
+        kind = classify_deadline_note(item.get("deadline_kind"))
+        if item["deadline"] and kind == "priority":
+            obligations.append("Priority-review date, NOT a final submission deadline")
+        elif item["deadline"] and kind == "unverified":
+            obligations.append("Deadline is not confirmed by an authoritative current source")
         if item["funding"] and ("confirm" in item["funding"].casefold() or "verify" in item["funding"].casefold()):
             obligations.append("Confirm funded stipend and international tuition eligibility")
         if "German" in item["eligibility"] and "German" in item["blockers"]:
@@ -50,6 +60,7 @@ def plan(today: date):
             "deadline": item["deadline"],
             "days_to_deadline": day_count,
             "deadline_kind": item["deadline_kind"],
+            "deadline_classification": kind,
             "tier": tier,
             "research_status": "source_verified" if primary else "human_review_required",
             "obligations": sorted(set(obligations)),
