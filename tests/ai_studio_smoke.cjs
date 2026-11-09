@@ -225,9 +225,10 @@ async function main(){
   await page.waitForURL('**/index.html#settings');
   await page.locator('#body h1').first().waitFor({timeout:12000});
   const lensCalls=lensRequests.filter(x=>x.body.conversation===true);
-  assert.ok(lensCalls.length>=2,'Atlas Lens conversations were not captured by the regression test');
-  assert.ok(lensCalls.every(x=>x.body.cloud_consent===false),'Local Atlas Lens conversations must not claim cloud disclosure consent');
-  assert.ok(lensCalls.every(x=>typeof x.key==='string'&&x.key.length>=16),'Atlas Lens inference calls should be retry-safe');
+  const localLensCalls=lensCalls.filter(x=>x.body.cloud_consent===false);
+  assert.ok(localLensCalls.length>=2,'Local Atlas Lens conversations were not captured');
+  assert.ok(lensCalls.every(x=>typeof x.key==='string'&&x.key.length>=16),'Atlas Lens inference calls must be retry-safe');
+  assert.equal(lensCalls.filter(x=>x.body.cloud_consent===true).length,1,'Exactly one approved cloud request must be sent');
   assert.deepEqual(pageErrors,[],'Browser JS errors');
   await page.close();
   console.log('Unified workspace passed: endpoint setup, activation, agent routing, application-scoped Atlas Lens inference, run trace, workflow editor, legacy route and mobile layout');
