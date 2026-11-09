@@ -34,6 +34,13 @@ async function main(){
    }
    const results=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa']).analyze();
    issues.push({viewport:width,view,violations:results.violations.map(v=>({id:v.id,impact:v.impact,description:v.description,nodes:v.nodes.slice(0,8).map(n=>({target:n.target,html:n.html,summary:n.failureSummary}))})),incomplete:results.incomplete.length});
+   if((view==='dashboard'&&width>1000)||(view==='settings'&&width<500)){
+    await page.locator('#atlasLens [data-lens="toggle"]').click();
+    await page.locator('#atlasLensPanel').waitFor();
+    const assistant=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa']).analyze();
+    issues.push({viewport:width,view:'atlas-assistant',violations:assistant.violations.map(v=>({id:v.id,impact:v.impact,description:v.description,nodes:v.nodes.slice(0,8).map(n=>({target:n.target,html:n.html,summary:n.failureSummary}))})),incomplete:assistant.incomplete.length});
+    await page.locator('#atlasLensPanel [data-lens="close"]').click();
+   }
    if(view==='applications'&&width>1000){
     await page.locator('#body tbody .rowbutton').first().click();
     const dialog=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa']).analyze();
