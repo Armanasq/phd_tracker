@@ -150,7 +150,7 @@ async function run() {
     });
     assert.equal(mobileBriefOverlap,false,'Deadline countdown must not overlap the programme title on mobile');
     await mobile.screenshot({path:path.join(out,'phd-atlas-mobile.png'),fullPage:true});
-    await mobile.locator('#atlasLens [data-lens="toggle"]').click();
+    await mobile.locator('.topbar [data-action="lens-open"]').click();
     await mobile.locator('#atlasLensPanel').waitFor();
     const lensWidth=await mobile.locator('#atlasLensPanel').evaluate(el=>Math.round(el.getBoundingClientRect().width));
     assert.equal(lensWidth,390,'Mobile assistant must fit the viewport');
