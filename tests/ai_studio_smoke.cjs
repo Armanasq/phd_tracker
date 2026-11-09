@@ -89,7 +89,7 @@ async function main(){
   const updated=await fetch(base+'/api/routing').then(x=>x.json());
   assert.equal(updated.agent_assignments.smoke_agent.provider_id,'smoke_vllm');
   assert.equal(updated.agent_assignments.smoke_agent.source,'agent_assignment');
-  await page.locator('[data-action="nav"][data-value="ai"]').click();
+  await page.locator('#navigation [data-action="nav"][data-value="ai"]').click();
   await page.locator('form[data-os-form="run"] select[name="agent_id"]').selectOption('smoke_agent');
   await page.locator('#osPrompt').fill('Evaluate the applicant evidence; do not submit anything.');
   assert.equal(await page.locator('form[data-os-form="run"] select[name="provider_id"]').count(),0,
@@ -99,7 +99,7 @@ async function main(){
   assert.ok(seen.filter(x=>x.path==='/v1/chat/completions').length>=2);
   await page.locator('[data-action="nav"][data-value="activity"]').click();
   await page.locator('.os-ledger').first().getByText('My Research Agent').waitFor();
-  await page.locator('[data-action="nav"][data-value="settings"]').click();
+  await page.locator('#navigation [data-action="nav"][data-value="settings"]').click();
   await page.locator('[data-os-action="tab"][data-id="workflows"]').click();
   await page.locator('form[data-os-form="workflow"]').waitFor();
   const out=path.resolve('artifacts/ui-qa');
