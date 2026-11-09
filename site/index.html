@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#faf9f6">
+<meta name="theme-color" content="#192b26">
 <meta name="description" content="Fall 2027 PhD application tracker: verified sources, deadlines and decisions.">
 <title>PhD Atlas — Applications, Fall 2027</title>
 <link rel="stylesheet" href="./style.css">
@@ -12,12 +12,14 @@
 <a class="skip" href="#main">Skip to content</a>
 <div id="app" class="shell">
   <aside class="sidebar" aria-label="Workspace navigation">
+    <div class="sidebar-overline">RESEARCH OPERATIONS <span> / 2027</span></div>
     <div class="brand" aria-label="PhD Atlas">
       <span class="brand-mark" aria-hidden="true">a<span>.</span></span>
       <span class="brand-name"><strong>atlas</strong><small>PhD applications / 2027</small></span>
     </div>
-    <div class="nav-group-label">WORKSPACE</div>
+    <div class="nav-group-label">NAVIGATION</div>
     <nav id="navigation" aria-label="Workspace views"></nav>
+    <section id="sidebarDue" class="sidebar-deadline" aria-label="Nearest recorded application closing"></section>
     <div class="side-bottom">
       <div class="side-caption">DATA STATUS</div>
       <div id="providerStatus" class="source-status" aria-live="polite">Reading source snapshot…</div>
@@ -42,8 +44,9 @@
         <button id="exportMenu" class="btn secondary export-btn" type="button">Export <span aria-hidden="true">↓</span></button>
       </div>
     </header>
+    <div class="context-strip" aria-label="Source context"><span class="context-strip-label">PHD ATLAS <span aria-hidden="true">/</span> INTAKE 2027</span><span id="topEvidenceAsOf">Reading committed evidence…</span></div>
     <div id="body" class="page" aria-live="off"></div>
-    <footer class="main-footer"><span>PhD Atlas · Fall 2027</span><span>Evidence is versioned. Decisions are yours.</span></footer>
+    <footer class="main-footer"><span>PhD Atlas · Research operations / 2027</span><span>Recorded evidence is not proof of eligibility or submission.</span></footer>
   </main>
 </div>
 <div id="dialogRoot"></div>
