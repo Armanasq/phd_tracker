@@ -349,3 +349,9 @@ body.dark .os-provider-icon,body.dark .os-avatar,body.dark .os-workflow-mark,bod
 .os-context-banner strong{font-size:13px;display:block;overflow-wrap:anywhere}
 .os-context-banner small{font-size:11px;color:var(--muted);display:block;margin-top:4px}
 body.dark .os-context-banner{background:#223155;border-color:#425780}
+
+@media(max-width:760px){
+ .os-offline{grid-template-columns:minmax(0,1fr)}
+ .os-offline>div{min-width:0}
+ .os-code{max-width:100%;overflow-x:auto}
+}
