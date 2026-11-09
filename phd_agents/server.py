@@ -11,7 +11,8 @@ from urllib.parse import parse_qs, unquote, urlsplit
 from .catalog import agent_spec, provider_spec, workflow_spec
 from .domain import agenda, plan_capacity, preflight, today_in
 from .operations import evidence_conflicts, milestones_for, referee_matrix, research_fit_signals, resource_schedule
-from .engine import catalog, owner_records, run_agent, run_workflow, scheduler_once
+from .providers import invoke
+from .engine import catalog, owner_records, run_agent, run_workflow, scheduler_once, selected
 from .store import ConflictError, Store
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -152,7 +153,15 @@ class ApiHandler(BaseHTTPRequestHandler):
     def post_route(self, path: str, data: dict) -> None:
         store = self.server.store
         root = self.server.root
-        if path.startswith("/api/private/"):
+        if path == "/api/providers/probe":
+            provider = selected(catalog(store)["providers"], data["provider_id"], "provider")
+            if not provider["local"] and data.get("cloud_consent") is not True:
+                raise PermissionError("Cloud provider testing requires explicit disclosure consent")
+            response = invoke(provider, "Answer with one short sentence.", "Respond with the exact text: Provider connection successful.")
+            self.send_json({"status": "responded", "provider_id": provider["id"],
+                            "model": response.model, "response": response.content[:600],
+                            "usage": response.usage})
+        elif path.startswith("/api/private/"):
             parts = path.removeprefix("/api/private/").split("/")
             if len(parts) == 1:
                 kind = parts[0]

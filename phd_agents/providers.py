@@ -48,8 +48,8 @@ def validate_url(value: object, local: bool) -> str:
             raise
     if parts.scheme == "http" and not (local and loopback):
         raise ValueError("Unencrypted model connections are permitted only on loopback")
-    if local and not loopback and parts.scheme != "https":
-        raise ValueError("Remote local providers require HTTPS")
+    if local and not loopback:
+        raise ValueError("Local providers must use loopback; configure a remote HTTPS self-hosted server as cloud to require disclosure consent")
     return candidate
 
 

@@ -25,7 +25,14 @@ def _missing(kind: str, identity: str):
 
 def owner_records(store: Store, root: Path) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     source = snapshot(root)
-    return source, merged_records(source, store.list_applications())
+    records = merged_records(source, store.list_applications())
+    confirmed = {(m.get("application_id"), m.get("date")) for m in store.items("milestone")
+                 if m.get("kind") == "final" and m.get("verification") == "primary_confirmed"
+                 and m.get("source_url") and m.get("time") and m.get("timezone")}
+    for record in records:
+        if (record["id"], record.get("deadline")) in confirmed:
+            record["deadline_time_verified"] = True
+    return source, records
 
 def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str,
               application_id: str | None = None, input_text: str = "",
