@@ -15,7 +15,7 @@ from .store import Store, utcnow
 
 def credential_ready(provider: dict[str, Any]) -> bool:
     variable = str(provider.get("api_key_env") or "")
-    return not variable or bool(os.environ.get(variable))
+    return not variable or bool(read_secret(variable))
 
 
 def provider_state(provider: dict[str, Any], last: dict[str, Any] | None = None) -> dict[str, Any]:
