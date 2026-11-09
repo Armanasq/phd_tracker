@@ -30,3 +30,28 @@ def classify_deadline_note(note: object) -> DeadlineClass:
     if any(phrase in normalized for phrase in uncertain):
         return "unverified"
     return "final"
+
+MONITOR_STATUS_RANK = {
+    "anchor_present": 0,
+    "not_checked": 0,
+    "unavailable": 2,
+    "response_too_large": 2,
+    "disallowed_host": 3,
+    "unsafe_redirect": 3,
+    "review_source_changed": 4,
+    "contradiction_deadline_mismatch": 5,
+    "contradiction_closed_portal": 5,
+}
+
+
+def summarize_watch_statuses(observations: list[dict]) -> dict[str, str]:
+    selected: dict[str, str] = {}
+    for item in observations:
+        application = item.get("application_id") or item.get("id")
+        status = str(item.get("status") or "")
+        if not application or not status:
+            continue
+        current = selected.get(application, "")
+        if MONITOR_STATUS_RANK.get(status, 1) > MONITOR_STATUS_RANK.get(current, -1):
+            selected[application] = status
+    return selected
