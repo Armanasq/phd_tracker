@@ -59,6 +59,17 @@ def resolve_repository(explicit: str | None = None, *, root: Path = ROOT) -> str
     return DEFAULT_REPOSITORY
 
 
+def resolve_data_mode(repository: str, override: str | None = None) -> str:
+    repository = validate_repository(repository)
+    choice = override if override is not None else os.environ.get("PHD_ATLAS_DATA_MODE", "")
+    mode = str(choice or "").strip().lower()
+    if not mode:
+        return "source" if repository.casefold() == DEFAULT_REPOSITORY.casefold() else "starter"
+    if mode not in {"source", "starter"}:
+        raise ValueError("Data mode must be source or starter")
+    return mode
+
+
 def repository_url(repository: str) -> str:
     return "https://github.com/" + validate_repository(repository)
 

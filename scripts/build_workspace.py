@@ -11,10 +11,10 @@ from urllib.parse import urlsplit, urlunsplit
 
 if __package__:
     from .source_policy import classify_deadline_note_strict
-    from .instance_config import DEFAULT_REPOSITORY, action_center_url, pages_url, repository_url, resolve_repository
+    from .instance_config import DEFAULT_REPOSITORY, action_center_url, pages_url, repository_url, resolve_data_mode, resolve_repository
 else:
     from source_policy import classify_deadline_note_strict
-    from instance_config import DEFAULT_REPOSITORY, action_center_url, pages_url, repository_url, resolve_repository
+    from instance_config import DEFAULT_REPOSITORY, action_center_url, pages_url, repository_url, resolve_data_mode, resolve_repository
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCUMENTS = {
@@ -85,9 +85,66 @@ def duplicate_advisories(records: list[dict]) -> list[dict]:
     return sorted(result, key=lambda d: -d["similarity"])[:100]
 
 
-def build(root: Path = ROOT, *, repository: str | None = None) -> dict:
+def source_links(repo: str) -> dict:
+    base = repository_url(repo)
+    return {
+        "workbook": base + "/blob/main/PhD_Action_List.xlsx",
+        "opportunities": base + "/blob/main/data/opportunities.json",
+        "source_monitor": base + "/actions/workflows/phd-intelligence.yml",
+        "control_issue": action_center_url(repo),
+        "repository": base,
+    }
+
+
+def instance_details(repo: str, mode: str) -> dict:
+    return {
+        "repository": repo,
+        "type": "upstream" if repo.casefold() == DEFAULT_REPOSITORY.casefold() else "independent",
+        "site_url": pages_url(repo, os.environ.get("PHD_ATLAS_SITE_URL")),
+        "data_policy": "public_committed_snapshot",
+        "data_mode": mode,
+    }
+
+
+def starter_snapshot(repo: str) -> dict:
+    return {
+        "schema_version": 1,
+        "as_of": None,
+        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "timezone": "UTC",
+        "policy": "Independent starter workspace. No opportunity evidence has been imported or verified.",
+        "privacy": "GitHub Pages is public; private applicant records belong in the local runtime.",
+        "instance": instance_details(repo, "starter"),
+        "meta": {
+            "tracked": 0, "candidates": 0, "unpromoted_leads": 0,
+            "discovery_snapshot": None, "notification_delivery": {},
+        },
+        "records": [], "leads": [], "archive": [], "tasks": [],
+        "task_ledger": [], "duplicates": [], "providers": [], "watches": [],
+        "coverage": {
+            "workbook_audit_as_of": None, "worksheets": [], "files": [],
+            "totals": {
+                "tracked": 0, "research_candidates": 0, "reviewed_opportunity_notes": 0,
+                "discovery_leads": 0, "historical_exclusions": 0, "task_projection": 0,
+                "full_task_ledger": 0, "workbook_tabs": 0,
+            },
+            "discovery_errors": {},
+        },
+        "documents": DOCUMENTS, "global_document_states": {},
+        "notes": [
+            "The starter workspace intentionally contains no original maintainer application data.",
+            "Provide your own reviewed source records and enable source mode before publishing them.",
+            "Unknown evidence must remain unknown; no portal submission is inferred.",
+        ],
+        "source_links": source_links(repo),
+    }
+
+
+def build(root: Path = ROOT, *, repository: str | None = None, data_mode: str | None = None) -> dict:
     repo = resolve_repository(repository, root=root)
-    repo_url = repository_url(repo)
+    mode = resolve_data_mode(repo, data_mode)
+    if mode == "starter":
+        return starter_snapshot(repo)
     experience = load(root, "experience_view.json")
     frontier = load(root, "portfolio_frontier.json")
     details = {str(r["id"]): r for r in load(root, "opportunities.json").get("records", []) if r.get("id")}
@@ -297,7 +354,7 @@ def build(root: Path = ROOT, *, repository: str | None = None) -> dict:
         "timezone": experience.get("timezone", "Europe/Berlin"),
         "policy": "Source snapshot; no live deadline guarantee. Unknown document states are not missing. No applicant submission state is inferred.",
         "privacy": "Public Pages snapshot omits mailbox links, email addresses, personal correspondence bodies and historical exclusion reasons.",
-        "instance": {"repository": repo, "type": "upstream" if repo.casefold() == DEFAULT_REPOSITORY.casefold() else "independent", "site_url": pages_url(repo, os.environ.get("PHD_ATLAS_SITE_URL")), "data_policy": "public_committed_snapshot"},
+        "instance": instance_details(repo, mode),
         "meta": {"tracked": sum(r["record_type"] == "tracked" for r in records), "candidates": sum(r["record_type"] == "candidate" for r in records), "unpromoted_leads": len(leads), "discovery_snapshot": provider_report.get("run_date"), "notification_delivery": notification.get("delivery", {})},
         "records": records, "leads": leads, "archive": archive, "tasks": tasks,
         "task_ledger": full_task_ledger,
@@ -310,13 +367,7 @@ def build(root: Path = ROOT, *, repository: str | None = None) -> dict:
             "A likely duplicate is a screening lead, not confirmation that submissions are interchangeable.",
             "The interface stores edits locally as drafts until a verified GitHub issue command is committed.",
         ],
-        "source_links": {
-            "workbook": repo_url + "/blob/main/PhD_Action_List.xlsx",
-            "opportunities": repo_url + "/blob/main/data/opportunities.json",
-            "source_monitor": repo_url + "/actions/workflows/phd-intelligence.yml",
-            "control_issue": action_center_url(repo),
-            "repository": repo_url,
-        },
+        "source_links": source_links(repo),
         "watches": [{"id": clean(w.get("id"), 90), "source_url": public_url(w.get("url"))} for w in watchlist.get("watches", [])],
     }
 
@@ -325,10 +376,11 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--out", default="site/data/workspace.json")
     parser.add_argument("--repository", help="GitHub owner/repository (automatically detected in GitHub Actions)")
+    parser.add_argument("--data-mode", choices=("starter", "source"), help="Public data mode; forks start without inherited applications")
     args = parser.parse_args()
     output = Path(args.out)
     output.parent.mkdir(parents=True, exist_ok=True)
-    snapshot = build(repository=args.repository)
+    snapshot = build(repository=args.repository, data_mode=args.data_mode)
     ids = [r["id"] for r in snapshot["records"]]
     if len(ids) != len(set(ids)):
         raise ValueError("Duplicate source IDs in workspace projection")
