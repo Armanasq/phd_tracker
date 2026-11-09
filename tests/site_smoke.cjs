@@ -40,7 +40,9 @@ async function run() {
     assert.match(await page.locator('#body h1').innerText(),/Today’s work/);
     assert.equal(await page.locator('.kpi').count(),5);
     assert.match(await page.locator('.kpi').first().innerText(),/Tracked applications\s*109/);
-    assert.equal(await page.locator('body').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(246, 247, 251)');
+    assert.equal(await page.locator('body').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(250, 251, 250)');
+    assert.equal(await page.locator('.sidebar').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(246, 247, 246)');
+    assert.equal(await page.locator('.heading h1, .today-head h1').first().evaluate(el=>getComputedStyle(el).fontFamily.includes('Inter')),true);
     assert.ok((await page.locator('.agenda-item').count())>=5);
     assert.ok((await page.locator('.nav-btn').count())>=11);
     assert.equal(await page.locator('.runway-day').count(),7);
@@ -54,6 +56,12 @@ async function run() {
     });
     assert.equal(briefOverlap,false,'Deadline countdown must not overlap the programme title on desktop');
     await page.screenshot({path:path.join(out,'phd-atlas-desktop.png'),fullPage:true});
+    await page.locator('#atlasLens [data-lens="toggle"]').click();
+    await page.locator('#atlasLensPanel').waitFor();
+    assert.match(await page.locator('.lens-hero h2').innerText(),/How can I help/);
+    assert.equal(await page.locator('.lens-hero-orbit').count(),0,'Decorative chatbot orbit must be removed');
+    await page.screenshot({path:path.join(out,'atlas-lens-desktop.png'),fullPage:false});
+    await page.locator('#atlasLensPanel [data-lens="close"]').click();
 
     await page.locator('#navigation [data-action="nav"][data-value="calendar"]').click();
     assert.match(await page.locator('#body h1').innerText(),/Application calendar/);
@@ -142,6 +150,12 @@ async function run() {
     });
     assert.equal(mobileBriefOverlap,false,'Deadline countdown must not overlap the programme title on mobile');
     await mobile.screenshot({path:path.join(out,'phd-atlas-mobile.png'),fullPage:true});
+    await mobile.locator('#atlasLens [data-lens="toggle"]').click();
+    await mobile.locator('#atlasLensPanel').waitFor();
+    const lensWidth=await mobile.locator('#atlasLensPanel').evaluate(el=>Math.round(el.getBoundingClientRect().width));
+    assert.equal(lensWidth,390,'Mobile assistant must fit the viewport');
+    await mobile.screenshot({path:path.join(out,'atlas-lens-mobile.png'),fullPage:false});
+    await mobile.locator('#atlasLensPanel [data-lens="close"]').click();
     await mobile.locator('#workspaceSection').selectOption('calendar');
     assert.ok((await mobile.locator('.cal-day').count())>=28);
     await mobile.locator('#workspaceSection').selectOption('applications');
