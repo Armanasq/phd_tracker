@@ -936,3 +936,21 @@ body.dark .source-strip strong{color:var(--ink)}
  .tablewrap{overflow:visible}
 }
 @media(prefers-reduced-motion:reduce){.runway-day,.nav-btn,.decision-brief-link{transition:none!important}}
+
+/* Accessibility corrections validated against the 2026-11-09 automated WCAG audit. */
+:root{--soft:#526657}
+body.dark{--soft:#b1c1b5}
+.page-index{color:#4f6657}
+body.dark .page-index{color:#bfd2c1}
+.decision-brief-label span:last-child{color:#4e624e}
+.decision-brief-days span{color:#3c503d}
+.decision-brief-context>span{color:#3c503d}
+.decision-brief-bottom{color:#42523f}
+.runway-weekday{color:#425e4b}
+.runway-due{color:#52675a}
+body.dark .decision-brief-label span:last-child,
+body.dark .decision-brief-days span,
+body.dark .decision-brief-context>span,
+body.dark .decision-brief-bottom{color:#d0dfc9}
+body.dark .runway-weekday,
+body.dark .runway-due{color:#c3d8c7}
