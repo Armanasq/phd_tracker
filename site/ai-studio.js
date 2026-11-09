@@ -77,7 +77,7 @@ function providers(){
   return '<article class="catalog-card connection-card"><div class="catalog-top">'+tag(p.local?"On-device":"Cloud API",p.local?"":"warn")+'<span class="provider-health '+escape(tone)+'"><span class="provider-dot"></span>'+escape(labels[code]||code)+'</span></div>'+
    '<div class="provider-brand"><h3>'+escape(p.label)+'</h3><span class="mono">'+escape(p.kind)+'</span></div>'+
    '<dl class="provider-facts"><div><dt>Model</dt><dd>'+escape(p.model)+'</dd></div><div><dt>Endpoint</dt><dd class="endpoint">'+escape(p.base_url)+'</dd></div><div><dt>Credentials</dt><dd>'+escape(p.api_key_env?(st.credential_configured?"Configured in environment":"Requires "+p.api_key_env):"No API key required")+'</dd></div></dl>'+
-   '<p class="connection-detail">'+escape(reason)+'</p><div class="buttons provider-actions">'+minor("Discover models","provider-models",p.id)+minor("Test inference","provider-probe",p.id)+minor("Configure","edit-provider",p.id)+'</div></article>';
+   '<p class="connection-detail">'+escape(reason)+'</p><div class="buttons provider-actions">'+minor("Discover models","provider-models",p.id)+minor("Test inference","provider-probe",p.id)+minor("Configure","edit-provider",p.id)+(p.api_key_env?minor("API key","provider-credential",p.id):"")+'</div></article>';
  }).join("");
  return heading("04 / MODEL INFRASTRUCTURE","Connections and model routing","Configure local and cloud endpoints, inspect discovered models and verify a response before selecting a provider.",btn("Add provider","new-provider","","primary")+btn("Settings","nav","settings"))+
  '<div class="kpis">'+metric("PROVIDERS",all.length,"Catalog entries · connection not implied")+metric("VERIFIED INFERENCE",verified,"Most recent successful model responses")+metric("CONFIGURATION READY",configured,"Credential and endpoint checks only")+metric("DEFAULT ROUTE",d.settings?.default_provider||"ollama","Private preferences")+'</div>'+
@@ -384,6 +384,12 @@ document.addEventListener("click",async e=>{
  if(action==="new-provider"){configModal("provider");return}
  if(action==="new-workflow"){configModal("workflow");return}
  if(action==="edit-provider"){configModal("provider",id);return}
+  if(action==="provider-credential"){
+   const provider=state.data.catalog.providers.find(p=>p.id===id);
+   if(!provider?.api_key_env)return;
+   modal("API credential · "+provider.label,'<p class="subtitle">Saved only in the private localhost runtime with owner-only file permissions. The key is never returned to the browser after saving.</p><form id="credentialForm" data-provider="'+escape(id)+'" class="form-grid"><div class="field wide"><label for="credentialInput">API key or token</label><input id="credentialInput" name="credential" type="password" autocomplete="off" required></div><div class="form-actions"><button class="btn primary" type="submit">Save credential</button></div></form>');
+   return;
+  }
   if(action==="provider-models"){
    const provider=state.data.catalog.providers.find(p=>p.id===id);
    if(!provider||state.busy)return;
@@ -444,9 +450,15 @@ document.addEventListener("click",async e=>{
  }
 });
 document.addEventListener("submit",async e=>{
- const form=e.target;if(!["configForm","applicationForm","agentRunForm","workflowRunForm","privateForm","capacityForm","settingsForm"].includes(form.id))return;
+ const form=e.target;if(!["configForm","applicationForm","agentRunForm","workflowRunForm","privateForm","capacityForm","settingsForm","credentialForm"].includes(form.id))return;
  e.preventDefault();try{
  if(form.id==="configForm"){await submitConfig(form);return}
+  if(form.id==="credentialForm"){
+   await api("/api/providers/credential",{provider_id:form.dataset.provider,credential:form.elements.credential.value});
+   form.elements.credential.value="";
+   close();await load();toast("Credential saved privately. Test connection to verify.");
+   return;
+  }
   if(form.id==="settingsForm"){
    const values=Object.fromEntries(new FormData(form));
    values.max_runs_per_tick=Number(values.max_runs_per_tick);
