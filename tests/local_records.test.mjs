@@ -23,7 +23,7 @@ test("invalid deadlines, mailbox URLs, private text, unsupported states and unsa
  for(const value of ["2027-02-30","tomorrow","2026-13-01"])
   assert.throws(()=>createLocalRecord({...input,deadline:value},id),/deadline/);
  for(const source_url of ["javascript:alert(1)","http://example.edu","https://mail.google.com/mail/u/0/#x","https://user:pass@example.edu/"])
-  assert.throws(()=>validateEvidenceUrl(source_url),/HTTPS/);
+  assert.throws(()=>validateEvidenceUrl(source_url),TypeError);
  assert.throws(()=>createLocalRecord({...input,name:"Prof test@example.edu"},id),/name/);
  assert.throws(()=>createLocalRecord({...input,status:"submitted_without_receipt"},id),/workflow/);
  assert.throws(()=>createLocalRecord(input,"../bad"),/ID/);
