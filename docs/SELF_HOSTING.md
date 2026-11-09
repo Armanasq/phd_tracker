@@ -36,7 +36,7 @@ Open `http://127.0.0.1:8765/#settings`. Configure a real OpenAI-compatible/other
 
 1. Fork or copy the repository to `YOUR_ACCOUNT/YOUR_REPOSITORY`. A fork contains the original maintainer's public files and Git history. By default, its Pages build publishes an empty starter workspace rather than inherited opportunities. Replace those source files and review provenance before sharing any new data. Never publish private emails, receipts or credentials.
 2. Keep `main` as the default branch. In **Settings → Actions**, enable GitHub Actions for the fork as required. In **Settings → Pages → Build and deployment**, select **GitHub Actions**.
-3. Run **Actions -> PhD Atlas | Publish GitHub Pages Workspace -> Run workflow**, or push edited source data to `main`. The default deployment intentionally contains no application records. After replacing and verifying your own sources, set repository Actions variable `PHD_ATLAS_DATA_MODE=source` and rerun the publisher. It derives the site identity from `GITHUB_REPOSITORY` and publishes under your account.
+3. Run **Actions -> PhD Atlas | Publish GitHub Pages Workspace -> Run workflow**. The initial deployment is an empty starter. Use the browser's **Applications -> Add opportunity** and **Updates -> Export GitHub source** features, review and commit the generated JSON at `data/user_opportunities.json`, then set Actions variable `PHD_ATLAS_DATA_MODE=source` and rerun publication. The site derives its repository and URL from `GITHUB_REPOSITORY`.
 4. Inspect the deployed `instance.json`, `release-manifest.json`, `data/workspace.json`, sitemap, and source links. The manifest binds published files to the source commit. A green deploy does not establish university claim accuracy.
 5. To use owner-controlled public status updates, enable Issues, create an **Owner Action Center** issue from the included issue template, and set repository Actions variable `PHD_ATLAS_ACTION_ISSUE` to its number. Without the variable, the application links to the issue-creation template rather than guessing `issues/1`.
 
@@ -55,6 +55,7 @@ Device-local data is not encrypted and must not be treated as confidential stora
 ### Build and configure a different repository explicitly
 
 ```bash
+cp data/user_opportunities.example.json data/user_opportunities.json
 python scripts/build_workspace.py --repository YOUR_ACCOUNT/YOUR_REPOSITORY --data-mode source --out site/data/workspace.json
 python scripts/instance_config.py --repository YOUR_ACCOUNT/YOUR_REPOSITORY --site site
 python -m http.server 8000 --directory site
@@ -62,7 +63,7 @@ python -m http.server 8000 --directory site
 
 Identity precedence is: explicit `--repository`, `PHD_ATLAS_REPOSITORY`, `GITHUB_REPOSITORY`, local git origin, then the upstream default. Remote detection accepts only GitHub HTTPS or SSH URLs. The optional site metadata preparation step updates the local site artifact, not the repository's GitHub About settings.
 
-**Public-data contract:** A fork starts in `starter` mode with zero tracked applications. `PHD_ATLAS_DATA_MODE=source` opts in to serving only that repository's source files. Private applicant notes, correspondence, receipts and credentials must not enter `data/*.json`, GitHub Issues or Pages artifacts.
+**Public-data contract:** A fork starts in `starter` mode with zero tracked applications. `PHD_ATLAS_DATA_MODE=source` requires `data/user_opportunities.json` and uses its source and independent overrides rather than the inherited workbook. Private email, credentials and receipts never belong in the public file.
 
 ### Validation
 
@@ -81,3 +82,5 @@ Browser draft keys are namespaced by host and Pages project path, preventing acc
 Detailed [source ownership, synchronization state machines and deployment contracts](DATA_FLOW.md) describe the trust boundaries and invariants.
 
 The repository currently has no explicit software `LICENSE` file. Users who need redistribution rights outside GitHub's platform terms should obtain permission until the maintainer selects a license.
+
+The [independent opportunity input contract and browser-to-GitHub export workflow](USER_SOURCE.md) covers the public schema, verification requirements and update state. Fork discovery is disabled by default; opt in with Actions variable `PHD_ATLAS_ENABLE_DISCOVERY=true` only after auditing the sources.

@@ -5,6 +5,9 @@ on:
     branches: [main, 'feature/**']
     paths:
       - scripts/**
+      - data/user_opportunities.json
+      - data/user_workspace_overrides.json
+      - data/user_opportunities.example.json
       - tests/**
       - dashboard/**
       - site/**

@@ -121,3 +121,5 @@ The snapshot and UI are an applicant work queue, not a source of admissions trut
 ### Distribution and licensing
 
 The repository did not contain an explicit software `LICENSE` file when this guide was written. Running or redistributing outside GitHub's platform terms may require permission. A repository owner must choose and publish a license before advertising broad open-source reuse.
+
+Independent forks use `data/user_opportunities.json` plus isolated `data/user_workspace_overrides.json` in source mode, not inherited workbook records or upstream status overrides. See [USER_SOURCE.md](USER_SOURCE.md). Owner status updates commit only source-controlled override files; generated `site/data/workspace.json` remains a build artifact.
