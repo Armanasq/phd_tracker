@@ -52,6 +52,31 @@ Open `http://127.0.0.1:8765/`, then configure **Settings → Connections**, test
 
 Source-related changes can be proposed through the [source correction](.github/ISSUE_TEMPLATE/01-source-correction.yml), [opportunity lead](.github/ISSUE_TEMPLATE/02-opportunity-lead.yml) and [automation idea](.github/ISSUE_TEMPLATE/03-automation-idea.yml) issue templates. The [intelligence workflow](.github/workflows/phd-intelligence.yml) is an auditable automation entry point, not an autonomous submission service.
 
+## Source coverage and verification
+
+The [Sources](https://armanasq.github.io/phd_tracker/#sources) section exposes the source workbook inventory, research candidates, reviewed opportunity notes, task projection, historical exclusions, discovery-provider errors, and links to committed evidence layers. **Counts describe different types of records:** workbook steps, source-audit rows and excluded research leads must not be counted as new application opportunities.
+
+The [Verification](https://armanasq.github.io/phd_tracker/#review) section now includes a prioritized, filterable proof queue. It separates recorded closing dates from structured evidence of cutoff hour/timezone; unknown document states from explicitly unstarted requirements; source verification from current portal availability; and owner-managed Submitted state from a verified receipt. Its full queue can be exported to CSV for external review.
+
+| Evidence label | Meaning |
+| --- | --- |
+| Source reviewed / Owner verified | An explicit review is recorded; current availability is still not guaranteed. |
+| Needs review / Unverified | The primary-source verification gate remains incomplete. |
+| Unknown document | Readiness has not been established; this is not proof that a file is missing. |
+| Not started | Preparation is explicitly marked incomplete for that particular document. |
+| Recorded deadline | The date is known from source notes; actual closing time may remain unverified. |
+| Submitted | Owner-managed status; a portal receipt remains independently verifiable. |
+
+Missing evidence is intentionally preserved as unknown. Private applicant correspondence, API credentials and receipt links must not be copied into public Pages data. Already committed public source files require their own privacy review.
+
+## Deployment and repository administration
+
+The Pages workflow generates the current workspace snapshot and a commit-bound SHA-256 release manifest. Post-deployment checks fetch the hosted manifest and verify the source commit and published JavaScript asset. A passing workflow verifies the deployed build, not the factual correctness of every university claim.
+
+The repository About description, website and topics are versioned in [metadata configuration](.github/repository-metadata.json), but **GitHub About fields require a separate administration-authorized API update**. Committing a description file alone does not populate GitHub's About sidebar. The synchronization workflow fails explicitly if authorization is missing.
+
+[Release readiness](docs/RELEASE_READINESS.md) · [Repository settings](.github/REPOSITORY_SETTINGS.md) · [Public-site guide](site/README.md) · [Accessibility statement](ACCESSIBILITY.md) · [GitHub Actions](https://github.com/Armanasq/phd_tracker/actions)
+
 ## Engineering
 
 The application separates read-only public evidence from local agent execution. It uses a static JavaScript frontend, source normalization and verification scripts, deterministic application checks, a Python orchestration layer and SQLite for private state.

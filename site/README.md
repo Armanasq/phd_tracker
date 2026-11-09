@@ -54,3 +54,11 @@ Each provider configuration now supports a bounded request timeout (10–180 sec
 ## Prioritized proof obligations
 
 The Operations control center includes a deterministic evidence work queue. It ranks recorded missing cutoff verification, source review, document readiness, submission receipts, referee portal confirmations and conflicting evidence claims using explicit task weights and deadline proximity. Every row links to the appropriate editor. Scores are **heuristic triage scores**, not admission probabilities or validated requirements; all claims remain provisional until independently verified.
+
+## Public evidence coverage
+
+The Sources view includes the original workbook's worksheet-level inventory, curated application records, reviewed opportunity notes, historical exclusions, the operational task projection and discovery-feed health. Historical audit dates remain attached to their respective counts. The Verification view now exposes deterministic proof obligations with category filters, incremental results and a CSV export of all checks.
+
+These features operate on the committed snapshot and explicit browser drafts. They do not search live university portals when a view is opened, and they do not automatically submit applications or disclose private provider keys. Use the release manifest and corresponding GitHub Actions run to establish which source commit was actually published.
+
+Validation additions: node --test tests/assurance.test.mjs and node --check site/modules/assurance-view.mjs.

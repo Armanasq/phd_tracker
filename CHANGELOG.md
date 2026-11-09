@@ -2,6 +2,15 @@
 
 Changes to the PhD Atlas application and its supporting tooling are recorded here. Source-data refreshes and individual PhD application status changes are tracked separately in the evidence ledger.
 
+## Unreleased — 2026-11-09 (source and release assurance)
+
+- Added worksheet-level workbook inventory, source catalog, observed discovery errors and explicit distinction between tracked applications, research candidates, leads, exclusions and task records.
+- Added filterable and exportable verification proof obligations, including unknown document readiness, exact-cutoff checks and missing receipt warnings.
+- Removed silent display caps from important application, calendar, review and historical lists.
+- Hardened CSV exports against spreadsheet formula evaluation and exposed more source context in application details.
+- Extended deployment and CI with assurance tests, commit-bound release manifest and published asset verification.
+- Corrected About metadata automation to report missing administration permission and verify live GitHub settings after an attempted update.
+
 ## 0.1.0 — 2026-11-09 (public preview)
 
 ### Public workspace

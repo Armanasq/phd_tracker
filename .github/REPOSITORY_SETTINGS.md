@@ -40,3 +40,7 @@ Pages uses `contents: read`, `pages: write` and `id-token: write`. Code quality 
 ## Privacy and accuracy
 
 The public tracker is not a user-authenticated service. The local private Python backend is a different trust boundary and requires separate startup, provider verification and explicit cloud consent. Do not imply that GitHub Pages can access the user's local vLLM, Ollama, Azure credential store or SQLite database.
+
+## Latest verified About-field discrepancy (2026-11-09)
+
+The repository API returned an empty description, empty homepage and no topics even though the desired values were present in the tracked metadata JSON file. An authorized repository administrator must apply these settings using GitHub About or an administration-write token. The synchronization workflow now runs when metadata files change, checks GitHub's response, and fails instead of reporting success if live fields do not match. Do not interpret a metadata-sync failure as evidence that the Pages application failed to build.
