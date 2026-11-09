@@ -24,7 +24,7 @@ python -m http.server 8000 --directory site
 
 Open `http://127.0.0.1:8000/`. File URLs (`file://`) are not supported because module imports and data fetches require HTTP. The static server does not expose the private Python agent API.
 
-To use local/cloud model providers, private application updates, scheduled workflows and SQLite:
+To use local/cloud model providers, private application updates, scheduled workflows and SQLite (the private server automatically regenerates `site/data/workspace.json` if it is missing):
 
 ```bash
 python -m phd_agents serve --port 8765
@@ -68,3 +68,7 @@ node --check site/app.js
 This verifies routing, metadata generation, public source links, instance identity and a minimal independent source dataset. A fork's dataset is not guaranteed complete and must be verified against primary university sources.
 
 Browser draft keys are namespaced by host and Pages project path, preventing accidental mixing among repos. Namespacing is **not a security boundary**: pages under the same hostname can read the same browser-origin storage. Keep sensitive applicant state in the private local runtime.
+
+Detailed [source ownership, synchronization state machines and deployment contracts](DATA_FLOW.md) describe the trust boundaries and invariants.
+
+The repository currently has no explicit software `LICENSE` file. Users who need redistribution rights outside GitHub's platform terms should obtain permission until the maintainer selects a license.
