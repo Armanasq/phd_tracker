@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - dashboard/**
+      - site/**
+      - scripts/build_workspace.py
+      - tests/site_smoke.cjs
       - scripts/experience_engine.py
       - scripts/readme_studio.py
       - tests/ui_smoke.cjs
@@ -41,6 +44,10 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Exercise map, charts, timeline, simulation and command palette
         run: node tests/ui_smoke.cjs
+      - name: Generate PhD Atlas evidence-backed Pages snapshot
+        run: python scripts/build_workspace.py --out site/data/workspace.json
+      - name: Exercise PhD Atlas across desktop and mobile
+        run: node tests/site_smoke.cjs
       - name: Publish desktop and mobile screenshots
         if: always()
         uses: actions/upload-artifact@v4

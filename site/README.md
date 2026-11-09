@@ -4,7 +4,7 @@ GitHub Pages application management interface, preserving the repository's exist
 
 ## Interface
 
-Dashboard, Applications, Contacts, Actions, Updates, Compare, Verification, Expired / blocked and Source intelligence. Search/filter/sort, side-by-side comparison, daily prioritization, faculty follow-ups, document state, candidate leads, risk flags, calendar export, CSV/JSON export, local draft editing and browser notifications.
+Dashboard, Calendar, Applications, Pipeline, Contacts, Actions, Updates, Compare, Verification, Expired / blocked and Source intelligence. Search/filter/sort, side-by-side comparison, daily prioritization, faculty follow-ups, document state, candidate leads, risk flags, calendar export, CSV/JSON export, local draft editing and browser notifications.
 
 ## Authoritative data
 
@@ -39,3 +39,7 @@ python scripts/build_workspace.py --out site/data/workspace.json
 python -m unittest discover -s tests -p 'test_workspace.py'
 node --check site/app.js
 ```
+
+## Integrated visualization and browser QA
+
+The existing interactive EvidenceGraph dashboard is preserved and published at `/evidencegraph/` beside PhD Atlas. The `visual-qa.yml` workflow runs the legacy dashboard smoke test and the new PhD Atlas browser suite, including filters, calendar, pipeline drag-and-drop, comparisons, local edits, exports and mobile screenshots. It uploads rendered screenshots as a GitHub Actions artifact.
