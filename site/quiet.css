@@ -621,6 +621,9 @@ body.dark #atlasLens .lens-footer-status {background:var(--surface);border-color
 @media(max-width:680px) {
   .sidebar,body.dark .sidebar {padding:10px 14px}
   .topbar {height:54px;padding:0 14px}
+  .topbar .crumb {display:none}
+  .topbar .top-actions {width:100%;justify-content:flex-end;margin-left:auto}
+  #atlasLens .lens-launcher {display:none}
   .top-actions {gap:6px}
   .top-search {width:35px;min-width:35px;padding:0 9px;justify-content:center}
   .top-search span,.top-search kbd {display:none}
