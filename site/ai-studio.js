@@ -2,8 +2,8 @@
 "use strict";
 const $ = id => document.getElementById(id);
 const escape = v => String(v == null ? "" : v).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const state = {data:null,ops:null,view:"overview",query:"",selected:"",busy:false,filter:"all"};
-const VIEWS = {overview:"Decision desk",agents:"AI agents",workflows:"Automation",providers:"Models & providers",applications:"Applications",referees:"Referees",timeline:"Deadline clocks",evidence:"Evidence ledger",planning:"Capacity planning",activity:"Run history"};
+const state = {data:null,ops:null,view:"overview",query:"",selected:"",busy:false,filter:"all",providerFilter:"all"};
+const VIEWS = {overview:"Decision desk",agents:"AI agents",workflows:"Automation",providers:"Models & providers",applications:"Applications",referees:"Referees",timeline:"Deadline clocks",evidence:"Evidence ledger",planning:"Capacity planning",activity:"Run history",settings:"Settings & diagnostics"};
 const isCloud = id => !state.data.catalog.providers.find(p => p.id === id)?.local;
 function toast(message){const el=$("message");el.textContent=message;el.style.display="block";clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.style.display="none",4500)}
 async function api(path, body){
@@ -26,8 +26,9 @@ function nav(view){
  state.view=view;location.hash=view;render();
 }
 function selectChoices(items,current){return items.map(x=>'<option value="'+escape(x.id)+'"'+(x.id===current?' selected':'')+'>'+escape(x.label)+'</option>').join("")}
-function providerSelect(name="provider_id",current="ollama"){
- return '<select name="'+name+'" required>'+selectChoices(state.data.catalog.providers.map(p=>({id:p.id,label:p.label+" / "+p.model})),current)+'</select>';
+function providerSelect(name="provider_id",current=""){
+ const selected=current||state.data.settings?.default_provider||"ollama";
+ return '<select name="'+name+'" required>'+selectChoices(state.data.catalog.providers.map(p=>({id:p.id,label:p.label+" · "+p.model})),selected)+'</select>';
 }
 function appSelect(name="application_id",selected=""){
  return '<select name="'+name+'"><option value="">Whole portfolio</option>'+selectChoices(state.data.records.filter(r=>r.record_type==="tracked").map(r=>({id:r.id,label:r.name})),selected)+'</select>';
@@ -50,7 +51,7 @@ function agents(){
  const d=state.data;
  return heading("02 / INTELLIGENT WORKERS","Research and execution agents","Specialized, configurable agents with human-controlled actions, evidence injection and provider-independent prompting.",btn("New agent","new-agent","","primary"))+
  '<div class="panel" style="margin-bottom:23px"><div class="panel-head"><div><h2>Run an agent</h2><p>The selected source record will be supplied as untrusted evidence. Review provider data handling before calling cloud models.</p></div></div><div class="panel-body">'+
- '<form id="agentRunForm" class="form-grid"><div class="field"><label>Research agent</label><select name="agent_id" required>'+selectChoices(d.catalog.agents.map(a=>({id:a.id,label:a.label})),d.catalog.agents[0]?.id)+'</select></div>'+
+ '<form id="agentRunForm" class="form-grid"><div class="field"><label>Research agent</label><select name="agent_id" required>'+selectChoices(d.catalog.agents.map(a=>({id:a.id,label:a.label})),d.settings?.default_agent||d.catalog.agents[0]?.id)+'</select></div>'+
  '<div class="field"><label>Model provider</label>'+providerSelect()+'</div>'+
  '<div class="field wide"><label>Application context</label>'+appSelect()+'</div>'+
  '<div class="field wide"><label>Specific research task</label><textarea name="input_text" rows="3" maxlength="5000" placeholder="Ask for a verifiable analysis, decision, or draft."></textarea></div>'+
@@ -65,10 +66,41 @@ function workflows(){
  '<div class="cards two">'+d.catalog.workflows.map(w=>'<article class="catalog-card"><div class="catalog-top"><span class="catalog-badge">'+escape(w.id)+'</span>'+tag(w.enabled?"Enabled":"Disabled",w.enabled?"":"warn")+'</div><h3>'+escape(w.label)+'</h3><p>'+escape(w.description)+'</p><div class="row-meta">'+tag(w.schedule)+tag((w.steps||[w.agent_id]).join(" then "))+tag(w.provider_id||"ollama")+'</div><div class="buttons">'+minor("Edit workflow","edit-workflow",w.id)+minor("Run now","workflow-run",w.id)+'</div></article>').join("")+'</div>';
 }
 function providers(){
- const d=state.data;
- return heading("04 / MODEL INFRASTRUCTURE","Local and cloud models","Configure OpenAI-compatible inference, Azure OpenAI, Anthropic, Gemini or OpenRouter; use the local runtime for credentials and execution.",btn("Add model provider","new-provider","","primary"))+
- '<div class="notice">Provider entries contain model identifiers and credential environment-variable names only. No secret values are saved or displayed. A listed provider is not necessarily reachable until its endpoint and credentials are configured.</div>'+
- '<div class="cards">'+d.catalog.providers.map(p=>'<article class="catalog-card"><div class="catalog-top"><span class="catalog-badge">'+escape(p.kind)+'</span>'+tag(p.local?"Local":"Cloud",p.local?"":"warn")+'</div><h3>'+escape(p.label)+'</h3><p class="mono">'+escape(p.model)+'<br>'+escape(p.base_url)+'</p><div class="row-meta">'+tag(p.api_key_env||"No key required")+'</div><div class="buttons">'+minor("Configure","edit-provider",p.id)+minor("Test model","provider-probe",p.id)+'</div></article>').join("")+'</div>';
+ const d=state.data, all=d.catalog.providers, status=d.provider_states||{};
+ const verified=all.filter(p=>status[p.id]?.state==="responded").length;
+ const configured=all.filter(p=>["ready_to_test","responded","reachable"].includes(status[p.id]?.state)).length;
+ const visible=all.filter(p=>state.providerFilter==="all"||(state.providerFilter==="local"&&p.local)||(state.providerFilter==="cloud"&&!p.local)||(state.providerFilter==="attention"&&["needs_setup","failed"].includes(status[p.id]?.state)));
+ const labels={needs_setup:"Setup required",ready_to_test:"Untested",responded:"Inference verified",reachable:"Catalog reachable",failed:"Connection failed"};
+ const cards=visible.map(p=>{
+  const st=status[p.id]||{}, code=st.state||"ready_to_test", tone=code==="responded"?"good":code==="failed"||code==="needs_setup"?"warn":"neutral";
+  const reason=st.reason||st.last_error||(st.last_checked?"Last check: "+st.last_checked+" · "+(st.latency_ms??"—")+" ms":"Endpoint not yet tested");
+  return '<article class="catalog-card connection-card"><div class="catalog-top">'+tag(p.local?"On-device":"Cloud API",p.local?"":"warn")+'<span class="provider-health '+escape(tone)+'"><span class="provider-dot"></span>'+escape(labels[code]||code)+'</span></div>'+
+   '<div class="provider-brand"><h3>'+escape(p.label)+'</h3><span class="mono">'+escape(p.kind)+'</span></div>'+
+   '<dl class="provider-facts"><div><dt>Model</dt><dd>'+escape(p.model)+'</dd></div><div><dt>Endpoint</dt><dd class="endpoint">'+escape(p.base_url)+'</dd></div><div><dt>Credentials</dt><dd>'+escape(p.api_key_env?(st.credential_configured?"Configured in environment":"Requires "+p.api_key_env):"No API key required")+'</dd></div></dl>'+
+   '<p class="connection-detail">'+escape(reason)+'</p><div class="buttons provider-actions">'+minor("Discover models","provider-models",p.id)+minor("Test inference","provider-probe",p.id)+minor("Configure","edit-provider",p.id)+'</div></article>';
+ }).join("");
+ return heading("04 / MODEL INFRASTRUCTURE","Connections and model routing","Configure local and cloud endpoints, inspect discovered models and verify a response before selecting a provider.",btn("Add provider","new-provider","","primary")+btn("Settings","nav","settings"))+
+ '<div class="kpis">'+metric("PROVIDERS",all.length,"Catalog entries · connection not implied")+metric("VERIFIED INFERENCE",verified,"Most recent successful model responses")+metric("CONFIGURATION READY",configured,"Credential and endpoint checks only")+metric("DEFAULT ROUTE",d.settings?.default_provider||"ollama","Private preferences")+'</div>'+
+ '<div class="notice neutral">Provider checks are explicitly initiated. Model discovery contacts the provider but sends no application records. Inference tests may consume tokens. Credential values remain in the backend environment.</div>'+
+ '<div class="connection-toolbar"><label for="providerFilter">View providers</label><select id="providerFilter">'+[["all","All"],["local","Local"],["cloud","Cloud"],["attention","Needs attention"]].map(([k,label])=>'<option value="'+k+'"'+(state.providerFilter===k?" selected":"")+'>'+label+'</option>').join("")+'</select><span>'+visible.length+' / '+all.length+' connections</span></div>'+
+ '<div class="cards provider-cards">'+(cards||'<div class="blank">No providers match the selected filter.</div>')+'</div>';
+}
+function settings(){
+ const d=state.data, prefs=d.settings||{}, status=d.provider_states||{};
+ const credentials=d.catalog.providers.filter(p=>status[p.id]?.credential_configured).length;
+ const checked=Object.values(status).filter(s=>s.state==="responded").length;
+ return heading("11 / OPERATOR CONTROLS","Settings & diagnostics","Persistent private defaults, time zone, run limits and evidence-grounded connection health.",btn("Connections","nav","providers","primary"))+
+ '<div class="settings-layout">'+panel("Runtime preferences","Preferences affect local agent execution, not the public spreadsheet.",'<form id="settingsForm" class="form-grid">'+
+ '<div class="field"><label for="prefProvider">Default provider</label>'+providerSelect("default_provider",prefs.default_provider||"ollama")+'</div>'+
+ '<div class="field"><label for="prefAgent">Default agent</label><select name="default_agent" id="prefAgent">'+selectChoices(d.catalog.agents.map(a=>({id:a.id,label:a.label})),prefs.default_agent||"portfolio_planner")+'</select></div>'+
+ '<div class="field"><label for="prefZone">Local IANA time zone</label><input id="prefZone" name="timezone" required value="'+escape(prefs.timezone||"Europe/London")+'"><small>Example: Europe/Amsterdam. Official cutoff-zone evidence remains separate.</small></div>'+
+ '<div class="field"><label for="prefLimit">Maximum scheduled runs per tick</label><input id="prefLimit" type="number" min="1" max="10" step="1" name="max_runs_per_tick" value="'+escape(prefs.max_runs_per_tick||3)+'" required><small>Limits each scheduled evaluation; no background service is created automatically.</small></div>'+
+ '<div class="field wide privacy-setting"><strong>Cloud disclosure approval enforced</strong><p>Manual cloud requests need explicit authorization. Scheduled cloud workflows require separate workflow-level approval. This protection cannot be disabled.</p></div>'+
+ '<div class="form-actions"><button type="submit" class="btn primary">Save preferences</button></div></form>')+
+ panel("Operational diagnostics","A listed provider is not the same as a working connection.",'<div class="diagnostics-list">'+
+ [["Private runtime","Loopback only","No externally accessible API"],["Credentials",credentials+" configured environment variable(s)","Secret values never leave the server"],["Inference checks",checked+" verified provider(s)","Last check is not an uptime guarantee"],["Scheduler","External trigger required","Invoke scheduler-once using cron or systemd"],["Storage","Local SQLite","Private state is not synced to public GitHub"]].map(([name,value,desc])=>'<div class="diagnostic-row"><span>'+escape(name)+'</span><div><strong>'+escape(value)+'</strong><small>'+escape(desc)+'</small></div></div>').join("")+
+ '<div class="buttons">'+btn("Connection tests","nav","providers","primary")+btn("Run history","nav","activity")+'</div></div>')+'</div>'+
+ '<section class="panel" style="margin-top:22px"><div class="panel-head"><div><h2>Deployment boundary</h2><p>Why a private runtime is necessary</p></div></div><div class="panel-body"><p class="subtitle">The public Pages site can display source data but cannot securely host provider credentials, scheduled LLM execution or personal records. Run AI Studio from the checkout on your private machine.</p><code class="instruction">python -m phd_agents serve --port 8765</code></div></section>';
 }
 function applications(){
  const list=state.data.records.filter(r=>r.record_type==="tracked").filter(r=>(r.name+" "+r.id+" "+r.topic).toLowerCase().includes(state.query.toLowerCase())).slice(0,160);
@@ -126,7 +158,7 @@ function planning(){
 
 function render(){
  const d=state.data;if(!d)return;
- const actual={overview,agents,workflows,providers,applications,referees,timeline,evidence,planning,activity};
+ const actual={overview,agents,workflows,providers,applications,referees,timeline,evidence,planning,activity,settings};
  $("crumb").textContent=VIEWS[state.view];
  document.querySelectorAll("[data-view]").forEach(b=>{b.classList.toggle("active",b.dataset.view===state.view);if(b.dataset.view===state.view)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
  $("workspace").innerHTML=actual[state.view]();
