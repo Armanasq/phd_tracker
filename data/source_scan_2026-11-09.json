@@ -48,7 +48,10 @@
   "institutional_conflicts": [
     "2026 BEST EURAXESS index shows inconsistent metadata year (2027) versus call body and current Toulouse primary page (2026): primary 2026 deadline used.",
     "LinkedIn AI4I job preview reports no longer accepting LinkedIn applications; official Politecnico and AI4I offsite submission route must be checked directly before treating this as closure.",
-    "Inria Astra-Vision ELLIS lists multimodal world models deadline 20 Nov 2026, but primary lab page currently shows a different older May 2026 world-model opening: research queue only, do not promote."
+    "Inria Astra-Vision ELLIS lists multimodal world models deadline 20 Nov 2026, but primary lab page currently shows a different older May 2026 world-model opening: research queue only, do not promote.",
+    "TUM Autonomous Vehicle Systems original tracked application N263-07 says 15 Nov 2026, while live official page https://www.mos.ed.tum.de/en/avs/career/our-jobs/ki-motorsport-1/ explicitly states application deadline Friday July 17 2026, selection Aug 1–15 2026 and start Oct 1 2026; preserve original row, monitor via N263-07-LIVE and require review.",
+    "UZH RPG current primary page explicitly states no fixed closing date; indexed Oct 27 2026 deadlines are stale. Registered as rolling/unposted.",
+    "ETH IDEAL Jan 15 2027 represents best consideration not verified final cutoff. ETH HC3 31 Jan 2027 is externally indexed only. Neither may be described as primary-confirmed final."
   ],
   "excluded_from_automatic_promotion": [
     "R26-DARTMOUTH-A2R-CODESIGN",
@@ -68,6 +71,35 @@
   "notes": "No personal email bodies copied to repository. Recruitment posts and primary institutional deadlines are distinct evidence types; user application statuses have not been changed.",
   "supplemental_ids": [
     "R26-VIENNA-EXOSPHERE",
-    "R26-INRIA-ASTRA-PHYSWORLD"
-  ]
+    "R26-INRIA-ASTRA-PHYSWORLD",
+    "R26-KTH-AGENTIC-EMBODIED",
+    "R26-ETH-IDEAL-ENGINEERING-AI",
+    "R26-IMPERIAL-PAIR-HRI",
+    "R26-BONN-HRL-ACTIVE-PERCEPTION",
+    "R26-UZH-RPG-VISION-ROBOT-LEARNING",
+    "R26-ETH-HC3-3D-RECON"
+  ],
+  "research_support": {
+    "plugins_used": [
+      "GitHub",
+      "Gmail",
+      "LinkedIn people search",
+      "Acumen",
+      "CoChat",
+      "Consensus",
+      "ChatAcademia attempted but credits insufficient"
+    ],
+    "research_alignment_only": [
+      {
+        "title": "Dream to Fly: Model-Based Reinforcement Learning for Vision-Based Drone Flight",
+        "doi": "10.1109/icra57385.2026.11695931"
+      },
+      {
+        "title": "Demonstrating Agile Flight from Pixels without State Estimation",
+        "doi": "10.48550/arxiv.2406.12505"
+      }
+    ],
+    "discovery_pipeline": "1/4 sources healthy: Inria working; AcademicPositions returns HTTP 403; AcademicTransfer zero yield; Brave lacks BRAVE_SEARCH_API_KEY",
+    "confidence_rule": "University/lab primary source required for promotion; indexed/LinkedIn/Gmail-only claims cannot silently overwrite applicant-controlled source cells"
+  }
 }
