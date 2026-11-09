@@ -4,7 +4,7 @@
   --page:#faf9f6;--sidebar:#f2f1ed;--surface:#fffefa;--surface-alt:#f8f7f3;
   --ink:#222923;--text:#414942;--muted:#737c75;--soft:#8b938c;
   --line:#e3e3dc;--line-strong:#cecfca;--accent:#2c554a;--accent-hover:#21463c;
-  --accent-surface:#e7eeeb;--amber:#986c35;--amber-bg:#f8efe1;--red:#a34940;--red-bg:#fcf0eb;
+  --accent-surface:#e7eeeb;--amber:#795221;--amber-bg:#f8efe1;--red:#a34940;--red-bg:#fcf0eb;
   --green:#386c53;--green-bg:#e9f2ec;--focus:#266d85;--shadow:0 8px 35px rgba(37,42,30,.035);
   font-family:"Inter",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:var(--page);color:var(--ink);font-size:14px;line-height:1.5;
@@ -41,7 +41,7 @@ a:hover{text-decoration:underline}
 .nav-btn.active .nav-icon{color:var(--accent)}
 .nav-icon svg{width:17px;height:17px;stroke:currentColor;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .nav-btn .nav-label{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px}
-.nav-btn em{font-style:normal;margin-left:auto;color:#68746d;font-weight:550;font-size:10px;font-variant-numeric:tabular-nums}
+.nav-btn em{font-style:normal;margin-left:auto;color:#506154;font-weight:550;font-size:10px;font-variant-numeric:tabular-nums}
 .nav-btn.active em{color:var(--accent)}
 .side-bottom{margin-top:auto;padding:22px 12px 0;border-top:1px solid var(--line)}
 .side-caption{padding:0;margin:0 0 8px}
@@ -220,7 +220,7 @@ a:hover{text-decoration:underline}
 .agenda-item{display:grid;grid-template-columns:37px minmax(0,1fr) auto;gap:12px;align-items:flex-start;padding:16px 22px;border-bottom:1px solid var(--line)}
 .agenda-item:last-child{border:0}
 .agenda-item:hover{background:#fbfcf8}
-.agenda-number{font-family:Georgia,serif;font-size:14px;color:#b1b9ae;padding-top:1px;font-variant-numeric:tabular-nums}
+.agenda-number{font-family:Georgia,serif;font-size:14px;color:#5b6a5e;padding-top:1px;font-variant-numeric:tabular-nums}
 .agenda-main{min-width:0}
 .agenda-main>.rowbutton{font-size:12px;font-weight:650;line-height:1.38;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--ink)}
 .agenda-meta{font-size:10px;color:var(--soft);margin:6px 0 4px;letter-spacing:.015em;display:flex;gap:8px;flex-wrap:wrap}
@@ -382,7 +382,7 @@ body.dark #toast{background:#cadcc9;color:#1c2b21;border-color:#b6c9b5}
 }
 
 /* Final legibility pass: small operational text remains readable on laptop and mobile. */
-:root{--muted:#5e6b62;--soft:#657369}
+:root{--muted:#5e6b62;--soft:#5e6b62}
 body.dark{--muted:#b6c3b7;--soft:#a5b2a7}
 .kpi .label{font-size:12px}
 .kpi small{font-size:11px}
@@ -479,3 +479,5 @@ button,.btn,.nav-btn,input,select,textarea{touch-action:manipulation}
   .kanban-board{max-width:100%;min-width:0}
   .source-grid{max-width:100%;min-width:0}
 }
+
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}

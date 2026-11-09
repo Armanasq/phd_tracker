@@ -106,6 +106,7 @@ function dashboard(){
  const dupRoutes=tracked.filter(r=>r.duplicate_submission_advisory).length;
  const followups=active.filter(r=>r.followup&&days(r.followup)!==null&&days(r.followup)<=0).length;
  const failing=state.data.providers.filter(p=>p.health!=="ok").length;
+ const collisions=deadlineCollisions(active,TODAY());
  return '<div class="today-head"><div><div class="desk-kicker">Fall 2027 &nbsp; · &nbsp; '+escapeHTML(stamp(TODAY()))+'</div><h1>Today’s work</h1><p>Deadlines, decisions and evidence requiring attention.</p></div><div class="buttons">'+button("All applications","nav","applications")+button("Open actions","nav","actions","primary")+'</div></div>'+
  '<div class="source-strip"><span><strong>Evidence dated '+escapeHTML(stamp(state.data.as_of))+'</strong> &nbsp;·&nbsp; '+tracked.length+' tracked applications &nbsp;·&nbsp; '+state.data.meta.candidates+' additional candidates</span>'+link(state.data.source_links.opportunities,"Source records")+'</div>'+
  '<div class="kpis">'+kpi("Tracked applications",tracked.length,"Source-backed records")+kpi("Due today",today.length,"Check portal cutoff")+kpi("Next 7 days",week.length,"Recorded dates")+kpi("Needs verification",verify.length,"Official evidence review")+kpi("Confirmed submissions",tracked.filter(r=>r.status==="submitted"&&r.status_confirmed).length,"Owner-confirmed only")+'</div>'+
@@ -119,7 +120,8 @@ function dashboard(){
   ["Verify official information",verify.length,"Application source review","review"],
   ["Check document readiness",unknownDocs,"Unknown document states","applications"],
   ["Review submission routes",dupRoutes,"Potential duplicate pathways","review"],
-  ["Faculty follow-ups",followups,"Follow-up date reached","contacts"]
+  ["Faculty follow-ups",followups,"Follow-up date reached","contacts"],
+  ["Deadline collisions",collisions.length,"Days with two or more open calls","calendar"]
  ].map(([name,n,help,view])=>'<div class="attention-item"><div><button data-action="nav" data-value="'+view+'">'+escapeHTML(name)+'</button><small>'+escapeHTML(help)+'</small></div><strong>'+n+'</strong></div>').join("")+'</div></section>'+
  '<section class="desk-section"><div class="desk-header"><h2>Source checks</h2>'+link(state.data.source_links.source_monitor,"Monitoring")+'</div><div style="padding:9px 20px 16px"><p style="margin:0 0 11px;font-size:11px;color:var(--muted)">'+failing+' of '+state.data.providers.length+' feeds need attention</p>'+state.data.providers.map(p=>'<div class="week-row" style="grid-template-columns:minmax(0,1fr) auto"><span>'+escapeHTML(p.name)+'</span>'+pill(p.health,p.health==="ok"?"green":"warning")+'</div>').join("")+'</div></section></div></div>';
 }
@@ -166,7 +168,7 @@ function calendarView(){
   for(let d=1;d<=last;d++){
     const day=month+"-"+String(d).padStart(2,"0"),items=byDate.get(day)||[],urgent=items.some(r=>!isClosed(r)&&days(day)>=0&&days(day)<=3);
     const mark=day===today?" today":"",chosen=day===selected?" selected":"";
-    cells+='<button class="cal-day'+mark+chosen+'" type="button" data-action="cal-day" data-value="'+day+'" aria-label="'+escapeHTML(stamp(day))+' '+items.length+' recorded application dates"><span class="cal-number">'+d+'</span>'+(items.length?'<span class="cal-count '+(urgent?"cal-urgent":"")+'">'+items.length+' due</span>':'')+items.slice(0,2).map(r=>'<span class="cal-entry">'+escapeHTML(r.name.slice(0,32))+'</span>').join("")+(items.length>2?'<span class="cal-more">+'+(items.length-2)+' more</span>':"")+'</button>';
+    cells+='<button class="cal-day'+mark+chosen+'" type="button" data-action="cal-day" data-value="'+day+'"><span class="cal-number">'+d+'</span><span class="sr-only">Full date: '+escapeHTML(stamp(day))+'</span>+(items.length?'<span class="cal-count '+(urgent?"cal-urgent":"")+'">'+items.length+' due</span>':'')+items.slice(0,2).map(r=>'<span class="cal-entry">'+escapeHTML(r.name.slice(0,32))+'</span>').join("")+(items.length>2?'<span class="cal-more">+'+(items.length-2)+' more</span>':"")+'</button>';
   }
   const total=Array.from(byDate.values()).reduce((n,arr)=>n+arr.length,0);
   const ordered=Array.from(byDate.keys()).sort();
@@ -257,7 +259,7 @@ const fields='<div class="field"><label for="editPriority">My priority</label><s
 '<div class="field"><label for="editStep">Next action</label><textarea id="editStep" class="input" maxlength="650">'+escapeHTML(r.next_step||"")+'</textarea></div>'+
 '<div class="field"><label for="editNotes">Local notes (this device)</label><textarea id="editNotes" class="input" maxlength="750">'+escapeHTML(r.notes||"")+'</textarea></div>'+
 '<div class="field"><label for="editReceipt">Receipt link (local only, HTTPS)</label><input id="editReceipt" type="url" class="input" value="'+escapeHTML(r.receipt||r.submission_receipt||"")+'" placeholder="https://..."><p class="form-error" id="receiptError" role="alert"></p><small class="subtle">Private browser-local URL; never sent to public GitHub.</small></div>'+
-'<h3>Document readiness</h3><p class="subtle">'+escapeHTML(readiness.label)+'. Unknown is not missing. Verify the complete official document list.</p><div class="documents">'+docs.map(([id,st])=>'<div class="docrow"><span>'+escapeHTML(state.data.documents[id]||id)+'</span><select class="select" data-document="'+escapeHTML(id)+'">'+opts(["unknown","ready","in_progress","not_started","not_applicable"],st)+'</select></div>').join("")+'</div>';
+'<h3>Document readiness</h3><p class="subtle">'+escapeHTML(readiness.label)+'. Unknown is not missing. Verify the complete official document list.</p><div class="documents">'+docs.map(([id,st])=>'<div class="docrow"><span>'+escapeHTML(state.data.documents[id]||id)+'</span><select class="select" aria-label="Readiness for '+escapeHTML(state.data.documents[id]||id)+'" data-document="'+escapeHTML(id)+'">'+opts(["unknown","ready","in_progress","not_started","not_applicable"],st)+'</select></div>').join("")+'</div>';
 openModal('<div class="eyebrow">'+escapeHTML(r.id)+' · '+escapeHTML(r.record_type)+(sync!=="none"?' · '+escapeHTML(sync):"")+'</div><h2>'+escapeHTML(r.name)+'</h2>',
 '<div class="detail-layout"><div><div class="field"><label>Deadline & evidence classification</label><p>'+escapeHTML(stamp(r.deadline))+' · '+dateRisk(days(r.deadline))+' · '+verificationPill(r)+'</p><p class="subtle">'+escapeHTML(r.deadline_kind||"Closing time not verified")+'</p></div>'+
 '<div class="field"><label>Evidence links</label><div class="linkset">'+link(r.source_url,"Primary evidence")+link(r.secondary_url,"Secondary evidence")+link(r.apply_url,"Application route")+'</div></div>'+
@@ -272,6 +274,7 @@ function openModal(title,body,footer=""){
  if(!state.modal)state.returnFocus=document.activeElement;
  state.modal="generic";
  document.body.classList.add("modal-open");
+ if($("app"))$("app").inert=true;
  $("dialogRoot").innerHTML='<div class="overlay" data-close="true"><div class="modal" tabindex="-1" role="dialog" aria-modal="true" aria-label="Workspace dialog"><div class="head"><div>'+title+'</div><button class="x" type="button" data-action="close" aria-label="Close dialog">✕</button></div>'+body+footer+'</div></div>';
  $("dialogRoot").querySelector(".modal")?.focus();
 }
@@ -279,6 +282,7 @@ function closeModal(){
  state.modal="";
  $("dialogRoot").innerHTML="";
  document.body.classList.remove("modal-open");
+ if($("app"))$("app").inert=false;
  if(state.returnFocus?.isConnected&&typeof state.returnFocus.focus==="function")state.returnFocus.focus();
  state.returnFocus=null;
 }
@@ -373,7 +377,7 @@ function go(view){
  window.scrollTo({top:0,behavior:"instant"});render();
 }
 function explainNotifications(){const supported=("Notification" in window);const permission=supported?Notification.permission:"unsupported";openModal("<h2>Reminder settings</h2>",'<p class="muted">Reminders are computed locally from source dates while this page is open. Closing the tab disables on-page notifications. GitHub Actions provides separate scheduled reminders.</p><div class="notifications"><div class="notification"><strong>Browser permission</strong>'+escapeHTML(permission)+'</div><div class="notification"><strong>Current horizon</strong>Today, 1, 3 and 7 days before a recorded date</div></div><div class="buttons">'+button("Request browser permission","permission","","primary")+button("View GitHub notifications","url",OWNER_REPO+"/actions/workflows/phd-intelligence.yml")+'</div>')}
-function checkNotifications(){if(!state.data||!state.prefs.reminders||!("Notification" in window)||Notification.permission!=="granted")return;const alerted=state.prefs.notified||{};let changed=false;for(const r of records().filter(r=>r.record_type==="tracked")){const d=days(r.deadline);if(!open(r)||![0,1,3,7].includes(d))continue;const key=r.id+"|"+r.deadline+"|"+d;if(alerted[key])continue;try{new Notification("PhD deadline: "+stamp(r.deadline),{body:r.name.slice(0,140)+" — verify portal cutoff and submission state.",tag:key});alerted[key]=TODAY();changed=true}catch{}}if(changed){state.prefs.notified=Object.fromEntries(Object.entries(alerted).slice(-500));saveStore(PREFS,state.prefs)}}
+function checkNotifications(){if(!state.data||!state.prefs.reminders||!("Notification" in window)||Notification.permission!=="granted")return;const alerted=state.prefs.notified||{};let changed=false;for(const r of records().filter(r=>r.record_type==="tracked")){const d=days(r.deadline);if(!open(r)||![0,1,3,7].includes(d))continue;const key=r.id+"|"+r.deadline+"|"+d;if(alerted[key])continue;try{const n=new Notification("PhD deadline: "+stamp(r.deadline),{body:r.name.slice(0,140)+" — verify portal cutoff and submission state.",tag:key});n.onclick=()=>{window.focus();go("applications");detail(getRecord(r.id));n.close()};alerted[key]=TODAY();changed=true}catch{}}if(changed){state.prefs.notified=Object.fromEntries(Object.entries(alerted).slice(-500));saveStore(PREFS,state.prefs)}}
 function events(){
  document.addEventListener("click",e=>{
   if(e.target?.dataset?.close==="true"){closeModal();return}
