@@ -24,7 +24,8 @@ async function main(){
  const issues=[];
  try{
   for(const [width,height,view] of [[1512,980,'dashboard'],[1512,980,'applications'],[1512,980,'calendar'],[1512,980,'pipeline'],[1512,980,'review'],[390,844,'applications']]){
-   const page=await browser.newPage({viewport:{width,height}});
+   const context=await browser.newContext({viewport:{width,height}});
+   const page=await context.newPage();
    await page.goto('http://127.0.0.1:'+server.address().port+'/',{waitUntil:'networkidle'});
    await page.locator('#body h1').waitFor();
    if(view!=='dashboard')await page.locator('#navigation [data-value="'+view+'"]').click();
@@ -36,6 +37,7 @@ async function main(){
     issues.push({viewport:width,view:'application-dialog',violations:dialog.violations.map(v=>({id:v.id,impact:v.impact,description:v.description,nodes:v.nodes.slice(0,8).map(n=>({target:n.target,html:n.html,summary:n.failureSummary}))})),incomplete:dialog.incomplete.length});
    }
    await page.close();
+   await context.close();
   }
   await fs.writeFile(path.join(dest,'phd-atlas-accessibility.json'),JSON.stringify({generated:new Date().toISOString(),results:issues},null,2));
   const blocking=issues.flatMap(x=>x.violations.filter(v=>['critical','serious'].includes(v.impact)).map(v=>({view:x.view,viewport:x.viewport,rule:v.id,impact:v.impact,nodes:v.nodes.map(n=>n.target)})));
