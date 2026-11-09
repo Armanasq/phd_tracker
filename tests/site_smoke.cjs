@@ -30,10 +30,13 @@ async function run() {
   const errors = [];
   const page = await browser.newPage({viewport:{width:1512,height:982},acceptDownloads:true});
   page.on('pageerror',error=>errors.push(error.message));
+  page.on('console',msg=>{if(msg.type()==='error')console.error('[browser console]',msg.text())});
+  page.on('requestfailed',req=>console.error('[browser failed]',req.url(),req.failure()));
+  page.on('response',res=>{if(res.status()>=400)console.error('[HTTP]',res.status(),res.url())});
   try {
     const response = await page.goto(base+'/',{waitUntil:'networkidle'});
     assert.equal(response.status(),200);
-    await page.locator('#body h1').waitFor();
+    await page.locator('#body h1').waitFor({timeout:7500}).catch(async err=>{console.error('[bootstrap]',await page.locator('#body').innerHTML(),errors);throw err});
     assert.match(await page.locator('#body h1').innerText(),/Today’s work/);
     assert.equal(await page.locator('.kpi').count(),5);
     assert.match(await page.locator('.kpi').first().innerText(),/Tracked applications\s*109/);
