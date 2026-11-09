@@ -4,6 +4,7 @@
   "explicit_readiness_policy": "Unknown inputs remain unknown. Mentioned documents are not evidence of missing documents.",
   "active_future_opportunities": 109,
   "source_conflict_count": 1,
+  "source_health_warning_count": 0,
   "resource_frontier": [
     {
       "resource_id": "academic_cv",
