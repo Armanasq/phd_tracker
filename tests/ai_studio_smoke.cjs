@@ -205,7 +205,11 @@ async function main(){
    if(consentDialogs===1)await dialog.dismiss();
    else await dialog.accept();
   });
-  await page.locator('.lens-launcher').click();
+  await page.evaluate(()=>{
+   const launcher=document.querySelector('.lens-launcher');
+   if(launcher?.getAttribute('aria-expanded')!=='true')launcher?.click();
+  });
+  await page.locator('#atlasLensPanel').waitFor({state:'visible'});
   await page.locator('#lensAgent').selectOption('smoke_agent');
   await page.waitForFunction(()=>document.querySelector('.lens-provider')?.textContent?.includes('Cloud test gateway'),{timeout:15000});
   await page.locator('#lensInput').fill('Audit a verified research statement.');
