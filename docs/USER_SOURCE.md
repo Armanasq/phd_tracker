@@ -68,3 +68,5 @@ PHD_ATLAS_DATA_MODE=source python -m phd_agents serve --port 8765
 Open `http://127.0.0.1:8765/#settings` and configure private model providers there. Do not expose this loopback server to the internet without an independently designed authenticated service. On GitHub Pages, JavaScript `localStorage` is origin-wide even when keys are namespaced by project path; browser drafts are not confidential storage.
 
 The inherited scheduled discovery job is disabled on forks unless the owner sets Actions variable `PHD_ATLAS_ENABLE_DISCOVERY=true`. Publishing the fork's own opportunities never requires enabling discovery.
+
+When exporting a fork that already has public `source` records, the exporter preserves those committed records and appends device-only opportunities. Re-exporting from the original upstream Pages site does **not** include the upstream maintainer's opportunities. Exports fail if a local ID collides with an existing public ID. Inspect the complete JSON diff before replacing your `data/user_opportunities.json`, especially when browser data may be stale.

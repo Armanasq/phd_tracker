@@ -65,3 +65,27 @@ test("public exports drop URL tokens, fragments and personal next steps",()=>{
  assert.ok(!exported.includes("Do not disclose"));
  assert.ok(!exported.includes('"next_step"'));
 });
+
+test("publishing additional opportunities preserves existing fork records and strips private fields",()=>{
+ const existing={
+  id:"FORK-1",name:"Existing official programme",record_type:"tracked",
+  verification:"source_verified",status:"preparing",source_url:"https://university.example.edu/phd?tracking=1",
+  source_date:"2026-11-09",evidence:"Reviewed official academic page",
+  documents:["academic_cv"],document_states:{academic_cv:"ready"},
+  notes:"PRIVATE owner note",receipt:"https://university.example.edu/private?token=1",
+  next_step:"Confirm official portal deadline",
+ };
+ const row=createLocalRecord({...input,notes:"Do not publish",status:"preparing"},id);
+ const source=exportIndependentSource([row],"2026-11-09","Europe/Berlin",[existing]);
+ assert.deepEqual(source.records.map(r=>r.id),["FORK-1",id]);
+ assert.equal(source.records[0].verification,"source_verified");
+ assert.equal(source.records[0].source_url,"https://university.example.edu/phd");
+ assert.equal(source.records[0].document_states.academic_cv,"ready");
+ assert.equal(source.records[0].status,"preparing");
+ assert.equal(source.records[1].verification,"unverified");
+ assert.ok(!JSON.stringify(source).includes("PRIVATE"));
+ assert.ok(!JSON.stringify(source).includes("token=1"));
+ assert.ok(!JSON.stringify(source).includes("Do not publish"));
+ assert.throws(()=>exportIndependentSource([row],"2026-11-09","Europe/Berlin",[{...existing,id}]),/Duplicate opportunity/);
+ assert.throws(()=>exportIndependentSource([],"2026-11-09","UTC",[{...existing,source_date:null}]),/source date/);
+});

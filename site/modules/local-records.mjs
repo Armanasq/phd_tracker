@@ -93,16 +93,68 @@ export function mergeLocalRecords(existing,incoming,committedIds=[]){
  return {records:[...map.values()],imported,skipped};
 }
 
-export function exportIndependentSource(records,today,timezone="UTC"){
- const local=normalizeLocalRecords(records);
+const SOURCE_TEXT_FIELDS={
+ institution:160,country:70,deadline_kind:200,faculty:160,funding:400,eligibility:380,
+ fit:260,topic:220,next_step:650,blockers:420,decision:80,evidence:440,
+};
+
+function publicSourceRecord(row){
+ if(!row||typeof row!=="object"||Array.isArray(row)||row.local_only)throw new TypeError("Invalid published opportunity");
+ if(typeof row.id!=="string"||!/^[A-Za-z0-9][A-Za-z0-9_.-]{0,79}$/.test(row.id))throw new TypeError("Invalid published opportunity ID");
+ const name=safeText(row.name,350,"published name");
+ if(!name)throw new TypeError("Published opportunity is missing its name");
+ const type=row.record_type??"tracked";
+ if(!["tracked","candidate"].includes(type))throw new TypeError("Invalid published opportunity type");
+ const verification=row.verification??"unverified";
+ if(!VERIFICATIONS.has(verification))throw new TypeError("Invalid published verification");
+ const status=row.status??"unconfirmed";
+ if(!STATUSES.has(status))throw new TypeError("Invalid published application status");
+ const deadlineType=row.deadline_type??"unverified";
+ if(!["unverified","final","rolling","internal","other"].includes(deadlineType))throw new TypeError("Invalid published deadline type");
+ const priority=row.priority??"normal";
+ if(!["low","normal","high"].includes(priority))throw new TypeError("Invalid published priority");
+ const contact=row.contact_status??"unrecorded";
+ if(!CONTACT_STATES.has(contact))throw new TypeError("Invalid published contact state");
+ const documents=row.documents??[];
+ if(!Array.isArray(documents)||documents.length>DOCS.size||documents.some(d=>!DOCS.has(d))||new Set(documents).size!==documents.length)throw new TypeError("Invalid published documents");
+ const documentStates=row.document_states??{};
+ if(!documentStates||typeof documentStates!=="object"||Array.isArray(documentStates)||Object.entries(documentStates).some(([key,value])=>!DOCS.has(key)||!DOCUMENT_STATES.has(value)))throw new TypeError("Invalid published document states");
+ const source=validateEvidenceUrl(row.source_url??"");
+ const application=validateEvidenceUrl(row.apply_url??"");
+ const scrubUrl=url=>url?(new URL(url).origin+new URL(url).pathname):"";
+ const evidence=safeText(row.evidence??"",440,"published evidence");
+ const sourceDate=optionalDay(row.source_date,"published source date");
+ if(["source_verified","owner_verified"].includes(verification)&&(!source||!sourceDate||!evidence))throw new TypeError("Published verified evidence must have source URL, source date and note");
+ const retained={
+  id:row.id,record_type:type,name,verification,status,deadline_type:deadlineType,
+  deadline:optionalDay(row.deadline,"published deadline"),followup:optionalDay(row.followup,"published followup"),
+  source_url:scrubUrl(source),apply_url:scrubUrl(application),source_date:sourceDate,
+  priority,contact_status:contact,documents,
+  document_states:Object.fromEntries(documents.map(d=>[d,documentStates[d]??"unknown"])),
+ };
+ for(const [key,max] of Object.entries(SOURCE_TEXT_FIELDS)){
+  const value=safeText(row[key]??"",max,"published "+key);
+  if(value)retained[key]=value;
+ }
+ if(row.duplicate_submission_advisory===true)retained.duplicate_submission_advisory=true;
+ return retained;
+}
+
+export function exportIndependentSource(records,today,timezone="UTC",committed=[]){
  if(!isDay(today))throw new TypeError("Invalid export date");
  if(typeof timezone!=="string"||!/^[-_A-Za-z/]{2,80}$/.test(timezone))throw new TypeError("Invalid timezone");
+ if(!Array.isArray(committed)||committed.length>5000)throw new TypeError("Invalid published opportunity list");
+ const existing=committed.map(publicSourceRecord);
+ const ids=existing.map(record=>record.id);
+ if(new Set(ids).size!==ids.length)throw new TypeError("Duplicate published opportunity identifier");
+ const local=normalizeLocalRecords(records,ids);
+ if(existing.length+local.length>5000)throw new TypeError("Maximum 5000 public opportunity records");
  return {
   schema_version:1,as_of:today,timezone,
-  records:local.map(r=>({
+  records:[...existing,...local.map(r=>({
    id:r.id,record_type:"tracked",name:r.name,institution:r.institution,country:r.country,deadline:r.deadline,
    verification:"unverified",source_url:r.source_url?new URL(r.source_url).origin+new URL(r.source_url).pathname:"",
    documents:r.documents,
-  })),
+  }))],
  };
 }
