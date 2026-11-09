@@ -94,3 +94,7 @@ The application separates read-only public evidence from local agent execution. 
 The latest deployment status is visible in [GitHub Actions](https://github.com/Armanasq/phd_tracker/actions). The public site is not an authenticated backend, the assistant does not send mail or submit applications, and its references describe retrieved context rather than verified claim-level citations.
 
 For change history and the scope of the current preview, see [CHANGELOG.md](CHANGELOG.md). Vulnerability reporting guidance is in [SECURITY.md](SECURITY.md). This repository does not currently include a software license.
+
+### Complete task ledger
+
+The [Task ledger](https://armanasq.github.io/phd_tracker/#ledger) exposes all normalized workbook task records, including historical deadlines, preparation steps and cross-route tasks, with search, task-type filters, worksheet/row provenance, source links and a complete CSV export. This is distinct from the short-horizon **Actions** view. Historic task dates are not treated as proof of incompletion.

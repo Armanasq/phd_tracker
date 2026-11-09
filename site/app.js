@@ -5,9 +5,10 @@ import {auditWorkspace} from "./modules/assurance.mjs";
 import {renderAssurance,renderCoverage} from "./modules/assurance-view.mjs";
 (() => {
 "use strict";
-const VIEWS=[["dashboard","home","Overview"],["applications","file","Applications"],["operations","layers","Operations"],["actions","check","Actions"],["calendar","calendar","Calendar"],["pipeline","columns","Pipeline"],["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],["review","shield","Verification"],["archive","archive","Archive"],["sources","database","Sources"],["ai","sparkles","Copilot"],["agents","bot","Agents"],["automations","flow","Automations"],["activity","activity","Run history"],["settings","settings","Settings"]];
+const VIEWS=[["dashboard","home","Overview"],["applications","file","Applications"],["operations","layers","Operations"],["actions","check","Actions"],["ledger","check","Task ledger"],["calendar","calendar","Calendar"],["pipeline","columns","Pipeline"],["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],["review","shield","Verification"],["archive","archive","Archive"],["sources","database","Sources"],["ai","sparkles","Copilot"],["agents","bot","Agents"],["automations","flow","Automations"],["activity","activity","Run history"],["settings","settings","Settings"]];
 const OWNER_REPO="https://github.com/Armanasq/phd_tracker";
 let selectedAuditCategory="all",assuranceLimit=75;
+let ledgerQuery="",ledgerType="all",ledgerPage=1;
 const STORE="phd-atlas-drafts-v1",PREFS="phd-atlas-prefs-v1",VIEW_STORE="phd-atlas-views-v2",COMPARE_STORE="phd-atlas-compare-v1";
 const $=id=>document.getElementById(id);
 const escapeHTML=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -155,7 +156,31 @@ function applications(){
 }
 function contacts(){const all=records().filter(r=>r.faculty!=="Not recorded"||r.contact_status!=="unrecorded"||r.followup);const list=sortList(filters(all));return heading("Faculty contacts","Contacts and follow-up dates, recorded explicitly.",button("Export contacts CSV","export","contacts"))+
 statCard("Faculty and supervisor pipeline",toolbar(list)+'<div class="tablewrap"><table class="table"><thead><tr><th>Opportunity</th><th>Faculty / contact</th><th>Outreach status</th><th>Next follow-up</th><th>Action</th></tr></thead><tbody>'+list.map(r=>'<tr><td>'+rowButton(r)+'</td><td>'+escapeHTML(r.faculty)+'</td><td>'+pill(r.contact_status==="unrecorded"?"Not recorded":r.contact_status)+'</td><td>'+escapeHTML(stamp(r.followup))+(r.followup?" "+dateRisk(days(r.followup)):"")+'</td><td>'+button("Update","record",r.id)+'</td></tr>').join("")+'</tbody></table></div>')}
-function actions(){const rs=records().filter(r=>r.record_type==="tracked").filter(open).sort((a,b)=>priority(b)-priority(a));const tasks=(state.data.tasks||[]).filter(t=>!t.application_id||!getRecord(t.application_id)||open(getRecord(t.application_id)));return heading("Next actions","Your deadline-first application tasks and the original workbook steps.",button("Download calendar (.ics)","export","ics","primary"))+
+function ledgerView(){
+ const all=Array.isArray(state.data.task_ledger)?state.data.task_ledger:[];
+ const q=ledgerQuery.trim().toLocaleLowerCase();
+ const types=[...new Set(all.map(t=>t.type).filter(Boolean))].sort();
+ const selected=all.filter(t=>(ledgerType==="all"||t.type===ledgerType)&&(!q||[t.id,t.application_id,t.name,t.action,t.sheet,t.state,t.type].join(" ").toLocaleLowerCase().includes(q)));
+ const pageSize=60,pageCount=Math.max(1,Math.ceil(selected.length/pageSize)),page=Math.min(ledgerPage,pageCount);
+ const current=selected.slice((page-1)*pageSize,page*pageSize);
+ const opt=(v,label)=>'<option value="'+escapeHTML(v)+'"'+(ledgerType===v?' selected':'')+'>'+escapeHTML(label)+'</option>';
+ return heading("Full task ledger","All normalized task records from the original source workbook, including dated historical events. Task states are source claims, not proof of outstanding or completed work.",button("Export full ledger","export-ledger","","primary")+button("Priority actions","nav","actions"))+
+ '<div class="kpis">'+kpi("All task records",all.length,"Source execution-plan records")+kpi("Matching tasks",selected.length,"Current search and type")+kpi("Source categories",types.length,"Different task types")+kpi("Historical dates",selected.filter(t=>t.due&&days(t.due)<0).length,"Not automatically incomplete")+'</div>'+
+ '<section class="panel"><div class="panel-header"><h2>Workbook task register</h2><span class="subtle">Page '+page+' of '+pageCount+'</span></div>'+
+ '<div class="toolbar"><input id="ledgerQuery" class="input" type="search" aria-label="Search all workbook tasks" placeholder="Search task, application, worksheet or action…" value="'+escapeHTML(ledgerQuery)+'">'+
+ '<select id="ledgerType" class="select" aria-label="Filter workbook task type">'+opt("all","All task categories")+types.map(t=>opt(t,t.replaceAll("_"," "))).join("")+'</select>'+
+ '<span class="count" aria-live="polite">'+selected.length+' of '+all.length+' entries</span></div>'+
+ (current.length?'<div class="tablewrap"><table class="table"><thead><tr><th>Task</th><th>Date</th><th>Source type</th><th>Source row</th><th>State / Evidence</th></tr></thead><tbody>'+
+ current.map(t=>'<tr><td><strong>'+escapeHTML(t.name||"Untitled task")+'</strong><small>'+escapeHTML(t.action||"No task instruction recorded")+'</small><small>'+escapeHTML(t.id)+'</small></td>'+
+ '<td>'+escapeHTML(stamp(t.due))+(t.due?' '+dateRisk(days(t.due)):'')+'</td>'+
+ '<td>'+escapeHTML(t.type.replaceAll("_"," "))+'</td><td>'+escapeHTML(t.sheet||"Unknown sheet")+(t.row?' · '+escapeHTML(t.row):"")+'</td>'+
+ '<td>'+pill(t.state||"unconfirmed")+'<small>'+escapeHTML(t.application_id||"Cross-route task")+'</small>'+
+ (getRecord(t.application_id)?button("Application","record",t.application_id):"")+link(t.source_url,"Official source")+'</td></tr>').join("")+
+ '</tbody></table></div>':'<p class="empty">No tasks match this search and category. Clear the filter or review the original workbook.</p>')+
+ '<div class="buttons" style="justify-content:flex-end;padding:14px 16px">'+button("Previous 60","ledger-page",String(Math.max(1,page-1)))+button("Next 60","ledger-page",String(Math.min(pageCount,page+1)))+'</div></section>'+
+ '<p class="footnote">The original action list, timeline, proposed application dates and cross-route tasks are different records. Dates in the past are not necessarily unfinished. This view does not write completion state to the workbook.</p>';
+}
+function actions(){const rs=records().filter(r=>r.record_type==="tracked").filter(open).sort((a,b)=>priority(b)-priority(a));const tasks=(state.data.tasks||[]).filter(t=>!t.application_id||!getRecord(t.application_id)||open(getRecord(t.application_id)));return heading("Next actions","Your deadline-first application tasks and the original workbook steps.",button("Download calendar (.ics)","export","ics","primary")+button("Full task ledger","nav","ledger"))+
 '<div class="kpis">'+kpi("Due today",rs.filter(r=>days(r.deadline)===0).length,"Final or priority dates")+kpi("Within 72h",rs.filter(r=>days(r.deadline)!==null&&days(r.deadline)>=0&&days(r.deadline)<=3).length,"Check portal cutoff")+kpi("Follow-ups overdue",rs.filter(r=>r.followup&&days(r.followup)<0).length,"Manual date entries")+kpi("Plan steps surfaced",tasks.length,"Original tracker snapshot")+kpi("Explicit document gaps",rs.filter(r=>Object.values(r.document_states||{}).includes("not_started")).length,"Never infer from unknown")+'</div>'+
 statCard("Prioritized opportunities",'<div class="mini-list">'+rs.map((r,i)=>'<div class="mini-row"><div><span class="subtle">#'+(i+1)+' &nbsp;</span>'+rowButton(r)+'<small>'+escapeHTML(r.status==="submitted"?"Follow-up after submission: "+(r.next_step||"Check receipt and referee states"):(r.next_step||"Confirm next action"))+'</small></div><div>'+dateRisk(days(r.status==="submitted"?r.followup:r.deadline))+'</div></div>').join("")+'</div>')+
 statCard("Existing workbook execution steps",'<p class="subtle">Task completion should be confirmed through the existing authenticated GitHub issue workflow; a listed task is not automatically unfinished.</p>'+(tasks.length?'<div class="tablewrap"><table class="table"><thead><tr><th>Action</th><th>Due</th><th>Source status</th><th>Related application</th><th>Control</th></tr></thead><tbody>'+tasks.map(t=>'<tr><td>'+escapeHTML(t.action||t.name)+'</td><td>'+escapeHTML(stamp(t.due))+'</td><td>'+pill(t.state)+'</td><td>'+escapeHTML(t.application_id||"Shared")+'</td><td>'+button("Copy /done","task",t.id)+'</td></tr>').join("")+'</tbody></table></div>':'<div class="empty">No planned steps in the displayed horizon.</div>'))}
@@ -405,7 +430,7 @@ function navigation(){
 function render(){
  if(!state.data)return;
  navigation();
- const views={dashboard,calendar:calendarView,applications,pipeline,contacts,actions,updates,compare,review,archive,sources};
+ const views={dashboard,calendar:calendarView,applications,pipeline,contacts,actions,ledger:ledgerView,updates,compare,review,archive,sources};
  const intelligence=["ai","agents","automations","activity","settings","operations"].includes(state.view);
  const freshness=freshnessState(state.data.as_of,TODAY());
  const note=["aging","stale","unknown","future"].includes(freshness.state)
@@ -454,6 +479,11 @@ function events(){
   else if(type==="retry-load")loadSnapshot();
   else if(type==="audit-filter"){selectedAuditCategory=value;assuranceLimit=75;render()}
   else if(type==="audit-more"){assuranceLimit+=75;render()}
+  else if(type==="ledger-page"){ledgerPage=Math.max(1,Number(value)||1);render()}
+  else if(type==="export-ledger"){
+   const full=state.data.task_ledger||[];
+   exportFile("phd-atlas-full-task-ledger-"+TODAY()+".csv",asCSV(full,["id","application_id","name","action","due","type","state","sheet","row","source_url"]),"text/csv;charset=utf-8");
+  }
   else if(type==="export-audit"){
    const report=auditWorkspace({...state.data,records:records()},TODAY());
    const rows=report.queue.map(x=>({id:x.record_id,application:x.record_name,category:x.category,urgency:x.urgency,issue:x.title,details:x.detail,source_url:x.source_url}));
@@ -484,6 +514,7 @@ function events(){
  document.addEventListener("change",e=>{
   const t=e.target;
   if(t.id==="workspaceSection"){go(t.value);return}
+  if(t.id==="ledgerType"){ledgerType=t.value;ledgerPage=1;render();return}
   if(t.matches("[data-stage-id]")){stageStatus(t.dataset.stageId,t.value);return}
   if(t.matches("[data-compare]")){
    const id=t.dataset.compare;
@@ -508,7 +539,9 @@ function events(){
   }
  });
  document.addEventListener("input",e=>{
-  if(e.target.id==="filterQuery"){
+  if(e.target.id==="ledgerQuery"){
+   const pos=e.target.selectionStart;ledgerQuery=e.target.value;ledgerPage=1;render();$("ledgerQuery")?.focus();$("ledgerQuery")?.setSelectionRange(pos,pos);
+  }else if(e.target.id==="filterQuery"){
    const pos=e.target.selectionStart;
    state.query=e.target.value;state.activePreset="";persistViews();render();
    $("filterQuery")?.focus();$("filterQuery")?.setSelectionRange(pos,pos);

@@ -33,6 +33,16 @@ class WorkspaceTests(unittest.TestCase):
         self.assertTrue(all(item["path"] == "PhD_Action_List.xlsx" or item["path"].startswith("data/") for item in coverage["files"]))
         self.assertFalse(any("mail.google.com" in json.dumps(item) for item in coverage["files"]))
 
+    def test_full_task_ledger_is_source_faithful_and_public_safe(self):
+        snapshot = build()
+        source = json.loads((Path(__file__).resolve().parents[1] / "data" / "execution_plan.json").read_text(encoding="utf-8"))
+        ledger = snapshot["task_ledger"]
+        self.assertEqual(len(ledger), len(source["all_tasks"]))
+        self.assertEqual(snapshot["coverage"]["totals"]["full_task_ledger"], len(ledger))
+        self.assertEqual(len({item["id"] for item in ledger}), len(ledger))
+        self.assertTrue(all("mail.google.com" not in json.dumps(item) for item in ledger))
+        self.assertTrue(all("@" not in item["action"] for item in ledger))
+
     def test_url_filters_mailbox_links(self):
         self.assertEqual(public_url("https://mail.google.com/mail/u/0/#all/123"), "")
         self.assertEqual(public_url("javascript:alert(1)"), "")

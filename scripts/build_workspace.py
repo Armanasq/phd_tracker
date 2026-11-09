@@ -218,6 +218,25 @@ def build(root: Path = ROOT) -> dict:
             "type": clean(item.get("type"), 60),
         })
     tasks.sort(key=lambda item: (item["due"], item["id"]))
+    full_task_ledger = [
+        {
+            "id": clean(item.get("task_id") or item.get("task_key"), 80),
+            "application_id": clean(item.get("source_id"), 90),
+            "name": clean(item.get("name"), 350),
+            "action": clean(item.get("action"), 850),
+            "due": iso_day(item.get("due")),
+            "type": clean(item.get("type"), 60),
+            "state": clean(item.get("state") or "unconfirmed", 80),
+            "sheet": clean(item.get("sheet"), 90),
+            "row": item.get("row") if isinstance(item.get("row"), int) else None,
+            "source_url": public_url(item.get("source")),
+        }
+        for item in planner.get("all_tasks", [])
+        if isinstance(item, dict) and (item.get("task_id") or item.get("task_key"))
+    ]
+    full_task_ledger.sort(key=lambda row: (row["due"] or "9999-12-31", row["id"]))
+    if len({row["id"] for row in full_task_ledger}) != len(full_task_ledger):
+        raise ValueError("Duplicate workbook task IDs in source ledger")
     groups = duplicate_advisories(records)
     providers = [{
         "name": name, "health": spec.get("health", "unknown"),
@@ -257,6 +276,7 @@ def build(root: Path = ROOT) -> dict:
             "discovery_leads": len(leads),
             "historical_exclusions": len(archive),
             "task_projection": len(tasks),
+            "full_task_ledger": len(full_task_ledger),
             "workbook_tabs": len(worksheets),
         },
         "discovery_errors": {
@@ -273,6 +293,7 @@ def build(root: Path = ROOT) -> dict:
         "privacy": "Public Pages snapshot omits mailbox links, email addresses, personal correspondence bodies and historical exclusion reasons.",
         "meta": {"tracked": sum(r["record_type"] == "tracked" for r in records), "candidates": sum(r["record_type"] == "candidate" for r in records), "unpromoted_leads": len(leads), "discovery_snapshot": provider_report.get("run_date"), "notification_delivery": notification.get("delivery", {})},
         "records": records, "leads": leads, "archive": archive, "tasks": tasks,
+        "task_ledger": full_task_ledger,
         "coverage": coverage,
         "duplicates": groups, "providers": providers,
         "documents": DOCUMENTS, "global_document_states": global_document_status,

@@ -62,3 +62,7 @@ The Sources view includes the original workbook's worksheet-level inventory, cur
 These features operate on the committed snapshot and explicit browser drafts. They do not search live university portals when a view is opened, and they do not automatically submit applications or disclose private provider keys. Use the release manifest and corresponding GitHub Actions run to establish which source commit was actually published.
 
 Validation additions: node --test tests/assurance.test.mjs and node --check site/modules/assurance-view.mjs.
+
+## Complete workbook task inventory
+
+The Task ledger route provides full history and upcoming workbook steps through a read-only, provenance-bearing table. Entries retain original worksheet and row, source task identifier, related opportunity, date, type, status and sanitized action text. The priority Actions route remains a shorter operational view. Ledger exports do not contain private mailbox URLs or raw personal email addresses.
