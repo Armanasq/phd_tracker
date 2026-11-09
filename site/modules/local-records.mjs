@@ -101,7 +101,7 @@ export function exportExperienceView(records,today,timezone="UTC"){
   as_of:today,timezone,
   applications:local.map(r=>({
    id:r.id,name:r.name,country:r.country,deadline:r.deadline,
-   source:r.source_url,next_step:r.next_step,documents:r.documents,
+   source:r.source_url?new URL(r.source_url).origin+new URL(r.source_url).pathname:"",documents:r.documents,
   })),
  };
 }
