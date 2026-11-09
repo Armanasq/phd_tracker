@@ -31,10 +31,16 @@ Primary programme and workbook sources
               |
               | schema and unique-ID validation
               v
-    site/app.js  ---->  browser-local draft overlays
+    site/app.js  ---->  browser-local draft overlays (source-backed)
               |                     |
               |                     +--> export JSON/CSV
               |                     +--> stage owner-only GitHub command
+              |
+              +--> browser-local opportunity store (device-only)
+              |       +--> Add / edit / delete / restore JSON backups
+              |       +--> export sanitized experience_view.json
+              |       +--> explicitly commit own reviewed sources in fork
+              |             (never an automatic GitHub commit)
               |
               +--> Dashboard / Applications / Contacts / Actions
               +--> Calendar / Pipeline / Evidence / Sources
@@ -87,6 +93,8 @@ The diagram describes trust boundaries and observable processing, not guaranteed
 5. If the supplied `expected_updated_at` differs from the current committed version, the backend rejects the stale update rather than silently overwriting it.
 6. Successful writes update `data/workspace_overrides.json` and regenerate the public snapshot in a serialized retry loop.
 7. The browser observes a later published snapshot and reconciles its draft by comparing the base version and operational fields. Pending local state is not proof that the remote commit succeeded.
+
+Device-only applications are separate from the committed source registry: they have local UUIDs, do not enter owner-only Issue commands, and are never presented as GitHub-synchronized. An exported source file contains only reviewed public-field candidates; browser-only notes, receipts, workflow status, and query-token URLs are excluded. Import is validated and merges nonconflicting local UUIDs without replacing existing records.
 
 Local SQLite mutations follow a separate optimistic-version contract and are not merged into public Git commits by default.
 

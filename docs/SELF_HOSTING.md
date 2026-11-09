@@ -48,7 +48,7 @@ The publisher never writes credentials to the static artifact. Forks must indepe
 
 The Applications view provides **Add opportunity**, **Local backup**, and **Import backup**. Opportunity details can be edited and deleted without a backend. These records remain only in the current browser storage and are explicitly marked device-only; clearing browser data deletes them unless a backup has been exported. Import merges distinct local IDs and never overwrites an existing record automatically.
 
-Use **Export → GitHub source JSON (public fields)** to create `experience_view.json` from device-local opportunities. The export deliberately omits local notes, receipt links, and local submission state. Before publishing it to a fork, review the generated records and remove inherited application data from other files under `data/`, especially `data/opportunities.json`, `data/decision_queue.json` and `data/workspace_overrides.json`. The fork remains in blank `starter` mode until `PHD_ATLAS_DATA_MODE=source` is explicitly set. Exporting does not commit or submit anything.
+Use **Export → GitHub source JSON (public fields)** to create `experience_view.json` from device-local opportunities. The export deliberately omits local notes, receipt links, next-step text, local submission state, URL query parameters and fragments. Query-dependent official links must be reviewed and replaced with a stable public URL before publication. Before publishing it to a fork, review the generated records and remove inherited application data from other files under `data/`, especially `data/opportunities.json`, `data/decision_queue.json` and `data/workspace_overrides.json`. The fork remains in blank `starter` mode until `PHD_ATLAS_DATA_MODE=source` is explicitly set. Exporting does not commit or submit anything.
 
 Device-local data is not encrypted and must not be treated as confidential storage on a shared browser or same-origin hosting service; use the loopback SQLite backend for genuinely private applicant information. GitHub source exports are public once committed.
 
@@ -70,6 +70,7 @@ Identity precedence is: explicit `--repository`, `PHD_ATLAS_REPOSITORY`, `GITHUB
 python -m unittest discover -s tests -p 'test_instance_config.py'
 python -m unittest discover -s tests -p 'test_workspace.py'
 node --test tests/domain.test.mjs tests/storage.test.mjs tests/local_records.test.mjs
+node tests/local_records_smoke.cjs
 node --check site/app.js
 ```
 

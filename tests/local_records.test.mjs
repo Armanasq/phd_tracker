@@ -55,3 +55,12 @@ test("GitHub source export excludes local notes, receipts and private workflow s
  assert.ok(!encoded.includes('"status":"preparing"'));
  assert.ok(encoded.includes('"source":"https://example.edu/phd"'));
 });
+
+test("public exports drop URL tokens, fragments and personal next steps",()=>{
+ const row=createLocalRecord({...input,source_url:"https://example.edu/phd?id=123&token=private#account",next_step:"Do not disclose my planning"},id);
+ const exported=JSON.stringify(exportExperienceView([row],"2026-11-09"));
+ assert.ok(exported.includes('"source":"https://example.edu/phd"'));
+ assert.ok(!exported.includes("token=private"));
+ assert.ok(!exported.includes("Do not disclose"));
+ assert.ok(!exported.includes('"next_step"'));
+});
