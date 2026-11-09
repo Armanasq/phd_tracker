@@ -5,7 +5,7 @@ A fork's Pages build starts with an empty workspace. To publish your own opportu
 ## Browser-to-GitHub flow
 
 1. Open the forked Pages site and use **Applications → Add opportunity**. Records remain in the browser until exported.
-2. Open **Updates → Export GitHub source**. This downloads `user_opportunities.json`, strips local notes and receipts and resets publication verification to `unverified`.
+2. Open **Export workspace → GitHub source JSON (public fields)**. This downloads `user_opportunities.json`, strips local notes and receipts and resets publication verification to `unverified`.
 3. Review source URLs and privacy, then commit this file at `data/user_opportunities.json` on the fork's `main`.
 4. Set repository Actions variable `PHD_ATLAS_DATA_MODE=source` and run **PhD Atlas | Publish GitHub Pages Workspace**.
 5. Inspect the deployed `data/workspace.json` and `instance.json` for repository ownership, source mode, source SHA and record counts.
