@@ -4,7 +4,7 @@ import json
 import os
 import sqlite3
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -41,6 +41,8 @@ class Store:
         CREATE TABLE IF NOT EXISTS runs(id TEXT PRIMARY KEY, kind TEXT NOT NULL, agent_id TEXT NOT NULL, application_id TEXT, status TEXT NOT NULL, provider_id TEXT, payload TEXT NOT NULL, created_at TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS audit(id INTEGER PRIMARY KEY AUTOINCREMENT, action TEXT NOT NULL, subject TEXT NOT NULL, created_at TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS schedule(id TEXT PRIMARY KEY, last_period TEXT NOT NULL, updated_at TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS schedule_claims(id TEXT PRIMARY KEY, period TEXT NOT NULL, token TEXT NOT NULL, claimed_at TEXT NOT NULL, expires_at TEXT NOT NULL, cloud_calls INTEGER NOT NULL, day_start TEXT NOT NULL);
+        CREATE INDEX IF NOT EXISTS idx_schedule_claims_active ON schedule_claims(day_start,expires_at);
         CREATE TABLE IF NOT EXISTS private_objects(kind TEXT NOT NULL, id TEXT NOT NULL, payload TEXT NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY(kind,id));
         CREATE TABLE IF NOT EXISTS conversations(
             id TEXT PRIMARY KEY, agent_id TEXT NOT NULL, application_id TEXT,
@@ -264,6 +266,79 @@ class Store:
             return 0
         query = "SELECT COUNT(*) FROM runs WHERE created_at >= ? AND status IN ('proposed','failed') AND provider_id IN (" + ",".join("?" for _ in provider_ids) + ")"
         return int(self.db.execute(query, [since, *provider_ids]).fetchone()[0])
+
+    def schedule_claim(
+        self, identity: str, period: str, *, now: datetime | None = None,
+        lease_seconds: int = 900, cloud_calls: int = 0, cloud_cap: int = 0,
+        cloud_ids: list[str] | None = None, day_start: str = "",
+    ) -> tuple[str | None, str]:
+        if not isinstance(identity, str) or not identity or len(identity) > 100:
+            raise ValueError("Invalid scheduled workflow ID")
+        if not isinstance(period, str) or not period or len(period) > 50:
+            raise ValueError("Invalid scheduled period")
+        if not 30 <= lease_seconds <= 3600:
+            raise ValueError("Invalid schedule lease duration")
+        if type(cloud_calls) is not int or cloud_calls < 0 or cloud_calls > 3:
+            raise ValueError("Invalid reserved cloud call count")
+        if cloud_calls and (cloud_cap < 1 or not cloud_ids or not day_start):
+            return None, "cloud_budget_disabled"
+        current = (now or datetime.now(timezone.utc)).astimezone(timezone.utc)
+        timestamp = current.isoformat(timespec="seconds")
+        expires = (current + timedelta(seconds=lease_seconds)).isoformat(timespec="seconds")
+        token = uuid.uuid4().hex
+        with self.db:
+            self.db.execute("BEGIN IMMEDIATE")
+            done = self.db.execute("SELECT last_period FROM schedule WHERE id=?", (identity,)).fetchone()
+            if done and done["last_period"] == period:
+                return None, "already_executed"
+            active = self.db.execute(
+                "SELECT token,expires_at,period FROM schedule_claims WHERE id=?", (identity,)
+            ).fetchone()
+            if active and active["expires_at"] > timestamp and active["period"] == period:
+                return None, "already_running"
+            if cloud_calls:
+                billed = self.count_runs_since(day_start, cloud_ids or [])
+                reserved = self.db.execute(
+                    "SELECT COALESCE(SUM(cloud_calls),0) AS n FROM schedule_claims "
+                    "WHERE expires_at>? AND day_start=? AND id<>?",
+                    (timestamp, day_start, identity),
+                ).fetchone()["n"]
+                if billed + reserved + cloud_calls > cloud_cap:
+                    return None, "daily_cloud_model_call_cap"
+            self.db.execute(
+                "INSERT INTO schedule_claims(id,period,token,claimed_at,expires_at,cloud_calls,day_start) "
+                "VALUES(?,?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET "
+                "period=excluded.period,token=excluded.token,claimed_at=excluded.claimed_at,"
+                "expires_at=excluded.expires_at,cloud_calls=excluded.cloud_calls,day_start=excluded.day_start",
+                (identity, period, token, timestamp, expires, cloud_calls, day_start),
+            )
+        return token, "claimed"
+
+    def schedule_release(self, identity: str, period: str, token: str) -> bool:
+        with self.db:
+            changed = self.db.execute(
+                "DELETE FROM schedule_claims WHERE id=? AND period=? AND token=?",
+                (identity, period, token),
+            ).rowcount
+        return bool(changed)
+
+    def schedule_complete(self, identity: str, period: str, token: str) -> None:
+        with self.db:
+            self.db.execute("BEGIN IMMEDIATE")
+            claim = self.db.execute(
+                "SELECT token FROM schedule_claims WHERE id=? AND period=?", (identity, period)
+            ).fetchone()
+            if claim is None or claim["token"] != token:
+                raise ConflictError("Scheduled workflow lease was replaced; completion not recorded")
+            self.db.execute(
+                "INSERT INTO schedule(id,last_period,updated_at) VALUES(?,?,?) "
+                "ON CONFLICT(id) DO UPDATE SET last_period=excluded.last_period,updated_at=excluded.updated_at",
+                (identity, period, utcnow()),
+            )
+            self.db.execute(
+                "DELETE FROM schedule_claims WHERE id=? AND period=? AND token=?", (identity, period, token)
+            )
+            self._audit("schedule:ran", identity)
 
     def schedule_last(self, identity: str) -> str | None:
         row = self.db.execute("SELECT last_period FROM schedule WHERE id=?", (identity,)).fetchone()

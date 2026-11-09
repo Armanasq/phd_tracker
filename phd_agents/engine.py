@@ -210,19 +210,25 @@ def scheduler_once(store: Store, root: Path, *, now: datetime | None = None) -> 
             result.append({"workflow_id": workflow["id"], "status": "skipped", "reason": "cloud_provider_not_approved"})
             continue
         needed = sum(not route.provider["local"] for route in routes)
-        if needed:
-            if not cloud_cap:
-                result.append({"workflow_id": workflow["id"], "status": "skipped", "reason": "cloud_budget_disabled"})
-                continue
-            if store.count_runs_since(day_start, cloud_ids) + needed > cloud_cap:
-                result.append({"workflow_id": workflow["id"], "status": "skipped", "reason": "daily_cloud_model_call_cap"})
-                continue
+        token, reason = store.schedule_claim(
+            workflow["id"], period, cloud_calls=needed, cloud_cap=cloud_cap,
+            cloud_ids=cloud_ids, day_start=day_start,
+        )
+        if token is None:
+            if reason != "already_executed":
+                result.append({"workflow_id": workflow["id"], "status": "skipped", "reason": reason})
+            continue
         try:
             output = run_workflow(store, root, workflow_id=workflow["id"], provider_id=requested,
                                   cloud_consent=consent)
         except (ValueError, PermissionError, OSError, RuntimeError) as error:
+            store.schedule_release(workflow["id"], period, token)
             result.append({"workflow_id": workflow["id"], "status": "failed", "reason": str(error)[:180]})
             continue
-        store.schedule_mark(workflow["id"], period)
+        try:
+            store.schedule_complete(workflow["id"], period, token)
+        except ValueError as error:
+            result.append({"workflow_id": workflow["id"], "status": "failed", "reason": str(error)[:180]})
+            continue
         result.append({"workflow_id": workflow["id"], "status": "proposed", "run_id": output["id"]})
     return result
