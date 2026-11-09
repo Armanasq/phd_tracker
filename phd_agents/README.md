@@ -38,3 +38,11 @@ Cloud execution requires explicit consent per manual request. Scheduled workflow
 ## Status
 
 Implemented: provider-neutral model invocation, private catalog/state, 12 built-in agents, 11 workflows, deterministic preflight, task agenda, capacity screening, explicit owner updates, scheduled execution and persisted audit logs. Not implemented: automated portal submissions, verified end-to-end referee delivery, fully optimized cross-application scheduling, server-hosted multi-user authentication, live inbox OAuth, real-time push notifications, or universal research-source coverage.
+
+## Extended private applicant operations
+
+AI Studio includes separate views for referee requests, source-backed multi-clock milestones, contradictory evidence, lexical research alignment and capacity screening. These records are stored only in private SQLite, not in the public repository. Unknown document effort and exact cutoff times remain explicitly unknown.
+
+The agents use a deterministic tool allowlist: `preflight`, `daily_agenda`, `deadline_clocks`, `referee_dependencies`, `evidence_disputes`, `research_alignment`, `capacity_screen`, and `discovery_health`. Custom agents select any safe subset. Custom workflows can chain 1–3 registered agent stages; each stage's unverified output feeds subsequent stages as untrusted context. Scheduled cloud workflows require explicit stored consent.
+
+API endpoints: `GET /api/operations`, `POST /api/private/{referee,reference,milestone,evidence,profile}`, `POST /api/private/{kind}/{id}/delete`, `POST /api/schedule`. No API route sends external mail, contacts faculty, changes the public tracker, or submits a portal.

@@ -7,6 +7,8 @@ on:
       - scripts/**
       - tests/**
       - dashboard/**
+      - site/**
+      - phd_agents/**
       - requirements-intelligence.txt
       - .github/workflows/**
   pull_request:
@@ -14,6 +16,8 @@ on:
       - scripts/**
       - tests/**
       - dashboard/**
+      - site/**
+      - phd_agents/**
       - requirements-intelligence.txt
       - .github/workflows/**
   workflow_dispatch:
