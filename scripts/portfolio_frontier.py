@@ -50,7 +50,7 @@ def evaluate(wb, assets: dict, today: date, opportunity_records: list[dict], lat
     for record in latest.get("source_statuses", []):
         application = record.get("application_id") or record["id"]
         status = record.get("status")
-        if status == "contradiction_closed_portal" or application not in watches:
+        if status in {"contradiction_closed_portal", "contradiction_deadline_mismatch"} or application not in watches:
             watches[application] = status
     entries = []
     leverage = defaultdict(lambda: {"mention_count": 0, "within_30_days": 0, "urgency_index": 0.0})
@@ -81,7 +81,7 @@ def evaluate(wb, assets: dict, today: date, opportunity_records: list[dict], lat
                 evidence.append("Position has not passed primary-source verification")
             if any(token in str(record.get("eligibility", "")).lower() for token in ("confirm", "not stated", "unverified")):
                 evidence.append("Verify personal funding / eligibility before application")
-        if watches.get(sid) in ("contradiction_closed_portal", "review_source_changed"):
+        if watches.get(sid) in ("contradiction_closed_portal", "review_source_changed", "contradiction_deadline_mismatch"):
             evidence.append("Official page requires rechecking: " + watches[sid])
         readiness = "source_conflict" if evidence and any("Official page" in e for e in evidence) else (
             "explicit_tasks_remaining" if actionable else "requires_readiness_confirmation" if unknown else
