@@ -4,7 +4,7 @@
 
 | Deployment | User interface | Public evidence | Private state | Model execution |
 | --- | --- | --- | --- | --- |
-| GitHub Pages (upstream or fork) | Static HTML/JS | Published `data/workspace.json` | Browser-local drafts only | No |
+| GitHub Pages (upstream or fork) | Static HTML/JS | Published `data/workspace.json` | Device-local applications and drafts | No |
 | Local static server | Same HTML/JS | Locally built snapshot | Browser-local drafts | No |
 | Python runtime on loopback | Same HTML/JS | Locally built snapshot | Private SQLite | Yes, when configured and consented |
 
@@ -44,6 +44,14 @@ For a custom domain, configure the actual Pages domain in GitHub first, and set 
 
 The publisher never writes credentials to the static artifact. Forks must independently configure GitHub Actions permissions and optional discovery sources; upstream GitHub secrets and local SQLite files are not inherited.
 
+### Browser-local opportunities on any deployment
+
+The Applications view provides **Add opportunity**, **Local backup**, and **Import backup**. Opportunity details can be edited and deleted without a backend. These records remain only in the current browser storage and are explicitly marked device-only; clearing browser data deletes them unless a backup has been exported. Import merges distinct local IDs and never overwrites an existing record automatically.
+
+Use **Export → GitHub source JSON (public fields)** to create `experience_view.json` from device-local opportunities. The export deliberately omits local notes, receipt links, and local submission state. Before publishing it to a fork, review the generated records and remove inherited application data from other files under `data/`, especially `data/opportunities.json`, `data/decision_queue.json` and `data/workspace_overrides.json`. The fork remains in blank `starter` mode until `PHD_ATLAS_DATA_MODE=source` is explicitly set. Exporting does not commit or submit anything.
+
+Device-local data is not encrypted and must not be treated as confidential storage on a shared browser or same-origin hosting service; use the loopback SQLite backend for genuinely private applicant information. GitHub source exports are public once committed.
+
 ### Build and configure a different repository explicitly
 
 ```bash
@@ -61,7 +69,7 @@ Identity precedence is: explicit `--repository`, `PHD_ATLAS_REPOSITORY`, `GITHUB
 ```bash
 python -m unittest discover -s tests -p 'test_instance_config.py'
 python -m unittest discover -s tests -p 'test_workspace.py'
-node --test tests/domain.test.mjs tests/storage.test.mjs
+node --test tests/domain.test.mjs tests/storage.test.mjs tests/local_records.test.mjs
 node --check site/app.js
 ```
 

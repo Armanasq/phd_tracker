@@ -11,6 +11,8 @@ on:
       - scripts/build_workspace.py
       - scripts/instance_config.py
       - tests/test_instance_config.py
+      - tests/local_records.test.mjs
+      - tests/local_records_smoke.cjs
       - docs/SELF_HOSTING.md
       - scripts/workspace_controls.py
       - tests/domain.test.mjs
@@ -65,6 +67,8 @@ jobs:
           node --check site/app.js
           node --check site/modules/storage.mjs
           node --test tests/storage.test.mjs
+          node --check site/modules/local-records.mjs
+          node --test tests/local_records.test.mjs
           node --check site/modules/lens.mjs
           node --check site/modules/console.mjs
           node --check site/modules/assurance.mjs
@@ -105,7 +109,7 @@ jobs:
           import hashlib, json, os
           from pathlib import Path
           root = Path("site")
-          assets = ["index.html", "app.js", "assurance.css", "responsive.css", "modules/assurance.mjs", "modules/assurance-view.mjs", "modules/domain.mjs", "modules/storage.mjs", "data/workspace.json", "instance.json", "sitemap.xml"]
+          assets = ["index.html", "app.js", "assurance.css", "responsive.css", "modules/assurance.mjs", "modules/assurance-view.mjs", "modules/domain.mjs", "modules/storage.mjs", "modules/local-records.mjs", "data/workspace.json", "instance.json", "sitemap.xml"]
           digests = {path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in assets}
           manifest = {"schema_version": 1, "commit": os.environ["GITHUB_SHA"], "sha256": digests}
           (root / "release-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
@@ -137,10 +141,11 @@ jobs:
                curl -fsSL --max-time 15 "$base/modules/domain.mjs?revision=$GITHUB_SHA" -o /tmp/phd-hosted-domain.mjs &&
                grep -q 'validateSnapshot' /tmp/phd-hosted-domain.mjs &&
                curl -fsSL --max-time 15 "$base/modules/storage.mjs?revision=$GITHUB_SHA" -o /tmp/phd-hosted-storage.mjs &&
+               curl -fsSL --max-time 15 "$base/modules/local-records.mjs?revision=$GITHUB_SHA" -o /tmp/phd-hosted-local-records.mjs &&
                curl -fsSL --max-time 15 "$base/modules/assurance.mjs?revision=$GITHUB_SHA" -o /tmp/phd-hosted-assurance.mjs &&
                curl -fsSL --max-time 15 "$base/responsive.css?revision=$GITHUB_SHA" -o /tmp/phd-hosted-responsive.css &&
                curl -fsSL --max-time 15 "$base/release-manifest.json?revision=$GITHUB_SHA" -o /tmp/phd-hosted-manifest.json &&
-               python -c 'import hashlib,json,os; m=json.load(open("/tmp/phd-hosted-manifest.json")); assert m["commit"]==os.environ["GITHUB_SHA"]; assert hashlib.sha256(open("/tmp/phd-hosted-assurance.mjs","rb").read()).hexdigest()==m["sha256"]["modules/assurance.mjs"]; assert hashlib.sha256(open("/tmp/phd-hosted-responsive.css","rb").read()).hexdigest()==m["sha256"]["responsive.css"]; assert hashlib.sha256(open("/tmp/phd-hosted-storage.mjs","rb").read()).hexdigest()==m["sha256"]["modules/storage.mjs"]' &&
+               python -c 'import hashlib,json,os; m=json.load(open("/tmp/phd-hosted-manifest.json")); assert m["commit"]==os.environ["GITHUB_SHA"]; assert hashlib.sha256(open("/tmp/phd-hosted-assurance.mjs","rb").read()).hexdigest()==m["sha256"]["modules/assurance.mjs"]; assert hashlib.sha256(open("/tmp/phd-hosted-responsive.css","rb").read()).hexdigest()==m["sha256"]["responsive.css"]; assert hashlib.sha256(open("/tmp/phd-hosted-storage.mjs","rb").read()).hexdigest()==m["sha256"]["modules/storage.mjs"]; assert hashlib.sha256(open("/tmp/phd-hosted-local-records.mjs","rb").read()).hexdigest()==m["sha256"]["modules/local-records.mjs"]' &&
                curl -fsSL --max-time 15 "$base/favicon.svg?revision=$GITHUB_SHA" -o /tmp/phd-hosted-icon.svg &&
                grep -q '<svg' /tmp/phd-hosted-icon.svg &&
                curl -fsSL --max-time 15 "$base/sitemap.xml?revision=$GITHUB_SHA" -o /tmp/phd-hosted-sitemap.xml &&
