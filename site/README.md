@@ -4,7 +4,7 @@ GitHub Pages application management interface, preserving the repository's exist
 
 ## Interface
 
-Dashboard, Calendar, Applications, Pipeline, Contacts, Actions, Updates, Compare, Verification, Expired / blocked and Source intelligence. Search/filter/sort, side-by-side comparison, daily prioritization, faculty follow-ups, document state, candidate leads, risk flags, calendar export, CSV/JSON export, local draft editing and browser notifications.
+Overview, Applications, Calendar, Pipeline, Actions, Contacts, Changes, Compare, Verification, Expired / blocked and Sources. The visual system uses a calm light-first editorial layout with a compact mobile navigation instead of a conventional card-heavy dark dashboard. Search/filter/sort, side-by-side comparison, daily prioritization, faculty follow-ups, document state, candidate leads, risk flags, calendar export, CSV/JSON export, local draft editing and browser notifications.
 
 ## Authoritative data
 
@@ -30,7 +30,7 @@ Repository Settings → Pages → Source: GitHub Actions. The `publish-cockpit.y
 
 ## Privacy boundary
 
-GitHub Pages may be publicly accessible even when its source repository is private. The projection suppresses Gmail links, email addresses, correspondence bodies and historical exclusion reasons. Do not add confidential documents or personal contact details to owner comments, public assets or receipt URLs. Local drafts are browser-device-specific and should be exported regularly.
+This repository and its GitHub Pages deployment are public. The projection suppresses Gmail links, email addresses, correspondence bodies and historical exclusion reasons. Public issue commands are intentionally limited to non-sensitive operational fields. Private notes and receipt links are device-local and deliberately excluded from GitHub synchronization. Do not paste confidential applicant information into public issues. Local drafts are browser-device-specific and should be exported regularly.
 
 ## Validation
 

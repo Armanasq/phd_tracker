@@ -380,3 +380,33 @@ body.dark #toast{background:#cadcc9;color:#1c2b21;border-color:#b6c9b5}
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
 }
+
+/* Final legibility pass: small operational text remains readable on laptop and mobile. */
+:root{--muted:#5e6b62;--soft:#657369}
+body.dark{--muted:#b6c3b7;--soft:#a5b2a7}
+.kpi .label{font-size:12px}
+.kpi small{font-size:11px}
+.agenda-main>.rowbutton{font-size:13px;line-height:1.46}
+.agenda-meta{font-size:11px}
+.agenda-next{font-size:12px;line-height:1.55}
+.agenda-number{font-size:15px}
+.week-row{font-size:12px}
+.attention-item button{font-size:12px}
+.attention-item small{font-size:11px}
+.footnote{font-size:11px}
+.table{font-size:12px}
+.table td:nth-child(6){font-size:12px}
+.table td small{font-size:11px}
+.table .rowbutton{font-size:12.5px}
+.nav-btn .nav-label{font-size:12.5px}
+.panel h2{font-size:14.5px}
+.modal-open{overflow:hidden}
+@media(max-width:470px){
+ .agenda-main>.rowbutton{font-size:12.5px}
+ .agenda-next{font-size:11.5px}
+ .agenda-meta{font-size:10.5px}
+ .kpi .label{font-size:11px}
+ .kpi small{font-size:10px}
+ .nav-btn .nav-label{font-size:11.5px}
+ .week-row{font-size:11.5px}
+}

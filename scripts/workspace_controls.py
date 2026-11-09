@@ -14,7 +14,7 @@ VERIFY = {"unverified", "needs_review", "source_verified", "owner_verified"}
 CONTACT = {"unrecorded", "to_contact", "contacted", "awaiting_reply", "followup_due", "replied", "declined", "completed"}
 DOC = {"unknown", "ready", "in_progress", "not_started", "not_applicable"}
 DOCUMENT_KEYS = {"academic_cv", "research_statement", "transcripts", "recommendations", "english_proof", "research_portfolio"}
-FIELDS = {"id", "status", "verification", "followup", "contact_status", "next_step", "notes", "receipt", "documents"}
+FIELDS = {"id", "status", "verification", "followup", "contact_status", "next_step", "documents"}
 ROOT = Path(__file__).resolve().parents[1]
 
 

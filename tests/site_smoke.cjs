@@ -70,11 +70,18 @@ async function run() {
 
     await page.locator('#navigation [data-action="nav"][data-value="applications"]').click();
     const first = page.locator('tbody .rowbutton').first();
+    const editedId = await first.getAttribute('data-value');
     await first.click();
     assert.equal(await page.locator('.modal [data-document]').count()>0,true);
     await page.locator('#editNotes').fill('Local QA draft only, not a confirmed application submission');
     await page.locator('[data-action="save-record"]').click();
     assert.equal(await page.locator('.modal').count(),0);
+    await page.locator('#navigation [data-value="updates"]').click();
+    await page.locator('[data-action="command"][data-value="'+editedId+'"]').click();
+    const publicCommand = await page.locator('.command').innerText();
+    assert.ok(!publicCommand.includes('Local QA draft only'), 'Private notes must not enter GitHub commands');
+    await page.keyboard.press('Escape');
+    await page.locator('#navigation [data-value="applications"]').click();
     const [download] = await Promise.all([
       page.waitForEvent('download'),
       page.locator('[data-action="export"][data-value="csv"]').first().click(),
@@ -99,6 +106,7 @@ async function run() {
     assert.ok((await mobile.locator('tbody tr').count())>=100);
     const mobileOverflow=await mobile.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
     assert.ok(mobileOverflow<=2, 'Mobile page must not overflow: '+mobileOverflow+'px');
+    await mobile.screenshot({path:path.join(out,'phd-atlas-mobile-applications.png'),fullPage:false});
     await mobile.close();
 
     assert.deepEqual(errors,[]);

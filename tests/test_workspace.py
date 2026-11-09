@@ -51,6 +51,13 @@ class WorkspaceTests(unittest.TestCase):
         self.assertFalse(denied["accepted"])
         self.assertEqual(replay, modified)
 
+    def test_private_notes_cannot_be_committed_from_public_issue(self):
+        previous = {"schema_version": 1, "records": {}, "processed_comment_ids": []}
+        event = {"action": "created", "issue": {"body": "<!-- phd-intelligence-action-center-v1 -->"}, "comment": {"id": 444, "user": {"login": "Armanasq"}, "body": '/workspace {"id":"N263-05","notes":"Private note","status":"preparing"}'}}
+        unchanged, result = transform(event, "Armanasq", {"N263-05"}, previous)
+        self.assertFalse(result["accepted"])
+        self.assertEqual(unchanged, previous)
+
 
 if __name__ == "__main__":
     unittest.main()
