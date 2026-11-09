@@ -1,0 +1,149 @@
+from __future__ import annotations
+
+import json
+import os
+import sqlite3
+import uuid
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+STATUS = {"unconfirmed", "shortlisted", "preparing", "submitted", "interview", "offer", "rejected", "withdrawn", "blocked", "archived"}
+CONTACT = {"unrecorded", "to_contact", "contacted", "awaiting_reply", "followup_due", "replied", "declined", "completed"}
+DOCUMENT = {"unknown", "ready", "in_progress", "not_started", "not_applicable"}
+ALLOWED_UPDATE = {"status", "contact_status", "followup", "priority", "next_step", "notes", "receipt", "document_states", "confirmed_submission", "referees", "estimated_hours", "evidence_flags"}
+
+def utcnow() -> str:
+    return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+def default_path() -> Path:
+    base = os.environ.get("PHDAI_PRIVATE_DIR")
+    return (Path(base).expanduser() if base else Path.home() / ".local" / "share" / "phd-atlas") / "state.sqlite3"
+
+class ConflictError(ValueError):
+    pass
+
+class Store:
+    def __init__(self, path: Path | None = None):
+        self.path = Path(path) if path else default_path()
+        self.path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+        if not self.path.exists():
+            fd = os.open(str(self.path), os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+            os.close(fd)
+        self.db = sqlite3.connect(str(self.path), check_same_thread=False, timeout=15)
+        self.db.row_factory = sqlite3.Row
+        self.db.execute("PRAGMA journal_mode=WAL")
+        self.db.execute("PRAGMA busy_timeout=5000")
+        self.db.executescript("""
+        CREATE TABLE IF NOT EXISTS catalog(kind TEXT NOT NULL, id TEXT NOT NULL, payload TEXT NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY(kind,id));
+        CREATE TABLE IF NOT EXISTS applications(id TEXT PRIMARY KEY, payload TEXT NOT NULL, version INTEGER NOT NULL, updated_at TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS runs(id TEXT PRIMARY KEY, kind TEXT NOT NULL, agent_id TEXT NOT NULL, application_id TEXT, status TEXT NOT NULL, provider_id TEXT, payload TEXT NOT NULL, created_at TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS audit(id INTEGER PRIMARY KEY AUTOINCREMENT, action TEXT NOT NULL, subject TEXT NOT NULL, created_at TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS schedule(id TEXT PRIMARY KEY, last_period TEXT NOT NULL, updated_at TEXT NOT NULL);
+        """)
+        self.db.commit()
+
+    def close(self) -> None:
+        self.db.close()
+
+    def get_custom(self, kind: str) -> list[dict[str, Any]]:
+        if kind not in {"provider", "agent", "workflow"}:
+            raise ValueError("Invalid catalog kind")
+        rows = self.db.execute("SELECT payload FROM catalog WHERE kind=? ORDER BY id", (kind,)).fetchall()
+        return [json.loads(row["payload"]) for row in rows]
+
+    def put_custom(self, kind: str, entry: dict[str, Any]) -> None:
+        if kind not in {"provider", "agent", "workflow"}:
+            raise ValueError("Invalid catalog kind")
+        with self.db:
+            self.db.execute("INSERT INTO catalog(kind,id,payload,updated_at) VALUES(?,?,?,?) ON CONFLICT(kind,id) DO UPDATE SET payload=excluded.payload,updated_at=excluded.updated_at",
+                            (kind, entry["id"], json.dumps(entry), utcnow()))
+            self._audit("catalog:" + kind, entry["id"])
+
+    def catalog(self, kind: str, defaults: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        values = {entry["id"]: dict(entry) for entry in defaults}
+        for entry in self.get_custom(kind):
+            values[entry["id"]] = entry
+        return list(values.values())
+
+    def get_application(self, identity: str) -> dict[str, Any]:
+        row = self.db.execute("SELECT payload,version FROM applications WHERE id=?", (identity,)).fetchone()
+        return {"version": int(row["version"]), **json.loads(row["payload"])} if row else {"version": 0}
+
+    def update_application(self, identity: str, patch: dict[str, Any], expected_version: int) -> dict[str, Any]:
+        if not patch or set(patch) - ALLOWED_UPDATE:
+            raise ValueError("Unknown application update fields")
+        current = self.get_application(identity)
+        if current["version"] != expected_version:
+            raise ConflictError("Application state changed; reload before saving")
+        if "status" in patch and patch["status"] not in STATUS:
+            raise ValueError("Invalid application status")
+        if "contact_status" in patch and patch["contact_status"] not in CONTACT:
+            raise ValueError("Invalid contact status")
+        if "priority" in patch and patch["priority"] not in {"high", "normal", "low"}:
+            raise ValueError("Invalid priority")
+        if "document_states" in patch:
+            if not isinstance(patch["document_states"], dict) or len(patch["document_states"]) > 30 or any(v not in DOCUMENT for v in patch["document_states"].values()):
+                raise ValueError("Invalid document readiness state")
+        if "estimated_hours" in patch and (not isinstance(patch["estimated_hours"], (int, float)) or isinstance(patch["estimated_hours"], bool) or not 0 <= patch["estimated_hours"] <= 400):
+            raise ValueError("Invalid effort estimate")
+        if "followup" in patch and patch["followup"] not in (None, ""):
+            from datetime import date
+            date.fromisoformat(str(patch["followup"]))
+        for key in ("notes", "next_step", "receipt"):
+            if key in patch and (not isinstance(patch[key], str) or len(patch[key]) > 3000):
+                raise ValueError("Invalid " + key)
+        if "referees" in patch and (not isinstance(patch["referees"], list) or len(patch["referees"]) > 20):
+            raise ValueError("Invalid referee tracking structure")
+        if "evidence_flags" in patch and (not isinstance(patch["evidence_flags"], list) or len(patch["evidence_flags"]) > 30):
+            raise ValueError("Invalid evidence flags")
+        updated = {k: v for k, v in current.items() if k != "version"}
+        updated.update(patch)
+        if updated.get("status") == "submitted" and current.get("status") != "submitted":
+            if patch.get("confirmed_submission") is not True:
+                raise ValueError("Submission requires explicit owner confirmation")
+        updated.pop("confirmed_submission", None)
+        version = current["version"] + 1
+        with self.db:
+            row = self.db.execute("SELECT version FROM applications WHERE id=?", (identity,)).fetchone()
+            current_version = int(row["version"]) if row else 0
+            if current_version != expected_version:
+                raise ConflictError("Concurrent application update; reload")
+            self.db.execute("INSERT INTO applications(id,payload,version,updated_at) VALUES(?,?,?,?) ON CONFLICT(id) DO UPDATE SET payload=excluded.payload,version=excluded.version,updated_at=excluded.updated_at",
+                            (identity, json.dumps(updated, ensure_ascii=False), version, utcnow()))
+            self._audit("application:update", identity)
+        return {"id": identity, "version": version, **updated}
+
+    def list_applications(self) -> dict[str, dict[str, Any]]:
+        rows = self.db.execute("SELECT id,payload,version FROM applications").fetchall()
+        return {row["id"]: {"version": row["version"], **json.loads(row["payload"])} for row in rows}
+
+    def put_run(self, kind: str, agent_id: str, application_id: str | None, status: str, provider_id: str, payload: dict[str, Any]) -> str:
+        identity = uuid.uuid4().hex
+        with self.db:
+            self.db.execute("INSERT INTO runs(id,kind,agent_id,application_id,status,provider_id,payload,created_at) VALUES(?,?,?,?,?,?,?,?)",
+                            (identity, kind, agent_id, application_id, status, provider_id, json.dumps(payload, ensure_ascii=False), utcnow()))
+            self._audit("run:" + status, agent_id)
+        return identity
+
+    def runs(self, limit: int = 30) -> list[dict[str, Any]]:
+        rows = self.db.execute("SELECT * FROM runs ORDER BY created_at DESC, rowid DESC LIMIT ?", (min(max(limit, 1), 100),)).fetchall()
+        return [{"id": r["id"], "kind": r["kind"], "agent_id": r["agent_id"], "application_id": r["application_id"],
+                 "status": r["status"], "provider_id": r["provider_id"], "created_at": r["created_at"], **json.loads(r["payload"])} for r in rows]
+
+    def schedule_last(self, identity: str) -> str | None:
+        row = self.db.execute("SELECT last_period FROM schedule WHERE id=?", (identity,)).fetchone()
+        return str(row["last_period"]) if row else None
+
+    def schedule_mark(self, identity: str, period: str) -> None:
+        with self.db:
+            self.db.execute("INSERT INTO schedule(id,last_period,updated_at) VALUES(?,?,?) ON CONFLICT(id) DO UPDATE SET last_period=excluded.last_period,updated_at=excluded.updated_at",
+                            (identity, period, utcnow()))
+            self._audit("schedule:ran", identity)
+
+    def _audit(self, action: str, subject: str) -> None:
+        self.db.execute("INSERT INTO audit(action,subject,created_at) VALUES(?,?,?)", (action, subject, utcnow()))
+
+    def activity(self, limit: int = 50) -> list[dict[str, Any]]:
+        rows = self.db.execute("SELECT action,subject,created_at FROM audit ORDER BY id DESC LIMIT ?", (min(max(limit, 1), 100),)).fetchall()
+        return [dict(r) for r in rows]
