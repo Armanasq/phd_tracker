@@ -17,6 +17,28 @@ from .evidence_pack import bounded_evidence
 from .relevance import select_evidence
 from .proof_queue import evidence_work_queue
 
+def paper_radar_for_instance(root: Path, source: dict[str, Any]) -> list[dict[str, Any]]:
+    instance = source.get("instance", {})
+    identity = instance.get("type") if isinstance(instance, dict) else None
+    filename = "research_radar.json" if identity in (None, "upstream") else "user_research_radar.json"
+    try:
+        payload = json.loads((Path(root) / "data" / filename).read_text(encoding="utf-8"))
+    except (OSError, ValueError, TypeError):
+        return []
+    if not isinstance(payload, dict) or not isinstance(payload.get("papers"), list):
+        return []
+    result = []
+    for paper in payload["papers"][:500]:
+        if not isinstance(paper, dict):
+            continue
+        item = {key: paper.get(key) for key in ("title", "paper_url", "topic", "published", "relevance_score")}
+        item["title"] = str(item["title"] or "")[:180]
+        item["published"] = str(item["published"] or "")[:32]
+        item["relevance_score"] = item["relevance_score"] if type(item["relevance_score"]) in (int, float) else 0
+        result.append(item)
+    return result
+
+
 def catalog(store: Store) -> dict[str, list[dict[str, Any]]]:
     return {"providers": store.catalog("provider", PROVIDERS),
             "agents": store.catalog("agent", AGENTS),
@@ -88,12 +110,7 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str | Non
                                for item in proof_queue[:10]]
     tool_names = agent.get("tools") if isinstance(agent.get("tools"), list) else DEFAULT_TOOLS.get(agent_id, [])
     private = {kind: store.items(kind) for kind in ("profile", "referee", "reference", "milestone", "evidence")}
-    papers = []
-    if "paper_radar" in tool_names:
-        try:
-            papers = json.loads((root / "data" / "research_radar.json").read_text(encoding="utf-8")).get("papers", [])
-        except (OSError, ValueError, TypeError):
-            papers = []
+    papers = paper_radar_for_instance(root, source) if "paper_radar" in tool_names else []
     tool_pack = run_tools(tool_names, data=source, records=records, private=private,
                           today=today, application_id=application_id, papers=papers)
     evidence["tool_results"] = tool_pack

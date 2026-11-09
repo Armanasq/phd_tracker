@@ -63,6 +63,7 @@ jobs:
       - run: node --test tests/assurance.test.mjs
       - run: test -s site/quiet.css
       - run: python -m pytest tests -q
+      - run: python -m unittest discover -s tests -p 'test_instance_privacy.py'
       - name: Validate snapshot builder as deployed script
         run: |
           python scripts/build_workspace.py --out /tmp/phd-atlas-smoke.json

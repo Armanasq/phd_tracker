@@ -84,3 +84,7 @@ Detailed [source ownership, synchronization state machines and deployment contra
 The repository currently has no explicit software `LICENSE` file. Users who need redistribution rights outside GitHub's platform terms should obtain permission until the maintainer selects a license.
 
 The [independent opportunity input contract and browser-to-GitHub export workflow](USER_SOURCE.md) covers the public schema, verification requirements and update state. Fork discovery is disabled by default; opt in with Actions variable `PHD_ATLAS_ENABLE_DISCOVERY=true` only after auditing the sources.
+
+### Private runtime isolation across local clones
+
+A clone of another owner's fork automatically receives a private SQLite database and provider credential file under a checkout-scoped subdirectory of `~/.local/share/phd-atlas/instances/`. This is separate from the upstream installation's legacy path, which remains unchanged. Explicit `PHDAI_PRIVATE_DIR` takes precedence. A downloaded source archive without a Git origin must set `PHD_ATLAS_REPOSITORY=YOUR_ACCOUNT/YOUR_REPOSITORY` when starting the private runtime to avoid upstream fallback. Use separate identities for separate users; this is not an authenticated multi-user server.

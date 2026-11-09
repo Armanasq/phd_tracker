@@ -8,11 +8,13 @@ import sqlite3
 import stat
 import tempfile
 import uuid
+from functools import lru_cache
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
 from .state_guard import acquire_state_guard, release_state_guard
+from scripts.instance_config import DEFAULT_REPOSITORY, git_repository, validate_repository
 
 STATUS = {"unconfirmed", "shortlisted", "preparing", "submitted", "interview", "offer", "rejected", "withdrawn", "blocked", "archived"}
 CONTACT = {"unrecorded", "to_contact", "contacted", "awaiting_reply", "followup_due", "replied", "declined", "completed"}
@@ -22,9 +24,29 @@ ALLOWED_UPDATE = {"status", "contact_status", "followup", "priority", "next_step
 def utcnow() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
+def private_directory(root: Path, repository: str, *, home: Path | None = None) -> Path:
+    identity = validate_repository(repository)
+    base = (Path(home) if home is not None else Path.home()) / ".local" / "share" / "phd-atlas"
+    if identity.casefold() == DEFAULT_REPOSITORY.casefold():
+        return base
+    material = (str(Path(root).expanduser().resolve()) + "\0" + identity.casefold()).encode("utf-8")
+    suffix = hashlib.sha256(material).hexdigest()[:20]
+    return base / "instances" / suffix
+
+
+@lru_cache(maxsize=8)
+def _origin_identity(root: str) -> str:
+    return git_repository(Path(root)) or DEFAULT_REPOSITORY
+
+
 def default_path() -> Path:
     base = os.environ.get("PHDAI_PRIVATE_DIR")
-    return (Path(base).expanduser() if base else Path.home() / ".local" / "share" / "phd-atlas") / "state.sqlite3"
+    if base:
+        return Path(base).expanduser() / "state.sqlite3"
+    root = Path(__file__).resolve().parents[1]
+    repository = (os.environ.get("PHD_ATLAS_REPOSITORY")
+                  or os.environ.get("GITHUB_REPOSITORY") or _origin_identity(str(root)))
+    return private_directory(root, repository) / "state.sqlite3"
 
 class ConflictError(ValueError):
     pass

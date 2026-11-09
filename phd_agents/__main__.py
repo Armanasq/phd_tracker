@@ -8,7 +8,8 @@ from pathlib import Path
 from .catalog import PROVIDERS
 from .engine import catalog, run_agent, scheduler_once
 from .server import ROOT, serve
-from .store import Store
+from .store import Store, private_directory
+from scripts.instance_config import resolve_repository
 
 def main() -> None:
     parser = argparse.ArgumentParser(prog="python -m phd_agents")
@@ -35,6 +36,8 @@ def main() -> None:
     agent.add_argument("--task", default="")
     agent.add_argument("--allow-cloud", action="store_true")
     args = parser.parse_args()
+    if not os.environ.get("PHDAI_PRIVATE_DIR") and args.repo.resolve() != ROOT.resolve():
+        os.environ["PHDAI_PRIVATE_DIR"] = str(private_directory(args.repo, resolve_repository(root=args.repo)))
     if args.command == "serve":
         serve(port=args.port, root=args.repo)
         return

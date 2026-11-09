@@ -123,3 +123,9 @@ The snapshot and UI are an applicant work queue, not a source of admissions trut
 The repository did not contain an explicit software `LICENSE` file when this guide was written. Running or redistributing outside GitHub's platform terms may require permission. A repository owner must choose and publish a license before advertising broad open-source reuse.
 
 Independent forks use `data/user_opportunities.json` plus isolated `data/user_workspace_overrides.json` in source mode, not inherited workbook records or upstream status overrides. See [USER_SOURCE.md](USER_SOURCE.md). Owner status updates commit only source-controlled override files; generated `site/data/workspace.json` remains a build artifact.
+
+## Independent runtime storage and research context
+
+Default private storage is isolated per GitHub repository identity and local checkout path for independent forks. The original upstream installation retains its existing SQLite location for backward compatibility; `PHDAI_PRIVATE_DIR` is an explicit operator override. The credential JSON is stored beside that checkout's SQLite file. GitHub Pages still contains no secrets or SQLite data.
+
+The `paper_radar` agent tool is also scoped to the deployment: upstream uses `data/research_radar.json`, while independent runtimes can supply `data/user_research_radar.json`. No fork inherits the upstream radar records implicitly. Static Pages does not execute this agent tool.
