@@ -9,7 +9,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, unquote, urlsplit
 
 from .catalog import agent_spec, provider_spec, workflow_spec
-from .domain import agenda, plan_capacity, preflight, today_in
+from .domain import agenda, plan_capacity, preflight, today_in, snapshot
 from .operations import evidence_conflicts, milestones_for, referee_matrix, research_fit_signals, resource_schedule
 from .proof_queue import evidence_work_queue
 from .providers import invoke, ProviderError
@@ -150,6 +150,7 @@ class ApiHandler(BaseHTTPRequestHandler):
                 "provider_states": provider_states(store, available["providers"]),
                 "routing": routing_status(store, available["providers"], available["agents"]),
                 "conversations": store.conversations(20),
+                "as_of": snapshot(self.server.root).get("as_of"),
                 "security": {"local_only": True, "auto_application_submission": False},
             })
         elif path == "/api/conversations":
