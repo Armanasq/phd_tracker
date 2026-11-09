@@ -148,6 +148,7 @@ class HttpBoundaryTests(unittest.TestCase):
         self.assertEqual(self._status(f"evil.example:{port}"), 403)
         self.assertEqual(self._status(f"127.0.0.1:{port}", "https://example.org"), 403)
         self.assertEqual(self._status(f"localhost:{port}", f"http://localhost:{port}"), 200)
+        self.assertEqual(self._status(f"localhost:{port}", f"http://127.0.0.1:{port}"), 403)
         self.assertEqual(self._status(f"localhost:{port}", f"http://localhost:{port+1}"), 403)
 
     def test_unknown_private_api_does_not_fall_through_static_router(self) -> None:

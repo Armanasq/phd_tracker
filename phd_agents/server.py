@@ -95,7 +95,7 @@ class ApiHandler(BaseHTTPRequestHandler):
                 origin = urlsplit(origins[0])
                 if (
                     origin.scheme != "http"
-                    or origin.hostname not in {"127.0.0.1", "localhost", "::1"}
+                    or origin.hostname != host.hostname
                     or origin.port != self.server.server_port
                     or origin.path or origin.query or origin.fragment
                     or origin.username or origin.password

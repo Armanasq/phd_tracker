@@ -165,6 +165,8 @@ def restore_backup(
                 os.fsync(destination.fileno())
             os.chmod(staged, 0o600)
             _verify_database(staged)
+            if _file_digest(staged) != inspected["sha256"]:
+                raise ValueError("Backup contents changed during restore")
             if state.exists():
                 stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
                 preserved = source.parent / (

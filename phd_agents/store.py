@@ -128,7 +128,9 @@ class Store:
             finally:
                 os.close(dir_fd)
             files = sorted(
-                (q for q in directory.glob("phd-atlas-*.sqlite3") if q.is_file() and not q.is_symlink()),
+                (q for q in directory.glob("phd-atlas-*.sqlite3")
+                 if q.is_file() and not q.is_symlink()
+                 and not q.name.startswith("phd-atlas-pre-restore-")),
                 key=lambda q: q.stat().st_mtime_ns, reverse=True,
             )
             for expired in files[retain:]:

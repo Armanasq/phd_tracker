@@ -61,6 +61,16 @@ class VerifiedRestoreTests(unittest.TestCase):
         with sqlite3.connect(self.path.parent / "backups" / result["previous_state"]) as database:
             saved = database.execute("SELECT payload FROM applications WHERE id='P'").fetchone()[0]
         self.assertIn('"new"', saved)
+        restored_state = Store(self.path)
+        try:
+            rotated = restored_state.create_backup(retain=1)
+            self.assertEqual(rotated["retained"], 1)
+        finally:
+            restored_state.close()
+        self.assertTrue((self.path.parent / "backups" / result["previous_state"]).is_file())
+        self.assertEqual(
+            verify_backup(result["previous_state"], state_path=self.path)["integrity"], "ok"
+        )
 
     def test_requires_confirmation_and_matching_hash(self) -> None:
         state = Store(self.path)
