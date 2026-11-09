@@ -1,13 +1,15 @@
 {
   "as_of": "2026-11-09",
-  "fetched": 0,
-  "new_ids": [],
-  "new_count": 0,
-  "total_retained": 34,
-  "source_errors": [
-    "slam: HTTPError: HTTP Error 429: Unknown Error",
-    "robot_learning: TimeoutError: The read operation timed out",
-    "medical_ai: TimeoutError: The read operation timed out"
+  "fetched": 23,
+  "new_ids": [
+    "arxiv:2611.09864",
+    "arxiv:2611.09847",
+    "arxiv:2611.09777",
+    "arxiv:2611.09468",
+    "arxiv:2611.09521"
   ],
+  "new_count": 5,
+  "total_retained": 39,
+  "source_errors": [],
   "classification": "research_signal_only"
 }

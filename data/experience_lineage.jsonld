@@ -922,6 +922,33 @@
       ]
     },
     {
+      "@id": "urn:phdtracker:application:R26-TOULOUSE-BEST-CROSSING",
+      "@type": "prov:Entity",
+      "schema:name": "Université de Toulouse BEST / CNRS CROSSING — France–Australia PhD in World Models, Drone Swarms and Autonomous Agent Safety",
+      "applicationDeadline": {
+        "@value": "2026-11-23",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go with risk",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://doctorat.univ-toulouse.fr/cofund-best"
+      },
+      "proofObligation": [
+        "Position has not passed primary-source verification"
+      ]
+    },
+    {
       "@id": "urn:phdtracker:application:N264-07",
       "@type": "prov:Entity",
       "schema:name": "Linkoeping University CHASS, PhD Optimal Motion Planning for Drone Swarms (LiU-2026-04767)",
@@ -1665,6 +1692,39 @@
       },
       "schema:citation": {
         "@id": "https://www.jobs.ac.uk/job/DTJ272/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:application:R26-STANFORD-BLUEPEARL",
+      "@type": "prov:Entity",
+      "schema:name": "Stanford Oceans — BluePEARL Lab PhD in Robot Learning for Marine Robotics (Fall 2027)",
+      "applicationDeadline": {
+        "@value": "2026-12-02",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:recommendations"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://oceans.stanford.edu/oceans.stanford.edu/academics/graduate-program/admissions/"
       }
     },
     {

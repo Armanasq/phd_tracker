@@ -2,6 +2,105 @@
   "schema_version": 1,
   "papers": [
     {
+      "id": "arxiv:2611.09864",
+      "title": "Grasp-TAGS: Task-Aware Grasp Selection via Critic Distillation for Prehensile Loco-Manipulation",
+      "authors": [
+        "Xun Tu",
+        "Minghao Zou",
+        "Karthik Desingh"
+      ],
+      "abstract_excerpt": "Loco-manipulation, which requires mobile manipulators to coordinate locomotion and manipulation over long horizons, is a key capability for large-object rearrangement in applications such as service robotics and warehouse automation. Despite recent progress, reliably executing these tasks remains challenging because performance depends on complex robot-object and object-environment interaction dynamics. Existing approaches address this challenge either through model-based methods, which often require accurate dynamics models, or through learning-based methods, which reduce ",
+      "paper_url": "https://arxiv.org/abs/2611.09864",
+      "published": "2026-11-06",
+      "topic": "robot_learning",
+      "relevance_score": 8,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-09T04:55:37+00:00",
+      "first_seen": "2026-11-09T04:55:37+00:00",
+      "last_seen": "2026-11-09T04:55:37+00:00"
+    },
+    {
+      "id": "arxiv:2611.09468",
+      "title": "Mechanical Interaction Sensing for Robotic Kiwifruit Handling with an Optoelectronic Soft Suction Cup",
+      "authors": [
+        "Romina Adhami",
+        "Ebrahim Shahabi",
+        "Alessio Mondini",
+        "Samuel M. Youssef",
+        "Cosimo Della Santina",
+        "Gualtiero Volpe",
+        "Barbara Mazzolai"
+      ],
+      "abstract_excerpt": "Robotic handling of delicate fruit benefits from compliant contact and quantitative sensing of the mechanical interaction at the end-effector. This study investigates an optoelectronic soft suction cup with a kiwifruit-specific bicomponent design for estimating interaction forces during contact with real fruit. During known-contact intervals, the optical signals accurately estimate interaction force on fruits excluded from model training: the best shallow network achieves grouped out-of-fold pooled R-squared = 0.968 +/- 0.005 (MAE = 0.138 N), with a median per-fruit held-ou",
+      "paper_url": "https://arxiv.org/abs/2611.09468",
+      "published": "2026-11-06",
+      "topic": "robot_learning",
+      "relevance_score": 6,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-09T04:55:37+00:00",
+      "first_seen": "2026-11-09T04:55:37+00:00",
+      "last_seen": "2026-11-09T04:55:37+00:00"
+    },
+    {
+      "id": "arxiv:2611.09777",
+      "title": "Autonomous Whole-body Loco-manipulation Using a Snake Robot",
+      "authors": [
+        "Adarsh Salagame",
+        "Henry Noyes",
+        "Haroon Hublikar",
+        "Alireza Ramezani"
+      ],
+      "abstract_excerpt": "Snake robots can leverage their hyper-redundant morphology for both locomotion and manipulation through distributed body contact but whole-body loco-manipulation is particularly challenging since the entire body serves simultaneously as propulsive mechanism and manipulation tool Prior work on wheeled legged and snake robot platforms has decoupled these functions through dedicated appendages body segmentation or grippers We present closed-loop loco-manipulation with our snake robot COBRA without this distinction such that any part of the body may make contact We develop a co",
+      "paper_url": "https://arxiv.org/abs/2611.09777",
+      "published": "2026-11-06",
+      "topic": "robot_learning",
+      "relevance_score": 5,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-09T04:55:37+00:00",
+      "first_seen": "2026-11-09T04:55:37+00:00",
+      "last_seen": "2026-11-09T04:55:37+00:00"
+    },
+    {
+      "id": "arxiv:2611.09521",
+      "title": "Embedding Predictive Adaptation and Refinement for Multi-Modal Industrial Anomaly Detection",
+      "authors": [
+        "Jaeho Cho",
+        "Jinsik Bang",
+        "Taehwan Kim"
+      ],
+      "abstract_excerpt": "Industrial Anomaly Detection (IAD) has evolved from 2D image-based approaches to multi-modal methods that leverage the complementary nature of RGB images and 3D point clouds. Among these, memory bank-based methods, which identify anomalies by the discrepancy between each query patch feature and its nearest normal prototype, have proven particularly effective. However, two limitations remain: (i) employing frozen pretrained encoders yields insufficient discrimination between normal and anomalous features due to the domain gap, while existing contrastive learning-based adapta",
+      "paper_url": "https://arxiv.org/abs/2611.09521",
+      "published": "2026-11-06",
+      "topic": "medical_ai",
+      "relevance_score": 5,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-09T04:55:37+00:00",
+      "first_seen": "2026-11-09T04:55:37+00:00",
+      "last_seen": "2026-11-09T04:55:37+00:00"
+    },
+    {
+      "id": "arxiv:2611.09847",
+      "title": "Computer-Use Agents Are Embodied Generalists",
+      "authors": [
+        "Pranjal Aggarwal",
+        "Sean Welleck"
+      ],
+      "abstract_excerpt": "In many areas of AI, general-purpose models have increasingly replaced handcrafted methods and specialized architectures. We argue that embodied AI is poised for a similar shift. Our key claim is that embodied tasks can be formulated as interaction with digital software. Specifically, we build software that renders an agent's view of a physical environment on a screen and provides controls for acting in it. A computer-use agent (CUA) can then perform embodied tasks through the same screenshots and keyboard and mouse actions that it uses to operate ordinary software. Using a",
+      "paper_url": "https://arxiv.org/abs/2611.09847",
+      "published": "2026-11-06",
+      "topic": "robot_learning",
+      "relevance_score": 4,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-09T04:55:37+00:00",
+      "first_seen": "2026-11-09T04:55:37+00:00",
+      "last_seen": "2026-11-09T04:55:37+00:00"
+    },
+    {
       "id": "arxiv:2611.08100",
       "title": "An Integrated Open-Source Stack for Vision-Based Autonomous Navigation of Wheeled Rovers",
       "authors": [
@@ -21,7 +120,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-08T19:56:32+00:00"
+      "last_seen": "2026-11-09T04:55:37+00:00"
     },
     {
       "id": "arxiv:2611.08372",
@@ -416,7 +515,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-08T19:56:32+00:00"
+      "last_seen": "2026-11-09T04:55:37+00:00"
     },
     {
       "id": "arxiv:2611.03932",
@@ -435,7 +534,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-08T19:56:32+00:00"
+      "last_seen": "2026-11-09T04:55:37+00:00"
     },
     {
       "id": "arxiv:2611.03106",
@@ -453,7 +552,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-08T19:56:32+00:00"
+      "last_seen": "2026-11-09T04:55:37+00:00"
     },
     {
       "id": "arxiv:2611.00482",
@@ -470,7 +569,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-08T19:56:32+00:00"
+      "last_seen": "2026-11-09T04:55:37+00:00"
     },
     {
       "id": "arxiv:2610.41768",
@@ -490,7 +589,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-08T19:56:32+00:00"
+      "last_seen": "2026-11-09T04:55:37+00:00"
     },
     {
       "id": "arxiv:2610.41602",
@@ -511,7 +610,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-08T19:56:32+00:00"
+      "last_seen": "2026-11-09T04:55:37+00:00"
     },
     {
       "id": "arxiv:2610.39385",
@@ -533,7 +632,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-08T19:56:32+00:00"
+      "last_seen": "2026-11-09T04:55:37+00:00"
     },
     {
       "id": "arxiv:2610.39691",
@@ -556,7 +655,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-08T19:56:32+00:00"
+      "last_seen": "2026-11-09T04:55:37+00:00"
     },
     {
       "id": "arxiv:2610.38141",
@@ -582,7 +681,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-08T19:56:32+00:00"
+      "last_seen": "2026-11-09T04:55:37+00:00"
     },
     {
       "id": "arxiv:2610.37111",
@@ -602,7 +701,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-08T19:56:32+00:00"
+      "last_seen": "2026-11-09T04:55:37+00:00"
     },
     {
       "id": "arxiv:2610.36454",
@@ -625,7 +724,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-08T19:56:32+00:00"
+      "last_seen": "2026-11-09T04:55:37+00:00"
     },
     {
       "id": "arxiv:2610.35642",
@@ -643,7 +742,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-08T19:56:32+00:00"
+      "last_seen": "2026-11-09T04:55:37+00:00"
     },
     {
       "id": "arxiv:2610.36312",
@@ -667,7 +766,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-08T19:56:32+00:00"
+      "last_seen": "2026-11-09T04:55:37+00:00"
     },
     {
       "id": "arxiv:2610.34041",
@@ -685,7 +784,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-08T19:56:32+00:00"
+      "last_seen": "2026-11-09T04:55:37+00:00"
     },
     {
       "id": "arxiv:2610.33174",
@@ -707,7 +806,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-08T19:56:32+00:00"
+      "last_seen": "2026-11-09T04:55:37+00:00"
     },
     {
       "id": "arxiv:2610.31221",
@@ -728,7 +827,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-08T19:56:32+00:00"
+      "last_seen": "2026-11-09T04:55:37+00:00"
     },
     {
       "id": "arxiv:2610.28566",
@@ -746,7 +845,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-08T19:56:32+00:00"
+      "last_seen": "2026-11-09T04:55:37+00:00"
     }
   ]
 }

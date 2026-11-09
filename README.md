@@ -13,10 +13,10 @@
 </div>
 
 <table><tr>
-<td align="center" width="16%"><b>OPPORTUNITIES</b><h2>103</h2><sub>dated frontier</sub></td>
+<td align="center" width="16%"><b>OPPORTUNITIES</b><h2>105</h2><sub>dated frontier</sub></td>
 <td align="center" width="16%"><b>UPCOMING</b><h2>19</h2><sub>next seven days</sub></td>
-<td align="center" width="16%"><b>PROOF STATES</b><h2>322</h2><sub>unknown document mentions</sub></td>
-<td align="center" width="16%"><b>RESEARCH</b><h2>34</h2><sub>indexed papers</sub></td>
+<td align="center" width="16%"><b>PROOF STATES</b><h2>329</h2><sub>unknown document mentions</sub></td>
+<td align="center" width="16%"><b>RESEARCH</b><h2>39</h2><sub>indexed papers</sub></td>
 <td align="center" width="16%"><b>SOURCES</b><h2>1/4</h2><sub>healthy providers</sub></td>
 <td align="center" width="16%"><b>CONTRADICTIONS</b><h2>1</h2><sub>source review flags</sub></td>
 </tr></table>
@@ -33,7 +33,7 @@ The diagram below is **native Mermaid**. GitHub renders it as a diagram, not as 
 flowchart LR
     A["Discovery sources · 4 monitored"] --> B["Ingest & deduplicate"]
     B --> C{"Evidence verification"}
-    C -->|"Source verified"| D["Application frontier · 103"]
+    C -->|"Source verified"| D["Application frontier · 105"]
     C -->|"Unresolved source"| E["Evidence review · 1 conflicts"]
     E --> C
     D --> F["Deadline & proof planning"]
@@ -49,13 +49,13 @@ flowchart LR
 
 ## Opportunity funnel · actual deadline horizons
 
-This Sankey partitions the 103 dated portfolio records by their remaining calendar horizon; it does not imply historical conversion between recruitment stages.
+This Sankey partitions the 105 dated portfolio records by their remaining calendar horizon; it does not imply historical conversion between recruitment stages.
 
 ```mermaid
 sankey-beta
 Recorded frontier,0-7 days,19
-Recorded frontier,8-14 days,10
-Recorded frontier,15-30 days,38
+Recorded frontier,8-14 days,11
+Recorded frontier,15-30 days,39
 Recorded frontier,31-60 days,14
 Recorded frontier,61+ days,22
 ```
@@ -103,7 +103,7 @@ xychart-beta
     title "Application deadline horizon"
     x-axis ["0-7d", "8-14d", "15-30d", "31-60d", "61+d"]
     y-axis "Application records" 0 --> 40
-    bar [19, 10, 38, 14, 22]
+    bar [19, 11, 39, 14, 22]
 ```
 
 </details>
@@ -114,7 +114,7 @@ xychart-beta
 {"type":"FeatureCollection","features":[{"type":"Feature","properties":{"title":"Germany: 3 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":3,"sample_source_ids":"N263-09, N263-07, N264-10","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[13.405,52.52]}},{"type":"Feature","properties":{"title":"United Kingdom: 18 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":18,"sample_source_ids":"N263-05, N263-06, M17","marker-color":"#19b5b6","marker-size":"large"},"geometry":{"type":"Point","coordinates":[-0.1276,51.5072]}},{"type":"Feature","properties":{"title":"Netherlands: 8 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":8,"sample_source_ids":"N263-10, N263-08, N264-03","marker-color":"#19b5b6","marker-size":"large"},"geometry":{"type":"Point","coordinates":[4.9041,52.3676]}},{"type":"Feature","properties":{"title":"Switzerland: 9 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":9,"sample_source_ids":"C06, M23, M24","marker-color":"#19b5b6","marker-size":"large"},"geometry":{"type":"Point","coordinates":[7.4474,46.948]}},{"type":"Feature","properties":{"title":"Norway: 6 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":6,"sample_source_ids":"M19, M20, M21","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[10.7522,59.9139]}},{"type":"Feature","properties":{"title":"Sweden: 2 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":2,"sample_source_ids":"N264-07, N264-09","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[18.0632,59.3346]}},{"type":"Feature","properties":{"title":"Denmark: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"N264-08","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[12.5683,55.6761]}},{"type":"Feature","properties":{"title":"Japan: 6 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":6,"sample_source_ids":"M18, M15, C15-NAGOYA","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[139.6917,35.6895]}},{"type":"Feature","properties":{"title":"France: 3 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":3,"sample_source_ids":"inria:2026-10608, inria:2026-10570, inria:2026-10454","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[2.3522,48.8566]}},{"type":"Feature","properties":{"title":"Italy: 3 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":3,"sample_source_ids":"N264-05, N264-04, R26-AI4I-TRUSTWORTHY-GENERALIST","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[12.4964,41.9028]}},{"type":"Feature","properties":{"title":"Cyprus: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"R26-UCY-SKEYES","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[33.3823,35.1856]}},{"type":"Feature","properties":{"title":"Luxembourg: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"M26","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[6.1319,49.6116]}},{"type":"Feature","properties":{"title":"United States: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"R26-GWU-EPIC","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[-77.0369,38.9072]}},{"type":"Feature","properties":{"title":"Canada: 8 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":8,"sample_source_ids":"M33, M31, M34","marker-color":"#19b5b6","marker-size":"large"},"geometry":{"type":"Point","coordinates":[-75.6972,45.4215]}},{"type":"Feature","properties":{"title":"Australia: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"M43a","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[149.13,-35.2809]}}]}
 ```
 
-**71/103** applications have unambiguous institution-name country matches, aggregated into **15** country markers. The markers are at representative capital locations, **not university campus coordinates**. The remaining 32 records are deliberately excluded from the geographic visualization rather than assigned guessed locations.
+**71/105** applications have unambiguous institution-name country matches, aggregated into **15** country markers. The markers are at representative capital locations, **not university campus coordinates**. The remaining 34 records are deliberately excluded from the geographic visualization rather than assigned guessed locations.
 
 <details>
 <summary><b>Explore country counts and mapped source IDs</b></summary>
@@ -348,13 +348,13 @@ The following are generated Mermaid artifacts and can be opened independently on
 
 <div align="center">
 
-<a href="../../actions/workflows/experience-lab.yml"><img src="assets/readme/kinetic_cover.svg" width="100%" alt="Animated research intelligence cover with 103 actual future application records on deadline orbits" /></a>
+<a href="../../actions/workflows/experience-lab.yml"><img src="assets/readme/kinetic_cover.svg" width="100%" alt="Animated research intelligence cover with 105 actual future application records on deadline orbits" /></a>
 
 **THIS IS AN EXECUTABLE RESEARCH WORKSPACE, NOT A STATIC TRACKER.**
 
 [**RUN AN INTERACTIVE SCENARIO**](../../actions/workflows/experience-lab.yml) · [**OPERATE SOURCE ALERTS**](../../issues/1) · [**DOWNLOAD ONE-FILE APP**](dashboard/index.html) · [**OPENING GUIDE**](dashboard/README.md) · [**INSPECT RAW EVIDENCE**](data/experience_view.json)
 
-<sub>Regenerated from committed evidence. Snapshot 2026-11-09 · 103 frontier records · 1 source conflict(s). Real actions run through GitHub or the browser application.</sub>
+<sub>Regenerated from committed evidence. Snapshot 2026-11-09 · 105 frontier records · 1 source conflict(s). Real actions run through GitHub or the browser application.</sub>
 
 </div>
 
@@ -485,7 +485,7 @@ These are working combinations of existing interaction methods; no unverified cl
 
 | Time critical | Source assurance | Applicant decisions | Research horizon |
 |:--|:--|:--|:--|
-| **1** deadline(s) in ≤3 days; **17** in the next 7 days | **1/4** active providers reporting healthy; **3** degraded/disabled | **2** dated steps today; **117** older steps with *completion unknown* | **34** indexed papers, research signals only |
+| **1** deadline(s) in ≤3 days; **17** in the next 7 days | **1/4** active providers reporting healthy; **3** degraded/disabled | **2** dated steps today; **117** older steps with *completion unknown* | **39** indexed papers, research signals only |
 | [Review every dated task](docs/TODAY.md) | [Source diagnostics](data/discovery_report.json) | [Confirm task status](../../issues/1) | [Research radar](data/research_radar.json) |
 
 **Source consistency:** 6 observations across 6 configured monitors; 4 matched expected anchors and 2 require review. **Degraded sources:** academicpositions, academictransfer, brave.
@@ -640,7 +640,7 @@ No exclusions on this date.
 | inria | ok | 10 | 0 |
 
 - **Contradictory source observations:** 2 monitor finding(s). A published programme deadline is not proof that an application portal is accepting submissions.
-- **Research records:** 34 scholarly articles indexed separately, not counted as available PhD placements.
+- **Research records:** 39 scholarly articles indexed separately, not counted as available PhD placements.
 - **Discovery scope:** without configured Brave credentials, international web search is **disabled**. A healthy workflow cannot imply exhaustive worldwide coverage.
 
 <details>
@@ -648,7 +648,7 @@ No exclusions on this date.
 
 The original *Dropped* and *Not added* tabs retain **6 dropped routes** and **200 researched-but-not-added routes**. They are an evidence base for explaining omissions, not proof that those programmes are permanently unsuitable.
 
-The automated research queue contains 28 rows. Review both university vacancy records and eligibility/funding requirements before promoting a result to the main list. Historical exclusions have **0 possible reappearance warning(s)**, which require manual review rather than automatic rejection.
+The automated research queue contains 37 rows. Review both university vacancy records and eligibility/funding requirements before promoting a result to the main list. Historical exclusions have **0 possible reappearance warning(s)**, which require manual review rather than automatic rejection.
 
 [Source provenance](data/latest_run.json) · [Discovery report](data/discovery_report.json) · [Historical exclusion memory](data/exclusion_memory.json) · [Rejected and unadded decisions](PhD_Action_List.xlsx) · [Detailed methodology](docs/PRODUCT_RFC.md)
 
@@ -676,7 +676,7 @@ The system is not limited to the deadline column. These sheets are retained in t
 | **Task ledger** | Every dated programme task and original worksheet row, not just deadlines |
 | **Exclusion memory** | Historical dropped and not-added evidence; reappearing leads are flagged, never silently rejected |
 
-**Original workbook coverage:** 188 applications · 564 dated/programme-specific steps · 26 shared tasks · 6 dropped routes · 200 researched but unadded.
+**Original workbook coverage:** 190 applications · 566 dated/programme-specific steps · 26 shared tasks · 6 dropped routes · 200 researched but unadded.
 
 The generated **Execution board** and **Task ledger** can be filtered or edited locally. Derived sheets are regenerated; original source sheets and status cells are protected by integrity tests.
 

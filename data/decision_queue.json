@@ -35,6 +35,21 @@
       "next_step": "Check research scope and applicant eligibility, then submit directly via Inria portal by 13 Nov; demonstrate reproducible scientific ML and physics-informed modelling experience."
     },
     {
+      "id": "R26-MCGILL-LIVING-MACHINES",
+      "programme": "McGill Living Machines Lab — Fully Funded Soft/Bio-Inspired Robotics PhD Fall 2027",
+      "deadline": "2026-11-15",
+      "days_to_deadline": 6,
+      "deadline_kind": "Priority review of lab interest form 15 Nov 2026; NOT necessarily formal university admission deadline",
+      "tier": "urgent",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://www.mcgill.ca/",
+      "original_email": "https://mail.google.com/mail/u/0/#all/1a1afd51407e47db",
+      "next_step": "Submit lab-interest form before 15 Nov for priority review; ask whether lab uses a separate formal McGill PhD degree application and what its deadline is."
+    },
+    {
       "id": "R26-AI4I-TRUSTWORTHY-GENERALIST",
       "programme": "AI4I and Politecnico di Torino — PhD Trustworthy Generalist Robot Policies",
       "deadline": "2026-11-16",
@@ -63,6 +78,36 @@
       "official_source": "https://jobs.inria.fr/public/classic/en/offres/2026-10570",
       "original_email": "",
       "next_step": "Apply through Inria before 20 Nov; frame proposal around persistent world models, long-horizon planning, robust robot control and multimodal state estimation. Confirm role is still open despite earlier listed start date."
+    },
+    {
+      "id": "R26-TOULOUSE-BEST-CROSSING",
+      "programme": "Université de Toulouse BEST / CNRS CROSSING — France–Australia PhD in World Models, Drone Swarms and Autonomous Agent Safety",
+      "deadline": "2026-11-23",
+      "days_to_deadline": 14,
+      "deadline_kind": "Final 23 Nov 2026 at 12:00 CET on university platform (check portal timezone)",
+      "tier": "near-term",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://doctorat.univ-toulouse.fr/cofund-best",
+      "original_email": "",
+      "next_step": "Review the four CROSSING projects: (1) RL/world models for a social robot, (2) drone swarm identification/planning, (3) human–swarm cooperation, (4) conversational-agent risk assessment. Confirm whether multiple applications are accepted; submit preferred project(s) via BEST platform by 23 Nov 12:00 CET."
+    },
+    {
+      "id": "R26-TOULOUSE-BEST-SOCIAL-RL",
+      "programme": "Université de Toulouse BEST — Social Reinforcement Learning for Agroecological Transition",
+      "deadline": "2026-11-23",
+      "days_to_deadline": 14,
+      "deadline_kind": "23 Nov 2026 12:00 CET, same shared BEST competitive programme",
+      "tier": "near-term",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://ellis.eu/research/jobs/2026-11-23-fully-funded-phd-on-social-reinforcement-learning-to-support-the",
+      "original_email": "",
+      "next_step": "Review the primary ELLIS project description, determine whether BEST permits applying to multiple thesis proposals, and submit on official platform if research focus matches."
     },
     {
       "id": "R26-UCY-SKEYES",
@@ -96,6 +141,22 @@
       "next_step": "Check German-language requirement before committing effort; send one PDF of at most 10 MB to jobs.mii@uni-bamberg.de by 29 Nov, referencing MII-202611-ROB and earliest start date."
     },
     {
+      "id": "R26-STUTTGART-PAL-SOFT-ROBOTICS",
+      "programme": "University of Stuttgart — Funded PhD Soft Robot Mechanics and Metamaterials (Aniket Pal)",
+      "deadline": "2026-11-30",
+      "days_to_deadline": 21,
+      "deadline_kind": "Direct PI email route deadline 30 Nov 2026; separate IMPRS-IS route 15 Nov 2026",
+      "tier": "near-term",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Confirm funded stipend and international tuition eligibility",
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://www.mib.uni-stuttgart.de/pal/",
+      "original_email": "https://mail.google.com/mail/u/0/#all/1a1a585678bdb27b",
+      "next_step": "If experimental background is sufficient, submit a direct single-PDF email application by 30 Nov. The earlier IMPRS-IS Nov 15 deadline is a distinct application pathway already tracked."
+    },
+    {
       "id": "inria:2026-10454",
       "programme": "Inria MIND Palaiseau — PhD Pretrained Multimodal Neuroimaging Models for Predicting Individual Cognition",
       "deadline": "2026-11-30",
@@ -124,6 +185,19 @@
       "official_source": "https://graduate.engineering.gwu.edu/doctoral-admissions-requirements",
       "original_email": "https://mail.google.com/mail/u/0/#all/1a1a5570fd6389df",
       "next_step": "Prepare tailored research statement emphasizing visual-inertial estimation and robotics; apply by Dec 1 priority deadline"
+    },
+    {
+      "id": "R26-STANFORD-BLUEPEARL",
+      "programme": "Stanford Oceans — BluePEARL Lab PhD in Robot Learning for Marine Robotics (Fall 2027)",
+      "deadline": "2026-12-02",
+      "days_to_deadline": 23,
+      "deadline_kind": "Final 2 Dec 2026 at 17:00 PST; interest form is separate from degree application",
+      "tier": "near-term",
+      "research_status": "source_verified",
+      "obligations": [],
+      "official_source": "https://oceans.stanford.edu/oceans.stanford.edu/academics/graduate-program/admissions/",
+      "original_email": "https://mail.google.com/mail/u/0/#all/1a17d3a96bf5bf8f",
+      "next_step": "Apply to Stanford Oceans by 2 Dec, 17:00 PST. Also complete BluePEARL lab interest form, which does not replace the university application."
     },
     {
       "id": "LEAD26-AUCKLAND-BIOMECH",
@@ -194,6 +268,87 @@
       "next_step": "Read current PDF and validate deadline/funding/required mechanical skills"
     },
     {
+      "id": "R26-ASU-MINIATURE-ROBOTS",
+      "programme": "Arizona State University — Miniature Robotics Laboratory PhD (Sukjun Kim) Fall 2027",
+      "deadline": null,
+      "days_to_deadline": null,
+      "deadline_kind": "No lab recruiting deadline in 7 Nov announcement",
+      "tier": "unposted",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Obtain an explicit official deadline and timezone",
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://news.engineering.asu.edu/welcome/sukjun-kim/",
+      "original_email": "https://mail.google.com/mail/u/0/#all/1a1bbc4d40700a96",
+      "next_step": "Contact PI with CV, transcripts and project-specific cover letter, subject 'Prospective PhD Student'; ask about funded positions and formal ASU admission timeline."
+    },
+    {
+      "id": "R26-BONN-SOFT-AERIAL",
+      "programme": "University of Bonn — Fully Funded PhD in Mechanosensing and Soft Aerial Robotics",
+      "deadline": null,
+      "days_to_deadline": null,
+      "deadline_kind": "Rolling applications until positions filled, as stated in 8 Nov PI announcement",
+      "tier": "unposted",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Obtain an explicit official deadline and timezone",
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://www.uni-bonn.de/en",
+      "original_email": "https://mail.google.com/mail/u/0/#all/1a1bbc013f9be42e",
+      "next_step": "Apply through the PI's PhD form only (email applications explicitly not accepted); verify open position, funding duration and exact degree enrolment."
+    },
+    {
+      "id": "R26-CTU-KESTREL-UAV",
+      "programme": "CTU Prague MRS — KESTREL funded PhD/predoctoral track in Knowledge-State-Driven Aerial Robotics",
+      "deadline": null,
+      "days_to_deadline": null,
+      "deadline_kind": "Rolling lab intake; formal CTU PhD enrolment spring 2027 (March–April mentioned in direct recruitment email), no fixed current closing date",
+      "tier": "unposted",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Confirm funded stipend and international tuition eligibility",
+        "Obtain an explicit official deadline and timezone",
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://mrs.fel.cvut.cz/careers/phdpos",
+      "original_email": "https://mail.google.com/mail/u/0/#all/1a1afd9d7f07f384",
+      "next_step": "Send CV, concise motivation, transcripts, 2–3 referee contacts with email subject '[PhD - GACR]'; ask for formal 2027 enrolment deadline, contract allocation and predoc start."
+    },
+    {
+      "id": "R26-UTK-JUE-WANG-SOFT-EMBODIED",
+      "programme": "University of Tennessee Knoxville — Jue Wang Lab PhD in Soft Robotics and Embodied AI (Spring/Fall 2027)",
+      "deadline": null,
+      "days_to_deadline": null,
+      "deadline_kind": "Rolling PI screening; university PhD admissions deadline not verified",
+      "tier": "unposted",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Obtain an explicit official deadline and timezone",
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://wang5056.github.io/jues-lab",
+      "original_email": "https://mail.google.com/mail/u/0/#all/1a177ef62f21340b",
+      "next_step": "Send research CV to PI for rolling screening and confirm formal UT Knoxville doctoral portal, admission cycle and funding duration."
+    },
+    {
+      "id": "R26-DARTMOUTH-A2R-CODESIGN",
+      "programme": "Dartmouth College — A2R Lab funded PhD in Computational Robotics Co-Design and Edge AI",
+      "deadline": "2026-12-15",
+      "days_to_deadline": 36,
+      "deadline_kind": "PI recruitment email gives 15 Dec 2026; CS application deadline not explicitly visible on inspected programme page",
+      "tier": "upcoming",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Confirm funded stipend and international tuition eligibility",
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://graduate.dartmouth.edu/admissions/programs/computer-science",
+      "original_email": "https://mail.google.com/mail/u/0/#all/1a1afd692706e63e",
+      "next_step": "Confirm Dartmouth Computer Science's 2026-12-15 deadline directly in the application portal; prepare 100-line original code sample, complete computer-science paper and 3 letters. Highlight GPU/edge robotics, MPC, autonomous vehicles and world-model efficiency."
+    },
+    {
       "id": "R26-MAN-PDS-CONSTELLATIONS",
       "programme": "University of Manchester — PDS Safe and Multi-Fidelity Optimisation of Satellite Constellations for a Changing Planet",
       "deadline": "2026-12-18",
@@ -205,6 +360,21 @@
       "official_source": "https://www.humanities.manchester.ac.uk/study/postgraduate-research/funding/list-of-awards/presidents-doctoral-scholar-award/",
       "original_email": "https://mail.google.com/mail/u/0/#all/1a19835b4c8513ee",
       "next_step": "Write proposal focused on uncertainty-aware multi-fidelity optimisation and safe constellation reconfiguration; contact supervisors"
+    },
+    {
+      "id": "R26-CARDIFF-WEARABLE-CHILDREN",
+      "programme": "Cardiff University — Growing with Me, Soft Robotic Wearables for Children's Upper-Limb Rehabilitation",
+      "deadline": "2027-01-05",
+      "days_to_deadline": 57,
+      "deadline_kind": "5 Jan 2027 final per supervisor email and FindAPhD listing; exact time not verified",
+      "tier": "upcoming",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://www.findaphd.com/phds/project/growing-with-me-co-designing-adaptable-low-cost-soft-robotic-wearables-for-children-s-upper-limb-rehabilitation/?p201874",
+      "original_email": "https://mail.google.com/mail/u/0/#all/1a1bbbf1a69c21c0",
+      "next_step": "Confirm primary Cardiff university application route and funding terms; prepare research fit on adaptive wearable robotics, human factors and clinical validation before 5 Jan 2027."
     },
     {
       "id": "inria:2026-10501",

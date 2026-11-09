@@ -4,12 +4,12 @@
   "timezone": "Europe/Berlin",
   "policy": "Observed snapshot, not live availability. Unknown is not false. Document mention does not imply missing. Simulations never change application state.",
   "metrics": {
-    "tracked": 103,
-    "future": 103,
+    "tracked": 105,
+    "future": 105,
     "next_seven_days": 19,
-    "unknown_document_mentions": 322,
+    "unknown_document_mentions": 329,
     "source_conflicts": 1,
-    "research_papers": 34
+    "research_papers": 39
   },
   "applications": [
     {
@@ -693,6 +693,28 @@
       "next_step": "Prepare a single application PDF following lab instructions and verify exact time/eligibility"
     },
     {
+      "id": "R26-TOULOUSE-BEST-CROSSING",
+      "name": "Université de Toulouse BEST / CNRS CROSSING — France–Australia PhD in World Models, Drone Swarms and Autonomous Agent Safety",
+      "country": null,
+      "deadline": "2026-11-23",
+      "days": 14,
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "documents": [
+        "academic_cv",
+        "research_statement"
+      ],
+      "unknown_documents": [
+        "academic_cv",
+        "research_statement"
+      ],
+      "proof_obligations": [
+        "Position has not passed primary-source verification"
+      ],
+      "source": "https://doctorat.univ-toulouse.fr/cofund-best",
+      "next_step": "Review the four CROSSING projects: (1) RL/world models for a social robot, (2) drone swarm identification/planning, (3) human–swarm cooperation, (4) conversational-agent risk assessment. Confirm whether multiple applications are accepted; submit preferred project(s) via BEST platform by 23 Nov 12:00 CET."
+    },
+    {
       "id": "N264-07",
       "name": "Linkoeping University CHASS, PhD Optimal Motion Planning for Drone Swarms (LiU-2026-04767)",
       "country": "Sweden",
@@ -1291,6 +1313,32 @@
       "proof_obligations": [],
       "source": "https://www.jobs.ac.uk/job/DTJ272/",
       "next_step": "Email Prof Papachristodoulou (antonis@eng.ox.ac.uk) and Prof Margellos (kostas.margellos@eng.ox.ac.uk) by 2026-10-30 asking whether an international (overseas-fee) candidate can be funded, quoting 27ENGCO_AP"
+    },
+    {
+      "id": "R26-STANFORD-BLUEPEARL",
+      "name": "Stanford Oceans — BluePEARL Lab PhD in Robot Learning for Marine Robotics (Fall 2027)",
+      "country": null,
+      "deadline": "2026-12-02",
+      "days": 23,
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "documents": [
+        "academic_cv",
+        "english_proof",
+        "recommendations",
+        "research_statement",
+        "transcripts"
+      ],
+      "unknown_documents": [
+        "academic_cv",
+        "english_proof",
+        "recommendations",
+        "research_statement",
+        "transcripts"
+      ],
+      "proof_obligations": [],
+      "source": "https://oceans.stanford.edu/oceans.stanford.edu/academics/graduate-program/admissions/",
+      "next_step": "Apply to Stanford Oceans by 2 Dec, 17:00 PST. Also complete BluePEARL lab interest form, which does not replace the university application."
     },
     {
       "id": "M37-CIS",
@@ -2581,36 +2629,36 @@
       "id": "academic_cv",
       "label": "Academic CV",
       "state": "unknown",
-      "potential": 75,
-      "near_term": 55
+      "potential": 77,
+      "near_term": 57
     },
     {
       "id": "recommendations",
       "label": "Reference letters and referees",
       "state": "unknown",
-      "potential": 61,
-      "near_term": 46
+      "potential": 62,
+      "near_term": 47
     },
     {
       "id": "transcripts",
       "label": "Official transcripts",
       "state": "unknown",
-      "potential": 72,
-      "near_term": 49
+      "potential": 73,
+      "near_term": 50
     },
     {
       "id": "research_statement",
       "label": "Research statement / SOP",
       "state": "unknown",
-      "potential": 49,
-      "near_term": 35
+      "potential": 51,
+      "near_term": 37
     },
     {
       "id": "english_proof",
       "label": "English proficiency evidence",
       "state": "unknown",
-      "potential": 39,
-      "near_term": 21
+      "potential": 40,
+      "near_term": 22
     },
     {
       "id": "research_portfolio",
@@ -2652,6 +2700,46 @@
     "contradiction_closed_portal": 1
   },
   "research": [
+    {
+      "title": "Grasp-TAGS: Task-Aware Grasp Selection via Critic Distillation for Prehensile Loco-Manipulation",
+      "id": "arxiv:2611.09864",
+      "url": "https://arxiv.org/abs/2611.09864",
+      "topic": "robot_learning",
+      "relevance_score": 8,
+      "published": "2026-11-06"
+    },
+    {
+      "title": "Mechanical Interaction Sensing for Robotic Kiwifruit Handling with an Optoelectronic Soft Suction Cup",
+      "id": "arxiv:2611.09468",
+      "url": "https://arxiv.org/abs/2611.09468",
+      "topic": "robot_learning",
+      "relevance_score": 6,
+      "published": "2026-11-06"
+    },
+    {
+      "title": "Autonomous Whole-body Loco-manipulation Using a Snake Robot",
+      "id": "arxiv:2611.09777",
+      "url": "https://arxiv.org/abs/2611.09777",
+      "topic": "robot_learning",
+      "relevance_score": 5,
+      "published": "2026-11-06"
+    },
+    {
+      "title": "Embedding Predictive Adaptation and Refinement for Multi-Modal Industrial Anomaly Detection",
+      "id": "arxiv:2611.09521",
+      "url": "https://arxiv.org/abs/2611.09521",
+      "topic": "medical_ai",
+      "relevance_score": 5,
+      "published": "2026-11-06"
+    },
+    {
+      "title": "Computer-Use Agents Are Embodied Generalists",
+      "id": "arxiv:2611.09847",
+      "url": "https://arxiv.org/abs/2611.09847",
+      "topic": "robot_learning",
+      "relevance_score": 4,
+      "published": "2026-11-06"
+    },
     {
       "title": "An Integrated Open-Source Stack for Vision-Based Autonomous Navigation of Wheeled Rovers",
       "id": "arxiv:2611.08100",
@@ -3109,6 +3197,20 @@
         "count": 3
       },
       {
+        "date": "2026-11-23",
+        "applications": [
+          {
+            "id": "R26-UCY-SKEYES",
+            "name": "University of Cyprus — V4RL SkEyes ERC funded PhD in robotics, computer vision and aerial SLAM (Margarita Chli)"
+          },
+          {
+            "id": "R26-TOULOUSE-BEST-CROSSING",
+            "name": "Université de Toulouse BEST / CNRS CROSSING — France–Australia PhD in World Models, Drone Swarms and Autonomous Agent Safety"
+          }
+        ],
+        "count": 2
+      },
+      {
         "date": "2026-11-24",
         "applications": [
           {
@@ -3227,6 +3329,20 @@
           }
         ],
         "count": 9
+      },
+      {
+        "date": "2026-12-02",
+        "applications": [
+          {
+            "id": "M35",
+            "name": "Oxford DPhil Engineering Science studentship: Data-driven Control Engineering for Large-scale Uncertain Systems (ref 27ENGCO_AP; Papachristodoulou, Margellos)"
+          },
+          {
+            "id": "R26-STANFORD-BLUEPEARL",
+            "name": "Stanford Oceans — BluePEARL Lab PhD in Robot Learning for Marine Robotics (Fall 2027)"
+          }
+        ],
+        "count": 2
       },
       {
         "date": "2026-12-08",
@@ -3748,6 +3864,17 @@
         "source": "https://euraxess.ec.europa.eu/jobs/476857"
       },
       {
+        "id": "R26-TOULOUSE-BEST-CROSSING",
+        "name": "Université de Toulouse BEST / CNRS CROSSING — France–Australia PhD in World Models, Drone Swarms and Autonomous Agent Safety",
+        "deadline": "2026-11-23",
+        "days": 14,
+        "reasons": [
+          "1 source/evidence obligations",
+          "2 mentioned documents with unknown readiness"
+        ],
+        "source": "https://doctorat.univ-toulouse.fr/cofund-best"
+      },
+      {
         "id": "N264-07",
         "name": "Linkoeping University CHASS, PhD Optimal Motion Planning for Drone Swarms (LiU-2026-04767)",
         "deadline": "2026-11-24",
@@ -3948,16 +4075,6 @@
           "4 mentioned documents with unknown readiness"
         ],
         "source": "https://biomedicalai.maxplanckschools.org/4056/application-process"
-      },
-      {
-        "id": "M33",
-        "name": "Memorial University - PhD Engineering and Applied Science, Fall 2027 admission",
-        "deadline": "2026-12-01",
-        "days": 22,
-        "reasons": [
-          "5 mentioned documents with unknown readiness"
-        ],
-        "source": "https://mun.ca/engineering/graduate/faq-for-prospective-research-students/"
       }
     ],
     "policy": "Priorities are calendar-sorted review candidates, not admission likelihood, guaranteed eligibility or inferred incomplete tasks."

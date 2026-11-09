@@ -2,48 +2,48 @@
   "schema_version": 1,
   "as_of": "2026-11-09",
   "explicit_readiness_policy": "Unknown inputs remain unknown. Mentioned documents are not evidence of missing documents.",
-  "active_future_opportunities": 103,
+  "active_future_opportunities": 105,
   "source_conflict_count": 1,
   "resource_frontier": [
     {
       "resource_id": "academic_cv",
       "label": "Academic CV",
       "current_state": "unknown",
-      "potential_applications": 75,
-      "near_term_applications": 55,
-      "urgency_index": 6.6537
+      "potential_applications": 77,
+      "near_term_applications": 57,
+      "urgency_index": 6.7621
     },
     {
       "resource_id": "recommendations",
       "label": "Reference letters and referees",
       "current_state": "unknown",
-      "potential_applications": 61,
-      "near_term_applications": 46,
-      "urgency_index": 5.5869
+      "potential_applications": 62,
+      "near_term_applications": 47,
+      "urgency_index": 5.6285
     },
     {
       "resource_id": "transcripts",
       "label": "Official transcripts",
       "current_state": "unknown",
-      "potential_applications": 72,
-      "near_term_applications": 49,
-      "urgency_index": 4.7592
+      "potential_applications": 73,
+      "near_term_applications": 50,
+      "urgency_index": 4.8008
     },
     {
       "resource_id": "research_statement",
       "label": "Research statement / SOP",
       "current_state": "unknown",
-      "potential_applications": 49,
-      "near_term_applications": 35,
-      "urgency_index": 3.0716
+      "potential_applications": 51,
+      "near_term_applications": 37,
+      "urgency_index": 3.1799
     },
     {
       "resource_id": "english_proof",
       "label": "English proficiency evidence",
       "current_state": "unknown",
-      "potential_applications": 39,
-      "near_term_applications": 21,
-      "urgency_index": 2.4611
+      "potential_applications": 40,
+      "near_term_applications": 22,
+      "urgency_index": 2.5028
     },
     {
       "resource_id": "research_portfolio",
@@ -865,6 +865,32 @@
       "source_url": "https://www.applykite.com/positions/phd-in-machine-learning-and-medical-data-science-at-eth-zurich-7wdy7wpsqv"
     },
     {
+      "source_id": "R26-TOULOUSE-BEST-CROSSING",
+      "deadline": "2026-11-23",
+      "days_to_deadline": 14,
+      "opportunity": "Université de Toulouse BEST / CNRS CROSSING — France–Australia PhD in World Models, Drone Swarms and Autonomous Agent Safety",
+      "decision": "Go with risk",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [
+        "Position has not passed primary-source verification"
+      ],
+      "next_step": "Review the four CROSSING projects: (1) RL/world models for a social robot, (2) drone swarm identification/planning, (3) human–swarm cooperation, (4) conversational-agent risk assessment. Confirm whether multiple applications are accepted; submit preferred project(s) via BEST platform by 23 Nov 12:00 CET.",
+      "source_url": "https://doctorat.univ-toulouse.fr/cofund-best"
+    },
+    {
       "source_id": "R26-UCY-SKEYES",
       "deadline": "2026-11-23",
       "days_to_deadline": 14,
@@ -1637,6 +1663,39 @@
       "evidence_proof_obligations": [],
       "next_step": "Email Prof Papachristodoulou (antonis@eng.ox.ac.uk) and Prof Margellos (kostas.margellos@eng.ox.ac.uk) by 2026-10-30 asking whether an international (overseas-fee) candidate can be funded, quoting 27ENGCO_AP",
       "source_url": "https://www.jobs.ac.uk/job/DTJ272/"
+    },
+    {
+      "source_id": "R26-STANFORD-BLUEPEARL",
+      "deadline": "2026-12-02",
+      "days_to_deadline": 23,
+      "opportunity": "Stanford Oceans — BluePEARL Lab PhD in Robot Learning for Marine Robotics (Fall 2027)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "recommendations",
+        "english_proof"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [],
+      "next_step": "Apply to Stanford Oceans by 2 Dec, 17:00 PST. Also complete BluePEARL lab interest form, which does not replace the university application.",
+      "source_url": "https://oceans.stanford.edu/oceans.stanford.edu/academics/graduate-program/admissions/"
     },
     {
       "source_id": "M36-6014",
