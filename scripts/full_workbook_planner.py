@@ -191,7 +191,7 @@ def plan(wb, today: date, completion_state=None):
     shared_today=[t for t in included if t["type"]=="cross_route_task" and t["days"]==0]
     future_week=[t for t in included if t["type"]=="application_deadline" and t["days"] is not None and 0<t["days"]<=7]
     future_week_priorities=[t for t in included if t["type"]=="application_priority" and t["days"] is not None and 0<t["days"]<=7]
-    past_unconfirmed=[t for t in included if t["type"]!="application_deadline" and t["days"] is not None and t["days"]<0
+    past_unconfirmed=[t for t in included if t["type"] not in {"application_deadline", "application_priority", "application_unverified"} and t["days"] is not None and t["days"]<0
                       and (not t["final_deadline"] or t["final_deadline"]>=today.isoformat())]
     parent_final_today=[t for t in included if t["type"]=="timeline_step"
                         and t["days"] is not None and t["days"]<0 and t["final_deadline"]==today.isoformat()]
