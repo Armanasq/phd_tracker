@@ -1,4 +1,5 @@
 import {daysUntil,isActionable,isClosed as domainClosed,riskSignal,priorityScore,validateSnapshot,documentReadiness,applyRecordFilters,draftState,deadlineCollisions,freshnessState} from "./modules/domain.mjs";
+import {storageKey,legacyKeyForMigration} from "./modules/storage.mjs";
 import {createConsole} from "./modules/console.mjs";
 import {mountAtlasLens} from "./modules/lens.mjs";
 import {auditWorkspace} from "./modules/assurance.mjs";
@@ -9,12 +10,19 @@ const VIEWS=[["dashboard","home","Overview"],["applications","file","Application
 const FALLBACK_REPO="https://github.com/Armanasq/phd_tracker";
 let selectedAuditCategory="all",assuranceLimit=75;
 let ledgerQuery="",ledgerType="all",ledgerPage=1;
-const STORE="phd-atlas-drafts-v1",PREFS="phd-atlas-prefs-v1",VIEW_STORE="phd-atlas-views-v2",COMPARE_STORE="phd-atlas-compare-v1";
+const STORE=storageKey("phd-atlas-drafts-v1"),PREFS=storageKey("phd-atlas-prefs-v1"),VIEW_STORE=storageKey("phd-atlas-views-v2"),COMPARE_STORE=storageKey("phd-atlas-compare-v1");
 const $=id=>document.getElementById(id);
 const escapeHTML=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safeURL=value=>{try{const u=new URL(String(value));return u.protocol==="https:"?u.href:""}catch{return""}};
 const ownerRepo=()=>safeURL(state.data?.source_links?.repository)||safeURL(document.querySelector(".side-link")?.href)||FALLBACK_REPO;
-const readStore=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch{return d}};
+const readStore=(k,d)=>{try{
+ let raw=localStorage.getItem(k);
+ if(raw===null){
+  const oldKey=legacyKeyForMigration(k.slice(k.lastIndexOf(":")+1));
+  if(oldKey){const older=localStorage.getItem(oldKey);if(older!==null){JSON.parse(older);localStorage.setItem(k,older);localStorage.removeItem(oldKey);raw=older}}
+ }
+ return raw===null?d:(JSON.parse(raw)??d);
+ }catch{return d}};
 const saveStore=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{notify("Local storage unavailable. Export drafts as JSON.")}};
 const storedViews=readStore(VIEW_STORE,{saved:[],last:{scope:"tracked",query:"",status:"all",verification:"all",country:"all",horizon:"all",sort:"deadline"}});
 const state={data:null,view:"dashboard",scope:storedViews.last?.scope||"tracked",query:storedViews.last?.query||"",status:storedViews.last?.status||"all",verification:storedViews.last?.verification||"all",country:storedViews.last?.country||"all",horizon:storedViews.last?.horizon||"all",sort:storedViews.last?.sort||"deadline",presets:Array.isArray(storedViews.saved)?storedViews.saved:[],activePreset:"",compare:readStore(COMPARE_STORE,[]),selected:null,drafts:readStore(STORE,{}),prefs:readStore(PREFS,{theme:"light",horizon:7,reminders:true,notified:{}}),modal:"",focus:null,calendarMonth:null,selectedDate:null,draggedId:null};

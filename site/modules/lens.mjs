@@ -1,3 +1,4 @@
+import {storageKey} from "./storage.mjs";
 const byId=id=>document.getElementById(id);
 const escapeHTML=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const short=(value,n=160)=>String(value??"").slice(0,n);
@@ -20,7 +21,7 @@ export function mountAtlasLens({getRecords,getView,getSelectedApplication,openSe
  const records=()=>{try{const data=getRecords?.();return Array.isArray(data)?data:[]}catch{return []}};
  const isLocal=()=>["localhost","127.0.0.1"].includes(location.hostname)&&location.protocol==="http:";
  const selected=()=>records().find(x=>x.id===state.applicationId);
- const threadStorageKey="phd-atlas-private-thread-v1";
+ const threadStorageKey=storageKey("phd-atlas-private-thread-v1");
  const routeNames={request_override:"Request override",agent_assignment:"Agent assignment",workspace_default:"Workspace default"};
  function syncRoute(){
    const route=state.routes[state.agent];
