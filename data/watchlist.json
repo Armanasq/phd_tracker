@@ -43,6 +43,15 @@
       "negative_anchor": "The application period has now closed",
       "expected_deadline": "2026-11-15",
       "application_id": "N263-09"
+    },
+    {
+      "id": "N263-07-LIVE",
+      "url": "https://www.mos.ed.tum.de/en/avs/career/our-jobs/ki-motorsport-1/",
+      "anchor": "15th of November 2026",
+      "negative_anchor": "July 17, 2026",
+      "negative_state": "contradiction_deadline_mismatch",
+      "expected_deadline": "2026-11-15",
+      "application_id": "N263-07"
     }
   ]
 }
