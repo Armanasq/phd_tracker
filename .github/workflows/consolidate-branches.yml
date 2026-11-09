@@ -6,13 +6,15 @@ on:
     paths:
       - .github/workflows/consolidate-branches.yml
   workflow_dispatch:
+  pull_request:
+    types: [closed]
 
 permissions:
   contents: write
 
 jobs:
   consolidate:
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, '[consolidate-branches]')
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
@@ -58,6 +60,7 @@ jobs:
           echo "Only main remains. Release tags and merged PRs are preserved." >> "$GITHUB_STEP_SUMMARY"
 
   about:
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && contains(github.event.head_commit.message, '[consolidate-branches]'))
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -81,3 +84,32 @@ jobs:
             echo "### GitHub About fields not changed" >> "$GITHUB_STEP_SUMMARY"
             echo "Set REPOSITORY_ADMIN_TOKEN in Actions secrets, then rerun this workflow manually, or edit the repository About panel." >> "$GITHUB_STEP_SUMMARY"
           fi
+
+
+  prune_merged_pr:
+    if: github.event_name == 'pull_request' && github.event.pull_request.merged == true && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Remove only the exact merged source branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PR_BRANCH: ${{ github.event.pull_request.head.ref }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$PR_BRANCH" = "main" ]; then
+            exit 0
+          fi
+          if ! actual="$(gh api "repos/$GH_REPO/git/ref/heads/$PR_BRANCH" --jq '.object.sha' 2>/dev/null)"; then
+            echo "Branch already removed."
+            exit 0
+          fi
+          if [ "$actual" != "$PR_HEAD_SHA" ]; then
+            echo "::warning::Branch advanced after merge. Preserving it for manual review."
+            exit 0
+          fi
+          gh api --method DELETE "repos/$GH_REPO/git/refs/heads/$PR_BRANCH"
+          echo "Removed merged branch $PR_BRANCH at $PR_HEAD_SHA"
