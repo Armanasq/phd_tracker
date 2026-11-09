@@ -7,6 +7,11 @@ from pathlib import Path
 
 from openpyxl import load_workbook
 
+if __package__:
+    from .refresh_tracker import should_promote
+else:
+    from refresh_tracker import should_promote
+
 ROOT = Path(__file__).resolve().parents[1]
 path = ROOT / "PhD_Action_List.xlsx"
 
@@ -39,13 +44,13 @@ def main():
     assert records >= 180, f"Unexpectedly low record count {records}"
     sources = json.loads((ROOT / "data" / "opportunities.json").read_text())["records"]
     for item in sources:
-        if item["confidence"] == "official_plus_email":
+        if should_promote(item):
             assert item["id"] in ids, f"Verified opportunity absent: {item['id']}"
     queue_ids = {x[0] for x in wb["Research queue"].iter_rows(min_row=2, values_only=True) if x[0]}
     for item in sources:
-        if item["confidence"] != "official_plus_email":
-            assert item["id"] in queue_ids, f"Unverified opportunity missing from queue: {item['id']}"
-            assert item["id"] not in ids, "Unverified opportunity promoted without review"
+        if not should_promote(item):
+            assert item["id"] in queue_ids, f"Non-promoted opportunity missing from queue: {item['id']}"
+            assert item["id"] not in ids, "Non-promoted opportunity entered Action list without policy approval"
     watches = [v[0] for v in wb["Source watch"].iter_rows(min_row=2, values_only=True) if v[0]]
     assert len(watches) >= 5 and len(watches) == len(set(watches))
     assert wb["Action list"]["B1"].value is not None

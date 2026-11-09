@@ -58,6 +58,13 @@ def date_key(value):
     return (0, parsed) if parsed else (1, datetime.max)
 
 
+def should_promote(rec: dict) -> bool:
+    return bool(rec.get("deadline")) and (
+        rec.get("confidence") == "official_plus_email"
+        or (rec.get("confidence") == "official_institution" and rec.get("decision") in {"Go", "Go with risk"})
+    )
+
+
 def make_main_row(rec: dict):
     source = rec["source_url"]
     steps = rec["next_step"]
@@ -161,7 +168,7 @@ def refresh(wb, today: date, online: bool):
     for rec in opportunities:
         if not rec["id"] or not rec["source_url"].startswith("https://"):
             raise ValueError("Malformed candidate provenance")
-        if (rec["confidence"] == "official_plus_email" or (rec["confidence"] == "official_institution" and rec["decision"] in {"Go", "Go with risk"})) and rec["deadline"] and rec["id"] not in ids:
+        if should_promote(rec) and rec["id"] not in ids:
             current.append(make_main_row(rec))
             ids.add(rec["id"])
     current.sort(key=lambda row: (date_key(row[1]), str(row[6]).casefold()))

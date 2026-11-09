@@ -88,3 +88,16 @@ def test_primary_official_research_promotion_preserves_review_gate(tmp_path, mon
     assert {"REVIEW", "LEAD"}.issubset(queue_ids)
     assert first["main_count"] == second["main_count"] == 2
     assert sum(wb["Step timeline"].cell(i, 7).value == "VERIFIED" for i in range(4, wb["Step timeline"].max_row + 1)) == 1
+
+def test_main_list_promotion_policy_shared_with_validator():
+    from scripts.validate_tracker import should_promote as validator_policy
+
+    assert validator_policy is refresh.should_promote
+    base = {"deadline": "2026-11-29", "decision": "Go"}
+    assert refresh.should_promote({**base, "confidence": "official_plus_email"})
+    assert refresh.should_promote({**base, "confidence": "official_institution"})
+    assert refresh.should_promote({**base, "confidence": "official_institution", "decision": "Go with risk"})
+    assert not refresh.should_promote({**base, "confidence": "official_institution", "decision": "Check first"})
+    assert not refresh.should_promote({**base, "confidence": "search_lead_unverified"})
+    assert not refresh.should_promote({**base, "confidence": "email_only"})
+    assert not refresh.should_promote({**base, "confidence": "official_institution", "deadline": None})
