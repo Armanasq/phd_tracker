@@ -87,9 +87,10 @@ def duplicate_advisories(records: list[dict]) -> list[dict]:
 
 def source_links(repo: str) -> dict:
     base = repository_url(repo)
+    independent = repo.casefold() != DEFAULT_REPOSITORY.casefold()
     return {
-        "workbook": base + "/blob/main/PhD_Action_List.xlsx",
-        "opportunities": base + "/blob/main/data/opportunities.json",
+        "workbook": "" if independent else base + "/blob/main/PhD_Action_List.xlsx",
+        "opportunities": base + "/blob/main/data/" + ("user_opportunities.json" if independent else "opportunities.json"),
         "source_monitor": base + "/actions/workflows/phd-intelligence.yml",
         "control_issue": action_center_url(repo),
         "repository": base,
@@ -140,11 +141,159 @@ def starter_snapshot(repo: str) -> dict:
     }
 
 
+def independent_snapshot(root: Path, repo: str) -> dict:
+    source = root / "data" / "user_opportunities.json"
+    if not source.is_file():
+        raise ValueError("Independent source mode requires data/user_opportunities.json; copied upstream records are never used")
+    payload = json.loads(source.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict) or payload.get("schema_version") != 1 or not isinstance(payload.get("records"), list):
+        raise ValueError("Independent source must contain schema_version=1 and a records array")
+    if set(payload) - {"schema_version", "as_of", "timezone", "records"}:
+        raise ValueError("Independent source has unexpected top-level fields")
+    if len(payload["records"]) > 5000:
+        raise ValueError("Independent source exceeds 5000 application records")
+    from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
+    timezone_name = payload.get("timezone", "UTC")
+    if not isinstance(timezone_name, str) or len(timezone_name) > 80:
+        raise ValueError("Invalid IANA timezone")
+    try:
+        ZoneInfo(timezone_name)
+    except (ValueError, ZoneInfoNotFoundError) as exc:
+        raise ValueError("Unrecognized IANA timezone") from exc
+    if payload.get("as_of") and not iso_day(payload["as_of"]):
+        raise ValueError("Invalid independent source observation date")
+    allowed_fields = {
+        "id", "record_type", "name", "institution", "country", "deadline", "deadline_kind",
+        "deadline_type", "source_url", "apply_url", "source_date", "evidence", "verification",
+        "status", "followup", "contact_status", "faculty", "funding", "eligibility",
+        "fit", "topic", "next_step", "blockers", "decision", "documents", "document_states",
+        "priority", "duplicate_submission_advisory",
+    }
+    contacts = {"unrecorded", "to_contact", "contacted", "awaiting_reply", "followup_due", "replied", "declined", "completed"}
+    verification_states = {"unverified", "needs_review", "source_verified", "owner_verified"}
+    valid_deadlines = {"unverified", "final", "rolling", "internal", "other"}
+    states = {"unknown", "ready", "in_progress", "not_started", "not_applicable"}
+    overrides = load(root, "user_workspace_overrides.json").get("records", {})
+    if not isinstance(overrides, dict):
+        raise ValueError("Independent owner override data must be a mapping")
+    results = []
+    ids = set()
+    for index, raw in enumerate(payload["records"]):
+        if not isinstance(raw, dict) or set(raw) - allowed_fields:
+            raise ValueError(f"Independent record {index + 1}: unsupported or private fields")
+        rid = raw.get("id")
+        if not isinstance(rid, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,79}", rid) or rid in ids:
+            raise ValueError(f"Independent record {index + 1}: missing, unsafe or duplicate ID")
+        ids.add(rid)
+        name = clean(raw.get("name"), 350)
+        if not name:
+            raise ValueError(f"Independent record {rid}: name is required")
+        if raw.get("record_type", "tracked") not in {"tracked", "candidate"}:
+            raise ValueError(f"Independent record {rid}: invalid record type")
+        owner = overrides.get(rid, {})
+        if not isinstance(owner, dict):
+            raise ValueError(f"Independent record {rid}: invalid owner override")
+        status = owner.get("status", raw.get("status", "unconfirmed"))
+        if status not in STATES:
+            raise ValueError(f"Independent record {rid}: invalid status")
+        verification = owner.get("verification", raw.get("verification", "unverified"))
+        if verification not in verification_states:
+            raise ValueError(f"Independent record {rid}: invalid verification state")
+        deadline = iso_day(raw.get("deadline"))
+        followup = iso_day(owner.get("followup", raw.get("followup")))
+        source_date = iso_day(raw.get("source_date"))
+        for key, val, parsed in (("deadline", raw.get("deadline"), deadline),
+                                 ("followup", owner.get("followup", raw.get("followup")), followup),
+                                 ("source_date", raw.get("source_date"), source_date)):
+            if val not in (None, "") and parsed is None:
+                raise ValueError(f"Independent record {rid}: invalid {key} date")
+        source_url = public_url(raw.get("source_url"))
+        apply_url = public_url(raw.get("apply_url"))
+        for key, original, url in (("source_url", raw.get("source_url"), source_url),
+                                   ("apply_url", raw.get("apply_url"), apply_url)):
+            if original not in (None, "") and not url:
+                raise ValueError(f"Independent record {rid}: {key} must be public HTTPS without credentials")
+        evidence = clean(raw.get("evidence"), 440)
+        if verification in {"source_verified", "owner_verified"} and not (source_url and source_date and evidence):
+            raise ValueError(f"Independent record {rid}: verified status requires primary URL, observation date and evidence note")
+        raw_docs = raw.get("documents", [])
+        if not isinstance(raw_docs, list) or len(raw_docs) > len(DOCUMENTS) or any(doc not in DOCUMENTS for doc in raw_docs):
+            raise ValueError(f"Independent record {rid}: invalid document requirements")
+        documents = list(dict.fromkeys(raw_docs))
+        raw_doc_states = raw.get("document_states", {})
+        if not isinstance(raw_doc_states, dict) or any(k not in documents or v not in DOC_STATES for k, v in raw_doc_states.items()):
+            raise ValueError(f"Independent record {rid}: invalid document states")
+        owner_docs = owner.get("documents", {})
+        if not isinstance(owner_docs, dict) or any(k not in DOCUMENTS or v not in DOC_STATES for k, v in owner_docs.items()):
+            raise ValueError(f"Independent record {rid}: invalid confirmed document override")
+        documents = sorted(set(documents) | set(owner_docs))
+        doc_states = {key: owner_docs.get(key, raw_doc_states.get(key, "unknown")) for key in documents}
+        priority = owner.get("priority", raw.get("priority", "normal"))
+        if priority not in {"low", "normal", "high"}:
+            raise ValueError(f"Independent record {rid}: invalid priority")
+        contact_status = owner.get("contact_status", raw.get("contact_status", "unrecorded"))
+        if contact_status not in contacts:
+            raise ValueError(f"Independent record {rid}: invalid contact status")
+        deadline_type = raw.get("deadline_type", "unverified")
+        if deadline_type not in valid_deadlines:
+            raise ValueError(f"Independent record {rid}: invalid deadline type")
+        advisory = raw.get("duplicate_submission_advisory", False)
+        if not isinstance(advisory, bool):
+            raise ValueError(f"Independent record {rid}: invalid duplicate advisory")
+        results.append({
+            "id": rid, "record_type": raw.get("record_type", "tracked"),
+            "name": name, "institution": clean(raw.get("institution"), 160),
+            "country": clean(raw.get("country"), 70), "deadline": deadline,
+            "deadline_kind": clean(raw.get("deadline_kind"), 200),
+            "deadline_type": deadline_type, "deadline_cutoff_verified": False,
+            "verification": verification, "verification_note": evidence,
+            "status": status, "status_confirmed": "status" in owner or "status" in raw,
+            "submission_receipt": "", "documents": documents, "document_states": doc_states,
+            "document_requirements_note": "", "followup": followup,
+            "contact_status": contact_status,
+            "faculty": clean(raw.get("faculty"), 160) or "Not recorded",
+            "source_url": source_url, "secondary_url": "", "apply_url": apply_url,
+            "source_date": source_date, "evidence": evidence,
+            "funding": clean(raw.get("funding"), 400),
+            "eligibility": clean(raw.get("eligibility"), 380),
+            "fit": clean(raw.get("fit"), 260), "topic": clean(raw.get("topic"), 220),
+            "next_step": clean(owner.get("next_step", raw.get("next_step")), 650),
+            "blockers": clean(raw.get("blockers"), 420), "notes": "",
+            "priority": priority, "decision": clean(raw.get("decision"), 80),
+            "duplicate_submission_advisory": advisory,
+            "recheck_required": verification not in {"source_verified", "owner_verified"},
+            "updated_at": clean(owner.get("updated_at"), 50),
+        })
+    snapshot = starter_snapshot(repo)
+    snapshot["instance"] = {**instance_details(repo, "source"), "source_file": "data/user_opportunities.json"}
+    snapshot["as_of"] = iso_day(payload.get("as_of"))
+    snapshot["timezone"] = timezone_name
+    snapshot["policy"] = "Independent owner-supplied source snapshot. Verification claims require direct review of primary evidence."
+    snapshot["records"] = results
+    snapshot["meta"]["tracked"] = sum(r["record_type"] == "tracked" for r in results)
+    snapshot["meta"]["candidates"] = sum(r["record_type"] == "candidate" for r in results)
+    snapshot["duplicates"] = duplicate_advisories(results)
+    snapshot["coverage"]["files"] = [
+        {"name": "Independent owner opportunity source", "path": "data/user_opportunities.json",
+         "description": "Public, owner-provided opportunities; review primary sources."}
+    ]
+    snapshot["coverage"]["totals"]["tracked"] = snapshot["meta"]["tracked"]
+    snapshot["coverage"]["totals"]["research_candidates"] = snapshot["meta"]["candidates"]
+    snapshot["notes"] = [
+        "This snapshot was built from the current repository's independent opportunity source.",
+        "Verified source claims must retain their primary URL and observation details.",
+        "Private applicant correspondence and receipts are never permitted in this source format.",
+    ]
+    return snapshot
+
+
 def build(root: Path = ROOT, *, repository: str | None = None, data_mode: str | None = None) -> dict:
     repo = resolve_repository(repository, root=root)
     mode = resolve_data_mode(repo, data_mode)
     if mode == "starter":
         return starter_snapshot(repo)
+    if repo.casefold() != DEFAULT_REPOSITORY.casefold():
+        return independent_snapshot(root, repo)
     experience = load(root, "experience_view.json")
     frontier = load(root, "portfolio_frontier.json")
     details = {str(r["id"]): r for r in load(root, "opportunities.json").get("records", []) if r.get("id")}
