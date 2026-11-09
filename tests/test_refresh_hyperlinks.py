@@ -122,7 +122,61 @@ def test_source_watch_deadline_mismatch_is_distinct_from_portal_closure(monkeypa
         "negative_anchor": "July 17, 2026",
         "negative_state": "contradiction_deadline_mismatch",
     }
-    monkeypatch.setattr(refresh, "urlopen", lambda *args, **kwargs: Response("Application Deadline: Friday, July 17, 2026"))
+    monkeypatch.setattr(refresh, "safe_monitor_open", lambda *args, **kwargs: Response("Application Deadline: Friday, July 17, 2026"))
     assert refresh.monitor_one(watch)[1] == "contradiction_deadline_mismatch"
-    monkeypatch.setattr(refresh, "urlopen", lambda *args, **kwargs: Response("Application Deadline: 15th of November 2026"))
+    monkeypatch.setattr(refresh, "safe_monitor_open", lambda *args, **kwargs: Response("Application Deadline: 15th of November 2026"))
+    assert refresh.monitor_one(watch)[1] == "anchor_present"
+
+def test_source_monitor_rejects_unsafe_urls_before_fetch(monkeypatch):
+    calls = []
+    monkeypatch.setattr(refresh, "safe_monitor_open", lambda *args, **kwargs: calls.append(1))
+    for url in (
+        "http://www.mos.ed.tum.de/en/avs/",
+        "https://user:password@www.mos.ed.tum.de/en/avs/",
+        "https://www.mos.ed.tum.de:8443/en/avs/",
+        "https://127.0.0.1/private",
+    ):
+        assert refresh.monitor_one({"id": "unsafe", "url": url, "anchor": "deadline"})[1] == "disallowed_host"
+    assert not calls
+
+
+def test_source_monitor_rejects_downgrade_and_oversized_html(monkeypatch):
+    class Response:
+        def __init__(self, content, final):
+            self.content = content
+            self.final = final
+        def __enter__(self):
+            return self
+        def __exit__(self, *args):
+            return False
+        def geturl(self):
+            return self.final
+        def read(self, size):
+            return self.content[:size]
+
+    url = "https://www.mos.ed.tum.de/en/avs/career/our-jobs/ki-motorsport-1/"
+    watch = {"id": "example", "url": url, "anchor": "November 15"}
+    monkeypatch.setattr(refresh, "safe_monitor_open", lambda *args, **kwargs: Response(b"November 15", "http://127.0.0.1/private"))
+    assert refresh.monitor_one(watch)[1] == "unsafe_redirect"
+    monkeypatch.setattr(refresh, "safe_monitor_open", lambda *args, **kwargs: Response(b"x" * (refresh.MAX_MONITOR_BYTES + 1), url))
+    assert refresh.monitor_one(watch)[1] == "response_too_large"
+
+
+def test_source_monitor_current_date_wins_over_archived_date(monkeypatch):
+    class Response:
+        def __enter__(self):
+            return self
+        def __exit__(self, *args):
+            return False
+        def geturl(self):
+            return "https://www.mos.ed.tum.de/en/avs/"
+        def read(self, size):
+            return b"Old closing: July 17, 2026. Updated application deadline: 15th of November 2026"
+
+    monkeypatch.setattr(refresh, "safe_monitor_open", lambda *args, **kwargs: Response())
+    watch = {
+        "id": "N263-07-LIVE", "url": "https://www.mos.ed.tum.de/en/avs/",
+        "anchor": "15th of November 2026", "negative_anchor": "July 17, 2026",
+        "negative_state": "contradiction_deadline_mismatch",
+    }
     assert refresh.monitor_one(watch)[1] == "anchor_present"
