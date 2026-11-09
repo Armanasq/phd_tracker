@@ -2,6 +2,18 @@
 
 Changes to the PhD Atlas application and its supporting tooling are recorded here. Source-data refreshes and individual PhD application status changes are tracked separately in the evidence ledger.
 
+## Unreleased — 2026-11-09 (private backend integrity)
+
+- Made applicant state updates atomically version-checked; conflicting writes now fail explicitly.
+- Added exclusive opt-in scheduler claims, crash recovery, and reserved cloud-call budget.
+- Added private SQLite health diagnostics, online verified backups, CLI recovery controls and Settings integration.
+- Bounded inference concurrency, added request identifiers, and tightened request framing and loopback policy.
+- Bound known vendor credential names to official provider hosts at request time, including legacy saved gateways.
+- Added time-bounded provider verification and credential-rotation invalidation.
+- Added SQLite-backed idempotency keys for manual model-request retries.
+- Expanded concurrency, recovery, HTTP, cloud-policy and provider regression tests.
+- Documented constraints in [backend engineering](docs/BACKEND_ENGINEERING.md).
+
 ## Unreleased — 2026-11-09 (source and release assurance)
 
 - Added worksheet-level workbook inventory, source catalog, observed discovery errors and explicit distinction between tracked applications, research candidates, leads, exclusions and task records.

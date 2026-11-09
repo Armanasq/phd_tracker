@@ -77,6 +77,10 @@ The repository About description, website and topics are versioned in [metadata 
 
 [Release readiness](docs/RELEASE_READINESS.md) · [Repository settings](.github/REPOSITORY_SETTINGS.md) · [Public-site guide](site/README.md) · [Accessibility statement](ACCESSIBILITY.md) · [GitHub Actions](https://github.com/Armanasq/phd_tracker/actions)
 
+## Backend runtime and recovery
+
+The optional private Python service includes atomic applicant-state updates, scheduled-run SQLite leases, cloud-call reservations, credential-bound model providers, inference admission limits, retry idempotency, and verified local backups. These functions run on **private loopback**; GitHub Pages remains read-only. See [backend engineering and operations](docs/BACKEND_ENGINEERING.md) for API semantics, recovery, concurrency and limitations.
+
 ## Engineering
 
 The application separates read-only public evidence from local agent execution. It uses a static JavaScript frontend, source normalization and verification scripts, deterministic application checks, a Python orchestration layer and SQLite for private state.

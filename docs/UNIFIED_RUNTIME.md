@@ -91,3 +91,7 @@ Private Settings offers database integrity diagnostics and a verified, owner-onl
 ## Request admission and diagnostics
 
 The loopback API permits two concurrent inference-bearing HTTP requests by default (`PHDAI_MAX_CONCURRENT_INFERENCE=1..8`). It returns HTTP 429 when the configured capacity is exhausted; health and local-database diagnostics remain available. Every JSON response carries an opaque `X-Request-ID`. A per-process admission limit does not replace an authenticated multi-tenant service, global rate limiter or shared task queue.
+
+## Production engineering reference
+
+The [backend engineering and operations guide](BACKEND_ENGINEERING.md) specifies the exact request semantics, SQLite concurrency and recovery model, inference admission limits, scheduled cloud-call reservations, credential forwarding rules and remaining constraints.
