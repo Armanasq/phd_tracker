@@ -12,7 +12,7 @@ from datetime import date, datetime
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlparse
-from urllib.request import Request, urlopen
+from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 from openpyxl import load_workbook
 from openpyxl.styles import Alignment, Font, PatternFill
@@ -23,6 +23,7 @@ OPPORTUNITIES = ROOT / "data" / "opportunities.json"
 MAIL_SIGNALS = ROOT / "data" / "mail_signals.json"
 WATCHLIST = ROOT / "data" / "watchlist.json"
 
+MAX_MONITOR_BYTES = 1_500_000
 ALLOWED_HOSTS = {
     "imprs.is.mpg.de",
     "graduate.engineering.gwu.edu",
@@ -110,26 +111,55 @@ def append_formatted_sheet(wb, name, columns, rows, key_column=None):
     return ws
 
 
+def allowed_monitor_url(value: str) -> bool:
+    try:
+        parsed = urlparse(value)
+        return (
+            parsed.scheme == "https"
+            and (parsed.hostname or "").lower() in ALLOWED_HOSTS
+            and parsed.port in (None, 443)
+            and parsed.username is None
+            and parsed.password is None
+        )
+    except (ValueError, TypeError):
+        return False
+
+
+class AllowedMonitorRedirect(HTTPRedirectHandler):
+    def redirect_request(self, request, response, code, message, headers, newurl):
+        if not allowed_monitor_url(newurl):
+            raise URLError("Disallowed URL redirect in institutional source monitor")
+        return super().redirect_request(request, response, code, message, headers, newurl)
+
+
+def safe_monitor_open(request: Request, timeout: int):
+    return build_opener(AllowedMonitorRedirect()).open(request, timeout=timeout)
+
+
 def monitor_one(watch: dict):
     url = watch["url"]
-    host = (urlparse(url).hostname or "").lower()
-    if urlparse(url).scheme != "https" or host not in ALLOWED_HOSTS:
+    if not allowed_monitor_url(url):
         return watch["id"], "disallowed_host", "", ""
     try:
         req = Request(url, headers={"User-Agent": "PhDTrackerEvidenceMonitor/0.1", "Accept": "text/html"})
-        with urlopen(req, timeout=15) as response:
+        with safe_monitor_open(req, timeout=15) as response:
             final_url = response.geturl()
-            if (urlparse(final_url).hostname or "").lower() not in ALLOWED_HOSTS:
+            if not allowed_monitor_url(final_url):
                 return watch["id"], "unsafe_redirect", "", ""
-            raw = response.read(800_000)
+            raw = response.read(MAX_MONITOR_BYTES + 1)
+        if len(raw) > MAX_MONITOR_BYTES:
+            return watch["id"], "response_too_large", "", "Source document exceeds size limit"
         s = raw.decode("utf-8", errors="replace")
         s = re.sub(r"(?is)<(script|style|noscript)[^>]*>.*?</\1>", " ", s)
         content = html.unescape(re.sub(r"(?s)<[^>]+>", " ", s))
         normalized = re.sub(r"\s+", " ", content).lower()
         found = watch["anchor"].lower() in normalized
         negative = watch.get("negative_anchor", "").lower() in normalized if watch.get("negative_anchor") else False
-        state = (watch.get("negative_state", "contradiction_closed_portal") if negative
-                 else ("anchor_present" if found else "review_source_changed"))
+        negative_state = watch.get("negative_state", "contradiction_closed_portal")
+        if negative and (not found or negative_state != "contradiction_deadline_mismatch"):
+            state = negative_state
+        else:
+            state = "anchor_present" if found else "review_source_changed"
         return watch["id"], state, hashlib.sha256(normalized.encode()).hexdigest(), ""
     except (HTTPError, URLError, TimeoutError, OSError, ValueError) as e:
         return watch["id"], "unavailable", "", str(e)[:120]
