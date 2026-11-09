@@ -2,6 +2,8 @@ name: PhD Atlas | Publish GitHub Pages Workspace
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '17 6 * * *'
   push:
     branches: [main]
     paths:
@@ -50,6 +52,12 @@ jobs:
           node --check site/app.js
           test -s site/index.html
           test -s site/style.css
+      - name: Save standalone site archive for offline review
+        uses: actions/upload-artifact@v4
+        with:
+          name: phd-atlas-offline-site
+          path: site
+          retention-days: 30
       - uses: actions/configure-pages@v5
         with:
           enablement: true
