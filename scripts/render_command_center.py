@@ -586,11 +586,16 @@ def report_paths(markdown: str) -> str:
         return "](../" + target + ")"
 
     markdown = re.sub(r"\]\(([^)]+)\)", link, markdown)
-    return re.sub(
-        r'(src|href)="(?!https?://|#|/)([^"]+)"',
-        lambda match: match.group(1) + '="../' + match.group(2) + '"',
-        markdown,
-    )
+
+    def html_link(match: re.Match[str]) -> str:
+        target = match.group(2)
+        if target.startswith("../../actions/") or target.startswith("../../issues/"):
+            target = "https://github.com/Armanasq/phd_tracker/" + target.removeprefix("../../")
+        else:
+            target = "../" + target
+        return match.group(1) + '="' + target + '"'
+
+    return re.sub(r'(src|href)="(?!https?://|#|/)([^"]+)"', html_link, markdown)
 
 
 def render(root=ROOT):
