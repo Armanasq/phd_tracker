@@ -10,6 +10,11 @@ from pathlib import Path
 from openpyxl import load_workbook
 from openpyxl.styles import Alignment, Font, PatternFill
 
+if __package__:
+    from .source_policy import classify_deadline_note, primary_source_verified
+else:
+    from source_policy import classify_deadline_note, primary_source_verified
+
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS_FILE = ROOT / "data" / "application_assets.json"
 REPORT = ROOT / "data" / "portfolio_frontier.json"
@@ -65,6 +70,7 @@ def evaluate(wb, assets: dict, today: date, opportunity_records: list[dict], lat
         if days < 0:
             continue
         sid = str(row[20])
+        deadline_type = classify_deadline_note(row[2])
         signals = extract_assets(" ".join(str(row[i] or "") for i in (10, 11, 12, 13, 14)))
         unresolved = [r for r in signals if resources.get(r, {}).get("status") not in ("ready", "not_applicable")]
         unknown = [r for r in unresolved if resources.get(r, {}).get("status", "unknown") == "unknown"]
@@ -77,10 +83,14 @@ def evaluate(wb, assets: dict, today: date, opportunity_records: list[dict], lat
         evidence = []
         if sid in known:
             record = known[sid]
-            if record.get("confidence") not in ("official_plus_email",):
+            if not primary_source_verified(record.get("confidence")):
                 evidence.append("Position has not passed primary-source verification")
             if any(token in str(record.get("eligibility", "")).lower() for token in ("confirm", "not stated", "unverified")):
                 evidence.append("Verify personal funding / eligibility before application")
+        if deadline_type == "priority":
+            evidence.append("This is a priority-review milestone, NOT the final application deadline")
+        elif deadline_type == "unverified":
+            evidence.append("Official final application date requires confirmation")
         if watches.get(sid) in ("contradiction_closed_portal", "review_source_changed", "contradiction_deadline_mismatch"):
             evidence.append("Official page requires rechecking: " + watches[sid])
         readiness = "source_conflict" if evidence and any("Official page" in e for e in evidence) else (
@@ -89,6 +99,7 @@ def evaluate(wb, assets: dict, today: date, opportunity_records: list[dict], lat
         entries.append({
             "source_id": sid,
             "deadline": due.isoformat(),
+            "deadline_type": deadline_type,
             "days_to_deadline": days,
             "opportunity": str(row[6])[:230],
             "decision": str(row[4] or ""),
