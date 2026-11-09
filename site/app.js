@@ -200,13 +200,13 @@ function actions(){const rs=records().filter(r=>r.record_type==="tracked").filte
 statCard("Prioritized opportunities",'<div class="mini-list">'+rs.map((r,i)=>'<div class="mini-row"><div><span class="subtle">#'+(i+1)+' &nbsp;</span>'+rowButton(r)+'<small>'+escapeHTML(r.status==="submitted"?"Follow-up after submission: "+(r.next_step||"Check receipt and referee states"):(r.next_step||"Confirm next action"))+'</small></div><div>'+dateRisk(days(r.status==="submitted"?r.followup:r.deadline))+'</div></div>').join("")+'</div>')+
 statCard("Existing workbook execution steps",'<p class="subtle">Task completion should be confirmed through the existing authenticated GitHub issue workflow; a listed task is not automatically unfinished.</p>'+(tasks.length?'<div class="tablewrap"><table class="table"><thead><tr><th>Action</th><th>Due</th><th>Source status</th><th>Related application</th><th>Control</th></tr></thead><tbody>'+tasks.map(t=>'<tr><td>'+escapeHTML(t.action||t.name)+'</td><td>'+escapeHTML(stamp(t.due))+'</td><td>'+pill(t.state)+'</td><td>'+escapeHTML(t.application_id||"Shared")+'</td><td>'+button("Copy /done","task",t.id)+'</td></tr>').join("")+'</tbody></table></div>':'<div class="empty">No planned steps in the displayed horizon.</div>'))}
 function updates(){
- const committed=records().filter(r=>r.updated_at);
+ const committed=records().filter(r=>r.updated_at&&!r.local_only);
  const edited=Object.keys(state.drafts).filter(id=>state.data.records.some(r=>r.id===id));
  const statuses=Object.fromEntries(edited.map(id=>[id,draftState(state.drafts[id],state.data.records.find(r=>r.id===id))]));
  const conflicting=edited.filter(id=>["conflict","needs-review"].includes(statuses[id]));
  const pending=edited.filter(id=>statuses[id]==="pending");
  return heading("Changes","Local changes, synchronization status and research leads.",button("Export drafts","export","drafts","primary")+button("Git history","url",ownerRepo()+"/commits/main"))+
- '<div class="kpis">'+kpi("Local drafts",edited.length,"Only in this browser")+kpi("Awaiting confirmation",pending.length,"GitHub issue required")+kpi("Needs reconciliation",conflicting.length,"Source version changed or unknown")+kpi("Owner updates",committed.length,"Committed overrides")+kpi("Evidence snapshot",stamp(state.data.as_of),"Source projection")+'</div>'+
+ '<div class="kpis">'+kpi("Device-only opportunities",state.localRecords.length,"Private to this browser")+kpi("Local drafts",edited.length,"Only in this browser")+kpi("Awaiting confirmation",pending.length,"GitHub issue required")+kpi("Needs reconciliation",conflicting.length,"Source version changed or unknown")+kpi("Owner updates",committed.length,"Committed overrides")+kpi("Evidence snapshot",stamp(state.data.as_of),"Source projection")+'</div>'+
  statCard("Local change register",edited.length?'<div class="mini-list">'+edited.map(id=>{
   const r=getRecord(id),status=statuses[id],message={"draft":"Local draft","pending":"Awaiting GitHub confirmation","conflict":"Conflict — source changed","needs-review":"Review source version","committed":"Matches committed source","missing-source":"Source unavailable"}[status]||"Draft";
   return '<div class="mini-row"><div>'+rowButton(r)+'<small>'+escapeHTML(message)+' · '+escapeHTML(id)+'</small></div><div class="buttons">'+
@@ -299,6 +299,7 @@ function stageStatus(id,status){
  if(!r || !["unconfirmed","shortlisted","preparing","submitted","interview","offer","blocked"].includes(status))return;
  if(r.record_type==="candidate"){notify("Verify and promote this candidate before changing its application stage.");return}
  if(status==="submitted"&& !confirm("Confirm this application was submitted through the official portal? This change is only a local draft."))return;
+ if(r.local_only){saveLocalRecord({...r,status,updated_at:new Date().toISOString()});render();notify("Application stage updated on this device.");return}
  state.drafts[id]={...withDraftBase(id),status,_sync_status:"draft"};
  saveStore(STORE,state.drafts);render();notify("Status saved locally. Confirm it on GitHub from Changes.");
 }
@@ -320,8 +321,8 @@ function commitRebase(id){
  saveStore(STORE,state.drafts);closeModal();render();notify("Draft rebased locally. Review and confirm the GitHub update.");
 }
 function detail(r){if(!r)return;state.selected=r.id;const docs=Object.entries(r.document_states||{});const opts=(values,current)=>values.map(v=>'<option value="'+escapeHTML(v)+'"'+(current===v?' selected':'')+'>'+escapeHTML(DOC_LABELS[v]||statusLabel(v))+'</option>').join('');
-const sync=draftState(state.drafts[r.id],sourceRecord(r.id)),readiness=documentReadiness(r);
-const fields='<div class="field"><label for="editPriority">My priority</label><select id="editPriority" class="select">'+opts(["normal","high","low"],r.priority||"normal")+'</select><small class="subtle">Adjusts priority in the action queue.</small></div><div class="field"><label for="editStatus">Application status (owner-confirmed only after GitHub sync)</label><select id="editStatus" class="select">'+opts(["unconfirmed","shortlisted","preparing","submitted","interview","offer","rejected","withdrawn","blocked","archived"],r.status)+'</select><small class="subtle">Never mark submitted without actual portal confirmation.</small></div>'+
+const sync=r.local_only?"device-only":draftState(state.drafts[r.id],sourceRecord(r.id)),readiness=documentReadiness(r);
+const fields='<div class="field"><label for="editPriority">My priority</label><select id="editPriority" class="select">'+opts(["normal","high","low"],r.priority||"normal")+'</select><small class="subtle">Adjusts priority in the action queue.</small></div><div class="field"><label for="editStatus">Application status (confirm any real portal submission)</label><select id="editStatus" class="select">'+opts(["unconfirmed","shortlisted","preparing","submitted","interview","offer","rejected","withdrawn","blocked","archived"],r.status)+'</select><small class="subtle">Never mark submitted without actual portal confirmation.</small></div>'+
 '<div class="field"><label for="editVerification">Verification status</label><select id="editVerification" class="select">'+opts(["unverified","needs_review","source_verified","owner_verified"],r.verification)+'</select><small class="subtle">Choose verified only after inspecting supporting primary evidence.</small></div>'+
 '<div class="field"><label for="editFollowup">Next faculty follow-up</label><input id="editFollowup" type="date" class="input" value="'+escapeHTML(r.followup||"")+'"></div>'+
 '<div class="field"><label for="editContact">Contact / outreach stage</label><select id="editContact" class="select">'+opts(["unrecorded","to_contact","contacted","awaiting_reply","followup_due","replied","declined","completed"],r.contact_status)+'</select></div>'+
@@ -338,7 +339,7 @@ openModal('<div class="eyebrow">'+escapeHTML(r.id)+' · '+escapeHTML(r.record_ty
 '<div class="field"><label>Required document evidence</label><p>'+escapeHTML(r.document_requirements_note||"Verify document list on official portal")+'</p></div>'+
 '<div class="field"><label>Blockers, source reservations & submission precautions</label><p>'+escapeHTML(r.blockers||r.verification_note||"No specific blocker documented")+'</p>'+riskPill(r)+'</div>'+
 '<div class="field"><label>Evidence excerpt</label><p>'+escapeHTML(r.evidence||"No detailed excerpt recorded")+'</p></div></div><div>'+fields+'</div></div>',
-'<div class="buttons">'+(r.record_type==="tracked"?button("Analyze with Copilot","ai-record",r.id,"primary")+button("Manage privately","ops-record",r.id):"")+button("Save local draft","save-record",r.id)+button("Review GitHub update","save-command",r.id)+(r.record_type==="candidate"?button("Promote candidate","promote",r.id):"")+button("Action Center","url",state.data.source_links.control_issue)+'</div><p class="footnote">Drafts stay in your browser until confirmed through GitHub. Notes and receipt URLs remain local; public issues must not contain private applicant data.</p>');
+'<div class="buttons">'+(r.local_only?button("Save on this device","save-record",r.id,"primary")+button("Delete local opportunity","delete-local",r.id,"danger"):(r.record_type==="tracked"?button("Analyze with Copilot","ai-record",r.id,"primary")+button("Manage privately","ops-record",r.id):"")+button("Save local draft","save-record",r.id)+button("Review GitHub update","save-command",r.id)+(r.record_type==="candidate"?button("Promote candidate","promote",r.id):"")+button("Action Center","url",state.data.source_links.control_issue))+'</div><p class="footnote">'+(r.local_only?"Device-local only. Export a backup or a sanitized GitHub source file; no commit occurs automatically.":"Drafts stay in your browser until confirmed through GitHub. Notes and receipt URLs remain local; public issues must not contain private applicant data.")+'</p>');
 }
 function openModal(title,body,footer=""){
  if(!state.modal)state.returnFocus=document.activeElement;
@@ -365,6 +366,7 @@ function saveRecord(copy){
  if(status==="submitted"&&r.status!=="submitted"&&!confirm("Confirm that this application was actually submitted through the official portal?"))return;
  if(verification==="owner_verified"&&r.verification!=="owner_verified"&&!confirm("Confirm that you inspected the official source, including the exact deadline?"))return;
  const documents={};$("dialogRoot").querySelectorAll("[data-document]").forEach(el=>documents[el.dataset.document]=el.value);
+ if(r.local_only){saveLocalRecord({...r,status,verification,priority,followup:followup||null,contact_status,next_step,notes,receipt,document_states:documents,updated_at:new Date().toISOString()});closeModal();render();notify("Local opportunity updated. Export a backup to preserve it.");return}
  state.drafts[id]={...withDraftBase(id),status,verification,priority,followup:followup||null,contact_status,next_step,notes,receipt,documents,_sync_status:"draft"};
  saveStore(STORE,state.drafts);closeModal();render();
  if(copy)issueCommand(id);else notify("Saved on this device. GitHub confirmation is still required.");
@@ -381,6 +383,7 @@ function promoteCandidate(id){
 }
 function issueCommand(id){
  const v=state.drafts[id],source=sourceRecord(id);
+ if(source?.local_only){notify("Device-local records cannot be synchronized through the GitHub Action Center. Export GitHub source JSON.");return}
  if(!v||!source){notify("Source or local draft unavailable.");return}
  const sync=draftState(v,source);
  if(["conflict","needs-review"].includes(sync)){reconcileDraft(id);return}
@@ -440,7 +443,7 @@ async function importLocalBackup(file){
   notify(result.imported+" opportunity records imported; "+result.skipped+" existing IDs preserved.");
  }catch(error){notify("Import rejected: "+String(error.message||error))}
 }
-function exportData(kind){const filename="phd-atlas-"+TODAY();if(kind==="csv"){const cols=["id","name","country","deadline","deadline_kind","verification","status","next_step","source_url","funding","eligibility"];exportFile(filename+"-applications.csv",asCSV(sortList(filters(records())),cols),"text/csv;charset=utf-8")}else if(kind==="contacts"){exportFile(filename+"-contacts.csv",asCSV(records().filter(r=>r.faculty!=="Not recorded"),["id","name","faculty","contact_status","followup","source_url"]),"text/csv;charset=utf-8")}else if(kind==="ics"){exportFile(filename+"-deadlines.ics",calendar(),"text/calendar;charset=utf-8")}else if(kind==="drafts"){exportFile(filename+"-local-drafts.json",JSON.stringify({as_of:TODAY(),drafts:state.drafts},null,2),"application/json")}else{exportFile(filename+"-workspace.json",JSON.stringify({source_snapshot:state.data,local_drafts:state.drafts},null,2),"application/json")}}
+function exportData(kind){const filename="phd-atlas-"+TODAY();if(kind==="csv"){const cols=["id","name","country","deadline","deadline_kind","verification","status","next_step","source_url","funding","eligibility"];exportFile(filename+"-applications.csv",asCSV(sortList(filters(records())),cols),"text/csv;charset=utf-8")}else if(kind==="contacts"){exportFile(filename+"-contacts.csv",asCSV(records().filter(r=>r.faculty!=="Not recorded"),["id","name","faculty","contact_status","followup","source_url"]),"text/csv;charset=utf-8")}else if(kind==="ics"){exportFile(filename+"-deadlines.ics",calendar(),"text/calendar;charset=utf-8")}else if(kind==="drafts"){exportFile(filename+"-local-drafts.json",JSON.stringify({as_of:TODAY(),drafts:state.drafts,local_records:state.localRecords},null,2),"application/json")}else if(kind==="local"){exportFile(filename+"-local-records.json",JSON.stringify({schema_version:1,exported_at:new Date().toISOString(),local_records:state.localRecords},null,2),"application/json")}else if(kind==="github-source"){exportFile("experience_view.json",JSON.stringify(exportExperienceView(state.localRecords,TODAY(),state.data.timezone||"UTC"),null,2),"application/json")}else{exportFile(filename+"-workspace.json",JSON.stringify({source_snapshot:state.data,local_drafts:state.drafts,local_records:state.localRecords},null,2),"application/json")}}
 const ICONS={
  home:'<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16M10 10v10"/>',
  file:'<path d="M7 3.5h8l3 3V20H7zM15 3.5v4h3M10 12h5M10 16h5"/>',
@@ -524,6 +527,16 @@ function events(){
   else if(type==="reconcile")reconcileDraft(value);
   else if(type==="confirm-rebase")commitRebase(value);
   else if(type==="promote")promoteCandidate(value);
+  else if(type==="new-local")openLocalCreator();
+  else if(type==="create-local")createLocal();
+  else if(type==="import-local")$("localImportFile")?.click();
+  else if(type==="delete-local"){
+   const row=state.localRecords.find(r=>r.id===value);
+   if(row&&confirm("Delete this device-only opportunity? Export a backup first. This action cannot be undone.")){
+    state.localRecords=state.localRecords.filter(r=>r.id!==value);delete state.drafts[value];state.compare=state.compare.filter(id=>id!==value);
+    saveStore(LOCAL_STORE,state.localRecords);saveStore(STORE,state.drafts);saveStore(COMPARE_STORE,state.compare);closeModal();render();notify("Local opportunity deleted.");
+   }
+  }
   else if(type==="save-view")saveCurrentView();
   else if(type==="confirm-view")commitSavedView();
   else if(type==="delete-view")deleteSavedView();
@@ -566,6 +579,7 @@ function events(){
  document.addEventListener("change",e=>{
   const t=e.target;
   if(t.id==="workspaceSection"){go(t.value);return}
+  if(t.id==="localImportFile"){const file=t.files?.[0];if(file)importLocalBackup(file);return}
   if(t.id==="ledgerType"){ledgerType=t.value;ledgerPage=1;render();return}
   if(t.matches("[data-stage-id]")){stageStatus(t.dataset.stageId,t.value);return}
   if(t.matches("[data-compare]")){
@@ -629,7 +643,7 @@ function events(){
   state.view=requested;closeModal();render();
  });
  $("openSearch").addEventListener("click",()=>{state.focus="";commandPalette()});
- $("exportMenu").addEventListener("click",()=>openModal("<h2>Export workspace</h2>",'<p class="muted">Exports clearly separate committed evidence from local browser drafts.</p><div class="buttons">'+button("Applications CSV","export","csv")+button("Contacts CSV","export","contacts")+button("Calendar ICS","export","ics")+button("Local draft JSON","export","drafts")+button("Full workspace JSON","export","json")+'</div>'));
+ $("exportMenu").addEventListener("click",()=>openModal("<h2>Export workspace</h2>",'<p class="muted">Exports clearly separate committed evidence from local browser drafts.</p><div class="buttons">'+button("Applications CSV","export","csv")+button("Contacts CSV","export","contacts")+button("Calendar ICS","export","ics")+button("Local draft JSON","export","drafts")+button("Local opportunity backup","export","local")+button("GitHub source JSON (public fields)","export","github-source")+button("Full workspace JSON","export","json")+'</div>'));
  $("themeToggle").addEventListener("click",()=>{state.prefs.theme=state.prefs.theme==="light"?"dark":"light";saveStore(PREFS,state.prefs);document.body.classList.toggle("dark",state.prefs.theme==="dark")});
  $("notificationToggle").addEventListener("click",explainNotifications);
 }
