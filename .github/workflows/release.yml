@@ -20,6 +20,9 @@ jobs:
   release:
     runs-on: ubuntu-latest
     timeout-minutes: 12
+    env:
+      PHD_ATLAS_SITE_URL: ${{ vars.PHD_ATLAS_SITE_URL }}
+      PHD_ATLAS_DATA_MODE: ${{ vars.PHD_ATLAS_DATA_MODE }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -34,15 +37,18 @@ jobs:
           version="$(tr -d '\r\n' < VERSION)"
           [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
           grep -q "^## $version " CHANGELOG.md
-          grep -q "https://armanasq.github.io/phd_tracker/" site/index.html
+          python scripts/instance_config.py --repository "$GITHUB_REPOSITORY" --site site --site-url "${PHD_ATLAS_SITE_URL:-}" --commit "$GITHUB_SHA"
+          python -c 'import json,os; from pathlib import Path; c=json.loads(Path("site/instance.json").read_text()); assert c["repository"]==os.environ["GITHUB_REPOSITORY"]; assert c["site_url"] in Path("site/index.html").read_text()'
           test -s site/favicon.svg
           test -s site/sitemap.xml
           python -m pip install -r requirements-intelligence.txt
           python -m pytest tests -q
           node --check site/app.js
           node --check site/modules/lens.mjs
+          node --check site/modules/storage.mjs
+          node --check site/modules/local-records.mjs
           python scripts/build_workspace.py --out /tmp/atlas-release-workspace.json
-          python -c 'import json; d=json.load(open("/tmp/atlas-release-workspace.json")); assert d["schema_version"] == 1 and len(d["records"]) >= 109'
+          python -c 'import json,os; d=json.load(open("/tmp/atlas-release-workspace.json")); assert d["schema_version"] == 1; assert d["instance"]["repository"] == os.environ["GITHUB_REPOSITORY"]; assert d["instance"]["data_mode"] == (os.environ.get("PHD_ATLAS_DATA_MODE","").strip().lower() or ("source" if os.environ["GITHUB_REPOSITORY"].lower()=="armanasq/phd_tracker" else "starter"))'
       - name: Create immutable release reference if missing
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
