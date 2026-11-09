@@ -667,7 +667,7 @@ body.dark #atlasLens .lens-footer-status {background:var(--surface);border-color
   #atlasLens .lens-prompt {min-height:45px}
 }
 @media(max-width:430px) {
-  .sidebar,body.dark .sidebar {flex-wrap:wrap;gap:7px}
+  .sidebar,body.dark .sidebar {flex-wrap:nowrap;gap:10px}
   .brand {min-width:0;flex:0 0 auto;padding:0}
   .brand-name small {display:none}
   .mobile-workspace-navigation {min-width:0;flex:1 1 100px;margin-left:auto;max-width:none;padding:0}

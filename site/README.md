@@ -66,3 +66,10 @@ Validation additions: node --test tests/assurance.test.mjs and node --check site
 ## Complete workbook task inventory
 
 The Task ledger route provides full history and upcoming workbook steps through a read-only, provenance-bearing table. Entries retain original worksheet and row, source task identifier, related opportunity, date, type, status and sanitized action text. The priority Actions route remains a shorter operational view. Ledger exports do not contain private mailbox URLs or raw personal email addresses.
+
+
+## Responsive layout contract
+
+The shared phone/tablet layout is governed by the final, ordered stylesheet \`responsive.css\`, loaded after component styles. It normalizes content gutters, 2-column metric-card padding, header/selector alignment, document tables, source cards, dialog bounds, and browser touch controls across the entire workspace.
+
+The original root defect was an older higher-specificity \`:nth-child()\` selector zeroing the padding of metric cards, combined with a narrow-header \`flex-wrap:wrap\` rule. Both have been removed. The six-width Playwright regression checks in \`tests/mobile_layout_audit.cjs\` cover all 18 routes (108 route/viewport combinations) and fail for horizontal page overflow, inconsistent card padding, clipped deadline titles, wrapped header navigation or content crossing the shared page gutter. Internal calendar and kanban horizontal scrolling remains intentional.

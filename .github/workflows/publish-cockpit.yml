@@ -61,6 +61,7 @@ jobs:
           node --check site/modules/assurance-view.mjs
           node --test tests/assurance.test.mjs
           test -s site/assurance.css
+          test -s site/responsive.css
           node --check site/modules/operations.mjs
           node --test tests/domain.test.mjs
           test -s site/modules/domain.mjs
@@ -81,7 +82,7 @@ jobs:
           import hashlib, json, os
           from pathlib import Path
           root = Path("site")
-          assets = ["index.html", "app.js", "assurance.css", "modules/assurance.mjs", "modules/assurance-view.mjs", "modules/domain.mjs", "data/workspace.json"]
+          assets = ["index.html", "app.js", "assurance.css", "responsive.css", "modules/assurance.mjs", "modules/assurance-view.mjs", "modules/domain.mjs", "data/workspace.json"]
           digests = {path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in assets}
           manifest = {"schema_version": 1, "commit": os.environ["GITHUB_SHA"], "sha256": digests}
           (root / "release-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")

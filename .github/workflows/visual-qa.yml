@@ -10,6 +10,7 @@ on:
       - tests/site_smoke.cjs
       - tests/ai_studio_smoke.cjs
       - tests/all_routes_audit.cjs
+      - tests/mobile_layout_audit.cjs
       - tests/site_accessibility.cjs
       - tests/domain.test.mjs
       - tests/test_workspace.py
@@ -38,7 +39,7 @@ concurrency:
 jobs:
   browser:
     runs-on: ubuntu-latest
-    timeout-minutes: 18
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -70,8 +71,10 @@ jobs:
         run: node tests/ai_studio_smoke.cjs
       - name: Audit WCAG 2.2 A/AA across key views and dialogs
         run: node tests/site_accessibility.cjs
-      - name: Audit all 16 unified workspace routes in public and private modes across four viewports
+      - name: Audit all 18 unified workspace routes in public and private modes across four viewports
         run: node tests/all_routes_audit.cjs
+      - name: Audit responsive alignment, gutters, typography and overflow at six phone/tablet widths
+        run: node tests/mobile_layout_audit.cjs
       - name: Publish desktop and mobile screenshots
         if: always()
         uses: actions/upload-artifact@v4
