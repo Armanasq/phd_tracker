@@ -43,9 +43,11 @@ jobs:
       - run: python -m pip install -r requirements-intelligence.txt
       - run: python -m compileall -q scripts phd_agents
       - run: node --check site/app.js
+          node --check site/modules/lens.mjs
       - run: node --check site/modules/console.mjs
       - run: node --check site/modules/operations.mjs
       - run: node --check site/modules/domain.mjs
+      - run: test -s site/quiet.css
       - run: python -m pytest tests -q
       - name: Validate snapshot builder as deployed script
         run: |
