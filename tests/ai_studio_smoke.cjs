@@ -181,6 +181,46 @@ async function main(){
   await page.screenshot({path:path.join(out,'atlas-settings-unified-mobile.png'),fullPage:true});
   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
   assert.ok(overflow<=2,'Mobile settings horizontal overflow: '+overflow);
+  const cloudRequests=[];
+  await page.route('**/api/assistant/bootstrap',async route=>{
+   const upstream=await route.fetch();
+   const bootstrap=await upstream.json();
+   bootstrap.catalog.providers.push({id:'cloud_consent_test',label:'Cloud test gateway',local:false,kind:'openai_compatible',base_url:'https://safe.example.invalid/v1',model:'test-cloud'});
+   bootstrap.provider_states.cloud_consent_test={state:'responded',credential_configured:true};
+   bootstrap.routing.agent_assignments.smoke_agent={provider_id:'cloud_consent_test',provider_label:'Cloud test gateway',model:'test-cloud',source:'agent_assignment',state:'responded',allowed:true};
+   await route.fulfill({response:upstream,json:bootstrap});
+  });
+  await page.route('**/api/agents/run',async route=>{
+   cloudRequests.push({body:route.request().postDataJSON(),key:route.request().headers()['idempotency-key']});
+   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({
+    id:'synthetic-cloud-run',agent_id:'smoke_agent',provider_id:'cloud_consent_test',
+    model:'test-cloud',status:'proposed',text:'Cloud consent verified for this single request.',
+    conversation_id:null,evidence_refs:[],tools:[],retrieval_method:'test'
+   })});
+  });
+  let consentDialogs=0;
+  page.on('dialog',async dialog=>{
+   if(dialog.type()!=='confirm')throw Error('Unexpected dialog: '+dialog.message());
+   consentDialogs+=1;
+   if(consentDialogs===1)await dialog.dismiss();
+   else await dialog.accept();
+  });
+  await page.locator('.lens-launcher').click();
+  await page.locator('#lensAgent').selectOption('smoke_agent');
+  await page.waitForFunction(()=>document.querySelector('.lens-provider')?.textContent?.includes('Cloud test gateway'),{timeout:15000});
+  await page.locator('#lensInput').fill('Audit a verified research statement.');
+  await page.locator('#lensForm button[type="submit"]').click();
+  assert.equal(consentDialogs,1,'A manual cloud request must obtain explicit disclosure consent');
+  assert.equal(cloudRequests.length,0,'Declined cloud consent must not send a model request');
+  await page.locator('#lensForm button[type="submit"]').click();
+  await page.locator('.lens-turn.assistant .lens-body').getByText('Cloud consent verified for this single request.',{exact:false}).waitFor({timeout:12000});
+  assert.equal(consentDialogs,2);
+  assert.equal(cloudRequests.length,1);
+  assert.equal(cloudRequests[0].body.cloud_consent,true);
+  assert.ok(cloudRequests[0].key?.length>=16,'Cloud request must provide an idempotency key');
+  await page.locator('#atlasLensPanel [data-lens="close"]').click();
+  await page.unroute('**/api/agents/run');
+  await page.unroute('**/api/assistant/bootstrap');
   await page.goto(base+'/ai-studio.html#providers',{waitUntil:'domcontentloaded'});
   await page.waitForURL('**/index.html#settings');
   await page.locator('#body h1').first().waitFor({timeout:12000});
