@@ -81,7 +81,7 @@ async function main(){
   const backup=path.join(output,"local-backup.json");
   await backupDownload.saveAs(backup);
   assert.ok((await fs.readFile(backup,"utf8")).includes("PRIVATE draft note"));
-  await page.locator('[data-action="record"][data-value="'+localId+'"]').first().click();
+  await page.locator('.app-card:visible .rowbutton[data-action="record"][data-value="'+localId+'"]').first().click();
   page.once('dialog',d=>d.accept());
   await page.locator('[data-action="delete-local"]').click();
   assert.ok(!(await page.locator("#body").innerText()).includes("Robotics and perception PhD"));
