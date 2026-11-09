@@ -17,7 +17,7 @@ export function mountAtlasLens({getRecords,getView,getSelectedApplication,openSe
  const root=document.createElement("div");root.id="atlasLens";document.body.appendChild(root);
  const focusable='button:not([disabled]),select:not([disabled]),textarea:not([disabled]),a[href]';
  let focusReturn=null;let requestSequence=0;
- const records=()=>Array.isArray(getRecords?.())?getRecords():[];
+ const records=()=>{try{const data=getRecords?.();return Array.isArray(data)?data:[]}catch{return []}};
  const isLocal=()=>["localhost","127.0.0.1"].includes(location.hostname)&&location.protocol==="http:";
  const selected=()=>records().find(x=>x.id===state.applicationId);
  function contextOptions(){
@@ -133,5 +133,5 @@ export function mountAtlasLens({getRecords,getView,getSelectedApplication,openSe
  if((event.ctrlKey||event.metaKey)&&event.shiftKey&&event.key.toLowerCase()==="j"){event.preventDefault();setOpen(!state.open)}
  });
  render();refresh();
- return {open:()=>setOpen(true),setApplication:context,refresh,inspect:()=>({...state,abort:undefined})};
+ return {open:()=>setOpen(true),setApplication:context,refresh,refreshData:()=>{if(state.open)render()},inspect:()=>({...state,abort:undefined})};
 }
