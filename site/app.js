@@ -114,7 +114,7 @@ function dashboard(){
   const date=new Date(timeZero);date.setUTCDate(date.getUTCDate()+offset);
   const iso=date.toISOString().slice(0,10),due=active.filter(r=>r.deadline===iso).length;
   const weekday=offset===0?"TODAY":new Intl.DateTimeFormat("en-GB",{weekday:"short",timeZone:"UTC"}).format(date).toUpperCase();
-  return '<button type="button" class="runway-day'+(due?' has-due':'')+(offset===0?' is-today':'')+'" data-action="nav" data-value="calendar" aria-label="'+escapeHTML(stamp(iso)+': '+due+' recorded closings. Open calendar.')+'"><span class="runway-weekday">'+weekday+'</span><span class="runway-daynumber">'+date.getUTCDate()+'</span><span class="runway-due">'+(due?due+' DUE':'—')+'</span></button>';
+  return '<button type="button" class="runway-day'+(due?' has-due':'')+(offset===0?' is-today':'')+'" data-action="nav" data-value="calendar" aria-label="'+escapeHTML(weekday+' '+date.getUTCDate()+' '+(due?due+' DUE':'—')+'; '+stamp(iso)+'; open calendar')+'"><span class="runway-weekday">'+weekday+'</span><span class="runway-daynumber">'+date.getUTCDate()+'</span><span class="runway-due">'+(due?due+' DUE':'—')+'</span></button>';
  }).join("");
  return '<div class="operational-hero"><div class="today-head"><div><div class="desk-kicker">Fall 2027 &nbsp; · &nbsp; '+escapeHTML(stamp(TODAY()))+'</div><h1>Today’s work</h1><p>Deadlines, decisions and evidence requiring attention.</p></div><div class="buttons">'+button("All applications","nav","applications")+button("Open actions","nav","actions","primary")+'</div></div>'+
  '<section class="decision-brief" aria-label="Next recorded application closing"><div class="decision-brief-label"><span>01 / NEXT RECORDED CLOSING</span><span>DEADLINE INTELLIGENCE ↗</span></div>' +
