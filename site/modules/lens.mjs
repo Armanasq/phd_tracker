@@ -50,7 +50,7 @@ export function mountAtlasLens({getRecords,getView,getSelectedApplication,openSe
    const data=await response.json();
    if(!state.agents.some(a=>a.id===data.agent_id))throw Error("Conversation agent is no longer registered");
    state.agent=data.agent_id;
-   state.applicationId=data.application_id&&records().some(x=>x.id===data.application_id)?data.application_id:"";
+   state.applicationId=typeof data.application_id==="string"?data.application_id:"";
    state.conversationId=data.id;
    state.turns=(data.messages||[]).map(m=>({role:m.role,text:m.content,model:m.model,provider:m.provider_id,agent:data.agent_id,
      id:m.run_id,latency:m.latency_ms,sourceAsOf:m.source_as_of,evidence_refs:m.evidence_refs||[],retrievalMethod:m.retrieval_method,tools:m.tools||[],openTrace:false}));
@@ -75,7 +75,7 @@ export function mountAtlasLens({getRecords,getView,getSelectedApplication,openSe
  }
  function contextOptions(){
  const rows=records().filter(x=>x.record_type==="tracked"||x.record_type==="candidate").slice(0,400);
- return '<option value="">Portfolio · all applications</option>'+rows.map(x=>'<option value="'+escapeHTML(x.id)+'"'+(state.applicationId===x.id?" selected":"")+'>'+escapeHTML(short(x.name,69))+'</option>').join("");
+ return '<option value="">Portfolio · all applications</option>'+(state.applicationId&&!rows.some(x=>x.id===state.applicationId)?'<option value="'+escapeHTML(state.applicationId)+'" selected>Unavailable in snapshot · '+escapeHTML(short(state.applicationId,35))+'</option>':"")+rows.map(x=>'<option value="'+escapeHTML(x.id)+'"'+(state.applicationId===x.id?" selected":"")+'>'+escapeHTML(short(x.name,69))+'</option>').join("");
  }
  function agentOptions(){return state.agents.map(a=>'<option value="'+escapeHTML(a.id)+'"'+(state.agent===a.id?" selected":"")+'>'+escapeHTML(short(a.label,45))+'</option>').join("")}
  function counts(){
