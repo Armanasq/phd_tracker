@@ -56,7 +56,7 @@ def operational_insights(applications: list[dict], observations: list[dict]) -> 
         if not isinstance(observed, dict):
             continue
         status = str(observed.get("status", "unknown"))
-        if status not in {"review_source_changed", "contradiction_closed_portal"}:
+        if status not in {"review_source_changed", "contradiction_closed_portal", "contradiction_deadline_mismatch"}:
             continue
         app_id = str(observed.get("application_id", observed.get("id", "")))
         app = known.get(app_id)
