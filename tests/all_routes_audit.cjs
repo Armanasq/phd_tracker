@@ -25,7 +25,11 @@ async function check(browser,url,kind,views,results){
  for(const [device,width,height] of SIZES){
   const page=await browser.newPage({viewport:{width,height}}),errors=[],httpErrors=[];
   page.on('pageerror',e=>errors.push(e.message));
-  page.on('response',r=>{if(r.url().startsWith(url)&&r.status()>=400)httpErrors.push(r.status()+' '+r.url())});
+  page.on('response',r=>{
+   const responseUrl=new URL(r.url());
+   const expectedPrivateProbe=kind==='tracker'&&r.status()===404&&responseUrl.pathname==='/api/bootstrap';
+   if(r.url().startsWith(url)&&r.status()>=400&&!expectedPrivateProbe)httpErrors.push(r.status()+' '+r.url());
+  });
   try{
    await page.goto(url+'/'+(kind==='tracker'?'index.html':'ai-studio.html'),{waitUntil:'networkidle'});
    if(kind==='tracker')await page.locator('#body h1').waitFor({timeout:15000});
