@@ -8,6 +8,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlsplit
 
+if __package__:
+    from .instance_config import DEFAULT_REPOSITORY, resolve_data_mode, resolve_repository
+else:
+    from instance_config import DEFAULT_REPOSITORY, resolve_data_mode, resolve_repository
+
 MARKER = "<!-- phd-intelligence-action-center-v1 -->"
 STATUS = {"unconfirmed", "shortlisted", "preparing", "submitted", "interview", "offer", "rejected", "withdrawn", "blocked", "archived"}
 VERIFY = {"unverified", "needs_review", "source_verified", "owner_verified"}
@@ -19,7 +24,6 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def control_context(root: Path, repository: str, mode: str) -> tuple[Path, set[str]]:
-    from scripts.instance_config import DEFAULT_REPOSITORY
     if repository.casefold() == DEFAULT_REPOSITORY.casefold():
         exp = json.loads((root / "data" / "experience_view.json").read_text(encoding="utf-8"))
         opp = json.loads((root / "data" / "opportunities.json").read_text(encoding="utf-8"))
@@ -152,7 +156,6 @@ def main() -> None:
     parser.add_argument("--output", default="data/workspace_control_result.json")
     parser.add_argument("--state", default=None)
     args = parser.parse_args()
-    from scripts.instance_config import resolve_data_mode, resolve_repository
     repository = resolve_repository(os.environ.get("GITHUB_REPOSITORY"), root=ROOT)
     mode = resolve_data_mode(repository)
     event = json.loads(Path(args.event).read_text(encoding="utf-8"))
