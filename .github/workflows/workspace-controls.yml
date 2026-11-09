@@ -1,0 +1,30 @@
+name: PhD Atlas | Verified Owner Updates
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: read
+
+concurrency:
+  group: phd-atlas-owner-writes
+  cancel-in-progress: false
+
+jobs:
+  update:
+    if: github.event.comment.user.login == github.repository_owner && github.event.issue.pull_request == null && startsWith(github.event.comment.body, '/workspace ')
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate owner command and commit to main without overwriting concurrent changes
+        env:
+          OWNER_LOGIN: ${{ github.repository_owner }}
+        run: bash scripts/atomic_workspace.sh
