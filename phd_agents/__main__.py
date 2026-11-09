@@ -21,6 +21,13 @@ def main() -> None:
     commands.add_parser("diagnostics")
     backup_command = commands.add_parser("backup")
     backup_command.add_argument("--retain", type=int, default=7)
+    verify_command = commands.add_parser("verify-backup")
+    verify_command.add_argument("filename")
+    verify_command.add_argument("--sha256")
+    restore_command = commands.add_parser("restore-backup")
+    restore_command.add_argument("filename")
+    restore_command.add_argument("--sha256")
+    restore_command.add_argument("--confirm", action="store_true")
     agent = commands.add_parser("run")
     agent.add_argument("--agent", default="portfolio_planner")
     agent.add_argument("--provider", default="ollama")
@@ -30,6 +37,14 @@ def main() -> None:
     args = parser.parse_args()
     if args.command == "serve":
         serve(port=args.port, root=args.repo)
+        return
+    if args.command in {"verify-backup", "restore-backup"}:
+        from .recovery import restore_backup, verify_backup
+        if args.command == "verify-backup":
+            result = verify_backup(args.filename, sha256=args.sha256)
+        else:
+            result = restore_backup(args.filename, sha256=args.sha256, confirm=args.confirm)
+        print(json.dumps(result, indent=2, ensure_ascii=False))
         return
     store = Store()
     try:

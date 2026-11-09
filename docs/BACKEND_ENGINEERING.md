@@ -23,6 +23,8 @@ Run from the repository root with Python 3.11+ and dependencies in requirements-
 | **python -m phd_agents serve --port 8765** | Start the same-origin private application |
 | **python -m phd_agents diagnostics** | Check SQLite integrity, WAL state, file permissions, active scheduler claims and backup count |
 | **python -m phd_agents backup --retain 7** | Create an owner-only, integrity-checked SQLite backup |
+| **python -m phd_agents verify-backup FILENAME --sha256 DIGEST** | Validate a generated backup without loading or changing the current database |
+| **python -m phd_agents restore-backup FILENAME --sha256 DIGEST --confirm** | Offline verified restore after stopping the private runtime; preserve a pre-restore safety copy |
 | **python -m phd_agents scheduler-once** | Evaluate opted-in scheduled workflows once |
 | **python -m pytest tests -q** | Run Python backend and integration regression tests |
 | **node --check site/modules/console.mjs** | Validate the private Settings frontend JavaScript |
@@ -60,7 +62,7 @@ Expensive HTTP requests share a per-process inference admission semaphore, defau
 
 Use the private Settings panel or the backup CLI. The SQLite online-backup operation validates the copy, computes a SHA-256 digest, rotates retained copies and does not send the backup off-machine. It includes applicant state, run logs, settings, evidence and conversations, but excludes provider-credentials.json.
 
-To restore, first stop the runtime. Preserve the existing SQLite state and sidecar files, validate a selected backup, replace the database with owner-only permissions, restart, and run diagnostics. There is intentionally no HTTP database-restore endpoint. A backup on the same machine is not off-host disaster recovery; store an independently encrypted offline copy if the risk warrants it.
+To restore on Linux or another POSIX system, stop the private runtime, select a generated backup filename, run `verify-backup` with the SHA-256 from the original backup report, then invoke `restore-backup FILENAME --sha256 DIGEST --confirm`. The offline command refuses unsafe file permissions, symlinks, corrupt or schema-incompatible backups, a running private service, and any existing SQLite journal sidecars. It stages and verifies the restored database before an atomic replacement, saves the former state as a separate pre-restore backup, and leaves the credential file untouched. Restart the service and run diagnostics. The lock is advisory for the provided Python server and restore commands; external SQLite clients must also be stopped. There is intentionally no HTTP restore endpoint. A same-host backup is not off-host disaster recovery; securely export an encrypted copy for that purpose.
 
 ## Release quality gates
 

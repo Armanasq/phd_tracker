@@ -27,7 +27,8 @@ from .toolkit import TOOL_NAMES, DEFAULT_TOOLS
 from time import perf_counter
 from .calendar import line_items
 from .engine import catalog, owner_records, run_agent, run_workflow, scheduler_once, selected
-from .store import ConflictError, Store
+from .store import ConflictError, Store, default_path
+from .recovery import runtime_lock
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
@@ -465,6 +466,11 @@ class ApiHandler(BaseHTTPRequestHandler):
 def serve(host: str = "127.0.0.1", port: int = 8765, *, root: Path = ROOT, state_path: Path | None = None) -> None:
     if host not in {"127.0.0.1", "localhost"}:
         raise ValueError("The private API binds to loopback only; use a separately secured reverse proxy for remote access")
+    with runtime_lock(Path(state_path) if state_path is not None else default_path()):
+        _serve_locked(host, port, root=root, state_path=state_path)
+
+
+def _serve_locked(host: str, port: int, *, root: Path, state_path: Path | None) -> None:
     from threading import Event, Thread
     store = Store(state_path)
     httpd = ApiServer((host, port), store=store, root=root)
