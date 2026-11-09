@@ -12,7 +12,9 @@
     "academicpositions": [
       "HTTPError: HTTP Error 403: Forbidden"
     ],
-    "academictransfer": [],
+    "academictransfer": [
+      "academictransfer returned no parseable relevant doctoral postings; verify whether listings are client-rendered or HTML schema changed"
+    ],
     "brave": [
       "BRAVE_SEARCH_API_KEY missing: broad multi-country search disabled"
     ],
