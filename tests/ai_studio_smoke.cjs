@@ -95,14 +95,18 @@ async function main(){
   await recordButton.waitFor();
   const selectedId=await recordButton.getAttribute('data-value');
   await recordButton.click();
-  await page.locator('.os-context-banner').getByText(selectedId,{exact:false}).waitFor();
-  assert.equal(await page.locator('form[data-os-form="run"] select[name="application_id"]').inputValue(),selectedId);
-  await page.locator('form[data-os-form="run"] select[name="agent_id"]').selectOption('smoke_agent');
-  await page.locator('#osPrompt').fill('Evaluate the applicant evidence; do not submit anything.');
-  assert.equal(await page.locator('form[data-os-form="run"] select[name="provider_id"]').count(),0,
-    'Copilot must not require a model selector on each run');
-  await page.locator('form[data-os-form="run"] button[type="submit"]').click();
-  await page.locator('.os-answer-text').getByText('Synthetic verified local inference response.',{exact:false}).waitFor({timeout:30000});
+  await page.locator('#atlasLensPanel').waitFor({timeout:12000});
+  assert.equal(await page.locator('#lensScope').inputValue(),selectedId,
+    'Application action must open the Lens with the correct opportunity in context');
+  await page.locator('#lensAgent').selectOption('smoke_agent',{timeout:12000});
+  await page.locator('#lensInput').fill('Evaluate the applicant evidence; do not submit anything.');
+  assert.equal(await page.locator('#lensForm select[name="provider_id"]').count(),0,
+    'Lens must use the configured model route rather than exposing a per-turn provider field');
+  await page.locator('#lensForm button[type="submit"]').click();
+  await page.locator('.lens-turn.assistant .lens-body').getByText('Synthetic verified local inference response.',{exact:false}).waitFor({timeout:30000});
+  await page.locator('.lens-turn.assistant [data-lens="trace"]').click();
+  assert.match(await page.locator('.lens-trace').innerText(),/smoke-chat/);
+  await page.locator('#atlasLensPanel [data-lens="close"]').click();
   assert.ok(seen.filter(x=>x.path==='/v1/chat/completions').length>=2);
   await page.locator('[data-action="nav"][data-value="activity"]').click();
   await page.locator('.os-ledger').first().getByText('My Research Agent').waitFor();
@@ -144,7 +148,7 @@ async function main(){
   await page.locator('#body h1').first().waitFor({timeout:12000});
   assert.deepEqual(pageErrors,[],'Browser JS errors');
   await page.close();
-  console.log('Unified workspace passed: custom OpenAI-compatible vLLM endpoint, model probe, activation, agent assignment, automatic inference, workflow editor, legacy route, mobile layout');
+  console.log('Unified workspace passed: endpoint setup, activation, agent routing, application-scoped Atlas Lens inference, run trace, workflow editor, legacy route and mobile layout');
  }finally{
   if(browser)await browser.close();
   child.kill('SIGTERM');
