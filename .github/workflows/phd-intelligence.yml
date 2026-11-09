@@ -24,6 +24,7 @@ concurrency:
 
 jobs:
   discover:
+    if: github.repository == 'Armanasq/phd_tracker' || vars.PHD_ATLAS_ENABLE_DISCOVERY == 'true'
     name: Discover research via ${{ matrix.source }}
     runs-on: ubuntu-latest
     timeout-minutes: 12
@@ -55,6 +56,7 @@ jobs:
           retention-days: 14
 
   research_radar:
+    if: github.repository == 'Armanasq/phd_tracker' || vars.PHD_ATLAS_ENABLE_DISCOVERY == 'true'
     name: Emerging research radar (arXiv, never classified as a vacancy)
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -72,6 +74,7 @@ jobs:
           retention-days: 14
 
   reconcile:
+    if: github.repository == 'Armanasq/phd_tracker' || vars.PHD_ATLAS_ENABLE_DISCOVERY == 'true'
     needs: [discover, research_radar]
     runs-on: ubuntu-latest
     timeout-minutes: 22
@@ -104,6 +107,7 @@ jobs:
         run: bash scripts/atomic_intelligence.sh
 
   notify:
+    if: github.repository == 'Armanasq/phd_tracker' || vars.PHD_ATLAS_ENABLE_DISCOVERY == 'true'
     needs: reconcile
     runs-on: ubuntu-latest
     timeout-minutes: 12

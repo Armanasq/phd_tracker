@@ -29,4 +29,5 @@ jobs:
         env:
           OWNER_LOGIN: ${{ github.repository_owner }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PHD_ATLAS_DATA_MODE: ${{ vars.PHD_ATLAS_DATA_MODE }}
         run: bash scripts/atomic_workspace.sh

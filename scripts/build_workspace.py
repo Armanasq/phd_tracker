@@ -241,7 +241,7 @@ def independent_snapshot(root: Path, repo: str) -> dict:
         if not isinstance(advisory, bool):
             raise ValueError(f"Independent record {rid}: invalid duplicate advisory")
         results.append({
-            "id": rid, "record_type": raw.get("record_type", "tracked"),
+            "id": rid, "record_type": "tracked" if raw.get("record_type") == "candidate" and owner.get("promoted") is True else raw.get("record_type", "tracked"),
             "name": name, "institution": clean(raw.get("institution"), 160),
             "country": clean(raw.get("country"), 70), "deadline": deadline,
             "deadline_kind": clean(raw.get("deadline_kind"), 200),

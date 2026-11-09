@@ -21,6 +21,8 @@ on:
       - tests/test_workspace.py
       - data/workspace_overrides.json
       - data/opportunities.json
+      - data/user_opportunities.json
+      - data/user_workspace_overrides.json
       - data/experience_view.json
       - data/portfolio_frontier.json
       - data/decision_queue.json
