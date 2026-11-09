@@ -168,7 +168,7 @@ function calendarView(){
   for(let d=1;d<=last;d++){
     const day=month+"-"+String(d).padStart(2,"0"),items=byDate.get(day)||[],urgent=items.some(r=>!isClosed(r)&&days(day)>=0&&days(day)<=3);
     const mark=day===today?" today":"",chosen=day===selected?" selected":"";
-    cells+='<button class="cal-day'+mark+chosen+'" type="button" data-action="cal-day" data-value="'+day+'"><span class="cal-number">'+d+'</span><span class="sr-only">Full date: '+escapeHTML(stamp(day))+'</span>+(items.length?'<span class="cal-count '+(urgent?"cal-urgent":"")+'">'+items.length+' due</span>':'')+items.slice(0,2).map(r=>'<span class="cal-entry">'+escapeHTML(r.name.slice(0,32))+'</span>').join("")+(items.length>2?'<span class="cal-more">+'+(items.length-2)+' more</span>':"")+'</button>';
+    cells+='<button class="cal-day'+mark+chosen+'" type="button" data-action="cal-day" data-value="'+day+'"><span class="cal-number">'+d+'</span><span class="sr-only">Full date: '+escapeHTML(stamp(day))+'</span>'+(items.length?'<span class="cal-count '+(urgent?"cal-urgent":"")+'">'+items.length+' due</span>':'')+items.slice(0,2).map(r=>'<span class="cal-entry">'+escapeHTML(r.name.slice(0,32))+'</span>').join("")+(items.length>2?'<span class="cal-more">+'+(items.length-2)+' more</span>':"")+'</button>';
   }
   const total=Array.from(byDate.values()).reduce((n,arr)=>n+arr.length,0);
   const ordered=Array.from(byDate.keys()).sort();
