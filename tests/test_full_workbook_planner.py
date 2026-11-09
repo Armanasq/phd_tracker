@@ -115,3 +115,27 @@ def test_owner_completion_overlay_is_persistent_and_source_preserving(tmp_path):
     assert any(t["task_id"]==identity and t["state"]=="confirmed_done"
                for t in refreshed["all_tasks"])
     assert load_workbook(file)["Step timeline"]["E7"].value==before
+
+def test_priority_review_does_not_create_final_deadline_or_duplicate_generated_step(tmp_path):
+    wb, _ = book(tmp_path)
+    ws = wb["Action list"]
+    ws["C6"] = "Priority review by 15 Nov 2026; final application date is later."
+    timeline = wb["Step timeline"]
+    timeline.append([
+        datetime(2026, 11, 15), None, "Space PhD", "Go",
+        "Submit for priority review [External deadline: priority review]",
+        datetime(2026, 11, 15), "C",
+    ])
+    result = plan(wb, date(2026, 11, 15))
+    assert not any(t["source_id"] == "C" for t in result["today"]["eligible_application_deadlines"])
+    priority = next(t for t in result["today"]["priority_review_dates"] if t["source_id"] == "C")
+    assert priority["type"] == "application_priority"
+    assert priority["state"] == "priority_review_date"
+    assert priority["final_deadline"] is None
+    assert result["today"]["counts"]["priority_reviews"] == 1
+    assert not any(t["source_id"] == "C" and t["due"] == "2026-11-15"
+                   for t in result["today"]["scheduled_timeline_tasks"])
+    linked = next(t for t in result["all_tasks"]
+                  if t["source_id"] == "C" and t["type"] == "timeline_step"
+                  and t["due"] == "2026-11-15")
+    assert linked["state"] == "linked_priority_note" and linked["blocked"]
