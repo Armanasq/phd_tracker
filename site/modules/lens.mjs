@@ -11,7 +11,7 @@ const prompts=[
  {title:"Find my strongest research matches",code:"03",value:"Assess research alignment among tracked opportunities using recorded research focus, faculty, funding, and eligibility evidence. Separate unknown fit from supported fit."},
  {title:"Plan my next application steps",code:"04",value:"Develop a realistic prioritized sequence of next application actions, faculty follow-ups, referee checks, and document preparation based only on available records."}
 ];
-export function mountAtlasLens({getRecords,getView,getSelectedApplication,openSettings,onFocusApplication}){
+export function mountAtlasLens({getRecords,getView,getSelectedApplication,openSettings,onFocusApplication,onRunComplete}){
  if(byId("atlasLens"))return;
  const state={open:false,expanded:false,busy:false,connected:false,verified:false,provider:"",model:"",agent:"",agents:[],applicationId:"",turns:[],draft:"",trace:null,abort:null,error:"",sourceAsOf:""};
  const root=document.createElement("div");root.id="atlasLens";document.body.appendChild(root);
@@ -105,6 +105,7 @@ export function mountAtlasLens({getRecords,getView,getSelectedApplication,openSe
  if(!response.ok)throw new Error(json.error||"The assistant request failed");
  if(sequence!==requestSequence)return;
  state.turns.push({role:"assistant",text:String(json.text||"No model response returned."),id:json.id,model:json.model,provider:json.provider_id,agent:json.agent_id,latency:json.latency_ms,sourceAsOf:json.source_as_of,tools:json.tools||[],openTrace:false});
+ try{Promise.resolve(onRunComplete?.(json)).catch(()=>{})}catch{}
  }catch(error){if(error.name!=="AbortError")state.error=short(error.message||"Inference failed",220);else state.error="Request canceled."}
  finally{if(sequence===requestSequence){state.busy=false;state.abort=null;render();const h=byId("lensHistory");if(h)h.scrollTop=h.scrollHeight}}
  }
