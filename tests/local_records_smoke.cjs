@@ -76,12 +76,14 @@ async function main(){
   assert.equal(exported.records[0].source_url,"https://example.edu/phd");
   assert.ok(!JSON.stringify(exported).includes("PRIVATE draft note"));
   assert.ok(!JSON.stringify(exported).includes("preparing"));
-  await page.keyboard.press("Escape");
-  const [backupDownload]=await Promise.all([page.waitForEvent("download"),page.locator('[data-action="export"][data-value="local"]').first().click()]);
+  const [backupDownload]=await Promise.all([page.waitForEvent("download"),page.locator('.modal [data-action="export"][data-value="local"]').click()]);
   const backup=path.join(output,"local-backup.json");
   await backupDownload.saveAs(backup);
   assert.ok((await fs.readFile(backup,"utf8")).includes("PRIVATE draft note"));
-  await page.locator('.app-card:visible .rowbutton[data-action="record"][data-value="'+localId+'"]').first().click();
+  await page.locator('.modal [data-action="close"]').click();
+  await page.locator(".modal").waitFor({state:"detached"});
+  await page.locator('#workspaceSection').selectOption("applications");
+  await page.locator('.app-card:visible .rowbutton[data-action="record"][data-value="'+localId+'"]').click();
   page.once('dialog',d=>d.accept());
   await page.locator('[data-action="delete-local"]').click();
   assert.ok(!(await page.locator("#body").innerText()).includes("Robotics and perception PhD"));
