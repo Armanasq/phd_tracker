@@ -29,7 +29,9 @@ def classify_deadline_note(note: object) -> DeadlineClass:
     )
     if any(phrase in normalized for phrase in uncertain):
         return "unverified"
-    return "final"
+    if re.search(r"\bfinal\b|\bdeadline\b|\bclosing date\b|\bapply by\b", normalized):
+        return "final"
+    return "unverified"
 
 MONITOR_STATUS_RANK = {
     "anchor_present": 0,

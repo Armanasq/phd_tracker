@@ -1,7 +1,7 @@
 const STATUSES = new Set(["unconfirmed","shortlisted","preparing","submitted","interview","offer","rejected","withdrawn","blocked","archived"]);
 const VERIFICATIONS = new Set(["unverified","needs_review","source_verified","owner_verified"]);
 const DOC_STATES = new Set(["unknown","ready","in_progress","not_started","not_applicable"]);
-const CLOSED = new Set(["submitted","rejected","withdrawn","archived","offer"]);
+const CLOSED = new Set(["rejected","withdrawn","archived","offer"]);
 const DAY_MS = 86_400_000;
 const dayPattern = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -20,6 +20,10 @@ export function isClosed(record){return CLOSED.has(record?.status)}
 
 export function isActionable(record,today) {
   if(!record || record.record_type!=="tracked" || isClosed(record) || record.status==="blocked")return false;
+  if(record.status==="submitted"){
+    const follow=daysUntil(record.followup,today);
+    return follow!==null&&follow<=14;
+  }
   const due=daysUntil(record.deadline,today);
   return due===null||due>=0;
 }
@@ -42,6 +46,10 @@ export function documentReadiness(record) {
 export function riskSignal(record,today) {
   const due=daysUntil(record?.deadline,today);
   if(record?.status==="blocked")return"Blocked";
+  if(record?.status==="submitted"){
+    const follow=daysUntil(record.followup,today);
+    return follow===null?"Submitted":follow<=0?"Follow-up overdue":follow<=14?"Follow-up due":"Submitted";
+  }
   if(isClosed(record))return"Closed";
   if(due!==null&&due<0)return"Expired";
   if(documentReadiness(record).state==="incomplete")return"Confirmed gap";
@@ -54,6 +62,10 @@ export function riskSignal(record,today) {
 export function priorityScore(record,today) {
   const due=daysUntil(record?.deadline,today);
   if(!isActionable(record,today))return -100;
+  if(record.status==="submitted"){
+    const follow=daysUntil(record.followup,today);
+    return (follow<=0?102:follow<=3?74:follow<=7?46:24)+(record.priority==="high"?20:0);
+  }
   let p=due===null?5:due===0?100:due<=3?80:due<=7?56:due<=14?35:due<=30?18:3;
   if(!["source_verified","owner_verified"].includes(record.verification))p+=16;
   if(record.duplicate_submission_advisory)p+=18;
@@ -117,7 +129,7 @@ export function applyRecordFilters(items,filters,today) {
 export function deadlineCollisions(items,today,limit=30) {
   const groups=new Map();
   for(const r of items){
-    if(!isActionable(r,today)||!isDay(r.deadline))continue;
+    if(!isActionable(r,today)||r.status==="submitted"||!isDay(r.deadline))continue;
     const current=groups.get(r.deadline)||[];
     current.push(r.id);
     groups.set(r.deadline,current);

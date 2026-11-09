@@ -22,7 +22,11 @@ test("critical risks preserve explicit blockers and do not invent submission",()
  assert.equal(riskSignal(base,today),"Urgent");
  assert.equal(riskSignal({...base,document_states:{academic_cv:"not_started",transcripts:"unknown"}},today),"Confirmed gap");
  assert.equal(riskSignal({...base,status:"blocked"},today),"Blocked");
- assert.equal(riskSignal({...base,status:"submitted"},today),"Closed");
+ assert.equal(riskSignal({...base,status:"submitted"},today),"Submitted");
+ assert.equal(riskSignal({...base,status:"submitted",followup:"2026-11-08"},today),"Follow-up overdue");
+ assert.equal(isActionable({...base,status:"submitted",followup:"2026-11-08"},today),true);
+ assert.equal(isActionable({...base,status:"submitted"},today),false);
+ assert.ok(priorityScore({...base,status:"submitted",followup:"2026-11-08"},today)>0);
  assert.equal(isActionable({...base,record_type:"candidate"},today),false);
  assert.ok(priorityScore({...base,priority:"high"},today)>priorityScore({...base,priority:"low"},today));
 });

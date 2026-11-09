@@ -26,3 +26,9 @@ def test_multiple_source_watch_states_prioritize_conflicts_over_late_success():
     assert summarize_watch_statuses(observations) == {
         "A": "contradiction_closed_portal", "B": "unavailable",
     }
+
+
+def test_untyped_date_notes_are_never_assumed_final():
+    assert classify_deadline_note(None) == "unverified"
+    assert classify_deadline_note("interest form; no cutoff specified") == "unverified"
+    assert classify_deadline_note("Rolling until filled") == "unverified"
