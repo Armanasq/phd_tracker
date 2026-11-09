@@ -46,6 +46,8 @@ def validate_url(value: object, local: bool) -> str:
     except ValueError as err:
         if "not permitted" in str(err):
             raise
+    if not local and (loopback or host.endswith((".local", ".internal", ".localhost"))):
+        raise ValueError("Cloud providers may not target private or loopback hostnames")
     if parts.scheme == "http" and not (local and loopback):
         raise ValueError("Unencrypted model connections are permitted only on loopback")
     if local and not loopback:

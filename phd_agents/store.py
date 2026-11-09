@@ -48,17 +48,19 @@ class Store:
         self.db.close()
 
     def get_custom(self, kind: str) -> list[dict[str, Any]]:
-        if kind not in {"provider", "agent", "workflow"}:
+        if kind not in {"provider", "agent", "workflow", "connection", "setting"}:
             raise ValueError("Invalid catalog kind")
         rows = self.db.execute("SELECT payload FROM catalog WHERE kind=? ORDER BY id", (kind,)).fetchall()
         return [json.loads(row["payload"]) for row in rows]
 
     def put_custom(self, kind: str, entry: dict[str, Any]) -> None:
-        if kind not in {"provider", "agent", "workflow"}:
+        if kind not in {"provider", "agent", "workflow", "connection", "setting"}:
             raise ValueError("Invalid catalog kind")
         with self.db:
             self.db.execute("INSERT INTO catalog(kind,id,payload,updated_at) VALUES(?,?,?,?) ON CONFLICT(kind,id) DO UPDATE SET payload=excluded.payload,updated_at=excluded.updated_at",
                             (kind, entry["id"], json.dumps(entry), utcnow()))
+            if kind == "provider":
+                self.db.execute("DELETE FROM catalog WHERE kind='connection' AND id=?", (entry["id"],))
             self._audit("catalog:" + kind, entry["id"])
 
     def catalog(self, kind: str, defaults: list[dict[str, Any]]) -> list[dict[str, Any]]:

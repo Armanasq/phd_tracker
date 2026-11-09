@@ -11,7 +11,10 @@ from urllib.parse import parse_qs, unquote, urlsplit
 from .catalog import agent_spec, provider_spec, workflow_spec
 from .domain import agenda, plan_capacity, preflight, today_in
 from .operations import evidence_conflicts, milestones_for, referee_matrix, research_fit_signals, resource_schedule
-from .providers import invoke
+from .providers import invoke, ProviderError
+from .connectivity import model_list, provider_states, remember_check
+from .settings import read_settings, save_settings
+from time import perf_counter
 from .calendar import line_items
 from .engine import catalog, owner_records, run_agent, run_workflow, scheduler_once, selected
 from .store import ConflictError, Store
@@ -113,6 +116,8 @@ class ApiHandler(BaseHTTPRequestHandler):
                             "records": records, "agenda": agenda(records, today, 40),
                             "runs": store.runs(30), "activity": store.activity(30),
                             "providers_status": source.get("providers", []),
+                            "provider_states": provider_states(store, catalog(store)["providers"]),
+                            "settings": read_settings(store),
                             "security": {"local_only": True, "credentials": "environment variables", "auto_application_submission": False}})
         elif path == "/api/calendar.ics":
             source, records = owner_records(store, self.server.root)
@@ -126,6 +131,9 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             self.wfile.write(body)
+        elif path == "/api/settings":
+            self.send_json({"settings": read_settings(store),
+                            "provider_states": provider_states(store, catalog(store)["providers"])})
         elif path == "/api/operations":
             source, records = owner_records(store, self.server.root)
             today = today_in(source.get("timezone", "Europe/London"))
@@ -166,14 +174,32 @@ class ApiHandler(BaseHTTPRequestHandler):
     def post_route(self, path: str, data: dict) -> None:
         store = self.server.store
         root = self.server.root
-        if path == "/api/providers/probe":
+        if path == "/api/settings":
+            self.send_json({"settings": save_settings(store, data)})
+        elif path in {"/api/providers/probe", "/api/providers/models"}:
             provider = selected(catalog(store)["providers"], data["provider_id"], "provider")
             if not provider["local"] and data.get("cloud_consent") is not True:
-                raise PermissionError("Cloud provider testing requires explicit disclosure consent")
-            response = invoke(provider, "Answer with one short sentence.", "Respond with the exact text: Provider connection successful.")
-            self.send_json({"status": "responded", "provider_id": provider["id"],
-                            "model": response.model, "response": response.content[:600],
-                            "usage": response.usage})
+                raise PermissionError("Cloud provider connection checks require explicit consent")
+            started = perf_counter()
+            try:
+                if path == "/api/providers/models":
+                    result = model_list(provider)
+                    remember_check(store, provider["id"], status="reachable",
+                                   latency_ms=result["latency_ms"], model_count=result["model_count"])
+                else:
+                    response = invoke(provider, "Answer with one short sentence.",
+                                      "Respond with the exact text: Provider connection successful.", timeout=18)
+                    result = {"status": "responded", "provider_id": provider["id"],
+                              "model": response.model, "response": response.content[:600],
+                              "usage": response.usage}
+                    remember_check(store, provider["id"], status="responded", model=response.model,
+                                   latency_ms=round((perf_counter() - started) * 1000))
+            except (OSError, RuntimeError, ValueError) as error:
+                remember_check(store, provider["id"], status="failed",
+                               latency_ms=round((perf_counter() - started) * 1000),
+                               error=str(error))
+                raise
+            self.send_json(result)
         elif path.startswith("/api/private/"):
             parts = path.removeprefix("/api/private/").split("/")
             if len(parts) == 1:

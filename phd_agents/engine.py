@@ -11,6 +11,7 @@ from .domain import agenda, merged_records, preflight, snapshot, today_in
 from .providers import invoke
 from .store import Store
 from .toolkit import DEFAULT_TOOLS, run_tools
+from .settings import read_settings
 
 def catalog(store: Store) -> dict[str, list[dict[str, Any]]]:
     return {"providers": store.catalog("provider", PROVIDERS),
@@ -129,7 +130,10 @@ def scheduler_once(store: Store, root: Path, *, now: datetime | None = None) -> 
     current = now or datetime.now(ZoneInfo("UTC"))
     result = []
     settings = catalog(store)
+    max_runs = read_settings(store)["max_runs_per_tick"]
     for workflow in settings["workflows"]:
+        if len(result) >= max_runs:
+            break
         if not workflow.get("enabled") or workflow.get("schedule") == "manual":
             continue
         period = period_for(workflow["schedule"], current)
