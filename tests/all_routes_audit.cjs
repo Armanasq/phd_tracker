@@ -35,7 +35,8 @@ async function check(browser,url,views,results,mode){
    await page.locator('#body h1').waitFor({timeout:15000});
    const lens=page.locator('#atlasLens');
    assert.equal(await lens.count(),1,'Atlas Lens must initialize on every workspace mode');
-   await lens.locator('[data-lens="toggle"]').click();
+   if(width<=680)await page.locator('.topbar [data-action="lens-open"]').click();
+   else await lens.locator('[data-lens="toggle"]').click();
    await page.locator('#atlasLensPanel').waitFor({timeout:12000});
    assert.ok(await page.locator('#lensScope').isVisible(),'Application context selector must render');
    await page.locator('#atlasLensPanel [data-lens="close"]').click();
