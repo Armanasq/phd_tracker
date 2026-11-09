@@ -9,7 +9,7 @@ const cleanId = value => String(value||"").trim().toLowerCase().replace(/[^a-z0-
 const opt = (items,value) => choose(items,value);
 
 export function createConsole({notify,onChange,navigate,getRecords,getSourceRecords,onReload,getView}) {
- const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:""};
+ const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,scheduleTick:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:""};
  const providers = () => state.data?.catalog?.providers || [];
  const agents = () => state.data?.catalog?.agents || [];
  const workflows = () => state.data?.catalog?.workflows || [];
@@ -94,6 +94,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   try{
    await task();
    await connect({silent:true});
+   state.schedulePreviewRequested=false;state.schedulePreview=null;
   }catch(error){
    state.message=short(error.message || "Operation failed",260);
    notify(state.message);
@@ -241,6 +242,34 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    footnote("Agents can analyze evidence using allowlisted local tools. They cannot send mail, submit applications or change records without a separate, audited authorization workflow.")+
    '</form></section></div>'+note();
  }
+ function schedulerPanel(){
+  if(!state.schedulePreviewRequested){
+   state.schedulePreviewRequested=true;
+   request("/api/scheduler/preview").then(data=>{
+    state.schedulePreview=data;onChange();
+   }).catch(error=>{
+    state.schedulePreview={error:error.message,workflows:[]};onChange();
+   });
+  }
+  const plan=state.schedulePreview;
+  if(!plan)return '<section class="os-panel"><div class="os-panel-heading"><div><h2>Automation execution plan</h2><p>Preparing an execution forecast without invoking models.</p></div></div></section>';
+  const labels={due:"Ready to attempt",disabled:"Disabled",manual_only:"Manual",already_executed:"Completed this period",
+   cloud_disclosure_not_approved:"Disclosure approval required",provider_not_approved:"Cloud provider not activated",
+   cloud_budget_disabled:"Cloud budget disabled",cloud_daily_limit:"Daily cloud limit reached"};
+  const rows=(plan.workflows||[]).map(w=>
+   '<div class="os-schedule-row"><div><strong>'+esc(w.label)+'</strong><small>'+esc(pretty(w.schedule))+
+   ' · '+esc(w.stages.map(x=>x.agent_id+" → "+x.model).join(" / "))+'</small></div>'+
+   '<span class="os-badge '+(w.state==="due"?"good":w.state==="disabled"||w.state==="manual_only"?"":"warn")+'">'+esc(labels[w.state]||w.state)+'</span></div>').join("");
+  const results=state.scheduleTick?.results||[];
+  return '<section class="os-panel"><div class="os-panel-heading"><div><h2>Automation execution plan</h2><p>Read-only status, agent model assignments and reasons for skipped workflows</p></div>'+
+   '<div class="os-inline-actions">'+btn("Refresh preview","refresh-preview","","quiet")+btn("Run due workflows","run-due","","primary")+'</div></div>'+
+   '<div class="os-schedule-summary"><span>'+esc(plan.due||0)+' due</span><span>Timezone: '+esc(plan.timezone||"—")+'</span>'+
+   '<span>Cloud usage: '+esc(plan.recorded_daily_cloud_calls??0)+' / '+esc(plan.daily_cloud_call_cap??0)+'</span></div>'+
+   '<div class="os-schedule-list">'+(rows||'<p class="os-empty">No workflows configured.</p>')+'</div>'+
+   (results.length?'<div class="os-schedule-results"><strong>Most recent manual scheduler check</strong>'+results.map(x=>
+    '<p>'+esc(x.workflow_id)+' · '+esc(x.status)+(x.reason?' · '+esc(x.reason):'')+'</p>').join("")+'</div>':"")+
+   '<p class="os-footnote" style="padding:0 20px 20px">'+esc(plan.notice||"")+'</p></section>';
+ }
  function workflowPanel() {
   const list=workflows(),workflow=list.find(x=>x.id===state.selectedWorkflow)||list[0]||null,isNew=state.selectedWorkflow==="__new__";
   const item=isNew?{id:"",label:"",agent_id:agents()[0]?.id,schedule:"manual",enabled:false,steps:[],provider_id:"auto",cloud_consent:false,prompt:""}:workflow||{};
@@ -265,7 +294,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    '<div class="os-form-footer"><button class="os-btn primary" type="submit" '+(state.busy?"disabled":"")+'>Save workflow</button>'+
    (isNew?"":btn("Run now","run-workflow",item.id,"quiet"))+'</div>'+
    footnote("Automation creates reviewable proposals, not submissions. Recurring runs require an enabled private scheduler and the daily cloud-call budget.")+
-   '</form></section></div>'+note();
+   '</form></section></div>'+schedulerPanel()+note();
  }
  function preferencesPanel() {
   const p=prefs();
@@ -412,6 +441,16 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    await change(async()=>{
     await request("/api/providers/activate",{provider_id:id,allow_cloud_data:!provider.local});
     state.selectedProvider=id;state.message=provider.label+" is now the automatic workspace model.";
+   });return;
+  }
+  if(action==="refresh-preview"){
+   state.schedulePreviewRequested=false;state.schedulePreview=null;onChange();return;
+  }
+  if(action==="run-due"){
+   if(!window.confirm("Run all due and explicitly enabled workflows now? Approved cloud routes may incur token charges and may receive application evidence. No submissions or messages will be sent."))return;
+   await change(async()=>{
+    state.scheduleTick=await request("/api/scheduler/tick",{});
+    state.message="Scheduler check completed. Review attempted, skipped and failed workflows below.";
    });return;
   }
   if(action==="run-workflow"){

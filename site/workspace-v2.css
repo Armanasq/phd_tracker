@@ -372,3 +372,14 @@ body.dark .os-context-banner{background:#223155;border-color:#425780}
 .ops-metrics>div{min-width:0}
 @media(max-width:970px){.ops-columns{grid-template-columns:1fr}}
 @media(max-width:680px){.ops-document-grid{grid-template-columns:1fr}.ops-row{align-items:flex-start}.ops-row .os-actions{flex-wrap:wrap}}
+
+.os-schedule-list{display:grid;padding:0 18px 14px}
+.os-schedule-row{display:flex;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid var(--line);padding:13px 2px}
+.os-schedule-row>div:first-child{min-width:0}
+.os-schedule-row strong{display:block;font-size:12px}
+.os-schedule-row small{display:block;margin-top:3px;color:var(--muted);font-size:10px;overflow-wrap:anywhere}
+.os-schedule-summary{display:flex;gap:20px;flex-wrap:wrap;padding:14px 20px;color:var(--muted);font-size:11px}
+.os-schedule-results{border-top:1px solid var(--line);padding:14px 20px;font-size:11px}
+.os-schedule-results strong{font-size:12px}
+.os-schedule-results p{color:var(--muted);margin:6px 0}
+@media(max-width:680px){.os-schedule-row{align-items:flex-start;flex-direction:column}.os-schedule-summary{gap:10px}}
