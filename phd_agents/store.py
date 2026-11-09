@@ -168,10 +168,22 @@ class Store:
         if row is None:
             raise ValueError("Unknown conversation")
         messages = self.db.execute(
-            "SELECT role,content,model,provider_id,run_id,created_at FROM conversation_messages "
-            "WHERE conversation_id=? ORDER BY id ASC LIMIT 300", (conversation_id,),
+            "SELECT m.role,m.content,m.model,m.provider_id,m.run_id,m.created_at,r.payload AS run_payload "
+            "FROM conversation_messages AS m LEFT JOIN runs AS r ON r.id=m.run_id "
+            "WHERE m.conversation_id=? ORDER BY m.id DESC LIMIT 300", (conversation_id,),
         ).fetchall()
-        return {**dict(row), "messages": [dict(message) for message in messages]}
+        visible = []
+        for message in reversed(messages):
+            item = dict(message)
+            payload = json.loads(item.pop("run_payload")) if item.get("run_payload") else {}
+            if item["role"] == "assistant":
+                item["evidence_refs"] = payload.get("evidence_refs", [])
+                item["retrieval_method"] = payload.get("retrieval_method")
+                item["latency_ms"] = payload.get("latency_ms")
+                item["source_as_of"] = payload.get("source_as_of")
+                item["tools"] = payload.get("tools", [])
+            visible.append(item)
+        return {**dict(row), "messages": visible}
 
     def conversations(self, limit: int = 20) -> list[dict[str, Any]]:
         rows = self.db.execute(
