@@ -142,15 +142,20 @@ def evaluate(today: date, workbook: Path, data_dir: Path) -> dict:
         })
     run = load(data_dir / "latest_run.json", {})
     for record in run.get("source_statuses", []):
-        if record.get("status") not in ("contradiction_closed_portal", "review_source_changed", "contradiction_deadline_mismatch"):
+        status = record.get("status")
+        if status in {"contradiction_closed_portal", "review_source_changed", "contradiction_deadline_mismatch"}:
+            kind = "conflict"
+        elif status in {"unavailable", "response_too_large", "disallowed_host", "unsafe_redirect"}:
+            kind = "source_health"
+        else:
             continue
         sid = record["id"]
         application = record.get("application_id", sid)
         events.append({
-            "id": key_event("conflict", sid, record["status"]),
-            "kind": "conflict", "source_id": application, "monitor_id": sid, "name": application,
+            "id": key_event(kind, sid, status),
+            "kind": kind, "source_id": application, "monitor_id": sid, "name": application,
             "source": clean(record.get("source_url"), 300),
-            "evidence_status": record["status"],
+            "evidence_status": status,
         })
     discovery_health = load(data_dir / "discovery_report.json", {})
     for provider, stats in discovery_health.get("source_yield", {}).items():
@@ -179,7 +184,7 @@ def evaluate(today: date, workbook: Path, data_dir: Path) -> dict:
         for name, days in potential_assets.items()
     ]
     assets.sort(key=lambda x: (-x["leverage_index"], -x["potential_applications"], x["document"]))
-    events.sort(key=lambda x: (0 if x["kind"] == "conflict" else 1 if x["kind"] == "deadline" else 2,
+    events.sort(key=lambda x: (0 if x["kind"] == "conflict" else 1 if x["kind"] == "source_health" else 2 if x["kind"] == "deadline" else 3,
                                x.get("days", 9999), x["source_id"]))
     upcoming.sort(key=lambda x: (x["days"], x["source_id"]))
     return {"as_of": today.isoformat(), "upcoming": upcoming, "assets": assets, "events": events}
@@ -205,7 +210,7 @@ def apply_policy(events: list[dict], policy: dict, today: date) -> list[dict]:
                     raise ValueError("Invalid snooze date for " + sid)
         selected.append(event)
     selected.sort(key=lambda x: (
-        0 if x["kind"] == "conflict" else 1,
+        0 if x["kind"] == "conflict" else 1 if x["kind"] == "source_health" else 2,
         0 if x["source_id"] in priority else 1,
         0 if x["kind"] in ("deadline", "priority") else 1 if x["kind"] == "new_lead" else 2,
         x.get("days", 9999),
@@ -288,6 +293,8 @@ def digest(evaluated: dict, selected: list[dict]) -> str:
             lines.append(f'- Research paper, not a PhD vacancy: {item["name"]} ({item["source"]})')
         elif item["kind"] == "coverage_gap":
             lines.append(f'- Discovery coverage degraded or disabled: {item["name"]} — {item["detail"]}')
+        elif item["kind"] == "source_health":
+            lines.append(f'- Source monitor unavailable or unsafe: {item["source_id"]} ({item["evidence_status"]})')
         else:
             lines.append(f'- Conflicting evidence: {item["source_id"]} ({item["evidence_status"]})')
     if not selected:
@@ -320,6 +327,8 @@ def comment_body(selected: list[dict]) -> str:
             lines.append(f'- **Research only (not recruitment):** {item["name"]} — {item["source"]}')
         elif item["kind"] == "coverage_gap":
             lines.append(f'- **Discovery blind spot:** {item["name"]} — {item["detail"]}')
+        elif item["kind"] == "source_health":
+            lines.append(f'- **Source monitor outage:** {item["source_id"]}: {item["evidence_status"]} — {item["source"]}')
         else:
             lines.append(f'- **Contradiction:** {item["source_id"]}: {item["evidence_status"]} — {item["source"]}')
     lines.append("")
