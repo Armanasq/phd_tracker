@@ -8,6 +8,7 @@ on:
       - scripts/experience_engine.py
       - scripts/readme_studio.py
       - scripts/render_command_center.py
+      - .github/README_TEMPLATE.md
       - scripts/render_command_center.py
       - dashboard/template.html
       - dashboard/experience.css
