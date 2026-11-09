@@ -13,7 +13,10 @@ for attempt in 1 2 3; do
   python scripts/build_workspace.py --out site/data/workspace.json
   git add data/workspace_overrides.json site/data/workspace.json
   git commit -m "Confirm owner PhD application workspace update"
-  if git push origin HEAD:main; then exit 0; fi
+  if git push origin HEAD:main; then
+    gh workflow run publish-cockpit.yml --ref main || echo 'Publication dispatch unavailable; committed owner state is preserved'
+    exit 0
+  fi
   echo "Concurrent change; reapplying verified owner command" >&2
 done
 exit 1
