@@ -1,12 +1,12 @@
 {
-  "run_date": "2026-11-08",
+  "run_date": "2026-11-09",
   "new_ids": [],
   "new_count": 0,
   "seen_by_provider": {
     "academicpositions": 0,
     "academictransfer": 0,
     "brave": 0,
-    "inria": 12
+    "inria": 10
   },
   "source_errors": {
     "academicpositions": [
@@ -42,9 +42,9 @@
       "health": "disabled"
     },
     "inria": {
-      "observed": 12,
+      "observed": 10,
       "new_unique": 0,
-      "reobservations": 12,
+      "reobservations": 10,
       "unique_yield": 0.0,
       "health": "ok"
     }
