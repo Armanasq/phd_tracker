@@ -747,3 +747,14 @@ body.dark #atlasLens .lens-footer-status {background:var(--surface);border-color
   text-underline-offset:3px;color:var(--accent)
 }
 #atlasLens .lens-evidence p{color:var(--muted);font-size:10.5px;line-height:1.5;margin:9px 0}
+
+
+/* Readability and accessible operational labels across light surfaces. */
+.nav-btn em,.nav-btn.active em {color:#344743}
+.nav-btn.active em {color:#295b48}
+.runway-day.is-today .runway-weekday,.runway-day.is-today .runway-due {color:#304e43}
+.cal-day.today .cal-entry {color:#304e43}
+body.dark .nav-btn em {color:#d7e8dc}
+body.dark .nav-btn.active em {color:#e0f0e7}
+body.dark .runway-day.is-today .runway-weekday,body.dark .runway-day.is-today .runway-due {color:#d3e8da}
+body.dark .cal-day.today .cal-entry {color:#d3e8da}
