@@ -134,7 +134,7 @@ def evaluate(today: date, workbook: Path, data_dir: Path) -> dict:
         })
     run = load(data_dir / "latest_run.json", {})
     for record in run.get("source_statuses", []):
-        if record.get("status") not in ("contradiction_closed_portal", "review_source_changed"):
+        if record.get("status") not in ("contradiction_closed_portal", "review_source_changed", "contradiction_deadline_mismatch"):
             continue
         sid = record["id"]
         application = record.get("application_id", sid)
