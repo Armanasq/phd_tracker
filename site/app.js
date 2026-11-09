@@ -34,7 +34,7 @@ function riskPill(r){let x=risk(r);return pill(x,["Expired","Blocked","Confirmed
 function priority(r){return priorityScore(r,TODAY())}
 function filters(list){return applyRecordFilters(list,state,TODAY())}
 function sortList(list){return list.slice().sort((a,b)=>state.sort==="priority"?priority(b)-priority(a):state.sort==="name"?a.name.localeCompare(b.name):state.sort==="updated"?String(b.updated_at||"").localeCompare(String(a.updated_at||"")):(a.deadline||"9999").localeCompare(b.deadline||"9999")||a.name.localeCompare(b.name))}
-function heading(title,desc,buttons=""){return '<div class="heading"><div><div class="page-context">Fall 2027 &nbsp;/&nbsp; Applications</div><h1>'+escapeHTML(title)+'</h1><p>'+desc+'</p></div><div class="buttons">'+buttons+'</div></div>'}
+function heading(title,desc,buttons=""){const n=VIEWS.findIndex(([id])=>id===state.view)+1;return '<header class="heading"><div><div class="page-context"><span class="page-index">'+String(n).padStart(2,"0")+' / 11</span><span class="context-divider" aria-hidden="true"></span><span>2027 APPLICATION WORKSPACE</span></div><h1>'+escapeHTML(title)+'</h1><p>'+desc+'</p></div><div class="buttons">'+buttons+'</div></header>'}
 function kpi(name,value,caption){return'<div class="kpi"><div class="label">'+escapeHTML(name)+'</div><strong>'+escapeHTML(value)+'</strong><small>'+escapeHTML(caption)+'</small></div>'}
 function statCard(title,body){return'<section class="panel"><div class="panel-header"><h2>'+escapeHTML(title)+'</h2></div>'+body+'</section>'}
 function button(label,action,value,variant="secondary"){return'<button class="btn '+variant+'" type="button" data-action="'+escapeHTML(action)+'" data-value="'+escapeHTML(value||"")+'">'+escapeHTML(label)+'</button>'}
@@ -107,9 +107,22 @@ function dashboard(){
  const followups=active.filter(r=>r.followup&&days(r.followup)!==null&&days(r.followup)<=0).length;
  const failing=state.data.providers.filter(p=>p.health!=="ok").length;
  const collisions=deadlineCollisions(active,TODAY());
+ const nearest=active.filter(r=>{const d=days(r.deadline);return d!==null&&d>=0}).sort((a,b)=>days(a.deadline)-days(b.deadline)||priority(b)-priority(a))[0]||null;
+ const closingDays=nearest?days(nearest.deadline):null;
+ const timeZero=new Date(TODAY()+"T12:00:00Z");
+ const runway=Array.from({length:7},(_,offset)=>{
+  const date=new Date(timeZero);date.setUTCDate(date.getUTCDate()+offset);
+  const iso=date.toISOString().slice(0,10),due=active.filter(r=>r.deadline===iso).length;
+  const weekday=offset===0?"TODAY":new Intl.DateTimeFormat("en-GB",{weekday:"short",timeZone:"UTC"}).format(date).toUpperCase();
+  return '<button type="button" class="runway-day'+(due?' has-due':'')+(offset===0?' is-today':'')+'" data-action="nav" data-value="calendar" aria-label="'+escapeHTML(stamp(iso)+': '+due+' recorded closings. Open calendar.')+'"><span class="runway-weekday">'+weekday+'</span><span class="runway-daynumber">'+date.getUTCDate()+'</span><span class="runway-due">'+(due?due+' DUE':'—')+'</span></button>';
+ }).join("");
  return '<div class="today-head"><div><div class="desk-kicker">Fall 2027 &nbsp; · &nbsp; '+escapeHTML(stamp(TODAY()))+'</div><h1>Today’s work</h1><p>Deadlines, decisions and evidence requiring attention.</p></div><div class="buttons">'+button("All applications","nav","applications")+button("Open actions","nav","actions","primary")+'</div></div>'+
+ '<section class="decision-brief" aria-label="Next recorded application closing"><div class="decision-brief-label"><span>01 / NEXT RECORDED CLOSING</span><span>DEADLINE INTELLIGENCE ↗</span></div>' +
+ (nearest?'<div class="decision-brief-body"><div class="decision-brief-days"><strong>'+(closingDays===0?'TODAY':String(closingDays).padStart(2,'0'))+'</strong><span>'+(closingDays===0?'SUBMISSION DATE':'DAYS REMAINING')+'</span></div><div class="decision-brief-context"><button type="button" class="decision-brief-link" data-action="record" data-value="'+escapeHTML(nearest.id)+'">'+escapeHTML(nearest.name)+'</button><span>'+escapeHTML(stamp(nearest.deadline))+' · '+escapeHTML(nearest.country||'Country unrecorded')+'</span></div></div>':'<div class="decision-brief-none">No upcoming dated calls are recorded. Undated opportunities remain in the registry.</div>')+
+ '<div class="decision-brief-bottom"><span>Whole dates are not verified portal closing times.</span><button type="button" data-action="nav" data-value="calendar">Open calendar ↗</button></div></section>'+
  '<div class="source-strip"><span><strong>Evidence dated '+escapeHTML(stamp(state.data.as_of))+'</strong> &nbsp;·&nbsp; '+tracked.length+' tracked applications &nbsp;·&nbsp; '+state.data.meta.candidates+' additional candidates</span>'+link(state.data.source_links.opportunities,"Source records")+'</div>'+
  '<div class="kpis">'+kpi("Tracked applications",tracked.length,"Source-backed records")+kpi("Due today",today.length,"Check portal cutoff")+kpi("Next 7 days",week.length,"Recorded dates")+kpi("Needs verification",verify.length,"Official evidence review")+kpi("Confirmed submissions",tracked.filter(r=>r.status==="submitted"&&r.status_confirmed).length,"Owner-confirmed only")+'</div>'+
+ '<section class="runway" aria-label="Seven-day recorded deadline runway"><div class="runway-intro"><div><span class="runway-overline">02 / TIME HORIZON</span><h2>Next seven days</h2></div><span>Recorded closing dates · source-backed</span></div><div class="runway-days">'+runway+'</div></section>'+
  '<div class="desk-grid"><section class="desk-section"><div class="desk-header"><h2>Priority queue</h2><span>'+queue.length+' next decisions</span></div><div class="agenda">'+queue.map((r,i)=>
   '<div class="agenda-item"><span class="agenda-number">'+String(i+1).padStart(2,"0")+'</span><div class="agenda-main">'+rowButton(r)+
   '<div class="agenda-meta"><span>'+escapeHTML(r.id)+'</span><span>·</span><span>'+escapeHTML(stamp(r.deadline))+'</span><span>·</span><span>'+escapeHTML(verifiedLabel(r.verification))+'</span></div>'+
