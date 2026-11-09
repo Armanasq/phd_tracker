@@ -278,6 +278,26 @@ class ApiHandler(BaseHTTPRequestHandler):
         else:
             self.static(path)
 
+    def inference_reply(self, path: str, data: dict, operation) -> None:
+        key = self.headers.get("Idempotency-Key")
+        if key is None:
+            self.send_json(operation())
+            return
+        state, cached = self.request_store.begin_idempotent(key, path, data)
+        if state == "replayed":
+            self.send_json(cached)
+            return
+        if state == "running":
+            self.send_json({"error": "Request with this idempotency key is still processing"}, 409)
+            return
+        try:
+            result = operation()
+            self.request_store.complete_idempotent(key, result)
+        except Exception:
+            self.request_store.abort_idempotent(key)
+            raise
+        self.send_json(result)
+
     def post_route(self, path: str, data: dict) -> None:
         store = self.request_store
         root = self.server.root
@@ -370,7 +390,7 @@ class ApiHandler(BaseHTTPRequestHandler):
                 raise ValueError("Configure available hours per week in your private applicant profile")
             self.send_json(resource_schedule(records, today, hours, profile))
         elif path == "/api/agents/run":
-            self.send_json(run_agent(store, root,
+            self.inference_reply(path, data, lambda: run_agent(store, root,
                                      agent_id=data["agent_id"], provider_id=data.get("provider_id"),
                                      application_id=data.get("application_id"), input_text=data.get("input_text", ""),
                                      cloud_consent=data.get("cloud_consent") is True,
@@ -380,7 +400,7 @@ class ApiHandler(BaseHTTPRequestHandler):
             identity = unquote(path[len("/api/conversations/"):-len("/delete")].strip("/"))
             self.send_json({"deleted": store.delete_conversation(identity)})
         elif path == "/api/workflows/run":
-            self.send_json(run_workflow(store, root,
+            self.inference_reply(path, data, lambda: run_workflow(store, root,
                                         workflow_id=data["workflow_id"], provider_id=data.get("provider_id"),
                                         application_id=data.get("application_id"), input_text=data.get("input_text", ""),
                                         cloud_consent=data.get("cloud_consent") is True))

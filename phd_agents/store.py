@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import sqlite3
 import stat
 import tempfile
@@ -52,6 +53,7 @@ class Store:
         CREATE TABLE IF NOT EXISTS audit(id INTEGER PRIMARY KEY AUTOINCREMENT, action TEXT NOT NULL, subject TEXT NOT NULL, created_at TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS schedule(id TEXT PRIMARY KEY, last_period TEXT NOT NULL, updated_at TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS schedule_claims(id TEXT PRIMARY KEY, period TEXT NOT NULL, token TEXT NOT NULL, claimed_at TEXT NOT NULL, expires_at TEXT NOT NULL, cloud_calls INTEGER NOT NULL, day_start TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS request_idempotency(key TEXT PRIMARY KEY, endpoint TEXT NOT NULL, digest TEXT NOT NULL, state TEXT NOT NULL, response TEXT, expires_at TEXT NOT NULL);
         CREATE INDEX IF NOT EXISTS idx_schedule_claims_active ON schedule_claims(day_start,expires_at);
         CREATE TABLE IF NOT EXISTS private_objects(kind TEXT NOT NULL, id TEXT NOT NULL, payload TEXT NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY(kind,id));
         CREATE TABLE IF NOT EXISTS conversations(
@@ -153,6 +155,54 @@ class Store:
 
     def close(self) -> None:
         self.db.close()
+
+    def begin_idempotent(
+        self, key: str, endpoint: str, payload: dict[str, Any],
+    ) -> tuple[str, dict[str, Any] | None]:
+        if not isinstance(key, str) or not re.fullmatch(r"[A-Za-z0-9_.-]{16,128}", key):
+            raise ValueError("Idempotency-Key must contain 16–128 safe characters")
+        if endpoint not in {"/api/agents/run", "/api/workflows/run"}:
+            raise ValueError("Idempotency is unavailable for this endpoint")
+        digest = hashlib.sha256(
+            json.dumps(payload, sort_keys=True, ensure_ascii=False, separators=(",", ":")).encode("utf-8")
+        ).hexdigest()
+        now = datetime.now(timezone.utc)
+        cutoff = now.isoformat(timespec="seconds")
+        lease_until = (now + timedelta(minutes=15)).isoformat(timespec="seconds")
+        with self.db:
+            self.db.execute("BEGIN IMMEDIATE")
+            self.db.execute("DELETE FROM request_idempotency WHERE expires_at<=?", (cutoff,))
+            row = self.db.execute(
+                "SELECT endpoint,digest,state,response FROM request_idempotency WHERE key=?", (key,)
+            ).fetchone()
+            if row:
+                if row["endpoint"] != endpoint or row["digest"] != digest:
+                    raise ConflictError("Idempotency key was already used with another request")
+                if row["state"] == "completed" and row["response"]:
+                    return "replayed", json.loads(row["response"])
+                return "running", None
+            self.db.execute(
+                "INSERT INTO request_idempotency(key,endpoint,digest,state,response,expires_at) VALUES(?,?,?,?,?,?)",
+                (key, endpoint, digest, "running", None, lease_until),
+            )
+        return "claimed", None
+
+    def complete_idempotent(self, key: str, response: dict[str, Any]) -> None:
+        expires = (datetime.now(timezone.utc) + timedelta(days=1)).isoformat(timespec="seconds")
+        with self.db:
+            updated = self.db.execute(
+                "UPDATE request_idempotency SET state='completed',response=?,expires_at=? "
+                "WHERE key=? AND state='running'",
+                (json.dumps(response, ensure_ascii=False), expires, key),
+            ).rowcount
+            if updated != 1:
+                raise ConflictError("Idempotent request lease no longer exists")
+
+    def abort_idempotent(self, key: str) -> None:
+        with self.db:
+            self.db.execute(
+                "DELETE FROM request_idempotency WHERE key=? AND state='running'", (key,)
+            )
 
     def get_custom(self, kind: str) -> list[dict[str, Any]]:
         if kind not in {"provider", "agent", "workflow", "connection", "setting"}:

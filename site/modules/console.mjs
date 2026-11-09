@@ -56,7 +56,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
  async function request(path,body) {
   const controller = new AbortController();
   const options = {cache:"no-store",signal:controller.signal,headers:{"Accept":"application/json"}};
-  if(body!==undefined){options.method="POST";options.headers["Content-Type"]="application/json";options.body=JSON.stringify(body);}
+  if(body!==undefined){options.method="POST";options.headers["Content-Type"]="application/json";options.body=JSON.stringify(body);if(["/api/agents/run","/api/workflows/run"].includes(path)&&globalThis.crypto?.randomUUID)options.headers["Idempotency-Key"]=globalThis.crypto.randomUUID();}
   const response = await fetch("./"+path.replace(/^\//,""),options);
   const result = await response.json().catch(()=>({error:"The private backend returned an unreadable response"}));
   if(!response.ok) throw new Error(result.error || "Private runtime returned HTTP "+response.status);
