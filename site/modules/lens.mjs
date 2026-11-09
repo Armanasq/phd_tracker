@@ -2,7 +2,7 @@ const byId=id=>document.getElementById(id);
 const escapeHTML=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const short=(value,n=160)=>String(value??"").slice(0,n);
 const safeLink=value=>{try{const u=new URL(value);return u.protocol==="https:"?u.href:null}catch{return null}};
-const icon=(name)=>({lens:'<circle cx="12" cy="12" r="4"/><ellipse cx="12" cy="12" rx="10" ry="5" transform="rotate(-35 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="5" transform="rotate(35 12 12)"/>',close:'<path d="m5 5 14 14M19 5 5 19"/>',expand:'<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 4v7H4m16 2h-7v7"/>',shrink:'<path d="M4 4h8v8H4zm8 8h8v8h-8z"/>',plus:'<path d="M12 4v16M4 12h16"/>',send:'<path d="m5 12 14-7-5 14-2.5-6.5L5 12zm6.5.5L19 5"/>',arrow:'<path d="M4 12h15m-6-6 6 6-6 6"/>',copy:'<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>',settings:'<circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/>',stop:'<rect x="6" y="6" width="12" height="12" rx="2"/>'})[name]||"";
+const icon=(name)=>({lens:'<circle cx="12" cy="12" r="4"/><ellipse cx="12" cy="12" rx="10" ry="5" transform="rotate(-35 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="5" transform="rotate(35 12 12)"/>',close:'<path d="m5 5 14 14M19 5 5 19"/>',expand:'<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 4v7H4m16 2h-7v7"/>',shrink:'<path d="M4 4h8v8H4zm8 8h8v8h-8z"/>',plus:'<path d="M12 4v16M4 12h16"/>',send:'<path d="m5 12 14-7-5 14-2.5-6.5L5 12zm6.5.5L19 5"/>',arrow:'<path d="M4 12h15m-6-6 6 6-6 6"/>',history:'<path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/><path d="M12 7v5l3 2"/>',copy:'<rect x="8" y="8" width="12" height="12" rx="2"/>'<path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>',settings:'<circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3"/>',stop:'<rect x="6" y="6" width="12" height="12" rx="2"/>'})[name]||"";
 const svg=name=>'<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6">'+icon(name)+'</svg>';
 const card=(number,label)=>'<div><strong>'+escapeHTML(number)+'</strong><small>'+escapeHTML(label)+'</small></div>';
 const prompts=[
@@ -13,13 +13,66 @@ const prompts=[
 ];
 export function mountAtlasLens({getRecords,getView,getSelectedApplication,openSettings,onFocusApplication,onRunComplete}){
  if(byId("atlasLens"))return;
- const state={open:false,expanded:false,busy:false,connected:false,verified:false,provider:"",model:"",agent:"",agents:[],applicationId:"",turns:[],draft:"",trace:null,abort:null,error:"",sourceAsOf:""};
+ const state={open:false,expanded:false,busy:false,connected:false,verified:false,provider:"",model:"",agent:"",agents:[],applicationId:"",turns:[],draft:"",trace:null,abort:null,error:"",sourceAsOf:"",providerStates:{},providers:[],routes:{},routeSource:"",routeState:"",routeReason:"",conversationId:null,conversations:[],historyOpen:false,hydrated:false};
  const root=document.createElement("div");root.id="atlasLens";document.body.appendChild(root);
  const focusable='button:not([disabled]),select:not([disabled]),textarea:not([disabled]),a[href]';
  let focusReturn=null;let requestSequence=0;
  const records=()=>{try{const data=getRecords?.();return Array.isArray(data)?data:[]}catch{return []}};
  const isLocal=()=>["localhost","127.0.0.1"].includes(location.hostname)&&location.protocol==="http:";
  const selected=()=>records().find(x=>x.id===state.applicationId);
+ const threadStorageKey="phd-atlas-private-thread-v1";
+ const routeNames={request_override:"Request override",agent_assignment:"Agent assignment",workspace_default:"Workspace default"};
+ function syncRoute(){
+   const route=state.routes[state.agent];
+   const provider=state.providers.find(p=>p.id===route?.provider_id);
+   state.provider=route?.provider_label||provider?.label||"Not configured";
+   state.model=route?.model||provider?.model||"";
+   state.routeSource=routeNames[route?.source]||"Not assigned";
+   state.routeState=route?.state||"needs_setup";
+   state.routeReason=state.providerStates[route?.provider_id]?.reason||"";
+   state.verified=Boolean(route?.allowed&&route?.state==="responded");
+ }
+ function clearThread(){
+   state.conversationId=null;state.turns=[];state.historyOpen=false;state.error="";
+   try{localStorage.removeItem(threadStorageKey)}catch{}
+ }
+ async function fetchThreads(){
+   if(!state.connected)return;
+   try{
+     const r=await fetch("./api/conversations",{cache:"no-store"});
+     if(r.ok){const data=await r.json();state.conversations=Array.isArray(data.conversations)?data.conversations:[]}
+   }catch{}
+ }
+ async function openThread(identity,{silent=false}={}){
+   if(!state.connected||!/^[a-f0-9]{32}$/.test(String(identity)))return;
+   const response=await fetch("./api/conversations/"+encodeURIComponent(identity),{cache:"no-store"});
+   if(!response.ok)throw Error("Conversation not available");
+   const data=await response.json();
+   if(!state.agents.some(a=>a.id===data.agent_id))throw Error("Conversation agent is no longer registered");
+   state.agent=data.agent_id;
+   state.applicationId=data.application_id&&records().some(x=>x.id===data.application_id)?data.application_id:"";
+   state.conversationId=data.id;
+   state.turns=(data.messages||[]).map(m=>({role:m.role,text:m.content,model:m.model,provider:m.provider_id,agent:data.agent_id,
+     id:m.run_id,latency:m.latency_ms,sourceAsOf:m.source_as_of,evidence_refs:m.evidence_refs||[],retrievalMethod:m.retrieval_method,tools:m.tools||[],openTrace:false}));
+   state.historyOpen=false;state.error="";syncRoute();
+   try{localStorage.setItem(threadStorageKey,data.id)}catch{}
+   if(!silent){render();const h=byId("lensHistory");if(h)h.scrollTop=h.scrollHeight}
+ }
+ async function deleteThread(identity){
+   if(!state.connected||!window.confirm("Delete this private conversation and its messages?"))return;
+   const r=await fetch("./api/conversations/"+encodeURIComponent(identity)+"/delete",{method:"POST",headers:{"Content-Type":"application/json"},body:"{}"});
+   if(!r.ok)throw Error("Could not delete conversation");
+   if(identity===state.conversationId)clearThread();
+   await fetchThreads();render();
+ }
+ function historyMenu(){
+   if(!state.historyOpen)return "";
+   return '<div class="lens-thread-menu" role="group" aria-label="Recent private conversations"><div class="lens-thread-heading">Recent conversations</div>'+
+     (state.conversations.length?state.conversations.slice(0,15).map(item=>
+       '<div class="lens-thread-row"><button type="button" class="lens-thread-open" data-lens="open-thread" data-id="'+escapeHTML(item.id)+'"><strong>'+escapeHTML(short(item.title,85))+'</strong><small>'+escapeHTML(item.updated_at||"")+'</small></button>'+
+       '<button type="button" class="lens-thread-remove" data-lens="delete-thread" data-id="'+escapeHTML(item.id)+'" aria-label="Delete conversation '+escapeHTML(short(item.title,45))+'">Delete</button></div>'
+     ).join(""):'<p class="lens-thread-empty">No saved conversations yet.</p>')+'</div>';
+ }
  function contextOptions(){
  const rows=records().filter(x=>x.record_type==="tracked").slice(0,400);
  return '<option value="">Portfolio · all applications</option>'+rows.map(x=>'<option value="'+escapeHTML(x.id)+'"'+(state.applicationId===x.id?" selected":"")+'>'+escapeHTML(short(x.name,69))+'</option>').join("");
@@ -36,10 +89,11 @@ export function mountAtlasLens({getRecords,getView,getSelectedApplication,openSe
  return '<section class="lens-hero"><h2>'+(chosen?'Ask about this application':'How can I help?')+'</h2><p>'+(chosen?'Review its deadlines, requirements, and unresolved evidence.':'Ask about your applications, deadlines, research fit, or next actions.')+'</p><div class="lens-facts">'+card(c.tracked,"Tracked records")+card(c.upcoming,"Future dated records")+card(c.unknown,"Not verified")+'</div><div class="lens-section-label">Suggested questions</div><div class="lens-prompts">'+prompts.map(p=>'<button type="button" class="lens-prompt" data-lens="prompt" data-value="'+escapeHTML(p.value)+'"><strong>'+escapeHTML(p.title)+'</strong>'+svg("arrow")+'</button>').join("")+'</div></section>';
  }
  function offline(){
- return '<div class="lens-offline"><h3>Model not connected</h3><p>This public site is read-only. To use your configured AI models, open Atlas from the private runtime on your machine.</p><code>python -m phd_agents serve --port 8765</code><button type="button" data-lens="refresh">Check connection</button></div>';
+   if(!state.connected)return '<div class="lens-offline"><h3>Private model unavailable</h3><p>GitHub Pages cannot run private inference. Open Atlas through the locally hosted runtime.</p><code>python -m phd_agents serve --port 8765</code><button type="button" data-lens="refresh">Retry connection</button></div>';
+   return '<div class="lens-offline"><h3>Model needs verification</h3><p>'+escapeHTML(state.routeReason||"Verify the selected agent's model in Settings before sending messages.")+'</p><button type="button" data-lens="settings">Open model settings</button> <button type="button" data-lens="refresh">Retry</button></div>';
  }
  function feed(){
- if(!state.turns.length)return hero()+(state.connected?"":offline());
+ if(!state.turns.length)return hero()+(state.verified?"":offline());
  return '<div class="lens-feed">'+state.turns.map((t,i)=>{
  if(t.role==="user")return '<div class="lens-turn user" data-index="'+i+'"><div class="lens-body">'+escapeHTML(t.text)+'</div></div>';
  return '<article class="lens-turn assistant" data-index="'+i+'"><div class="lens-speaker"><span>Atlas</span> / '+escapeHTML(t.model||"Assistant")+'</div><div class="lens-body">'+escapeHTML(t.text)+'</div>'+
