@@ -8,6 +8,7 @@ on:
       - site/**
       - scripts/build_workspace.py
       - tests/site_smoke.cjs
+      - tests/local_records_smoke.cjs
       - tests/ai_studio_smoke.cjs
       - tests/all_routes_audit.cjs
       - tests/mobile_layout_audit.cjs
