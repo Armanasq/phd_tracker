@@ -53,6 +53,7 @@ jobs:
           python scripts/build_workspace.py --out site/data/workspace.json
           python -m unittest discover -s tests -p 'test_workspace.py'
           node --check site/app.js
+          node --check site/modules/lens.mjs
           node --check site/modules/console.mjs
           node --check site/modules/operations.mjs
           node --test tests/domain.test.mjs
@@ -60,6 +61,7 @@ jobs:
           test -s site/index.html
           test -s site/style.css
           test -s site/workspace-v2.css
+          test -s site/quiet.css
           test -s site/modules/console.mjs
           mkdir -p site/evidencegraph
           cp dashboard/index.html site/evidencegraph/index.html
