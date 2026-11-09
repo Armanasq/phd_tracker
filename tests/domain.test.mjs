@@ -45,7 +45,7 @@ test("optimistic draft conflict detection does not overwrite newer source state"
  assert.equal(draftState(draft,{...base,updated_at:"2026-11-08T10:00:00Z"}),"draft");
  assert.equal(draftState({...draft,_sync_status:"pending"},{...base,updated_at:"2026-11-08T10:00:00Z"}),"pending");
  assert.equal(draftState(draft,{...base,updated_at:"2026-11-09T10:00:00Z"}),"conflict");
- assert.equal(draftState({...draft,status:"submitted"},{...base,updated_at:"2026-11-09T10:00:00Z",status:"submitted"}),"committed");
+ assert.equal(draftState({...draft,status:"submitted",_sync_status:"pending"},{...base,updated_at:"2026-11-09T10:00:00Z",status:"submitted"}),"committed");
  assert.equal(draftState({status:"preparing"},base),"needs-review");
 });
 test("deadline collision classification requires two actionable tracked opportunities",()=>{
