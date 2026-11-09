@@ -50,3 +50,7 @@ The **Operations** route now includes owner-maintained application state, refere
 ## Per-model execution parameters
 
 Each provider configuration now supports a bounded request timeout (10–180 seconds), an output-token ceiling (64–16,384), and an optional sampling temperature. Temperature is omitted from the wire request unless explicitly configured, because some reasoning models reject that parameter. Token limit parameter compatibility remains configurable for providers that use `max_completion_tokens` instead of `max_tokens`. These defaults are per provider and persist for all agents using that route.
+
+## Prioritized proof obligations
+
+The Operations control center includes a deterministic evidence work queue. It ranks recorded missing cutoff verification, source review, document readiness, submission receipts, referee portal confirmations and conflicting evidence claims using explicit task weights and deadline proximity. Every row links to the appropriate editor. Scores are **heuristic triage scores**, not admission probabilities or validated requirements; all claims remain provisional until independently verified.

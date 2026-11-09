@@ -15,7 +15,7 @@ const dates=x=>!x?"Unrecorded":String(x);
 const options=choices=>choices.map(x=>[x,title(x)]);
 
 export function createOperations({request,onChange,onReload,getRecords,notify}){
- const state={data:null,loading:false,loadedAttempt:false,tab:"overview",busy:false,editing:null,kind:null,applicationId:"",schedule:null,message:""};
+ const state={data:null,loading:false,loadedAttempt:false,tab:"overview",busy:false,editing:null,kind:null,applicationId:"",schedule:null,showProof:false,message:""};
  const records=()=>getRecords().filter(x=>x.record_type==="tracked");
  const apps=()=>records().map(r=>[r.id,r.name]);
  const byId=id=>records().find(x=>x.id===id)||null;
@@ -34,10 +34,19 @@ export function createOperations({request,onChange,onReload,getRecords,notify}){
   ].map(([v,label])=>'<div><strong>'+v+'</strong><span>'+label+'</span></div>').join("")+'</div>';
  }
  function overview(){
+  const queue=d().proof_queue||{total:0,items:[]};
+  const proofItems=state.showProof?queue.items:(queue.items||[]).slice(0,10);
+  const proofPanel=section("Priority evidence work queue",
+   "Transparent proof-obligation triage, not admissions probability. Every action requires original evidence.",
+   '<div class="ops-rows">'+proofItems.map(item=>
+    '<div class="ops-row"><div><strong>'+esc(item.application)+'</strong><small>'+esc(item.action)+' · '+esc(item.proof_needed)+'</small></div>'+
+    '<div class="os-actions"><span class="os-badge">'+esc(item.heuristic_priority)+' triage</span>'+button("Inspect","proof",item.id)+'</div></div>').join("")+
+   (proofItems.length?"":'<p class="os-empty">No outstanding proof obligations identified in the tracked data.</p>')+'</div>'+
+   (queue.total>10?'<div class="os-form-footer" style="padding:10px 20px 20px">'+button(state.showProof?"Show top ten":"Show all "+queue.items.length,"toggle-proof")+'</div>':""));
   const matrix=d().referee_matrix||{},urgent=(matrix.requests||[]).filter(r=>r.needs_attention).slice(0,12),
    conflicts=d().evidence_conflicts||[],
    upcoming=(d().deadline_events||[]).filter(e=>e.days_left!==null&&e.days_left>=0).slice(0,12);
-  return '<div class="ops-columns">'+
+  return proofPanel+'<div class="ops-columns">'+
    section("Upcoming proof obligations","Dates are not fully verified until an official cutoff time, time zone and primary source agree.",
    '<div class="ops-rows">'+upcoming.map(item=>
     '<div class="ops-row"><div><strong>'+esc(byId(item.application_id)?.name||item.application_id)+'</strong><small>'+esc(item.kind)+' · '+esc(item.date||"Unknown")+' · '+(item.cutoff_fully_verified?"Cutoff verified":"Cutoff unverified")+'</small></div><span class="os-badge '+(item.cutoff_fully_verified?"good":"warn")+'">'+esc(item.days_left)+' days</span></div>').join("")+
@@ -206,6 +215,12 @@ export function createOperations({request,onChange,onReload,getRecords,notify}){
   event.preventDefault();
   const action=element.dataset.opsAction,id=element.dataset.id||"";
   if(action==="tab"){state.tab=id;state.editing=null;state.kind=null;onChange();return;}
+  if(action==="toggle-proof"){state.showProof=!state.showProof;onChange();return;}
+  if(action==="proof"){
+   const task=d().proof_queue?.items?.find(x=>x.id===id);
+   if(task){state.applicationId=task.application_id;state.tab=task.target_section;state.editing=null;state.kind=null;onChange();}
+   return;
+  }
   if(action==="new"){state.kind=id;state.editing=null;onChange();return;}
   if(action==="close-edit"){state.kind=null;state.editing=null;onChange();return;}
   if(action==="edit"){const [kind,...parts]=id.split(":");state.kind=kind;state.editing=parts.join(":");onChange();return;}
