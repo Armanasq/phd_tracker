@@ -60,6 +60,47 @@ class InstanceTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 resolve_data_mode("NewOwner/new-atlas", "inherit")
 
+    def test_independent_sources_fail_closed_on_missing_file_and_private_fields(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "data").mkdir()
+            with self.assertRaisesRegex(ValueError, "user_opportunities.json"):
+                build(root, repository="ForkOwner/my-tracker", data_mode="source")
+            path = root / "data" / "user_opportunities.json"
+            for values in (
+                [{"id": "mine", "name": "My programme", "notes": "Private applicant note"}],
+                [{"id": "mine", "name": "My programme", "verification": "source_verified"}],
+                [{"id": "mine", "name": "My programme", "source_url": "http://example.org"}],
+                [{"id": "mine", "name": "My programme"}, {"id": "mine", "name": "Duplicate ID"}],
+            ):
+                path.write_text(json.dumps({"schema_version": 1, "records": values}), encoding="utf-8")
+                with self.assertRaises(ValueError):
+                    build(root, repository="ForkOwner/my-tracker", data_mode="source")
+
+    def test_independent_owner_state_is_separate_from_upstream_overrides(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "data").mkdir()
+            (root / "data" / "user_opportunities.json").write_text(json.dumps({
+                "schema_version": 1, "records": [{
+                    "id": "APP1", "name": "Mine", "source_url": "https://university.example.edu/phd",
+                    "source_date": "2026-11-09", "evidence": "Official source reviewed",
+                    "verification": "source_verified", "documents": ["academic_cv"],
+                }],
+            }), encoding="utf-8")
+            (root / "data" / "workspace_overrides.json").write_text(json.dumps({
+                "records": {"APP1": {"status": "rejected"}},
+            }), encoding="utf-8")
+            (root / "data" / "user_workspace_overrides.json").write_text(json.dumps({
+                "records": {"APP1": {"status": "preparing", "documents": {"academic_cv": "in_progress"}}},
+            }), encoding="utf-8")
+            snapshot = build(root, repository="ForkOwner/my-tracker", data_mode="source")
+            record = snapshot["records"][0]
+            self.assertEqual(record["status"], "preparing")
+            self.assertEqual(record["document_states"]["academic_cv"], "in_progress")
+            self.assertEqual(record["verification"], "source_verified")
+            self.assertIsNone(snapshot["as_of"])
+
     def test_metadata_is_prepared_for_fork_without_touching_source(self):
         with tempfile.TemporaryDirectory() as directory:
             site = Path(directory)
@@ -88,7 +129,11 @@ class InstanceTests(unittest.TestCase):
             (root / "data").mkdir()
             (root / "data" / "experience_view.json").write_text(json.dumps({
                 "as_of": "2026-11-09",
-                "applications": [{"id": "own-1", "name": "Documented opportunity", "deadline": "2027-01-31"}],
+                "applications": [{"id": "inherited", "name": "Not mine", "deadline": "2027-01-31"}],
+            }), encoding="utf-8")
+            (root / "data" / "user_opportunities.json").write_text(json.dumps({
+                "schema_version": 1, "as_of": "2026-11-09", "timezone": "Europe/Berlin",
+                "records": [{"id": "own-1", "name": "Documented opportunity", "deadline": "2027-01-31"}],
             }), encoding="utf-8")
             with patch.dict(os.environ, {"PHD_ATLAS_ACTION_ISSUE": ""}):
                 snapshot = build(root, repository="ForkOwner/my-tracker", data_mode="source")
@@ -97,7 +142,8 @@ class InstanceTests(unittest.TestCase):
             self.assertIn("template=00-owner-action-center.md", snapshot["source_links"]["control_issue"])
             self.assertEqual(snapshot["instance"]["type"], "independent")
             self.assertEqual(snapshot["meta"]["tracked"], 1)
-            self.assertEqual([item["path"] for item in snapshot["coverage"]["files"]], ["data/experience_view.json"])
+            self.assertEqual([item["path"] for item in snapshot["coverage"]["files"]], ["data/user_opportunities.json"])
+            self.assertNotIn("inherited", json.dumps(snapshot))
 
 
 if __name__ == "__main__":
