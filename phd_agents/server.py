@@ -438,7 +438,10 @@ class ApiHandler(BaseHTTPRequestHandler):
 
     def static(self, path: str) -> None:
         relative = unquote(path).lstrip("/") or "index.html"
-        if relative.startswith("api/") or "\x00" in relative:
+        if relative.startswith("api/"):
+            self.send_json({"error": "Unknown API endpoint"}, 404)
+            return
+        if "\x00" in relative:
             raise ValueError("Invalid static path")
         site_root = self.server.site.resolve()
         target = (site_root / relative).resolve()

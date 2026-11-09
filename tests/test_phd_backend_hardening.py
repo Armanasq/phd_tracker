@@ -150,6 +150,13 @@ class HttpBoundaryTests(unittest.TestCase):
         self.assertEqual(self._status(f"localhost:{port}", f"http://localhost:{port}"), 200)
         self.assertEqual(self._status(f"localhost:{port}", f"http://localhost:{port+1}"), 403)
 
+    def test_unknown_private_api_does_not_fall_through_static_router(self) -> None:
+        target = "http://127.0.0.1:" + str(self.server.server_port) + "/api/does-not-exist"
+        with self.assertRaises(HTTPError) as error:
+            urlopen(target, timeout=4)
+        self.assertEqual(error.exception.code, 404)
+        self.assertIn("Unknown API endpoint", error.exception.read().decode("utf-8"))
+
     def test_rejects_ambiguous_transfer_framing(self) -> None:
         port = self.server.server_port
         connection = http.client.HTTPConnection("127.0.0.1", port, timeout=3)
