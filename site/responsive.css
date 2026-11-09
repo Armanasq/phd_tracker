@@ -83,6 +83,7 @@
  }
  .kpis>.kpi:nth-child(2n){border-right:0}
  .kpis>.kpi:nth-child(n+3){border-top:1px solid var(--line)}
+ .kpis>.kpi:last-child{grid-column:auto}
  .kpis>.kpi:last-child:nth-child(odd){grid-column:1/-1;border-right:0;min-height:102px}
  .kpis>.kpi .label{font-size:12px;line-height:1.45;font-weight:580;overflow-wrap:anywhere}
  .kpis>.kpi strong{font-size:30px;line-height:1.12;margin:10px 0 7px}

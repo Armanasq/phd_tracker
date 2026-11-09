@@ -48,7 +48,9 @@ async function main(){
       const pagebox=rect(content);
       const style=getComputedStyle(content);
       const inner={left:pagebox.left+parseFloat(style.paddingLeft),right:pagebox.right-parseFloat(style.paddingRight)};
-      const kpis=[...document.querySelectorAll('#body .kpi')].map(el=>{
+      const kpiEls=[...document.querySelectorAll('#body .kpi')];
+      const kpiLastColumn=kpiEls.length?getComputedStyle(kpiEls.at(-1)).gridColumn:null;
+      const kpis=kpiEls.map(el=>{
        const r=rect(el),s=getComputedStyle(el),l=el.querySelector('.label'),label=l?rect(l):null;
        return {left:r.left,right:r.right,padLeft:parseFloat(s.paddingLeft),padRight:parseFloat(s.paddingRight),label};
       });
@@ -64,7 +66,7 @@ async function main(){
       const clipped=programme?programme.scrollHeight>programme.clientHeight+2:false;
       const panels=[...document.querySelectorAll('#body>.panel,#body>.assurance-layout,#body>.registry-summary,#body>.operational-hero,#body>.kpis')].map(el=>({name:el.className,...rect(el)}));
       const issues=[...document.querySelectorAll('#body .registry-summary>div')].map(el=>parseFloat(getComputedStyle(el).paddingLeft));
-      return {sidebar,brand,navigation,documentOverflow,pagebox,inner,kpis,topButtons,intersect,clipped,panels,issues};
+      return {sidebar,brand,navigation,documentOverflow,pagebox,inner,kpis,kpiLastColumn,topButtons,intersect,clipped,panels,issues};
      });
      assert.ok(report.documentOverflow<=2,width+'px '+view+' document horizontal overflow: '+report.documentOverflow);
      assert.ok(report.sidebar.height<=82,width+'px '+view+' mobile header wrapped to '+report.sidebar.height+'px');
@@ -72,6 +74,8 @@ async function main(){
      assert.ok(report.topButtons.every(b=>b.left>=-1&&b.right<=width+1),width+'px '+view+' toolbar overflows viewport');
      assert.ok(report.panels.every(b=>b.left>=report.inner.left-3&&b.right<=report.inner.right+3),width+'px '+view+' top-level content extends beyond page gutter: '+JSON.stringify(report.panels));
      assert.ok(report.kpis.every(k=>k.padLeft>=13&&k.padRight>=13&&k.label&&k.label.left>=k.left+12),width+'px '+view+' KPI margin defect: '+JSON.stringify(report.kpis));
+     if(width>350&&width<=760&&report.kpis.length>1&&report.kpis.length%2===0)
+      assert.equal(report.kpiLastColumn,"auto",width+'px '+view+' even KPI count must not leave an empty grid cell');
      assert.ok(report.issues.every(pad=>pad>=12),width+'px '+view+' registry card padding regression');
      assert.equal(report.intersect,false,width+'px '+view+' countdown overlaps programme');
      assert.equal(report.clipped,false,width+'px '+view+' programme name clipped');
