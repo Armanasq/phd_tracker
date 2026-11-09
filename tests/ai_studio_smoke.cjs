@@ -140,7 +140,7 @@ async function main(){
   await page.locator('#atlasLensPanel [data-lens="close"]').click();
   assert.ok(seen.filter(x=>x.path==='/v1/chat/completions').length>=2);
   await page.locator('[data-action="nav"][data-value="activity"]').click();
-  await page.locator('.os-ledger').first().getByText('My Research Agent').waitFor();
+  await page.locator('.os-ledger').first().getByText('My Research Agent').first().waitFor();
   await page.locator('#navigation [data-action="nav"][data-value="operations"]').click();
   await page.locator('.ops-metrics').waitFor({timeout:15000});
   await page.locator('[data-ops-action="tab"][data-id="referees"]').click();
