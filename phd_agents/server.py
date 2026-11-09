@@ -10,6 +10,7 @@ from urllib.parse import parse_qs, unquote, urlsplit
 
 from .catalog import agent_spec, provider_spec, workflow_spec
 from .domain import agenda, plan_capacity, preflight, today_in
+from .operations import evidence_conflicts, milestones_for, referee_matrix, research_fit_signals, resource_schedule
 from .engine import catalog, owner_records, run_agent, run_workflow, scheduler_once
 from .store import ConflictError, Store
 
@@ -111,6 +112,21 @@ class ApiHandler(BaseHTTPRequestHandler):
                             "runs": store.runs(30), "activity": store.activity(30),
                             "providers_status": source.get("providers", []),
                             "security": {"local_only": True, "credentials": "environment variables", "auto_application_submission": False}})
+        elif path == "/api/operations":
+            source, records = owner_records(store, self.server.root)
+            today = today_in(source.get("timezone", "Europe/London"))
+            profile = (store.items("profile") or [{}])[0]
+            referees = store.items("referee")
+            references = store.items("reference")
+            milestones = store.items("milestone")
+            claims = store.items("evidence")
+            self.send_json({"referees": referees, "references": references, "milestones": milestones,
+                            "claims": claims, "profile": profile,
+                            "referee_matrix": referee_matrix(referees, references, today),
+                            "deadline_events": milestones_for(records, milestones, today),
+                            "evidence_conflicts": evidence_conflicts(claims),
+                            "research_fit_signals": research_fit_signals(profile, records),
+                            "as_of": today.isoformat()})
         elif path == "/api/runs":
             self.send_json(store.runs())
         elif path == "/api/activity":
@@ -136,7 +152,30 @@ class ApiHandler(BaseHTTPRequestHandler):
     def post_route(self, path: str, data: dict) -> None:
         store = self.server.store
         root = self.server.root
-        if path == "/api/agents/run":
+        if path.startswith("/api/private/"):
+            parts = path.removeprefix("/api/private/").split("/")
+            if len(parts) == 1:
+                kind = parts[0]
+                if kind in {"reference", "milestone", "evidence"}:
+                    _, known = owner_records(store, root)
+                    if data.get("application_id") not in {r["id"] for r in known}:
+                        raise ValueError("Unknown application ID")
+                if kind == "reference" and data.get("referee_id") not in {r["id"] for r in store.items("referee")}:
+                    raise ValueError("Unknown referee ID")
+                self.send_json({"saved": True, "entry": store.put_item(kind, data)})
+            elif len(parts) == 3 and parts[-1] == "delete":
+                self.send_json({"deleted": store.delete_item(parts[0], unquote(parts[1]))})
+            else:
+                self.send_json({"error": "Unknown private record route"}, 404)
+        elif path == "/api/schedule":
+            source, records = owner_records(store, root)
+            today = today_in(source.get("timezone", "Europe/London"))
+            profile = (store.items("profile") or [{}])[0]
+            hours = data.get("hours_per_week") or profile.get("hours_per_week")
+            if hours is None:
+                raise ValueError("Configure available hours per week in your private applicant profile")
+            self.send_json(resource_schedule(records, today, hours, profile))
+        elif path == "/api/agents/run":
             self.send_json(run_agent(store, root,
                                      agent_id=data["agent_id"], provider_id=data["provider_id"],
                                      application_id=data.get("application_id"), input_text=data.get("input_text", ""),
