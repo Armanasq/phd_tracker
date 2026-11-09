@@ -171,7 +171,9 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    '<div class="os-form-two">'+field("Model / deployment ID","model",p.model,"text",'required maxlength=128 spellcheck="false"')+
    field("Credential variable","api_key_env",p.api_key_env||"","text",'placeholder="e.g. OPENAI_API_KEY" spellcheck="false"')+'</div>'+
    field("API key (private runtime only)","credential","","password",'placeholder="'+(health?.credential_configured?"Leave blank to preserve saved key":"Enter credential if required")+'" autocomplete="new-password"')+
-   '<div class="os-form-two">'+selector("Max output tokens","max_output_tokens",[["512","512"],["1200","1200"],["2048","2048"],["4096","4096"]],String(p.max_output_tokens||1200))+
+   '<div class="os-form-two">'+field("Max output tokens","max_output_tokens",p.max_output_tokens??1200,"number",'min="64" max="16384" step="1" required')+
+   field("Request timeout (seconds)","timeout_seconds",p.timeout_seconds??55,"number",'min="10" max="180" step="1" required')+'</div>'+
+   '<div class="os-form-two">'+field("Temperature · optional","temperature",p.temperature??"","number",'min="0" max="'+(p.kind==="anthropic"?"1":"2")+'" step="0.05" placeholder="Model default"')+
    selector("Token limit parameter","token_parameter",[["max_tokens","max_tokens"],["max_completion_tokens","max_completion_tokens"]],p.token_parameter||"max_tokens")+'</div>'+
    (p.kind==="azure_deployment"?field("Azure API version","api_version",p.api_version||"2024-10-21","text",'pattern="20[2-9][0-9]-[0-9]{2}-[0-9]{2}(-preview)?"'):field("Azure API version (deployment adapter only)","api_version",p.api_version||"","text",'placeholder="Used for Azure deployment API only"'))+
    '<label class="os-check"><input name="local" type="checkbox" '+(p.local?"checked":"")+'> <span>Local endpoint (HTTP permitted on loopback only)</span></label>'+
@@ -474,7 +476,9 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    const provider={id,label:values.label,kind:values.kind,base_url:values.base_url,
                    model:values.model,api_key_env:variable,local:isLocal,
                    max_output_tokens:Number(values.max_output_tokens||1200),
+                   timeout_seconds:Number(values.timeout_seconds||55),
                    token_parameter:values.token_parameter};
+   if(values.temperature!=="")provider.temperature=Number(values.temperature);
    if(provider.kind==="azure_deployment")provider.api_version=values.api_version||"2024-10-21";
    const credential=form.elements.credential.value;
    const mode=event.submitter?.value||"verify";

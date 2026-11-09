@@ -46,3 +46,7 @@ The new model smoke test uses a synthetic local OpenAI-compatible HTTP server to
 ## Unified private applicant operations
 
 The **Operations** route now includes owner-maintained application state, referee records and reference-request states, distinct deadline clocks with verified source/time-zone fields, claim-level evidence, private research profile and capacity scenarios. These are accessible through the same navigation and backend as model Settings and Copilot. Select **Manage privately** on an application to inspect and update its private state with an optimistic version check. Changes to private records do not silently publish on GitHub Pages. Previously recorded source claims remain separate from owner-entered evidence and contradictions remain flagged for review.
+
+## Per-model execution parameters
+
+Each provider configuration now supports a bounded request timeout (10–180 seconds), an output-token ceiling (64–16,384), and an optional sampling temperature. Temperature is omitted from the wire request unless explicitly configured, because some reasoning models reject that parameter. Token limit parameter compatibility remains configurable for providers that use `max_completion_tokens` instead of `max_tokens`. These defaults are per provider and persist for all agents using that route.

@@ -58,12 +58,13 @@ def validate_url(value: object, local: bool) -> str:
     return candidate
 
 
-def invoke(provider: dict[str, Any], system: str, prompt: str, *, timeout: int = 55) -> ModelReply:
+def invoke(provider: dict[str, Any], system: str, prompt: str, *, timeout: int | None = None) -> ModelReply:
     validate_url(provider["base_url"], bool(provider["local"]))
     key_name = provider.get("api_key_env", "")
     api_key = read_secret(key_name) if key_name else ""
     if key_name and not api_key and not provider["local"]:
         raise ProviderError("Missing provider credential in environment variable " + key_name)
+    effective_timeout = int(provider.get("timeout_seconds", 55)) if timeout is None else timeout
     kind = provider["kind"]
     headers = {"Content-Type": "application/json", "Accept": "application/json"}
     model = provider["model"]
@@ -76,6 +77,8 @@ def invoke(provider: dict[str, Any], system: str, prompt: str, *, timeout: int =
         headers.update({"x-api-key": api_key, "anthropic-version": "2023-06-01"})
         payload = {"model": model, "max_tokens": limit, "system": system,
                    "messages": [{"role": "user", "content": prompt}]}
+        if "temperature" in provider:
+            payload["temperature"] = provider["temperature"]
     else:
         if kind == "azure_deployment":
             version = str(provider.get("api_version") or "2024-10-21")
@@ -92,13 +95,15 @@ def invoke(provider: dict[str, Any], system: str, prompt: str, *, timeout: int =
                    "messages": [{"role": "system", "content": system},
                                 {"role": "user", "content": prompt}],
                    provider["token_parameter"]: limit, "stream": False}
+        if "temperature" in provider:
+            payload["temperature"] = provider["temperature"]
     if len(prompt) > 25000:
         raise ValueError("Prompt exceeds the configured input budget")
     request = Request(url, json.dumps(payload).encode("utf-8"), headers=headers, method="POST")
     started = perf_counter()
     opener = build_opener(NoRedirect())
     try:
-        with opener.open(request, timeout=timeout) as response:
+        with opener.open(request, timeout=effective_timeout) as response:
             raw = response.read(2_000_001)
     except HTTPError as error:
         raise ProviderError(f"Model request failed: HTTP {error.code}") from error

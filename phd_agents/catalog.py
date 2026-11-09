@@ -74,14 +74,24 @@ def provider_spec(value: dict[str, Any]) -> dict[str, Any]:
     if not model or len(model) > 128:
         raise ValueError("Model identifier is required")
     tokens = int(value.get("max_output_tokens", 1200))
-    if not 64 <= tokens <= 4096:
-        raise ValueError("max_output_tokens must be in [64, 4096]")
+    if not 64 <= tokens <= 16384:
+        raise ValueError("max_output_tokens must be in [64, 16384]")
+    timeout_seconds = value.get("timeout_seconds", 55)
+    if type(timeout_seconds) is not int or not 10 <= timeout_seconds <= 180:
+        raise ValueError("timeout_seconds must be an integer in [10, 180]")
+    temperature = value.get("temperature")
+    if temperature not in (None, ""):
+        if type(temperature) not in (int, float) or not 0 <= temperature <= (1 if kind == "anthropic" else 2):
+            raise ValueError("Invalid optional temperature for this adapter")
     parameter = value.get("token_parameter", "max_tokens")
     if parameter not in {"max_tokens", "max_completion_tokens"}:
         raise ValueError("Unsupported token parameter")
     result = {"id": identity, "label": str(value.get("label") or identity)[:100],
               "kind": kind, "base_url": url, "model": model, "api_key_env": env,
-              "local": bool(value.get("local")), "max_output_tokens": tokens, "token_parameter": parameter}
+              "local": bool(value.get("local")), "max_output_tokens": tokens, "token_parameter": parameter,
+              "timeout_seconds": timeout_seconds}
+    if temperature not in (None, ""):
+        result["temperature"] = float(temperature)
     if kind == "azure_deployment":
         version = str(value.get("api_version") or "2024-10-21")
         if not re.fullmatch(r"20[2-9][0-9]-(?:0[1-9]|1[0-2])-[0-3][0-9](?:-preview)?", version):

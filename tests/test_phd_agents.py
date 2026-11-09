@@ -49,6 +49,21 @@ class CatalogTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             provider_spec({"id": "bad model", "kind": "openai_compatible", "base_url": "https://example.com", "model": "a"})
 
+    def test_provider_inference_parameters_are_explicit_and_validated(self):
+        data = {"id": "custom_local", "kind": "openai_compatible",
+                "base_url": "http://127.0.0.1:8000/v1", "model": "local",
+                "local": True, "max_output_tokens": 8192, "timeout_seconds": 90,
+                "temperature": 0.25}
+        provider = provider_spec(data)
+        self.assertEqual(provider["timeout_seconds"], 90)
+        self.assertEqual(provider["max_output_tokens"], 8192)
+        self.assertEqual(provider["temperature"], 0.25)
+        for bad in ({"timeout_seconds": 0}, {"timeout_seconds": 181}, {"temperature": 3.0},
+                    {"temperature": True}, {"max_output_tokens": 17000}):
+            with self.subTest(bad=bad), self.assertRaises(ValueError):
+                provider_spec({**data, **bad})
+        self.assertNotIn("temperature", provider_spec({k: v for k, v in data.items() if k != "temperature"}))
+
     def test_workflow_contract_preserves_execution_policy(self):
         flow = workflow_spec({"id": "private_daily", "agent_id": "portfolio_planner", "schedule": "daily",
                               "enabled": True, "provider_id": "openai", "cloud_consent": True,
