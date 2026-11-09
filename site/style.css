@@ -967,3 +967,9 @@ body.dark .agenda-number,body.dark .agenda-meta{color:#c0dac4}
 .ai-workspace-shell{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface)}.ai-workspace-banner{display:flex;justify-content:space-between;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line)}.ai-workspace-banner span{color:var(--muted)}
 #aiWorkspaceFrame{width:100%;height:calc(100vh - 210px);min-height:720px;border:0}.ai-offline{max-width:680px;margin:50px auto;padding:30px}.ai-offline pre{padding:16px;overflow:auto;background:var(--surface-alt)}
 @media(max-width:900px){.ai-context{grid-template-columns:1fr}.ai-inline-result{grid-column:1}#aiWorkspaceFrame{height:1000px}}@media(max-width:600px){.ai-context-controls{flex-direction:column;align-items:stretch}.ai-context-controls input,.ai-context-controls select{width:100%}}
+
+.ai-context,.ai-context-intro,.ai-context-controls,.ai-inline-result{min-width:0;max-width:100%}
+.ai-context-controls input,.ai-context-controls select{min-width:0;max-width:100%}
+.ai-context-controls .btn{max-width:100%;overflow-wrap:anywhere}
+@media(max-width:900px){.ai-context{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.ai-context-controls input,.ai-context-controls select,.ai-context-controls button{width:100%;max-width:100%}}
