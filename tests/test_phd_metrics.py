@@ -11,6 +11,7 @@ from urllib.request import urlopen
 
 from phd_agents.catalog import workflow_spec
 from phd_agents.engine import scheduler_once
+from phd_agents.connectivity import remember_check
 from phd_agents.metrics import usage_summary
 from phd_agents.server import ApiServer
 from phd_agents.settings import save_settings
@@ -54,6 +55,9 @@ class MetricsTests(unittest.TestCase):
             "schedule": "daily", "enabled": True, "cloud_consent": True,
             "provider_id": "openai"
         }))
+        remember_check(self.store, "openai", status="responded", model="verified-test-model")
+        with patch.dict("os.environ", {"OPENAI_API_KEY": "synthetic-test-only"}):
+            save_settings(self.store, {"approved_cloud_providers": ["openai"]})
         now = datetime(2026, 11, 9, 8, 0, tzinfo=timezone.utc)
         with patch("phd_agents.engine.run_workflow", return_value={"id": "run1"}) as run:
             disabled = scheduler_once(self.store, Path(self.folder.name), now=now)
