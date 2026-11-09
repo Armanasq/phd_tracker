@@ -77,7 +77,7 @@ class InstanceTests(unittest.TestCase):
             self.assertIn("template=00-owner-action-center.md", snapshot["source_links"]["control_issue"])
             self.assertEqual(snapshot["instance"]["type"], "independent")
             self.assertEqual(snapshot["meta"]["tracked"], 1)
-            self.assertEqual(snapshot["coverage"]["files"], [])
+            self.assertEqual([item["path"] for item in snapshot["coverage"]["files"]], ["data/experience_view.json"])
 
 
 if __name__ == "__main__":
