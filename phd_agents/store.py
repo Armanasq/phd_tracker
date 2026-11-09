@@ -32,6 +32,7 @@ class Store:
             os.close(fd)
         self.db = sqlite3.connect(str(self.path), check_same_thread=False, timeout=15)
         self.db.row_factory = sqlite3.Row
+        self.db.execute("PRAGMA foreign_keys=ON")
         self.db.execute("PRAGMA journal_mode=WAL")
         self.db.execute("PRAGMA busy_timeout=5000")
         self.db.executescript("""
@@ -41,6 +42,16 @@ class Store:
         CREATE TABLE IF NOT EXISTS audit(id INTEGER PRIMARY KEY AUTOINCREMENT, action TEXT NOT NULL, subject TEXT NOT NULL, created_at TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS schedule(id TEXT PRIMARY KEY, last_period TEXT NOT NULL, updated_at TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS private_objects(kind TEXT NOT NULL, id TEXT NOT NULL, payload TEXT NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY(kind,id));
+        CREATE TABLE IF NOT EXISTS conversations(
+            id TEXT PRIMARY KEY, agent_id TEXT NOT NULL, application_id TEXT,
+            title TEXT NOT NULL, created_at TEXT NOT NULL, updated_at TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS conversation_messages(
+            id INTEGER PRIMARY KEY AUTOINCREMENT, conversation_id TEXT NOT NULL
+            REFERENCES conversations(id) ON DELETE CASCADE, role TEXT NOT NULL,
+            content TEXT NOT NULL, model TEXT, provider_id TEXT, run_id TEXT, created_at TEXT NOT NULL);
+        CREATE INDEX IF NOT EXISTS idx_conversation_messages ON conversation_messages(conversation_id,id);
+        CREATE INDEX IF NOT EXISTS idx_conversations_recent ON conversations(updated_at DESC);
+
         """)
         self.db.commit()
 
@@ -141,6 +152,97 @@ class Store:
         rows = self.db.execute("SELECT * FROM runs ORDER BY created_at DESC, rowid DESC LIMIT ?", (min(max(limit, 1), 100),)).fetchall()
         return [{"id": r["id"], "kind": r["kind"], "agent_id": r["agent_id"], "application_id": r["application_id"],
                  "status": r["status"], "provider_id": r["provider_id"], "created_at": r["created_at"], **json.loads(r["payload"])} for r in rows]
+
+
+    def conversation(self, conversation_id: str) -> dict[str, Any]:
+        if not isinstance(conversation_id, str) or len(conversation_id) != 32:
+            raise ValueError("Invalid conversation identifier")
+        try:
+            uuid.UUID(hex=conversation_id)
+        except ValueError as error:
+            raise ValueError("Invalid conversation identifier") from error
+        row = self.db.execute(
+            "SELECT id,agent_id,application_id,title,created_at,updated_at FROM conversations WHERE id=?",
+            (conversation_id,),
+        ).fetchone()
+        if row is None:
+            raise ValueError("Unknown conversation")
+        messages = self.db.execute(
+            "SELECT m.role,m.content,m.model,m.provider_id,m.run_id,m.created_at,r.payload AS run_payload "
+            "FROM conversation_messages AS m LEFT JOIN runs AS r ON r.id=m.run_id "
+            "WHERE m.conversation_id=? ORDER BY m.id DESC LIMIT 300", (conversation_id,),
+        ).fetchall()
+        visible = []
+        for message in reversed(messages):
+            item = dict(message)
+            payload = json.loads(item.pop("run_payload")) if item.get("run_payload") else {}
+            if item["role"] == "assistant":
+                item["evidence_refs"] = payload.get("evidence_refs", [])
+                item["retrieval_method"] = payload.get("retrieval_method")
+                item["latency_ms"] = payload.get("latency_ms")
+                item["source_as_of"] = payload.get("source_as_of")
+                item["tools"] = payload.get("tools", [])
+            visible.append(item)
+        return {**dict(row), "messages": visible}
+
+    def conversations(self, limit: int = 20) -> list[dict[str, Any]]:
+        rows = self.db.execute(
+            "SELECT id,agent_id,application_id,title,created_at,updated_at "
+            "FROM conversations ORDER BY updated_at DESC,id DESC LIMIT ?",
+            (min(max(limit, 1), 50),),
+        ).fetchall()
+        return [dict(row) for row in rows]
+
+    def conversation_context(
+        self, conversation_id: str, agent_id: str, application_id: str | None,
+        *, limit: int = 6,
+    ) -> list[dict[str, str]]:
+        conversation = self.conversation(conversation_id)
+        if conversation["agent_id"] != agent_id or conversation["application_id"] != application_id:
+            raise ValueError("Conversation is scoped to another agent or application")
+        rows = self.db.execute(
+            "SELECT role,content FROM conversation_messages WHERE conversation_id=? "
+            "ORDER BY id DESC LIMIT ?", (conversation_id, min(max(limit, 1), 12)),
+        ).fetchall()
+        return [{"role": row["role"], "content": row["content"][:750]} for row in reversed(rows)]
+
+    def save_conversation_turn(
+        self, *, conversation_id: str | None, agent_id: str, application_id: str | None,
+        question: str, answer: str, model: str, provider_id: str, run_id: str,
+    ) -> str:
+        if not isinstance(question, str) or not question.strip() or len(question) > 5000:
+            raise ValueError("Invalid conversation question")
+        if not isinstance(answer, str) or not answer.strip() or len(answer) > 20000:
+            raise ValueError("Invalid conversation answer")
+        if conversation_id:
+            self.conversation_context(conversation_id, agent_id, application_id, limit=1)
+        identity = conversation_id or uuid.uuid4().hex
+        timestamp = utcnow()
+        with self.db:
+            if not conversation_id:
+                self.db.execute(
+                    "INSERT INTO conversations(id,agent_id,application_id,title,created_at,updated_at)"
+                    " VALUES(?,?,?,?,?,?)",
+                    (identity, agent_id, application_id, question.strip()[:110], timestamp, timestamp),
+                )
+            for role, content in (("user", question), ("assistant", answer)):
+                self.db.execute(
+                    "INSERT INTO conversation_messages(conversation_id,role,content,model,provider_id,run_id,created_at)"
+                    " VALUES(?,?,?,?,?,?,?)",
+                    (identity, role, content, model if role == "assistant" else None,
+                     provider_id if role == "assistant" else None,
+                     run_id if role == "assistant" else None, timestamp),
+                )
+            self.db.execute("UPDATE conversations SET updated_at=? WHERE id=?", (timestamp, identity))
+        return identity
+
+    def delete_conversation(self, conversation_id: str) -> bool:
+        self.conversation(conversation_id)
+        with self.db:
+            changed = self.db.execute("DELETE FROM conversations WHERE id=?", (conversation_id,)).rowcount
+            if changed:
+                self._audit("conversation:deleted", conversation_id)
+        return bool(changed)
 
     def count_runs_since(self, since: str, provider_ids: list[str]) -> int:
         if not provider_ids:

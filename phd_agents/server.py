@@ -4,7 +4,7 @@ import json
 import mimetypes
 import os
 import re
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, unquote, urlsplit
 
@@ -28,7 +28,8 @@ from .store import ConflictError, Store
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
 
-class ApiServer(HTTPServer):
+class ApiServer(ThreadingHTTPServer):
+    daemon_threads = True
     def __init__(self, address: tuple[str, int], *, store: Store, root: Path):
         super().__init__(address, ApiHandler)
         self.store = store
@@ -37,6 +38,19 @@ class ApiServer(HTTPServer):
 
 class ApiHandler(BaseHTTPRequestHandler):
     server: ApiServer
+
+    @property
+    def request_store(self) -> Store:
+        if not hasattr(self, "_request_store"):
+            self._request_store = Store(self.server.store.path)
+        return self._request_store
+
+    def finish(self) -> None:
+        try:
+            super().finish()
+        finally:
+            if hasattr(self, "_request_store"):
+                self._request_store.close()
 
     def log_message(self, format: str, *args) -> None:
         return
@@ -112,7 +126,7 @@ class ApiHandler(BaseHTTPRequestHandler):
         self.send_json({"error": "Cross-origin requests are disabled"}, 405)
 
     def get_route(self, path: str) -> None:
-        store = self.server.store
+        store = self.request_store
         if path == "/api/health":
             self.send_json({"status": "ok", "mode": "loopback_private", "ai_side_effects": "none"})
         elif path == "/api/bootstrap":
@@ -128,6 +142,26 @@ class ApiHandler(BaseHTTPRequestHandler):
                             "routing": routing_status(store, catalog(store)["providers"], catalog(store)["agents"]),
                             "tool_names": sorted(TOOL_NAMES), "default_tools": DEFAULT_TOOLS,
                             "security": {"local_only": True, "credentials": "environment variables", "auto_application_submission": False}})
+        elif path == "/api/assistant/bootstrap":
+            available = catalog(store)
+            try:
+                as_of = json.loads((self.server.site / "data" / "workspace.json").read_text(encoding="utf-8")).get("as_of")
+            except (OSError, ValueError, TypeError):
+                as_of = None
+            self.send_json({
+                "catalog": {"providers": available["providers"], "agents": available["agents"]},
+                "settings": read_settings(store),
+                "provider_states": provider_states(store, available["providers"]),
+                "routing": routing_status(store, available["providers"], available["agents"]),
+                "conversations": store.conversations(20),
+                "as_of": as_of,
+                "security": {"local_only": True, "auto_application_submission": False},
+            })
+        elif path == "/api/conversations":
+            self.send_json({"conversations": store.conversations(30)})
+        elif path.startswith("/api/conversations/"):
+            identity = unquote(path.removeprefix("/api/conversations/"))
+            self.send_json(store.conversation(identity))
         elif path == "/api/calendar.ics":
             source, records = owner_records(store, self.server.root)
             events = milestones_for(records, store.items("milestone"), today_in(read_settings(store)["timezone"]))
@@ -189,7 +223,7 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.static(path)
 
     def post_route(self, path: str, data: dict) -> None:
-        store = self.server.store
+        store = self.request_store
         root = self.server.root
         if path == "/api/settings":
             self.send_json({"settings": save_settings(store, data)})
@@ -281,7 +315,12 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.send_json(run_agent(store, root,
                                      agent_id=data["agent_id"], provider_id=data.get("provider_id"),
                                      application_id=data.get("application_id"), input_text=data.get("input_text", ""),
-                                     cloud_consent=data.get("cloud_consent") is True))
+                                     cloud_consent=data.get("cloud_consent") is True,
+                                     conversation_mode=data.get("conversation") is True,
+                                     conversation_id=data.get("conversation_id")))
+        elif path.startswith("/api/conversations/") and path.endswith("/delete"):
+            identity = unquote(path[len("/api/conversations/"):-len("/delete")].strip("/"))
+            self.send_json({"deleted": store.delete_conversation(identity)})
         elif path == "/api/workflows/run":
             self.send_json(run_workflow(store, root,
                                         workflow_id=data["workflow_id"], provider_id=data.get("provider_id"),

@@ -31,7 +31,7 @@ Only set credentials for the providers you use. Keys are looked up by environmen
 
 The server is deliberately local-only and rejects cross-origin browser requests. Keep the port inaccessible from public networks; do not reverse-proxy this API without adding TLS, authenticated sessions, user isolation, request size restrictions and CSRF safeguards. If `PHDAI_API_TOKEN` is set, HTTP requests require `Authorization: Bearer <token>`; the bundled no-login UI does not supply it, so use an authenticated client in that configuration.
 
-Cloud execution requires explicit consent per manual request. Scheduled workflows must separately enable cloud consent and remain disabled initially. Any text passed to a cloud provider may include source/application evidence and must be assessed by the user for confidentiality first. AI runs produce proposed analyses; they do not email referees, contact faculty, submit portals, or modify verified evidence. Owner application updates go to private SQLite and do not synchronize with GitHub's public workbook.
+Cloud execution requires an approved provider-specific disclosure route or explicit consent for the individual request. Scheduled workflows must separately enable cloud consent and remain disabled initially. Any text passed to a cloud provider may include source/application evidence and must be assessed by the user for confidentiality first. AI runs produce proposed analyses; they do not email referees, contact faculty, submit portals, or modify verified evidence. Owner application updates go to private SQLite and do not synchronize with GitHub's public workbook.
 
 `GET /api/bootstrap` returns the local catalog, source-backed applications, agenda, runs and activity. `POST /api/catalog/{provider,agent,workflow}` registers configuration. `POST /api/agents/run`, `POST /api/workflows/run`, `GET /api/preflight/{id}`, `POST /api/capacity`, and `POST /api/applications/{id}/update` provide the core operations.
 
@@ -100,3 +100,26 @@ The single-page application is served at `http://127.0.0.1:8765/`. In **Settings
 Cloud approval is scoped to the selected provider. It is not permission to contact faculty, send email, submit an application, or connect unrelated remote accounts. The daily cloud scheduler call cap remains independent of approval and defaults to zero.
 
 Public GitHub Pages continues to provide a read-only research tracking surface. The private backend serves the identical workspace with functioning Settings and agent execution. API keys and private state never become part of the public Pages artifact.
+
+
+## Embedded Atlas assistant: private conversation and evidence API
+
+Atlas Lens runs on public Pages in read-only mode and on the private loopback server with model inference and saved conversations. API keys, messages, private applicant state and model outputs are never deployed to GitHub Pages.
+
+| Route | Purpose |
+| --- | --- |
+| GET /api/assistant/bootstrap | Lightweight provider states, agent-specific routing, settings and recent private conversation metadata |
+| GET /api/conversations | Recent conversation metadata |
+| GET /api/conversations/{id} | Messages with linked model-run metadata and evidence references |
+| POST /api/conversations/{id}/delete | Remove a private conversation and its messages |
+| POST /api/agents/run | Run an agent; optional conversation mode persists the request and answer |
+
+The first conversational request contains agent_id, input_text and conversation=true, with an optional application_id. Subsequent turns add the returned conversation_id, sending only the new applicant question rather than duplicating transcript text in the prompt. The server reads up to six previous scoped messages (750 characters each) from local SQLite. Threads are bound to one agent and one application; scope mismatches are rejected.
+
+For an unscoped request, deterministic weighted lexical ranking supplies up to seven relevant application records. If there are no lexical matches, the method is labeled deadline_fallback and the nearest open recorded deadlines are supplied instead. A selected application is pinned. The response includes evidence_refs, retrieval_method, route_source, source_as_of and model/run telemetry. Retrieved records represent context **supplied to the model**, not independently verified claim-level citations.
+
+The widget reflects the chosen agent's configured provider and its recorded inference-verification state, not the workspace default model. Changing a provider resets its verification and automatic cloud approval. Provider probes are historical connection evidence, not guarantees of current uptime.
+
+The backend handles simultaneous local HTTP requests using request-local SQLite connections. The browser's Stop waiting action aborts its HTTP request but may not cancel the upstream model call; finished calls are still logged. Native token streaming, shared multi-user authentication, cross-device sync and provider-wide OAuth are not implemented.
+
+Only an opaque thread ID is retained in local browser storage. Conversation content stays in the private SQLite database. If PHDAI_API_TOKEN is set, the browser UI cannot provide that token automatically; use an authenticated client or an appropriately secured front-end integration.

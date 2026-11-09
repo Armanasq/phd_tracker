@@ -152,6 +152,10 @@ async function run() {
     await mobile.screenshot({path:path.join(out,'phd-atlas-mobile.png'),fullPage:true});
     await mobile.locator('.topbar [data-action="lens-open"]').click();
     await mobile.locator('#atlasLensPanel').waitFor();
+    await mobile.waitForFunction(()=>{
+      const panel=document.getElementById('atlasLensPanel');
+      return panel&&!panel.hidden&&Math.abs(panel.getBoundingClientRect().width-window.innerWidth)<=2;
+    },null,{timeout:12000});
     const lensWidth=await mobile.locator('#atlasLensPanel').evaluate(el=>Math.round(el.getBoundingClientRect().width));
     assert.equal(lensWidth,390,'Mobile assistant must fit the viewport');
     await mobile.screenshot({path:path.join(out,'atlas-lens-mobile.png'),fullPage:false});

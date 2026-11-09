@@ -89,6 +89,9 @@ async function main(){
   const updated=await fetch(base+'/api/routing').then(x=>x.json());
   assert.equal(updated.agent_assignments.smoke_agent.provider_id,'smoke_vllm');
   assert.equal(updated.agent_assignments.smoke_agent.source,'agent_assignment');
+  const routeChange=await fetch(base+'/api/settings',{method:'POST',
+    headers:{'Content-Type':'application/json'},body:JSON.stringify({default_provider:'ollama'})});
+  assert.ok(routeChange.ok,'Unverified workspace default should not block an assigned verified agent');
   await page.locator('#navigation [data-action="nav"][data-value="applications"]').click();
   await page.locator('#body tbody .rowbutton').first().click();
   const recordButton=page.locator('.modal [data-action="ai-record"]');
@@ -99,6 +102,8 @@ async function main(){
   assert.equal(await page.locator('#lensScope').inputValue(),selectedId,
     'Application action must open the Lens with the correct opportunity in context');
   await page.locator('#lensAgent').selectOption('smoke_agent',{timeout:12000});
+  await page.locator('.lens-identity-copy small').getByText('Verified · smoke-chat',{exact:false}).waitFor({timeout:12000});
+  assert.match(await page.locator('.lens-provider').innerText(),/Local smoke model/);
   await page.locator('#lensInput').fill('Evaluate the applicant evidence; do not submit anything.');
   assert.equal(await page.locator('#lensForm select[name="provider_id"]').count(),0,
     'Lens must use the configured model route rather than exposing a per-turn provider field');
@@ -106,10 +111,36 @@ async function main(){
   await page.locator('.lens-turn.assistant .lens-body').getByText('Synthetic verified local inference response.',{exact:false}).waitFor({timeout:30000});
   await page.locator('.lens-turn.assistant [data-lens="trace"]').click();
   assert.match(await page.locator('.lens-trace').innerText(),/smoke-chat/);
+  await page.locator('.lens-evidence summary').click();
+  assert.ok((await page.locator('.lens-evidence-item').count())>=1);
+  const conversations=await fetch(base+'/api/conversations').then(r=>r.json());
+  assert.equal(conversations.conversations.length,1);
+  const threadId=conversations.conversations[0].id;
+  const firstThread=await fetch(base+'/api/conversations/'+threadId).then(r=>r.json());
+  assert.equal(firstThread.application_id,selectedId);
+  assert.equal(firstThread.agent_id,'smoke_agent');
+  assert.equal(firstThread.messages.length,2);
+  assert.equal(firstThread.messages[1].evidence_refs[0].application_id,selectedId);
+  await page.locator('#lensInput').fill('Which document should I check next?');
+  await page.locator('#lensForm button[type="submit"]').click();
+  await page.locator('.lens-turn.assistant').nth(1).waitFor({timeout:30000});
+  const secondThread=await fetch(base+'/api/conversations/'+threadId).then(r=>r.json());
+  assert.equal(secondThread.messages.length,4);
+  const lastModelCall=seen.filter(x=>x.path==='/v1/chat/completions').at(-1);
+  assert.match(lastModelCall.body,/conversation_history/);
+  assert.match(lastModelCall.body,/Evaluate the applicant evidence/);
+  await page.locator('#atlasLensPanel [data-lens="close"]').click();
+  await page.reload({waitUntil:'networkidle'});
+  await page.locator('.topbar [data-action="lens-open"]').click();
+  await page.locator('.lens-turn.assistant').nth(1).waitFor({timeout:13000});
+  assert.equal(await page.locator('#lensAgent').inputValue(),'smoke_agent');
+  assert.equal(await page.locator('#lensScope').inputValue(),selectedId);
+  await page.locator('#atlasLensPanel [data-lens="history"]').click();
+  await page.locator('.lens-thread-open').first().waitFor();
   await page.locator('#atlasLensPanel [data-lens="close"]').click();
   assert.ok(seen.filter(x=>x.path==='/v1/chat/completions').length>=2);
   await page.locator('[data-action="nav"][data-value="activity"]').click();
-  await page.locator('.os-ledger').first().getByText('My Research Agent').waitFor();
+  await page.locator('.os-ledger').first().getByText('My Research Agent').first().waitFor();
   await page.locator('#navigation [data-action="nav"][data-value="operations"]').click();
   await page.locator('.ops-metrics').waitFor({timeout:15000});
   await page.locator('[data-ops-action="tab"][data-id="referees"]').click();
