@@ -98,7 +98,7 @@ function timeline(){
  const o=state.ops,events=o.deadline_events||[];
  const ahead=events.filter(e=>e.days_left!==null&&e.days_left>=0).slice(0,75);
  const needsTime=events.filter(e=>e.days_left!==null&&e.days_left>=0&&!e.cutoff_fully_verified).length;
- return heading("08 / TEMPORAL INTELLIGENCE","Multiple deadlines, one source of truth","Keep final cutoffs separate from referee, scholarship, supervisor-contact, interview and priority-review milestones.",btn("Record milestone","new-private","milestone","primary"))+
+ return heading("08 / TEMPORAL INTELLIGENCE","Multiple deadlines, one source of truth","Keep final cutoffs separate from referee, scholarship, supervisor-contact, interview and priority-review milestones.",btn("Record milestone","new-private","milestone","primary")+btn("Private calendar export","private-ics"))+
  '<div class="kpis">'+metric("RECORDED CLOCKS",events.length,"Source and private milestones")+metric("UPCOMING EVENTS",events.filter(e=>e.days_left!==null&&e.days_left>=0).length,"Calendar dates only")+metric("CUTOFF TIMES UNKNOWN",needsTime,"Require official time-zone evidence")+metric("PRIVATE MILESTONES",o.milestones.length,"Explicitly maintained by applicant")+'</div>'+
  '<div class="notice">Date-only events do not imply a verified end-of-day cutoff. An institutional source may change after a prior observation. Verify the submission portal.</div>'+
  panel("Milestone timeline","Showing the next 75 calendar events",ahead.map(e=>
@@ -339,6 +339,7 @@ document.addEventListener("click",async e=>{
  if(action==="edit-workflow"){configModal("workflow",id);return}
  if(action==="inspect"){await inspect(id);return}
  if(action==="edit-application"){applicationModal(id);return}
+ if(action==="private-ics"){window.location.assign("/api/calendar.ics");return}
  if(action==="provider-probe"){
   const p=state.data.catalog.providers.find(x=>x.id===id);
   if(!p)return;

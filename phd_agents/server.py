@@ -12,6 +12,7 @@ from .catalog import agent_spec, provider_spec, workflow_spec
 from .domain import agenda, plan_capacity, preflight, today_in
 from .operations import evidence_conflicts, milestones_for, referee_matrix, research_fit_signals, resource_schedule
 from .providers import invoke
+from .calendar import line_items
 from .engine import catalog, owner_records, run_agent, run_workflow, scheduler_once, selected
 from .store import ConflictError, Store
 
@@ -113,6 +114,18 @@ class ApiHandler(BaseHTTPRequestHandler):
                             "runs": store.runs(30), "activity": store.activity(30),
                             "providers_status": source.get("providers", []),
                             "security": {"local_only": True, "credentials": "environment variables", "auto_application_submission": False}})
+        elif path == "/api/calendar.ics":
+            source, records = owner_records(store, self.server.root)
+            events = milestones_for(records, store.items("milestone"), today_in(source.get("timezone", "Europe/London")))
+            body = line_items(records, events, store.items("reference")).encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "text/calendar; charset=utf-8")
+            self.send_header("Content-Disposition", 'attachment; filename="phd-atlas-private.ics"')
+            self.send_header("Cache-Control", "no-store")
+            self.send_header("X-Content-Type-Options", "nosniff")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
         elif path == "/api/operations":
             source, records = owner_records(store, self.server.root)
             today = today_in(source.get("timezone", "Europe/London"))
@@ -251,11 +264,28 @@ class ApiHandler(BaseHTTPRequestHandler):
 def serve(host: str = "127.0.0.1", port: int = 8765, *, root: Path = ROOT, state_path: Path | None = None) -> None:
     if host not in {"127.0.0.1", "localhost"}:
         raise ValueError("The private API binds to loopback only; use a separately secured reverse proxy for remote access")
+    from threading import Event, Thread
     store = Store(state_path)
     httpd = ApiServer((host, port), store=store, root=root)
+    stop = Event()
+    def schedule_loop() -> None:
+        while not stop.is_set():
+            worker = Store(state_path)
+            try:
+                scheduler_once(worker, root)
+            except (OSError, ValueError, RuntimeError) as error:
+                print("Private scheduler diagnostic: " + type(error).__name__, flush=True)
+            finally:
+                worker.close()
+            if stop.wait(300):
+                break
+    thread = Thread(target=schedule_loop, name="phd-atlas-scheduler", daemon=True)
+    thread.start()
     try:
         print(f"PhD Atlas private runtime listening at http://127.0.0.1:{port}/ai-studio.html", flush=True)
+        print("Opt-in scheduled AI workflows are checked every five minutes while the private runtime is running.", flush=True)
         httpd.serve_forever(poll_interval=0.5)
     finally:
+        stop.set()
         httpd.server_close()
         store.close()
