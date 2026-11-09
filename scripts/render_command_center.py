@@ -573,6 +573,26 @@ The following earlier preparation steps are **not** additional November 6 submis
     return doc
 
 
+PUBLIC_README = "# PhD Atlas\n\n**An evidence-aware workspace for PhD applications, deadlines and research fit.**\n\n[Open workspace](https://armanasq.github.io/phd_tracker/) · [Application guide](site/README.md) · [Architecture](docs/ARCHITECTURE.md) · [Release notes](CHANGELOG.md)\n\n[![Pages deployment](https://github.com/Armanasq/phd_tracker/actions/workflows/publish-cockpit.yml/badge.svg)](https://github.com/Armanasq/phd_tracker/actions/workflows/publish-cockpit.yml)\n[![Code quality](https://github.com/Armanasq/phd_tracker/actions/workflows/intelligence-ci.yml/badge.svg)](https://github.com/Armanasq/phd_tracker/actions/workflows/intelligence-ci.yml)\n\nPhD Atlas brings application records, supporting sources, preparation tasks, contacts and decisions into one reviewable workspace. The public site is a static projection of committed evidence. An optional local Python service enables private state, model configuration and agent execution.\n\n## Workspace\n\n| Area | Purpose |\n| --- | --- |\n| Applications & Compare | Review opportunities, recorded deadlines, funding, eligibility and research fit side by side. |\n| Actions, Contacts & Updates | Track preparation dependencies, faculty follow-ups, document readiness and changes. |\n| Dashboard, Calendar & Pipeline | Prioritize work and distinguish recorded dates from confirmed closing times. |\n| Verification, Sources & Archive | Inspect provenance, conflicting claims, excluded routes and incomplete evidence. |\n| Research & EvidenceGraph | Examine the [evidence workflow](assets/readme/evidence_flow.svg), [portfolio frontier](data/portfolio_frontier.json) and [generated research report](docs/RESEARCH_REPORT.md). |\n| Atlas assistant | Use configured local or cloud-compatible inference providers through the *private* runtime; responses are proposals, not completed actions. |\n\nThe [public workspace](https://armanasq.github.io/phd_tracker/) works without an AI provider. A provider preset, search result or model-produced suggestion is not proof of current availability, admission eligibility or a submitted application.\n\n## Run locally\n\nUse Python 3.11+ from the repository root.\n\n```bash\ngit clone https://github.com/Armanasq/phd_tracker.git\ncd phd_tracker\npython -m pip install -r requirements-intelligence.txt\npython scripts/build_workspace.py --out site/data/workspace.json\npython -m http.server 8000 --directory site\n```\n\nOpen `http://127.0.0.1:8000/` for the static application. For personal AI settings, stored conversations and local model inference, start the separate private runtime instead:\n\n```bash\npython -m phd_agents serve --port 8765\n```\n\nOpen `http://127.0.0.1:8765/`, then configure **Settings → Connections**, test the selected model, and explicitly activate any cloud provider. See [private runtime operations](phd_agents/README.md) and [unified workspace setup](site/README.md). The runtime binds to loopback; API keys and private SQLite conversations are not deployed to GitHub Pages.\n\n## Evidence and state\n\n- **Original records:** [PhD_Action_List.xlsx](PhD_Action_List.xlsx) and reviewed JSON projections under [data/](data/). The [daily agenda](docs/TODAY.md) and **Full Task ledger** are generated from these sources.\n- **Evidence discipline:** A recorded deadline is not a verified cutoff time. Unknown funding, document or eligibility requirements remain unknown until confirmed against official sources.\n- **Owner updates:** GitHub Issues and owner-controlled workflows retain explicit approvals; private local edits are kept in SQLite and do not silently synchronize into the public workbook.\n- **Discovery:** The [discovery report](data/discovery_report.json) describes observed source health. AcademicPositions, institutional feeds and other channels are not complete coverage. Gmail intake requires separately configured consent and credentials.\n- **Reproducibility:** See the [capability atlas](docs/CAPABILITY_ATLAS.md), [operator playbooks](docs/PLAYBOOKS.md), [generated evidence report](docs/RESEARCH_REPORT.md) and [source provenance](data/experience_lineage.jsonld).\n\nSource-related changes can be proposed through the [source correction](.github/ISSUE_TEMPLATE/01-source-correction.yml), [opportunity lead](.github/ISSUE_TEMPLATE/02-opportunity-lead.yml) and [automation idea](.github/ISSUE_TEMPLATE/03-automation-idea.yml) issue templates. The [intelligence workflow](.github/workflows/phd-intelligence.yml) is an auditable automation entry point, not an autonomous submission service.\n\n## Engineering\n\nThe application separates read-only public evidence from local agent execution. It uses a static JavaScript frontend, source normalization and verification scripts, deterministic application checks, a Python orchestration layer and SQLite for private state.\n\n| Directory | Responsibility |\n| --- | --- |\n| [site/](site/) | GitHub Pages frontend and model configuration views |\n| [phd_agents/](phd_agents/) | Private HTTP runtime, inference adapters, workflows and conversation storage |\n| [scripts/](scripts/) | Import, normalization, reconciliation, evaluation and publication |\n| [data/](data/) | Tracked evidence snapshots and derived application records |\n| [dashboard/](dashboard/) | Research and exploration views |\n| [tests/](tests/) | Contract, integration and UI regression checks |\n| [.github/workflows/](.github/workflows/) | Pages publishing, quality gates and controlled automation |\n\nThe latest deployment status is visible in [GitHub Actions](https://github.com/Armanasq/phd_tracker/actions). The public site is not an authenticated backend, the assistant does not send mail or submit applications, and its references describe retrieved context rather than verified claim-level citations.\n\nFor change history and the scope of the current preview, see [CHANGELOG.md](CHANGELOG.md). Vulnerability reporting guidance is in [SECURITY.md](SECURITY.md). This repository does not currently include a software license.\n"
+
+
+def report_paths(markdown: str) -> str:
+    def link(match: re.Match[str]) -> str:
+        target = match.group(1)
+        if target.startswith(("#", "http:", "https:", "mailto:", "/")):
+            return match.group(0)
+        if target.startswith("../../actions/") or target.startswith("../../issues/"):
+            return "](" + "https://github.com/Armanasq/phd_tracker/" + target.removeprefix("../../") + ")"
+        return "](../" + target + ")"
+
+    markdown = re.sub(r"\]\(([^)]+)\)", link, markdown)
+    return re.sub(
+        r'(src|href)="(?!https?://|#|/)([^"]+)"',
+        lambda match: match.group(1) + '="../' + match.group(2) + '"',
+        markdown,
+    )
+
+
 def render(root=ROOT):
     plan=load(root/"data"/"execution_plan.json")
     if not plan or "today" not in plan:
@@ -593,12 +613,18 @@ def render(root=ROOT):
     experience_block=experience_markdown(load(view_path)) if view_path.is_file() else ""
     legacy=dashboard_md(plan,metrics,experience_block)
     if view_path.is_file():
-        studio=generate_readme_studio(root,load(view_path),plan)
-        readme=(studio+"\n\n<details>\n<summary><b>Engineering deep dive · original execution intelligence and source diagnostics</b></summary>\n\n"
-                +legacy+"\n\n</details>\n")
+        studio = generate_readme_studio(root, load(view_path), plan)
+        report = (studio + "\n\n<details>\n<summary><b>Engineering detail · execution intelligence and source diagnostics</b></summary>\n\n"
+                  + legacy + "\n\n</details>\n")
     else:
-        readme=legacy
-    (root/"README.md").write_text(readme,encoding="utf-8")
+        report = legacy
+    (docs / "RESEARCH_REPORT.md").write_text(
+        "# Generated evidence report\n\n[Overview](../README.md) · [Open workspace](https://armanasq.github.io/phd_tracker/)\n\n"
+        + "**Snapshot:** " + str(plan.get("as_of", "unavailable"))
+        + ". This report is generated from committed evidence, not live admissions information.\n\n"
+        + report_paths(report), encoding="utf-8",
+    )
+    (root / "README.md").write_text(PUBLIC_README, encoding="utf-8")
     (docs/"TODAY.md").write_text(todays_md(plan,metrics),encoding="utf-8")
     output={
       "rendered_as_of":plan["as_of"],
