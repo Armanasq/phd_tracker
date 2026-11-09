@@ -42,7 +42,7 @@ class WorkspaceTests(unittest.TestCase):
         self.assertEqual(snapshot["coverage"]["totals"]["full_task_ledger"], len(ledger))
         self.assertEqual(len({item["id"] for item in ledger}), len(ledger))
         self.assertTrue(all("mail.google.com" not in json.dumps(item) for item in ledger))
-        self.assertTrue(all(re.search(r"\\b[A-Z0-9._%+\\-]+@[A-Z0-9.\\-]+\\.[A-Z]{2,}\\b", item["action"], re.I) is None for item in ledger))
+        self.assertTrue(all(re.search(r"[A-Z0-9._%+-]+@[A-Z0-9.-]+[.][A-Z]{2,}", item["action"], re.I) is None for item in ledger))
 
     def test_url_filters_mailbox_links(self):
         self.assertEqual(public_url("https://mail.google.com/mail/u/0/#all/123"), "")
