@@ -33,7 +33,7 @@ async function check(browser,url,kind,views,results){
   try{
    await page.goto(url+'/'+(kind==='tracker'?'index.html':'ai-studio.html'),{waitUntil:'networkidle'});
    if(kind==='tracker')await page.locator('#body h1').waitFor({timeout:15000});
-   else await page.locator('#connection.live').waitFor({timeout:15000});
+   else await page.locator('#connection.live').waitFor({state:'attached',timeout:15000});
    for(const view of views){
     const selector=kind==='tracker'?'#navigation [data-action="nav"][data-value="'+view+'"]':'#studioNav [data-view="'+view+'"]';
     const root=kind==='tracker'?'#body':'#workspace';
