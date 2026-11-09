@@ -1,0 +1,83 @@
+name: PhD Atlas | Consolidate Merged Branches and Sync About
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/consolidate-branches.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  consolidate:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify reviewed branch identities, pull requests and ancestry
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          while read -r branch expected pr; do
+            actual="$(gh api "repos/$GH_REPO/git/ref/heads/$branch" --jq '.object.sha')"
+            test "$actual" = "$expected"
+            merged_at="$(gh api "repos/$GH_REPO/pulls/$pr" --jq '.merged_at')"
+            test "$merged_at" != "null"
+            git merge-base --is-ancestor "$expected" "$GITHUB_SHA"
+            echo "Verified $branch at $expected and merged PR #$pr"
+          done <<'BRANCHES'
+          feature/experiencegraph-cockpit e2d116cfde6912a2eb4a4e1ddc41895a6bc41de5 2
+          feature/atlas-context-backend c5b792c8d5f9b8fb68774a0e3a6e9ca1ff83f040 3
+          chore/repository-release-polish 3d755b19ca40baa508f14deb2ca30b0f1f9bf3ed 4
+          BRANCHES
+      - name: Delete only confirmed merged legacy branches
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for branch in feature/experiencegraph-cockpit feature/atlas-context-backend chore/repository-release-polish; do
+            gh api --method DELETE "repos/$GH_REPO/git/refs/heads/$branch"
+            echo "Deleted $branch"
+          done
+          remaining="$(gh api "repos/$GH_REPO/branches?per_page=100" --jq '.[].name')"
+          if [ "$remaining" != "main" ]; then
+            echo "::error::Expected main as the only remaining branch; found: $remaining"
+            exit 1
+          fi
+          echo "### Branch consolidation verified" >> "$GITHUB_STEP_SUMMARY"
+          echo "Only main remains. Release tags and merged PRs are preserved." >> "$GITHUB_STEP_SUMMARY"
+
+  about:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Synchronize GitHub About metadata when authorized
+        env:
+          DEFAULT_TOKEN: ${{ github.token }}
+          REPOSITORY_ADMIN_TOKEN: ${{ secrets.REPOSITORY_ADMIN_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          token="$REPOSITORY_ADMIN_TOKEN"
+          if [ -z "$token" ]; then
+            token="$DEFAULT_TOKEN"
+          fi
+          if GITHUB_ADMIN_TOKEN="$token" python scripts/sync_repository_metadata.py --apply; then
+            echo "### GitHub About fields updated" >> "$GITHUB_STEP_SUMMARY"
+            echo "Description, website and topics were accepted by the GitHub API." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "::warning::GitHub About fields need repository Administration write permission."
+            echo "### GitHub About fields not changed" >> "$GITHUB_STEP_SUMMARY"
+            echo "Set REPOSITORY_ADMIN_TOKEN in Actions secrets, then rerun this workflow manually, or edit the repository About panel." >> "$GITHUB_STEP_SUMMARY"
+          fi
