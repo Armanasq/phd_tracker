@@ -31,7 +31,7 @@ def plan(today: date):
             obligations.append("Confirm German-language requirement")
         if confidence == "contradictory":
             obligations.append("Resolve conflict between recruiter email and lab website")
-        if observations.get(item["id"]) in ("review_source_changed","contradiction_closed_portal"):
+        if observations.get(item["id"]) in ("review_source_changed","contradiction_closed_portal","contradiction_deadline_mismatch"):
             obligations.append("Recheck official page: observed source contradicts expected evidence")
         day_count = (date.fromisoformat(item["deadline"]) - today).days if item["deadline"] else None
         if day_count is not None and day_count < 0:
@@ -60,7 +60,7 @@ def plan(today: date):
     order = {"urgent":0,"near-term":1,"unposted":2,"upcoming":3,"expired":4}
     due.sort(key=lambda r:(order[r["tier"]],r["days_to_deadline"] if r["days_to_deadline"] is not None else 9999,r["id"]))
     return {"as_of":today.isoformat(),"decision_policy":"Evidence obligations, not model confidence probabilities",
-            "items":due,"source_conflicts":[m for m in monitor if m["status"] in ("review_source_changed","contradiction_closed_portal")]}
+            "items":due,"source_conflicts":[m for m in monitor if m["status"] in ("review_source_changed","contradiction_closed_portal","contradiction_deadline_mismatch")]}
 
 
 def main():
