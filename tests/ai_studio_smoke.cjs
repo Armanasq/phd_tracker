@@ -42,8 +42,11 @@ async function main(){
     await page.locator('#settingsForm').waitFor();
     await page.locator('#prefZone').fill('Europe/Amsterdam');
     await page.locator('#prefLimit').fill('2');
+    await page.locator('#prefCloudLimit').fill('0');
     await page.locator('#settingsForm button[type="submit"]').click();
     await page.waitForFunction(()=>document.querySelector('#prefZone')?.value==='Europe/Amsterdam');
+    await page.locator('[data-view="activity"]').click();
+    await page.getByText('INPUT TOKENS').waitFor();
     await page.locator('[data-view="providers"]').click();
     await page.locator('#providerFilter').selectOption('all');
     await page.route('**/api/providers/models',route=>route.fulfill({status:200,contentType:'application/json',

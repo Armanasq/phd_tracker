@@ -78,3 +78,11 @@ python scripts/install_ai_runtime.py --enable --overwrite
 The installer generates a **private empty environment file** at `~/.config/phd-atlas-ai/provider.env` with mode `0600`. Add only the provider keys you intend to use. Units reference that file but never copy its contents into Git. `--install` writes units without enabling them. `--enable` activates the private loopback server and timer for this machine. A running timer is not an enabled workflow: each automated workflow remains disabled until approved in AI Studio. On non-systemd platforms, schedule `python -m phd_agents scheduler-once` with an OS-appropriate private scheduler.
 
 For production operations, keep the SQLite database outside the public checkout, audit outgoing model context, monitor individual workflow failures and protect the host. The default HTTP service is **not** a publicly authenticated multi-user API.
+
+## Inference telemetry and cloud automation caps
+
+The private **Run history** view now reports per-provider model calls, failed calls, actual token usage and observed request latency. The underlying `GET /api/metrics` returns bounded telemetry. Missing usage values are not inferred; monetary costs remain unknown unless verified pricing is separately supplied.
+
+Settings include `max_cloud_model_calls_per_day`, initially **0**. This disables unattended cloud model calls even when a workflow is explicitly enabled and cloud disclosure permission is granted. Increase the cap only after reviewing the desired workflow stages, data disclosure and model pricing. A 3-stage workflow consumes up to three model-call slots. The scheduler uses the configured IANA time zone for daily periods and refuses new stages when the approved daily quota would be exceeded. Manual cloud calls still require confirmation.
+
+A model invocation failure is recorded as a failed audit run without storing the full prompt, model text or credential.
