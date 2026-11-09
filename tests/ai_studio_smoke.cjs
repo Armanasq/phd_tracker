@@ -113,7 +113,7 @@ async function main(){
   assert.ok(overflow<=2,'Mobile settings horizontal overflow: '+overflow);
   await page.goto(base+'/ai-studio.html#providers',{waitUntil:'domcontentloaded'});
   await page.waitForURL('**/index.html#settings');
-  assert.ok(await page.locator('#body h1').count());
+  await page.locator('#body h1').first().waitFor({timeout:12000});
   assert.deepEqual(pageErrors,[],'Browser JS errors');
   await page.close();
   console.log('Unified workspace passed: custom OpenAI-compatible vLLM endpoint, model probe, activation, agent assignment, automatic inference, workflow editor, legacy route, mobile layout');

@@ -75,7 +75,7 @@ async function main(){
    assert.equal(await page.locator('iframe').count(),0,'No embedded AI Studio is permitted');
    await page.goto(publicUrl+'/ai-studio.html#providers',{waitUntil:'domcontentloaded'});
    await page.waitForURL('**/index.html#settings');
-   assert.ok(await page.locator('#body h1').count());
+   await page.locator('#body h1').first().waitFor({timeout:12000});
    assert.match(await page.locator('#body').innerText(),/private workspace/i);
 
   }finally{await page.close()}
