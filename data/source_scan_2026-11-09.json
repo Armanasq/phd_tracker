@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "observed_on": "2026-11-09",
+  "inputs": {
+    "gmail": "Personal Gmail search and full review of relevant recruiting announcements, 2026-10-19 through 2026-11-09",
+    "linkedin": "Public LinkedIn posts, supervisor profile lookup and verified university cross-check",
+    "other_social": "Public-index searches of X, Bluesky and Reddit; no guaranteed comprehensive coverage",
+    "institutional": "Primary university/PI/lab announcements and applicant portals"
+  },
+  "new_ids": [
+    "R26-STANFORD-BLUEPEARL",
+    "R26-DARTMOUTH-A2R-CODESIGN",
+    "R26-TOULOUSE-BEST-CROSSING",
+    "R26-CTU-KESTREL-UAV",
+    "R26-CARDIFF-WEARABLE-CHILDREN",
+    "R26-MCGILL-LIVING-MACHINES",
+    "R26-BONN-SOFT-AERIAL",
+    "R26-ASU-MINIATURE-ROBOTS",
+    "R26-UTK-JUE-WANG-SOFT-EMBODIED",
+    "R26-STUTTGART-PAL-SOFT-ROBOTICS",
+    "R26-TOULOUSE-BEST-SOCIAL-RL"
+  ],
+  "auto_promotable_policy": "Existing tracker policy automatically promotes only official_plus_email with deadline, and official_institution with deadline plus Go/Go with risk; all other entries remain research-queue review.",
+  "email_status_observations": [
+    {
+      "topic": "ETH AI Center 2027 doctoral fellowship",
+      "message_ids": [
+        "1a18237d8b8c4fcb",
+        "1a1830b7945d1d56"
+      ],
+      "finding": "Oct 28 response denied ordinary extension; later same day a general portal grace window was announced through Oct 29 09:00 CET. Successful resubmission not evidenced by searched matching messages. Owner action: confirm portal submission receipt; do not infer submitted/rejected."
+    },
+    {
+      "topic": "UCL Sajad Saeedi 3 robotics PhDs",
+      "message_ids": [
+        "1a19d2339f948983"
+      ],
+      "finding": "PI states UK Home Fee qualification required; not promoted for unverified eligibility."
+    },
+    {
+      "topic": "KTH GeoRob ERC funded PhDs",
+      "message_ids": [
+        "1a1584a828353b84"
+      ],
+      "finding": "Oct 30 2026 deadline elapsed. Not added as open 2027 opportunity."
+    }
+  ],
+  "institutional_conflicts": [
+    "2026 BEST EURAXESS index shows inconsistent metadata year (2027) versus call body and current Toulouse primary page (2026): primary 2026 deadline used.",
+    "LinkedIn AI4I job preview reports no longer accepting LinkedIn applications; official Politecnico and AI4I offsite submission route must be checked directly before treating this as closure."
+  ],
+  "excluded_from_automatic_promotion": [
+    "R26-DARTMOUTH-A2R-CODESIGN",
+    "R26-CARDIFF-WEARABLE-CHILDREN",
+    "R26-MCGILL-LIVING-MACHINES",
+    "R26-CTU-KESTREL-UAV",
+    "R26-BONN-SOFT-AERIAL",
+    "R26-ASU-MINIATURE-ROBOTS",
+    "R26-UTK-JUE-WANG-SOFT-EMBODIED",
+    "R26-STUTTGART-PAL-SOFT-ROBOTICS",
+    "R26-TOULOUSE-BEST-SOCIAL-RL"
+  ],
+  "already_in_main": [
+    "M31 Mila 2026-12-01 supervisor-match deadline; requires university application"
+  ],
+  "notes": "No personal email bodies copied to repository. Recruitment posts and primary institutional deadlines are distinct evidence types; user application statuses have not been changed."
+}
