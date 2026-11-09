@@ -63,7 +63,7 @@ async function main(){
     await fs.mkdir(out,{recursive:true});
     await page.screenshot({path:path.join(out,'ai-studio-providers-desktop.png'),fullPage:true});
     await page.setViewportSize({width:390,height:844});
-    await page.locator('[data-view="settings"]').click();
+    await page.locator('#mobileStudioView').selectOption('settings');
     await page.locator('#settingsForm').waitFor();
     await page.screenshot({path:path.join(out,'ai-studio-settings-mobile.png'),fullPage:true});
     assert.deepEqual(errors,[]);

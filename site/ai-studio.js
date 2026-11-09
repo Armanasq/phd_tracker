@@ -165,6 +165,7 @@ function render(){
  const d=state.data;if(!d)return;
  const actual={overview,agents,workflows,providers,applications,referees,timeline,evidence,planning,activity,settings};
  $("crumb").textContent=VIEWS[state.view];
+ const mobileView=$("mobileStudioView");if(mobileView)mobileView.value=state.view;
  document.querySelectorAll("[data-view]").forEach(b=>{b.classList.toggle("active",b.dataset.view===state.view);if(b.dataset.view===state.view)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
  $("workspace").innerHTML=actual[state.view]();
 }
@@ -463,6 +464,7 @@ document.addEventListener("submit",async e=>{
  }catch(error){toast(error.message)}
 });
 document.addEventListener("change",e=>{
+ if(e.target.id==="mobileStudioView"){nav(e.target.value);return}
  if(e.target.id==="providerFilter"){state.providerFilter=e.target.value;render()}
 });
 document.addEventListener("input",e=>{

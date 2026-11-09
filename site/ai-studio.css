@@ -40,3 +40,15 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 @media(prefers-reduced-motion:reduce){.connection-card,.model-option{transition:none!important;animation:none!important}}
 
 .rail{overflow-y:auto;overscroll-behavior:contain}
+
+.mobile-nav-control{display:none}
+@media(max-width:850px){
+ .rail{padding:13px 20px 16px;overflow:visible}
+ .identity{padding:0 0 11px}
+ .rail-nav{display:none}
+ .mobile-nav-control{display:grid;grid-template-columns:100px minmax(0,1fr);align-items:center;gap:12px;max-width:650px}
+ .mobile-nav-control label{font-size:.78rem;font-weight:650;color:#dcebe3}
+ .mobile-nav-control select{min-width:0;width:100%;background:#234038;color:#fff;border:1px solid #537969;border-radius:10px;min-height:44px;padding:10px 12px;font-size:1rem}
+ .mobile-nav-control select:focus-visible{outline:3px solid #b0d4c4;outline-offset:2px}
+}
+@media(max-width:390px){.mobile-nav-control{grid-template-columns:1fr;gap:5px}}

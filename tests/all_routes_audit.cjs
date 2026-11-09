@@ -33,7 +33,8 @@ async function check(browser,url,kind,views,results){
    for(const view of views){
     const selector=kind==='tracker'?'#navigation [data-action="nav"][data-value="'+view+'"]':'#studioNav [data-view="'+view+'"]';
     const root=kind==='tracker'?'#body':'#workspace';
-    await page.locator(selector).click();
+    if(kind==='studio'&&width<=850)await page.locator('#mobileStudioView').selectOption(view);
+    else await page.locator(selector).click();
     await page.locator(root+' h1').first().waitFor();
     const title=(await page.locator(root+' h1').first().innerText()).trim();
     assert.ok(title,kind+' '+view+' missing heading');
