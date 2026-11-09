@@ -132,7 +132,8 @@ def build(root: Path = ROOT) -> dict:
             contacts = ""
         next_step = clean(owner.get("next_step") or source.get("next_step") or queued.get("next_step") or detail.get("next_step"), 650)
         raw_deadline_note = str(detail.get("deadline_kind") or extra.get("deadline_type") or queued.get("deadline_kind") or "")
-        deadline_type = "priority" if "priority" in raw_deadline_note.casefold() else "final" if ("final" in raw_deadline_note.casefold() or date_str) else "unknown"
+        from scripts.source_policy import classify_deadline_note_strict
+        deadline_type = classify_deadline_note_strict(raw_deadline_note) if date_str else "unverified"
         explicit_joint = any(phrase in (str(detail.get("blockers", ""))+" "+next_step).casefold() for phrase in (
             "do not submit twice", "not independently", "joint application", "same application", "not a separate application",
             "either application", "via this or", "this or gatsby", "or gatsby application",

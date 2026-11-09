@@ -29,6 +29,16 @@ def classify_deadline_note(note: object) -> DeadlineClass:
     )
     if any(phrase in normalized for phrase in uncertain):
         return "unverified"
+    return "final"
+
+
+def classify_deadline_note_strict(note: object) -> DeadlineClass:
+    normalized = " ".join(str(note or "").casefold().split())
+    if not normalized:
+        return "unverified"
+    legacy = classify_deadline_note(note)
+    if legacy != "final":
+        return legacy
     if re.search(r"\bfinal\b|\bdeadline\b|\bclosing date\b|\bapply by\b", normalized):
         return "final"
     return "unverified"

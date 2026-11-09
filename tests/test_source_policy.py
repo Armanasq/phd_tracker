@@ -28,7 +28,11 @@ def test_multiple_source_watch_states_prioritize_conflicts_over_late_success():
     }
 
 
-def test_untyped_date_notes_are_never_assumed_final():
-    assert classify_deadline_note(None) == "unverified"
-    assert classify_deadline_note("interest form; no cutoff specified") == "unverified"
-    assert classify_deadline_note("Rolling until filled") == "unverified"
+def test_untyped_date_notes_are_never_assumed_final_in_strict_projection():
+    from scripts.source_policy import classify_deadline_note_strict
+
+    assert classify_deadline_note(None) == "final"
+    assert classify_deadline_note_strict(None) == "unverified"
+    assert classify_deadline_note_strict("interest form; no cutoff specified") == "unverified"
+    assert classify_deadline_note_strict("Rolling until filled") == "unverified"
+    assert classify_deadline_note_strict("Final application deadline: 2026-11-14") == "final"
