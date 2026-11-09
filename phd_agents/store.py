@@ -40,6 +40,7 @@ class Store:
         CREATE TABLE IF NOT EXISTS runs(id TEXT PRIMARY KEY, kind TEXT NOT NULL, agent_id TEXT NOT NULL, application_id TEXT, status TEXT NOT NULL, provider_id TEXT, payload TEXT NOT NULL, created_at TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS audit(id INTEGER PRIMARY KEY AUTOINCREMENT, action TEXT NOT NULL, subject TEXT NOT NULL, created_at TEXT NOT NULL);
         CREATE TABLE IF NOT EXISTS schedule(id TEXT PRIMARY KEY, last_period TEXT NOT NULL, updated_at TEXT NOT NULL);
+        CREATE TABLE IF NOT EXISTS private_objects(kind TEXT NOT NULL, id TEXT NOT NULL, payload TEXT NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY(kind,id));
         """)
         self.db.commit()
 
@@ -143,6 +144,32 @@ class Store:
 
     def _audit(self, action: str, subject: str) -> None:
         self.db.execute("INSERT INTO audit(action,subject,created_at) VALUES(?,?,?)", (action, subject, utcnow()))
+
+    def put_item(self, kind: str, value: dict[str, Any]) -> dict[str, Any]:
+        from .operations import normalize_item
+        entry = normalize_item(kind, value)
+        with self.db:
+            self.db.execute("INSERT INTO private_objects(kind,id,payload,updated_at) VALUES(?,?,?,?) ON CONFLICT(kind,id) DO UPDATE SET payload=excluded.payload,updated_at=excluded.updated_at",
+                            (kind, entry["id"], json.dumps(entry, ensure_ascii=False), utcnow()))
+            self._audit("private:" + kind + ":upsert", entry["id"])
+        return entry
+
+    def items(self, kind: str) -> list[dict[str, Any]]:
+        from .operations import KINDS
+        if kind not in KINDS:
+            raise ValueError("Unknown private record kind")
+        rows = self.db.execute("SELECT payload FROM private_objects WHERE kind=? ORDER BY id", (kind,)).fetchall()
+        return [json.loads(r["payload"]) for r in rows]
+
+    def delete_item(self, kind: str, identity: str) -> bool:
+        from .operations import KINDS
+        if kind not in KINDS:
+            raise ValueError("Unknown private record kind")
+        with self.db:
+            cursor = self.db.execute("DELETE FROM private_objects WHERE kind=? AND id=?", (kind, identity))
+            if cursor.rowcount:
+                self._audit("private:" + kind + ":delete", identity)
+        return bool(cursor.rowcount)
 
     def activity(self, limit: int = 50) -> list[dict[str, Any]]:
         rows = self.db.execute("SELECT action,subject,created_at FROM audit ORDER BY id DESC LIMIT ?", (min(max(limit, 1), 100),)).fetchall()
