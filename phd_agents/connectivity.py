@@ -6,6 +6,7 @@ import time
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, build_opener
+from urllib.parse import quote
 
 from .providers import NoRedirect, ProviderError, validate_url
 from .store import Store, utcnow
@@ -65,8 +66,12 @@ def model_list(provider: dict[str, Any], timeout: int = 12) -> dict[str, Any]:
         if env and os.environ.get(env):
             headers["x-api-key"] = os.environ[env]
     else:
-        endpoint = base + "/models"
-        if kind == "azure_openai":
+        if kind == "azure_deployment":
+            version = str(provider.get("api_version") or "2024-10-21")
+            endpoint = base + "/openai/models?api-version=" + quote(version, safe="")
+        else:
+            endpoint = base + "/models"
+        if kind in {"azure_openai", "azure_deployment"}:
             if env and os.environ.get(env):
                 headers["api-key"] = os.environ[env]
         elif env and os.environ.get(env):

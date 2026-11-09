@@ -6,7 +6,7 @@ import os
 from dataclasses import dataclass
 from typing import Any
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, quote
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 
@@ -74,8 +74,12 @@ def invoke(provider: dict[str, Any], system: str, prompt: str, *, timeout: int =
         payload = {"model": model, "max_tokens": limit, "system": system,
                    "messages": [{"role": "user", "content": prompt}]}
     else:
-        url = base + "/chat/completions"
-        if kind == "azure_openai":
+        if kind == "azure_deployment":
+            version = str(provider.get("api_version") or "2024-10-21")
+            url = base + "/openai/deployments/" + quote(model, safe="") + "/chat/completions?api-version=" + quote(version, safe="")
+        else:
+            url = base + "/chat/completions"
+        if kind in {"azure_openai", "azure_deployment"}:
             if not api_key:
                 raise ProviderError("Azure OpenAI requires the configured API key")
             headers["api-key"] = api_key

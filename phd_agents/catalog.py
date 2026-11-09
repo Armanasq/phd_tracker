@@ -4,13 +4,14 @@ import re
 from typing import Any
 
 IDENTIFIER = re.compile(r"^[a-z][a-z0-9_-]{1,63}$")
-KINDS = {"openai_compatible", "azure_openai", "anthropic"}
+KINDS = {"openai_compatible", "azure_openai", "azure_deployment", "anthropic"}
 SCHEDULES = {"manual", "daily", "twice_daily", "weekly"}
 PROVIDERS: list[dict[str, Any]] = [
     {"id": "ollama", "label": "Ollama · local", "kind": "openai_compatible", "base_url": "http://127.0.0.1:11434/v1", "model": "llama3.2", "api_key_env": "", "local": True, "max_output_tokens": 1200, "token_parameter": "max_tokens"},
     {"id": "vllm", "label": "vLLM / LiteLLM · local", "kind": "openai_compatible", "base_url": "http://127.0.0.1:4000/v1", "model": "qwen3.6-agent", "api_key_env": "VLLM_API_KEY", "local": True, "max_output_tokens": 1200, "token_parameter": "max_tokens"},
     {"id": "openai", "label": "OpenAI · cloud", "kind": "openai_compatible", "base_url": "https://api.openai.com/v1", "model": "gpt-4.1-mini", "api_key_env": "OPENAI_API_KEY", "local": False, "max_output_tokens": 1200, "token_parameter": "max_completion_tokens"},
     {"id": "azure", "label": "Azure OpenAI · cloud", "kind": "azure_openai", "base_url": "https://example.openai.azure.com/openai/v1", "model": "model-router", "api_key_env": "AZURE_OPENAI_API_KEY", "local": False, "max_output_tokens": 1200, "token_parameter": "max_completion_tokens"},
+    {"id": "azure_deploy", "label": "Azure deployment API · cloud", "kind": "azure_deployment", "base_url": "https://example.openai.azure.com", "model": "model-router", "api_key_env": "AZURE_OPENAI_API_KEY", "api_version": "2024-10-21", "local": False, "max_output_tokens": 1200, "token_parameter": "max_completion_tokens"},
     {"id": "anthropic", "label": "Anthropic · cloud", "kind": "anthropic", "base_url": "https://api.anthropic.com", "model": "claude-sonnet-4-5", "api_key_env": "ANTHROPIC_API_KEY", "local": False, "max_output_tokens": 1200, "token_parameter": "max_tokens"},
     {"id": "gemini", "label": "Gemini OpenAI gateway · cloud", "kind": "openai_compatible", "base_url": "https://generativelanguage.googleapis.com/v1beta/openai", "model": "gemini-2.5-flash", "api_key_env": "GEMINI_API_KEY", "local": False, "max_output_tokens": 1200, "token_parameter": "max_tokens"},
     {"id": "openrouter", "label": "OpenRouter · cloud", "kind": "openai_compatible", "base_url": "https://openrouter.ai/api/v1", "model": "openai/gpt-4.1-mini", "api_key_env": "OPENROUTER_API_KEY", "local": False, "max_output_tokens": 1200, "token_parameter": "max_tokens"},
@@ -78,9 +79,15 @@ def provider_spec(value: dict[str, Any]) -> dict[str, Any]:
     parameter = value.get("token_parameter", "max_tokens")
     if parameter not in {"max_tokens", "max_completion_tokens"}:
         raise ValueError("Unsupported token parameter")
-    return {"id": identity, "label": str(value.get("label") or identity)[:100],
-            "kind": kind, "base_url": url, "model": model, "api_key_env": env,
-            "local": bool(value.get("local")), "max_output_tokens": tokens, "token_parameter": parameter}
+    result = {"id": identity, "label": str(value.get("label") or identity)[:100],
+              "kind": kind, "base_url": url, "model": model, "api_key_env": env,
+              "local": bool(value.get("local")), "max_output_tokens": tokens, "token_parameter": parameter}
+    if kind == "azure_deployment":
+        version = str(value.get("api_version") or "2024-10-21")
+        if not re.fullmatch(r"20[2-9][0-9]-(?:0[1-9]|1[0-2])-[0-3][0-9](?:-preview)?", version):
+            raise ValueError("Azure deployment API version must be a dated version")
+        result["api_version"] = version
+    return result
 
 def agent_spec(value: dict[str, Any]) -> dict[str, Any]:
     identity = validate_id(value.get("id"))
