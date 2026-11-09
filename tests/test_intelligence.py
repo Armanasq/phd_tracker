@@ -201,3 +201,19 @@ def test_private_network_hosts_are_rejected():
     assert safe_url("https://127.0.0.1/admin") is None
     assert safe_url("https://192.168.1.10/admin") is None
     assert safe_url("https://10.0.0.7/api") is None
+
+def test_notification_detects_deadline_mismatch(tmp_path):
+    path = workbook(tmp_path)
+    data = tmp_path / "data"
+    data.mkdir()
+    (data / "latest_run.json").write_text(json.dumps({
+        "source_statuses": [{
+            "id": "N263-07-LIVE",
+            "application_id": "N263-07",
+            "source_url": "https://example.edu/doctoral",
+            "status": "contradiction_deadline_mismatch",
+            "expected_deadline": "2026-11-15",
+        }]
+    }))
+    result = evaluate(date(2026, 11, 9), path, data)
+    assert any(event["kind"] == "conflict" for event in result["events"])
