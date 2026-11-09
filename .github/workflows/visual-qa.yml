@@ -8,6 +8,7 @@ on:
       - site/**
       - scripts/build_workspace.py
       - tests/site_smoke.cjs
+      - tests/site_accessibility.cjs
       - tests/domain.test.mjs
       - tests/test_workspace.py
       - scripts/workspace_controls.py
@@ -43,7 +44,7 @@ jobs:
           test -s dashboard/index.html
       - name: Install headless browser
         run: |
-          npm install --no-save playwright@1.56.1
+          npm install --no-save playwright@1.56.1 @axe-core/playwright@4.14.0
           npx playwright install --with-deps chromium
       - name: Exercise map, charts, timeline, simulation and command palette
         run: node tests/ui_smoke.cjs
@@ -53,11 +54,13 @@ jobs:
         run: node --test tests/domain.test.mjs
       - name: Exercise PhD Atlas across desktop and mobile
         run: node tests/site_smoke.cjs
+      - name: Audit WCAG 2.2 A/AA across key views and dialogs
+        run: node tests/site_accessibility.cjs
       - name: Publish desktop and mobile screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: evidencegraph-responsive-ui
-          path: artifacts/ui-qa/*.png
+          path: artifacts/ui-qa/*
           if-no-files-found: ignore
           retention-days: 14
