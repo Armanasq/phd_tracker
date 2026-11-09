@@ -8,6 +8,7 @@ on:
       - scripts/experience_engine.py
       - scripts/readme_studio.py
       - scripts/render_command_center.py
+      - scripts/render_command_center.py
       - dashboard/template.html
       - dashboard/experience.css
       - dashboard/experience.js
@@ -52,7 +53,7 @@ jobs:
             test -s data/readme_opportunities.geojson
             test -s docs/diagrams/pipeline.mmd
             test -s assets/readme/deadline_skyline.stl
-            git add README.md docs/TODAY.md docs/EXPERIENCE.md docs/diagrams/ dashboard/index.html \
+            git add README.md docs/TODAY.md docs/RESEARCH_REPORT.md docs/EXPERIENCE.md docs/diagrams/ dashboard/index.html \
               assets/readme/ data/experience_view.json data/experience_lineage.jsonld data/readme_opportunities.geojson
             if git diff --cached --quiet; then
               echo "Rendered state already current"
