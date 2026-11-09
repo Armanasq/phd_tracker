@@ -39,32 +39,33 @@ async function run() {
     assert.ok((await page.locator('.nav-btn').count())>=11);
     await page.screenshot({path:path.join(out,'phd-atlas-desktop.png'),fullPage:true});
 
-    await page.locator('[data-action="nav"][data-value="calendar"]').click();
+    await page.locator('#navigation [data-action="nav"][data-value="calendar"]').click();
     assert.match(await page.locator('#body h1').innerText(),/Application calendar/);
     assert.ok((await page.locator('.cal-day').count())>=28);
     await page.locator('[data-action="cal-next"]').click();
     assert.ok((await page.locator('.cal-day').count())>=28);
 
-    await page.locator('[data-action="nav"][data-value="applications"]').click();
+    await page.locator('#navigation [data-action="nav"][data-value="applications"]').click();
     assert.ok((await page.locator('tbody tr').count())>=100);
     await page.locator('#filterQuery').fill('N263-05');
     assert.equal(await page.locator('tbody tr').count(),1);
     await page.locator('#filterQuery').fill('');
     await page.locator('[data-compare]').nth(0).check();
     await page.locator('[data-compare]').nth(1).check();
-    await page.locator('[data-action="nav"][data-value="compare"]').click();
+    assert.match(await page.locator('#body [data-action="nav"][data-value="compare"]').innerText(),/Compare selected \(2\)/);
+    await page.locator('#navigation [data-action="nav"][data-value="compare"]').click();
     assert.equal(await page.locator('.compare-card').count(),2);
 
-    await page.locator('[data-action="nav"][data-value="pipeline"]').click();
+    await page.locator('#navigation [data-action="nav"][data-value="pipeline"]').click();
     assert.equal(await page.locator('.kanban-lane').count(),7);
     const before = await page.locator('.kanban-lane[data-lane="shortlisted"] .kanban-card').count();
     await page.locator('.kanban-lane[data-lane="unconfirmed"] .kanban-card').first().dragTo(page.locator('.kanban-lane[data-lane="shortlisted"]'));
     assert.equal(await page.locator('.kanban-lane[data-lane="shortlisted"] .kanban-card').count(),before+1);
 
-    await page.locator('[data-action="nav"][data-value="updates"]').click();
+    await page.locator('#navigation [data-action="nav"][data-value="updates"]').click();
     assert.ok((await page.locator('#body').innerText()).includes('Unsynchronized local records'));
 
-    await page.locator('[data-action="nav"][data-value="applications"]').click();
+    await page.locator('#navigation [data-action="nav"][data-value="applications"]').click();
     const first = page.locator('tbody .rowbutton').first();
     await first.click();
     assert.equal(await page.locator('.modal [data-document]').count()>0,true);
@@ -89,9 +90,9 @@ async function run() {
     await mobile.goto(base+'/',{waitUntil:'networkidle'});
     await mobile.locator('#body h1').waitFor();
     await mobile.screenshot({path:path.join(out,'phd-atlas-mobile.png'),fullPage:true});
-    await mobile.locator('[data-action="nav"][data-value="calendar"]').click();
+    await mobile.locator('#navigation [data-action="nav"][data-value="calendar"]').click();
     assert.ok((await mobile.locator('.cal-day').count())>=28);
-    await mobile.locator('[data-action="nav"][data-value="applications"]').click();
+    await mobile.locator('#navigation [data-action="nav"][data-value="applications"]').click();
     assert.ok((await mobile.locator('tbody tr').count())>=100);
     await mobile.close();
 
