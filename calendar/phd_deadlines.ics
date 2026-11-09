@@ -6441,6 +6441,62 @@ DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:tsk-0308c7bc02e49d07@phd-tracker.local
+DTSTAMP:20261109T000000Z
+DTSTART;VALUE=DATE:20261203
+DTEND;VALUE=DATE:20261204
+SUMMARY:SCHEDULED APPLICATION STEP: KTH Royal Institute of Technology —
+  PhD Agentic & Embodied AI for Adaptive Manufacturing Systems (PA-2026-3
+ 497)
+DESCRIPTION:Action: Apply to KTH vacancy PA-2026-3497 by 3 Dec. Tailor st
+ atement to embodied agents\, manufacturing robotics and safety-aware pla
+ nning. [External deadline: Official final deadline 3 Dec 2026\, local Sw
+ eden]\nStatus: completion_unconfirmed\nOriginal source: Step timeline ro
+ w 393\nOfficial URL: https://kth.varbi.com/en/what%3Ajob/jobID%3A978857/
+ \nFinal programme deadline: 2026-12-03\nOriginal note: 2026-12-03 00:00:
+ 00\nAll-day date. DO NOT infer a closing time from this event.\nConfirm 
+ actual portal availability and individual eligibility.
+CATEGORIES:SCHEDULED APPLICATION STEP
+STATUS:TENTATIVE
+URL:https://kth.varbi.com/en/what%3Ajob/jobID%3A978857/
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:tsk-1cf1ac858b6b2d27@phd-tracker.local
+DTSTAMP:20261109T000000Z
+DTSTART;VALUE=DATE:20261203
+DTEND;VALUE=DATE:20261204
+SUMMARY:APPLICATION DEADLINE: KTH Royal Institute of Technology — PhD A
+ gentic & Embodied AI for Adaptive Manufacturing Systems (PA-2026-3497)
+DESCRIPTION:Action: Apply to KTH vacancy PA-2026-3497 by 3 Dec. Tailor st
+ atement to embodied agents\, manufacturing robotics and safety-aware pla
+ nning.\nStatus: deadline_unconfirmed\nOriginal source: Action list row 9
+ 3\nOfficial URL: https://kth.varbi.com/en/what%3Ajob/jobID%3A978857/\nFi
+ nal programme deadline: 2026-12-03\nOriginal note: Official final deadli
+ ne 3 Dec 2026\, local Sweden. Official KTH doctoral vacancy PA-2026-3497
+  and EURAXESS list agentic/embodied AI for adaptive manufacturing with a
+ pplication deadline 3 Dec 2026.\nAll-day date. DO NOT infer a closing ti
+ me from this event.\nConfirm actual portal availability and individual e
+ ligibility.
+CATEGORIES:APPLICATION DEADLINE
+STATUS:TENTATIVE
+URL:https://kth.varbi.com/en/what%3Ajob/jobID%3A978857/
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:APPLICATION DEADLINE — check original source
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:APPLICATION DEADLINE — check original source
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:tsk-532087cc41277d1b@phd-tracker.local
 DTSTAMP:20261109T000000Z
 DTSTART;VALUE=DATE:20261204
@@ -6450,7 +6506,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Oxford Intelligent Eart
 DESCRIPTION:Action: By 2026-12-04 ask three referees (academic preferred\
  ; up to two professional if relevant work experience) to submit\; at lea
  st two references must be in by the deadline\nStatus: completion_unconfi
- rmed\nOriginal source: Step timeline row 393\nOfficial URL: https://inte
+ rmed\nOriginal source: Step timeline row 394\nOfficial URL: https://inte
  lligent-earth.ox.ac.uk/how-apply\nFinal programme deadline: 2027-01-06\n
  Original note: 2027-01-06 00:00:00\nAll-day date. DO NOT infer a closing
   time from this event.\nConfirm actual portal availability and individua
@@ -6496,7 +6552,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Surrey fully funded PhD
 DESCRIPTION:Action: By 2026-12-05 email Alison Stubley (address not print
  ed on the page) a CV and a one-page statement of interest\, stating the 
  project title and supervisor names\nStatus: completion_unconfirmed\nOrig
- inal source: Step timeline row 395\nOfficial URL: https://www.surrey.ac.
+ inal source: Step timeline row 396\nOfficial URL: https://www.surrey.ac.
  uk/fees-and-funding/studentships/fully-funded-phd-studentship-predictabi
  lity-romance-verbal-inflection\nFinal programme deadline: 2026-12-20\nOr
  iginal note: 2026-12-20 00:00:00\nAll-day date. DO NOT infer a closing t
@@ -6522,7 +6578,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: King's College London\, PhD in Human-
  try
 DESCRIPTION:Action: 2026-12-05: confirm two academic referees and whether
   they may be contacted before interview\nStatus: completion_unconfirmed\
- nOriginal source: Step timeline row 394\nOfficial URL: http://kcl.ac.uk/
+ nOriginal source: Step timeline row 395\nOfficial URL: http://kcl.ac.uk/
  study/funding/funding-opportunities/fully-funded-phd-studentship-in-huma
  n-robot-interaction-at-kings-college-london\nFinal programme deadline: 2
  027-01-11\nOriginal note: 2027-01-11 00:00:00\nAll-day date. DO NOT infe
@@ -6548,12 +6604,12 @@ SUMMARY:APPLICATION DEADLINE: Exeter EPSRC DLA studentship\, Sept 2027 en
 DESCRIPTION:Action: Email pgrapplicants@exeter.ac.uk by 2026-11-02 to con
  firm the international-place wording and reference deadline (award page 
  says 8 Jan 2027\, important-information page says 15 Feb 2027)\nStatus: 
- deadline_unconfirmed\nOriginal source: Action list row 99\nOfficial URL:
-  https://www.exeter.ac.uk/study/funding/award/?id=6014\nFinal programme 
- deadline: 2026-12-08\nOriginal note: Application closes midday Tuesday 8
-  December 2026 (Exeter award page id=6014)\nAll-day date. DO NOT infer a
-  closing time from this event.\nConfirm actual portal availability and i
- ndividual eligibility.
+ deadline_unconfirmed\nOriginal source: Action list row 100\nOfficial URL
+ : https://www.exeter.ac.uk/study/funding/award/?id=6014\nFinal programme
+  deadline: 2026-12-08\nOriginal note: Application closes midday Tuesday 
+ 8 December 2026 (Exeter award page id=6014)\nAll-day date. DO NOT infer 
+ a closing time from this event.\nConfirm actual portal availability and 
+ individual eligibility.
 CATEGORIES:APPLICATION DEADLINE
 STATUS:TENTATIVE
 URL:https://www.exeter.ac.uk/study/funding/award/?id=6014
@@ -6579,7 +6635,7 @@ SUMMARY:APPLICATION DEADLINE: Exeter EPSRC DLA studentship\, Sept 2027 en
 DESCRIPTION:Action: Email pgrapplicants@exeter.ac.uk by 2026-11-02 to con
  firm the international-place wording and reference deadline (award page 
  says 8 Jan 2027\, important-information page says 15 Feb 2027)\nStatus: 
- deadline_unconfirmed\nOriginal source: Action list row 95\nOfficial URL:
+ deadline_unconfirmed\nOriginal source: Action list row 96\nOfficial URL:
   https://www.exeter.ac.uk/study/funding/award/?id=6010\nFinal programme 
  deadline: 2026-12-08\nOriginal note: Application closes midday Tuesday 8
   December 2026 (Exeter award page id=6010)\nAll-day date. DO NOT infer a
@@ -6607,7 +6663,7 @@ DTEND;VALUE=DATE:20261209
 SUMMARY:APPLICATION DEADLINE: Cambridge Trust funding (Cambridge Internat
  ional Scholarship) via the same Cambridge PhD application
 DESCRIPTION:Action: Check the course page Funding Deadline by 2026-10-31\
- nStatus: deadline_unconfirmed\nOriginal source: Action list row 93\nOffi
+ nStatus: deadline_unconfirmed\nOriginal source: Action list row 94\nOffi
  cial URL: https://www.cambridgetrust.org/postgraduate-applicants/\nFinal
   programme deadline: 2026-12-08\nOriginal note: Submit by the course's f
  unding deadline (8 Dec 2026 or 6 Jan 2027 by course)\, 23:59 GMT / 11:59
@@ -6639,7 +6695,7 @@ SUMMARY:APPLICATION DEADLINE: Exeter EPSRC DLA studentships\, Mathematics
  me)
 DESCRIPTION:Action: Email pgrapplicants@exeter.ac.uk by 2026-10-30 to con
  firm reference deadline and international fee wording\nStatus: deadline_
- unconfirmed\nOriginal source: Action list row 102\nOfficial URL: https:/
+ unconfirmed\nOriginal source: Action list row 103\nOfficial URL: https:/
  /www.exeter.ac.uk/study/funding/award/?id=6019\nFinal programme deadline
  : 2026-12-08\nOriginal note: 'Midday\, Tuesday 8 December 2026' (Exeter 
  award page id=6019). References by 8 January 2027 on this page\; the imp
@@ -6670,7 +6726,7 @@ SUMMARY:APPLICATION DEADLINE: University of Amsterdam AMLab\, multiple Ph
  )
 DESCRIPTION:Action: Validate mathematical/research depth\; submit by 8 De
  c with research statement and 2 referees.\nStatus: deadline_unconfirmed\
- nOriginal source: Action list row 104\nOfficial URL: https://werkenbij.u
+ nOriginal source: Action list row 105\nOfficial URL: https://werkenbij.u
  va.nl/en/vacancies/multiple-phd-positions-in-symmetries-and-their-breaki
  ng-in-deep-learning-netherlands-15608\nFinal programme deadline: 2026-12
  -08\nOriginal note: Official UvA listing closes 8 Dec 2026\; multiple sa
@@ -6700,7 +6756,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Alberta\, Computing Sci
  ence PhD\, Fall 2027 (Amii)
 DESCRIPTION:Action: Submit the GPS application and pay CAD 135 by 2026-12
  -08 (deadline 2026-12-15)\nStatus: completion_unconfirmed\nOriginal sour
- ce: Step timeline row 404\nOfficial URL: https://www.ualberta.ca/en/comp
+ ce: Step timeline row 405\nOfficial URL: https://www.ualberta.ca/en/comp
  uting-science/graduate-studies/programs-and-admissions/applications-and-
  admissions/index.html\nFinal programme deadline: 2026-12-15\nOriginal no
  te: 2026-12-15 00:00:00\nAll-day date. DO NOT infer a closing time from 
@@ -6727,7 +6783,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentships\, Depar
  surname Zhou per PDF name)
 DESCRIPTION:Action: Submit by midday 2026-12-08\; incomplete applications
   will not be shortlisted\nStatus: completion_unconfirmed\nOriginal sourc
- e: Step timeline row 402\nOfficial URL: https://www.exeter.ac.uk/study/f
+ e: Step timeline row 403\nOfficial URL: https://www.exeter.ac.uk/study/f
  unding/award/?id=6014\nFinal programme deadline: 2026-12-08\nOriginal no
  te: 2026-12-08 00:00:00\nAll-day date. DO NOT infer a closing time from 
  this event.\nConfirm actual portal availability and individual eligibili
@@ -6751,7 +6807,7 @@ SUMMARY:APPLICATION DEADLINE: Gates Cambridge Scholarship (PhD\, 2027/28
 DESCRIPTION:Action: Choose the Cambridge PhD course and read its 'Course 
  Funding Deadline' on the Course Directory by 2026-10-31 (8 Dec 2026 or 6
   Jan 2027)\nStatus: deadline_unconfirmed\nOriginal source: Action list r
- ow 103\nOfficial URL: https://www.gatescambridge.org/apply/how-to-apply/
+ ow 104\nOfficial URL: https://www.gatescambridge.org/apply/how-to-apply/
  \nFinal programme deadline: 2026-12-08\nOriginal note: Round 2 deadline 
  is either Tuesday 8 December 2026 or Wednesday 6 January 2027 depending 
  on the course's Course Funding Deadline\; 11:59pm UK time (gatescambridg
@@ -6780,7 +6836,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
  027 entry (award id 6011): Sovereign Agentic AI: Distilling Small Langua
  ge Model Agents for Local Deployment (Wang and Huang\, Computer Science)
 DESCRIPTION:Action: Submit by midday 2026-12-08\nStatus: completion_uncon
- firmed\nOriginal source: Step timeline row 399\nOfficial URL: https://ww
+ firmed\nOriginal source: Step timeline row 400\nOfficial URL: https://ww
  w.exeter.ac.uk/study/funding/award/?id=6011\nFinal programme deadline: 2
  026-12-08\nOriginal note: 2026-12-08 00:00:00\nAll-day date. DO NOT infe
  r a closing time from this event.\nConfirm actual portal availability an
@@ -6805,7 +6861,7 @@ SUMMARY:APPLICATION DEADLINE: Exeter EPSRC DLA studentship\, Sept 2027 en
 DESCRIPTION:Action: Email pgrapplicants@exeter.ac.uk by 2026-11-02 to con
  firm the international-place wording and reference deadline (award page 
  says 8 Jan 2027\, important-information page says 15 Feb 2027)\nStatus: 
- deadline_unconfirmed\nOriginal source: Action list row 96\nOfficial URL:
+ deadline_unconfirmed\nOriginal source: Action list row 97\nOfficial URL:
   https://www.exeter.ac.uk/study/funding/award/?id=6011\nFinal programme 
  deadline: 2026-12-08\nOriginal note: Application closes midday Tuesday 8
   December 2026 (Exeter award page id=6011)\nAll-day date. DO NOT infer a
@@ -6834,7 +6890,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
  027 entry (award id 6015): Physics-Informed AI and Experimental Modellin
  g of Ocean Mixing (Messias\, Geography)
 DESCRIPTION:Action: Submit by midday 2026-12-08\nStatus: completion_uncon
- firmed\nOriginal source: Step timeline row 401\nOfficial URL: https://ww
+ firmed\nOriginal source: Step timeline row 402\nOfficial URL: https://ww
  w.exeter.ac.uk/study/funding/award/?id=6015\nFinal programme deadline: 2
  026-12-08\nOriginal note: 2026-12-08 00:00:00\nAll-day date. DO NOT infe
  r a closing time from this event.\nConfirm actual portal availability an
@@ -6857,7 +6913,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
  027 entry (award id 6011): R2T2-Med: Resource-Aware AI for Scalable and 
  Deployable Medical Image Analysis (Zhang\, Computer Science)
 DESCRIPTION:Action: Submit by midday 2026-12-08\nStatus: completion_uncon
- firmed\nOriginal source: Step timeline row 398\nOfficial URL: https://ww
+ firmed\nOriginal source: Step timeline row 399\nOfficial URL: https://ww
  w.exeter.ac.uk/study/funding/award/?id=6011\nFinal programme deadline: 2
  026-12-08\nOriginal note: 2026-12-08 00:00:00\nAll-day date. DO NOT infe
  r a closing time from this event.\nConfirm actual portal availability an
@@ -6882,7 +6938,7 @@ SUMMARY:APPLICATION DEADLINE: Exeter EPSRC DLA studentship\, Sept 2027 en
 DESCRIPTION:Action: Email pgrapplicants@exeter.ac.uk by 2026-11-02 to con
  firm the international-place wording and reference deadline (award page 
  says 8 Jan 2027\, important-information page says 15 Feb 2027)\nStatus: 
- deadline_unconfirmed\nOriginal source: Action list row 98\nOfficial URL:
+ deadline_unconfirmed\nOriginal source: Action list row 99\nOfficial URL:
   https://www.exeter.ac.uk/study/funding/award/?id=6011\nFinal programme 
  deadline: 2026-12-08\nOriginal note: Application closes midday Tuesday 8
   December 2026 (Exeter award page id=6011)\nAll-day date. DO NOT infer a
@@ -6914,7 +6970,7 @@ SUMMARY:APPLICATION DEADLINE: Exeter EPSRC DLA studentships\, Department
 DESCRIPTION:Action: Email pgrapplicants@exeter.ac.uk by 2026-10-30 to con
  firm the reference deadline (8 Jan vs 15 Feb 2027) and the exact fee-sta
  tus/funding wording for international students\nStatus: deadline_unconfi
- rmed\nOriginal source: Action list row 101\nOfficial URL: https://www.ex
+ rmed\nOriginal source: Action list row 102\nOfficial URL: https://www.ex
  eter.ac.uk/study/funding/award/?id=6014\nFinal programme deadline: 2026-
  12-08\nOriginal note: 'midday Tuesday 8 December 2026' (Exeter award pag
  e id=6014). References: this page says by 8 January 2027\; the important
@@ -6946,7 +7002,7 @@ SUMMARY:APPLICATION DEADLINE: Exeter EPSRC DLA studentship\, Sept 2027 en
 DESCRIPTION:Action: Email pgrapplicants@exeter.ac.uk by 2026-11-02 to con
  firm the international-place wording and reference deadline (award page 
  says 8 Jan 2027\, important-information page says 15 Feb 2027)\nStatus: 
- deadline_unconfirmed\nOriginal source: Action list row 97\nOfficial URL:
+ deadline_unconfirmed\nOriginal source: Action list row 98\nOfficial URL:
   https://www.exeter.ac.uk/study/funding/award/?id=6011\nFinal programme 
  deadline: 2026-12-08\nOriginal note: Application closes midday Tuesday 8
   December 2026 (Exeter award page id=6011)\nAll-day date. DO NOT infer a
@@ -6976,7 +7032,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentships\, Mathe
  cation for healthcare models: a route to precision medicine (Salter per 
  PDF name)
 DESCRIPTION:Action: Submit by midday 2026-12-08\nStatus: completion_uncon
- firmed\nOriginal source: Step timeline row 403\nOfficial URL: https://ww
+ firmed\nOriginal source: Step timeline row 404\nOfficial URL: https://ww
  w.exeter.ac.uk/study/funding/award/?id=6019\nFinal programme deadline: 2
  026-12-08\nOriginal note: 2026-12-08 00:00:00\nAll-day date. DO NOT infe
  r a closing time from this event.\nConfirm actual portal availability an
@@ -7000,7 +7056,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
  l Twins for High-Torque Electric Propulsion under Extreme Duty Cycles (E
  ngineering)
 DESCRIPTION:Action: Submit by midday 2026-12-08\nStatus: completion_uncon
- firmed\nOriginal source: Step timeline row 400\nOfficial URL: https://ww
+ firmed\nOriginal source: Step timeline row 401\nOfficial URL: https://ww
  w.exeter.ac.uk/study/funding/award/?id=6014\nFinal programme deadline: 2
  026-12-08\nOriginal note: 2026-12-08 00:00:00\nAll-day date. DO NOT infe
  r a closing time from this event.\nConfirm actual portal availability an
@@ -7023,7 +7079,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
  027 entry (award id 6010): AI and Image Processing for Diabetic Retinopa
  thy Smart Cameras (Vaughan and Ye\, Clinical and Biomedical Sciences)
 DESCRIPTION:Action: Submit by midday 2026-12-08\nStatus: completion_uncon
- firmed\nOriginal source: Step timeline row 396\nOfficial URL: https://ww
+ firmed\nOriginal source: Step timeline row 397\nOfficial URL: https://ww
  w.exeter.ac.uk/study/funding/award/?id=6010\nFinal programme deadline: 2
  026-12-08\nOriginal note: 2026-12-08 00:00:00\nAll-day date. DO NOT infe
  r a closing time from this event.\nConfirm actual portal availability an
@@ -7048,7 +7104,7 @@ SUMMARY:APPLICATION DEADLINE: Exeter EPSRC DLA studentship\, Sept 2027 en
 DESCRIPTION:Action: Email pgrapplicants@exeter.ac.uk by 2026-11-02 to con
  firm the international-place wording and reference deadline (award page 
  says 8 Jan 2027\, important-information page says 15 Feb 2027)\nStatus: 
- deadline_unconfirmed\nOriginal source: Action list row 100\nOfficial URL
+ deadline_unconfirmed\nOriginal source: Action list row 101\nOfficial URL
  : https://www.exeter.ac.uk/study/funding/award/?id=6015\nFinal programme
   deadline: 2026-12-08\nOriginal note: Application closes midday Tuesday 
  8 December 2026 (Exeter award page id=6015)\nAll-day date. DO NOT infer 
@@ -7077,7 +7133,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
  027 entry (award id 6011): Explainable AI for Early Dementia Detection a
  nd Deployment (Dong\, Computer Science)
 DESCRIPTION:Action: Submit by midday 2026-12-08\nStatus: completion_uncon
- firmed\nOriginal source: Step timeline row 397\nOfficial URL: https://ww
+ firmed\nOriginal source: Step timeline row 398\nOfficial URL: https://ww
  w.exeter.ac.uk/study/funding/award/?id=6011\nFinal programme deadline: 2
  026-12-08\nOriginal note: 2026-12-08 00:00:00\nAll-day date. DO NOT infe
  r a closing time from this event.\nConfirm actual portal availability an
@@ -7101,7 +7157,7 @@ SUMMARY:APPLICATION DEADLINE: Exeter EPSRC DLA 2027\, Public Health and S
  n older adults (Taleshi)
 DESCRIPTION:Action: 2026-10-30: identify the award page for Public Health
   and Sport Sciences and confirm deadline\nStatus: deadline_unconfirmed\n
- Original source: Action list row 94\nOfficial URL: https://www.exeter.ac
+ Original source: Action list row 95\nOfficial URL: https://www.exeter.ac
  .uk/study/pg-research/funding/phdfunding/epsrc-dla-studentships/finding_
  a_phd_research_project/\nFinal programme deadline: 2026-12-08\nOriginal 
  note: Same DLA closing date midday 8 December 2026 (award page id not fo
@@ -7132,7 +7188,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Toronto MIE\, CLIMB Lab
 DESCRIPTION:Action: By 2026-12-10 create the SGS applicant profile\, choo
  se Mechanical and Industrial Engineering PhD\, and name Pakpong Chirarat
  tananon as intended supervisor\nStatus: completion_unconfirmed\nOriginal
-  source: Step timeline row 410\nOfficial URL: https://climb.mie.utoronto
+  source: Step timeline row 411\nOfficial URL: https://climb.mie.utoronto
  .ca/openings/\nFinal programme deadline: 2027-01-15\nOriginal note: 2027
  -01-15 00:00:00\nAll-day date. DO NOT infer a closing time from this eve
  nt.\nConfirm actual portal availability and individual eligibility.
@@ -7155,7 +7211,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: SFU Engineering Science PhD (Fall 202
 DESCRIPTION:Action: By 2026-12-10 request references: enter three referee
   emails in the online application so the system emails them (allow at le
  ast 2 weeks)\nStatus: completion_unconfirmed\nOriginal source: Step time
- line row 406\nOfficial URL: https://www.sfu.ca/students/calendar/2027/sp
+ line row 407\nOfficial URL: https://www.sfu.ca/students/calendar/2027/sp
  ring/programs/engineering-science/doctor-of-philosophy.html\nFinal progr
  amme deadline: 2027-01-15\nOriginal note: 2027-01-15 00:00:00\nAll-day d
  ate. DO NOT infer a closing time from this event.\nConfirm actual portal
@@ -7179,7 +7235,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Surrey fully funded PhD
  : predictability in Romance verbal inflection (Linguistics)
 DESCRIPTION:Action: By 2026-12-10 email supervisor Sacha Beniamine (s.ben
  iamine@surrey.ac.uk) before applying\nStatus: completion_unconfirmed\nOr
- iginal source: Step timeline row 409\nOfficial URL: https://www.surrey.a
+ iginal source: Step timeline row 410\nOfficial URL: https://www.surrey.a
  c.uk/fees-and-funding/studentships/fully-funded-phd-studentship-predicta
  bility-romance-verbal-inflection\nFinal programme deadline: 2026-12-20\n
  Original note: 2026-12-20 00:00:00\nAll-day date. DO NOT infer a closing
@@ -7204,7 +7260,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Max Planck School Biomedical AI PhD 2
  027
 DESCRIPTION:Action: Confirm two academic referees have uploaded recommend
  ations\; school process states 10 Dec deadline\nStatus: completion_uncon
- firmed\nOriginal source: Step timeline row 405\nOfficial URL: https://bi
+ firmed\nOriginal source: Step timeline row 406\nOfficial URL: https://bi
  omedicalai.maxplanckschools.org/4056/application-process\nFinal programm
  e deadline: 2026-12-01\nOriginal note: 2026-12-01 00:00:00\nAll-day date
  . DO NOT infer a closing time from this event.\nConfirm actual portal av
@@ -7228,7 +7284,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: UEA / ARIES NERC DTP studentships (en
 DESCRIPTION:Action: By 2026-12-10 apply to the University of Registration
   for each project via the portal linked at the bottom of each studentshi
  p advert\nStatus: completion_unconfirmed\nOriginal source: Step timeline
-  row 407\nOfficial URL: https://www.aries-dtp.ac.uk/applications\nFinal 
+  row 408\nOfficial URL: https://www.aries-dtp.ac.uk/applications\nFinal 
  programme deadline: 2026-12-16\nOriginal note: 2026-12-16 00:00:00\nAll-
  day date. DO NOT infer a closing time from this event.\nConfirm actual p
  ortal availability and individual eligibility.
@@ -7250,7 +7306,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Edinburgh EPSRC Centre
  for Doctoral Training in Machine Learning Systems (PhD\, Round 1)
 DESCRIPTION:Action: Submit the online first-stage form by 2026-12-10 (har
  d deadline 2026-12-14 23:59)\nStatus: completion_unconfirmed\nOriginal s
- ource: Step timeline row 408\nOfficial URL: https://informatics.ed.ac.uk
+ ource: Step timeline row 409\nOfficial URL: https://informatics.ed.ac.uk
  /cdt-in-machine-learning-systems/apply/application-process-and-guidance/
  application-deadlines\nFinal programme deadline: 2026-12-14\nOriginal no
  te: 2026-12-14 00:00:00\nAll-day date. DO NOT infer a closing time from 
@@ -7275,7 +7331,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Sydney Faculty of Engin
  eering Research Scholarship for MENA
 DESCRIPTION:Action: By 2026-12-11 submit PhD admission application in the
   Faculty of Engineering (needs unconditional offer for award)\nStatus: c
- ompletion_unconfirmed\nOriginal source: Step timeline row 411\nOfficial 
+ ompletion_unconfirmed\nOriginal source: Step timeline row 412\nOfficial 
  URL: https://www.sydney.edu.au/scholarships/b/faculty-of-engineering-res
  earch-scholarship-for-mena.html\nFinal programme deadline: unposted\nOri
  ginal note: Rolling\nAll-day date. DO NOT infer a closing time from this
@@ -7299,7 +7355,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Sydney Research Trainin
  g Program (RTP) international stipend + fee offset\, 2027 commencement
 DESCRIPTION:Action: By 2026-12-11 apply for admission and upload all docu
  ments via Sydney Courses\nStatus: completion_unconfirmed\nOriginal sourc
- e: Step timeline row 412\nOfficial URL: https://www.sydney.edu.au/schola
+ e: Step timeline row 413\nOfficial URL: https://www.sydney.edu.au/schola
  rships/australian-government-research-training-program/rtp-international
  .html\nFinal programme deadline: 2026-12-18\nOriginal note: 2026-12-18 0
  0:00:00\nAll-day date. DO NOT infer a closing time from this event.\nCon
@@ -7323,7 +7379,7 @@ SUMMARY:APPLICATION DEADLINE: University of Edinburgh EPSRC Centre for Do
  ctoral Training in Machine Learning Systems (PhD\, Round 1)
 DESCRIPTION:Action: Identify and contact a potential supervisor (stage 1 
  'Get support from a supervisor') by 2026-11-10\nStatus: deadline_unconfi
- rmed\nOriginal source: Action list row 105\nOfficial URL: https://inform
+ rmed\nOriginal source: Action list row 106\nOfficial URL: https://inform
  atics.ed.ac.uk/cdt-in-machine-learning-systems/apply/application-process
  -and-guidance/application-deadlines\nFinal programme deadline: 2026-12-1
  4\nOriginal note: Round 1 Stage 1 first-stage form closes 14/12/2026 23:
@@ -7355,7 +7411,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: EPFL EDRS (Robotics\, Control and Int
  elligent Systems) doctoral programme
 DESCRIPTION:Action: Submit the EDRS application form and complete file by
   15 Dec 2026\nStatus: completion_unconfirmed\nOriginal source: Step time
- line row 418\nOfficial URL: https://epfl.ch/education/phd/programs/edrs-
+ line row 419\nOfficial URL: https://epfl.ch/education/phd/programs/edrs-
  robotics_control_and_intelligent_systems/edrs-applicants\nFinal programm
  e deadline: 2026-12-15\nOriginal note: 2026-12-15 00:00:00\nAll-day date
  . DO NOT infer a closing time from this event.\nConfirm actual portal av
@@ -7380,7 +7436,7 @@ SUMMARY:APPLICATION DEADLINE: McGill University School of Computer Scienc
 DESCRIPTION:Action: Verify that MSc Space Engineering is classified as cl
  osely related\; find robotics/ML supervisors with documented research fu
  nding and apply by 15 Dec.\nStatus: deadline_unconfirmed\nOriginal sourc
- e: Action list row 107\nOfficial URL: https://www.mcgill.ca/gradapplican
+ e: Action list row 108\nOfficial URL: https://www.mcgill.ca/gradapplican
  ts/program/computer-science-phd\nFinal programme deadline: 2026-12-15\nO
  riginal note: McGill graduate admissions lists Fall international deadli
  ne 15 Dec.\nAll-day date. DO NOT infer a closing time from this event.\n
@@ -7409,7 +7465,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: McMaster University\, Computing and S
 DESCRIPTION:Action: By 2026-12-15 create the applicant profile on applygr
  ad.mcmaster.ca (SLATE) and enter the two referees' emails so the e-refer
  ence system contacts them\nStatus: completion_unconfirmed\nOriginal sour
- ce: Step timeline row 424\nOfficial URL: https://www.eng.mcmaster.ca//ap
+ ce: Step timeline row 425\nOfficial URL: https://www.eng.mcmaster.ca//ap
  p/uploads/2025/11/CAS-Graduate-Information-1.pdf\nFinal programme deadli
  ne: 2027-02-28\nOriginal note: 2027-02-28 00:00:00\nAll-day date. DO NOT
   infer a closing time from this event.\nConfirm actual portal availabili
@@ -7434,7 +7490,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Glasgow Graduate School scholarships
 DESCRIPTION:Action: After submitting\, register on the Scholarship Portal
   using your application number and student ID (a programme offer is not 
  required)\nStatus: completion_unconfirmed\nOriginal source: Step timelin
- e row 421\nOfficial URL: https://www.gla.ac.uk/schools/computing/postgra
+ e row 422\nOfficial URL: https://www.gla.ac.uk/schools/computing/postgra
  duateresearch/prospectivestudents/scholarshipsandfundingopportunities/st
  udentshipinformation\nFinal programme deadline: 2027-01-31\nOriginal not
  e: 2027-01-31 00:00:00\nAll-day date. DO NOT infer a closing time from t
@@ -7459,7 +7515,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Glasgow Graduate School scholarships
  (College of Science and Engineering\, any supervisor)
 DESCRIPTION:Action: By 2026-12-15 submit the Glasgow PhD programme applic
  ation\, selecting 'Univ of Glasgow Scholarship' as funding source\nStatu
- s: completion_unconfirmed\nOriginal source: Step timeline row 420\nOffic
+ s: completion_unconfirmed\nOriginal source: Step timeline row 421\nOffic
  ial URL: https://www.gla.ac.uk/schools/computing/postgraduateresearch/pr
  ospectivestudents/scholarshipsandfundingopportunities/studentshipinforma
  tion\nFinal programme deadline: 2027-01-31\nOriginal note: 2027-01-31 00
@@ -7484,7 +7540,7 @@ SUMMARY:APPLICATION DEADLINE: McGill University\, Electrical and Computer
   Engineering PhD\, Fall 2027
 DESCRIPTION:Action: Confirm the ECE PhD deadline and year with grad.ece@m
  cgill.ca by 2026-10-30 (December 15 vs January 15)\nStatus: deadline_unc
- onfirmed\nOriginal source: Action list row 108\nOfficial URL: https://ww
+ onfirmed\nOriginal source: Action list row 109\nOfficial URL: https://ww
  w.mcgill.ca/ece/graduate/graduate/deadlines\nFinal programme deadline: 2
  026-12-15\nOriginal note: ECE deadlines page: international applicants' 
  application form\, documents and test scores received by 'December 15th'
@@ -7514,7 +7570,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: EPFL EDRS (Robotics\, Control and Int
  elligent Systems) doctoral programme
 DESCRIPTION:Action: Assemble passport copy\, bachelor and master diplomas
   and grades\, statement of purpose\, CV\nStatus: completion_unconfirmed\
- nOriginal source: Step timeline row 417\nOfficial URL: https://epfl.ch/e
+ nOriginal source: Step timeline row 418\nOfficial URL: https://epfl.ch/e
  ducation/phd/programs/edrs-robotics_control_and_intelligent_systems/edrs
  -applicants\nFinal programme deadline: 2026-12-15\nOriginal note: 2026-1
  2-15 00:00:00\nAll-day date. DO NOT infer a closing time from this event
@@ -7539,7 +7595,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Imperial College London President's P
 DESCRIPTION:Action: By 2026-12-15 confirm with the relevant Admissions te
  am that Iranian degree grades qualify (page tells international candidat
  es to check)\nStatus: completion_unconfirmed\nOriginal source: Step time
- line row 422\nOfficial URL: https://www.imperial.ac.uk/study/fees-and-fu
+ line row 423\nOfficial URL: https://www.imperial.ac.uk/study/fees-and-fu
  nding/postgraduate-doctoral/grants-scholarships/presidents-phd/\nFinal p
  rogramme deadline: 2027-01-11\nOriginal note: 2027-01-11 00:00:00\nAll-d
  ay date. DO NOT infer a closing time from this event.\nConfirm actual po
@@ -7564,7 +7620,7 @@ SUMMARY:APPLICATION DEADLINE: University of Alberta\, Computing Science P
 DESCRIPTION:Action: Select research area and identify up to three potenti
  al supervisors\; email them by 2026-11-10 (admitted only if a professor 
  agrees to supervise)\nStatus: deadline_unconfirmed\nOriginal source: Act
- ion list row 110\nOfficial URL: https://www.ualberta.ca/en/computing-sci
+ ion list row 111\nOfficial URL: https://www.ualberta.ca/en/computing-sci
  ence/graduate-studies/programs-and-admissions/applications-and-admission
  s/index.html\nFinal programme deadline: 2026-12-15\nOriginal note: Appli
  cation window October 15\, 2026 to December 15\, 2026 (zone not stated)\
@@ -7595,7 +7651,7 @@ SUMMARY:APPLICATION DEADLINE: EPFL EDRS (Robotics\, Control and Intellige
  nt Systems) doctoral programme
 DESCRIPTION:Action: Now: read websites of participating EDRS laboratories
   and shortlist advisers\; EPFL says to consult labs before applying\nSta
- tus: deadline_unconfirmed\nOriginal source: Action list row 106\nOfficia
+ tus: deadline_unconfirmed\nOriginal source: Action list row 107\nOfficia
  l URL: https://epfl.ch/education/phd/programs/edrs-robotics_control_and_
  intelligent_systems/edrs-applicants\nFinal programme deadline: 2026-12-1
  5\nOriginal note: Page: 'yearly deadlines of April 15 and December 15'. 
@@ -7628,7 +7684,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: McGill University\, Electrical and Co
 DESCRIPTION:Action: Upload transcripts\, degree certificates and Area of 
  Research and Applicant Profile Form\; have IELTS sent electronically to 
  McGill (code 0935)\; all by 2026-12-15\nStatus: completion_unconfirmed\n
- Original source: Step timeline row 423\nOfficial URL: https://www.mcgill
+ Original source: Step timeline row 424\nOfficial URL: https://www.mcgill
  .ca/ece/graduate/graduate/deadlines\nFinal programme deadline: 2026-12-1
  5\nOriginal note: 2026-12-15 00:00:00\nAll-day date. DO NOT infer a clos
  ing time from this event.\nConfirm actual portal availability and indivi
@@ -7652,7 +7708,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of British Columbia (Vanco
 DESCRIPTION:Action: By 2026-12-15 open the online application (open since
   2026-10-15)\, list the faculty you want to work with and the three refe
  rees\nStatus: completion_unconfirmed\nOriginal source: Step timeline row
-  427\nOfficial URL: https://www.grad.ubc.ca/prospective-students/graduat
+  428\nOfficial URL: https://www.grad.ubc.ca/prospective-students/graduat
  e-degree-programs/phd-electrical-computer-engineering\nFinal programme d
  eadline: 2027-01-15\nOriginal note: 2027-01-15 00:00:00\nAll-day date. D
  O NOT infer a closing time from this event.\nConfirm actual portal avail
@@ -7677,7 +7733,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: UBC Computer Science PhD\, September
 DESCRIPTION:Action: Upload transcripts\, degree certificates\, Statement 
  of Intent and enter English test registration number and date\; pay fee 
  and click Continue to submit by 2026-12-15\nStatus: completion_unconfirm
- ed\nOriginal source: Step timeline row 426\nOfficial URL: https://www.cs
+ ed\nOriginal source: Step timeline row 427\nOfficial URL: https://www.cs
  .ubc.ca/students/grad/admissions\nFinal programme deadline: 2026-12-15\n
  Original note: 2026-12-15 00:00:00\nAll-day date. DO NOT infer a closing
   time from this event.\nConfirm actual portal availability and individua
@@ -7700,7 +7756,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Toronto MIE\, CLIMB Lab
   (Pakpong Chirarattananon)\, PhD September 2027
 DESCRIPTION:Action: By 2026-12-15 line up two academic referees with inst
  itutional email addresses (at least one a previous thesis supervisor)\nS
- tatus: completion_unconfirmed\nOriginal source: Step timeline row 429\nO
+ tatus: completion_unconfirmed\nOriginal source: Step timeline row 430\nO
  fficial URL: https://climb.mie.utoronto.ca/openings/\nFinal programme de
  adline: 2027-01-15\nOriginal note: 2027-01-15 00:00:00\nAll-day date. DO
   NOT infer a closing time from this event.\nConfirm actual portal availa
@@ -7722,7 +7778,7 @@ DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: SFU Computing Science PhD (Fall 2027)
 DESCRIPTION:Action: By 2026-12-15 write the statement of purpose and gath
  er all post-secondary transcripts as unofficial uploads\nStatus: complet
- ion_unconfirmed\nOriginal source: Step timeline row 425\nOfficial URL: h
+ ion_unconfirmed\nOriginal source: Step timeline row 426\nOfficial URL: h
  ttps://www.sfu.ca/fas/study/future-graduates/apply/computing-science.htm
  l\nFinal programme deadline: 2027-01-19\nOriginal note: 2027-01-19 00:00
  :00\nAll-day date. DO NOT infer a closing time from this event.\nConfirm
@@ -7746,7 +7802,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Victoria University of Wellington\, W
  ellington Doctoral Scholarship (round 2 per earlier sweep)
 DESCRIPTION:Action: By 2026-12-15 order a Scholaro GPA report (small fee)
   and certified copies of transcripts and degree certificates\nStatus: co
- mpletion_unconfirmed\nOriginal source: Step timeline row 430\nOfficial U
+ mpletion_unconfirmed\nOriginal source: Step timeline row 431\nOfficial U
  RL: https://www.wgtn.ac.nz/scholarships/current/wellington-doctoral-scho
  larship\nFinal programme deadline: 2027-03-01\nOriginal note: 2027-03-01
   00:00:00\nAll-day date. DO NOT infer a closing time from this event.\nC
@@ -7771,7 +7827,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Surrey (Vision\, Speech
  amera lenses (Volino\, Guillemaut)\, April 2027 start
 DESCRIPTION:Action: 2026-12-15: prepare Surrey VSSP PhD application with 
  a document giving project title and supervisor instead of a proposal\nSt
- atus: completion_unconfirmed\nOriginal source: Step timeline row 428\nOf
+ atus: completion_unconfirmed\nOriginal source: Step timeline row 429\nOf
  ficial URL: https://www.surrey.ac.uk/fees-and-funding/studentships/smart
  -optical-design-ai-tools-next-generation-cinematic-camera-lenses\nFinal 
  programme deadline: 2027-01-17\nOriginal note: 2027-01-17 00:00:00\nAll-
@@ -7796,7 +7852,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: EPFL EDRS (Robotics\, Control and Int
  elligent Systems) doctoral programme
 DESCRIPTION:Action: About late Jan 2027: decision\; if admitted\, find a 
  hiring thesis advisor within one year\nStatus: completion_unconfirmed\nO
- riginal source: Step timeline row 419\nOfficial URL: https://epfl.ch/edu
+ riginal source: Step timeline row 420\nOfficial URL: https://epfl.ch/edu
  cation/phd/programs/edrs-robotics_control_and_intelligent_systems/edrs-a
  pplicants\nFinal programme deadline: 2026-12-15\nOriginal note: 2026-12-
  15 00:00:00\nAll-day date. DO NOT infer a closing time from this event.\
@@ -7820,7 +7876,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Bristol PhD studentship\, learning an
  d decision making under uncertainty in public health (Mengyan Zhang)
 DESCRIPTION:Action: By 2026-12-15 prepare CV\, 1-2 page personal statemen
  t\, transcripts and optional research proposal\nStatus: completion_uncon
- firmed\nOriginal source: Step timeline row 413\nOfficial URL: https://ww
+ firmed\nOriginal source: Step timeline row 414\nOfficial URL: https://ww
  w.jobs.ac.uk/job/DSP806/phd-studentship-learning-and-decision-making-und
  er-uncertainty-in-public-health\nFinal programme deadline: 2027-01-31\nO
  riginal note: 2027-01-31 00:00:00\nAll-day date. DO NOT infer a closing 
@@ -7845,7 +7901,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: EPFL EDRS (Robotics\, Control and Int
  elligent Systems) doctoral programme
 DESCRIPTION:Action: By mid Nov 2026: ask three recommenders to submit let
  ters by 15 Dec 2026 at the latest\nStatus: completion_unconfirmed\nOrigi
- nal source: Step timeline row 416\nOfficial URL: https://epfl.ch/educati
+ nal source: Step timeline row 417\nOfficial URL: https://epfl.ch/educati
  on/phd/programs/edrs-robotics_control_and_intelligent_systems/edrs-appli
  cants\nFinal programme deadline: 2026-12-15\nOriginal note: 2026-12-15 0
  0:00:00\nAll-day date. DO NOT infer a closing time from this event.\nCon
@@ -7869,7 +7925,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: EPFL EDRS (Robotics\, Control and Int
  elligent Systems) doctoral programme
 DESCRIPTION:Action: Now: read websites of participating EDRS laboratories
   and shortlist advisers\; EPFL says to consult labs before applying\nSta
- tus: completion_unconfirmed\nOriginal source: Step timeline row 415\nOff
+ tus: completion_unconfirmed\nOriginal source: Step timeline row 416\nOff
  icial URL: https://epfl.ch/education/phd/programs/edrs-robotics_control_
  and_intelligent_systems/edrs-applicants\nFinal programme deadline: 2026-
  12-15\nOriginal note: 2026-12-15 00:00:00\nAll-day date. DO NOT infer a 
@@ -7893,7 +7949,7 @@ DTEND;VALUE=DATE:20261216
 SUMMARY:APPLICATION DEADLINE: UBC Computer Science PhD\, September 2027
 DESCRIPTION:Action: Create a UBC CWL account and start the application (o
  pen since 2026-09-15) by 2026-11-01\nStatus: deadline_unconfirmed\nOrigi
- nal source: Action list row 109\nOfficial URL: https://www.cs.ubc.ca/stu
+ nal source: Action list row 110\nOfficial URL: https://www.cs.ubc.ca/stu
  dents/grad/admissions\nFinal programme deadline: 2026-12-15\nOriginal no
  te: 'December 15\, 2026\, is the application deadline for programs begin
  ning in September 2027 or January 2028' (cs.ubc.ca)\; only completed app
@@ -7924,7 +7980,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Concordia Mechanical\, Industrial and
 DESCRIPTION:Action: By 2026-12-15 identify and email Concordia MIAE facul
  ty (SLAM\, attitude estimation) to secure a supervisor (the earlier note
   required this\; the page itself does not state it)\nStatus: completion_
- unconfirmed\nOriginal source: Step timeline row 414\nOfficial URL: https
+ unconfirmed\nOriginal source: Step timeline row 415\nOfficial URL: https
  ://www.concordia.ca/academics/graduate/mechanical-engineering-phd.html\n
  Final programme deadline: 2027-03-01\nOriginal note: 2027-03-01 00:00:00
  \nAll-day date. DO NOT infer a closing time from this event.\nConfirm ac
@@ -7949,7 +8005,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: UEA / ARIES NERC DTP studentships (en
 DESCRIPTION:Action: If nominated by the supervisor: complete the ARIES-sp
  ecific application form\, then attend a ~35 minute online ARIES panel in
  terview (February\, exact date not printed for 2027)\nStatus: completion
- _unconfirmed\nOriginal source: Step timeline row 432\nOfficial URL: http
+ _unconfirmed\nOriginal source: Step timeline row 433\nOfficial URL: http
  s://www.aries-dtp.ac.uk/applications\nFinal programme deadline: 2026-12-
  16\nOriginal note: 2026-12-16 00:00:00\nAll-day date. DO NOT infer a clo
  sing time from this event.\nConfirm actual portal availability and indiv
@@ -7973,7 +8029,7 @@ SUMMARY:APPLICATION DEADLINE: UEA / ARIES NERC DTP studentships (entry 1
 DESCRIPTION:Action: By 2026-11-06 browse all 6 pages of https://aries-dtp
  .ac.uk/studentships/ and shortlist up to 3 projects (max 3 allowed per y
  ear) whose scope fits\; page 1 shows only climate/ocean projects\nStatus
- : deadline_unconfirmed\nOriginal source: Action list row 111\nOfficial U
+ : deadline_unconfirmed\nOriginal source: Action list row 112\nOfficial U
  RL: https://www.aries-dtp.ac.uk/applications\nFinal programme deadline: 
  2026-12-16\nOriginal note: 23:59 on 16 December 2026 (aries-dtp.ac.uk/ap
  plications\, UK time implied\; studentship listing page confirms 'close 
@@ -8005,7 +8061,7 @@ DESCRIPTION:Action: By 2026-12-16 23:59 upload cover letter\, CV\, scanne
  d transcripts and degree certificates (official translations if not in E
  nglish)\, and complete the ARIES EDI form requested by the University of
   Registration\nStatus: completion_unconfirmed\nOriginal source: Step tim
- eline row 431\nOfficial URL: https://www.aries-dtp.ac.uk/applications\nF
+ eline row 432\nOfficial URL: https://www.aries-dtp.ac.uk/applications\nF
  inal programme deadline: 2026-12-16\nOriginal note: 2026-12-16 00:00:00\
  nAll-day date. DO NOT infer a closing time from this event.\nConfirm act
  ual portal availability and individual eligibility.
@@ -8027,7 +8083,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Sydney Research Trainin
  g Program (RTP) international stipend + fee offset\, 2027 commencement
 DESCRIPTION:Action: Read the HDR scholarship selection process PDF and fi
  ll the Research experience evidence template before submitting\nStatus: 
- completion_unconfirmed\nOriginal source: Step timeline row 441\nOfficial
+ completion_unconfirmed\nOriginal source: Step timeline row 442\nOfficial
   URL: https://www.sydney.edu.au/scholarships/australian-government-resea
  rch-training-program/rtp-international.html\nFinal programme deadline: 2
  026-12-18\nOriginal note: 2026-12-18 00:00:00\nAll-day date. DO NOT infe
@@ -8054,7 +8110,7 @@ SUMMARY:APPLICATION DEADLINE: University of Manchester — PDS Safe and M
 DESCRIPTION:Action: Write proposal focused on uncertainty-aware multi-fid
  elity optimisation and safe constellation reconfiguration\; contact supe
  rvisors\nStatus: deadline_unconfirmed\nOriginal source: Action list row 
- 113\nOfficial URL: https://www.humanities.manchester.ac.uk/study/postgra
+ 114\nOfficial URL: https://www.humanities.manchester.ac.uk/study/postgra
  duate-research/funding/list-of-awards/presidents-doctoral-scholar-award/
  \nFinal programme deadline: 2026-12-18\nOriginal note: final. University
   award page explicitly lists this project and 18 December deadline and f
@@ -8085,7 +8141,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Sydney Faculty of Engin
 DESCRIPTION:Action: Note: awardees must withdraw University of Sydney RTP
   applications\, so decide between M43a and M43b after the faculty reply 
  and before 2026-12-18\nStatus: completion_unconfirmed\nOriginal source: 
- Step timeline row 439\nOfficial URL: https://www.sydney.edu.au/scholarsh
+ Step timeline row 440\nOfficial URL: https://www.sydney.edu.au/scholarsh
  ips/b/faculty-of-engineering-research-scholarship-for-mena.html\nFinal p
  rogramme deadline: unposted\nOriginal note: Rolling\nAll-day date. DO NO
  T infer a closing time from this event.\nConfirm actual portal availabil
@@ -8109,7 +8165,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Manchester President's
  Doctoral Scholar (PDS) Award
 DESCRIPTION:Action: Prepare evidence of research experience and broader a
  ctivity (outreach\, volunteering) as the scheme assesses both\nStatus: c
- ompletion_unconfirmed\nOriginal source: Step timeline row 435\nOfficial 
+ ompletion_unconfirmed\nOriginal source: Step timeline row 436\nOfficial 
  URL: https://www.se.manchester.ac.uk/study/postgraduate-research/fees-an
  d-funding/search-for-funding/presidents-doctoral-scholarship/\nFinal pro
  gramme deadline: 2026-12-18\nOriginal note: 2026-12-18 00:00:00\nAll-day
@@ -8135,7 +8191,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Sydney Research Trainin
 DESCRIPTION:Action: By 2026-12-18 submit the scholarship application form
   (Submit RTP form) together with the research experience evidence templa
  te and appendix\nStatus: completion_unconfirmed\nOriginal source: Step t
- imeline row 440\nOfficial URL: https://www.sydney.edu.au/scholarships/au
+ imeline row 441\nOfficial URL: https://www.sydney.edu.au/scholarships/au
  stralian-government-research-training-program/rtp-international.html\nFi
  nal programme deadline: 2026-12-18\nOriginal note: 2026-12-18 00:00:00\n
  All-day date. DO NOT infer a closing time from this event.\nConfirm actu
@@ -8160,7 +8216,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Manchester President's
 DESCRIPTION:Action: Email FSE.doctoralacademy.admissions@manchester.ac.uk
   or pds@manchester.ac.uk and ask for the 2027 PDS deadline and whether i
  nternational fees are covered\nStatus: completion_unconfirmed\nOriginal 
- source: Step timeline row 433\nOfficial URL: https://www.se.manchester.a
+ source: Step timeline row 434\nOfficial URL: https://www.se.manchester.a
  c.uk/study/postgraduate-research/fees-and-funding/search-for-funding/pre
  sidents-doctoral-scholarship/\nFinal programme deadline: 2026-12-18\nOri
  ginal note: 2026-12-18 00:00:00\nAll-day date. DO NOT infer a closing ti
@@ -8186,7 +8242,7 @@ SUMMARY:APPLICATION DEADLINE: University of Manchester President's Doctor
 DESCRIPTION:Action: Email FSE.doctoralacademy.admissions@manchester.ac.uk
   or pds@manchester.ac.uk and ask for the 2027 PDS deadline and whether i
  nternational fees are covered\nStatus: deadline_unconfirmed\nOriginal so
- urce: Action list row 112\nOfficial URL: https://www.se.manchester.ac.uk
+ urce: Action list row 113\nOfficial URL: https://www.se.manchester.ac.uk
  /study/postgraduate-research/fees-and-funding/search-for-funding/preside
  nts-doctoral-scholarship/\nFinal programme deadline: 2026-12-18\nOrigina
  l note: (assumed) No deadline printed on the central PDS page or the Fac
@@ -8219,7 +8275,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Manchester President's
 DESCRIPTION:Action: Find a Manchester supervisor and the PhD programme an
  d submit the PhD application by the published deadline (required to be c
  onsidered)\nStatus: completion_unconfirmed\nOriginal source: Step timeli
- ne row 434\nOfficial URL: https://www.se.manchester.ac.uk/study/postgrad
+ ne row 435\nOfficial URL: https://www.se.manchester.ac.uk/study/postgrad
  uate-research/fees-and-funding/search-for-funding/presidents-doctoral-sc
  holarship/\nFinal programme deadline: 2026-12-18\nOriginal note: 2026-12
  -18 00:00:00\nAll-day date. DO NOT infer a closing time from this event.
@@ -8244,7 +8300,7 @@ SUMMARY:APPLICATION DEADLINE: University of Sydney Research Training Prog
 DESCRIPTION:Action: By 2026-11-13 email engineering.hdr@sydney.edu.au wit
  h CV and research area to identify a supervisor (stated on the Faculty p
  age as the contact)\nStatus: deadline_unconfirmed\nOriginal source: Acti
- on list row 114\nOfficial URL: https://www.sydney.edu.au/scholarships/au
+ on list row 115\nOfficial URL: https://www.sydney.edu.au/scholarships/au
  stralian-government-research-training-program/rtp-international.html\nFi
  nal programme deadline: 2026-12-18\nOriginal note: Research Periods 3 an
  d 4\, 2027: submission deadline 18 December 2026 (no time or zone printe
@@ -8276,7 +8332,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Oxford Intelligent Eart
 DESCRIPTION:Action: By 2026-12-18 submit the online graduate application 
  with programme code R30_1 (full-time) or R30_9P1 (part-time)\, not the s
  tudentship code\, with statement of purpose and supporting documents\nSt
- atus: completion_unconfirmed\nOriginal source: Step timeline row 438\nOf
+ atus: completion_unconfirmed\nOriginal source: Step timeline row 439\nOf
  ficial URL: https://intelligent-earth.ox.ac.uk/how-apply\nFinal programm
  e deadline: 2027-01-06\nOriginal note: 2027-01-06 00:00:00\nAll-day date
  . DO NOT infer a closing time from this event.\nConfirm actual portal av
@@ -8301,7 +8357,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Manchester — PDS Safe
 DESCRIPTION:Action: Write proposal focused on uncertainty-aware multi-fid
  elity optimisation and safe constellation reconfiguration\; contact supe
  rvisors [External deadline: final]\nStatus: completion_unconfirmed\nOrig
- inal source: Step timeline row 436\nOfficial URL: https://www.humanities
+ inal source: Step timeline row 437\nOfficial URL: https://www.humanities
  .manchester.ac.uk/study/postgraduate-research/funding/list-of-awards/pre
  sidents-doctoral-scholar-award/\nFinal programme deadline: 2026-12-18\nO
  riginal note: 2026-12-18 00:00:00\nAll-day date. DO NOT infer a closing 
@@ -8325,7 +8381,7 @@ DTEND;VALUE=DATE:20261219
 SUMMARY:SCHEDULED APPLICATION STEP: University of Melbourne MDHS graduate
   research (PhD)\, Round 1\, 2027 intake
 DESCRIPTION:Action: 2026-12-18: outcomes\nStatus: completion_unconfirmed\
- nOriginal source: Step timeline row 437\nOfficial URL: https://mdhs.unim
+ nOriginal source: Step timeline row 438\nOfficial URL: https://mdhs.unim
  elb.edu.au/research/research-training/future-students\nFinal programme d
  eadline: 2026-10-31\nOriginal note: 2026-10-31 00:00:00\nAll-day date. D
  O NOT infer a closing time from this event.\nConfirm actual portal avail
@@ -8350,7 +8406,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: King's College London\, PhD in Human-
  try
 DESCRIPTION:Action: 2026-12-20: confirm ATAS position with pgr-engineerin
  g@kcl.ac.uk\nStatus: completion_unconfirmed\nOriginal source: Step timel
- ine row 442\nOfficial URL: http://kcl.ac.uk/study/funding/funding-opport
+ ine row 443\nOfficial URL: http://kcl.ac.uk/study/funding/funding-opport
  unities/fully-funded-phd-studentship-in-human-robot-interaction-at-kings
  -college-london\nFinal programme deadline: 2027-01-11\nOriginal note: 20
  27-01-11 00:00:00\nAll-day date. DO NOT infer a closing time from this e
@@ -8373,7 +8429,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Surrey fully funded PhD
 DESCRIPTION:Action: By 2026-12-20 submit the application through the Ling
  uistics PhD programme page\, following the earlier studentship deadline 
  rather than the 17 Jan 2027 April-intake date\nStatus: completion_unconf
- irmed\nOriginal source: Step timeline row 444\nOfficial URL: https://www
+ irmed\nOriginal source: Step timeline row 445\nOfficial URL: https://www
  .surrey.ac.uk/fees-and-funding/studentships/fully-funded-phd-studentship
  -predictability-romance-verbal-inflection\nFinal programme deadline: 202
  6-12-20\nOriginal note: 2026-12-20 00:00:00\nAll-day date. DO NOT infer 
@@ -8399,7 +8455,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: SFU Engineering Science PhD (Fall 202
 DESCRIPTION:Action: By 2026-12-20 prepare statement of interest\, CV and 
  unofficial transcripts (in English or French\, or with official translat
  ion)\nStatus: completion_unconfirmed\nOriginal source: Step timeline row
-  443\nOfficial URL: https://www.sfu.ca/students/calendar/2027/spring/pro
+  444\nOfficial URL: https://www.sfu.ca/students/calendar/2027/spring/pro
  grams/engineering-science/doctor-of-philosophy.html\nFinal programme dea
  dline: 2027-01-15\nOriginal note: 2027-01-15 00:00:00\nAll-day date. DO 
  NOT infer a closing time from this event.\nConfirm actual portal availab
@@ -8424,7 +8480,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Waterloo ECE PhD\, Stephen L. Smith (
 DESCRIPTION:Action: By 2026-12-20 write the Supplementary Information For
  m and a statement naming Stephen L. Smith as potential supervisor and th
  e lab research areas that interest you\nStatus: completion_unconfirmed\n
- Original source: Step timeline row 445\nOfficial URL: https://uwaterloo.
+ Original source: Step timeline row 446\nOfficial URL: https://uwaterloo.
  ca/autonomous-systems-lab/joining-lab\nFinal programme deadline: 2027-01
  -15\nOriginal note: 2027-01-15 00:00:00\nAll-day date. DO NOT infer a cl
  osing time from this event.\nConfirm actual portal availability and indi
@@ -8448,7 +8504,7 @@ SUMMARY:APPLICATION DEADLINE: University of Surrey fully funded PhD: pred
 DESCRIPTION:Action: By 2026-12-05 email Alison Stubley (address not print
  ed on the page) a CV and a one-page statement of interest\, stating the 
  project title and supervisor names\nStatus: deadline_unconfirmed\nOrigin
- al source: Action list row 115\nOfficial URL: https://www.surrey.ac.uk/f
+ al source: Action list row 116\nOfficial URL: https://www.surrey.ac.uk/f
  ees-and-funding/studentships/fully-funded-phd-studentship-predictability
  -romance-verbal-inflection\nFinal programme deadline: 2026-12-20\nOrigin
  al note: 20 December 2026\, no time or zone printed. Start 1 April 2027\
@@ -8478,7 +8534,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Hokkaido University e3 MEXT Universit
  y Recommendation\, doctoral\, Oct 2027 entry (4 doctoral places)
 DESCRIPTION:Action: If shortlisted: online interview with prospective sup
  ervisor\; first screening results 2026-12-24\nStatus: completion_unconfi
- rmed\nOriginal source: Step timeline row 446\nOfficial URL: https://epro
+ rmed\nOriginal source: Step timeline row 447\nOfficial URL: https://epro
  gram.eng.hokudai.ac.jp/e3/news-updates/20-admission/452-application-guid
  elines-for-mext-uni-2027\nFinal programme deadline: 2026-10-29\nOriginal
   note: 2026-10-29 00:00:00\nAll-day date. DO NOT infer a closing time fr
@@ -8502,7 +8558,7 @@ DTEND;VALUE=DATE:20270102
 SUMMARY:SCHEDULED APPLICATION STEP: University of Toronto MIE\, CLIMB Lab
   (Pakpong Chirarattananon)\, PhD September 2027
 DESCRIPTION:Action: By 2027-01-01 pay the non-refundable application fee\
- nStatus: completion_unconfirmed\nOriginal source: Step timeline row 447\
+ nStatus: completion_unconfirmed\nOriginal source: Step timeline row 448\
  nOfficial URL: https://climb.mie.utoronto.ca/openings/\nFinal programme 
  deadline: 2027-01-15\nOriginal note: 2027-01-15 00:00:00\nAll-day date. 
  DO NOT infer a closing time from this event.\nConfirm actual portal avai
@@ -8526,7 +8582,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Toyohashi University of Technology In
  )
 DESCRIPTION:Action: Now: contact a prospective TUT supervisor (page asks 
  for this before applying) and ask for a Letter of Acceptance\nStatus: co
- mpletion_unconfirmed\nOriginal source: Step timeline row 449\nOfficial U
+ mpletion_unconfirmed\nOriginal source: Step timeline row 450\nOfficial U
  RL: https://www.tut.ac.jp/english/exam/applications/docs/3_2026_special_
  guidelines_en.pdf\nFinal programme deadline: 2027-01-04\nOriginal note: 
  2027-01-04 00:00:00\nAll-day date. DO NOT infer a closing time from this
@@ -8550,7 +8606,7 @@ SUMMARY:APPLICATION DEADLINE: Toyohashi University of Technology Internat
  ional Doctoral Degree Program with MEXT (university recommendation)
 DESCRIPTION:Action: Now: contact a prospective TUT supervisor (page asks 
  for this before applying) and ask for a Letter of Acceptance\nStatus: de
- adline_unconfirmed\nOriginal source: Action list row 116\nOfficial URL: 
+ adline_unconfirmed\nOriginal source: Action list row 117\nOfficial URL: 
  https://www.tut.ac.jp/english/exam/applications/docs/3_2026_special_guid
  elines_en.pdf\nFinal programme deadline: 2027-01-04\nOriginal note: (ass
  umed) TUT page (updated 4 Aug 2026): 'Application for admission in 2027 
@@ -8583,7 +8639,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Toyohashi University of Technology In
  )
 DESCRIPTION:Action: Check the TUT page again in early December 2026 and A
  pril 2027 for the 2027 MEXT university recommendation guidelines\nStatus
- : completion_unconfirmed\nOriginal source: Step timeline row 450\nOffici
+ : completion_unconfirmed\nOriginal source: Step timeline row 451\nOffici
  al URL: https://www.tut.ac.jp/english/exam/applications/docs/3_2026_spec
  ial_guidelines_en.pdf\nFinal programme deadline: 2027-01-04\nOriginal no
  te: 2027-01-04 00:00:00\nAll-day date. DO NOT infer a closing time from 
@@ -8608,7 +8664,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Imperial College London President's P
  hD Scholarships 2027/28\, round 2
 DESCRIPTION:Action: By 2027-01-04 name two academic referees (not the pro
  posed supervisor)\nStatus: completion_unconfirmed\nOriginal source: Step
-  timeline row 448\nOfficial URL: https://www.imperial.ac.uk/study/fees-a
+  timeline row 449\nOfficial URL: https://www.imperial.ac.uk/study/fees-a
  nd-funding/postgraduate-doctoral/grants-scholarships/presidents-phd/\nFi
  nal programme deadline: 2027-01-11\nOriginal note: 2027-01-11 00:00:00\n
  All-day date. DO NOT infer a closing time from this event.\nConfirm actu
@@ -8634,7 +8690,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Toyohashi University of Technology In
 DESCRIPTION:Action: When published: submit application form\, detailed re
  search plan and recommendation letter for admission\, plus the MEXT file
   by the stated email deadline\nStatus: completion_unconfirmed\nOriginal 
- source: Step timeline row 451\nOfficial URL: https://www.tut.ac.jp/engli
+ source: Step timeline row 452\nOfficial URL: https://www.tut.ac.jp/engli
  sh/exam/applications/docs/3_2026_special_guidelines_en.pdf\nFinal progra
  mme deadline: 2027-01-04\nOriginal note: 2027-01-04 00:00:00\nAll-day da
  te. DO NOT infer a closing time from this event.\nConfirm actual portal 
@@ -8657,7 +8713,7 @@ DTEND;VALUE=DATE:20270107
 SUMMARY:APPLICATION DEADLINE: University of Oxford Intelligent Earth CDT 
  (AI for the environment)\, September 2027 entry
 DESCRIPTION:Action: By 2026-11-20 register for the 25 Nov Open Day\nStatu
- s: deadline_unconfirmed\nOriginal source: Action list row 117\nOfficial 
+ s: deadline_unconfirmed\nOriginal source: Action list row 118\nOfficial 
  URL: https://intelligent-earth.ox.ac.uk/how-apply\nFinal programme deadl
  ine: 2027-01-06\nOriginal note: '12:00 midday UK time on Wednesday 6 Jan
  uary 2027'. Virtual Open Day Wednesday 25 November 2026\, 14:00-16:00 GM
@@ -8687,7 +8743,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Oxford Intelligent Eart
  h CDT (AI for the environment)\, September 2027 entry
 DESCRIPTION:Action: If invited\, attend virtual interview late February 2
  027\nStatus: completion_unconfirmed\nOriginal source: Step timeline row 
- 453\nOfficial URL: https://intelligent-earth.ox.ac.uk/how-apply\nFinal p
+ 454\nOfficial URL: https://intelligent-earth.ox.ac.uk/how-apply\nFinal p
  rogramme deadline: 2027-01-06\nOriginal note: 2027-01-06 00:00:00\nAll-d
  ay date. DO NOT infer a closing time from this event.\nConfirm actual po
  rtal availability and individual eligibility.
@@ -8709,7 +8765,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Oxford Intelligent Eart
  h CDT (AI for the environment)\, September 2027 entry
 DESCRIPTION:Action: Submit no later than 2027-01-06 12:00 UK time\; earli
  er submission advised as the earlier sweep suggested two weeks early\nSt
- atus: completion_unconfirmed\nOriginal source: Step timeline row 452\nOf
+ atus: completion_unconfirmed\nOriginal source: Step timeline row 453\nOf
  ficial URL: https://intelligent-earth.ox.ac.uk/how-apply\nFinal programm
  e deadline: 2027-01-06\nOriginal note: 2027-01-06 00:00:00\nAll-day date
  . DO NOT infer a closing time from this event.\nConfirm actual portal av
@@ -8734,7 +8790,7 @@ DESCRIPTION:Action: By early 2027-01: additional documents (MEXT applicat
  ion form\, MEXT-format research proposal\, handwritten pledge\, official
   ranking certificate\, Dean's letter addressed to President of Hokkaido 
  University)\nStatus: completion_unconfirmed\nOriginal source: Step timel
- ine row 455\nOfficial URL: https://eprogram.eng.hokudai.ac.jp/e3/news-up
+ ine row 456\nOfficial URL: https://eprogram.eng.hokudai.ac.jp/e3/news-up
  dates/20-admission/452-application-guidelines-for-mext-uni-2027\nFinal p
  rogramme deadline: 2026-10-29\nOriginal note: 2026-10-29 00:00:00\nAll-d
  ay date. DO NOT infer a closing time from this event.\nConfirm actual po
@@ -8758,7 +8814,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Hokkaido University e3 MEXT Universit
  y Recommendation\, doctoral\, Oct 2027 entry (4 doctoral places)
 DESCRIPTION:Action: 2027-01-07 to 2027-01-14: keep free for second screen
  ing interview with MEXT committee\nStatus: completion_unconfirmed\nOrigi
- nal source: Step timeline row 454\nOfficial URL: https://eprogram.eng.ho
+ nal source: Step timeline row 455\nOfficial URL: https://eprogram.eng.ho
  kudai.ac.jp/e3/news-updates/20-admission/452-application-guidelines-for-
  mext-uni-2027\nFinal programme deadline: 2026-10-29\nOriginal note: 2026
  -10-29 00:00:00\nAll-day date. DO NOT infer a closing time from this eve
@@ -8782,7 +8838,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Edinburgh EPSRC Centre
  for Doctoral Training in Machine Learning Systems (PhD\, Round 1)
 DESCRIPTION:Action: Stage 1 outcomes by 2027-01-07\; if invited\, prepare
   Research Proposal and submit the EUCLID full application by 2027-01-21\
- nStatus: completion_unconfirmed\nOriginal source: Step timeline row 456\
+ nStatus: completion_unconfirmed\nOriginal source: Step timeline row 457\
  nOfficial URL: https://informatics.ed.ac.uk/cdt-in-machine-learning-syst
  ems/apply/application-process-and-guidance/application-deadlines\nFinal 
  programme deadline: 2026-12-14\nOriginal note: 2026-12-14 00:00:00\nAll-
@@ -8807,7 +8863,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Edinburgh EPSRC Centre
  for Doctoral Training in Machine Learning Systems (PhD\, Round 1)
 DESCRIPTION:Action: English scores can follow by the offer stage (end of 
  February 2027)\nStatus: completion_unconfirmed\nOriginal source: Step ti
- meline row 457\nOfficial URL: https://informatics.ed.ac.uk/cdt-in-machin
+ meline row 458\nOfficial URL: https://informatics.ed.ac.uk/cdt-in-machin
  e-learning-systems/apply/application-process-and-guidance/application-de
  adlines\nFinal programme deadline: 2026-12-14\nOriginal note: 2026-12-14
   00:00:00\nAll-day date. DO NOT infer a closing time from this event.\nC
@@ -8832,7 +8888,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: UEC Tokyo (Graduate School of Informa
  all 2027 doctoral
 DESCRIPTION:Action: By 2027-01-08: supervisor sends full set to the Inter
  national Student Office (ISO)\nStatus: completion_unconfirmed\nOriginal 
- source: Step timeline row 461\nOfficial URL: https://www.fedu.uec.ac.jp/
+ source: Step timeline row 462\nOfficial URL: https://www.fedu.uec.ac.jp/
  en/future_students/scholarship/japanese-government-mext-scholarship-stud
  ents-1.html\nFinal programme deadline: 2026-10-31\nOriginal note: 2026-1
  0-31 00:00:00\nAll-day date. DO NOT infer a closing time from this event
@@ -8856,7 +8912,7 @@ SUMMARY:APPLICATION DEADLINE: UCL 50 fully funded 4-year EPSRC PhD studen
  tships in engineering and physical sciences
 DESCRIPTION:Action: 2026-10-30: open the advert in a browser and read int
  ernational eligibility\, cap and ATAS\nStatus: deadline_unconfirmed\nOri
- ginal source: Action list row 118\nOfficial URL: https://www.jobs.ac.uk/
+ ginal source: Action list row 119\nOfficial URL: https://www.jobs.ac.uk/
  job/DTA190/50-fully-funded-4-year-epsrc-phd-studentships-in-engineering-
  and-physical-sciences\nFinal programme deadline: 2027-01-08\nOriginal no
  te: (assumed) jobs.ac.uk listing shows closing '08 Jan'\; year not shown
@@ -8886,7 +8942,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: SFU Engineering Science PhD (Fall 202
  7)
 DESCRIPTION:Action: After an offer only: send official transcripts direct
  ly from each institution to SFU\nStatus: completion_unconfirmed\nOrigina
- l source: Step timeline row 460\nOfficial URL: https://www.sfu.ca/studen
+ l source: Step timeline row 461\nOfficial URL: https://www.sfu.ca/studen
  ts/calendar/2027/spring/programs/engineering-science/doctor-of-philosoph
  y.html\nFinal programme deadline: 2027-01-15\nOriginal note: 2027-01-15 
  00:00:00\nAll-day date. DO NOT infer a closing time from this event.\nCo
@@ -8911,7 +8967,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: UEC Tokyo (Graduate School of Informa
  all 2027 doctoral
 DESCRIPTION:Action: Feb 2027 university selection\; Mar-Jun 2027 MEXT sel
  ection\; late Jun-early Jul acceptance notice\nStatus: completion_unconf
- irmed\nOriginal source: Step timeline row 462\nOfficial URL: https://www
+ irmed\nOriginal source: Step timeline row 463\nOfficial URL: https://www
  .fedu.uec.ac.jp/en/future_students/scholarship/japanese-government-mext-
  scholarship-students-1.html\nFinal programme deadline: 2026-10-31\nOrigi
  nal note: 2026-10-31 00:00:00\nAll-day date. DO NOT infer a closing time
@@ -8936,7 +8992,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: SFU Engineering Science PhD (Fall 202
  7)
 DESCRIPTION:Action: By 2027-01-08 submit the online application (3 days o
  f slack before 2027-01-15)\nStatus: completion_unconfirmed\nOriginal sou
- rce: Step timeline row 459\nOfficial URL: https://www.sfu.ca/students/ca
+ rce: Step timeline row 460\nOfficial URL: https://www.sfu.ca/students/ca
  lendar/2027/spring/programs/engineering-science/doctor-of-philosophy.htm
  l\nFinal programme deadline: 2027-01-15\nOriginal note: 2027-01-15 00:00
  :00\nAll-day date. DO NOT infer a closing time from this event.\nConfirm
@@ -8981,7 +9037,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: King's College London\, PhD in Human-
  try
 DESCRIPTION:Action: 2027-01-08: submit on King's Apply\, select funding o
  ption 5 and enter code 1213\, name Dr Celiktutan as supervisor\nStatus: 
- completion_unconfirmed\nOriginal source: Step timeline row 458\nOfficial
+ completion_unconfirmed\nOriginal source: Step timeline row 459\nOfficial
   URL: http://kcl.ac.uk/study/funding/funding-opportunities/fully-funded-
  phd-studentship-in-human-robot-interaction-at-kings-college-london\nFina
  l programme deadline: 2027-01-11\nOriginal note: 2027-01-11 00:00:00\nAl
@@ -9004,7 +9060,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Surrey (Vision\, Speech
   and Signal Processing)\, Smart optical design: AI tools for cinematic c
  amera lenses (Volino\, Guillemaut)\, April 2027 start
 DESCRIPTION:Action: 2027-01-10: submit application ahead of 2027-01-17\nS
- tatus: completion_unconfirmed\nOriginal source: Step timeline row 463\nO
+ tatus: completion_unconfirmed\nOriginal source: Step timeline row 464\nO
  fficial URL: https://www.surrey.ac.uk/fees-and-funding/studentships/smar
  t-optical-design-ai-tools-next-generation-cinematic-camera-lenses\nFinal
   programme deadline: 2027-01-17\nOriginal note: 2027-01-17 00:00:00\nAll
@@ -9030,7 +9086,7 @@ SUMMARY:APPLICATION DEADLINE: King's College London\, PhD in Human-Robot
 DESCRIPTION:Action: 2026-11-02: email Dr Celiktutan (oya.celiktutan@kcl.a
  c.uk) with CV and a short note on Go2 SLAM and robot learning work\, quo
  ting the CO-STAR title\nStatus: deadline_unconfirmed\nOriginal source: A
- ction list row 120\nOfficial URL: http://kcl.ac.uk/study/funding/funding
+ ction list row 121\nOfficial URL: http://kcl.ac.uk/study/funding/funding
  -opportunities/fully-funded-phd-studentship-in-human-robot-interaction-a
  t-kings-college-london\nFinal programme deadline: 2027-01-11\nOriginal n
  ote: 'Application deadline: 11 January 2027\, 23:59'\; applications open
@@ -9060,7 +9116,7 @@ DESCRIPTION:Action: By 2027-01-11 23:59 UK submit the Imperial online PhD
   application\, select the President's PhD Scholarship option in the fund
  ing section of the additional questions tab\, and upload the two-page st
  atement (page 1 personal statement\, page 2 research proposal)\nStatus: 
- completion_unconfirmed\nOriginal source: Step timeline row 464\nOfficial
+ completion_unconfirmed\nOriginal source: Step timeline row 465\nOfficial
   URL: https://www.imperial.ac.uk/study/fees-and-funding/postgraduate-doc
  toral/grants-scholarships/presidents-phd/\nFinal programme deadline: 202
  7-01-11\nOriginal note: 2027-01-11 00:00:00\nAll-day date. DO NOT infer 
@@ -9086,7 +9142,7 @@ SUMMARY:APPLICATION DEADLINE: Imperial College London President's PhD Sch
 DESCRIPTION:Action: By 2026-11-06 check the Unavailable Supervisors page 
  and email target Imperial supervisors with CV and proposal to secure a s
  upervisor's agreement (required before applying)\nStatus: deadline_uncon
- firmed\nOriginal source: Action list row 119\nOfficial URL: https://www.
+ firmed\nOriginal source: Action list row 120\nOfficial URL: https://www.
  imperial.ac.uk/study/fees-and-funding/postgraduate-doctoral/grants-schol
  arships/presidents-phd/\nFinal programme deadline: 2027-01-11\nOriginal 
  note: 11 January 2027\, 23:59 UK time\; notification by 15 April 2027. R
@@ -9118,7 +9174,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Imperial College London President's P
  hD Scholarships 2027/28\, round 2
 DESCRIPTION:Action: Also contact the department to say you want to be con
  sidered\; round 3 (1 March 2027) is the fallback\nStatus: completion_unc
- onfirmed\nOriginal source: Step timeline row 465\nOfficial URL: https://
+ onfirmed\nOriginal source: Step timeline row 466\nOfficial URL: https://
  www.imperial.ac.uk/study/fees-and-funding/postgraduate-doctoral/grants-s
  cholarships/presidents-phd/\nFinal programme deadline: 2027-01-11\nOrigi
  nal note: 2027-01-11 00:00:00\nAll-day date. DO NOT infer a closing time
@@ -9141,7 +9197,7 @@ DTSTART;VALUE=DATE:20270112
 DTEND;VALUE=DATE:20270113
 SUMMARY:SCHEDULED APPLICATION STEP: SFU Computing Science PhD (Fall 2027)
 DESCRIPTION:Action: After an offer only: provide official transcripts\nSt
- atus: completion_unconfirmed\nOriginal source: Step timeline row 467\nOf
+ atus: completion_unconfirmed\nOriginal source: Step timeline row 468\nOf
  ficial URL: https://www.sfu.ca/fas/study/future-graduates/apply/computin
  g-science.html\nFinal programme deadline: 2027-01-19\nOriginal note: 202
  7-01-19 00:00:00\nAll-day date. DO NOT infer a closing time from this ev
@@ -9165,7 +9221,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: SFU Computing Science PhD (Fall 2027)
 DESCRIPTION:Action: By 2027-01-12 submit the online application with form
  \, transcripts\, CV\, statement of purpose\, three letters and IELTS res
  ult\nStatus: completion_unconfirmed\nOriginal source: Step timeline row 
- 466\nOfficial URL: https://www.sfu.ca/fas/study/future-graduates/apply/c
+ 467\nOfficial URL: https://www.sfu.ca/fas/study/future-graduates/apply/c
  omputing-science.html\nFinal programme deadline: 2027-01-19\nOriginal no
  te: 2027-01-19 00:00:00\nAll-day date. DO NOT infer a closing time from 
  this event.\nConfirm actual portal availability and individual eligibili
@@ -9190,7 +9246,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Toronto UTIAS (Aerospac
  pace robotics\, SLAM\, navigation labs)
 DESCRIPTION:Action: By 15 Jan 2027: submit UTIAS application plus SGS app
  lication\nStatus: completion_unconfirmed\nOriginal source: Step timeline
-  row 475\nOfficial URL: https://gradstudies.engineering.utoronto.ca/pros
+  row 477\nOfficial URL: https://gradstudies.engineering.utoronto.ca/pros
  pective-students/departments/aerospace-studies-graduate-studies-programs
  -and-degrees/\nFinal programme deadline: 2027-01-15\nOriginal note: 2027
  -01-15 00:00:00\nAll-day date. DO NOT infer a closing time from this eve
@@ -9215,7 +9271,7 @@ SUMMARY:APPLICATION DEADLINE: University of Toronto MIE\, CLIMB Lab (Pakp
 DESCRIPTION:Action: By 2026-11-06 email p.chirarattananon@utoronto.ca wit
  h CV\, transcripts\, brief note on research interests and link to the la
  b's legged and bioinspired robotics work\nStatus: deadline_unconfirmed\n
- Original source: Action list row 124\nOfficial URL: https://climb.mie.ut
+ Original source: Action list row 126\nOfficial URL: https://climb.mie.ut
  oronto.ca/openings/\nFinal programme deadline: 2027-01-15\nOriginal note
  : September start: application fee by 1 January 2027\, materials by 15 J
  anuary 2027 (same for all citizenships). No time or zone printed.\nAll-d
@@ -9244,7 +9300,7 @@ SUMMARY:APPLICATION DEADLINE: Waterloo ECE PhD\, Stephen L. Smith (Autono
  mous Systems Lab)
 DESCRIPTION:Action: By 2026-10-31 email ece.researchadmissions@uwaterloo.
  ca to get the exact September 2027 PhD deadline\nStatus: deadline_unconf
- irmed\nOriginal source: Action list row 127\nOfficial URL: https://uwate
+ irmed\nOriginal source: Action list row 129\nOfficial URL: https://uwate
  rloo.ca/autonomous-systems-lab/joining-lab\nFinal programme deadline: 20
  27-01-15\nOriginal note: (assumed) Neither the lab page nor the ECE thin
  king-applying page prints a PhD deadline\; both point to the department'
@@ -9275,7 +9331,7 @@ SUMMARY:APPLICATION DEADLINE: University of Amsterdam EVELYN\, 2 PhDs AI
 DESCRIPTION:Action: Pursue Position 1: scientific multimodal RAG\, effici
  ent adaptation of visual models\, evidence verification\; apply by 15 Ja
  n 2027.\nStatus: deadline_unconfirmed\nOriginal source: Action list row 
- 122\nOfficial URL: https://werkenbij.uva.nl/en/vacancies/two-phd-positio
+ 124\nOfficial URL: https://werkenbij.uva.nl/en/vacancies/two-phd-positio
  ns-in-ai-for-science-at-the-university-of-amsterdam-netherlands-15626\nF
  inal programme deadline: 2027-01-15\nOriginal note: Official UvA listing
   closes 15 Jan 2027\; one advertised call for 2 positions.\nAll-day date
@@ -9305,7 +9361,7 @@ SUMMARY:APPLICATION DEADLINE: University of British Columbia (Vancouver)
  PhD in Electrical and Computer Engineering\, September 2027
 DESCRIPTION:Action: By 2026-11-13 browse ECE faculty profiles and email p
  rospective supervisors (encouraged\, not required) with CV and fit note\
- nStatus: deadline_unconfirmed\nOriginal source: Action list row 123\nOff
+ nStatus: deadline_unconfirmed\nOriginal source: Action list row 125\nOff
  icial URL: https://www.grad.ubc.ca/prospective-students/graduate-degree-
  programs/phd-electrical-computer-engineering\nFinal programme deadline: 
  2027-01-15\nOriginal note: International application deadline 15 January
@@ -9337,7 +9393,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Waterloo ECE PhD\, Stephen L. Smith (
  Autonomous Systems Lab)
 DESCRIPTION:Action: After the deadline: shortlisted candidates are interv
  iewed by Smith about positions and funding\nStatus: completion_unconfirm
- ed\nOriginal source: Step timeline row 478\nOfficial URL: https://uwater
+ ed\nOriginal source: Step timeline row 480\nOfficial URL: https://uwater
  loo.ca/autonomous-systems-lab/joining-lab\nFinal programme deadline: 202
  7-01-15\nOriginal note: 2027-01-15 00:00:00\nAll-day date. DO NOT infer 
  a closing time from this event.\nConfirm actual portal availability and 
@@ -9361,7 +9417,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of British Columbia (Vanco
 DESCRIPTION:Action: By 2027-01-15 submit the online application (cannot b
  e changed after submission)\, including statement of interest if the pro
  gram asks for one\nStatus: completion_unconfirmed\nOriginal source: Step
-  timeline row 471\nOfficial URL: https://www.grad.ubc.ca/prospective-stu
+  timeline row 473\nOfficial URL: https://www.grad.ubc.ca/prospective-stu
  dents/graduate-degree-programs/phd-electrical-computer-engineering\nFina
  l programme deadline: 2027-01-15\nOriginal note: 2027-01-15 00:00:00\nAl
  l-day date. DO NOT infer a closing time from this event.\nConfirm actual
@@ -9385,7 +9441,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Alberta\, Computing Sci
  ence PhD\, Fall 2027 (Amii)
 DESCRIPTION:Action: Provide three reference contacts\; letters are reques
  ted only after submission and payment\; upload documents by 2027-01-15\n
- Status: completion_unconfirmed\nOriginal source: Step timeline row 469\n
+ Status: completion_unconfirmed\nOriginal source: Step timeline row 471\n
  Official URL: https://www.ualberta.ca/en/computing-science/graduate-stud
  ies/programs-and-admissions/applications-and-admissions/index.html\nFina
  l programme deadline: 2026-12-15\nOriginal note: 2026-12-15 00:00:00\nAl
@@ -9410,7 +9466,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Waterloo ECE PhD\, Stephen L. Smith (
  Autonomous Systems Lab)
 DESCRIPTION:Action: Submit the full ECE application\, with $100 CAD fee\,
   by the confirmed deadline (assume 2027-01-15 until confirmed)\nStatus: 
- completion_unconfirmed\nOriginal source: Step timeline row 477\nOfficial
+ completion_unconfirmed\nOriginal source: Step timeline row 479\nOfficial
   URL: https://uwaterloo.ca/autonomous-systems-lab/joining-lab\nFinal pro
  gramme deadline: 2027-01-15\nOriginal note: 2027-01-15 00:00:00\nAll-day
   date. DO NOT infer a closing time from this event.\nConfirm actual port
@@ -9434,7 +9490,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Toronto MIE\, CLIMB Lab
 DESCRIPTION:Action: By 2027-01-15 upload transcripts as PDFs with grading
   scale\, CV\, 650-1\,000 word letter of intent\, up to three fields of s
  tudy\, and ELP results (sent electronically by the test body)\nStatus: c
- ompletion_unconfirmed\nOriginal source: Step timeline row 472\nOfficial 
+ ompletion_unconfirmed\nOriginal source: Step timeline row 474\nOfficial 
  URL: https://climb.mie.utoronto.ca/openings/\nFinal programme deadline: 
  2027-01-15\nOriginal note: 2027-01-15 00:00:00\nAll-day date. DO NOT inf
  er a closing time from this event.\nConfirm actual portal availability a
@@ -9457,7 +9513,7 @@ SUMMARY:APPLICATION DEADLINE: University of Warwick Biomedical AI PhD (jo
  bs.ac.uk DTF911)
 DESCRIPTION:Action: 2026-10-30: read advert in a browser for funding and 
  fee status\nStatus: deadline_unconfirmed\nOriginal source: Action list r
- ow 126\nOfficial URL: https://www.jobs.ac.uk/job/DTF911/biomedical-ai-ph
+ ow 128\nOfficial URL: https://www.jobs.ac.uk/job/DTF911/biomedical-ai-ph
  d\nFinal programme deadline: 2027-01-15\nOriginal note: jobs.ac.uk shows
   'Expires 15 Jan'\nAll-day date. DO NOT infer a closing time from this e
  vent.\nConfirm actual portal availability and individual eligibility.
@@ -9486,7 +9542,7 @@ SUMMARY:APPLICATION DEADLINE: University of Toronto UTIAS (Aerospace Stud
 DESCRIPTION:Action: By 15 Nov 2026: shortlist 3-5 UTIAS faculty (STARS/sp
  ace robotics\, navigation\, estimation) and email each with CV\, paper l
  inks and research fit\nStatus: deadline_unconfirmed\nOriginal source: Ac
- tion list row 125\nOfficial URL: https://gradstudies.engineering.utoront
+ tion list row 127\nOfficial URL: https://gradstudies.engineering.utoront
  o.ca/prospective-students/departments/aerospace-studies-graduate-studies
  -programs-and-degrees/\nFinal programme deadline: 2027-01-15\nOriginal n
  ote: Fall 2027 (September start)\, domestic and international: January 1
@@ -9520,7 +9576,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Toronto UTIAS (Aerospac
 DESCRIPTION:Action: By 15 Nov 2026: shortlist 3-5 UTIAS faculty (STARS/sp
  ace robotics\, navigation\, estimation) and email each with CV\, paper l
  inks and research fit\nStatus: completion_unconfirmed\nOriginal source: 
- Step timeline row 473\nOfficial URL: https://gradstudies.engineering.uto
+ Step timeline row 475\nOfficial URL: https://gradstudies.engineering.uto
  ronto.ca/prospective-students/departments/aerospace-studies-graduate-stu
  dies-programs-and-degrees/\nFinal programme deadline: 2027-01-15\nOrigin
  al note: 2027-01-15 00:00:00\nAll-day date. DO NOT infer a closing time 
@@ -9537,6 +9593,32 @@ DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:tsk-a452b7e0c3ccaabf@phd-tracker.local
+DTSTAMP:20261109T000000Z
+DTSTART;VALUE=DATE:20270115
+DTEND;VALUE=DATE:20270116
+SUMMARY:SCHEDULED APPLICATION STEP: ETH Zurich IDEAL Lab — Doctoral Pos
+ itions in Machine Learning for Engineering Design (Mark Fuge)
+DESCRIPTION:Action: Apply by 15 Jan for best consideration\, without trea
+ ting this as a strict final closing date. Describe ML-driven robot desig
+ n\, adaptive systems\, optimization and research record. [External deadl
+ ine: Priority/best-consideration date 15 Jan 2027\; not independently es
+ tablished as final closure]\nStatus: completion_unconfirmed\nOriginal so
+ urce: Step timeline row 470\nOfficial URL: https://www.jobs.ethz.ch/job/
+ view/JOPG_ethz_AUmT7tc75KfdQZK3sA\nFinal programme deadline: 2027-01-15\
+ nOriginal note: 2027-01-15 00:00:00\nAll-day date. DO NOT infer a closin
+ g time from this event.\nConfirm actual portal availability and individu
+ al eligibility.
+CATEGORIES:SCHEDULED APPLICATION STEP
+STATUS:TENTATIVE
+URL:https://www.jobs.ethz.ch/job/view/JOPG_ethz_AUmT7tc75KfdQZK3sA
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:tsk-ac8bdcd4eb60960f@phd-tracker.local
 DTSTAMP:20261109T000000Z
 DTSTART;VALUE=DATE:20270115
@@ -9546,7 +9628,7 @@ DESCRIPTION:Action: By 2026-11-15 pick 2-3 Engineering Science faculty (S
  LAM\, inertial\, medical AI fit) from the school faculty list and email 
  each to confirm willingness to supervise (a willing supervisor is requir
  ed before admission)\nStatus: deadline_unconfirmed\nOriginal source: Act
- ion list row 121\nOfficial URL: https://www.sfu.ca/students/calendar/202
+ ion list row 123\nOfficial URL: https://www.sfu.ca/students/calendar/202
  7/spring/programs/engineering-science/doctor-of-philosophy.html\nFinal p
  rogramme deadline: 2027-01-15\nOriginal note: General table on SFU Engin
  eering Science apply page: Fall (September) intake\, applications open S
@@ -9578,7 +9660,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Toronto UTIAS (Aerospac
  pace robotics\, SLAM\, navigation labs)
 DESCRIPTION:Action: By 15 Dec 2026: confirm English test requirement at u
  ofteng.ca/UTIAS-admissions and order transcripts\nStatus: completion_unc
- onfirmed\nOriginal source: Step timeline row 474\nOfficial URL: https://
+ onfirmed\nOriginal source: Step timeline row 476\nOfficial URL: https://
  gradstudies.engineering.utoronto.ca/prospective-students/departments/aer
  ospace-studies-graduate-studies-programs-and-degrees/\nFinal programme d
  eadline: 2027-01-15\nOriginal note: 2027-01-15 00:00:00\nAll-day date. D
@@ -9603,7 +9685,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Amsterdam EVELYN AI for
   Science PhDs
 DESCRIPTION:Action: Submit Position 1 multimodal retrieval/efficient foun
  dation-model adaptation application\, 1-page SOP and writing sample\nSta
- tus: completion_unconfirmed\nOriginal source: Step timeline row 470\nOff
+ tus: completion_unconfirmed\nOriginal source: Step timeline row 472\nOff
  icial URL: https://werkenbij.uva.nl/en/vacancies/two-phd-positions-in-ai
  -for-science-at-the-university-of-amsterdam-netherlands-15626\nFinal pro
  gramme deadline: 2027-01-15\nOriginal note: 2027-01-15 00:00:00\nAll-day
@@ -9620,6 +9702,38 @@ DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:tsk-da54374f61304dac@phd-tracker.local
+DTSTAMP:20261109T000000Z
+DTSTART;VALUE=DATE:20270115
+DTEND;VALUE=DATE:20270116
+SUMMARY:APPLICATION DEADLINE: ETH Zurich IDEAL Lab — Doctoral Positions
+  in Machine Learning for Engineering Design (Mark Fuge)
+DESCRIPTION:Action: Apply by 15 Jan for best consideration\, without trea
+ ting this as a strict final closing date. Describe ML-driven robot desig
+ n\, adaptive systems\, optimization and research record.\nStatus: deadli
+ ne_unconfirmed\nOriginal source: Action list row 122\nOfficial URL: http
+ s://www.jobs.ethz.ch/job/view/JOPG_ethz_AUmT7tc75KfdQZK3sA\nFinal progra
+ mme deadline: 2027-01-15\nOriginal note: Priority/best-consideration dat
+ e 15 Jan 2027\; not independently established as final closure. Official
+  ETH Zurich IDEAL listing advertised 1–2 doctoral positions with prior
+ ity consideration by 15 Jan 2027.\nAll-day date. DO NOT infer a closing 
+ time from this event.\nConfirm actual portal availability and individual
+  eligibility.
+CATEGORIES:APPLICATION DEADLINE
+STATUS:TENTATIVE
+URL:https://www.jobs.ethz.ch/job/view/JOPG_ethz_AUmT7tc75KfdQZK3sA
+BEGIN:VALARM
+TRIGGER:-P7D
+ACTION:DISPLAY
+DESCRIPTION:APPLICATION DEADLINE — check original source
+END:VALARM
+BEGIN:VALARM
+TRIGGER:-P1D
+ACTION:DISPLAY
+DESCRIPTION:APPLICATION DEADLINE — check original source
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:tsk-f1592718777c127d@phd-tracker.local
 DTSTAMP:20261109T000000Z
 DTSTART;VALUE=DATE:20270115
@@ -9628,7 +9742,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Bristol PhD studentship\, learning an
  d decision making under uncertainty in public health (Mengyan Zhang)
 DESCRIPTION:Action: By 2027-01-15 email mengyan.zhang@bristol.ac.uk with 
  subject 'PhD Application + Your name' attaching the materials\nStatus: c
- ompletion_unconfirmed\nOriginal source: Step timeline row 468\nOfficial 
+ ompletion_unconfirmed\nOriginal source: Step timeline row 469\nOfficial 
  URL: https://www.jobs.ac.uk/job/DSP806/phd-studentship-learning-and-deci
  sion-making-under-uncertainty-in-public-health\nFinal programme deadline
  : 2027-01-31\nOriginal note: 2027-01-31 00:00:00\nAll-day date. DO NOT i
@@ -9654,7 +9768,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Toronto UTIAS (Aerospac
  pace robotics\, SLAM\, navigation labs)
 DESCRIPTION:Action: Feb-Mar 2027: respond to interview requests and fundi
  ng offer\nStatus: completion_unconfirmed\nOriginal source: Step timeline
-  row 476\nOfficial URL: https://gradstudies.engineering.utoronto.ca/pros
+  row 478\nOfficial URL: https://gradstudies.engineering.utoronto.ca/pros
  pective-students/departments/aerospace-studies-graduate-studies-programs
  -and-degrees/\nFinal programme deadline: 2027-01-15\nOriginal note: 2027
  -01-15 00:00:00\nAll-day date. DO NOT infer a closing time from this eve
@@ -9679,7 +9793,7 @@ SUMMARY:APPLICATION DEADLINE: University of Surrey (Vision\, Speech and S
  lenses (Volino\, Guillemaut)\, April 2027 start
 DESCRIPTION:Action: 2026-11-10: email Dr Marco Volino (m.volino@surrey.ac
  .uk) with CV\nStatus: deadline_unconfirmed\nOriginal source: Action list
-  row 128\nOfficial URL: https://www.surrey.ac.uk/fees-and-funding/studen
+  row 130\nOfficial URL: https://www.surrey.ac.uk/fees-and-funding/studen
  tships/smart-optical-design-ai-tools-next-generation-cinematic-camera-le
  nses\nFinal programme deadline: 2027-01-17\nOriginal note: 'Application 
  deadline: 17 January 2027'\nAll-day date. DO NOT infer a closing time fr
@@ -9709,7 +9823,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: OIST Graduate School PhD\, May or Sep
   2027 entry (Admissions Workshop 2027)
 DESCRIPTION:Action: If shortlisted\, attend the online Admissions Worksho
  p 2027-01-18 to 2027-02-07\nStatus: completion_unconfirmed\nOriginal sou
- rce: Step timeline row 479\nOfficial URL: https://www.oist.jp/admissions
+ rce: Step timeline row 481\nOfficial URL: https://www.oist.jp/admissions
  /phd-program/apply-phd\nFinal programme deadline: 2026-11-15\nOriginal n
  ote: 2026-11-15 00:00:00\nAll-day date. DO NOT infer a closing time from
   this event.\nConfirm actual portal availability and individual eligibil
@@ -9732,7 +9846,7 @@ SUMMARY:APPLICATION DEADLINE: Durham University: Efficient Physical AI fo
  r Real-World Robotics\, funded PhD studentship (jobs.ac.uk DTI242)
 DESCRIPTION:Action: Open advert in browser and read funding and fee statu
  s by 2026-11-05\nStatus: deadline_unconfirmed\nOriginal source: Action l
- ist row 129\nOfficial URL: https://www.jobs.ac.uk/job/DTI242/efficient-p
+ ist row 131\nOfficial URL: https://www.jobs.ac.uk/job/DTI242/efficient-p
  hysical-ai-for-real-world-robotics-funded-phd-studentship\nFinal program
  me deadline: 2027-01-19\nOriginal note: jobs.ac.uk listing closing '19 J
  an'\nAll-day date. DO NOT infer a closing time from this event.\nConfirm
@@ -9761,7 +9875,7 @@ SUMMARY:APPLICATION DEADLINE: SFU Computing Science PhD (Fall 2027)
 DESCRIPTION:Action: By 2026-11-15 shortlist Computing Science faculty and
   email them your CV (the page does not require a supervisor\, but contac
  t is advisable\; this is my suggestion\, not a page requirement)\nStatus
- : deadline_unconfirmed\nOriginal source: Action list row 130\nOfficial U
+ : deadline_unconfirmed\nOriginal source: Action list row 132\nOfficial U
  RL: https://www.sfu.ca/fas/study/future-graduates/apply/computing-scienc
  e.html\nFinal programme deadline: 2027-01-19\nOriginal note: "Applicatio
  ns open October 1\, 2026\, and the deadline is January 19\, 2027." No ti
@@ -9794,7 +9908,7 @@ DESCRIPTION:Action: Now to 13 Nov 2026: if targeting MEXT IPGP\, obtain a
   Letter of Acceptance from one NAIST professor and email all MEXT docume
  nts to that professor with a copy to naist-ipgp (printed as naist-ipgp[a
  t]is.naist.jp)\nStatus: deadline_unconfirmed\nOriginal source: Action li
- st row 131\nOfficial URL: https://www.naist.jp/en/international_students
+ st row 133\nOfficial URL: https://www.naist.jp/en/international_students
  /prospective_students/financial_support/mext_international_priority_grad
  uate_programs.html\nFinal programme deadline: 2027-01-20\nOriginal note:
   Doctoral application window 18 to 20 Jan 2027 (11:59 pm JST)\, exam 15 
@@ -9825,7 +9939,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: NAIST doctoral course (Information Sc
  ience)\, 2027 admission\, with MEXT IPGP scholarship
 DESCRIPTION:Action: By 12 Feb 2027: submit English score\; 15 to 16 Feb 2
  027: online exam\; 19 Feb 2027: results\nStatus: completion_unconfirmed\
- nOriginal source: Step timeline row 483\nOfficial URL: https://www.naist
+ nOriginal source: Step timeline row 485\nOfficial URL: https://www.naist
  .jp/en/international_students/prospective_students/financial_support/mex
  t_international_priority_graduate_programs.html\nFinal programme deadlin
  e: 2027-01-20\nOriginal note: 2027-01-20 00:00:00\nAll-day date. DO NOT 
@@ -9852,7 +9966,7 @@ DESCRIPTION:Action: 18 to 20 Jan 2027: register for the doctoral entrance
   examination and submit research overview (max 5 A4)\, research plan (ma
  x 2 A4)\, master's and bachelor's transcripts\, degree certificate\, pas
  sport page and English test\nStatus: completion_unconfirmed\nOriginal so
- urce: Step timeline row 482\nOfficial URL: https://www.naist.jp/en/inter
+ urce: Step timeline row 484\nOfficial URL: https://www.naist.jp/en/inter
  national_students/prospective_students/financial_support/mext_internatio
  nal_priority_graduate_programs.html\nFinal programme deadline: 2027-01-2
  0\nOriginal note: 2027-01-20 00:00:00\nAll-day date. DO NOT infer a clos
@@ -9879,7 +9993,7 @@ DESCRIPTION:Action: Now to 13 Nov 2026: if targeting MEXT IPGP\, obtain a
   Letter of Acceptance from one NAIST professor and email all MEXT docume
  nts to that professor with a copy to naist-ipgp (printed as naist-ipgp[a
  t]is.naist.jp)\nStatus: completion_unconfirmed\nOriginal source: Step ti
- meline row 480\nOfficial URL: https://www.naist.jp/en/international_stud
+ meline row 482\nOfficial URL: https://www.naist.jp/en/international_stud
  ents/prospective_students/financial_support/mext_international_priority_
  graduate_programs.html\nFinal programme deadline: 2027-01-20\nOriginal n
  ote: 2027-01-20 00:00:00\nAll-day date. DO NOT infer a closing time from
@@ -9904,7 +10018,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: NAIST doctoral course (Information Sc
  ience)\, 2027 admission\, with MEXT IPGP scholarship
 DESCRIPTION:Action: By about 18 Dec 2026: complete the non-Japanese pre-a
  pplication procedure via admission-support@ad.naist.jp\nStatus: completi
- on_unconfirmed\nOriginal source: Step timeline row 481\nOfficial URL: ht
+ on_unconfirmed\nOriginal source: Step timeline row 483\nOfficial URL: ht
  tps://www.naist.jp/en/international_students/prospective_students/financ
  ial_support/mext_international_priority_graduate_programs.html\nFinal pr
  ogramme deadline: 2027-01-20\nOriginal note: 2027-01-20 00:00:00\nAll-da
@@ -9930,7 +10044,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Tokyo Graduate School o
   Recommendation (General) - scholarship may not continue
 DESCRIPTION:Action: Check page again late Dec 2026 for scholarship confir
  mation\nStatus: completion_unconfirmed\nOriginal source: Step timeline r
- ow 484\nOfficial URL: https://www.k.u-tokyo.ac.jp/en/exam/master/foreign
+ ow 486\nOfficial URL: https://www.k.u-tokyo.ac.jp/en/exam/master/foreign
  _research_students/mext_scholarship_univ/\nFinal programme deadline: 202
  7-01-22\nOriginal note: 2027-01-22 00:00:00\nAll-day date. DO NOT infer 
  a closing time from this event.\nConfirm actual portal availability and 
@@ -9956,7 +10070,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of Tokyo Graduate School o
 DESCRIPTION:Action: Email ilo@edu.k.u-tokyo.ac.jp to ask whether the trac
  k continues and whether applicants without prior GSFS exchange/internshi
  p qualify\nStatus: completion_unconfirmed\nOriginal source: Step timelin
- e row 485\nOfficial URL: https://www.k.u-tokyo.ac.jp/en/exam/master/fore
+ e row 487\nOfficial URL: https://www.k.u-tokyo.ac.jp/en/exam/master/fore
  ign_research_students/mext_scholarship_univ/\nFinal programme deadline: 
  2027-01-22\nOriginal note: 2027-01-22 00:00:00\nAll-day date. DO NOT inf
  er a closing time from this event.\nConfirm actual portal availability a
@@ -9981,7 +10095,7 @@ SUMMARY:APPLICATION DEADLINE: University of Tokyo Graduate School of Fron
  mendation (General) - scholarship may not continue
 DESCRIPTION:Action: Check page again late Dec 2026 for scholarship confir
  mation\nStatus: deadline_unconfirmed\nOriginal source: Action list row 1
- 32\nOfficial URL: not linked\nFinal programme deadline: 2027-01-22\nOrig
+ 34\nOfficial URL: not linked\nFinal programme deadline: 2027-01-22\nOrig
  inal note: Complete scholarship application documents expected by Januar
  y 22\, 2027\; entrance exam Schedule B (February)\; information late Dec
   2026/early Jan 2027 only if s\nAll-day date. DO NOT infer a closing tim
@@ -10011,7 +10125,7 @@ DESCRIPTION:Action: By 2027-01-24 confirm on the College of Science and E
  ngineering Graduate School page (https://www.gla.ac.uk/colleges/sciencee
  ngineering/graduateschool/) that the 2027 round and 31 Jan deadline appl
  y\nStatus: completion_unconfirmed\nOriginal source: Step timeline row 48
- 7\nOfficial URL: https://www.gla.ac.uk/schools/computing/postgraduateres
+ 9\nOfficial URL: https://www.gla.ac.uk/schools/computing/postgraduateres
  earch/prospectivestudents/scholarshipsandfundingopportunities/studentshi
  pinformation\nFinal programme deadline: 2027-01-31\nOriginal note: 2027-
  01-31 00:00:00\nAll-day date. DO NOT infer a closing time from this even
@@ -10037,7 +10151,7 @@ DESCRIPTION:Action: By 2027-01-24 submit the online Bristol application a
  t bris.ac.uk/pg-howtoapply\, selecting the programme title on the Progra
  mme Choice page and entering the studentship details in the Funding and 
  Research Details sections\nStatus: completion_unconfirmed\nOriginal sour
- ce: Step timeline row 486\nOfficial URL: https://www.jobs.ac.uk/job/DSP8
+ ce: Step timeline row 488\nOfficial URL: https://www.jobs.ac.uk/job/DSP8
  06/phd-studentship-learning-and-decision-making-under-uncertainty-in-pub
  lic-health\nFinal programme deadline: 2027-01-31\nOriginal note: 2027-01
  -31 00:00:00\nAll-day date. DO NOT infer a closing time from this event.
@@ -10062,7 +10176,7 @@ SUMMARY:APPLICATION DEADLINE: University of West London\, AI optimisation
 DESCRIPTION:Action: By 2026-10-31 email UWL postgraduate admissions (cont
  act link on the applying page) or the project supervisor to ask for the 
  green roofs advert link and its closing date\nStatus: deadline_unconfirm
- ed\nOriginal source: Action list row 133\nOfficial URL: https://www.uwl.
+ ed\nOriginal source: Action list row 135\nOfficial URL: https://www.uwl.
  ac.uk/research/phd-opportunities\nFinal programme deadline: 2027-01-25\n
  Original note: (assumed) Advert not found. The UWL applying-for-a-PhD pa
  ge lists no deadlines\; research degrees start in February or September.
@@ -10091,7 +10205,7 @@ DTEND;VALUE=DATE:20270201
 SUMMARY:SCHEDULED APPLICATION STEP: Bristol PhD studentship\, learning an
  d decision making under uncertainty in public health (Mengyan Zhang)
 DESCRIPTION:Action: Submit all before 2027-01-31\nStatus: completion_unco
- nfirmed\nOriginal source: Step timeline row 488\nOfficial URL: https://w
+ nfirmed\nOriginal source: Step timeline row 490\nOfficial URL: https://w
  ww.jobs.ac.uk/job/DSP806/phd-studentship-learning-and-decision-making-un
  der-uncertainty-in-public-health\nFinal programme deadline: 2027-01-31\n
  Original note: 2027-01-31 00:00:00\nAll-day date. DO NOT infer a closing
@@ -10117,7 +10231,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Concordia Mechanical\, Industrial and
 DESCRIPTION:Action: By 2027-01-31 review the program page 'four steps' an
  d the English language proficiency page for exemptions and required scor
  es\nStatus: completion_unconfirmed\nOriginal source: Step timeline row 4
- 89\nOfficial URL: https://www.concordia.ca/academics/graduate/mechanical
+ 91\nOfficial URL: https://www.concordia.ca/academics/graduate/mechanical
  -engineering-phd.html\nFinal programme deadline: 2027-03-01\nOriginal no
  te: 2027-03-01 00:00:00\nAll-day date. DO NOT infer a closing time from 
  this event.\nConfirm actual portal availability and individual eligibili
@@ -10141,7 +10255,7 @@ SUMMARY:APPLICATION DEADLINE: Bristol PhD studentship\, learning and deci
  sion making under uncertainty in public health (Mengyan Zhang)
 DESCRIPTION:Action: By 2026-12-15 prepare CV\, 1-2 page personal statemen
  t\, transcripts and optional research proposal\nStatus: deadline_unconfi
- rmed\nOriginal source: Action list row 134\nOfficial URL: https://www.jo
+ rmed\nOriginal source: Action list row 136\nOfficial URL: https://www.jo
  bs.ac.uk/job/DSP806/phd-studentship-learning-and-decision-making-under-u
  ncertainty-in-public-health\nFinal programme deadline: 2027-01-31\nOrigi
  nal note: Closing date 31 January 2027 (31/01/2027) on the jobs.ac.uk ad
@@ -10173,7 +10287,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: University of British Columbia (Vanco
 DESCRIPTION:Action: By 2027-01-31 upload scans of official transcripts th
  rough the applicant portal and make sure the three referees have submitt
  ed\nStatus: completion_unconfirmed\nOriginal source: Step timeline row 4
- 92\nOfficial URL: https://www.grad.ubc.ca/prospective-students/graduate-
+ 94\nOfficial URL: https://www.grad.ubc.ca/prospective-students/graduate-
  degree-programs/phd-electrical-computer-engineering\nFinal programme dea
  dline: 2027-01-15\nOriginal note: 2027-01-15 00:00:00\nAll-day date. DO 
  NOT infer a closing time from this event.\nConfirm actual portal availab
@@ -10197,7 +10311,7 @@ SUMMARY:APPLICATION DEADLINE: Glasgow Graduate School scholarships (Colle
  ge of Science and Engineering\, any supervisor)
 DESCRIPTION:Action: By 2026-11-15 search for and email potential supervis
  ors (the School page advises contacting one before applying)\nStatus: de
- adline_unconfirmed\nOriginal source: Action list row 135\nOfficial URL: 
+ adline_unconfirmed\nOriginal source: Action list row 137\nOfficial URL: 
  https://www.gla.ac.uk/schools/computing/postgraduateresearch/prospective
  students/scholarshipsandfundingopportunities/studentshipinformation\nFin
  al programme deadline: 2027-01-31\nOriginal note: Glasgow School of Comp
@@ -10228,7 +10342,7 @@ DTEND;VALUE=DATE:20270201
 SUMMARY:SCHEDULED APPLICATION STEP: Glasgow Graduate School scholarships 
  (College of Science and Engineering\, any supervisor)
 DESCRIPTION:Action: Submit the scholarship application before 2027-01-31\
- nStatus: completion_unconfirmed\nOriginal source: Step timeline row 490\
+ nStatus: completion_unconfirmed\nOriginal source: Step timeline row 492\
  nOfficial URL: https://www.gla.ac.uk/schools/computing/postgraduateresea
  rch/prospectivestudents/scholarshipsandfundingopportunities/studentshipi
  nformation\nFinal programme deadline: 2027-01-31\nOriginal note: 2027-01
@@ -10253,7 +10367,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: McMaster University\, Computing and S
  oftware\, PhD (Sept 2027 intake)
 DESCRIPTION:Action: By 2027-01-31 upload transcripts\, degree certificate
  \, statement of interest\, CV\, IELTS report\; pay the application fee\n
- Status: completion_unconfirmed\nOriginal source: Step timeline row 491\n
+ Status: completion_unconfirmed\nOriginal source: Step timeline row 493\n
  Official URL: https://www.eng.mcmaster.ca//app/uploads/2025/11/CAS-Gradu
  ate-Information-1.pdf\nFinal programme deadline: 2027-02-28\nOriginal no
  te: 2027-02-28 00:00:00\nAll-day date. DO NOT infer a closing time from 
@@ -10278,7 +10392,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Victoria University of Wellington\, W
  ellington Doctoral Scholarship (round 2 per earlier sweep)
 DESCRIPTION:Action: By 2027-02-01 nominate two referees in the system (re
  quest at least two weeks before the closing date)\nStatus: completion_un
- confirmed\nOriginal source: Step timeline row 493\nOfficial URL: https:/
+ confirmed\nOriginal source: Step timeline row 495\nOfficial URL: https:/
  /www.wgtn.ac.nz/scholarships/current/wellington-doctoral-scholarship\nFi
  nal programme deadline: 2027-03-01\nOriginal note: 2027-03-01 00:00:00\n
  All-day date. DO NOT infer a closing time from this event.\nConfirm actu
@@ -10302,7 +10416,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Hokkaido University e3 MEXT Universit
  y Recommendation\, doctoral\, Oct 2027 entry (4 doctoral places)
 DESCRIPTION:Action: Final result about 2027-02-05\; then e3 Special Selec
  tion entrance exam application around Feb-Mar 2027\nStatus: completion_u
- nconfirmed\nOriginal source: Step timeline row 494\nOfficial URL: https:
+ nconfirmed\nOriginal source: Step timeline row 496\nOfficial URL: https:
  //eprogram.eng.hokudai.ac.jp/e3/news-updates/20-admission/452-applicatio
  n-guidelines-for-mext-uni-2027\nFinal programme deadline: 2026-10-29\nOr
  iginal note: 2026-10-29 00:00:00\nAll-day date. DO NOT infer a closing t
@@ -10327,7 +10441,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Concordia Mechanical\, Industrial and
   Aerospace Engineering PhD (Fall 2027)
 DESCRIPTION:Action: By 2027-02-15 request references and assemble transcr
  ipts and statements as the application portal specifies\nStatus: complet
- ion_unconfirmed\nOriginal source: Step timeline row 495\nOfficial URL: h
+ ion_unconfirmed\nOriginal source: Step timeline row 497\nOfficial URL: h
  ttps://www.concordia.ca/academics/graduate/mechanical-engineering-phd.ht
  ml\nFinal programme deadline: 2027-03-01\nOriginal note: 2027-03-01 00:0
  0:00\nAll-day date. DO NOT infer a closing time from this event.\nConfir
@@ -10352,7 +10466,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Victoria University of Wellington\, W
 DESCRIPTION:Action: By 2027-02-15 finish the 2\,000-word academic writing
   sample\, upload English proficiency evidence and make the dashboard ful
  ly green\nStatus: completion_unconfirmed\nOriginal source: Step timeline
-  row 497\nOfficial URL: https://www.wgtn.ac.nz/scholarships/current/well
+  row 499\nOfficial URL: https://www.wgtn.ac.nz/scholarships/current/well
  ington-doctoral-scholarship\nFinal programme deadline: 2027-03-01\nOrigi
  nal note: 2027-03-01 00:00:00\nAll-day date. DO NOT infer a closing time
   from this event.\nConfirm actual portal availability and individual eli
@@ -10376,7 +10490,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: McMaster University\, Computing and S
  oftware\, PhD (Sept 2027 intake)
 DESCRIPTION:Action: By 2027-02-15 confirm both references were submitted\
  ; submit well before the 2027-02-28 deadline\nStatus: completion_unconfi
- rmed\nOriginal source: Step timeline row 496\nOfficial URL: https://www.
+ rmed\nOriginal source: Step timeline row 498\nOfficial URL: https://www.
  eng.mcmaster.ca//app/uploads/2025/11/CAS-Graduate-Information-1.pdf\nFin
  al programme deadline: 2027-02-28\nOriginal note: 2027-02-28 00:00:00\nA
  ll-day date. DO NOT infer a closing time from this event.\nConfirm actua
@@ -10401,7 +10515,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Monash Graduate Scholarship (stipend)
  nal Round 1 2027
 DESCRIPTION:Action: Nov to Dec 2026: contact a Monash supervisor (Enginee
  ring\, IT) and get agreement to supervise\nStatus: completion_unconfirme
- d\nOriginal source: Step timeline row 498\nOfficial URL: https://www.mon
+ d\nOriginal source: Step timeline row 500\nOfficial URL: https://www.mon
  ash.edu/study/fees-scholarships/scholarships/find-a-scholarship/internat
  ional-tuition-scholarship\nFinal programme deadline: 2027-02-28\nOrigina
  l note: 2027-02-28 00:00:00\nAll-day date. DO NOT infer a closing time f
@@ -10427,7 +10541,7 @@ SUMMARY:APPLICATION DEADLINE: Monash Graduate Scholarship (stipend) plus
  und 1 2027
 DESCRIPTION:Action: Nov to Dec 2026: contact a Monash supervisor (Enginee
  ring\, IT) and get agreement to supervise\nStatus: deadline_unconfirmed\
- nOriginal source: Action list row 137\nOfficial URL: https://www.monash.
+ nOriginal source: Action list row 139\nOfficial URL: https://www.monash.
  edu/study/fees-scholarships/scholarships/find-a-scholarship/internationa
  l-tuition-scholarship\nFinal programme deadline: 2027-02-28\nOriginal no
  te: MGS page: 'International Round 1 closes 28 February' and 'The R1 Clo
@@ -10459,7 +10573,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Monash Graduate Scholarship (stipend)
  nal Round 1 2027
 DESCRIPTION:Action: Mar to Apr 2027: outcomes\; Round 3 closes 31 Aug 202
  7 as fallback\nStatus: completion_unconfirmed\nOriginal source: Step tim
- eline row 500\nOfficial URL: https://www.monash.edu/study/fees-scholarsh
+ eline row 502\nOfficial URL: https://www.monash.edu/study/fees-scholarsh
  ips/scholarships/find-a-scholarship/international-tuition-scholarship\nF
  inal programme deadline: 2027-02-28\nOriginal note: 2027-02-28 00:00:00\
  nAll-day date. DO NOT infer a closing time from this event.\nConfirm act
@@ -10484,7 +10598,7 @@ SUMMARY:APPLICATION DEADLINE: McMaster University\, Computing and Softwar
 DESCRIPTION:Action: By 2026-11-15 shortlist at least 3 CAS faculty member
  s whose work matches (SLAM\, inertial estimation\, medical AI)\; the app
  lication requires naming 3 potential supervisors\nStatus: deadline_uncon
- firmed\nOriginal source: Action list row 136\nOfficial URL: https://www.
+ firmed\nOriginal source: Action list row 138\nOfficial URL: https://www.
  eng.mcmaster.ca//app/uploads/2025/11/CAS-Graduate-Information-1.pdf\nFin
  al programme deadline: 2027-02-28\nOriginal note: Engineering how-to-app
  ly page: September 2027 start term\, international applicant deadline Fe
@@ -10517,7 +10631,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Monash Graduate Scholarship (stipend)
 DESCRIPTION:Action: By 28 Feb 2027: submit course and scholarship applica
  tion together in myApp\; eligible applicants are automatically considere
  d for all graduate research scholarships\nStatus: completion_unconfirmed
- \nOriginal source: Step timeline row 499\nOfficial URL: https://www.mona
+ \nOriginal source: Step timeline row 501\nOfficial URL: https://www.mona
  sh.edu/study/fees-scholarships/scholarships/find-a-scholarship/internati
  onal-tuition-scholarship\nFinal programme deadline: 2027-02-28\nOriginal
   note: 2027-02-28 00:00:00\nAll-day date. DO NOT infer a closing time fr
@@ -10543,7 +10657,7 @@ SUMMARY:APPLICATION DEADLINE: Concordia Mechanical\, Industrial and Aeros
 DESCRIPTION:Action: By 2026-12-15 identify and email Concordia MIAE facul
  ty (SLAM\, attitude estimation) to secure a supervisor (the earlier note
   required this\; the page itself does not state it)\nStatus: deadline_un
- confirmed\nOriginal source: Action list row 138\nOfficial URL: https://w
+ confirmed\nOriginal source: Action list row 140\nOfficial URL: https://w
  ww.concordia.ca/academics/graduate/mechanical-engineering-phd.html\nFina
  l programme deadline: 2027-03-01\nOriginal note: "March 1 (U.S. and inte
  rnational)" for Fall\; "Priority will be given to complete applications 
@@ -10574,7 +10688,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Concordia Mechanical\, Industrial and
   Aerospace Engineering PhD (Fall 2027)
 DESCRIPTION:Action: Submit the online application before 2027-03-01 (entr
  ance awards are considered automatically)\nStatus: completion_unconfirme
- d\nOriginal source: Step timeline row 501\nOfficial URL: https://www.con
+ d\nOriginal source: Step timeline row 503\nOfficial URL: https://www.con
  cordia.ca/academics/graduate/mechanical-engineering-phd.html\nFinal prog
  ramme deadline: 2027-03-01\nOriginal note: 2027-03-01 00:00:00\nAll-day 
  date. DO NOT infer a closing time from this event.\nConfirm actual porta
@@ -10598,7 +10712,7 @@ SUMMARY:SCHEDULED APPLICATION STEP: Victoria University of Wellington\, W
  ellington Doctoral Scholarship (round 2 per earlier sweep)
 DESCRIPTION:Action: Submit before 2027-03-01 4:30 pm NZ time (or target t
  he 2027-07-01 round if not ready)\nStatus: completion_unconfirmed\nOrigi
- nal source: Step timeline row 502\nOfficial URL: https://www.wgtn.ac.nz/
+ nal source: Step timeline row 504\nOfficial URL: https://www.wgtn.ac.nz/
  scholarships/current/wellington-doctoral-scholarship\nFinal programme de
  adline: 2027-03-01\nOriginal note: 2027-03-01 00:00:00\nAll-day date. DO
   NOT infer a closing time from this event.\nConfirm actual portal availa
@@ -10623,7 +10737,7 @@ SUMMARY:APPLICATION DEADLINE: Victoria University of Wellington\, Welling
 DESCRIPTION:Action: By 2026-11-30 create the Communityforce application\,
   write the expression of interest and contact potential supervisors (not
   required before applying)\nStatus: deadline_unconfirmed\nOriginal sourc
- e: Action list row 139\nOfficial URL: https://www.wgtn.ac.nz/scholarship
+ e: Action list row 141\nOfficial URL: https://www.wgtn.ac.nz/scholarship
  s/current/wellington-doctoral-scholarship\nFinal programme deadline: 202
  7-03-01\nOriginal note: Page lists three closing dates a year: 1 March\,
   1 July and 1 November\, "4:30 pm" (NZ time per the apply-how page)\; it
@@ -10653,7 +10767,7 @@ DTEND;VALUE=DATE:20270304
 SUMMARY:SCHEDULED APPLICATION STEP: Institute of Science Tokyo\, Internat
  ional Graduate Program IGP(A) Fall 2027 with MEXT recommendation
 DESCRIPTION:Action: Result 2027-03-03 15:00 JST\nStatus: completion_uncon
- firmed\nOriginal source: Step timeline row 503\nOfficial URL: https://ad
+ firmed\nOriginal source: Step timeline row 505\nOfficial URL: https://ad
  missions.isct.ac.jp/en/013/graduate/programs/igp/igp-a\nFinal programme 
  deadline: 2026-11-15\nOriginal note: 2026-11-15 00:00:00\nAll-day date. 
  DO NOT infer a closing time from this event.\nConfirm actual portal avai

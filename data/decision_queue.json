@@ -218,6 +218,21 @@
       "next_step": "Prepare tailored research statement emphasizing visual-inertial estimation and robotics; apply by Dec 1 priority deadline"
     },
     {
+      "id": "R26-IMPERIAL-PAIR-HRI",
+      "programme": "Imperial College London PAIR Lab — Three Fully Funded Human-Robot Interaction PhDs for 2027",
+      "deadline": "2026-12-01",
+      "days_to_deadline": 22,
+      "deadline_kind": "Official lab deadline 1 Dec 2026",
+      "tier": "near-term",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://www.imperial.ac.uk/pair-lab/join-us/",
+      "original_email": "",
+      "next_step": "Consider only if pursuing HRI/user-group modeling; review lab project topics and admissions instructions before application."
+    },
+    {
       "id": "R26-STANFORD-BLUEPEARL",
       "programme": "Stanford Oceans — BluePEARL Lab PhD in Robot Learning for Marine Robotics (Fall 2027)",
       "deadline": "2026-12-02",
@@ -229,6 +244,22 @@
       "official_source": "https://oceans.stanford.edu/oceans.stanford.edu/academics/graduate-program/admissions/",
       "original_email": "https://mail.google.com/mail/u/0/#all/1a17d3a96bf5bf8f",
       "next_step": "Apply to Stanford Oceans by 2 Dec, 17:00 PST. Also complete BluePEARL lab interest form, which does not replace the university application."
+    },
+    {
+      "id": "R26-KTH-AGENTIC-EMBODIED",
+      "programme": "KTH Royal Institute of Technology — PhD Agentic & Embodied AI for Adaptive Manufacturing Systems (PA-2026-3497)",
+      "deadline": "2026-12-03",
+      "days_to_deadline": 24,
+      "deadline_kind": "Official final deadline 3 Dec 2026, local Sweden",
+      "tier": "near-term",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Confirm funded stipend and international tuition eligibility",
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://kth.varbi.com/en/what%3Ajob/jobID%3A978857/",
+      "original_email": "",
+      "next_step": "Apply to KTH vacancy PA-2026-3497 by 3 Dec. Tailor statement to embodied agents, manufacturing robotics and safety-aware planning."
     },
     {
       "id": "LEAD26-AUCKLAND-BIOMECH",
@@ -315,6 +346,22 @@
       "next_step": "Contact PI with CV, transcripts and project-specific cover letter, subject 'Prospective PhD Student'; ask about funded positions and formal ASU admission timeline."
     },
     {
+      "id": "R26-BONN-HRL-ACTIVE-PERCEPTION",
+      "programme": "University of Bonn Humanoid Robots Lab — Fully Funded Active Perception and VLM Robotics PhDs",
+      "deadline": null,
+      "days_to_deadline": null,
+      "deadline_kind": "Rolling until two places filled; primary lab explicitly states no fixed deadline",
+      "tier": "unposted",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Obtain an explicit official deadline and timezone",
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://www.hrl.uni-bonn.de/jobs/application",
+      "original_email": "",
+      "next_step": "Apply through lab form selecting active perception/mobile manipulation and/or VLM greenhouse robot project; upload single PDF under 8 MB. Do not email routine applications."
+    },
+    {
       "id": "R26-BONN-SOFT-AERIAL",
       "programme": "University of Bonn — Fully Funded PhD in Mechanosensing and Soft Aerial Robotics",
       "deadline": null,
@@ -364,6 +411,22 @@
       "next_step": "Send research CV to PI for rolling screening and confirm formal UT Knoxville doctoral portal, admission cycle and funding duration."
     },
     {
+      "id": "R26-UZH-RPG-VISION-ROBOT-LEARNING",
+      "programme": "University of Zurich Robotics and Perception Group — Fully Funded PhDs in Robot World Models and Visual Navigation",
+      "deadline": null,
+      "days_to_deadline": null,
+      "deadline_kind": "Rolling: current primary lab explicitly states no closing deadline, until filled; older indexed Oct 27 cutoff is stale",
+      "tier": "unposted",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Obtain an explicit official deadline and timezone",
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://rpg.ifi.uzh.ch/positions.html",
+      "original_email": "",
+      "next_step": "Submit PhD form for vision-based world models and/or learning navigation without explicit state estimation; include tailored research proposal and demonstrable robotics research."
+    },
+    {
       "id": "R26-DARTMOUTH-A2R-CODESIGN",
       "programme": "Dartmouth College — A2R Lab funded PhD in Computational Robotics Co-Design and Edge AI",
       "deadline": "2026-12-15",
@@ -406,6 +469,37 @@
       "official_source": "https://www.findaphd.com/phds/project/growing-with-me-co-designing-adaptable-low-cost-soft-robotic-wearables-for-children-s-upper-limb-rehabilitation/?p201874",
       "original_email": "https://mail.google.com/mail/u/0/#all/1a1bbbf1a69c21c0",
       "next_step": "Confirm primary Cardiff university application route and funding terms; prepare research fit on adaptive wearable robotics, human factors and clinical validation before 5 Jan 2027."
+    },
+    {
+      "id": "R26-ETH-IDEAL-ENGINEERING-AI",
+      "programme": "ETH Zurich IDEAL Lab — Doctoral Positions in Machine Learning for Engineering Design (Mark Fuge)",
+      "deadline": "2027-01-15",
+      "days_to_deadline": 67,
+      "deadline_kind": "Priority/best-consideration date 15 Jan 2027; not independently established as final closure",
+      "tier": "upcoming",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Confirm funded stipend and international tuition eligibility",
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://www.jobs.ethz.ch/job/view/JOPG_ethz_AUmT7tc75KfdQZK3sA",
+      "original_email": "",
+      "next_step": "Apply by 15 Jan for best consideration, without treating this as a strict final closing date. Describe ML-driven robot design, adaptive systems, optimization and research record."
+    },
+    {
+      "id": "R26-ETH-HC3-3D-RECON",
+      "programme": "ETH Zurich HC3 — Funded PhD in 3D Scene Reconstruction and Multimodal Sensing for Digital Twins",
+      "deadline": "2027-01-31",
+      "days_to_deadline": 83,
+      "deadline_kind": "EURAXESS index lists 31 Jan 2027; official ETH page did not establish a fixed final deadline",
+      "tier": "upcoming",
+      "research_status": "human_review_required",
+      "obligations": [
+        "Verify live institutional announcement and application route"
+      ],
+      "official_source": "https://jobs.ethz.ch/job/view/JOPG_ethz_VHL83kyFBbwBQD0AfO",
+      "original_email": "",
+      "next_step": "Verify closing date on the official ETH portal before treating the EURAXESS indexed 31 Jan date as final; prepare 3D mapping research portfolio."
     },
     {
       "id": "inria:2026-10501",

@@ -58,9 +58,9 @@
     {
       "type": "Feature",
       "properties": {
-        "title": "Switzerland: 9 application records",
+        "title": "Switzerland: 10 application records",
         "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
-        "count": 9,
+        "count": 10,
         "sample_source_ids": "C06, M23, M24",
         "marker-color": "#19b5b6",
         "marker-size": "large"
@@ -94,11 +94,11 @@
     {
       "type": "Feature",
       "properties": {
-        "title": "Sweden: 2 application records",
+        "title": "Sweden: 3 application records",
         "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
-        "count": 2,
-        "sample_source_ids": "N264-07, N264-09",
-        "marker-color": "#4384ff",
+        "count": 3,
+        "sample_source_ids": "N264-07, N264-09, R26-KTH-AGENTIC-EMBODIED",
+        "marker-color": "#9f61e8",
         "marker-size": "medium"
       },
       "geometry": {

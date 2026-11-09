@@ -2,16 +2,16 @@
   "schema_version": 1,
   "as_of": "2026-11-09",
   "explicit_readiness_policy": "Unknown inputs remain unknown. Mentioned documents are not evidence of missing documents.",
-  "active_future_opportunities": 106,
+  "active_future_opportunities": 108,
   "source_conflict_count": 1,
   "resource_frontier": [
     {
       "resource_id": "academic_cv",
       "label": "Academic CV",
       "current_state": "unknown",
-      "potential_applications": 78,
-      "near_term_applications": 58,
-      "urgency_index": 6.8454
+      "potential_applications": 80,
+      "near_term_applications": 59,
+      "urgency_index": 6.8854
     },
     {
       "resource_id": "recommendations",
@@ -25,33 +25,33 @@
       "resource_id": "transcripts",
       "label": "Official transcripts",
       "current_state": "unknown",
-      "potential_applications": 73,
-      "near_term_applications": 50,
-      "urgency_index": 4.8008
+      "potential_applications": 75,
+      "near_term_applications": 51,
+      "urgency_index": 4.8408
     },
     {
       "resource_id": "research_statement",
       "label": "Research statement / SOP",
       "current_state": "unknown",
-      "potential_applications": 51,
-      "near_term_applications": 37,
-      "urgency_index": 3.1799
+      "potential_applications": 53,
+      "near_term_applications": 38,
+      "urgency_index": 3.2199
     },
     {
       "resource_id": "english_proof",
       "label": "English proficiency evidence",
       "current_state": "unknown",
-      "potential_applications": 40,
-      "near_term_applications": 22,
-      "urgency_index": 2.5028
+      "potential_applications": 41,
+      "near_term_applications": 23,
+      "urgency_index": 2.5428
     },
     {
       "resource_id": "research_portfolio",
       "label": "Research portfolio and publications",
       "current_state": "unknown",
-      "potential_applications": 26,
-      "near_term_applications": 20,
-      "urgency_index": 1.7954
+      "potential_applications": 27,
+      "near_term_applications": 21,
+      "urgency_index": 1.8354
     }
   ],
   "applications": [
@@ -1721,6 +1721,41 @@
       "source_url": "https://oceans.stanford.edu/oceans.stanford.edu/academics/graduate-program/admissions/"
     },
     {
+      "source_id": "R26-KTH-AGENTIC-EMBODIED",
+      "deadline": "2026-12-03",
+      "days_to_deadline": 24,
+      "opportunity": "KTH Royal Institute of Technology — PhD Agentic & Embodied AI for Adaptive Manufacturing Systems (PA-2026-3497)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts",
+        "english_proof",
+        "research_portfolio"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [
+        "Position has not passed primary-source verification"
+      ],
+      "next_step": "Apply to KTH vacancy PA-2026-3497 by 3 Dec. Tailor statement to embodied agents, manufacturing robotics and safety-aware planning.",
+      "source_url": "https://kth.varbi.com/en/what%3Ajob/jobID%3A978857/"
+    },
+    {
       "source_id": "M36-6014",
       "deadline": "2026-12-08",
       "days_to_deadline": 29,
@@ -2630,6 +2665,35 @@
       "evidence_proof_obligations": [],
       "next_step": "By 15 Nov 2026: shortlist 3-5 UTIAS faculty (STARS/space robotics, navigation, estimation) and email each with CV, paper links and research fit",
       "source_url": "https://gradstudies.engineering.utoronto.ca/prospective-students/departments/aerospace-studies-graduate-studies-programs-and-degrees/"
+    },
+    {
+      "source_id": "R26-ETH-IDEAL-ENGINEERING-AI",
+      "deadline": "2027-01-15",
+      "days_to_deadline": 67,
+      "opportunity": "ETH Zurich IDEAL Lab — Doctoral Positions in Machine Learning for Engineering Design (Mark Fuge)",
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "document_mentions": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unconfirmed_resources": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unknown_resource_states": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "explicit_tasks_remaining": [],
+      "evidence_proof_obligations": [
+        "Position has not passed primary-source verification"
+      ],
+      "next_step": "Apply by 15 Jan for best consideration, without treating this as a strict final closing date. Describe ML-driven robot design, adaptive systems, optimization and research record.",
+      "source_url": "https://www.jobs.ethz.ch/job/view/JOPG_ethz_AUmT7tc75KfdQZK3sA"
     },
     {
       "source_id": "SE12",

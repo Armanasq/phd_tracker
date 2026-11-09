@@ -4,10 +4,10 @@
   "timezone": "Europe/Berlin",
   "policy": "Observed snapshot, not live availability. Unknown is not false. Document mention does not imply missing. Simulations never change application state.",
   "metrics": {
-    "tracked": 106,
-    "future": 106,
+    "tracked": 108,
+    "future": 108,
     "next_seven_days": 19,
-    "unknown_document_mentions": 330,
+    "unknown_document_mentions": 338,
     "source_conflicts": 1,
     "research_papers": 39
   },
@@ -1361,6 +1361,34 @@
       "next_step": "Apply to Stanford Oceans by 2 Dec, 17:00 PST. Also complete BluePEARL lab interest form, which does not replace the university application."
     },
     {
+      "id": "R26-KTH-AGENTIC-EMBODIED",
+      "name": "KTH Royal Institute of Technology — PhD Agentic & Embodied AI for Adaptive Manufacturing Systems (PA-2026-3497)",
+      "country": "Sweden",
+      "deadline": "2026-12-03",
+      "days": 24,
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "documents": [
+        "academic_cv",
+        "english_proof",
+        "research_portfolio",
+        "research_statement",
+        "transcripts"
+      ],
+      "unknown_documents": [
+        "academic_cv",
+        "english_proof",
+        "research_portfolio",
+        "research_statement",
+        "transcripts"
+      ],
+      "proof_obligations": [
+        "Position has not passed primary-source verification"
+      ],
+      "source": "https://kth.varbi.com/en/what%3Ajob/jobID%3A978857/",
+      "next_step": "Apply to KTH vacancy PA-2026-3497 by 3 Dec. Tailor statement to embodied agents, manufacturing robotics and safety-aware planning."
+    },
+    {
       "id": "M37-CIS",
       "name": "Cambridge Trust funding (Cambridge International Scholarship) via the same Cambridge PhD application",
       "country": "United Kingdom",
@@ -1959,6 +1987,30 @@
       "next_step": "2026-11-02: email Dr Celiktutan (oya.celiktutan@kcl.ac.uk) with CV and a short note on Go2 SLAM and robot learning work, quoting the CO-STAR title"
     },
     {
+      "id": "R26-ETH-IDEAL-ENGINEERING-AI",
+      "name": "ETH Zurich IDEAL Lab — Doctoral Positions in Machine Learning for Engineering Design (Mark Fuge)",
+      "country": "Switzerland",
+      "deadline": "2027-01-15",
+      "days": 67,
+      "decision": "Go",
+      "readiness": "requires_readiness_confirmation",
+      "documents": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "unknown_documents": [
+        "academic_cv",
+        "research_statement",
+        "transcripts"
+      ],
+      "proof_obligations": [
+        "Position has not passed primary-source verification"
+      ],
+      "source": "https://www.jobs.ethz.ch/job/view/JOPG_ethz_AUmT7tc75KfdQZK3sA",
+      "next_step": "Apply by 15 Jan for best consideration, without treating this as a strict final closing date. Describe ML-driven robot design, adaptive systems, optimization and research record."
+    },
+    {
       "id": "M49",
       "name": "SFU Engineering Science PhD (Fall 2027)",
       "country": null,
@@ -2429,9 +2481,9 @@
       {
         "type": "Feature",
         "properties": {
-          "title": "Switzerland: 9 application records",
+          "title": "Switzerland: 10 application records",
           "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
-          "count": 9,
+          "count": 10,
           "sample_source_ids": "C06, M23, M24",
           "marker-color": "#19b5b6",
           "marker-size": "large"
@@ -2465,11 +2517,11 @@
       {
         "type": "Feature",
         "properties": {
-          "title": "Sweden: 2 application records",
+          "title": "Sweden: 3 application records",
           "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
-          "count": 2,
-          "sample_source_ids": "N264-07, N264-09",
-          "marker-color": "#4384ff",
+          "count": 3,
+          "sample_source_ids": "N264-07, N264-09, R26-KTH-AGENTIC-EMBODIED",
+          "marker-color": "#9f61e8",
           "marker-size": "medium"
         },
         "geometry": {
@@ -2667,8 +2719,8 @@
       "id": "academic_cv",
       "label": "Academic CV",
       "state": "unknown",
-      "potential": 78,
-      "near_term": 58
+      "potential": 80,
+      "near_term": 59
     },
     {
       "id": "recommendations",
@@ -2681,29 +2733,29 @@
       "id": "transcripts",
       "label": "Official transcripts",
       "state": "unknown",
-      "potential": 73,
-      "near_term": 50
+      "potential": 75,
+      "near_term": 51
     },
     {
       "id": "research_statement",
       "label": "Research statement / SOP",
       "state": "unknown",
-      "potential": 51,
-      "near_term": 37
+      "potential": 53,
+      "near_term": 38
     },
     {
       "id": "english_proof",
       "label": "English proficiency evidence",
       "state": "unknown",
-      "potential": 40,
-      "near_term": 22
+      "potential": 41,
+      "near_term": 23
     },
     {
       "id": "research_portfolio",
       "label": "Research portfolio and publications",
       "state": "unknown",
-      "potential": 26,
-      "near_term": 20
+      "potential": 27,
+      "near_term": 21
     }
   ],
   "providers": [
@@ -2733,7 +2785,7 @@
     }
   ],
   "source_checks": {
-    "anchor_present": 4,
+    "anchor_present": 5,
     "review_source_changed": 1,
     "contradiction_closed_portal": 1
   },
@@ -3512,6 +3564,10 @@
         "date": "2027-01-15",
         "applications": [
           {
+            "id": "R26-ETH-IDEAL-ENGINEERING-AI",
+            "name": "ETH Zurich IDEAL Lab — Doctoral Positions in Machine Learning for Engineering Design (Mark Fuge)"
+          },
+          {
             "id": "M49",
             "name": "SFU Engineering Science PhD (Fall 2027)"
           },
@@ -3540,7 +3596,7 @@
             "name": "Waterloo ECE PhD, Stephen L. Smith (Autonomous Systems Lab)"
           }
         ],
-        "count": 7
+        "count": 8
       },
       {
         "date": "2027-01-19",

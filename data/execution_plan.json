@@ -1120,25 +1120,25 @@
     ]
   },
   "inventory": {
-    "application_rows": 191,
+    "application_rows": 193,
     "application_dates_unposted_or_rolling": 54,
-    "timeline_steps": 567,
+    "timeline_steps": 569,
     "cross_route_tasks": 26,
     "dropped_routes": 6,
     "not_added_routes": 200,
     "task_states": {
-      "deadline_unconfirmed": 136,
+      "deadline_unconfirmed": 138,
       "excluded": 1,
       "date_not_posted": 54,
-      "completion_unconfirmed": 565,
+      "completion_unconfirmed": 567,
       "excluded_parent": 2,
       "explicit_to_do": 26
     },
     "owner_completed_tasks": 0,
     "tracked_source_ids_in_dropped": 0,
-    "research_queue_rows": 38,
+    "research_queue_rows": 42,
     "mail_signal_rows": 7,
-    "evidence_ledger_rows": 27,
+    "evidence_ledger_rows": 33,
     "research_radar_rows": 39
   },
   "excluded_today": [],
@@ -2855,6 +2855,25 @@
       "type": "application_deadline",
       "sheet": "Action list",
       "row": 93,
+      "source_id": "R26-KTH-AGENTIC-EMBODIED",
+      "name": "KTH Royal Institute of Technology — PhD Agentic & Embodied AI for Adaptive Manufacturing Systems (PA-2026-3497)",
+      "action": "Apply to KTH vacancy PA-2026-3497 by 3 Dec. Tailor statement to embodied agents, manufacturing robotics and safety-aware planning.",
+      "due": "2026-12-03",
+      "days": 24,
+      "final_deadline": "2026-12-03",
+      "verdict": "Go",
+      "source": "https://kth.varbi.com/en/what%3Ajob/jobID%3A978857/",
+      "notes": "Official final deadline 3 Dec 2026, local Sweden. Official KTH doctoral vacancy PA-2026-3497 and EURAXESS list agentic/embodied AI for adaptive manufacturing with application deadline 3 Dec 2026.",
+      "state": "deadline_unconfirmed",
+      "blocked": false,
+      "group": "",
+      "task_id": "tsk-1cf1ac858b6b2d27",
+      "task_key": "Action list!93"
+    },
+    {
+      "type": "application_deadline",
+      "sheet": "Action list",
+      "row": 94,
       "source_id": "M37-CIS",
       "name": "Cambridge Trust funding (Cambridge International Scholarship) via the same Cambridge PhD application",
       "action": "Check the course page Funding Deadline by 2026-10-31",
@@ -2868,12 +2887,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-1451816570cbeb30",
-      "task_key": "Action list!93"
+      "task_key": "Action list!94"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 94,
+      "row": 95,
       "source_id": "SE-U09",
       "name": "Exeter EPSRC DLA 2027, Public Health and Sport Sciences: Computer vision to predict falls from everyday movement in older adults (Taleshi)",
       "action": "2026-10-30: identify the award page for Public Health and Sport Sciences and confirm deadline",
@@ -2887,12 +2906,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-f6b698377f528f28",
-      "task_key": "Action list!94"
+      "task_key": "Action list!95"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 95,
+      "row": 96,
       "source_id": "SC05",
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6010): AI and Image Processing for Diabetic Retinopathy Smart Cameras (Vaughan and Ye, Clinical and Biomedical Sciences)",
       "action": "Email pgrapplicants@exeter.ac.uk by 2026-11-02 to confirm the international-place wording and reference deadline (award page says 8 Jan 2027, important-information page says 15 Feb 2027)",
@@ -2906,12 +2925,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-119ffe619505a0e3",
-      "task_key": "Action list!95"
+      "task_key": "Action list!96"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 96,
+      "row": 97,
       "source_id": "SC06",
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): Explainable AI for Early Dementia Detection and Deployment (Dong, Computer Science)",
       "action": "Email pgrapplicants@exeter.ac.uk by 2026-11-02 to confirm the international-place wording and reference deadline (award page says 8 Jan 2027, important-information page says 15 Feb 2027)",
@@ -2925,12 +2944,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-646d5e625c47c0ef",
-      "task_key": "Action list!96"
+      "task_key": "Action list!97"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 97,
+      "row": 98,
       "source_id": "SC02",
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): R2T2-Med: Resource-Aware AI for Scalable and Deployable Medical Image Analysis (Zhang, Computer Science)",
       "action": "Email pgrapplicants@exeter.ac.uk by 2026-11-02 to confirm the international-place wording and reference deadline (award page says 8 Jan 2027, important-information page says 15 Feb 2027)",
@@ -2944,12 +2963,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-c0c300e8e8f4b6f8",
-      "task_key": "Action list!97"
+      "task_key": "Action list!98"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 98,
+      "row": 99,
       "source_id": "SC07",
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): Sovereign Agentic AI: Distilling Small Language Model Agents for Local Deployment (Wang and Huang, Computer Science)",
       "action": "Email pgrapplicants@exeter.ac.uk by 2026-11-02 to confirm the international-place wording and reference deadline (award page says 8 Jan 2027, important-information page says 15 Feb 2027)",
@@ -2963,12 +2982,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-a47a6917aa57d5dc",
-      "task_key": "Action list!98"
+      "task_key": "Action list!99"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 99,
+      "row": 100,
       "source_id": "SC03",
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6014): Multiscale Scientific Machine Learning Digital Twins for High-Torque Electric Propulsion under Extreme Duty Cycles (Engineering)",
       "action": "Email pgrapplicants@exeter.ac.uk by 2026-11-02 to confirm the international-place wording and reference deadline (award page says 8 Jan 2027, important-information page says 15 Feb 2027)",
@@ -2982,12 +3001,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-116a6bb9f87d00c3",
-      "task_key": "Action list!99"
+      "task_key": "Action list!100"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 100,
+      "row": 101,
       "source_id": "SC04",
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6015): Physics-Informed AI and Experimental Modelling of Ocean Mixing (Messias, Geography)",
       "action": "Email pgrapplicants@exeter.ac.uk by 2026-11-02 to confirm the international-place wording and reference deadline (award page says 8 Jan 2027, important-information page says 15 Feb 2027)",
@@ -3001,12 +3020,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-e72657da41b59fc1",
-      "task_key": "Action list!100"
+      "task_key": "Action list!101"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 101,
+      "row": 102,
       "source_id": "M36-6014",
       "name": "Exeter EPSRC DLA studentships, Department of Engineering, Sept 2027 entry (ref 6014): Physics-Aware Graph Neural Networks for Robust Short-Term Visibility Forecasting (supervisor surname Zhou per PDF name)",
       "action": "Email pgrapplicants@exeter.ac.uk by 2026-10-30 to confirm the reference deadline (8 Jan vs 15 Feb 2027) and the exact fee-status/funding wording for international students",
@@ -3020,12 +3039,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-b3d4ade8e960dabb",
-      "task_key": "Action list!101"
+      "task_key": "Action list!102"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 102,
+      "row": 103,
       "source_id": "M36-6019",
       "name": "Exeter EPSRC DLA studentships, Mathematics and Statistics, Sept 2027 entry (ref 6019): Uncertainty quantification for healthcare models: a route to precision medicine (Salter per PDF name)",
       "action": "Email pgrapplicants@exeter.ac.uk by 2026-10-30 to confirm reference deadline and international fee wording",
@@ -3039,12 +3058,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-149dd838dd886dac",
-      "task_key": "Action list!102"
+      "task_key": "Action list!103"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 103,
+      "row": 104,
       "source_id": "M37-Gates",
       "name": "Gates Cambridge Scholarship (PhD, 2027/28 entry, Round 2 all other eligible applicants)",
       "action": "Choose the Cambridge PhD course and read its 'Course Funding Deadline' on the Course Directory by 2026-10-31 (8 Dec 2026 or 6 Jan 2027)",
@@ -3058,12 +3077,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-35eb17c010076922",
-      "task_key": "Action list!103"
+      "task_key": "Action list!104"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 104,
+      "row": 105,
       "source_id": "N264-12",
       "name": "University of Amsterdam AMLab, multiple PhD positions Symmetries and Their Breaking in Deep Learning (Simons grant)",
       "action": "Validate mathematical/research depth; submit by 8 Dec with research statement and 2 referees.",
@@ -3077,12 +3096,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-23bdaeea4fb8d51b",
-      "task_key": "Action list!104"
+      "task_key": "Action list!105"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 105,
+      "row": 106,
       "source_id": "M38",
       "name": "University of Edinburgh EPSRC Centre for Doctoral Training in Machine Learning Systems (PhD, Round 1)",
       "action": "Identify and contact a potential supervisor (stage 1 'Get support from a supervisor') by 2026-11-10",
@@ -3096,12 +3115,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-55ba154f8bd20fdb",
-      "task_key": "Action list!105"
+      "task_key": "Action list!106"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 106,
+      "row": 107,
       "source_id": "C10",
       "name": "EPFL EDRS (Robotics, Control and Intelligent Systems) doctoral programme",
       "action": "Now: read websites of participating EDRS laboratories and shortlist advisers; EPFL says to consult labs before applying",
@@ -3115,12 +3134,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-6154812f9082e508",
-      "task_key": "Action list!106"
+      "task_key": "Action list!107"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 107,
+      "row": 108,
       "source_id": "N263-12",
       "name": "McGill University School of Computer Science PhD, Fall 2027 (international deadline)",
       "action": "Verify that MSc Space Engineering is classified as closely related; find robotics/ML supervisors with documented research funding and apply by 15 Dec.",
@@ -3134,12 +3153,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-0f28ad1883891cef",
-      "task_key": "Action list!107"
+      "task_key": "Action list!108"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 108,
+      "row": 109,
       "source_id": "M41",
       "name": "McGill University, Electrical and Computer Engineering PhD, Fall 2027",
       "action": "Confirm the ECE PhD deadline and year with grad.ece@mcgill.ca by 2026-10-30 (December 15 vs January 15)",
@@ -3153,12 +3172,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-3a8b5b5d8c10f6bf",
-      "task_key": "Action list!108"
+      "task_key": "Action list!109"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 109,
+      "row": 110,
       "source_id": "M40",
       "name": "UBC Computer Science PhD, September 2027",
       "action": "Create a UBC CWL account and start the application (open since 2026-09-15) by 2026-11-01",
@@ -3172,12 +3191,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-edf6558616cdaccd",
-      "task_key": "Action list!109"
+      "task_key": "Action list!110"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 110,
+      "row": 111,
       "source_id": "M39",
       "name": "University of Alberta, Computing Science PhD, Fall 2027 (Amii)",
       "action": "Select research area and identify up to three potential supervisors; email them by 2026-11-10 (admitted only if a professor agrees to supervise)",
@@ -3191,12 +3210,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-5cead17cb20c923d",
-      "task_key": "Action list!110"
+      "task_key": "Action list!111"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 111,
+      "row": 112,
       "source_id": "M42",
       "name": "UEA / ARIES NERC DTP studentships (entry 1 Oct 2027)",
       "action": "By 2026-11-06 browse all 6 pages of https://aries-dtp.ac.uk/studentships/ and shortlist up to 3 projects (max 3 allowed per year) whose scope fits; page 1 shows only climate/ocean projects",
@@ -3210,12 +3229,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-841d53bd5be46a27",
-      "task_key": "Action list!111"
+      "task_key": "Action list!112"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 112,
+      "row": 113,
       "source_id": "C11",
       "name": "University of Manchester President's Doctoral Scholar (PDS) Award",
       "action": "Email FSE.doctoralacademy.admissions@manchester.ac.uk or pds@manchester.ac.uk and ask for the 2027 PDS deadline and whether international fees are covered",
@@ -3229,12 +3248,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-5d05402856116d5e",
-      "task_key": "Action list!112"
+      "task_key": "Action list!113"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 113,
+      "row": 114,
       "source_id": "R26-MAN-PDS-CONSTELLATIONS",
       "name": "University of Manchester — PDS Safe and Multi-Fidelity Optimisation of Satellite Constellations for a Changing Planet",
       "action": "Write proposal focused on uncertainty-aware multi-fidelity optimisation and safe constellation reconfiguration; contact supervisors",
@@ -3248,12 +3267,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-15b4d28e985a84e5",
-      "task_key": "Action list!113"
+      "task_key": "Action list!114"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 114,
+      "row": 115,
       "source_id": "M43a",
       "name": "University of Sydney Research Training Program (RTP) international stipend + fee offset, 2027 commencement",
       "action": "By 2026-11-13 email engineering.hdr@sydney.edu.au with CV and research area to identify a supervisor (stated on the Faculty page as the contact)",
@@ -3267,12 +3286,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-f14f680f34de47a7",
-      "task_key": "Action list!114"
+      "task_key": "Action list!115"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 115,
+      "row": 116,
       "source_id": "M44",
       "name": "University of Surrey fully funded PhD: predictability in Romance verbal inflection (Linguistics)",
       "action": "By 2026-12-05 email Alison Stubley (address not printed on the page) a CV and a one-page statement of interest, stating the project title and supervisor names",
@@ -3286,12 +3305,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-ce3224f0e22d69e0",
-      "task_key": "Action list!115"
+      "task_key": "Action list!116"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 116,
+      "row": 117,
       "source_id": "C15-TOYOHASHI",
       "name": "Toyohashi University of Technology International Doctoral Degree Program with MEXT (university recommendation)",
       "action": "Now: contact a prospective TUT supervisor (page asks for this before applying) and ask for a Letter of Acceptance",
@@ -3305,12 +3324,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-7b3f9283ac197f32",
-      "task_key": "Action list!116"
+      "task_key": "Action list!117"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 117,
+      "row": 118,
       "source_id": "M46",
       "name": "University of Oxford Intelligent Earth CDT (AI for the environment), September 2027 entry",
       "action": "By 2026-11-20 register for the 25 Nov Open Day",
@@ -3324,12 +3343,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-4414c7ed8c4cc660",
-      "task_key": "Action list!117"
+      "task_key": "Action list!118"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 118,
+      "row": 119,
       "source_id": "SE-U07",
       "name": "UCL 50 fully funded 4-year EPSRC PhD studentships in engineering and physical sciences",
       "action": "2026-10-30: open the advert in a browser and read international eligibility, cap and ATAS",
@@ -3343,12 +3362,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-428ea7b742e4de76",
-      "task_key": "Action list!118"
+      "task_key": "Action list!119"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 119,
+      "row": 120,
       "source_id": "M47",
       "name": "Imperial College London President's PhD Scholarships 2027/28, round 2",
       "action": "By 2026-11-06 check the Unavailable Supervisors page and email target Imperial supervisors with CV and proposal to secure a supervisor's agreement (required before applying)",
@@ -3362,12 +3381,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-e6bdcedb0535e88e",
-      "task_key": "Action list!119"
+      "task_key": "Action list!120"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 120,
+      "row": 121,
       "source_id": "SE01",
       "name": "King's College London, PhD in Human-Robot Interaction (CO-STAR, Dr Oya Celiktutan, SAIR lab), Oct 2027 entry",
       "action": "2026-11-02: email Dr Celiktutan (oya.celiktutan@kcl.ac.uk) with CV and a short note on Go2 SLAM and robot learning work, quoting the CO-STAR title",
@@ -3381,12 +3400,31 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-0636839b0e0f823e",
-      "task_key": "Action list!120"
+      "task_key": "Action list!121"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 121,
+      "row": 122,
+      "source_id": "R26-ETH-IDEAL-ENGINEERING-AI",
+      "name": "ETH Zurich IDEAL Lab — Doctoral Positions in Machine Learning for Engineering Design (Mark Fuge)",
+      "action": "Apply by 15 Jan for best consideration, without treating this as a strict final closing date. Describe ML-driven robot design, adaptive systems, optimization and research record.",
+      "due": "2027-01-15",
+      "days": 67,
+      "final_deadline": "2027-01-15",
+      "verdict": "Go",
+      "source": "https://www.jobs.ethz.ch/job/view/JOPG_ethz_AUmT7tc75KfdQZK3sA",
+      "notes": "Priority/best-consideration date 15 Jan 2027; not independently established as final closure. Official ETH Zurich IDEAL listing advertised 1–2 doctoral positions with priority consideration by 15 Jan 2027.",
+      "state": "deadline_unconfirmed",
+      "blocked": false,
+      "group": "",
+      "task_id": "tsk-da54374f61304dac",
+      "task_key": "Action list!122"
+    },
+    {
+      "type": "application_deadline",
+      "sheet": "Action list",
+      "row": 123,
       "source_id": "M49",
       "name": "SFU Engineering Science PhD (Fall 2027)",
       "action": "By 2026-11-15 pick 2-3 Engineering Science faculty (SLAM, inertial, medical AI fit) from the school faculty list and email each to confirm willingness to supervise (a willing supervisor is required before admission)",
@@ -3400,12 +3438,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-ac8bdcd4eb60960f",
-      "task_key": "Action list!121"
+      "task_key": "Action list!123"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 122,
+      "row": 124,
       "source_id": "N264-13",
       "name": "University of Amsterdam EVELYN, 2 PhDs AI for Science (multimodal retrieval / mechanistic interpretability)",
       "action": "Pursue Position 1: scientific multimodal RAG, efficient adaptation of visual models, evidence verification; apply by 15 Jan 2027.",
@@ -3419,12 +3457,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-1cea4824e2c6b234",
-      "task_key": "Action list!122"
+      "task_key": "Action list!124"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 123,
+      "row": 125,
       "source_id": "M48",
       "name": "University of British Columbia (Vancouver) PhD in Electrical and Computer Engineering, September 2027",
       "action": "By 2026-11-13 browse ECE faculty profiles and email prospective supervisors (encouraged, not required) with CV and fit note",
@@ -3438,12 +3476,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-2710ae0f24974a91",
-      "task_key": "Action list!123"
+      "task_key": "Action list!125"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 124,
+      "row": 126,
       "source_id": "M45",
       "name": "University of Toronto MIE, CLIMB Lab (Pakpong Chirarattananon), PhD September 2027",
       "action": "By 2026-11-06 email p.chirarattananon@utoronto.ca with CV, transcripts, brief note on research interests and link to the lab's legged and bioinspired robotics work",
@@ -3457,12 +3495,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-06a97cda794f732d",
-      "task_key": "Action list!124"
+      "task_key": "Action list!126"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 125,
+      "row": 127,
       "source_id": "SF01",
       "name": "University of Toronto UTIAS (Aerospace Studies) PhD, Fall 2027, guaranteed funding, supervisor required (space robotics, SLAM, navigation labs)",
       "action": "By 15 Nov 2026: shortlist 3-5 UTIAS faculty (STARS/space robotics, navigation, estimation) and email each with CV, paper links and research fit",
@@ -3476,12 +3514,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-92e7b85e16cdc608",
-      "task_key": "Action list!125"
+      "task_key": "Action list!127"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 126,
+      "row": 128,
       "source_id": "SE-U08",
       "name": "University of Warwick Biomedical AI PhD (jobs.ac.uk DTF911)",
       "action": "2026-10-30: read advert in a browser for funding and fee status",
@@ -3495,12 +3533,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-8a366aaac4d019e5",
-      "task_key": "Action list!126"
+      "task_key": "Action list!128"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 127,
+      "row": 129,
       "source_id": "M54",
       "name": "Waterloo ECE PhD, Stephen L. Smith (Autonomous Systems Lab)",
       "action": "By 2026-10-31 email ece.researchadmissions@uwaterloo.ca to get the exact September 2027 PhD deadline",
@@ -3514,12 +3552,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-07c680cc469bf15a",
-      "task_key": "Action list!127"
+      "task_key": "Action list!129"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 128,
+      "row": 130,
       "source_id": "SE12",
       "name": "University of Surrey (Vision, Speech and Signal Processing), Smart optical design: AI tools for cinematic camera lenses (Volino, Guillemaut), April 2027 start",
       "action": "2026-11-10: email Dr Marco Volino (m.volino@surrey.ac.uk) with CV",
@@ -3533,12 +3571,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-47ba2f5e2d677b84",
-      "task_key": "Action list!128"
+      "task_key": "Action list!130"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 129,
+      "row": 131,
       "source_id": "SA13",
       "name": "Durham University: Efficient Physical AI for Real-World Robotics, funded PhD studentship (jobs.ac.uk DTI242)",
       "action": "Open advert in browser and read funding and fee status by 2026-11-05",
@@ -3552,12 +3590,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-8d3a0b27160da183",
-      "task_key": "Action list!129"
+      "task_key": "Action list!131"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 130,
+      "row": 132,
       "source_id": "M50",
       "name": "SFU Computing Science PhD (Fall 2027)",
       "action": "By 2026-11-15 shortlist Computing Science faculty and email them your CV (the page does not require a supervisor, but contact is advisable; this is my suggestion, not a page requirement)",
@@ -3571,12 +3609,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-e203ccc5c236e9c6",
-      "task_key": "Action list!130"
+      "task_key": "Action list!132"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 131,
+      "row": 133,
       "source_id": "C15-NAIST",
       "name": "NAIST doctoral course (Information Science), 2027 admission, with MEXT IPGP scholarship",
       "action": "Now to 13 Nov 2026: if targeting MEXT IPGP, obtain a Letter of Acceptance from one NAIST professor and email all MEXT documents to that professor with a copy to naist-ipgp (printed as naist-ipgp[at]is.naist.jp)",
@@ -3590,12 +3628,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-1268573d86964d91",
-      "task_key": "Action list!131"
+      "task_key": "Action list!133"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 132,
+      "row": 134,
       "source_id": "SF02",
       "name": "University of Tokyo Graduate School of Frontier Sciences (GSFS) fall 2027 regular degree with MEXT University Recommendation (General) - scholarship may not continue",
       "action": "Check page again late Dec 2026 for scholarship confirmation",
@@ -3609,12 +3647,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-cc923d514cba7d72",
-      "task_key": "Action list!132"
+      "task_key": "Action list!134"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 133,
+      "row": 135,
       "source_id": "M51",
       "name": "University of West London, AI optimisation of green roofs PhD studentship",
       "action": "By 2026-10-31 email UWL postgraduate admissions (contact link on the applying page) or the project supervisor to ask for the green roofs advert link and its closing date",
@@ -3628,12 +3666,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-ee9ae3a6d2352df5",
-      "task_key": "Action list!133"
+      "task_key": "Action list!135"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 134,
+      "row": 136,
       "source_id": "M53",
       "name": "Bristol PhD studentship, learning and decision making under uncertainty in public health (Mengyan Zhang)",
       "action": "By 2026-12-15 prepare CV, 1-2 page personal statement, transcripts and optional research proposal",
@@ -3647,12 +3685,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-4b3a27b4786188d4",
-      "task_key": "Action list!134"
+      "task_key": "Action list!136"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 135,
+      "row": 137,
       "source_id": "M52",
       "name": "Glasgow Graduate School scholarships (College of Science and Engineering, any supervisor)",
       "action": "By 2026-11-15 search for and email potential supervisors (the School page advises contacting one before applying)",
@@ -3666,12 +3704,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-858857b0acaac8e1",
-      "task_key": "Action list!135"
+      "task_key": "Action list!137"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 136,
+      "row": 138,
       "source_id": "M56",
       "name": "McMaster University, Computing and Software, PhD (Sept 2027 intake)",
       "action": "By 2026-11-15 shortlist at least 3 CAS faculty members whose work matches (SLAM, inertial estimation, medical AI); the application requires naming 3 potential supervisors",
@@ -3685,12 +3723,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-cf0ef467fbd557d4",
-      "task_key": "Action list!136"
+      "task_key": "Action list!138"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 137,
+      "row": 139,
       "source_id": "SH02",
       "name": "Monash Graduate Scholarship (stipend) plus Monash International Tuition Scholarship (fees), PhD, International Round 1 2027",
       "action": "Nov to Dec 2026: contact a Monash supervisor (Engineering, IT) and get agreement to supervise",
@@ -3704,12 +3742,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-51d1651043d04150",
-      "task_key": "Action list!137"
+      "task_key": "Action list!139"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 138,
+      "row": 140,
       "source_id": "M55a",
       "name": "Concordia Mechanical, Industrial and Aerospace Engineering PhD (Fall 2027)",
       "action": "By 2026-12-15 identify and email Concordia MIAE faculty (SLAM, attitude estimation) to secure a supervisor (the earlier note required this; the page itself does not state it)",
@@ -3723,12 +3761,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-1a93145fca07302e",
-      "task_key": "Action list!138"
+      "task_key": "Action list!140"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 139,
+      "row": 141,
       "source_id": "M55b",
       "name": "Victoria University of Wellington, Wellington Doctoral Scholarship (round 2 per earlier sweep)",
       "action": "By 2026-11-30 create the Communityforce application, write the expression of interest and contact potential supervisors (not required before applying)",
@@ -3742,12 +3780,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-f86db23138c8d631",
-      "task_key": "Action list!139"
+      "task_key": "Action list!141"
     },
     {
       "type": "application_deadline",
       "sheet": "Action list",
-      "row": 140,
+      "row": 142,
       "source_id": "M57",
       "name": "University of Wollongong, University Postgraduate Award (UPA), international PhD",
       "action": "No action possible for the 2027 round (closed)",
@@ -3761,12 +3799,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-66680820c5d53efc",
-      "task_key": "Action list!140"
+      "task_key": "Action list!142"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 141,
+      "row": 143,
       "source_id": "C13-ANU",
       "name": "ANU Dr Jonghyuk Kim (Robotics and Autonomy, Research School of Engineering)",
       "action": "Email jonghyuk.kim@anu.edu.au with CV, transcript, two first-author paper links and a one-page proposal on observer design for inertial/visual SLAM",
@@ -3780,12 +3818,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-66222392783fc0eb",
-      "task_key": "Action list!141"
+      "task_key": "Action list!143"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 142,
+      "row": 144,
       "source_id": "SH13",
       "name": "ANU PhD Scholarship (stipend), international applicants, rolling",
       "action": "Contact an HDR convener or supervisor (Robotics, Engineering, Computing)",
@@ -3799,12 +3837,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-b9076763d2a576d0",
-      "task_key": "Action list!142"
+      "task_key": "Action list!144"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 143,
+      "row": 145,
       "source_id": "SG03",
       "name": "CSEM Neuchatel with ETH Zurich: PhD in AI-Assisted Generative Design and Optimization of Compliant Mechanisms",
       "action": "2026-10-29 or later: apply via apps.csem.ch 'Apply for this job'",
@@ -3818,12 +3856,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-8551b2ca5da49b85",
-      "task_key": "Action list!143"
+      "task_key": "Action list!145"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 144,
+      "row": 146,
       "source_id": "C13-CSIRO",
       "name": "CSIRO Data61 Robotics: Deep SLAM funded PhD (Dr Peyman Moghadam)",
       "action": "Email peyman.moghadam@csiro.au with subject '[PhD Deep SLAM]' and one single PDF: CV, transcripts, one-page cover letter",
@@ -3837,12 +3875,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-c5172cb715186ff1",
-      "task_key": "Action list!144"
+      "task_key": "Action list!146"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 145,
+      "row": 147,
       "source_id": "C13-CURTIN",
       "name": "Curtin University GNSS-SPAN, Prof. Ahmed El-Mowafy (fully funded PhD: RTP project; two LEO-PNT positions)",
       "action": "Email a.el-mowafy@curtin.edu.au with CV, transcripts, publications and a short proposal on LEO-PNT / inertial-aided positioning",
@@ -3856,12 +3894,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-d0492926e7e0925a",
-      "task_key": "Action list!145"
+      "task_key": "Action list!147"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 146,
+      "row": 148,
       "source_id": "M59",
       "name": "ESA Networking/Partnering Initiative (NPI) co-funded PhD (host university in ESA Member State)",
       "action": "By 2026-11-15 identify host-university supervisors in ESA Member States with ESA-relevant robotics/autonomy topics (NPI focus: Spaceship ECSAT - robotics, autonomy, sample curation for exploration)",
@@ -3875,12 +3913,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-5cd3740a952261e9",
-      "task_key": "Action list!146"
+      "task_key": "Action list!148"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 147,
+      "row": 149,
       "source_id": "SE10",
       "name": "ETH Zurich / PSI X-ray Imaging Professorship (Prof Marco Stampanoni): Doctoral Position in sparse reconstruction of virtual histology images",
       "action": "2026-11-01: email the group contact with CV only for questions (not as application)",
@@ -3894,12 +3932,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-69283c438963d990",
-      "task_key": "Action list!147"
+      "task_key": "Action list!149"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 148,
+      "row": 150,
       "source_id": "SA09",
       "name": "ETH Zurich Advanced Manufacturing Lab (Bambach): fully funded PhD in Humanoid Robotics, 3D Perception and Embodied AI",
       "action": "Open ETH ad in a browser and verify deadline and eligibility by 2026-10-31",
@@ -3913,12 +3951,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-4d3409aeebf46f0f",
-      "task_key": "Action list!148"
+      "task_key": "Action list!150"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 149,
+      "row": 151,
       "source_id": "SE11",
       "name": "ETH Zurich D-BSSE Basel (Prof Dagmar Iber): PhD in Computational Methods for Digital Twins of Embryonic Development and Disease",
       "action": "2026-11-01: email the group contact with CV only for questions (not as application)",
@@ -3932,12 +3970,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-ede6b45923127851",
-      "task_key": "Action list!149"
+      "task_key": "Action list!151"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 150,
+      "row": 152,
       "source_id": "M58",
       "name": "ETH Zurich SIPLab (Holz), Doctoral Student in Neuromotor Interfaces for Dexterous Robot Teleoperation (egocentric vision + EMG)",
       "action": "By 2026-10-31 write the one-page motivation letter linking inertial/visual-inertial work and medical AI to EMG/biosignals, robotics, egocentric vision, embedded sensing or Mixed Reality",
@@ -3951,12 +3989,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-e421a3a8a2394e04",
-      "task_key": "Action list!150"
+      "task_key": "Action list!152"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 151,
+      "row": 153,
       "source_id": "SE09",
       "name": "ETH Zurich, Prof George Haller (Nonlinear Dynamics): PhD in Modeling and Control of Nonlinear Dynamical Systems from Data",
       "action": "2026-11-01: email the group contact with CV only for questions (not as application)",
@@ -3970,12 +4008,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-cef325b04f81a791",
-      "task_key": "Action list!151"
+      "task_key": "Action list!153"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 152,
+      "row": 154,
       "source_id": "C14-GRIFFITH",
       "name": "Griffith University PhD (international)",
       "action": "Email the Griffith Graduate Research School and ask whether applications from Iranian citizens are being accepted again",
@@ -3989,12 +4027,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-61d87e55efcd89b4",
-      "task_key": "Action list!152"
+      "task_key": "Action list!154"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 153,
+      "row": 155,
       "source_id": "SH16",
       "name": "Heriot-Watt University James Watt Scholarship (PhD)",
       "action": "Verify the official portal and deadline",
@@ -4008,12 +4046,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-2712b0948b417f3a",
-      "task_key": "Action list!153"
+      "task_key": "Action list!155"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 154,
+      "row": 156,
       "source_id": "SF10",
       "name": "Hiroshima University MEXT University Recommendation, October 2027",
       "action": "Ask graduate school of advanced science and engineering about slots",
@@ -4027,12 +4065,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-d380611ab4ebf397",
-      "task_key": "Action list!154"
+      "task_key": "Action list!156"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 155,
+      "row": 157,
       "source_id": "N263-16",
       "name": "McGill Intelligent Automation Lab (Di Wu, Benoit Boulet), funded Fall 2027 PhD recruiting",
       "action": "Contact both professors as instructed with detailed CV and English test score; ensure relevant McGill program application separately.",
@@ -4046,12 +4084,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-07f089c9c1554a4a",
-      "task_key": "Action list!155"
+      "task_key": "Action list!157"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 156,
+      "row": 158,
       "source_id": "SH14",
       "name": "MEXT Japanese Government Scholarship, Embassy recommendation route, research student/doctoral, 2027",
       "action": "Ask the Japanese Embassy in Tehran or the Consulate responsible for Iranian nationals for the 2027 guidelines and the allowed place of application",
@@ -4065,12 +4103,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-51f0cbc47ac9d1bf",
-      "task_key": "Action list!156"
+      "task_key": "Action list!158"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 157,
+      "row": 159,
       "source_id": "SB04",
       "name": "Monash Engineering robotics PhD call (Kulic, Chao Chen, Arashpour, Abdi, Fang, Chung, Burke)",
       "action": "Contact a listed supervisor with CV and transcripts",
@@ -4084,12 +4122,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-21822c5dc45929a2",
-      "task_key": "Action list!157"
+      "task_key": "Action list!159"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 158,
+      "row": 160,
       "source_id": "SB01",
       "name": "Monash University, DistRobot: two fully funded PhD positions in Distributed AI and autonomous robotics (Goudarzi, Rezatofighi, Kulic, Pham)",
       "action": "Before 5 Nov 2026: read the position page and Monash graduate research application process",
@@ -4103,12 +4141,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-68a8c83fcdf2c72c",
-      "task_key": "Action list!158"
+      "task_key": "Action list!160"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 159,
+      "row": 161,
       "source_id": "M13",
       "name": "Osaka (University of Osaka, Engineering Science) Special Training Program for Robotics Engineers, MEXT, October 2027 enrollment (Doctoral course)",
       "action": "Wait for official October 2027 Robotics MEXT approval and new guidelines; prepare documents using 2026 guidelines only as reference. DO NOT treat 6 Nov as a published deadline.",
@@ -4122,12 +4160,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-2d3553dde79042e7",
-      "task_key": "Action list!159"
+      "task_key": "Action list!161"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 160,
+      "row": 162,
       "source_id": "SB10",
       "name": "Polytechnique Montreal MIST Lab (Beltrame, Pavlasek, Lajoie): funded PhD/MSc positions in autonomous systems and field robotics",
       "action": "Email a faculty contact with CV and transcripts",
@@ -4141,12 +4179,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-2ac40b0d956e17c8",
-      "task_key": "Action list!160"
+      "task_key": "Action list!162"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 161,
+      "row": 163,
       "source_id": "C13-POLYMTL",
       "name": "Polytechnique Montréal Prof. Jérôme Le Ny and Prof. Bowen Yi (online estimation of nonlinear systems, robotic localization)",
       "action": "Email jerome.le-ny@polymtl.ca and bowen.yi@polymtl.ca one PDF: one-page cover letter, full CV, unofficial transcripts, one or two work samples (papers), names of two references",
@@ -4160,12 +4198,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-130aa3a9fbc928df",
-      "task_key": "Action list!161"
+      "task_key": "Action list!163"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 162,
+      "row": 164,
       "source_id": "SH11",
       "name": "Quebec Merit Scholarship Program for Foreign Students (PBEEE), doctoral stream, 2027-2028 cycle",
       "action": "Get admitted or in process at a Quebec university (McGill, Polytechnique Montreal, Universite de Montreal, ETS) and ask its graduate office for PBEEE preselection",
@@ -4179,12 +4217,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-6091b16b5d8428b4",
-      "task_key": "Action list!162"
+      "task_key": "Action list!164"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 163,
+      "row": 165,
       "source_id": "M07b",
       "name": "Southampton MSCA BlueOcean, application 2 of 2: linked PhD 'Robotic monitoring for place recognition and change detection in dynamic underwater environments' (phdscanner, lead supervisor Prof Blair Thornton)",
       "action": "Immediately confirm whether the linked PhD project form is a separate required submission, and whether its deadline matches the staff vacancy's verified 13 Nov closing date.",
@@ -4198,12 +4236,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-0505cd940a64c749",
-      "task_key": "Action list!163"
+      "task_key": "Action list!165"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 164,
+      "row": 166,
       "source_id": "N263-15",
       "name": "Technical University of Munich Computer Vision & AI Group (Daniel Cremers), fully funded PhD openings",
       "action": "Email cremers@tum.de one PDF set with CV, transcripts, brief research statement, specify 'PhD' and research interest areas.",
@@ -4217,12 +4255,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-721f57d77075859e",
-      "task_key": "Action list!164"
+      "task_key": "Action list!166"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 165,
+      "row": 167,
       "source_id": "SF04",
       "name": "Tohoku Advanced Graduate School Next-Generation AI Expert Development (NEXT-AI, JST), JPY 260,000/month + JPY 780,000/year research funds",
       "action": "After admission: watch pgd.tohoku.ac.jp for the AY2027 call (likely Jan 2027 for April 2027 enrolees)",
@@ -4236,12 +4274,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-5c17a9fff98dd064",
-      "task_key": "Action list!165"
+      "task_key": "Action list!167"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 166,
+      "row": 168,
       "source_id": "SF03",
       "name": "Tohoku University MEXT University Recommendation, October 2027 enrolment (special programmes only; Information Sciences NIFS and Engineering SDTM slots undecided)",
       "action": "Mid Nov 2026: identify Tohoku supervisor in Information Sciences and email field, target school, October 2027",
@@ -4255,12 +4293,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-26eb5b0eae51f3bd",
-      "task_key": "Action list!166"
+      "task_key": "Action list!168"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 167,
+      "row": 169,
       "source_id": "M60",
       "name": "Toronto Metropolitan University, Dr Mohamad T. Shahab, PhD (adaptive/learning-based control, robotics)",
       "action": "By 2026-10-31 email mshahab@torontomu.ca with subject '[PhD, international]' attaching cover letter, CV and unofficial transcripts; ask whether a funded PhD place is open for Fall 2027",
@@ -4274,12 +4312,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-3f28aa7319ac7f7b",
-      "task_key": "Action list!167"
+      "task_key": "Action list!169"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 168,
+      "row": 170,
       "source_id": "SH17",
       "name": "UCL Graduate Research Scholarship / Overseas Research Scholarship",
       "action": "Verify the official portal and deadline",
@@ -4293,12 +4331,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-0a713c400fb28835",
-      "task_key": "Action list!168"
+      "task_key": "Action list!170"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 169,
+      "row": 171,
       "source_id": "C13-UNB",
       "name": "UNB Geodesy and Geomatics Engineering (Fredericton) PhD",
       "action": "Identify a GGE professor in navigation, inertial or SLAM and email a CV, transcript and proposal asking about a funded place (no supervisor named by the earlier sweep)",
@@ -4312,12 +4350,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-006f458bccaf4f79",
-      "task_key": "Action list!169"
+      "task_key": "Action list!171"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 170,
+      "row": 172,
       "source_id": "N263-14",
       "name": "University of Bonn Autonomous Intelligent Systems Group (Sven Behnke), multiple funded PhD positions",
       "action": "Email CV, transcripts, publication list and research statement with subject 'PhD Application AIS'; no deadline, fill ASAP.",
@@ -4331,12 +4369,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-80c34c936133e8ad",
-      "task_key": "Action list!170"
+      "task_key": "Action list!172"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 171,
+      "row": 173,
       "source_id": "N263-13",
       "name": "University of Bonn Humanoid Robots Lab (Maren Bennewitz), 2 funded PhDs in Uncertainty-Aware Active Perception and VLM-Based Robotic Intervention",
       "action": "Submit lab application form selecting one or both preferred topics; not email for normal inquiries. Research integration on Go2 and 3D mapping is direct evidence.",
@@ -4350,12 +4388,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-e770d7df56b4b8ea",
-      "task_key": "Action list!171"
+      "task_key": "Action list!173"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 172,
+      "row": 174,
       "source_id": "SH19",
       "name": "University of Canterbury (NZ), Massey, Waikato Doctoral Scholarships (international PhD)",
       "action": "Verify the official portal and deadline",
@@ -4369,12 +4407,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-280043bbf0c4eb63",
-      "task_key": "Action list!172"
+      "task_key": "Action list!174"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 173,
+      "row": 175,
       "source_id": "SH10",
       "name": "University of Edinburgh Edinburgh Doctoral College Scholarships (PhD, 2027 entry)",
       "action": "Apply for PhD admission first; the scholarship requires an application already submitted",
@@ -4388,12 +4426,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-68a566ff6c5a6581",
-      "task_key": "Action list!173"
+      "task_key": "Action list!175"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 174,
+      "row": 176,
       "source_id": "SD14",
       "name": "University of Galway, 9 Fully Funded PhD Scholarships in data science and AI (Research Ireland national centre, contact Edward Curry)",
       "action": "Verify the official portal and deadline",
@@ -4407,12 +4445,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-ef8c9805f2630cd3",
-      "task_key": "Action list!174"
+      "task_key": "Action list!176"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 175,
+      "row": 177,
       "source_id": "SD10",
       "name": "University of Galway, fully funded PhD in Embodied AI, networked multi-agent / robotic systems (Panpan Zhou), start Sept 2027 or earlier",
       "action": "https://researchersjob.com/phd-candidate-position-university-of-galway/",
@@ -4426,12 +4464,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-91c5727c30d1ecdd",
-      "task_key": "Action list!175"
+      "task_key": "Action list!177"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 176,
+      "row": 178,
       "source_id": "SC12",
       "name": "University of Luxembourg SnT CVI2 (Prof. Djamila Aouada): Doctoral Researcher in Computer Vision (UOL08044)",
       "action": "Confirm UOL08044 is still open on the HR portal",
@@ -4445,12 +4483,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-118c59c8d0179f2e",
-      "task_key": "Action list!176"
+      "task_key": "Action list!178"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 177,
+      "row": 179,
       "source_id": "SB05",
       "name": "University of Luxembourg SnT SERVAL: PhD in Trustworthy World Models for Critical Systems",
       "action": "Check uni.lu recruitment portal for whether the post is still open",
@@ -4464,12 +4502,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-a29c3d841d4a9189",
-      "task_key": "Action list!177"
+      "task_key": "Action list!179"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 178,
+      "row": 180,
       "source_id": "SC11",
       "name": "University of Luxembourg SnT, Serval group: Doctoral Researcher in Machine Learning for Official Statistics (UOL08327)",
       "action": "Check on the University of Luxembourg HR portal that UOL08327 is still open",
@@ -4483,12 +4521,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-f36bf18b136bb586",
-      "task_key": "Action list!178"
+      "task_key": "Action list!180"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 179,
+      "row": 181,
       "source_id": "SE-U04",
       "name": "University of Luxembourg SnT/FSTM: Doctoral researcher in GNSS Reflectometry (Esch-sur-Alzette)",
       "action": "2026-10-29: fetch the advert in a browser to read reference number, deadline and group",
@@ -4502,12 +4540,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-5761cd58efb4de21",
-      "task_key": "Action list!179"
+      "task_key": "Action list!181"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 180,
+      "row": 182,
       "source_id": "C12-UOL08224",
       "name": "University of Luxembourg UOL08224 Doctoral Researcher in HPC and AI",
       "action": "Email Prof. Dr. Jun Pang with CV and a short note on fit (named as contact for questions)",
@@ -4521,12 +4559,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-a163bae33bbd8183",
-      "task_key": "Action list!180"
+      "task_key": "Action list!182"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 181,
+      "row": 183,
       "source_id": "SA11",
       "name": "University of Luxembourg UOL08434 Doctoral Researcher in Learning AI Agents (calibrated LLM agents, UBIX)",
       "action": "Check uni.lu HR portal for UOL08434 still open by 2026-10-31",
@@ -4540,12 +4578,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-f3182871ef11031a",
-      "task_key": "Action list!181"
+      "task_key": "Action list!183"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 182,
+      "row": 184,
       "source_id": "SA10",
       "name": "University of Luxembourg UOL08435 Doctoral Researcher in AI Systems (multi-agent LLM in energy operations, UBIX, Raphael Frank)",
       "action": "Check uni.lu HR portal for UOL08435 still open by 2026-10-31",
@@ -4559,12 +4597,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-b8659dac59e3f4fb",
-      "task_key": "Action list!182"
+      "task_key": "Action list!184"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 183,
+      "row": 185,
       "source_id": "C12-UOL08546",
       "name": "University of Luxembourg UOL08546 Doctoral Researcher in AI for Science (EUR 44,531)",
       "action": "Email Prof. Jun Pang (firstname.lastname@uni.lu pattern, see blockers) with a short fit statement before applying",
@@ -4578,12 +4616,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-56ad8f8f04f981ec",
-      "task_key": "Action list!183"
+      "task_key": "Action list!185"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 184,
+      "row": 186,
       "source_id": "C03-Otago",
       "name": "University of Otago Doctoral Scholarship (PhD, NZ)",
       "action": "By 1 Nov 2026 (to make the November assessment round, round cut-off unconfirmed): submit PhD admission application on Otago eVision with supervisor agreement",
@@ -4597,12 +4635,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-7baa5e42b2837a16",
-      "task_key": "Action list!184"
+      "task_key": "Action list!186"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 185,
+      "row": 187,
       "source_id": "SH01",
       "name": "University of Oxford Clarendon Scholarships (DPhil, 2027-28 entry); automatic consideration with the DPhil application",
       "action": "Now to Nov 2026: pick the DPhil course (Engineering Science, Computer Science, or Statistics/ML) and read its page for the exact December or January deadline",
@@ -4616,12 +4654,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-f96c4b8c3f2e3c0f",
-      "task_key": "Action list!185"
+      "task_key": "Action list!187"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 186,
+      "row": 188,
       "source_id": "SF05",
       "name": "University of Queensland Graduate Research School Scholarships (UQGRSS incl RTP): next international round for 2027/28 entry",
       "action": "After 31 Oct 2026: re-fetch page for new round dates",
@@ -4635,12 +4673,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-3948a1619a15d404",
-      "task_key": "Action list!186"
+      "task_key": "Action list!188"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 187,
+      "row": 189,
       "source_id": "SH18",
       "name": "University of Queensland Graduate School Scholarship (PhD, international)",
       "action": "Verify the official portal and deadline",
@@ -4654,12 +4692,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-03d37ed88bc840ac",
-      "task_key": "Action list!187"
+      "task_key": "Action list!189"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 188,
+      "row": 190,
       "source_id": "SA05",
       "name": "University of Sydney ARIAM Research Hub PhD Scholarship (Faculty of Engineering, supervisor must be an ARIAM Chief Investigator)",
       "action": "Identify an ARIAM Chief Investigator working on SLAM or robot learning and email by 2026-11-10",
@@ -4673,12 +4711,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-0010bb37ae3a8e83",
-      "task_key": "Action list!188"
+      "task_key": "Action list!190"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 189,
+      "row": 191,
       "source_id": "M43b",
       "name": "University of Sydney Faculty of Engineering Research Scholarship for MENA",
       "action": "By 2026-11-06 email engineering.hdr@sydney.edu.au asking in writing whether an Iranian citizen counts as 'a citizen from a country of the Middle East and North African region' (Iran is not named on the page)",
@@ -4692,12 +4730,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-dcc6aacdfdfe9e45",
-      "task_key": "Action list!189"
+      "task_key": "Action list!191"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 190,
+      "row": 192,
       "source_id": "N263-17",
       "name": "University of Waterloo CERC Human-Centred Robotics & Machine Intelligence (Katja Mombaur), PhD route",
       "action": "Send brief research interest and CV to group, ask about live funded PhD openings and department admission deadline before applying.",
@@ -4711,12 +4749,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-961bc40b5b02ff37",
-      "task_key": "Action list!190"
+      "task_key": "Action list!192"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 191,
+      "row": 193,
       "source_id": "SB08",
       "name": "UQO LaRSA (Berkane), multi-institution UQO/McGill/Queen's: PhD in visual-inertial SLAM for UAVs",
       "action": "Email CV to soulaimane.berkane@uqo.ca asking about current funding and start date",
@@ -4730,12 +4768,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-1d751c4cf443767d",
-      "task_key": "Action list!191"
+      "task_key": "Action list!193"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 192,
+      "row": 194,
       "source_id": "SB02",
       "name": "UZH Robotics and Perception Group (Scaramuzza): PhD positions incl. event-camera plus inertial SLAM world models, learning navigation without state estimation",
       "action": "Immediately: confirm via careersrpg (AT) ifi (DOT) uzh (DOT) ch only if a late application is still accepted; do not ask whether CV fits",
@@ -4749,12 +4787,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-a85826ceea233fe1",
-      "task_key": "Action list!192"
+      "task_key": "Action list!194"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 193,
+      "row": 195,
       "source_id": "SH15",
       "name": "Warwick Chancellor's International Scholarship (PhD)",
       "action": "Verify the official portal and deadline",
@@ -4768,12 +4806,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-b4f64ab5407ff24a",
-      "task_key": "Action list!193"
+      "task_key": "Action list!195"
     },
     {
       "type": "application_unposted",
       "sheet": "Action list",
-      "row": 194,
+      "row": 196,
       "source_id": "SB09",
       "name": "Western University ECE (Tayebi): PhD in AI-enabled autonomous navigation / robotics",
       "action": "Email CV to atayebi@uwo.ca asking about funding and intake",
@@ -4787,7 +4825,7 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-ca7220b69b6edef0",
-      "task_key": "Action list!194"
+      "task_key": "Action list!196"
     },
     {
       "type": "timeline_step",
@@ -12184,6 +12222,25 @@
       "type": "timeline_step",
       "sheet": "Step timeline",
       "row": 393,
+      "source_id": "R26-KTH-AGENTIC-EMBODIED",
+      "name": "KTH Royal Institute of Technology — PhD Agentic & Embodied AI for Adaptive Manufacturing Systems (PA-2026-3497)",
+      "action": "Apply to KTH vacancy PA-2026-3497 by 3 Dec. Tailor statement to embodied agents, manufacturing robotics and safety-aware planning. [External deadline: Official final deadline 3 Dec 2026, local Sweden]",
+      "due": "2026-12-03",
+      "days": 24,
+      "final_deadline": "2026-12-03",
+      "verdict": "Go",
+      "source": "https://kth.varbi.com/en/what%3Ajob/jobID%3A978857/",
+      "notes": "2026-12-03 00:00:00",
+      "state": "completion_unconfirmed",
+      "blocked": false,
+      "group": "",
+      "task_id": "tsk-0308c7bc02e49d07",
+      "task_key": "Step timeline!393"
+    },
+    {
+      "type": "timeline_step",
+      "sheet": "Step timeline",
+      "row": 394,
       "source_id": "M46",
       "name": "University of Oxford Intelligent Earth CDT (AI for the environment), September 2027 entry",
       "action": "By 2026-12-04 ask three referees (academic preferred; up to two professional if relevant work experience) to submit; at least two references must be in by the deadline",
@@ -12197,12 +12254,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-532087cc41277d1b",
-      "task_key": "Step timeline!393"
+      "task_key": "Step timeline!394"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 394,
+      "row": 395,
       "source_id": "SE01",
       "name": "King's College London, PhD in Human-Robot Interaction (CO-STAR, Dr Oya Celiktutan, SAIR lab), Oct 2027 entry",
       "action": "2026-12-05: confirm two academic referees and whether they may be contacted before interview",
@@ -12216,12 +12273,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-74c617a5934e0ab6",
-      "task_key": "Step timeline!394"
+      "task_key": "Step timeline!395"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 395,
+      "row": 396,
       "source_id": "M44",
       "name": "University of Surrey fully funded PhD: predictability in Romance verbal inflection (Linguistics)",
       "action": "By 2026-12-05 email Alison Stubley (address not printed on the page) a CV and a one-page statement of interest, stating the project title and supervisor names",
@@ -12235,12 +12292,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-21ee81119a66cc02",
-      "task_key": "Step timeline!395"
+      "task_key": "Step timeline!396"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 396,
+      "row": 397,
       "source_id": "SC05",
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6010): AI and Image Processing for Diabetic Retinopathy Smart Cameras (Vaughan and Ye, Clinical and Biomedical Sciences)",
       "action": "Submit by midday 2026-12-08",
@@ -12254,12 +12311,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-dd7d87d75ce506c7",
-      "task_key": "Step timeline!396"
+      "task_key": "Step timeline!397"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 397,
+      "row": 398,
       "source_id": "SC06",
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): Explainable AI for Early Dementia Detection and Deployment (Dong, Computer Science)",
       "action": "Submit by midday 2026-12-08",
@@ -12273,12 +12330,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-e9fe1725a8b6e837",
-      "task_key": "Step timeline!397"
+      "task_key": "Step timeline!398"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 398,
+      "row": 399,
       "source_id": "SC02",
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): R2T2-Med: Resource-Aware AI for Scalable and Deployable Medical Image Analysis (Zhang, Computer Science)",
       "action": "Submit by midday 2026-12-08",
@@ -12292,12 +12349,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-88bedee899c2974f",
-      "task_key": "Step timeline!398"
+      "task_key": "Step timeline!399"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 399,
+      "row": 400,
       "source_id": "SC07",
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): Sovereign Agentic AI: Distilling Small Language Model Agents for Local Deployment (Wang and Huang, Computer Science)",
       "action": "Submit by midday 2026-12-08",
@@ -12311,12 +12368,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-60b86c3b8992c937",
-      "task_key": "Step timeline!399"
+      "task_key": "Step timeline!400"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 400,
+      "row": 401,
       "source_id": "SC03",
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6014): Multiscale Scientific Machine Learning Digital Twins for High-Torque Electric Propulsion under Extreme Duty Cycles (Engineering)",
       "action": "Submit by midday 2026-12-08",
@@ -12330,12 +12387,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-cf39cf58e6292e1b",
-      "task_key": "Step timeline!400"
+      "task_key": "Step timeline!401"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 401,
+      "row": 402,
       "source_id": "SC04",
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6015): Physics-Informed AI and Experimental Modelling of Ocean Mixing (Messias, Geography)",
       "action": "Submit by midday 2026-12-08",
@@ -12349,12 +12406,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-68c23bad6d670c84",
-      "task_key": "Step timeline!401"
+      "task_key": "Step timeline!402"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 402,
+      "row": 403,
       "source_id": "M36-6014",
       "name": "Exeter EPSRC DLA studentships, Department of Engineering, Sept 2027 entry (ref 6014): Physics-Aware Graph Neural Networks for Robust Short-Term Visibility Forecasting (supervisor surname Zhou per PDF name)",
       "action": "Submit by midday 2026-12-08; incomplete applications will not be shortlisted",
@@ -12368,12 +12425,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-34de4fc928644ab2",
-      "task_key": "Step timeline!402"
+      "task_key": "Step timeline!403"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 403,
+      "row": 404,
       "source_id": "M36-6019",
       "name": "Exeter EPSRC DLA studentships, Mathematics and Statistics, Sept 2027 entry (ref 6019): Uncertainty quantification for healthcare models: a route to precision medicine (Salter per PDF name)",
       "action": "Submit by midday 2026-12-08",
@@ -12387,12 +12444,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-cccae714614b99e2",
-      "task_key": "Step timeline!403"
+      "task_key": "Step timeline!404"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 404,
+      "row": 405,
       "source_id": "M39",
       "name": "University of Alberta, Computing Science PhD, Fall 2027 (Amii)",
       "action": "Submit the GPS application and pay CAD 135 by 2026-12-08 (deadline 2026-12-15)",
@@ -12406,12 +12463,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-2c9abc23d6aae0cf",
-      "task_key": "Step timeline!404"
+      "task_key": "Step timeline!405"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 405,
+      "row": 406,
       "source_id": "N264-10",
       "name": "Max Planck School Biomedical AI PhD 2027",
       "action": "Confirm two academic referees have uploaded recommendations; school process states 10 Dec deadline",
@@ -12425,12 +12482,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-34b9b109ca5195f5",
-      "task_key": "Step timeline!405"
+      "task_key": "Step timeline!406"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 406,
+      "row": 407,
       "source_id": "M49",
       "name": "SFU Engineering Science PhD (Fall 2027)",
       "action": "By 2026-12-10 request references: enter three referee emails in the online application so the system emails them (allow at least 2 weeks)",
@@ -12444,12 +12501,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-085d9f92b6e6b9da",
-      "task_key": "Step timeline!406"
+      "task_key": "Step timeline!407"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 407,
+      "row": 408,
       "source_id": "M42",
       "name": "UEA / ARIES NERC DTP studentships (entry 1 Oct 2027)",
       "action": "By 2026-12-10 apply to the University of Registration for each project via the portal linked at the bottom of each studentship advert",
@@ -12463,12 +12520,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-56001187a0e211ea",
-      "task_key": "Step timeline!407"
+      "task_key": "Step timeline!408"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 408,
+      "row": 409,
       "source_id": "M38",
       "name": "University of Edinburgh EPSRC Centre for Doctoral Training in Machine Learning Systems (PhD, Round 1)",
       "action": "Submit the online first-stage form by 2026-12-10 (hard deadline 2026-12-14 23:59)",
@@ -12482,12 +12539,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-a470ac1a9ecee82a",
-      "task_key": "Step timeline!408"
+      "task_key": "Step timeline!409"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 409,
+      "row": 410,
       "source_id": "M44",
       "name": "University of Surrey fully funded PhD: predictability in Romance verbal inflection (Linguistics)",
       "action": "By 2026-12-10 email supervisor Sacha Beniamine (s.beniamine@surrey.ac.uk) before applying",
@@ -12501,12 +12558,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-1b6a55681c3eb67b",
-      "task_key": "Step timeline!409"
+      "task_key": "Step timeline!410"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 410,
+      "row": 411,
       "source_id": "M45",
       "name": "University of Toronto MIE, CLIMB Lab (Pakpong Chirarattananon), PhD September 2027",
       "action": "By 2026-12-10 create the SGS applicant profile, choose Mechanical and Industrial Engineering PhD, and name Pakpong Chirarattananon as intended supervisor",
@@ -12520,12 +12577,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-0578889c09bc7f2a",
-      "task_key": "Step timeline!410"
+      "task_key": "Step timeline!411"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 411,
+      "row": 412,
       "source_id": "M43b",
       "name": "University of Sydney Faculty of Engineering Research Scholarship for MENA",
       "action": "By 2026-12-11 submit PhD admission application in the Faculty of Engineering (needs unconditional offer for award)",
@@ -12539,12 +12596,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-56fb75c8161198c2",
-      "task_key": "Step timeline!411"
+      "task_key": "Step timeline!412"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 412,
+      "row": 413,
       "source_id": "M43a",
       "name": "University of Sydney Research Training Program (RTP) international stipend + fee offset, 2027 commencement",
       "action": "By 2026-12-11 apply for admission and upload all documents via Sydney Courses",
@@ -12558,12 +12615,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-d8cb2c341d68567a",
-      "task_key": "Step timeline!412"
+      "task_key": "Step timeline!413"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 413,
+      "row": 414,
       "source_id": "M53",
       "name": "Bristol PhD studentship, learning and decision making under uncertainty in public health (Mengyan Zhang)",
       "action": "By 2026-12-15 prepare CV, 1-2 page personal statement, transcripts and optional research proposal",
@@ -12577,12 +12634,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-c6f7ca5d4925c3b2",
-      "task_key": "Step timeline!413"
+      "task_key": "Step timeline!414"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 414,
+      "row": 415,
       "source_id": "M55a",
       "name": "Concordia Mechanical, Industrial and Aerospace Engineering PhD (Fall 2027)",
       "action": "By 2026-12-15 identify and email Concordia MIAE faculty (SLAM, attitude estimation) to secure a supervisor (the earlier note required this; the page itself does not state it)",
@@ -12596,12 +12653,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-ff07c0ef037d33e3",
-      "task_key": "Step timeline!414"
+      "task_key": "Step timeline!415"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 415,
+      "row": 416,
       "source_id": "C10",
       "name": "EPFL EDRS (Robotics, Control and Intelligent Systems) doctoral programme",
       "action": "Now: read websites of participating EDRS laboratories and shortlist advisers; EPFL says to consult labs before applying",
@@ -12615,12 +12672,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-d589f5b46d9af611",
-      "task_key": "Step timeline!415"
+      "task_key": "Step timeline!416"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 416,
+      "row": 417,
       "source_id": "C10",
       "name": "EPFL EDRS (Robotics, Control and Intelligent Systems) doctoral programme",
       "action": "By mid Nov 2026: ask three recommenders to submit letters by 15 Dec 2026 at the latest",
@@ -12634,12 +12691,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-d20e11e70727213f",
-      "task_key": "Step timeline!416"
+      "task_key": "Step timeline!417"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 417,
+      "row": 418,
       "source_id": "C10",
       "name": "EPFL EDRS (Robotics, Control and Intelligent Systems) doctoral programme",
       "action": "Assemble passport copy, bachelor and master diplomas and grades, statement of purpose, CV",
@@ -12653,12 +12710,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-3f7de8738a5f2bf7",
-      "task_key": "Step timeline!417"
+      "task_key": "Step timeline!418"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 418,
+      "row": 419,
       "source_id": "C10",
       "name": "EPFL EDRS (Robotics, Control and Intelligent Systems) doctoral programme",
       "action": "Submit the EDRS application form and complete file by 15 Dec 2026",
@@ -12672,12 +12729,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-067cbfe52b021170",
-      "task_key": "Step timeline!418"
+      "task_key": "Step timeline!419"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 419,
+      "row": 420,
       "source_id": "C10",
       "name": "EPFL EDRS (Robotics, Control and Intelligent Systems) doctoral programme",
       "action": "About late Jan 2027: decision; if admitted, find a hiring thesis advisor within one year",
@@ -12691,12 +12748,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-bc3ddc1676d70bb3",
-      "task_key": "Step timeline!419"
+      "task_key": "Step timeline!420"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 420,
+      "row": 421,
       "source_id": "M52",
       "name": "Glasgow Graduate School scholarships (College of Science and Engineering, any supervisor)",
       "action": "By 2026-12-15 submit the Glasgow PhD programme application, selecting 'Univ of Glasgow Scholarship' as funding source",
@@ -12710,12 +12767,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-29f9f570e962929c",
-      "task_key": "Step timeline!420"
+      "task_key": "Step timeline!421"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 421,
+      "row": 422,
       "source_id": "M52",
       "name": "Glasgow Graduate School scholarships (College of Science and Engineering, any supervisor)",
       "action": "After submitting, register on the Scholarship Portal using your application number and student ID (a programme offer is not required)",
@@ -12729,12 +12786,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-1dbfb4e69d6586e6",
-      "task_key": "Step timeline!421"
+      "task_key": "Step timeline!422"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 422,
+      "row": 423,
       "source_id": "M47",
       "name": "Imperial College London President's PhD Scholarships 2027/28, round 2",
       "action": "By 2026-12-15 confirm with the relevant Admissions team that Iranian degree grades qualify (page tells international candidates to check)",
@@ -12748,12 +12805,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-41e726da20261efd",
-      "task_key": "Step timeline!422"
+      "task_key": "Step timeline!423"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 423,
+      "row": 424,
       "source_id": "M41",
       "name": "McGill University, Electrical and Computer Engineering PhD, Fall 2027",
       "action": "Upload transcripts, degree certificates and Area of Research and Applicant Profile Form; have IELTS sent electronically to McGill (code 0935); all by 2026-12-15",
@@ -12767,12 +12824,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-70882e9576bfef13",
-      "task_key": "Step timeline!423"
+      "task_key": "Step timeline!424"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 424,
+      "row": 425,
       "source_id": "M56",
       "name": "McMaster University, Computing and Software, PhD (Sept 2027 intake)",
       "action": "By 2026-12-15 create the applicant profile on applygrad.mcmaster.ca (SLATE) and enter the two referees' emails so the e-reference system contacts them",
@@ -12786,12 +12843,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-0fc746674f0b900b",
-      "task_key": "Step timeline!424"
+      "task_key": "Step timeline!425"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 425,
+      "row": 426,
       "source_id": "M50",
       "name": "SFU Computing Science PhD (Fall 2027)",
       "action": "By 2026-12-15 write the statement of purpose and gather all post-secondary transcripts as unofficial uploads",
@@ -12805,12 +12862,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-83ff613972d299ff",
-      "task_key": "Step timeline!425"
+      "task_key": "Step timeline!426"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 426,
+      "row": 427,
       "source_id": "M40",
       "name": "UBC Computer Science PhD, September 2027",
       "action": "Upload transcripts, degree certificates, Statement of Intent and enter English test registration number and date; pay fee and click Continue to submit by 2026-12-15",
@@ -12824,12 +12881,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-786b570344d7238f",
-      "task_key": "Step timeline!426"
+      "task_key": "Step timeline!427"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 427,
+      "row": 428,
       "source_id": "M48",
       "name": "University of British Columbia (Vancouver) PhD in Electrical and Computer Engineering, September 2027",
       "action": "By 2026-12-15 open the online application (open since 2026-10-15), list the faculty you want to work with and the three referees",
@@ -12843,12 +12900,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-7395be167fab4824",
-      "task_key": "Step timeline!427"
+      "task_key": "Step timeline!428"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 428,
+      "row": 429,
       "source_id": "SE12",
       "name": "University of Surrey (Vision, Speech and Signal Processing), Smart optical design: AI tools for cinematic camera lenses (Volino, Guillemaut), April 2027 start",
       "action": "2026-12-15: prepare Surrey VSSP PhD application with a document giving project title and supervisor instead of a proposal",
@@ -12862,12 +12919,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-ac15fe00bde2cf59",
-      "task_key": "Step timeline!428"
+      "task_key": "Step timeline!429"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 429,
+      "row": 430,
       "source_id": "M45",
       "name": "University of Toronto MIE, CLIMB Lab (Pakpong Chirarattananon), PhD September 2027",
       "action": "By 2026-12-15 line up two academic referees with institutional email addresses (at least one a previous thesis supervisor)",
@@ -12881,12 +12938,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-7ea59702f814050a",
-      "task_key": "Step timeline!429"
+      "task_key": "Step timeline!430"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 430,
+      "row": 431,
       "source_id": "M55b",
       "name": "Victoria University of Wellington, Wellington Doctoral Scholarship (round 2 per earlier sweep)",
       "action": "By 2026-12-15 order a Scholaro GPA report (small fee) and certified copies of transcripts and degree certificates",
@@ -12900,12 +12957,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-88f7cafb2e8fa849",
-      "task_key": "Step timeline!430"
+      "task_key": "Step timeline!431"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 431,
+      "row": 432,
       "source_id": "M42",
       "name": "UEA / ARIES NERC DTP studentships (entry 1 Oct 2027)",
       "action": "By 2026-12-16 23:59 upload cover letter, CV, scanned transcripts and degree certificates (official translations if not in English), and complete the ARIES EDI form requested by the University of Registration",
@@ -12919,12 +12976,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-d9f5426ee828105b",
-      "task_key": "Step timeline!431"
+      "task_key": "Step timeline!432"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 432,
+      "row": 433,
       "source_id": "M42",
       "name": "UEA / ARIES NERC DTP studentships (entry 1 Oct 2027)",
       "action": "If nominated by the supervisor: complete the ARIES-specific application form, then attend a ~35 minute online ARIES panel interview (February, exact date not printed for 2027)",
@@ -12938,12 +12995,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-68f7c52d15775455",
-      "task_key": "Step timeline!432"
+      "task_key": "Step timeline!433"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 433,
+      "row": 434,
       "source_id": "C11",
       "name": "University of Manchester President's Doctoral Scholar (PDS) Award",
       "action": "Email FSE.doctoralacademy.admissions@manchester.ac.uk or pds@manchester.ac.uk and ask for the 2027 PDS deadline and whether international fees are covered",
@@ -12957,12 +13014,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-436d0282c2e1337b",
-      "task_key": "Step timeline!433"
+      "task_key": "Step timeline!434"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 434,
+      "row": 435,
       "source_id": "C11",
       "name": "University of Manchester President's Doctoral Scholar (PDS) Award",
       "action": "Find a Manchester supervisor and the PhD programme and submit the PhD application by the published deadline (required to be considered)",
@@ -12976,12 +13033,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-634d65025ec218ac",
-      "task_key": "Step timeline!434"
+      "task_key": "Step timeline!435"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 435,
+      "row": 436,
       "source_id": "C11",
       "name": "University of Manchester President's Doctoral Scholar (PDS) Award",
       "action": "Prepare evidence of research experience and broader activity (outreach, volunteering) as the scheme assesses both",
@@ -12995,12 +13052,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-2b92a6edff37d4a6",
-      "task_key": "Step timeline!435"
+      "task_key": "Step timeline!436"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 436,
+      "row": 437,
       "source_id": "R26-MAN-PDS-CONSTELLATIONS",
       "name": "University of Manchester — PDS Safe and Multi-Fidelity Optimisation of Satellite Constellations for a Changing Planet",
       "action": "Write proposal focused on uncertainty-aware multi-fidelity optimisation and safe constellation reconfiguration; contact supervisors [External deadline: final]",
@@ -13014,12 +13071,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-f6cabc76ffcdfebe",
-      "task_key": "Step timeline!436"
+      "task_key": "Step timeline!437"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 437,
+      "row": 438,
       "source_id": "M06",
       "name": "University of Melbourne MDHS graduate research (PhD), Round 1, 2027 intake",
       "action": "2026-12-18: outcomes",
@@ -13033,12 +13090,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-fa5548947eaa7ad4",
-      "task_key": "Step timeline!437"
+      "task_key": "Step timeline!438"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 438,
+      "row": 439,
       "source_id": "M46",
       "name": "University of Oxford Intelligent Earth CDT (AI for the environment), September 2027 entry",
       "action": "By 2026-12-18 submit the online graduate application with programme code R30_1 (full-time) or R30_9P1 (part-time), not the studentship code, with statement of purpose and supporting documents",
@@ -13052,12 +13109,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-f4aaf8fd5df774e6",
-      "task_key": "Step timeline!438"
+      "task_key": "Step timeline!439"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 439,
+      "row": 440,
       "source_id": "M43b",
       "name": "University of Sydney Faculty of Engineering Research Scholarship for MENA",
       "action": "Note: awardees must withdraw University of Sydney RTP applications, so decide between M43a and M43b after the faculty reply and before 2026-12-18",
@@ -13071,12 +13128,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-2a6f8c6def6a0dad",
-      "task_key": "Step timeline!439"
+      "task_key": "Step timeline!440"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 440,
+      "row": 441,
       "source_id": "M43a",
       "name": "University of Sydney Research Training Program (RTP) international stipend + fee offset, 2027 commencement",
       "action": "By 2026-12-18 submit the scholarship application form (Submit RTP form) together with the research experience evidence template and appendix",
@@ -13090,12 +13147,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-331f06491a7a788c",
-      "task_key": "Step timeline!440"
+      "task_key": "Step timeline!441"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 441,
+      "row": 442,
       "source_id": "M43a",
       "name": "University of Sydney Research Training Program (RTP) international stipend + fee offset, 2027 commencement",
       "action": "Read the HDR scholarship selection process PDF and fill the Research experience evidence template before submitting",
@@ -13109,12 +13166,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-092530ab4e74cb61",
-      "task_key": "Step timeline!441"
+      "task_key": "Step timeline!442"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 442,
+      "row": 443,
       "source_id": "SE01",
       "name": "King's College London, PhD in Human-Robot Interaction (CO-STAR, Dr Oya Celiktutan, SAIR lab), Oct 2027 entry",
       "action": "2026-12-20: confirm ATAS position with pgr-engineering@kcl.ac.uk",
@@ -13128,12 +13185,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-504692e26b6e0077",
-      "task_key": "Step timeline!442"
+      "task_key": "Step timeline!443"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 443,
+      "row": 444,
       "source_id": "M49",
       "name": "SFU Engineering Science PhD (Fall 2027)",
       "action": "By 2026-12-20 prepare statement of interest, CV and unofficial transcripts (in English or French, or with official translation)",
@@ -13147,12 +13204,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-886a72f4d36d348e",
-      "task_key": "Step timeline!443"
+      "task_key": "Step timeline!444"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 444,
+      "row": 445,
       "source_id": "M44",
       "name": "University of Surrey fully funded PhD: predictability in Romance verbal inflection (Linguistics)",
       "action": "By 2026-12-20 submit the application through the Linguistics PhD programme page, following the earlier studentship deadline rather than the 17 Jan 2027 April-intake date",
@@ -13166,12 +13223,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-80ef2583e7eaea2c",
-      "task_key": "Step timeline!444"
+      "task_key": "Step timeline!445"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 445,
+      "row": 446,
       "source_id": "M54",
       "name": "Waterloo ECE PhD, Stephen L. Smith (Autonomous Systems Lab)",
       "action": "By 2026-12-20 write the Supplementary Information Form and a statement naming Stephen L. Smith as potential supervisor and the lab research areas that interest you",
@@ -13185,12 +13242,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-9a994f6e71ee9d3a",
-      "task_key": "Step timeline!445"
+      "task_key": "Step timeline!446"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 446,
+      "row": 447,
       "source_id": "M00",
       "name": "Hokkaido University e3 MEXT University Recommendation, doctoral, Oct 2027 entry (4 doctoral places)",
       "action": "If shortlisted: online interview with prospective supervisor; first screening results 2026-12-24",
@@ -13204,12 +13261,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-8da53c5e5ed32565",
-      "task_key": "Step timeline!446"
+      "task_key": "Step timeline!447"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 447,
+      "row": 448,
       "source_id": "M45",
       "name": "University of Toronto MIE, CLIMB Lab (Pakpong Chirarattananon), PhD September 2027",
       "action": "By 2027-01-01 pay the non-refundable application fee",
@@ -13223,12 +13280,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-2e5d5111031be1f5",
-      "task_key": "Step timeline!447"
+      "task_key": "Step timeline!448"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 448,
+      "row": 449,
       "source_id": "M47",
       "name": "Imperial College London President's PhD Scholarships 2027/28, round 2",
       "action": "By 2027-01-04 name two academic referees (not the proposed supervisor)",
@@ -13242,12 +13299,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-d790a87edefffcb6",
-      "task_key": "Step timeline!448"
+      "task_key": "Step timeline!449"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 449,
+      "row": 450,
       "source_id": "C15-TOYOHASHI",
       "name": "Toyohashi University of Technology International Doctoral Degree Program with MEXT (university recommendation)",
       "action": "Now: contact a prospective TUT supervisor (page asks for this before applying) and ask for a Letter of Acceptance",
@@ -13261,12 +13318,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-0130a629c6f9604c",
-      "task_key": "Step timeline!449"
+      "task_key": "Step timeline!450"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 450,
+      "row": 451,
       "source_id": "C15-TOYOHASHI",
       "name": "Toyohashi University of Technology International Doctoral Degree Program with MEXT (university recommendation)",
       "action": "Check the TUT page again in early December 2026 and April 2027 for the 2027 MEXT university recommendation guidelines",
@@ -13280,12 +13337,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-9cddf9df571651bd",
-      "task_key": "Step timeline!450"
+      "task_key": "Step timeline!451"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 451,
+      "row": 452,
       "source_id": "C15-TOYOHASHI",
       "name": "Toyohashi University of Technology International Doctoral Degree Program with MEXT (university recommendation)",
       "action": "When published: submit application form, detailed research plan and recommendation letter for admission, plus the MEXT file by the stated email deadline",
@@ -13299,12 +13356,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-f58638a55104cf67",
-      "task_key": "Step timeline!451"
+      "task_key": "Step timeline!452"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 452,
+      "row": 453,
       "source_id": "M46",
       "name": "University of Oxford Intelligent Earth CDT (AI for the environment), September 2027 entry",
       "action": "Submit no later than 2027-01-06 12:00 UK time; earlier submission advised as the earlier sweep suggested two weeks early",
@@ -13318,12 +13375,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-a33411d9512969d9",
-      "task_key": "Step timeline!452"
+      "task_key": "Step timeline!453"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 453,
+      "row": 454,
       "source_id": "M46",
       "name": "University of Oxford Intelligent Earth CDT (AI for the environment), September 2027 entry",
       "action": "If invited, attend virtual interview late February 2027",
@@ -13337,12 +13394,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-549b36c9122dccdc",
-      "task_key": "Step timeline!453"
+      "task_key": "Step timeline!454"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 454,
+      "row": 455,
       "source_id": "M00",
       "name": "Hokkaido University e3 MEXT University Recommendation, doctoral, Oct 2027 entry (4 doctoral places)",
       "action": "2027-01-07 to 2027-01-14: keep free for second screening interview with MEXT committee",
@@ -13356,12 +13413,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-3c6fa2b81cb86df4",
-      "task_key": "Step timeline!454"
+      "task_key": "Step timeline!455"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 455,
+      "row": 456,
       "source_id": "M00",
       "name": "Hokkaido University e3 MEXT University Recommendation, doctoral, Oct 2027 entry (4 doctoral places)",
       "action": "By early 2027-01: additional documents (MEXT application form, MEXT-format research proposal, handwritten pledge, official ranking certificate, Dean's letter addressed to President of Hokkaido University)",
@@ -13375,12 +13432,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-340c3f12e98ad407",
-      "task_key": "Step timeline!455"
+      "task_key": "Step timeline!456"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 456,
+      "row": 457,
       "source_id": "M38",
       "name": "University of Edinburgh EPSRC Centre for Doctoral Training in Machine Learning Systems (PhD, Round 1)",
       "action": "Stage 1 outcomes by 2027-01-07; if invited, prepare Research Proposal and submit the EUCLID full application by 2027-01-21",
@@ -13394,12 +13451,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-4d25650eebc0fc78",
-      "task_key": "Step timeline!456"
+      "task_key": "Step timeline!457"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 457,
+      "row": 458,
       "source_id": "M38",
       "name": "University of Edinburgh EPSRC Centre for Doctoral Training in Machine Learning Systems (PhD, Round 1)",
       "action": "English scores can follow by the offer stage (end of February 2027)",
@@ -13413,12 +13470,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-fda51537f5f6e9a5",
-      "task_key": "Step timeline!457"
+      "task_key": "Step timeline!458"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 458,
+      "row": 459,
       "source_id": "SE01",
       "name": "King's College London, PhD in Human-Robot Interaction (CO-STAR, Dr Oya Celiktutan, SAIR lab), Oct 2027 entry",
       "action": "2027-01-08: submit on King's Apply, select funding option 5 and enter code 1213, name Dr Celiktutan as supervisor",
@@ -13432,12 +13489,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-dab0457387e77eb4",
-      "task_key": "Step timeline!458"
+      "task_key": "Step timeline!459"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 459,
+      "row": 460,
       "source_id": "M49",
       "name": "SFU Engineering Science PhD (Fall 2027)",
       "action": "By 2027-01-08 submit the online application (3 days of slack before 2027-01-15)",
@@ -13451,12 +13508,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-8f67fd4076e5d684",
-      "task_key": "Step timeline!459"
+      "task_key": "Step timeline!460"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 460,
+      "row": 461,
       "source_id": "M49",
       "name": "SFU Engineering Science PhD (Fall 2027)",
       "action": "After an offer only: send official transcripts directly from each institution to SFU",
@@ -13470,12 +13527,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-5fec31f936457f57",
-      "task_key": "Step timeline!460"
+      "task_key": "Step timeline!461"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 461,
+      "row": 462,
       "source_id": "M03",
       "name": "UEC Tokyo (Graduate School of Informatics and Engineering) MEXT University Recommendation (Special Frame), Fall 2027 doctoral",
       "action": "By 2027-01-08: supervisor sends full set to the International Student Office (ISO)",
@@ -13489,12 +13546,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-2f07e54d355f355e",
-      "task_key": "Step timeline!461"
+      "task_key": "Step timeline!462"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 462,
+      "row": 463,
       "source_id": "M03",
       "name": "UEC Tokyo (Graduate School of Informatics and Engineering) MEXT University Recommendation (Special Frame), Fall 2027 doctoral",
       "action": "Feb 2027 university selection; Mar-Jun 2027 MEXT selection; late Jun-early Jul acceptance notice",
@@ -13508,12 +13565,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-7dd4508e14ea97ec",
-      "task_key": "Step timeline!462"
+      "task_key": "Step timeline!463"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 463,
+      "row": 464,
       "source_id": "SE12",
       "name": "University of Surrey (Vision, Speech and Signal Processing), Smart optical design: AI tools for cinematic camera lenses (Volino, Guillemaut), April 2027 start",
       "action": "2027-01-10: submit application ahead of 2027-01-17",
@@ -13527,12 +13584,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-f7a0945d737922d6",
-      "task_key": "Step timeline!463"
+      "task_key": "Step timeline!464"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 464,
+      "row": 465,
       "source_id": "M47",
       "name": "Imperial College London President's PhD Scholarships 2027/28, round 2",
       "action": "By 2027-01-11 23:59 UK submit the Imperial online PhD application, select the President's PhD Scholarship option in the funding section of the additional questions tab, and upload the two-page statement (page 1 personal statement, page 2 research proposal)",
@@ -13546,12 +13603,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-da419e6ef4456d88",
-      "task_key": "Step timeline!464"
+      "task_key": "Step timeline!465"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 465,
+      "row": 466,
       "source_id": "M47",
       "name": "Imperial College London President's PhD Scholarships 2027/28, round 2",
       "action": "Also contact the department to say you want to be considered; round 3 (1 March 2027) is the fallback",
@@ -13565,12 +13622,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-f82b425649a2b350",
-      "task_key": "Step timeline!465"
+      "task_key": "Step timeline!466"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 466,
+      "row": 467,
       "source_id": "M50",
       "name": "SFU Computing Science PhD (Fall 2027)",
       "action": "By 2027-01-12 submit the online application with form, transcripts, CV, statement of purpose, three letters and IELTS result",
@@ -13584,12 +13641,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-c7c2f3d1bbb0578f",
-      "task_key": "Step timeline!466"
+      "task_key": "Step timeline!467"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 467,
+      "row": 468,
       "source_id": "M50",
       "name": "SFU Computing Science PhD (Fall 2027)",
       "action": "After an offer only: provide official transcripts",
@@ -13603,12 +13660,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-1679806148e02b97",
-      "task_key": "Step timeline!467"
+      "task_key": "Step timeline!468"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 468,
+      "row": 469,
       "source_id": "M53",
       "name": "Bristol PhD studentship, learning and decision making under uncertainty in public health (Mengyan Zhang)",
       "action": "By 2027-01-15 email mengyan.zhang@bristol.ac.uk with subject 'PhD Application + Your name' attaching the materials",
@@ -13622,12 +13679,31 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-f1592718777c127d",
-      "task_key": "Step timeline!468"
+      "task_key": "Step timeline!469"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 469,
+      "row": 470,
+      "source_id": "R26-ETH-IDEAL-ENGINEERING-AI",
+      "name": "ETH Zurich IDEAL Lab — Doctoral Positions in Machine Learning for Engineering Design (Mark Fuge)",
+      "action": "Apply by 15 Jan for best consideration, without treating this as a strict final closing date. Describe ML-driven robot design, adaptive systems, optimization and research record. [External deadline: Priority/best-consideration date 15 Jan 2027; not independently established as final closure]",
+      "due": "2027-01-15",
+      "days": 67,
+      "final_deadline": "2027-01-15",
+      "verdict": "Go",
+      "source": "https://www.jobs.ethz.ch/job/view/JOPG_ethz_AUmT7tc75KfdQZK3sA",
+      "notes": "2027-01-15 00:00:00",
+      "state": "completion_unconfirmed",
+      "blocked": false,
+      "group": "",
+      "task_id": "tsk-a452b7e0c3ccaabf",
+      "task_key": "Step timeline!470"
+    },
+    {
+      "type": "timeline_step",
+      "sheet": "Step timeline",
+      "row": 471,
       "source_id": "M39",
       "name": "University of Alberta, Computing Science PhD, Fall 2027 (Amii)",
       "action": "Provide three reference contacts; letters are requested only after submission and payment; upload documents by 2027-01-15",
@@ -13641,12 +13717,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-7e3f26ea90559bee",
-      "task_key": "Step timeline!469"
+      "task_key": "Step timeline!471"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 470,
+      "row": 472,
       "source_id": "N264-13",
       "name": "University of Amsterdam EVELYN AI for Science PhDs",
       "action": "Submit Position 1 multimodal retrieval/efficient foundation-model adaptation application, 1-page SOP and writing sample",
@@ -13660,12 +13736,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-d30c9e773e3d6411",
-      "task_key": "Step timeline!470"
+      "task_key": "Step timeline!472"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 471,
+      "row": 473,
       "source_id": "M48",
       "name": "University of British Columbia (Vancouver) PhD in Electrical and Computer Engineering, September 2027",
       "action": "By 2027-01-15 submit the online application (cannot be changed after submission), including statement of interest if the program asks for one",
@@ -13679,12 +13755,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-639f4193c6e6fd99",
-      "task_key": "Step timeline!471"
+      "task_key": "Step timeline!473"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 472,
+      "row": 474,
       "source_id": "M45",
       "name": "University of Toronto MIE, CLIMB Lab (Pakpong Chirarattananon), PhD September 2027",
       "action": "By 2027-01-15 upload transcripts as PDFs with grading scale, CV, 650-1,000 word letter of intent, up to three fields of study, and ELP results (sent electronically by the test body)",
@@ -13698,12 +13774,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-8512f12fa6b2d4ad",
-      "task_key": "Step timeline!472"
+      "task_key": "Step timeline!474"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 473,
+      "row": 475,
       "source_id": "SF01",
       "name": "University of Toronto UTIAS (Aerospace Studies) PhD, Fall 2027, guaranteed funding, supervisor required (space robotics, SLAM, navigation labs)",
       "action": "By 15 Nov 2026: shortlist 3-5 UTIAS faculty (STARS/space robotics, navigation, estimation) and email each with CV, paper links and research fit",
@@ -13717,12 +13793,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-9b37ab64b539e71f",
-      "task_key": "Step timeline!473"
+      "task_key": "Step timeline!475"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 474,
+      "row": 476,
       "source_id": "SF01",
       "name": "University of Toronto UTIAS (Aerospace Studies) PhD, Fall 2027, guaranteed funding, supervisor required (space robotics, SLAM, navigation labs)",
       "action": "By 15 Dec 2026: confirm English test requirement at uofteng.ca/UTIAS-admissions and order transcripts",
@@ -13736,12 +13812,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-c81d43ad172d62ae",
-      "task_key": "Step timeline!474"
+      "task_key": "Step timeline!476"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 475,
+      "row": 477,
       "source_id": "SF01",
       "name": "University of Toronto UTIAS (Aerospace Studies) PhD, Fall 2027, guaranteed funding, supervisor required (space robotics, SLAM, navigation labs)",
       "action": "By 15 Jan 2027: submit UTIAS application plus SGS application",
@@ -13755,12 +13831,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-004c1fa1fcf052e7",
-      "task_key": "Step timeline!475"
+      "task_key": "Step timeline!477"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 476,
+      "row": 478,
       "source_id": "SF01",
       "name": "University of Toronto UTIAS (Aerospace Studies) PhD, Fall 2027, guaranteed funding, supervisor required (space robotics, SLAM, navigation labs)",
       "action": "Feb-Mar 2027: respond to interview requests and funding offer",
@@ -13774,12 +13850,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-fb9cddafc3dd16cb",
-      "task_key": "Step timeline!476"
+      "task_key": "Step timeline!478"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 477,
+      "row": 479,
       "source_id": "M54",
       "name": "Waterloo ECE PhD, Stephen L. Smith (Autonomous Systems Lab)",
       "action": "Submit the full ECE application, with $100 CAD fee, by the confirmed deadline (assume 2027-01-15 until confirmed)",
@@ -13793,12 +13869,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-847e2485dbf35abf",
-      "task_key": "Step timeline!477"
+      "task_key": "Step timeline!479"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 478,
+      "row": 480,
       "source_id": "M54",
       "name": "Waterloo ECE PhD, Stephen L. Smith (Autonomous Systems Lab)",
       "action": "After the deadline: shortlisted candidates are interviewed by Smith about positions and funding",
@@ -13812,12 +13888,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-495a61adb0fa0d1e",
-      "task_key": "Step timeline!478"
+      "task_key": "Step timeline!480"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 479,
+      "row": 481,
       "source_id": "M15",
       "name": "OIST Graduate School PhD, May or Sep 2027 entry (Admissions Workshop 2027)",
       "action": "If shortlisted, attend the online Admissions Workshop 2027-01-18 to 2027-02-07",
@@ -13831,12 +13907,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-c9505307d8d06aa8",
-      "task_key": "Step timeline!479"
+      "task_key": "Step timeline!481"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 480,
+      "row": 482,
       "source_id": "C15-NAIST",
       "name": "NAIST doctoral course (Information Science), 2027 admission, with MEXT IPGP scholarship",
       "action": "Now to 13 Nov 2026: if targeting MEXT IPGP, obtain a Letter of Acceptance from one NAIST professor and email all MEXT documents to that professor with a copy to naist-ipgp (printed as naist-ipgp[at]is.naist.jp)",
@@ -13850,12 +13926,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-a41675b683b49e28",
-      "task_key": "Step timeline!480"
+      "task_key": "Step timeline!482"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 481,
+      "row": 483,
       "source_id": "C15-NAIST",
       "name": "NAIST doctoral course (Information Science), 2027 admission, with MEXT IPGP scholarship",
       "action": "By about 18 Dec 2026: complete the non-Japanese pre-application procedure via admission-support@ad.naist.jp",
@@ -13869,12 +13945,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-b8db57f94abe6757",
-      "task_key": "Step timeline!481"
+      "task_key": "Step timeline!483"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 482,
+      "row": 484,
       "source_id": "C15-NAIST",
       "name": "NAIST doctoral course (Information Science), 2027 admission, with MEXT IPGP scholarship",
       "action": "18 to 20 Jan 2027: register for the doctoral entrance examination and submit research overview (max 5 A4), research plan (max 2 A4), master's and bachelor's transcripts, degree certificate, passport page and English test",
@@ -13888,12 +13964,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-4315dd35a4fbf6ff",
-      "task_key": "Step timeline!482"
+      "task_key": "Step timeline!484"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 483,
+      "row": 485,
       "source_id": "C15-NAIST",
       "name": "NAIST doctoral course (Information Science), 2027 admission, with MEXT IPGP scholarship",
       "action": "By 12 Feb 2027: submit English score; 15 to 16 Feb 2027: online exam; 19 Feb 2027: results",
@@ -13907,12 +13983,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-2063430f436ba381",
-      "task_key": "Step timeline!483"
+      "task_key": "Step timeline!485"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 484,
+      "row": 486,
       "source_id": "SF02",
       "name": "University of Tokyo Graduate School of Frontier Sciences (GSFS) fall 2027 regular degree with MEXT University Recommendation (General) - scholarship may not continue",
       "action": "Check page again late Dec 2026 for scholarship confirmation",
@@ -13926,12 +14002,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-b0a8ee6de3e6cb3c",
-      "task_key": "Step timeline!484"
+      "task_key": "Step timeline!486"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 485,
+      "row": 487,
       "source_id": "SF02",
       "name": "University of Tokyo Graduate School of Frontier Sciences (GSFS) fall 2027 regular degree with MEXT University Recommendation (General) - scholarship may not continue",
       "action": "Email ilo@edu.k.u-tokyo.ac.jp to ask whether the track continues and whether applicants without prior GSFS exchange/internship qualify",
@@ -13945,12 +14021,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-bc0486eaeb5694cb",
-      "task_key": "Step timeline!485"
+      "task_key": "Step timeline!487"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 486,
+      "row": 488,
       "source_id": "M53",
       "name": "Bristol PhD studentship, learning and decision making under uncertainty in public health (Mengyan Zhang)",
       "action": "By 2027-01-24 submit the online Bristol application at bris.ac.uk/pg-howtoapply, selecting the programme title on the Programme Choice page and entering the studentship details in the Funding and Research Details sections",
@@ -13964,12 +14040,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-b2fce59a52ad738b",
-      "task_key": "Step timeline!486"
+      "task_key": "Step timeline!488"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 487,
+      "row": 489,
       "source_id": "M52",
       "name": "Glasgow Graduate School scholarships (College of Science and Engineering, any supervisor)",
       "action": "By 2027-01-24 confirm on the College of Science and Engineering Graduate School page (https://www.gla.ac.uk/colleges/scienceengineering/graduateschool/) that the 2027 round and 31 Jan deadline apply",
@@ -13983,12 +14059,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-2a4533ad342cdb31",
-      "task_key": "Step timeline!487"
+      "task_key": "Step timeline!489"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 488,
+      "row": 490,
       "source_id": "M53",
       "name": "Bristol PhD studentship, learning and decision making under uncertainty in public health (Mengyan Zhang)",
       "action": "Submit all before 2027-01-31",
@@ -14002,12 +14078,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-003d5972f79bdf2e",
-      "task_key": "Step timeline!488"
+      "task_key": "Step timeline!490"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 489,
+      "row": 491,
       "source_id": "M55a",
       "name": "Concordia Mechanical, Industrial and Aerospace Engineering PhD (Fall 2027)",
       "action": "By 2027-01-31 review the program page 'four steps' and the English language proficiency page for exemptions and required scores",
@@ -14021,12 +14097,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-34d0b413f975269a",
-      "task_key": "Step timeline!489"
+      "task_key": "Step timeline!491"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 490,
+      "row": 492,
       "source_id": "M52",
       "name": "Glasgow Graduate School scholarships (College of Science and Engineering, any supervisor)",
       "action": "Submit the scholarship application before 2027-01-31",
@@ -14040,12 +14116,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-8bf1a9cb79b2bcd5",
-      "task_key": "Step timeline!490"
+      "task_key": "Step timeline!492"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 491,
+      "row": 493,
       "source_id": "M56",
       "name": "McMaster University, Computing and Software, PhD (Sept 2027 intake)",
       "action": "By 2027-01-31 upload transcripts, degree certificate, statement of interest, CV, IELTS report; pay the application fee",
@@ -14059,12 +14135,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-d8a9bfbd827b5b24",
-      "task_key": "Step timeline!491"
+      "task_key": "Step timeline!493"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 492,
+      "row": 494,
       "source_id": "M48",
       "name": "University of British Columbia (Vancouver) PhD in Electrical and Computer Engineering, September 2027",
       "action": "By 2027-01-31 upload scans of official transcripts through the applicant portal and make sure the three referees have submitted",
@@ -14078,12 +14154,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-724d9341fd640ad4",
-      "task_key": "Step timeline!492"
+      "task_key": "Step timeline!494"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 493,
+      "row": 495,
       "source_id": "M55b",
       "name": "Victoria University of Wellington, Wellington Doctoral Scholarship (round 2 per earlier sweep)",
       "action": "By 2027-02-01 nominate two referees in the system (request at least two weeks before the closing date)",
@@ -14097,12 +14173,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-860df3db60bc15b2",
-      "task_key": "Step timeline!493"
+      "task_key": "Step timeline!495"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 494,
+      "row": 496,
       "source_id": "M00",
       "name": "Hokkaido University e3 MEXT University Recommendation, doctoral, Oct 2027 entry (4 doctoral places)",
       "action": "Final result about 2027-02-05; then e3 Special Selection entrance exam application around Feb-Mar 2027",
@@ -14116,12 +14192,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-15396d11c4e8dfd0",
-      "task_key": "Step timeline!494"
+      "task_key": "Step timeline!496"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 495,
+      "row": 497,
       "source_id": "M55a",
       "name": "Concordia Mechanical, Industrial and Aerospace Engineering PhD (Fall 2027)",
       "action": "By 2027-02-15 request references and assemble transcripts and statements as the application portal specifies",
@@ -14135,12 +14211,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-8bf4702b0a81e755",
-      "task_key": "Step timeline!495"
+      "task_key": "Step timeline!497"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 496,
+      "row": 498,
       "source_id": "M56",
       "name": "McMaster University, Computing and Software, PhD (Sept 2027 intake)",
       "action": "By 2027-02-15 confirm both references were submitted; submit well before the 2027-02-28 deadline",
@@ -14154,12 +14230,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-e34c01a09babe59f",
-      "task_key": "Step timeline!496"
+      "task_key": "Step timeline!498"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 497,
+      "row": 499,
       "source_id": "M55b",
       "name": "Victoria University of Wellington, Wellington Doctoral Scholarship (round 2 per earlier sweep)",
       "action": "By 2027-02-15 finish the 2,000-word academic writing sample, upload English proficiency evidence and make the dashboard fully green",
@@ -14173,12 +14249,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-cb7619674a70ead7",
-      "task_key": "Step timeline!497"
+      "task_key": "Step timeline!499"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 498,
+      "row": 500,
       "source_id": "SH02",
       "name": "Monash Graduate Scholarship (stipend) plus Monash International Tuition Scholarship (fees), PhD, International Round 1 2027",
       "action": "Nov to Dec 2026: contact a Monash supervisor (Engineering, IT) and get agreement to supervise",
@@ -14192,12 +14268,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-263e7011cacbf88f",
-      "task_key": "Step timeline!498"
+      "task_key": "Step timeline!500"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 499,
+      "row": 501,
       "source_id": "SH02",
       "name": "Monash Graduate Scholarship (stipend) plus Monash International Tuition Scholarship (fees), PhD, International Round 1 2027",
       "action": "By 28 Feb 2027: submit course and scholarship application together in myApp; eligible applicants are automatically considered for all graduate research scholarships",
@@ -14211,12 +14287,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-e8ed719508af9756",
-      "task_key": "Step timeline!499"
+      "task_key": "Step timeline!501"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 500,
+      "row": 502,
       "source_id": "SH02",
       "name": "Monash Graduate Scholarship (stipend) plus Monash International Tuition Scholarship (fees), PhD, International Round 1 2027",
       "action": "Mar to Apr 2027: outcomes; Round 3 closes 31 Aug 2027 as fallback",
@@ -14230,12 +14306,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-aeaeb4db9726115b",
-      "task_key": "Step timeline!500"
+      "task_key": "Step timeline!502"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 501,
+      "row": 503,
       "source_id": "M55a",
       "name": "Concordia Mechanical, Industrial and Aerospace Engineering PhD (Fall 2027)",
       "action": "Submit the online application before 2027-03-01 (entrance awards are considered automatically)",
@@ -14249,12 +14325,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-3cc60dabed702aab",
-      "task_key": "Step timeline!501"
+      "task_key": "Step timeline!503"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 502,
+      "row": 504,
       "source_id": "M55b",
       "name": "Victoria University of Wellington, Wellington Doctoral Scholarship (round 2 per earlier sweep)",
       "action": "Submit before 2027-03-01 4:30 pm NZ time (or target the 2027-07-01 round if not ready)",
@@ -14268,12 +14344,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-5b5b30f0b1d94aca",
-      "task_key": "Step timeline!502"
+      "task_key": "Step timeline!504"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 503,
+      "row": 505,
       "source_id": "M18",
       "name": "Institute of Science Tokyo, International Graduate Program IGP(A) Fall 2027 with MEXT recommendation",
       "action": "Result 2027-03-03 15:00 JST",
@@ -14287,12 +14363,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-004fa00dafe36919",
-      "task_key": "Step timeline!503"
+      "task_key": "Step timeline!505"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 504,
+      "row": 506,
       "source_id": "M57",
       "name": "University of Wollongong, University Postgraduate Award (UPA), international PhD",
       "action": "By 2027-03-31 email graduate-research-school@uow.edu.au to ask whether UPA includes a tuition award for international students (page is silent on tuition)",
@@ -14306,12 +14382,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-2e98b3b0035c46e5",
-      "task_key": "Step timeline!504"
+      "task_key": "Step timeline!506"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 505,
+      "row": 507,
       "source_id": "M57",
       "name": "University of Wollongong, University Postgraduate Award (UPA), international PhD",
       "action": "No action possible for the 2027 round (closed)",
@@ -14325,12 +14401,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-7e86ec3bb702222c",
-      "task_key": "Step timeline!505"
+      "task_key": "Step timeline!507"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 506,
+      "row": 508,
       "source_id": "M57",
       "name": "University of Wollongong, University Postgraduate Award (UPA), international PhD",
       "action": "By 2027-05-23 apply for the PhD through UOW Apply Online and tick the scholarship; the UPA is allocated on merit with limited places",
@@ -14344,12 +14420,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-b8793da1f5a9d703",
-      "task_key": "Step timeline!506"
+      "task_key": "Step timeline!508"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 507,
+      "row": 509,
       "source_id": "C13-ANU",
       "name": "ANU Dr Jonghyuk Kim (Robotics and Autonomy, Research School of Engineering)",
       "action": "Email jonghyuk.kim@anu.edu.au with CV, transcript, two first-author paper links and a one-page proposal on observer design for inertial/visual SLAM",
@@ -14363,12 +14439,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-ff6c5c15d3c96a0c",
-      "task_key": "Step timeline!507"
+      "task_key": "Step timeline!509"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 508,
+      "row": 510,
       "source_id": "C13-ANU",
       "name": "ANU Dr Jonghyuk Kim (Robotics and Autonomy, Research School of Engineering)",
       "action": "Ask: is the ARC-DP project funded, are there stipend and tuition places for international students, and what is the next ANU HDR round",
@@ -14382,12 +14458,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-99e394ffb115a1fe",
-      "task_key": "Step timeline!508"
+      "task_key": "Step timeline!510"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 509,
+      "row": 511,
       "source_id": "C13-ANU",
       "name": "ANU Dr Jonghyuk Kim (Robotics and Autonomy, Research School of Engineering)",
       "action": "If funded route exists, apply to ANU HDR and the ANU international scholarship round as advised",
@@ -14401,12 +14477,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-d6ed81a8a8ba90a4",
-      "task_key": "Step timeline!509"
+      "task_key": "Step timeline!511"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 510,
+      "row": 512,
       "source_id": "SH13",
       "name": "ANU PhD Scholarship (stipend), international applicants, rolling",
       "action": "Contact an HDR convener or supervisor (Robotics, Engineering, Computing)",
@@ -14420,12 +14496,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-797182131ecabe32",
-      "task_key": "Step timeline!510"
+      "task_key": "Step timeline!512"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 511,
+      "row": 513,
       "source_id": "SH13",
       "name": "ANU PhD Scholarship (stipend), international applicants, rolling",
       "action": "Submit a complete PhD application with referee reports",
@@ -14439,12 +14515,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-3915e9bd4e49c38d",
-      "task_key": "Step timeline!511"
+      "task_key": "Step timeline!513"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 512,
+      "row": 514,
       "source_id": "SH13",
       "name": "ANU PhD Scholarship (stipend), international applicants, rolling",
       "action": "Confirm in writing that international tuition fees are waived",
@@ -14458,12 +14534,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-75fd455be2261d42",
-      "task_key": "Step timeline!512"
+      "task_key": "Step timeline!514"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 513,
+      "row": 515,
       "source_id": "C13-CSIRO",
       "name": "CSIRO Data61 Robotics: Deep SLAM funded PhD (Dr Peyman Moghadam)",
       "action": "Email peyman.moghadam@csiro.au with subject '[PhD Deep SLAM]' and one single PDF: CV, transcripts, one-page cover letter",
@@ -14477,12 +14553,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-fbf98e8abb5f9b22",
-      "task_key": "Step timeline!513"
+      "task_key": "Step timeline!515"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 514,
+      "row": 516,
       "source_id": "C13-CSIRO",
       "name": "CSIRO Data61 Robotics: Deep SLAM funded PhD (Dr Peyman Moghadam)",
       "action": "State in the email that you are an Iranian national resident in Turkey and ask whether CSIRO can host and fund you, and which university enrols the PhD",
@@ -14496,12 +14572,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-4d26e76ee0557b78",
-      "task_key": "Step timeline!514"
+      "task_key": "Step timeline!516"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 515,
+      "row": 517,
       "source_id": "C13-CSIRO",
       "name": "CSIRO Data61 Robotics: Deep SLAM funded PhD (Dr Peyman Moghadam)",
       "action": "Follow his instructions for the partner university application",
@@ -14515,12 +14591,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-1256039f73aadd88",
-      "task_key": "Step timeline!515"
+      "task_key": "Step timeline!517"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 516,
+      "row": 518,
       "source_id": "C13-CURTIN",
       "name": "Curtin University GNSS-SPAN, Prof. Ahmed El-Mowafy (fully funded PhD: RTP project; two LEO-PNT positions)",
       "action": "Email a.el-mowafy@curtin.edu.au with CV, transcripts, publications and a short proposal on LEO-PNT / inertial-aided positioning",
@@ -14534,12 +14610,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-d37ffde62eafdf29",
-      "task_key": "Step timeline!516"
+      "task_key": "Step timeline!518"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 517,
+      "row": 519,
       "source_id": "C13-CURTIN",
       "name": "Curtin University GNSS-SPAN, Prof. Ahmed El-Mowafy (fully funded PhD: RTP project; two LEO-PNT positions)",
       "action": "Ask: is the RTP project open to international applicants, the closing date, and any restriction for Iranian nationals",
@@ -14553,12 +14629,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-794a04bc61fc0f99",
-      "task_key": "Step timeline!517"
+      "task_key": "Step timeline!519"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 518,
+      "row": 520,
       "source_id": "C13-CURTIN",
       "name": "Curtin University GNSS-SPAN, Prof. Ahmed El-Mowafy (fully funded PhD: RTP project; two LEO-PNT positions)",
       "action": "Submit the Curtin HDR Expression of Interest form and a two-page research proposal, then apply online",
@@ -14572,12 +14648,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-e1282350a52cc79b",
-      "task_key": "Step timeline!518"
+      "task_key": "Step timeline!520"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 519,
+      "row": 521,
       "source_id": "C14-GRIFFITH",
       "name": "Griffith University PhD (international)",
       "action": "Email the Griffith Graduate Research School and ask whether applications from Iranian citizens are being accepted again",
@@ -14591,12 +14667,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-13898e10ee2c838e",
-      "task_key": "Step timeline!519"
+      "task_key": "Step timeline!521"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 520,
+      "row": 522,
       "source_id": "C14-GRIFFITH",
       "name": "Griffith University PhD (international)",
       "action": "If yes: choose HDR programme, find a supervisor, write a research proposal, apply online and nominate referees",
@@ -14610,12 +14686,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-2b29a9a414d4168c",
-      "task_key": "Step timeline!520"
+      "task_key": "Step timeline!522"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 521,
+      "row": 523,
       "source_id": "SF10",
       "name": "Hiroshima University MEXT University Recommendation, October 2027",
       "action": "Ask graduate school of advanced science and engineering about slots",
@@ -14629,12 +14705,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-517e366ae01369f3",
-      "task_key": "Step timeline!521"
+      "task_key": "Step timeline!523"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 522,
+      "row": 524,
       "source_id": "SH14",
       "name": "MEXT Japanese Government Scholarship, Embassy recommendation route, research student/doctoral, 2027",
       "action": "Ask the Japanese Embassy in Tehran or the Consulate responsible for Iranian nationals for the 2027 guidelines and the allowed place of application",
@@ -14648,12 +14724,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-0bff31109945b276",
-      "task_key": "Step timeline!522"
+      "task_key": "Step timeline!524"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 523,
+      "row": 525,
       "source_id": "SB04",
       "name": "Monash Engineering robotics PhD call (Kulic, Chao Chen, Arashpour, Abdi, Fang, Chung, Burke)",
       "action": "Contact a listed supervisor with CV and transcripts",
@@ -14667,12 +14743,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-ea4daf30b95df0f2",
-      "task_key": "Step timeline!523"
+      "task_key": "Step timeline!525"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 524,
+      "row": 526,
       "source_id": "SB01",
       "name": "Monash University, DistRobot: two fully funded PhD positions in Distributed AI and autonomous robotics (Goudarzi, Rezatofighi, Kulic, Pham)",
       "action": "Before 5 Nov 2026: read the position page and Monash graduate research application process",
@@ -14686,12 +14762,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-3d4e1cff6aa64113",
-      "task_key": "Step timeline!524"
+      "task_key": "Step timeline!526"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 525,
+      "row": 527,
       "source_id": "SB01",
       "name": "Monash University, DistRobot: two fully funded PhD positions in Distributed AI and autonomous robotics (Goudarzi, Rezatofighi, Kulic, Pham)",
       "action": "Before 10 Nov 2026: complete the online application form linked on the page",
@@ -14705,12 +14781,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-21e52b02da3dc7d9",
-      "task_key": "Step timeline!525"
+      "task_key": "Step timeline!527"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 526,
+      "row": 528,
       "source_id": "SB01",
       "name": "Monash University, DistRobot: two fully funded PhD positions in Distributed AI and autonomous robotics (Goudarzi, Rezatofighi, Kulic, Pham)",
       "action": "Same day: email mohammad.goudarzi@monash.edu with subject 'Prospective PhD Applicant - DistRobot - <Your Name>' attaching CV (with WAM or equivalent) and transcripts",
@@ -14724,12 +14800,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-0dede6a1e14ba5fe",
-      "task_key": "Step timeline!526"
+      "task_key": "Step timeline!528"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 527,
+      "row": 529,
       "source_id": "SB01",
       "name": "Monash University, DistRobot: two fully funded PhD positions in Distributed AI and autonomous robotics (Goudarzi, Rezatofighi, Kulic, Pham)",
       "action": "Await interview invitation if shortlisted",
@@ -14743,12 +14819,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-2eac09df0d82ab41",
-      "task_key": "Step timeline!527"
+      "task_key": "Step timeline!529"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 528,
+      "row": 530,
       "source_id": "M13",
       "name": "Osaka (University of Osaka, Engineering Science) Special Training Program for Robotics Engineers, MEXT, October 2027 enrollment (Doctoral course)",
       "action": "Osaka 2027 Robotics MEXT continuation and deadline remain UNPOSTED; check official guidelines, do not assume 14 Nov or any 2026 closing date.",
@@ -14762,12 +14838,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-cfc0ab536fe445b8",
-      "task_key": "Step timeline!528"
+      "task_key": "Step timeline!530"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 529,
+      "row": 531,
       "source_id": "SB10",
       "name": "Polytechnique Montreal MIST Lab (Beltrame, Pavlasek, Lajoie): funded PhD/MSc positions in autonomous systems and field robotics",
       "action": "Email a faculty contact with CV and transcripts",
@@ -14781,12 +14857,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-74ddbf7a95bec744",
-      "task_key": "Step timeline!529"
+      "task_key": "Step timeline!531"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 530,
+      "row": 532,
       "source_id": "C13-POLYMTL",
       "name": "Polytechnique Montréal Prof. Jérôme Le Ny and Prof. Bowen Yi (online estimation of nonlinear systems, robotic localization)",
       "action": "Email jerome.le-ny@polymtl.ca and bowen.yi@polymtl.ca one PDF: one-page cover letter, full CV, unofficial transcripts, one or two work samples (papers), names of two references",
@@ -14800,12 +14876,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-a9947f14e831e7da",
-      "task_key": "Step timeline!530"
+      "task_key": "Step timeline!532"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 531,
+      "row": 533,
       "source_id": "C13-POLYMTL",
       "name": "Polytechnique Montréal Prof. Jérôme Le Ny and Prof. Bowen Yi (online estimation of nonlinear systems, robotic localization)",
       "action": "Complete Polytechnique's Student-Professor Contact form and attach it to the email",
@@ -14819,12 +14895,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-0444c96ac67d4cfc",
-      "task_key": "Step timeline!531"
+      "task_key": "Step timeline!533"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 532,
+      "row": 534,
       "source_id": "C13-POLYMTL",
       "name": "Polytechnique Montréal Prof. Jérôme Le Ny and Prof. Bowen Yi (online estimation of nonlinear systems, robotic localization)",
       "action": "After a supervisor agrees, submit the official online application by the deadline (likely 1 Feb 2027 for Fall 2027; confirm)",
@@ -14838,12 +14914,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-7e78974ce7c06444",
-      "task_key": "Step timeline!532"
+      "task_key": "Step timeline!534"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 533,
+      "row": 535,
       "source_id": "C13-POLYMTL",
       "name": "Polytechnique Montréal Prof. Jérôme Le Ny and Prof. Bowen Yi (online estimation of nonlinear systems, robotic localization)",
       "action": "Provide an accepted English test result (IELTS Academic 6 minimum)",
@@ -14857,12 +14933,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-aba88594536a8daf",
-      "task_key": "Step timeline!533"
+      "task_key": "Step timeline!535"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 534,
+      "row": 536,
       "source_id": "SH11",
       "name": "Quebec Merit Scholarship Program for Foreign Students (PBEEE), doctoral stream, 2027-2028 cycle",
       "action": "Get admitted or in process at a Quebec university (McGill, Polytechnique Montreal, Universite de Montreal, ETS) and ask its graduate office for PBEEE preselection",
@@ -14876,12 +14952,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-0dd1cdf93c89082d",
-      "task_key": "Step timeline!534"
+      "task_key": "Step timeline!536"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 535,
+      "row": 537,
       "source_id": "SH11",
       "name": "Quebec Merit Scholarship Program for Foreign Students (PBEEE), doctoral stream, 2027-2028 cycle",
       "action": "Final file to FRQNT after preselection",
@@ -14895,12 +14971,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-31c550160919b232",
-      "task_key": "Step timeline!535"
+      "task_key": "Step timeline!537"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 536,
+      "row": 538,
       "source_id": "SF04",
       "name": "Tohoku Advanced Graduate School Next-Generation AI Expert Development (NEXT-AI, JST), JPY 260,000/month + JPY 780,000/year research funds",
       "action": "After admission: watch pgd.tohoku.ac.jp for the AY2027 call (likely Jan 2027 for April 2027 enrolees)",
@@ -14914,12 +14990,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-a83720a15fef4b14",
-      "task_key": "Step timeline!536"
+      "task_key": "Step timeline!538"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 537,
+      "row": 539,
       "source_id": "SF03",
       "name": "Tohoku University MEXT University Recommendation, October 2027 enrolment (special programmes only; Information Sciences NIFS and Engineering SDTM slots undecided)",
       "action": "Mid Nov 2026: identify Tohoku supervisor in Information Sciences and email field, target school, October 2027",
@@ -14933,12 +15009,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-a3adae7182e00055",
-      "task_key": "Step timeline!537"
+      "task_key": "Step timeline!539"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 538,
+      "row": 540,
       "source_id": "SF03",
       "name": "Tohoku University MEXT University Recommendation, October 2027 enrolment (special programmes only; Information Sciences NIFS and Engineering SDTM slots undecided)",
       "action": "Early Dec 2026: re-check page for slots and dates",
@@ -14952,12 +15028,12 @@
       "blocked": false,
       "group": "MEXT",
       "task_id": "tsk-dab68d7ef8b1b2b8",
-      "task_key": "Step timeline!538"
+      "task_key": "Step timeline!540"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 539,
+      "row": 541,
       "source_id": "C13-UNB",
       "name": "UNB Geodesy and Geomatics Engineering (Fredericton) PhD",
       "action": "Identify a GGE professor in navigation, inertial or SLAM and email a CV, transcript and proposal asking about a funded place (no supervisor named by the earlier sweep)",
@@ -14971,12 +15047,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-3214c4959b671237",
-      "task_key": "Step timeline!539"
+      "task_key": "Step timeline!541"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 540,
+      "row": 542,
       "source_id": "C13-UNB",
       "name": "UNB Geodesy and Geomatics Engineering (Fredericton) PhD",
       "action": "Complete the UNB online graduate application and upload program documents",
@@ -14990,12 +15066,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-583bde099c33f8f1",
-      "task_key": "Step timeline!540"
+      "task_key": "Step timeline!542"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 541,
+      "row": 543,
       "source_id": "C13-UNB",
       "name": "UNB Geodesy and Geomatics Engineering (Fredericton) PhD",
       "action": "Pay the application fee and arrange three electronic reference requests",
@@ -15009,12 +15085,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-3cc34b7866b2aa2d",
-      "task_key": "Step timeline!541"
+      "task_key": "Step timeline!543"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 542,
+      "row": 544,
       "source_id": "C13-UNB",
       "name": "UNB Geodesy and Geomatics Engineering (Fredericton) PhD",
       "action": "Submit official English test scores (IELTS band 7 or TOEFL 94)",
@@ -15028,12 +15104,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-3275cfb6aba3a2fb",
-      "task_key": "Step timeline!542"
+      "task_key": "Step timeline!544"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 543,
+      "row": 545,
       "source_id": "SH10",
       "name": "University of Edinburgh Edinburgh Doctoral College Scholarships (PhD, 2027 entry)",
       "action": "Apply for PhD admission first; the scholarship requires an application already submitted",
@@ -15047,12 +15123,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-e501844b11e8b12d",
-      "task_key": "Step timeline!543"
+      "task_key": "Step timeline!545"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 544,
+      "row": 546,
       "source_id": "SH10",
       "name": "University of Edinburgh Edinburgh Doctoral College Scholarships (PhD, 2027 entry)",
       "action": "Check the School deadline for 2027 entry (Informatics likely mid December 2026)",
@@ -15066,12 +15142,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-6a03f743d10a0517",
-      "task_key": "Step timeline!544"
+      "task_key": "Step timeline!546"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 545,
+      "row": 547,
       "source_id": "SD14",
       "name": "University of Galway, 9 Fully Funded PhD Scholarships in data science and AI (Research Ireland national centre, contact Edward Curry)",
       "action": "Apply online with CV, cover letter, transcripts, 300-word research statement",
@@ -15085,12 +15161,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-6862c13386bde465",
-      "task_key": "Step timeline!545"
+      "task_key": "Step timeline!547"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 546,
+      "row": 548,
       "source_id": "SD10",
       "name": "University of Galway, fully funded PhD in Embodied AI, networked multi-agent / robotic systems (Panpan Zhou), start Sept 2027 or earlier",
       "action": "https://researchersjob.com/phd-candidate-position-university-of-galway/",
@@ -15104,12 +15180,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-9e97f72b48992b61",
-      "task_key": "Step timeline!546"
+      "task_key": "Step timeline!548"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 547,
+      "row": 549,
       "source_id": "SC12",
       "name": "University of Luxembourg SnT CVI2 (Prof. Djamila Aouada): Doctoral Researcher in Computer Vision (UOL08044)",
       "action": "Confirm UOL08044 is still open on the HR portal",
@@ -15123,12 +15199,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-dea8109f1b0d1657",
-      "task_key": "Step timeline!547"
+      "task_key": "Step timeline!549"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 548,
+      "row": 550,
       "source_id": "SC12",
       "name": "University of Luxembourg SnT CVI2 (Prof. Djamila Aouada): Doctoral Researcher in Computer Vision (UOL08044)",
       "action": "Apply online with CV, transcripts, 300-word research statement",
@@ -15142,12 +15218,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-7ffbd40d9cb61aea",
-      "task_key": "Step timeline!548"
+      "task_key": "Step timeline!550"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 549,
+      "row": 551,
       "source_id": "SB05",
       "name": "University of Luxembourg SnT SERVAL: PhD in Trustworthy World Models for Critical Systems",
       "action": "Check uni.lu recruitment portal for whether the post is still open",
@@ -15161,12 +15237,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-4392c7e83e8a9d09",
-      "task_key": "Step timeline!549"
+      "task_key": "Step timeline!551"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 550,
+      "row": 552,
       "source_id": "SB05",
       "name": "University of Luxembourg SnT SERVAL: PhD in Trustworthy World Models for Critical Systems",
       "action": "If open apply with CV and cover letter online",
@@ -15180,12 +15256,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-882ca77bd9126966",
-      "task_key": "Step timeline!550"
+      "task_key": "Step timeline!552"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 551,
+      "row": 553,
       "source_id": "SC11",
       "name": "University of Luxembourg SnT, Serval group: Doctoral Researcher in Machine Learning for Official Statistics (UOL08327)",
       "action": "Check on the University of Luxembourg HR portal that UOL08327 is still open",
@@ -15199,12 +15275,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-90ef47a3a74efc06",
-      "task_key": "Step timeline!551"
+      "task_key": "Step timeline!553"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 552,
+      "row": 554,
       "source_id": "SC11",
       "name": "University of Luxembourg SnT, Serval group: Doctoral Researcher in Machine Learning for Official Statistics (UOL08327)",
       "action": "Apply online with CV, cover letter, transcripts, 300-word research statement",
@@ -15218,12 +15294,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-3657cc703301c6dd",
-      "task_key": "Step timeline!552"
+      "task_key": "Step timeline!554"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 553,
+      "row": 555,
       "source_id": "C12-UOL08224",
       "name": "University of Luxembourg UOL08224 Doctoral Researcher in HPC and AI",
       "action": "Email Prof. Dr. Jun Pang with CV and a short note on fit (named as contact for questions)",
@@ -15237,12 +15313,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-bd4c8fe8d9a05dcf",
-      "task_key": "Step timeline!553"
+      "task_key": "Step timeline!555"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 554,
+      "row": 556,
       "source_id": "C12-UOL08224",
       "name": "University of Luxembourg UOL08224 Doctoral Researcher in HPC and AI",
       "action": "Apply online via the University of Luxembourg HR system (email applications not considered)",
@@ -15256,12 +15332,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-fbf9050010d6f9b0",
-      "task_key": "Step timeline!554"
+      "task_key": "Step timeline!556"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 555,
+      "row": 557,
       "source_id": "C12-UOL08224",
       "name": "University of Luxembourg UOL08224 Doctoral Researcher in HPC and AI",
       "action": "Upload CV, cover letter, transcripts, and details of 1 to 2 referees",
@@ -15275,12 +15351,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-608c949834d9ab2f",
-      "task_key": "Step timeline!555"
+      "task_key": "Step timeline!557"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 556,
+      "row": 558,
       "source_id": "C12-UOL08546",
       "name": "University of Luxembourg UOL08546 Doctoral Researcher in AI for Science (EUR 44,531)",
       "action": "Email Prof. Jun Pang (firstname.lastname@uni.lu pattern, see blockers) with a short fit statement before applying",
@@ -15294,12 +15370,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-792edce95713b7ea",
-      "task_key": "Step timeline!556"
+      "task_key": "Step timeline!558"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 557,
+      "row": 559,
       "source_id": "C12-UOL08546",
       "name": "University of Luxembourg UOL08546 Doctoral Researcher in AI for Science (EUR 44,531)",
       "action": "Apply online through the University of Luxembourg HR system (email applications are not considered)",
@@ -15313,12 +15389,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-1913684f09667b66",
-      "task_key": "Step timeline!557"
+      "task_key": "Step timeline!559"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 558,
+      "row": 560,
       "source_id": "C12-UOL08546",
       "name": "University of Luxembourg UOL08546 Doctoral Researcher in AI for Science (EUR 44,531)",
       "action": "Upload CV, cover letter, transcripts of all university modules, and details of 3 referees",
@@ -15332,12 +15408,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-5d898b90d99c6d85",
-      "task_key": "Step timeline!558"
+      "task_key": "Step timeline!560"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 559,
+      "row": 561,
       "source_id": "C03-Otago",
       "name": "University of Otago Doctoral Scholarship (PhD, NZ)",
       "action": "By 1 Nov 2026 (to make the November assessment round, round cut-off unconfirmed): submit PhD admission application on Otago eVision with supervisor agreement",
@@ -15351,12 +15427,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-c74486989df78550",
-      "task_key": "Step timeline!559"
+      "task_key": "Step timeline!561"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 560,
+      "row": 562,
       "source_id": "C03-Otago",
       "name": "University of Otago Doctoral Scholarship (PhD, NZ)",
       "action": "After admission application is lodged, wait for the student-portal alert inviting you to apply for the scholarship, then apply on eVision",
@@ -15370,12 +15446,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-8d74eff46de5a892",
-      "task_key": "Step timeline!560"
+      "task_key": "Step timeline!562"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 561,
+      "row": 563,
       "source_id": "C03-Otago",
       "name": "University of Otago Doctoral Scholarship (PhD, NZ)",
       "action": "Email scholarships@otago.ac.nz to ask the exact November 2026 round cut-off",
@@ -15389,12 +15465,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-9d6c6a4796af653b",
-      "task_key": "Step timeline!561"
+      "task_key": "Step timeline!563"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 562,
+      "row": 564,
       "source_id": "SH01",
       "name": "University of Oxford Clarendon Scholarships (DPhil, 2027-28 entry); automatic consideration with the DPhil application",
       "action": "Now to Nov 2026: pick the DPhil course (Engineering Science, Computer Science, or Statistics/ML) and read its page for the exact December or January deadline",
@@ -15408,12 +15484,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-f3843ff95db233ea",
-      "task_key": "Step timeline!562"
+      "task_key": "Step timeline!564"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 563,
+      "row": 565,
       "source_id": "SH01",
       "name": "University of Oxford Clarendon Scholarships (DPhil, 2027-28 entry); automatic consideration with the DPhil application",
       "action": "Before that deadline: submit the Oxford graduate application; no separate Clarendon form",
@@ -15427,12 +15503,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-8fa29b21e77f510f",
-      "task_key": "Step timeline!563"
+      "task_key": "Step timeline!565"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 564,
+      "row": 566,
       "source_id": "SH01",
       "name": "University of Oxford Clarendon Scholarships (DPhil, 2027-28 entry); automatic consideration with the DPhil application",
       "action": "Feb to Jun 2027: scholarship decisions are normally made late February to June",
@@ -15446,12 +15522,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-cd9717a8db4a20bf",
-      "task_key": "Step timeline!564"
+      "task_key": "Step timeline!566"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 565,
+      "row": 567,
       "source_id": "SF05",
       "name": "University of Queensland Graduate Research School Scholarships (UQGRSS incl RTP): next international round for 2027/28 entry",
       "action": "After 31 Oct 2026: re-fetch page for new round dates",
@@ -15465,12 +15541,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-c83c4e67b3f9f1f8",
-      "task_key": "Step timeline!565"
+      "task_key": "Step timeline!567"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 566,
+      "row": 568,
       "source_id": "SF05",
       "name": "University of Queensland Graduate Research School Scholarships (UQGRSS incl RTP): next international round for 2027/28 entry",
       "action": "Email target UQ supervisor (e.g. Dr Kasra Khosoussi, SLAM, k.khosoussi@uq.edu.au) to nominate EOI",
@@ -15484,12 +15560,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-a98b3e8f52ddca78",
-      "task_key": "Step timeline!566"
+      "task_key": "Step timeline!568"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 567,
+      "row": 569,
       "source_id": "SB08",
       "name": "UQO LaRSA (Berkane), multi-institution UQO/McGill/Queen's: PhD in visual-inertial SLAM for UAVs",
       "action": "Email CV to soulaimane.berkane@uqo.ca asking about current funding and start date",
@@ -15503,12 +15579,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-7f2d664f13cb9add",
-      "task_key": "Step timeline!567"
+      "task_key": "Step timeline!569"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 568,
+      "row": 570,
       "source_id": "SB02",
       "name": "UZH Robotics and Perception Group (Scaramuzza): PhD positions incl. event-camera plus inertial SLAM world models, learning navigation without state estimation",
       "action": "Immediately: confirm via careersrpg (AT) ifi (DOT) uzh (DOT) ch only if a late application is still accepted; do not ask whether CV fits",
@@ -15522,12 +15598,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-9502d2a625c6d7c1",
-      "task_key": "Step timeline!568"
+      "task_key": "Step timeline!570"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 569,
+      "row": 571,
       "source_id": "SB02",
       "name": "UZH Robotics and Perception Group (Scaramuzza): PhD positions incl. event-camera plus inertial SLAM world models, learning navigation without state estimation",
       "action": "Submit web form at rpg.ifi.uzh.ch/apply_phd.html (email applications ignored)",
@@ -15541,12 +15617,12 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-7a24a75d5e35f513",
-      "task_key": "Step timeline!569"
+      "task_key": "Step timeline!571"
     },
     {
       "type": "timeline_step",
       "sheet": "Step timeline",
-      "row": 570,
+      "row": 572,
       "source_id": "SB09",
       "name": "Western University ECE (Tayebi): PhD in AI-enabled autonomous navigation / robotics",
       "action": "Email CV to atayebi@uwo.ca asking about funding and intake",
@@ -15560,7 +15636,7 @@
       "blocked": false,
       "group": "",
       "task_id": "tsk-b5256377e1d1b9b3",
-      "task_key": "Step timeline!570"
+      "task_key": "Step timeline!572"
     },
     {
       "type": "cross_route_task",
@@ -16058,5 +16134,5 @@
     }
   ],
   "execution_rows": 63,
-  "ledger_rows": 785
+  "ledger_rows": 789
 }

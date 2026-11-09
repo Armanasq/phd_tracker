@@ -1,11 +1,11 @@
 {
   "date": "2026-11-09",
   "online": true,
-  "main_count": 191,
-  "new_verified_count": 11,
-  "queue_count": 16,
+  "main_count": 193,
+  "new_verified_count": 13,
+  "queue_count": 20,
   "mail_signals": 7,
-  "source_watches": 6,
+  "source_watches": 7,
   "source_statuses": [
     {
       "id": "R26-GWU-EPIC",
@@ -48,6 +48,13 @@
       "source_url": "https://imprs-is-apply.tue.mpg.de/registration/imprs-is-2026",
       "expected_deadline": "2026-11-15",
       "status": "contradiction_closed_portal"
+    },
+    {
+      "id": "N263-07-LIVE",
+      "application_id": "N263-07",
+      "source_url": "https://www.mos.ed.tum.de/en/avs/career/our-jobs/ki-motorsport-1/",
+      "expected_deadline": "2026-11-15",
+      "status": "anchor_present"
     }
   ]
 }

@@ -1752,6 +1752,42 @@
       }
     },
     {
+      "@id": "urn:phdtracker:application:R26-KTH-AGENTIC-EMBODIED",
+      "@type": "prov:Entity",
+      "schema:name": "KTH Royal Institute of Technology — PhD Agentic & Embodied AI for Adaptive Manufacturing Systems (PA-2026-3497)",
+      "applicationDeadline": {
+        "@value": "2026-12-03",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:english_proof"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_portfolio"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://kth.varbi.com/en/what%3Ajob/jobID%3A978857/"
+      },
+      "proofObligation": [
+        "Position has not passed primary-source verification"
+      ]
+    },
+    {
       "@id": "urn:phdtracker:application:M37-CIS",
       "@type": "prov:Entity",
       "schema:name": "Cambridge Trust funding (Cambridge International Scholarship) via the same Cambridge PhD application",
@@ -2484,6 +2520,36 @@
       "prov:wasDerivedFrom": {
         "@id": "urn:phdtracker:dataset:portfolio-frontier"
       }
+    },
+    {
+      "@id": "urn:phdtracker:application:R26-ETH-IDEAL-ENGINEERING-AI",
+      "@type": "prov:Entity",
+      "schema:name": "ETH Zurich IDEAL Lab — Doctoral Positions in Machine Learning for Engineering Design (Mark Fuge)",
+      "applicationDeadline": {
+        "@value": "2027-01-15",
+        "@type": "xsd:date"
+      },
+      "applicantDecision": "Go",
+      "documentMention": [
+        {
+          "@id": "urn:phdtracker:document:academic_cv"
+        },
+        {
+          "@id": "urn:phdtracker:document:research_statement"
+        },
+        {
+          "@id": "urn:phdtracker:document:transcripts"
+        }
+      ],
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:portfolio-frontier"
+      },
+      "schema:citation": {
+        "@id": "https://www.jobs.ethz.ch/job/view/JOPG_ethz_AUmT7tc75KfdQZK3sA"
+      },
+      "proofObligation": [
+        "Position has not passed primary-source verification"
+      ]
     },
     {
       "@id": "urn:phdtracker:application:M49",
