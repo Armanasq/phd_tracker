@@ -975,3 +975,6 @@ body.dark .agenda-number,body.dark .agenda-meta{color:#c0dac4}
 @media(max-width:600px){.ai-context-controls input,.ai-context-controls select,.ai-context-controls button{width:100%;max-width:100%}}
 
 .runway-day{position:relative}
+
+.cal-day{position:relative}
+@media(max-width:420px){.crumb{min-width:0;overflow:hidden}.crumb strong{overflow:hidden;text-overflow:ellipsis}}
