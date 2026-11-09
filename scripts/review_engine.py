@@ -5,9 +5,9 @@ from datetime import date
 from pathlib import Path
 
 if __package__:
-    from .source_policy import classify_deadline_note, primary_source_verified
+    from .source_policy import classify_deadline_note, primary_source_verified, summarize_watch_statuses
 else:
-    from source_policy import classify_deadline_note, primary_source_verified
+    from source_policy import classify_deadline_note, primary_source_verified, summarize_watch_statuses
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -20,7 +20,7 @@ def load(path, key):
 def plan(today: date):
     items = load("data/opportunities.json", "records")
     monitor = load("data/latest_run.json", "source_statuses")
-    observations = {x.get("application_id") or x["id"]: x["status"] for x in monitor}
+    observations = summarize_watch_statuses(monitor)
     due = []
     for item in items:
         obligations = []
@@ -41,8 +41,11 @@ def plan(today: date):
             obligations.append("Confirm German-language requirement")
         if confidence == "contradictory":
             obligations.append("Resolve conflict between recruiter email and lab website")
-        if observations.get(item["id"]) in ("review_source_changed","contradiction_closed_portal","contradiction_deadline_mismatch"):
+        status = observations.get(item["id"])
+        if status in {"review_source_changed", "contradiction_closed_portal", "contradiction_deadline_mismatch"}:
             obligations.append("Recheck official page: observed source contradicts expected evidence")
+        elif status in {"unavailable", "response_too_large", "disallowed_host", "unsafe_redirect"}:
+            obligations.append("Source monitor could not validate the current official page; verify manually")
         day_count = (date.fromisoformat(item["deadline"]) - today).days if item["deadline"] else None
         if day_count is not None and day_count < 0:
             tier = "expired"
