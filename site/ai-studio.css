@@ -38,3 +38,5 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 @media(max-width:980px){.settings-layout{grid-template-columns:1fr}}
 @media(max-width:600px){.connection-toolbar>span{margin-left:0;width:100%}.provider-facts>div{grid-template-columns:1fr;gap:3px}.diagnostic-row{grid-template-columns:1fr;gap:4px}.model-option{align-items:flex-start;flex-direction:column}}
 @media(prefers-reduced-motion:reduce){.connection-card,.model-option{transition:none!important;animation:none!important}}
+
+.rail{overflow-y:auto;overscroll-behavior:contain}

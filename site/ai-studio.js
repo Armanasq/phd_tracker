@@ -28,7 +28,7 @@ function nav(view){
 function selectChoices(items,current){return items.map(x=>'<option value="'+escape(x.id)+'"'+(x.id===current?' selected':'')+'>'+escape(x.label)+'</option>').join("")}
 function providerSelect(name="provider_id",current=""){
  const selected=current||state.data.settings?.default_provider||"ollama";
- return '<select name="'+name+'" required>'+selectChoices(state.data.catalog.providers.map(p=>({id:p.id,label:p.label+" · "+p.model})),selected)+'</select>';
+ return '<select id="'+escape(name)+'" name="'+escape(name)+'" required>'+selectChoices(state.data.catalog.providers.map(p=>({id:p.id,label:p.label+" · "+p.model})),selected)+'</select>';
 }
 function appSelect(name="application_id",selected=""){
  return '<select name="'+name+'"><option value="">Whole portfolio</option>'+selectChoices(state.data.records.filter(r=>r.record_type==="tracked").map(r=>({id:r.id,label:r.name})),selected)+'</select>';
@@ -91,7 +91,7 @@ function settings(){
  const checked=Object.values(status).filter(s=>s.state==="responded").length;
  return heading("11 / OPERATOR CONTROLS","Settings & diagnostics","Persistent private defaults, time zone, run limits and evidence-grounded connection health.",btn("Connections","nav","providers","primary"))+
  '<div class="settings-layout">'+panel("Runtime preferences","Preferences affect local agent execution, not the public spreadsheet.",'<form id="settingsForm" class="form-grid">'+
- '<div class="field"><label for="prefProvider">Default provider</label>'+providerSelect("default_provider",prefs.default_provider||"ollama")+'</div>'+
+ '<div class="field"><label for="default_provider">Default provider</label>'+providerSelect("default_provider",prefs.default_provider||"ollama")+'</div>'+
  '<div class="field"><label for="prefAgent">Default agent</label><select name="default_agent" id="prefAgent">'+selectChoices(d.catalog.agents.map(a=>({id:a.id,label:a.label})),prefs.default_agent||"portfolio_planner")+'</select></div>'+
  '<div class="field"><label for="prefZone">Local IANA time zone</label><input id="prefZone" name="timezone" required value="'+escape(prefs.timezone||"Europe/London")+'"><small>Example: Europe/Amsterdam. Official cutoff-zone evidence remains separate.</small></div>'+
  '<div class="field"><label for="prefLimit">Maximum scheduled runs per tick</label><input id="prefLimit" type="number" min="1" max="10" step="1" name="max_runs_per_tick" value="'+escape(prefs.max_runs_per_tick||3)+'" required><small>Limits each scheduled evaluation; no background service is created automatically.</small></div>'+
