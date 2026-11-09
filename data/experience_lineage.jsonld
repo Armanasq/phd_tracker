@@ -178,10 +178,7 @@
       },
       "schema:citation": {
         "@id": "https://jobs.inria.fr/public/classic/en/offres/2026-10608"
-      },
-      "proofObligation": [
-        "Position has not passed primary-source verification"
-      ]
+      }
     },
     {
       "@id": "urn:phdtracker:application:M07a",
@@ -235,10 +232,7 @@
       },
       "schema:citation": {
         "@id": "https://www.leibniz-gemeinschaft.de/en/careers/jobs/detail/job/show/Job/research-associatedoctoral-researcher-natural-language-processing-and-causal-ai-for-scientific-reasoning-mfd"
-      },
-      "proofObligation": [
-        "Position has not passed primary-source verification"
-      ]
+      }
     },
     {
       "@id": "urn:phdtracker:application:N263-10",
@@ -598,10 +592,7 @@
       },
       "schema:citation": {
         "@id": "https://ai4i.it/open-calls/phd-position-on-trustworthy-generalist-robot-policies/"
-      },
-      "proofObligation": [
-        "Position has not passed primary-source verification"
-      ]
+      }
     },
     {
       "@id": "urn:phdtracker:application:M19",
@@ -859,10 +850,7 @@
       },
       "schema:citation": {
         "@id": "https://jobs.inria.fr/public/classic/en/offres/2026-10570"
-      },
-      "proofObligation": [
-        "Position has not passed primary-source verification"
-      ]
+      }
     },
     {
       "@id": "urn:phdtracker:application:R26-VIENNA-EXOSPHERE",
@@ -883,10 +871,7 @@
       },
       "schema:citation": {
         "@id": "https://taa.cs.univie.ac.at/news/story/exosphere"
-      },
-      "proofObligation": [
-        "Position has not passed primary-source verification"
-      ]
+      }
     },
     {
       "@id": "urn:phdtracker:application:N264-06",
@@ -997,10 +982,7 @@
       },
       "schema:citation": {
         "@id": "https://doctorat.univ-toulouse.fr/cofund-best"
-      },
-      "proofObligation": [
-        "Position has not passed primary-source verification"
-      ]
+      }
     },
     {
       "@id": "urn:phdtracker:application:N264-07",
@@ -1141,10 +1123,7 @@
       },
       "schema:citation": {
         "@id": "https://www.uni-bamberg.de/en/mii/open-positions/mii-202611-rob/"
-      },
-      "proofObligation": [
-        "Position has not passed primary-source verification"
-      ]
+      }
     },
     {
       "@id": "urn:phdtracker:application:M25",
@@ -1261,10 +1240,7 @@
       },
       "schema:citation": {
         "@id": "https://jobs.inria.fr/public/classic/en/offres/2026-10454"
-      },
-      "proofObligation": [
-        "Position has not passed primary-source verification"
-      ]
+      }
     },
     {
       "@id": "urn:phdtracker:application:M28",
@@ -1546,7 +1522,10 @@
       },
       "schema:citation": {
         "@id": "https://graduate.engineering.gwu.edu/doctoral-admissions-requirements"
-      }
+      },
+      "proofObligation": [
+        "This is a priority-review milestone, NOT the final application deadline"
+      ]
     },
     {
       "@id": "urn:phdtracker:application:N264-10",
@@ -1812,10 +1791,7 @@
       },
       "schema:citation": {
         "@id": "https://kth.varbi.com/en/what%3Ajob/jobID%3A978857/"
-      },
-      "proofObligation": [
-        "Position has not passed primary-source verification"
-      ]
+      }
     },
     {
       "@id": "urn:phdtracker:application:M37-CIS",
@@ -2578,7 +2554,7 @@
         "@id": "https://www.jobs.ethz.ch/job/view/JOPG_ethz_AUmT7tc75KfdQZK3sA"
       },
       "proofObligation": [
-        "Position has not passed primary-source verification"
+        "This is a priority-review milestone, NOT the final application deadline"
       ]
     },
     {
@@ -3034,7 +3010,10 @@
       },
       "schema:citation": {
         "@id": "https://www.concordia.ca/academics/graduate/mechanical-engineering-phd.html"
-      }
+      },
+      "proofObligation": [
+        "This is a priority-review milestone, NOT the final application deadline"
+      ]
     },
     {
       "@id": "urn:phdtracker:application:M55b",

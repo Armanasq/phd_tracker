@@ -231,8 +231,8 @@ quadrantChart
     R02: [0.990, 0.250]
     R03: [0.989, 0.500]
     R04: [0.956, 0.375]
-    R05: [0.956, 0.250]
-    R06: [0.944, 0.500]
+    R05: [0.956, 0.125]
+    R06: [0.944, 0.375]
     R07: [0.933, 0.750]
     R08: [0.933, 0.250]
     R09: [0.933, 0.125]
@@ -246,7 +246,7 @@ quadrantChart
     R17: [0.922, 0.750]
     R18: [0.922, 0.500]
     R19: [0.922, 0.375]
-    R20: [0.922, 0.375]
+    R20: [0.922, 0.250]
 ```
 
 [See application records and exact source IDs](data/experience_view.json) · [Open the research radar](data/research_radar.json)

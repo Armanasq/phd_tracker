@@ -8,6 +8,7 @@
       "deadline": "2026-11-13",
       "days_to_deadline": 4,
       "deadline_kind": "email: final consideration 13 Nov 2026",
+      "deadline_classification": "final",
       "tier": "urgent",
       "research_status": "human_review_required",
       "obligations": [
@@ -25,11 +26,10 @@
       "deadline": "2026-11-13",
       "days_to_deadline": 4,
       "deadline_kind": "Final application deadline 13 Nov 2026; time unspecified",
+      "deadline_classification": "final",
       "tier": "urgent",
-      "research_status": "human_review_required",
-      "obligations": [
-        "Verify live institutional announcement and application route"
-      ],
+      "research_status": "source_verified",
+      "obligations": [],
       "official_source": "https://jobs.inria.fr/public/classic/en/offres/2026-10608",
       "original_email": "",
       "next_step": "Check research scope and applicant eligibility, then submit directly via Inria portal by 13 Nov; demonstrate reproducible scientific ML and physics-informed modelling experience."
@@ -40,11 +40,10 @@
       "deadline": "2026-11-14",
       "days_to_deadline": 5,
       "deadline_kind": "Official final application deadline 14 November 2026, closing time not stated",
+      "deadline_classification": "final",
       "tier": "urgent",
-      "research_status": "human_review_required",
-      "obligations": [
-        "Verify live institutional announcement and application route"
-      ],
+      "research_status": "source_verified",
+      "obligations": [],
       "official_source": "https://www.leibniz-gemeinschaft.de/en/careers/jobs/detail/job/show/Job/research-associatedoctoral-researcher-natural-language-processing-and-causal-ai-for-scientific-reasoning-mfd",
       "original_email": "",
       "next_step": "Apply by 14 Nov using official online form, reference 44/2026. Focus application on evidence-grounded agent architectures, causal research extraction, knowledge graphs and robust RAG/LLM evaluation; confirm conditional project funding and ZAB process."
@@ -55,9 +54,11 @@
       "deadline": "2026-11-15",
       "days_to_deadline": 6,
       "deadline_kind": "Priority review of lab interest form 15 Nov 2026; NOT necessarily formal university admission deadline",
+      "deadline_classification": "priority",
       "tier": "urgent",
       "research_status": "human_review_required",
       "obligations": [
+        "Priority-review date, NOT a final submission deadline",
         "Verify live institutional announcement and application route"
       ],
       "official_source": "https://www.mcgill.ca/",
@@ -70,11 +71,10 @@
       "deadline": "2026-11-16",
       "days_to_deadline": 7,
       "deadline_kind": "Final: 16 Nov 2026, 14:00 CET; AI4I expression of interest does not replace Politecnico di Torino doctoral application",
+      "deadline_classification": "final",
       "tier": "urgent",
-      "research_status": "human_review_required",
-      "obligations": [
-        "Verify live institutional announcement and application route"
-      ],
+      "research_status": "source_verified",
+      "obligations": [],
       "official_source": "https://ai4i.it/open-calls/phd-position-on-trustworthy-generalist-robot-policies/",
       "original_email": "",
       "next_step": "Submit BOTH the Politecnico di Torino official PhD admission application and the AI4I expression of interest; finish by 16 Nov 14:00 CET. Tailor research statement to runtime assurance, safe adaptation, world models and VLA policies."
@@ -85,6 +85,7 @@
       "deadline": "2026-11-20",
       "days_to_deadline": 11,
       "deadline_kind": "ELLIS network announces 20 Nov 2026; lab jobs site has older May 2026 world-model posting, so new deadline not yet primary-confirmed",
+      "deadline_classification": "final",
       "tier": "near-term",
       "research_status": "human_review_required",
       "obligations": [
@@ -101,11 +102,10 @@
       "deadline": "2026-11-20",
       "days_to_deadline": 11,
       "deadline_kind": "Official university 20 Nov 2026; exact time not specified in HTML news article",
+      "deadline_classification": "final",
       "tier": "near-term",
-      "research_status": "human_review_required",
-      "obligations": [
-        "Verify live institutional announcement and application route"
-      ],
+      "research_status": "source_verified",
+      "obligations": [],
       "official_source": "https://taa.cs.univie.ac.at/news/story/exosphere",
       "original_email": "",
       "next_step": "Inspect the official PDF to choose algorithmic/numerical robustness or theoretical expressivity track. Apply following the institutional announcement by 20 Nov."
@@ -116,11 +116,10 @@
       "deadline": "2026-11-20",
       "days_to_deadline": 11,
       "deadline_kind": "Final deadline: 20 Nov 2026; time unspecified",
+      "deadline_classification": "final",
       "tier": "near-term",
-      "research_status": "human_review_required",
-      "obligations": [
-        "Verify live institutional announcement and application route"
-      ],
+      "research_status": "source_verified",
+      "obligations": [],
       "official_source": "https://jobs.inria.fr/public/classic/en/offres/2026-10570",
       "original_email": "",
       "next_step": "Apply through Inria before 20 Nov; frame proposal around persistent world models, long-horizon planning, robust robot control and multimodal state estimation. Confirm role is still open despite earlier listed start date."
@@ -131,11 +130,10 @@
       "deadline": "2026-11-23",
       "days_to_deadline": 14,
       "deadline_kind": "Final 23 Nov 2026 at 12:00 CET on university platform (check portal timezone)",
+      "deadline_classification": "final",
       "tier": "near-term",
-      "research_status": "human_review_required",
-      "obligations": [
-        "Verify live institutional announcement and application route"
-      ],
+      "research_status": "source_verified",
+      "obligations": [],
       "official_source": "https://doctorat.univ-toulouse.fr/cofund-best",
       "original_email": "",
       "next_step": "Review the four CROSSING projects: (1) RL/world models for a social robot, (2) drone swarm identification/planning, (3) human–swarm cooperation, (4) conversational-agent risk assessment. Confirm whether multiple applications are accepted; submit preferred project(s) via BEST platform by 23 Nov 12:00 CET."
@@ -146,11 +144,10 @@
       "deadline": "2026-11-23",
       "days_to_deadline": 14,
       "deadline_kind": "23 Nov 2026 12:00 CET, same shared BEST competitive programme",
+      "deadline_classification": "final",
       "tier": "near-term",
-      "research_status": "human_review_required",
-      "obligations": [
-        "Verify live institutional announcement and application route"
-      ],
+      "research_status": "source_verified",
+      "obligations": [],
       "official_source": "https://ellis.eu/research/jobs/2026-11-23-fully-funded-phd-on-social-reinforcement-learning-to-support-the",
       "original_email": "",
       "next_step": "Review the primary ELLIS project description, determine whether BEST permits applying to multiple thesis proposals, and submit on official platform if research focus matches."
@@ -161,6 +158,7 @@
       "deadline": "2026-11-23",
       "days_to_deadline": 14,
       "deadline_kind": "23 Nov 2026 14:30 Asia/Nicosia",
+      "deadline_classification": "final",
       "tier": "near-term",
       "research_status": "source_verified",
       "obligations": [
@@ -176,11 +174,11 @@
       "deadline": "2026-11-29",
       "days_to_deadline": 20,
       "deadline_kind": "Final application deadline: 29 Nov 2026 (time unspecified)",
+      "deadline_classification": "final",
       "tier": "near-term",
-      "research_status": "human_review_required",
+      "research_status": "source_verified",
       "obligations": [
-        "Confirm German-language requirement",
-        "Verify live institutional announcement and application route"
+        "Confirm German-language requirement"
       ],
       "official_source": "https://www.uni-bamberg.de/en/mii/open-positions/mii-202611-rob/",
       "original_email": "",
@@ -192,6 +190,7 @@
       "deadline": "2026-11-30",
       "days_to_deadline": 21,
       "deadline_kind": "Direct PI email route deadline 30 Nov 2026; separate IMPRS-IS route 15 Nov 2026",
+      "deadline_classification": "final",
       "tier": "near-term",
       "research_status": "human_review_required",
       "obligations": [
@@ -208,11 +207,10 @@
       "deadline": "2026-11-30",
       "days_to_deadline": 21,
       "deadline_kind": "Final application deadline: 30 Nov 2026; time unspecified",
+      "deadline_classification": "final",
       "tier": "near-term",
-      "research_status": "human_review_required",
-      "obligations": [
-        "Verify live institutional announcement and application route"
-      ],
+      "research_status": "source_verified",
+      "obligations": [],
       "official_source": "https://jobs.inria.fr/public/classic/en/offres/2026-10454",
       "original_email": "",
       "next_step": "Submit through Inria by 30 Nov. Describe fMRI and deep-learning background, multimodal representations, robustness and cognition-prediction methodology."
@@ -223,10 +221,12 @@
       "deadline": "2026-12-01",
       "days_to_deadline": 22,
       "deadline_kind": "priority; final 2027-01-15",
+      "deadline_classification": "priority",
       "tier": "near-term",
       "research_status": "source_verified",
       "obligations": [
-        "Confirm funded stipend and international tuition eligibility"
+        "Confirm funded stipend and international tuition eligibility",
+        "Priority-review date, NOT a final submission deadline"
       ],
       "official_source": "https://graduate.engineering.gwu.edu/doctoral-admissions-requirements",
       "original_email": "https://mail.google.com/mail/u/0/#all/1a1a5570fd6389df",
@@ -238,11 +238,10 @@
       "deadline": "2026-12-01",
       "days_to_deadline": 22,
       "deadline_kind": "Official lab deadline 1 Dec 2026",
+      "deadline_classification": "final",
       "tier": "near-term",
-      "research_status": "human_review_required",
-      "obligations": [
-        "Verify live institutional announcement and application route"
-      ],
+      "research_status": "source_verified",
+      "obligations": [],
       "official_source": "https://www.imperial.ac.uk/pair-lab/join-us/",
       "original_email": "",
       "next_step": "Consider only if pursuing HRI/user-group modeling; review lab project topics and admissions instructions before application."
@@ -253,6 +252,7 @@
       "deadline": "2026-12-02",
       "days_to_deadline": 23,
       "deadline_kind": "Final 2 Dec 2026 at 17:00 PST; interest form is separate from degree application",
+      "deadline_classification": "final",
       "tier": "near-term",
       "research_status": "source_verified",
       "obligations": [],
@@ -266,11 +266,11 @@
       "deadline": "2026-12-03",
       "days_to_deadline": 24,
       "deadline_kind": "Official final deadline 3 Dec 2026, local Sweden",
+      "deadline_classification": "final",
       "tier": "near-term",
-      "research_status": "human_review_required",
+      "research_status": "source_verified",
       "obligations": [
-        "Confirm funded stipend and international tuition eligibility",
-        "Verify live institutional announcement and application route"
+        "Confirm funded stipend and international tuition eligibility"
       ],
       "official_source": "https://kth.varbi.com/en/what%3Ajob/jobID%3A978857/",
       "original_email": "",
@@ -282,6 +282,7 @@
       "deadline": null,
       "days_to_deadline": null,
       "deadline_kind": "not announced",
+      "deadline_classification": "final",
       "tier": "unposted",
       "research_status": "human_review_required",
       "obligations": [
@@ -299,6 +300,7 @@
       "deadline": null,
       "days_to_deadline": null,
       "deadline_kind": "unposted",
+      "deadline_classification": "final",
       "tier": "unposted",
       "research_status": "human_review_required",
       "obligations": [
@@ -317,6 +319,7 @@
       "deadline": null,
       "days_to_deadline": null,
       "deadline_kind": "unposted",
+      "deadline_classification": "final",
       "tier": "unposted",
       "research_status": "human_review_required",
       "obligations": [
@@ -334,6 +337,7 @@
       "deadline": null,
       "days_to_deadline": null,
       "deadline_kind": "unposted",
+      "deadline_classification": "final",
       "tier": "unposted",
       "research_status": "human_review_required",
       "obligations": [
@@ -350,6 +354,7 @@
       "deadline": null,
       "days_to_deadline": null,
       "deadline_kind": "No lab recruiting deadline in 7 Nov announcement",
+      "deadline_classification": "final",
       "tier": "unposted",
       "research_status": "human_review_required",
       "obligations": [
@@ -366,11 +371,11 @@
       "deadline": null,
       "days_to_deadline": null,
       "deadline_kind": "Rolling until two places filled; primary lab explicitly states no fixed deadline",
+      "deadline_classification": "unverified",
       "tier": "unposted",
-      "research_status": "human_review_required",
+      "research_status": "source_verified",
       "obligations": [
-        "Obtain an explicit official deadline and timezone",
-        "Verify live institutional announcement and application route"
+        "Obtain an explicit official deadline and timezone"
       ],
       "official_source": "https://www.hrl.uni-bonn.de/jobs/application",
       "original_email": "",
@@ -382,6 +387,7 @@
       "deadline": null,
       "days_to_deadline": null,
       "deadline_kind": "Rolling applications until positions filled, as stated in 8 Nov PI announcement",
+      "deadline_classification": "final",
       "tier": "unposted",
       "research_status": "human_review_required",
       "obligations": [
@@ -398,6 +404,7 @@
       "deadline": null,
       "days_to_deadline": null,
       "deadline_kind": "Rolling lab intake; formal CTU PhD enrolment spring 2027 (March–April mentioned in direct recruitment email), no fixed current closing date",
+      "deadline_classification": "final",
       "tier": "unposted",
       "research_status": "human_review_required",
       "obligations": [
@@ -415,6 +422,7 @@
       "deadline": null,
       "days_to_deadline": null,
       "deadline_kind": "University group says deadlines beginning November 2026; secondary job index says 9 November but no confirmed primary closing date; verify immediately",
+      "deadline_classification": "final",
       "tier": "unposted",
       "research_status": "human_review_required",
       "obligations": [
@@ -431,6 +439,7 @@
       "deadline": null,
       "days_to_deadline": null,
       "deadline_kind": "Rolling PI screening; university PhD admissions deadline not verified",
+      "deadline_classification": "unverified",
       "tier": "unposted",
       "research_status": "human_review_required",
       "obligations": [
@@ -447,11 +456,11 @@
       "deadline": null,
       "days_to_deadline": null,
       "deadline_kind": "Rolling: current primary lab explicitly states no closing deadline, until filled; older indexed Oct 27 cutoff is stale",
+      "deadline_classification": "final",
       "tier": "unposted",
-      "research_status": "human_review_required",
+      "research_status": "source_verified",
       "obligations": [
-        "Obtain an explicit official deadline and timezone",
-        "Verify live institutional announcement and application route"
+        "Obtain an explicit official deadline and timezone"
       ],
       "official_source": "https://rpg.ifi.uzh.ch/positions.html",
       "original_email": "",
@@ -463,6 +472,7 @@
       "deadline": "2026-12-15",
       "days_to_deadline": 36,
       "deadline_kind": "PI recruitment email gives 15 Dec 2026; CS application deadline not explicitly visible on inspected programme page",
+      "deadline_classification": "final",
       "tier": "upcoming",
       "research_status": "human_review_required",
       "obligations": [
@@ -479,6 +489,7 @@
       "deadline": "2026-12-18",
       "days_to_deadline": 39,
       "deadline_kind": "final",
+      "deadline_classification": "final",
       "tier": "upcoming",
       "research_status": "source_verified",
       "obligations": [],
@@ -492,9 +503,11 @@
       "deadline": "2027-01-05",
       "days_to_deadline": 57,
       "deadline_kind": "5 Jan 2027 final per supervisor email and FindAPhD listing; exact time not verified",
+      "deadline_classification": "unverified",
       "tier": "upcoming",
       "research_status": "human_review_required",
       "obligations": [
+        "Deadline is not confirmed by an authoritative current source",
         "Verify live institutional announcement and application route"
       ],
       "official_source": "https://www.findaphd.com/phds/project/growing-with-me-co-designing-adaptable-low-cost-soft-robotic-wearables-for-children-s-upper-limb-rehabilitation/?p201874",
@@ -507,11 +520,12 @@
       "deadline": "2027-01-15",
       "days_to_deadline": 67,
       "deadline_kind": "Priority/best-consideration date 15 Jan 2027; not independently established as final closure",
+      "deadline_classification": "priority",
       "tier": "upcoming",
-      "research_status": "human_review_required",
+      "research_status": "source_verified",
       "obligations": [
         "Confirm funded stipend and international tuition eligibility",
-        "Verify live institutional announcement and application route"
+        "Priority-review date, NOT a final submission deadline"
       ],
       "official_source": "https://www.jobs.ethz.ch/job/view/JOPG_ethz_AUmT7tc75KfdQZK3sA",
       "original_email": "",
@@ -523,6 +537,7 @@
       "deadline": "2027-01-31",
       "days_to_deadline": 83,
       "deadline_kind": "EURAXESS index lists 31 Jan 2027; official ETH page did not establish a fixed final deadline",
+      "deadline_classification": "final",
       "tier": "upcoming",
       "research_status": "human_review_required",
       "obligations": [
@@ -538,11 +553,10 @@
       "deadline": "2027-03-28",
       "days_to_deadline": 139,
       "deadline_kind": "Final deadline: 28 Mar 2027; time unspecified",
+      "deadline_classification": "final",
       "tier": "upcoming",
-      "research_status": "human_review_required",
-      "obligations": [
-        "Verify live institutional announcement and application route"
-      ],
+      "research_status": "source_verified",
+      "obligations": [],
       "official_source": "https://jobs.inria.fr/public/classic/en/offres/2026-10501",
       "original_email": "",
       "next_step": "Keep in research queue; only promote after confirming the data-visualization research focus matches intended doctorate. Check research team, eligibility and selection timetable."
