@@ -12,6 +12,8 @@ These settings describe the intended repository presentation and Pages configura
 
 Open the repository homepage, select the **About** gear icon, and enter the description, website, and topics above. Keep the repository name unchanged to preserve existing links.
 
+The same fields are versioned in [`repository-metadata.json`](repository-metadata.json). Run `python scripts/sync_repository_metadata.py` from the repository root for a read-only preview. To write them using an authorized personal token, set `GITHUB_ADMIN_TOKEN` with repository administration permission and run `python scripts/sync_repository_metadata.py --apply`. The GitHub App integration currently exposes repository file writes, not About-metadata updates; committing this file does not change the live About panel.
+
 ## Pages
 
 In **Settings → Pages**, keep the build source set to **GitHub Actions**, not "Deploy from a branch". The deployment workflow is `.github/workflows/publish-cockpit.yml`, and the canonical public URL is `https://armanasq.github.io/phd_tracker/`. No custom domain is configured. Do not add a CNAME unless a domain is owned and DNS is configured.
