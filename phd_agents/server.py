@@ -201,6 +201,8 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.wfile.write(body)
         elif path == "/api/metrics":
             self.send_json(usage_summary(store))
+        elif path == "/api/diagnostics":
+            self.send_json(store.diagnostics())
         elif path == "/api/scheduler/preview":
             self.send_json(scheduler_preview(store))
         elif path == "/api/settings":
@@ -252,6 +254,8 @@ class ApiHandler(BaseHTTPRequestHandler):
         root = self.server.root
         if path == "/api/settings":
             self.send_json({"settings": save_settings(store, data)})
+        elif path == "/api/maintenance/backup":
+            self.send_json({"backup": store.create_backup(retain=data.get("retain", 7))})
         elif path == "/api/providers/setup":
             spec = provider_spec(data["provider"])
             store.put_custom("provider", spec)

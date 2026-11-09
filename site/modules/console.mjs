@@ -9,7 +9,7 @@ const cleanId = value => String(value||"").trim().toLowerCase().replace(/[^a-z0-
 const opt = (items,value) => choose(items,value);
 
 export function createConsole({notify,onChange,navigate,getRecords,getSourceRecords,onReload,getView}) {
- const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,scheduleTick:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:""};
+ const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:""};
  const providers = () => state.data?.catalog?.providers || [];
  const agents = () => state.data?.catalog?.agents || [];
  const workflows = () => state.data?.catalog?.workflows || [];
@@ -314,7 +314,20 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
     '<div><strong>Cloud data disclosure</strong><p>Per-provider approval is required before unattended or confirmation-free use. Editing a provider revokes the approval.</p></div>'+
     '<div><strong>Model behavior</strong><p>Replies are reviewable proposals. No automatic faculty messages or application submissions.</p></div>'+
     '<div><strong>Scheduler</strong><p>Disabled until you enable workflows and run the external scheduler. Cloud calls remain capped separately.</p></div></div>'+
-    btn("View run history","go","activity","quiet"))+'</div>'+note();
+    btn("View run history","go","activity","quiet"))+
+   box("Private state resilience","Inspect local SQLite health and create a consistent, owner-only backup without uploading applicant data.",
+    '<div class="os-policy"><div><strong>SQLite state</strong><p>'+
+    (state.diagnostics?esc("Integrity: "+state.diagnostics.database.integrity+
+       " · WAL: "+state.diagnostics.database.journal_mode+
+       " · Active workflow claims: "+state.diagnostics.scheduler.active_claims+
+       " · Existing backups: "+state.diagnostics.backups.count):
+       "Not checked during this session. Health inspection performs no external requests.")+'</p></div>'+
+    (state.latestBackup?'<div><strong>Last saved backup</strong><p>'+esc(state.latestBackup.filename)+
+       ' · SHA-256 '+esc(state.latestBackup.sha256.slice(0,16))+
+       '… · Owner-only directory: '+esc(state.latestBackup.directory)+'</p></div>':'')+
+    '<div><strong>Recovery boundary</strong><p>Backups include private SQLite state but exclude provider credentials. Restore only with the runtime stopped.</p></div></div>'+
+    btn("Verify local database","state-diagnostics","","quiet")+
+    btn("Create private backup","state-backup","","quiet"))+'</div>'+note();
  }
  function settings() {
   const current=active();
@@ -392,6 +405,23 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   if(action==="go"){navigate(id);return;}
   if(action==="tab"){state.tab=id;onChange();return;}
   if(action==="reconnect"){await connect();return;}
+  if(action==="state-diagnostics"){
+   if(!isLive())return;
+   await change(async()=>{
+    state.diagnostics=await request("/api/diagnostics");
+    state.message="SQLite integrity: "+state.diagnostics.database.integrity+
+      ". Active workflow claims: "+state.diagnostics.scheduler.active_claims+".";
+   });return;
+  }
+  if(action==="state-backup"){
+   if(!isLive()||!window.confirm("Create a local SQLite backup in the private state directory? No data will be uploaded."))return;
+   await change(async()=>{
+    const output=await request("/api/maintenance/backup",{retain:7});
+    state.latestBackup=output.backup;
+    state.diagnostics=await request("/api/diagnostics");
+    state.message="Backup verified: "+state.latestBackup.filename+". Stored locally; provider credentials excluded.";
+   });return;
+  }
   if(action==="copy-command"){await navigator.clipboard?.writeText("python -m phd_agents serve --port 8765");notify("Start command copied");return;}
   if(!isLive())return;
   if(action==="new-provider"){selectConnection("__new__");state.tab="connections";return;}

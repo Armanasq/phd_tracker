@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import sqlite3
+import stat
+import tempfile
 import uuid
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -28,8 +31,15 @@ class Store:
         self.path = Path(path) if path else default_path()
         self.path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
         if not self.path.exists():
-            fd = os.open(str(self.path), os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
-            os.close(fd)
+            try:
+                fd = os.open(str(self.path), os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+                os.close(fd)
+            except FileExistsError:
+                pass
+        if self.path.is_symlink() or not self.path.is_file():
+            raise PermissionError("Private SQLite state must be an ordinary file, not a symlink")
+        if stat.S_IMODE(self.path.stat().st_mode) & 0o077:
+            raise PermissionError("Unsafe state database permissions; run chmod 600 on the private SQLite file")
         self.db = sqlite3.connect(str(self.path), check_same_thread=False, timeout=15)
         self.db.row_factory = sqlite3.Row
         self.db.execute("PRAGMA foreign_keys=ON")
@@ -56,6 +66,90 @@ class Store:
 
         """)
         self.db.commit()
+
+    def diagnostics(self) -> dict[str, Any]:
+        quick = self.db.execute("PRAGMA quick_check(1)").fetchone()[0]
+        foreign = self.db.execute("PRAGMA foreign_key_check").fetchall()
+        journal = self.db.execute("PRAGMA journal_mode").fetchone()[0]
+        current = utcnow()
+        leases = self.db.execute(
+            "SELECT COUNT(*) FROM schedule_claims WHERE expires_at>?", (current,)
+        ).fetchone()[0]
+        rows = self.db.execute("SELECT COUNT(*) FROM applications").fetchone()[0]
+        backups = self.path.parent / "backups"
+        backup_count = len(list(backups.glob("phd-atlas-*.sqlite3"))) if backups.is_dir() and not backups.is_symlink() else 0
+        permission = stat.S_IMODE(self.path.stat().st_mode)
+        return {
+            "schema_version": 1,
+            "status": "ok" if quick == "ok" and not foreign else "degraded",
+            "database": {
+                "integrity": str(quick)[:200],
+                "foreign_key_violations": len(foreign),
+                "journal_mode": journal,
+                "private_file_mode": oct(permission),
+                "size_bytes": self.path.stat().st_size,
+                "application_overrides": rows,
+            },
+            "scheduler": {"active_claims": leases},
+            "backups": {"count": backup_count, "directory_private": backups.is_dir() and not backups.is_symlink()},
+        }
+
+    def create_backup(self, *, retain: int = 7) -> dict[str, Any]:
+        if type(retain) is not int or not 1 <= retain <= 30:
+            raise ValueError("Backup retention must be an integer between 1 and 30")
+        directory = self.path.parent / "backups"
+        if directory.is_symlink():
+            raise PermissionError("Backup directory cannot be a symlink")
+        directory.mkdir(mode=0o700, parents=False, exist_ok=True)
+        if not directory.is_dir() or stat.S_IMODE(directory.stat().st_mode) & 0o077:
+            raise PermissionError("Backup directory must have owner-only permissions")
+        created = datetime.now(timezone.utc)
+        name = "phd-atlas-" + created.strftime("%Y%m%dT%H%M%SZ") + "-" + uuid.uuid4().hex[:10] + ".sqlite3"
+        target = directory / name
+        fd, temporary = tempfile.mkstemp(prefix=".phd-atlas-", suffix=".tmp", dir=directory)
+        os.close(fd)
+        try:
+            destination = sqlite3.connect(temporary)
+            try:
+                self.db.backup(destination, pages=100, sleep=0.05)
+                quick = destination.execute("PRAGMA quick_check(1)").fetchone()[0]
+                if quick != "ok" or destination.execute("PRAGMA foreign_key_check").fetchone():
+                    raise RuntimeError("SQLite backup integrity verification failed")
+            finally:
+                destination.close()
+            if stat.S_IMODE(Path(temporary).stat().st_mode) != 0o600:
+                os.chmod(temporary, 0o600)
+            os.replace(temporary, target)
+            dir_fd = os.open(directory, os.O_RDONLY)
+            try:
+                os.fsync(dir_fd)
+            finally:
+                os.close(dir_fd)
+            files = sorted(
+                (q for q in directory.glob("phd-atlas-*.sqlite3") if q.is_file() and not q.is_symlink()),
+                key=lambda q: q.stat().st_mtime_ns, reverse=True,
+            )
+            for expired in files[retain:]:
+                expired.unlink()
+            digest = hashlib.sha256()
+            with target.open("rb") as stream:
+                for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+                    digest.update(chunk)
+            self._audit("state:backup", name)
+            self.db.commit()
+            return {
+                "filename": name,
+                "directory": str(directory),
+                "created_at": created.isoformat(timespec="seconds"),
+                "size_bytes": target.stat().st_size,
+                "sha256": digest.hexdigest(),
+                "integrity": "ok",
+                "retained": min(len(files), retain),
+                "includes_credentials": False,
+            }
+        finally:
+            if os.path.exists(temporary):
+                os.unlink(temporary)
 
     def close(self) -> None:
         self.db.close()

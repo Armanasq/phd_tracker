@@ -83,3 +83,7 @@ node tests/site_accessibility.cjs
 ```
 
 The model integration browser test starts a synthetic local OpenAI-compatible model server and verifies registration, inference probing, activation, agent assignment, automatic routing and the private state-editing journey. The complete browser and accessibility audit remains a separate release gate; individual tests should not be reported as passed unless their CI results have been observed.
+
+## Local state recovery
+
+Private Settings offers database integrity diagnostics and a verified, owner-only SQLite backup. CLI equivalents: `python -m phd_agents diagnostics` and `python -m phd_agents backup --retain 7`. A backup excludes the separate provider credential file, and the application never uploads private SQLite backups to GitHub Pages. Direct restore requires stopping the local process; no remote overwrite API is provided.

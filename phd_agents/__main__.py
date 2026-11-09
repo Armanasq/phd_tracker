@@ -18,6 +18,9 @@ def main() -> None:
     server.add_argument("--port", type=int, default=8765)
     commands.add_parser("scheduler-once")
     commands.add_parser("catalog")
+    commands.add_parser("diagnostics")
+    backup_command = commands.add_parser("backup")
+    backup_command.add_argument("--retain", type=int, default=7)
     agent = commands.add_parser("run")
     agent.add_argument("--agent", default="portfolio_planner")
     agent.add_argument("--provider", default="ollama")
@@ -36,6 +39,10 @@ def main() -> None:
                 item["configured"] = not item["api_key_env"] or bool(os.environ.get(item["api_key_env"]))
         elif args.command == "scheduler-once":
             result = scheduler_once(store, args.repo)
+        elif args.command == "diagnostics":
+            result = store.diagnostics()
+        elif args.command == "backup":
+            result = store.create_backup(retain=args.retain)
         elif args.command == "run":
             result = run_agent(store, args.repo, agent_id=args.agent, provider_id=args.provider,
                                application_id=args.application, input_text=args.task,
