@@ -40,7 +40,7 @@ async function run() {
     assert.match(await page.locator('#body h1').innerText(),/Today’s work/);
     assert.equal(await page.locator('.kpi').count(),5);
     assert.match(await page.locator('.kpi').first().innerText(),/Tracked applications\s*109/);
-    assert.equal(await page.locator('body').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(250, 249, 246)');
+    assert.equal(await page.locator('body').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(246, 247, 251)');
     assert.ok((await page.locator('.agenda-item').count())>=5);
     assert.ok((await page.locator('.nav-btn').count())>=11);
     assert.equal(await page.locator('.runway-day').count(),7);
