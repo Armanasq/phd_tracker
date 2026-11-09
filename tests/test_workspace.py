@@ -24,6 +24,15 @@ class WorkspaceTests(unittest.TestCase):
         self.assertTrue(all("mail.google.com" not in json.dumps(row) for row in rows))
         self.assertTrue(all("@" not in row["faculty"] for row in rows))
 
+    def test_coverage_reports_source_grain_without_invented_opportunities(self):
+        snapshot = build()
+        coverage = snapshot["coverage"]
+        self.assertEqual(coverage["totals"]["tracked"], snapshot["meta"]["tracked"])
+        self.assertGreaterEqual(coverage["totals"]["workbook_tabs"], 1)
+        self.assertTrue(any(sheet["name"] == "Action list" for sheet in coverage["worksheets"]))
+        self.assertTrue(all(item["path"] == "PhD_Action_List.xlsx" or item["path"].startswith("data/") for item in coverage["files"]))
+        self.assertFalse(any("mail.google.com" in json.dumps(item) for item in coverage["files"]))
+
     def test_url_filters_mailbox_links(self):
         self.assertEqual(public_url("https://mail.google.com/mail/u/0/#all/123"), "")
         self.assertEqual(public_url("javascript:alert(1)"), "")

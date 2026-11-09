@@ -95,6 +95,7 @@ def build(root: Path = ROOT) -> dict:
     planner = load(root, "execution_plan.json")
     notification = load(root, "notification_report.json")
     watchlist = load(root, "watchlist.json")
+    workbook_audit = load(root, "workbook_audit.json")
     portfolio = {str(x["source_id"]): x for x in frontier.get("applications", []) if x.get("source_id")}
     by_id = {}
     global_document_status = {
@@ -222,6 +223,48 @@ def build(root: Path = ROOT) -> dict:
         "name": name, "health": spec.get("health", "unknown"),
         "observed": spec.get("observed", 0), "new_unique": spec.get("new_unique", 0)
     } for name, spec in provider_report.get("source_yield", {}).items()]
+    worksheets = [
+        {
+            "name": clean(name, 100),
+            "populated_rows": int(info.get("populated_rows", 0)),
+            "today_count": int(info.get("today_count", 0)),
+            "next_7_count": int(info.get("next_7_count", 0)),
+        }
+        for name, info in workbook_audit.get("sheets", {}).items()
+        if isinstance(info, dict)
+    ]
+    source_files = [
+        {"name": "Original application workbook", "path": "PhD_Action_List.xlsx", "description": "The full workbook; worksheet rows are not distinct applications."},
+        {"name": "Enriched opportunity notes", "path": "data/opportunities.json", "description": "Reviewed programme records and primary source references."},
+        {"name": "Curated application projection", "path": "data/experience_view.json", "description": "Tracked opportunities currently presented in the workspace."},
+        {"name": "Workbook structural audit", "path": "data/workbook_audit.json", "description": "Sheet-level counts, dates and workbook structure."},
+        {"name": "Full execution plan", "path": "data/execution_plan.json", "description": "Historical and upcoming workbook task events."},
+        {"name": "Source discovery report", "path": "data/discovery_report.json", "description": "Feed health and observed discovery limitations."},
+        {"name": "Discovered research leads", "path": "data/discovered_candidates.json", "description": "Unpromoted, provisional opportunity candidates."},
+        {"name": "Exclusion memory", "path": "data/exclusion_memory.json", "description": "Previously excluded and deferred routes."},
+        {"name": "Notification report", "path": "data/notification_report.json", "description": "Notification configuration and recorded delivery summary."},
+        {"name": "Source monitoring watchlist", "path": "data/watchlist.json", "description": "Official source links tracked for changes."},
+        {"name": "Portfolio evidence frontier", "path": "data/portfolio_frontier.json", "description": "Heuristic research-fit records, not admission probabilities."},
+    ]
+    coverage = {
+        "workbook_audit_as_of": iso_day(workbook_audit.get("as_of")),
+        "worksheets": worksheets,
+        "files": source_files,
+        "totals": {
+            "tracked": sum(row["record_type"] == "tracked" for row in records),
+            "research_candidates": sum(row["record_type"] == "candidate" for row in records),
+            "reviewed_opportunity_notes": len(details),
+            "discovery_leads": len(leads),
+            "historical_exclusions": len(archive),
+            "task_projection": len(tasks),
+            "workbook_tabs": len(worksheets),
+        },
+        "discovery_errors": {
+            clean(name, 80): [clean(error, 250) for error in errors[:4]]
+            for name, errors in provider_report.get("source_errors", {}).items()
+            if isinstance(errors, list) and errors
+        },
+    }
     return {
         "schema_version": 1, "as_of": as_of,
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -230,6 +273,7 @@ def build(root: Path = ROOT) -> dict:
         "privacy": "Public Pages snapshot omits mailbox links, email addresses, personal correspondence bodies and historical exclusion reasons.",
         "meta": {"tracked": sum(r["record_type"] == "tracked" for r in records), "candidates": sum(r["record_type"] == "candidate" for r in records), "unpromoted_leads": len(leads), "discovery_snapshot": provider_report.get("run_date"), "notification_delivery": notification.get("delivery", {})},
         "records": records, "leads": leads, "archive": archive, "tasks": tasks,
+        "coverage": coverage,
         "duplicates": groups, "providers": providers,
         "documents": DOCUMENTS, "global_document_states": global_document_status,
         "notes": [
