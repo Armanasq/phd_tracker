@@ -162,7 +162,8 @@ async function run() {
       await screen.goto(base+'/',{waitUntil:'networkidle'});
       await screen.locator('#body h1').waitFor();
       await screen.screenshot({path:path.join(out,'phd-atlas-'+label+'.png'),fullPage:false});
-      await screen.locator('#navigation [data-value="applications"]').click();
+      if(width<=980)await screen.locator('#workspaceSection').selectOption('applications');
+      else await screen.locator('#navigation [data-value="applications"]').click();
       const overflow=await screen.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
       assert.ok(overflow<=2,label+' overflow: '+overflow+'px');
       await screen.close();
