@@ -6,7 +6,9 @@ import json
 import mimetypes
 import os
 import re
+import uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from threading import BoundedSemaphore
 from pathlib import Path
 from urllib.parse import parse_qs, unquote, urlsplit
 
@@ -33,6 +35,14 @@ SITE = ROOT / "site"
 class ApiServer(ThreadingHTTPServer):
     daemon_threads = True
     def __init__(self, address: tuple[str, int], *, store: Store, root: Path):
+        try:
+            slots = int(os.environ.get("PHDAI_MAX_CONCURRENT_INFERENCE", "2"))
+        except ValueError as error:
+            raise ValueError("PHDAI_MAX_CONCURRENT_INFERENCE must be an integer") from error
+        if not 1 <= slots <= 8:
+            raise ValueError("Inference concurrency limit must be between 1 and 8")
+        self.inference_slots = BoundedSemaphore(slots)
+        self.inference_limit = slots
         super().__init__(address, ApiHandler)
         self.store = store
         self.root = Path(root)
@@ -40,6 +50,11 @@ class ApiServer(ThreadingHTTPServer):
 
 class ApiHandler(BaseHTTPRequestHandler):
     server: ApiServer
+
+    def setup(self) -> None:
+        self.request_id = uuid.uuid4().hex
+        self.request.settimeout(30)
+        super().setup()
 
     @property
     def request_store(self) -> Store:
@@ -100,6 +115,7 @@ class ApiHandler(BaseHTTPRequestHandler):
         self.send_header("Cache-Control", "no-store")
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("X-Frame-Options", "DENY")
+        self.send_header("X-Request-ID", self.request_id)
         self.end_headers()
         self.wfile.write(raw)
 
@@ -125,21 +141,34 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.send_json({"error": "Access denied: local origin or API token mismatch"}, 403)
             return
         path = urlsplit(self.path).path
+        costly = method == "POST" and path in {
+            "/api/agents/run", "/api/workflows/run", "/api/providers/probe",
+            "/api/providers/models", "/api/scheduler/tick",
+        }
+        if costly and not self.server.inference_slots.acquire(blocking=False):
+            self.send_json({"error": "Inference capacity reached; retry after an active request finishes"}, 429)
+            return
         try:
-            if method == "GET":
-                self.get_route(path)
-            elif method == "POST":
-                self.post_route(path, self.payload())
-            else:
-                self.send_json({"error": "Unsupported method"}, 405)
-        except ConflictError as error:
-            self.send_json({"error": str(error)}, 409)
-        except PermissionError as error:
-            self.send_json({"error": str(error)}, 403)
-        except (ValueError, KeyError, TypeError, json.JSONDecodeError) as error:
-            self.send_json({"error": str(error)[:220]}, 400)
-        except (OSError, RuntimeError) as error:
-            self.send_json({"error": str(error)[:220]}, 502)
+            try:
+                if method == "GET":
+                    self.get_route(path)
+                elif method == "POST":
+                    self.post_route(path, self.payload())
+                else:
+                    self.send_json({"error": "Unsupported method"}, 405)
+            except ConflictError as error:
+                self.send_json({"error": str(error)}, 409)
+            except PermissionError as error:
+                self.send_json({"error": str(error)}, 403)
+            except (ValueError, KeyError, TypeError, json.JSONDecodeError) as error:
+                self.send_json({"error": str(error)[:220]}, 400)
+            except (BrokenPipeError, ConnectionResetError):
+                return
+            except (OSError, RuntimeError) as error:
+                self.send_json({"error": str(error)[:220]}, 502)
+        finally:
+            if costly:
+                self.server.inference_slots.release()
 
     def do_GET(self) -> None:
         self.dispatch("GET")

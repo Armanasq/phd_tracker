@@ -87,3 +87,7 @@ The model integration browser test starts a synthetic local OpenAI-compatible mo
 ## Local state recovery
 
 Private Settings offers database integrity diagnostics and a verified, owner-only SQLite backup. CLI equivalents: `python -m phd_agents diagnostics` and `python -m phd_agents backup --retain 7`. A backup excludes the separate provider credential file, and the application never uploads private SQLite backups to GitHub Pages. Direct restore requires stopping the local process; no remote overwrite API is provided.
+
+## Request admission and diagnostics
+
+The loopback API permits two concurrent inference-bearing HTTP requests by default (`PHDAI_MAX_CONCURRENT_INFERENCE=1..8`). It returns HTTP 429 when the configured capacity is exhausted; health and local-database diagnostics remain available. Every JSON response carries an opaque `X-Request-ID`. A per-process admission limit does not replace an authenticated multi-tenant service, global rate limiter or shared task queue.
