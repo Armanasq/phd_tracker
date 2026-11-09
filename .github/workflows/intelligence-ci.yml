@@ -37,7 +37,8 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-intelligence.txt
       - run: python -m pip install -r requirements-intelligence.txt
-      - run: python -m compileall -q scripts
+      - run: python -m compileall -q scripts phd_agents
+      - run: node --check site/ai-studio.js
       - run: python -m pytest tests -q
       - name: Render observatory against repository snapshots
         run: |

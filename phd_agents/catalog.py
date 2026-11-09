@@ -89,6 +89,11 @@ def workflow_spec(value: dict[str, Any]) -> dict[str, Any]:
     schedule = value.get("schedule", "manual")
     if schedule not in SCHEDULES:
         raise ValueError("Unsupported workflow schedule")
+    provider_id = validate_id(value.get("provider_id") or "ollama")
+    prompt = str(value.get("prompt") or "")
+    if len(prompt) > 3000:
+        raise ValueError("Workflow objective exceeds 3000 characters")
     return {"id": identity, "label": str(value.get("label") or identity)[:100],
             "description": str(value.get("description") or "")[:400],
-            "agent_id": agent_id, "schedule": schedule, "enabled": bool(value.get("enabled", False))}
+            "agent_id": agent_id, "schedule": schedule, "enabled": bool(value.get("enabled", False)),
+            "provider_id": provider_id, "cloud_consent": value.get("cloud_consent") is True, "prompt": prompt}
