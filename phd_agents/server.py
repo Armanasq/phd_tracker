@@ -111,7 +111,7 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.send_json({"status": "ok", "mode": "loopback_private", "ai_side_effects": "none"})
         elif path == "/api/bootstrap":
             source, records = owner_records(store, self.server.root)
-            today = today_in(source.get("timezone", "Europe/London"))
+            today = today_in(read_settings(store)["timezone"])
             self.send_json({"catalog": catalog(store), "meta": source.get("meta", {}), "as_of": source.get("as_of"),
                             "records": records, "agenda": agenda(records, today, 40),
                             "runs": store.runs(30), "activity": store.activity(30),
@@ -121,7 +121,7 @@ class ApiHandler(BaseHTTPRequestHandler):
                             "security": {"local_only": True, "credentials": "environment variables", "auto_application_submission": False}})
         elif path == "/api/calendar.ics":
             source, records = owner_records(store, self.server.root)
-            events = milestones_for(records, store.items("milestone"), today_in(source.get("timezone", "Europe/London")))
+            events = milestones_for(records, store.items("milestone"), today_in(read_settings(store)["timezone"]))
             body = line_items(records, events, store.items("reference")).encode("utf-8")
             self.send_response(200)
             self.send_header("Content-Type", "text/calendar; charset=utf-8")
@@ -136,7 +136,7 @@ class ApiHandler(BaseHTTPRequestHandler):
                             "provider_states": provider_states(store, catalog(store)["providers"])})
         elif path == "/api/operations":
             source, records = owner_records(store, self.server.root)
-            today = today_in(source.get("timezone", "Europe/London"))
+            today = today_in(read_settings(store)["timezone"])
             profile = (store.items("profile") or [{}])[0]
             referees = store.items("referee")
             references = store.items("reference")
@@ -167,7 +167,7 @@ class ApiHandler(BaseHTTPRequestHandler):
             record = next((r for r in records if r["id"] == identity), None)
             if not record:
                 raise ValueError("Unknown application")
-            self.send_json(preflight(record, today_in(source.get("timezone", "Europe/London"))))
+            self.send_json(preflight(record, today_in(read_settings(store)["timezone"])))
         else:
             self.static(path)
 
@@ -217,7 +217,7 @@ class ApiHandler(BaseHTTPRequestHandler):
                 self.send_json({"error": "Unknown private record route"}, 404)
         elif path == "/api/schedule":
             source, records = owner_records(store, root)
-            today = today_in(source.get("timezone", "Europe/London"))
+            today = today_in(read_settings(store)["timezone"])
             profile = (store.items("profile") or [{}])[0]
             hours = data.get("hours_per_week") or profile.get("hours_per_week")
             if hours is None:
@@ -259,7 +259,7 @@ class ApiHandler(BaseHTTPRequestHandler):
         elif path == "/api/capacity":
             source, records = owner_records(store, root)
             hours = data.get("hours_per_week")
-            self.send_json(plan_capacity(records, today_in(source.get("timezone", "Europe/London")), hours))
+            self.send_json(plan_capacity(records, today_in(read_settings(store)["timezone"]), hours))
         elif path == "/api/scheduler/tick":
             self.send_json({"results": scheduler_once(store, root)})
         else:

@@ -163,11 +163,21 @@ function render(){
  document.querySelectorAll("[data-view]").forEach(b=>{b.classList.toggle("active",b.dataset.view===state.view);if(b.dataset.view===state.view)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});
  $("workspace").innerHTML=actual[state.view]();
 }
+let focusReturn=null;
 function modal(title,body){
- $("dialogLayer").innerHTML='<div class="overlay"><section class="dialog" role="dialog" aria-modal="true" aria-label="'+escape(title)+'"><div class="dialog-head"><h2>'+escape(title)+'</h2><button type="button" class="dialog-close" data-action="close" aria-label="Close dialog">×</button></div><div class="dialog-body">'+body+'</div></section></div>';
+ if(!$("dialogLayer").children.length)focusReturn=document.activeElement;
+ document.querySelector(".studio").inert=true;
+ document.body.classList.add("dialog-open");
+ $("dialogLayer").innerHTML='<div class="overlay"><section class="dialog" tabindex="-1" role="dialog" aria-modal="true" aria-label="'+escape(title)+'"><div class="dialog-head"><h2>'+escape(title)+'</h2><button type="button" class="dialog-close" data-action="close" aria-label="Close dialog">×</button></div><div class="dialog-body">'+body+'</div></section></div>';
  $("dialogLayer").querySelector(".dialog-close")?.focus();
 }
-function close(){ $("dialogLayer").innerHTML="" }
+function close(){
+ $("dialogLayer").innerHTML="";
+ document.querySelector(".studio").inert=false;
+ document.body.classList.remove("dialog-open");
+ if(focusReturn?.isConnected&&typeof focusReturn.focus==="function")focusReturn.focus();
+ focusReturn=null;
+}
 const textField=(name,label,value="",hint="",type="text")=>'<div class="field"><label for="f_'+escape(name)+'">'+escape(label)+'</label><input id="f_'+escape(name)+'" type="'+type+'" name="'+escape(name)+'" value="'+escape(value)+'"'+(name==="id"?' required pattern="[a-z][a-z0-9_-]{1,63}"':"")+'>'+ (hint?'<small>'+escape(hint)+'</small>':"")+'</div>';
 const area=(name,label,value="",rows=4)=>'<div class="field wide"><label for="f_'+escape(name)+'">'+escape(label)+'</label><textarea id="f_'+escape(name)+'" name="'+escape(name)+'" rows="'+rows+'">'+escape(value)+'</textarea></div>';
 function configModal(kind,id=""){
@@ -367,22 +377,52 @@ document.addEventListener("click",async e=>{
  if(action==="new-provider"){configModal("provider");return}
  if(action==="new-workflow"){configModal("workflow");return}
  if(action==="edit-provider"){configModal("provider",id);return}
+  if(action==="provider-models"){
+   const provider=state.data.catalog.providers.find(p=>p.id===id);
+   if(!provider||state.busy)return;
+   const consent=!provider.local;
+   if(consent&&!confirm("Query "+provider.label+" for available models? No applicant records are transmitted."))return;
+   state.busy=true;
+   try{
+    const result=await api("/api/providers/models",{provider_id:id,cloud_consent:consent});
+    await load();
+    const list=result.models.slice(0,40).map(model=>
+      '<div class="model-option"><div><strong>'+escape(model.name)+'</strong><small>'+escape(model.id)+'</small></div>'+
+      '<button type="button" class="mini-button" data-action="select-model" data-id="'+escape(id)+'" data-model="'+escape(model.id)+'">Select model</button></div>').join("");
+    modal("Model discovery · "+provider.label,'<p class="subtitle">Catalog responded in '+escape(result.latency_ms)+' ms. Listed models may not all support chat inference.</p>'+
+     '<div class="model-browser">'+(list||'<div class="blank">No model IDs were returned. Check permissions and endpoint configuration.</div>')+'</div>');
+   }catch(error){toast(error.message)}
+   finally{state.busy=false}
+   return;
+  }
+  if(action==="select-model"){
+   const provider=state.data.catalog.providers.find(p=>p.id===id);
+   if(!provider)return;
+   try{
+    await api("/api/catalog/provider",{...provider,model:el.dataset.model});
+    close();await load();toast("Model configured. Test inference to verify compatibility.");
+   }catch(error){toast(error.message)}
+   return;
+  }
  if(action==="edit-agent"){configModal("agent",id);return}
  if(action==="edit-workflow"){configModal("workflow",id);return}
  if(action==="inspect"){await inspect(id);return}
  if(action==="edit-application"){applicationModal(id);return}
  if(action==="private-ics"){window.location.assign("/api/calendar.ics");return}
  if(action==="provider-probe"){
-  const p=state.data.catalog.providers.find(x=>x.id===id);
-  if(!p)return;
-  const consent=!p.local;
-  if(consent&&!confirm("Send a one-sentence diagnostic prompt to "+p.label+"? This may incur API charges. No applicant records will be included."))return;
-  try{
-   const result=await api("/api/providers/probe",{provider_id:id,cloud_consent:consent});
-   modal("Model test · "+p.label,'<div class="row-meta">'+tag(result.status)+tag(result.model)+'</div><pre class="terminal" style="margin-top:18px">'+escape(result.response)+'</pre><p class="subtitle" style="margin-top:12px">This confirms one model response only, not sustained availability.</p>');
-  }catch(error){toast(error.message)}
-  return;
- }
+   const p=state.data.catalog.providers.find(x=>x.id===id);
+   if(!p||state.busy)return;
+   const consent=!p.local;
+   if(consent&&!confirm("Send a diagnostic request to "+p.label+"? This may incur API charges. No applicant records are included."))return;
+   state.busy=true;
+   try{
+    const result=await api("/api/providers/probe",{provider_id:id,cloud_consent:consent});
+    await load();
+    modal("Inference check · "+p.label,'<div class="row-meta">'+tag(result.status)+tag(result.model)+'</div><pre class="terminal" style="margin-top:18px">'+escape(result.response)+'</pre><p class="subtitle" style="margin-top:12px">One successful response is not a guarantee of provider uptime or future model availability.</p>');
+   }catch(error){toast(error.message)}
+   finally{state.busy=false}
+   return;
+  }
  if(action==="new-private"){privateModal(id);return}
  if(action==="edit-private"){const at=id.indexOf(":");privateModal(id.slice(0,at),id.slice(at+1));return}
  if(action==="generate-schedule"){try{await generateSchedule($("capacityForm"))}catch(err){toast(err.message)}return}
@@ -397,9 +437,16 @@ document.addEventListener("click",async e=>{
  }
 });
 document.addEventListener("submit",async e=>{
- const form=e.target;if(!["configForm","applicationForm","agentRunForm","workflowRunForm","privateForm","capacityForm"].includes(form.id))return;
+ const form=e.target;if(!["configForm","applicationForm","agentRunForm","workflowRunForm","privateForm","capacityForm","settingsForm"].includes(form.id))return;
  e.preventDefault();try{
  if(form.id==="configForm"){await submitConfig(form);return}
+  if(form.id==="settingsForm"){
+   const values=Object.fromEntries(new FormData(form));
+   values.max_runs_per_tick=Number(values.max_runs_per_tick);
+   await api("/api/settings",values);
+   await load();toast("Private runtime preferences saved");
+   return;
+  }
  if(form.id==="applicationForm"){await submitApplication(form);return}
  if(form.id==="privateForm"){await submitPrivate(form);return}
  if(form.id==="capacityForm"){await generateSchedule(form);return}
@@ -408,13 +455,24 @@ document.addEventListener("submit",async e=>{
  else await execute("agent",data);
  }catch(error){toast(error.message)}
 });
+document.addEventListener("change",e=>{
+ if(e.target.id==="providerFilter"){state.providerFilter=e.target.value;render()}
+});
 document.addEventListener("input",e=>{
  if(e.target.id==="appSearch"){
   const pos=e.target.selectionStart;state.query=e.target.value;render();
   const search=$("appSearch");search?.focus();search?.setSelectionRange(pos,pos)
  }
 });
-document.addEventListener("keydown",e=>{if(e.key==="Escape")close()});
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape"&&$("dialogLayer").children.length){close();return}
+ if(e.key!=="Tab"||!$("dialogLayer").children.length)return;
+ const nodes=[...$("dialogLayer").querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled])')].filter(n=>n.getClientRects().length);
+ if(!nodes.length)return;
+ const first=nodes[0],last=nodes[nodes.length-1];
+ if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+ else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+});
 $("refresh").addEventListener("click",load);
 const initial=location.hash.replace("#","");if(VIEWS[initial])state.view=initial;
 window.addEventListener("hashchange",()=>{const view=location.hash.replace("#","");if(VIEWS[view]&&state.view!==view){state.view=view;render()}});

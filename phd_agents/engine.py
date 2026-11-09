@@ -50,7 +50,7 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str,
     if application_id and application_id not in by_id:
         raise ValueError("Unknown application")
     relevant = by_id[application_id] if application_id else None
-    today = today_in(source.get("timezone", "Europe/London"))
+    today = today_in(read_settings(store)["timezone"])
     if relevant:
         keep = ("id", "name", "record_type", "deadline", "deadline_kind", "deadline_type",
                 "verification", "source_url", "apply_url", "funding", "eligibility", "fit", "topic",
