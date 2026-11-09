@@ -74,7 +74,7 @@ export function mountAtlasLens({getRecords,getView,getSelectedApplication,openSe
      ).join(""):'<p class="lens-thread-empty">No saved conversations yet.</p>')+'</div>';
  }
  function contextOptions(){
- const rows=records().filter(x=>x.record_type==="tracked").slice(0,400);
+ const rows=records().filter(x=>x.record_type==="tracked"||x.record_type==="candidate").slice(0,400);
  return '<option value="">Portfolio · all applications</option>'+rows.map(x=>'<option value="'+escapeHTML(x.id)+'"'+(state.applicationId===x.id?" selected":"")+'>'+escapeHTML(short(x.name,69))+'</option>').join("");
  }
  function agentOptions(){return state.agents.map(a=>'<option value="'+escapeHTML(a.id)+'"'+(state.agent===a.id?" selected":"")+'>'+escapeHTML(short(a.label,45))+'</option>').join("")}
@@ -214,7 +214,12 @@ export function mountAtlasLens({getRecords,getView,getSelectedApplication,openSe
  if(action==="toggle"){setOpen(!state.open);return}
  if(action==="close"){setOpen(false);return}
  if(action==="expand"){state.expanded=!state.expanded;render();byId("lensInput")?.focus();return}
- if(action==="new"){state.turns=[];state.error="";state.draft="";render();byId("lensInput")?.focus();return}
+ if(action==="new"){if(state.busy)return;clearThread();state.draft="";render();byId("lensInput")?.focus();return}
+ if(action==="history"){if(state.busy||!state.connected)return;state.historyOpen=!state.historyOpen;void fetchThreads().then(()=>render());render();return}
+ if(action==="open-thread"){if(state.busy)return;void openThread(button.dataset.id).catch(error=>{state.error=short(error.message,200);render()});return}
+ if(action==="delete-thread"){if(state.busy)return;void deleteThread(button.dataset.id).catch(error=>{state.error=short(error.message,200);render()});return}
+ if(action==="settings"){setOpen(false);openSettings?.();return}
+ if(action==="focus-record"){setOpen(false);onFocusApplication?.(button.dataset.id);return}
  if(action==="refresh"){refresh();return}
  if(action==="prompt"){state.draft=button.dataset.value||"";render();byId("lensInput")?.focus();return}
  if(action==="stop"){state.abort?.abort();return}
@@ -223,7 +228,7 @@ export function mountAtlasLens({getRecords,getView,getSelectedApplication,openSe
  });
  root.addEventListener("submit",event=>{if(event.target.id!=="lensForm")return;event.preventDefault();submit();});
  root.addEventListener("input",event=>{if(event.target.id==="lensInput")state.draft=event.target.value;});
- root.addEventListener("change",event=>{if(event.target.id==="lensScope")context(event.target.value);if(event.target.id==="lensAgent")state.agent=event.target.value});
+ root.addEventListener("change",event=>{if(event.target.id==="lensScope")context(event.target.value);if(event.target.id==="lensAgent"&&!state.busy){if(state.agent!==event.target.value){clearThread();state.agent=event.target.value;syncRoute();render();byId("lensInput")?.focus()}}});
  root.addEventListener("keydown",event=>{
  if(event.target.id==="lensInput"&&event.key==="Enter"&&!event.shiftKey&&!event.isComposing){event.preventDefault();submit();}
  if(event.key==="Escape"&&state.open){event.preventDefault();setOpen(false);}
