@@ -54,6 +54,7 @@ jobs:
           python -m unittest discover -s tests -p 'test_workspace.py'
           node --check site/app.js
           node --check site/modules/console.mjs
+          node --check site/modules/operations.mjs
           node --test tests/domain.test.mjs
           test -s site/modules/domain.mjs
           test -s site/index.html

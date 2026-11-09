@@ -44,6 +44,7 @@ jobs:
       - run: python -m compileall -q scripts phd_agents
       - run: node --check site/app.js
       - run: node --check site/modules/console.mjs
+      - run: node --check site/modules/operations.mjs
       - run: node --check site/modules/domain.mjs
       - run: python -m pytest tests -q
       - name: Validate snapshot builder as deployed script

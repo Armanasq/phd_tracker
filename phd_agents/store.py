@@ -96,7 +96,7 @@ class Store:
         if "document_states" in patch:
             if not isinstance(patch["document_states"], dict) or len(patch["document_states"]) > 30 or any(v not in DOCUMENT for v in patch["document_states"].values()):
                 raise ValueError("Invalid document readiness state")
-        if "estimated_hours" in patch and (not isinstance(patch["estimated_hours"], (int, float)) or isinstance(patch["estimated_hours"], bool) or not 0 <= patch["estimated_hours"] <= 400):
+        if "estimated_hours" in patch and patch["estimated_hours"] is not None and (not isinstance(patch["estimated_hours"], (int, float)) or isinstance(patch["estimated_hours"], bool) or not 0 <= patch["estimated_hours"] <= 400):
             raise ValueError("Invalid effort estimate")
         if "followup" in patch and patch["followup"] not in (None, ""):
             from datetime import date

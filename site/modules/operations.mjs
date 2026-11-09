@@ -249,8 +249,8 @@ export function createOperations({request,onChange,onReload,getRecords,notify}){
     const id=values.application_id,version=Number(values.private_version);
     const patch={status:values.status,priority:values.priority,next_step:values.next_step,
                  notes:values.notes,receipt:values.receipt};
-    if(values.followup)patch.followup=values.followup;
-    if(values.estimated_hours!=="")patch.estimated_hours=Number(values.estimated_hours);
+    patch.followup=values.followup||null;
+    patch.estimated_hours=values.estimated_hours===""?null:Number(values.estimated_hours);
     const record=byId(id);
     const documents={};
     for(const key of Object.keys(record?.document_states||{}))if(key in values)documents[key]=values[key];
