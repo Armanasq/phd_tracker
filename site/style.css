@@ -954,3 +954,8 @@ body.dark .decision-brief-context>span,
 body.dark .decision-brief-bottom{color:#d0dfc9}
 body.dark .runway-weekday,
 body.dark .runway-due{color:#c3d8c7}
+
+/* Final evidence-led WCAG contrast adjustments */
+.agenda-number{color:#405b47}
+.agenda-meta{color:#476451}
+body.dark .agenda-number,body.dark .agenda-meta{color:#c0dac4}
