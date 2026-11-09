@@ -6,6 +6,7 @@ from pathlib import Path
 
 from openpyxl import Workbook, load_workbook
 
+from scripts import discovery_engine
 from scripts.discovery_engine import aggregate, inria_cards, relevant_score, safe_url
 from scripts.ingest_discovery import ingest
 from scripts.notification_engine import evaluate, milestone_for, outstanding
@@ -246,3 +247,30 @@ def test_monitor_outage_not_reported_as_application_conflict(tmp_path):
     alerts = [e for e in result["events"] if e["kind"] == "source_health"]
     assert {e["source_id"] for e in alerts} == {"known-lab", "other"}
     assert not any(e["kind"] == "conflict" for e in result["events"])
+
+def test_discovery_blocks_unsafe_http_redirects():
+    from urllib.error import URLError
+    from urllib.request import Request
+
+    redirect = discovery_engine.SafeDiscoveryRedirect()
+    original = Request("https://example.org/positions")
+    for target in (
+        "http://example.org/positions",
+        "https://127.0.0.1/private",
+        "https://user:pw@example.org/secret",
+        "https://example.org:8443/positions",
+    ):
+        try:
+            redirect.redirect_request(original, None, 302, "Moved", {}, target)
+        except URLError:
+            continue
+        raise AssertionError("Unsafe academic discovery redirect was permitted: " + target)
+
+
+def test_empty_academic_board_reports_parser_gap(tmp_path, monkeypatch):
+    monkeypatch.setattr(discovery_engine, "collect_board", lambda *args, **kwargs: [])
+    out = tmp_path / "board.json"
+    result = discovery_engine.collect("academictransfer", out, tmp_path / "previous.json")
+    assert result["records"] == []
+    assert any("no parseable relevant doctoral postings" in e for e in result["errors"])
+    assert json.loads(out.read_text())["errors"] == result["errors"]
