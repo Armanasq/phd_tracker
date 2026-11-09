@@ -448,7 +448,7 @@ async function runIntegratedAgent(){
  try{
   const response=await fetch("./api/agents/run",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({agent_id:"portfolio_planner",provider_id:provider,input_text:prompt,cloud_consent:cloud})});
   const payload=await response.json();if(!response.ok)throw Error(payload.error||"Inference failed");
-  const content=payload.output||payload.answer||payload.response||payload;
+  const content=payload.text??payload.output??payload.answer??payload.response??payload;
   if(result)result.textContent=typeof content==="string"?content:JSON.stringify(content,null,2);
  }catch(error){if(result)result.textContent="Inference unavailable: "+error.message}
  finally{aiRuntime.busy=false}

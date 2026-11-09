@@ -62,6 +62,15 @@ async function main(){
     const out=path.resolve('artifacts','ui-qa');
     await fs.mkdir(out,{recursive:true});
     await page.screenshot({path:path.join(out,'ai-studio-providers-desktop.png'),fullPage:true});
+    await page.goto(url+'/index.html',{waitUntil:'networkidle'});
+    await page.locator('#aiProvider option').first().waitFor({timeout:12000});
+    await page.route('**/api/agents/run',route=>route.fulfill({status:200,contentType:'application/json',
+      body:JSON.stringify({id:'synthetic-test-run',text:'Verified evidence required for the closing time.',status:'proposed'})}));
+    await page.locator('#body [data-action="ai-run"]').click();
+    await page.locator('#aiInlineResult').getByText('Verified evidence required for the closing time.').waitFor();
+    assert.equal((await page.locator('#aiInlineResult').innerText()).trim(),'Verified evidence required for the closing time.');
+    await page.goto(url+'/ai-studio.html',{waitUntil:'networkidle'});
+    await page.locator('#connection.live').waitFor();
     await page.setViewportSize({width:390,height:844});
     await page.locator('#mobileStudioView').selectOption('settings');
     await page.locator('#settingsForm').waitFor();
