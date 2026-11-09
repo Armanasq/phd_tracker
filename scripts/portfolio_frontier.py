@@ -11,9 +11,9 @@ from openpyxl import load_workbook
 from openpyxl.styles import Alignment, Font, PatternFill
 
 if __package__:
-    from .source_policy import classify_deadline_note, primary_source_verified
+    from .source_policy import classify_deadline_note, primary_source_verified, summarize_watch_statuses
 else:
-    from source_policy import classify_deadline_note, primary_source_verified
+    from source_policy import classify_deadline_note, primary_source_verified, summarize_watch_statuses
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS_FILE = ROOT / "data" / "application_assets.json"
@@ -51,12 +51,7 @@ def evaluate(wb, assets: dict, today: date, opportunity_records: list[dict], lat
     if any(v.get("status") not in STATUSES for v in resources.values()):
         raise ValueError("Application asset status outside allowed states")
     known = {r["id"]: r for r in opportunity_records}
-    watches = {}
-    for record in latest.get("source_statuses", []):
-        application = record.get("application_id") or record["id"]
-        status = record.get("status")
-        if status in {"contradiction_closed_portal", "contradiction_deadline_mismatch"} or application not in watches:
-            watches[application] = status
+    watches = summarize_watch_statuses(latest.get("source_statuses", []))
     entries = []
     leverage = defaultdict(lambda: {"mention_count": 0, "within_30_days": 0, "urgency_index": 0.0})
     ws = wb["Action list"]
@@ -91,11 +86,18 @@ def evaluate(wb, assets: dict, today: date, opportunity_records: list[dict], lat
             evidence.append("This is a priority-review milestone, NOT the final application deadline")
         elif deadline_type == "unverified":
             evidence.append("Official final application date requires confirmation")
-        if watches.get(sid) in ("contradiction_closed_portal", "review_source_changed", "contradiction_deadline_mismatch"):
-            evidence.append("Official page requires rechecking: " + watches[sid])
-        readiness = "source_conflict" if evidence and any("Official page" in e for e in evidence) else (
-            "explicit_tasks_remaining" if actionable else "requires_readiness_confirmation" if unknown else
-            "no_unresolved_detected_requirements")
+        watch_status = watches.get(sid)
+        if watch_status in {"contradiction_closed_portal", "review_source_changed", "contradiction_deadline_mismatch"}:
+            evidence.append("Official page requires rechecking: " + watch_status)
+        elif watch_status in {"unavailable", "response_too_large", "disallowed_host", "unsafe_redirect"}:
+            evidence.append("Source monitor unable to validate live page: " + watch_status)
+        readiness = (
+            "source_conflict" if any("Official page" in item for item in evidence) else
+            "source_health_unverified" if any("Source monitor" in item for item in evidence) else
+            "explicit_tasks_remaining" if actionable else
+            "requires_readiness_confirmation" if unknown else
+            "no_unresolved_detected_requirements"
+        )
         entries.append({
             "source_id": sid,
             "deadline": due.isoformat(),
@@ -126,6 +128,7 @@ def evaluate(wb, assets: dict, today: date, opportunity_records: list[dict], lat
         "explicit_readiness_policy": "Unknown inputs remain unknown. Mentioned documents are not evidence of missing documents.",
         "active_future_opportunities": len(entries),
         "source_conflict_count": sum(x["readiness"] == "source_conflict" for x in entries),
+        "source_health_warning_count": sum(x["readiness"] == "source_health_unverified" for x in entries),
         "resource_frontier": impact,
         "applications": entries,
     }
