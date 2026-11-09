@@ -62,7 +62,7 @@ function workflows(){
  const d=state.data;
  return heading("03 / AUTOMATION DESIGN","Workflows and schedules","Connect agents to explicit tasks and schedules. Each run creates an auditable proposal; no external side effects or hidden submissions.",btn("New workflow","new-workflow","","primary")+btn("Evaluate schedules","scheduler-tick"))+
  '<div class="notice neutral">Scheduled execution occurs only when you run the private scheduler. Disabled is the default. Scheduled cloud calls require a separate saved cloud-consent setting.</div>'+
- '<div class="cards two">'+d.catalog.workflows.map(w=>'<article class="catalog-card"><div class="catalog-top"><span class="catalog-badge">'+escape(w.id)+'</span>'+tag(w.enabled?"Enabled":"Disabled",w.enabled?"":"warn")+'</div><h3>'+escape(w.label)+'</h3><p>'+escape(w.description)+'</p><div class="row-meta">'+tag(w.schedule)+tag(w.agent_id)+tag(w.provider_id||"ollama")+'</div><div class="buttons">'+minor("Edit workflow","edit-workflow",w.id)+minor("Run now","workflow-run",w.id)+'</div></article>').join("")+'</div>';
+ '<div class="cards two">'+d.catalog.workflows.map(w=>'<article class="catalog-card"><div class="catalog-top"><span class="catalog-badge">'+escape(w.id)+'</span>'+tag(w.enabled?"Enabled":"Disabled",w.enabled?"":"warn")+'</div><h3>'+escape(w.label)+'</h3><p>'+escape(w.description)+'</p><div class="row-meta">'+tag(w.schedule)+tag((w.steps||[w.agent_id]).join(" then "))+tag(w.provider_id||"ollama")+'</div><div class="buttons">'+minor("Edit workflow","edit-workflow",w.id)+minor("Run now","workflow-run",w.id)+'</div></article>').join("")+'</div>';
 }
 function providers(){
  const d=state.data;
@@ -152,12 +152,14 @@ function configModal(kind,id=""){
  }else if(kind==="agent"){
   body=textField("id","Agent identifier",old.id||"")+textField("label","Agent name",old.label||"")+
   area("description","Purpose and human-facing description",old.description||"",2)+
-  area("instructions","Specialized system instructions",old.instructions||"",7);
+  area("instructions","Specialized system instructions",old.instructions||"",7)+
+  textField("tools","Allowlisted tools, comma-separated",(old.tools||[]).join(", "), "Optional tools: preflight, daily_agenda, deadline_clocks, referee_dependencies, evidence_disputes, research_alignment, capacity_screen, discovery_health");
  }else{
   body=textField("id","Workflow identifier",old.id||"")+textField("label","Workflow name",old.label||"")+
   '<div class="field"><label>Assigned agent</label><select name="agent_id">'+selectChoices(d.catalog.agents.map(x=>({id:x.id,label:x.label})),old.agent_id||"portfolio_planner")+'</select></div>'+
   '<div class="field"><label>Schedule</label><select name="schedule">'+selectChoices(["manual","daily","twice_daily","weekly"].map(z=>({id:z,label:z})),old.schedule||"manual")+'</select></div>'+
   '<div class="field"><label>Provider for scheduled runs</label>'+providerSelect("provider_id",old.provider_id||"ollama")+'</div>'+
+  textField("steps","Sequential agent stages, comma-separated",(old.steps||[old.agent_id||"portfolio_planner"]).join(", "), "One to three known agent IDs")+
   area("description","What this workflow does",old.description||"",2)+area("prompt","Custom workflow objective",old.prompt||"",3)+
   '<div class="field checkbox"><input type="checkbox" id="enabledFlow" name="enabled" '+(old.enabled?"checked":"")+'><label for="enabledFlow">Enable scheduled execution</label></div>'+
   '<div class="field checkbox"><input type="checkbox" id="allowCloudFlow" name="cloud_consent" '+(old.cloud_consent?"checked":"")+'><label for="allowCloudFlow">Authorize scheduled cloud-model disclosure of application context</label></div>';
@@ -277,9 +279,13 @@ async function submitConfig(form){
  if(kind==="provider"){
   body.local=form.elements.local.checked;
   body.max_output_tokens=Number(raw.max_output_tokens);
+ }else if(kind==="agent"){
+  if(body.tools.trim())body.tools=body.tools.split(",").map(x=>x.trim()).filter(Boolean);
+  else delete body.tools;
  }else if(kind==="workflow"){
   body.enabled=form.elements.enabled.checked;
   body.cloud_consent=form.elements.cloud_consent.checked;
+  body.steps=body.steps.split(",").map(x=>x.trim()).filter(Boolean);
  }
  await api("/api/catalog/"+kind,body);
  close();await load();toast("Configuration saved privately");
