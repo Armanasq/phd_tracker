@@ -229,3 +229,20 @@ def test_priority_date_notification_is_not_a_final_deadline(tmp_path):
     assert target["date_type"] == "priority"
     assert not any(e["kind"] == "deadline" and e["source_id"] == "known-lab"
                    for e in result["events"])
+
+def test_monitor_outage_not_reported_as_application_conflict(tmp_path):
+    path = workbook(tmp_path)
+    data = tmp_path / "data"
+    data.mkdir()
+    (data / "latest_run.json").write_text(json.dumps({
+        "source_statuses": [
+            {"id": "monitor-unavailable", "application_id": "known-lab",
+             "status": "unavailable", "source_url": "https://example.edu/phd"},
+            {"id": "monitor-unsafe", "application_id": "other",
+             "status": "unsafe_redirect", "source_url": "https://example.edu/other"},
+        ]
+    }))
+    result = evaluate(date(2026, 11, 6), path, data)
+    alerts = [e for e in result["events"] if e["kind"] == "source_health"]
+    assert {e["source_id"] for e in alerts} == {"known-lab", "other"}
+    assert not any(e["kind"] == "conflict" for e in result["events"])
