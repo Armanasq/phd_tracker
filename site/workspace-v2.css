@@ -329,3 +329,17 @@ body.dark .os-provider-icon,body.dark .os-avatar,body.dark .os-workflow-mark,bod
 @media(prefers-reduced-motion:reduce){
  .os-btn,.nav-btn,.top-search,.model-route{transition:none;transform:none}
 }
+
+@media(max-width:980px){
+ .top-search{width:40px;min-width:40px;max-width:40px;justify-content:center;padding:6px}
+ .top-search span,.top-search kbd{display:none}
+ .top-actions{min-width:0;gap:7px}
+ .model-route{max-width:145px}
+}
+@media(max-width:430px){
+ .export-btn{font-size:0;min-width:33px;padding:7px 8px}
+ .export-btn span{font-size:15px}
+ .model-route{display:none}
+ .topbar .crumb{max-width:65px;min-width:0;overflow:hidden}
+ .topbar .crumb strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+}
