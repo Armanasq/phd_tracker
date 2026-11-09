@@ -43,3 +43,5 @@ node --check site/app.js
 ## Integrated visualization and browser QA
 
 The existing interactive EvidenceGraph dashboard is preserved and published at `/evidencegraph/` beside PhD Atlas. The `visual-qa.yml` workflow runs the legacy dashboard smoke test and the new PhD Atlas browser suite, including filters, calendar, pipeline drag-and-drop, comparisons, local edits, exports and mobile screenshots. It uploads rendered screenshots as a GitHub Actions artifact.
+
+For narrow screens, the application registry uses accessible application cards rather than a horizontally cropped desktop data table. The underlying source rows, comparison controls, and filters are unchanged.

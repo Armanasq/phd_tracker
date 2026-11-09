@@ -410,3 +410,22 @@ body.dark{--muted:#b6c3b7;--soft:#a5b2a7}
  .nav-btn .nav-label{font-size:11.5px}
  .week-row{font-size:11.5px}
 }
+
+/* Separate responsive presentation, without changing native table semantics. */
+.app-card-list{display:none}
+@media(max-width:680px){
+ .desktop-table{display:none}
+ .app-card-list{display:flex;flex-direction:column;gap:10px}
+ .app-card{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:16px;min-width:0}
+ .app-card-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:start}
+ .app-card-title{min-width:0}
+ .app-card-title>.rowbutton{display:block;font-size:13px;font-weight:660;line-height:1.42}
+ .app-card-title small,.app-card-due small{display:block;font-size:10px;color:var(--muted);margin-top:6px}
+ .app-card-title small{overflow-wrap:anywhere}
+ .app-card-due{display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-start;gap:2px;white-space:nowrap}
+ .app-card-due small{margin-top:2px}
+ .app-card-labels{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:13px}
+ .app-card-action{font-size:11.5px;color:var(--text);line-height:1.55;margin-top:13px;padding-top:13px;border-top:1px solid var(--line);overflow-wrap:anywhere}
+ .app-card-compare{display:flex;align-items:center;gap:9px;padding-top:12px;margin-top:12px;border-top:1px solid var(--line);font-size:11px;color:var(--text);cursor:pointer}
+ .app-card-compare .check{width:16px;height:16px}
+}

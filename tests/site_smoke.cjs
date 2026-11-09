@@ -104,6 +104,12 @@ async function run() {
     assert.ok((await mobile.locator('.cal-day').count())>=28);
     await mobile.locator('#navigation [data-action="nav"][data-value="applications"]').click();
     assert.ok((await mobile.locator('tbody tr').count())>=100);
+    assert.ok((await mobile.locator('.app-card:visible').count())>=100);
+    assert.equal(await mobile.locator('.desktop-table:visible').count(),0);
+    await mobile.locator('.app-card .rowbutton').first().click();
+    assert.equal(await mobile.locator('.modal [data-document]').count()>0,true);
+    await mobile.keyboard.press('Escape');
+
     const mobileOverflow=await mobile.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
     assert.ok(mobileOverflow<=2, 'Mobile page must not overflow: '+mobileOverflow+'px');
     await mobile.screenshot({path:path.join(out,'phd-atlas-mobile-applications.png'),fullPage:false});
