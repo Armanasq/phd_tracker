@@ -59,6 +59,9 @@ jobs:
           node --test tests/domain.test.mjs
           test -s site/modules/domain.mjs
           test -s site/index.html
+          test -s site/favicon.svg
+          test -s site/sitemap.xml
+          grep -q 'https://armanasq.github.io/phd_tracker/' site/index.html
           test -s site/style.css
           test -s site/workspace-v2.css
           test -s site/quiet.css
@@ -88,8 +91,13 @@ jobs:
           for attempt in 1 2 3 4 5 6 7 8; do
             if curl -fsSL --max-time 15 "$base/?revision=$GITHUB_SHA" -o /tmp/phd-hosted-index.html &&
                grep -q 'type="module"' /tmp/phd-hosted-index.html &&
+               grep -q 'rel="canonical"' /tmp/phd-hosted-index.html &&
                curl -fsSL --max-time 15 "$base/modules/domain.mjs?revision=$GITHUB_SHA" -o /tmp/phd-hosted-domain.mjs &&
                grep -q 'validateSnapshot' /tmp/phd-hosted-domain.mjs &&
+               curl -fsSL --max-time 15 "$base/favicon.svg?revision=$GITHUB_SHA" -o /tmp/phd-hosted-icon.svg &&
+               grep -q '<svg' /tmp/phd-hosted-icon.svg &&
+               curl -fsSL --max-time 15 "$base/sitemap.xml?revision=$GITHUB_SHA" -o /tmp/phd-hosted-sitemap.xml &&
+               grep -q 'https://armanasq.github.io/phd_tracker/' /tmp/phd-hosted-sitemap.xml &&
                curl -fsSL --max-time 15 "$base/data/workspace.json?revision=$GITHUB_SHA" -o /tmp/phd-hosted-data.json &&
                python -c 'import json; d=json.load(open("/tmp/phd-hosted-data.json")); assert d["schema_version"] == 1 and len(d["records"]) >= 109'; then
               echo "Confirmed deployed HTML, JavaScript module and 109+ authoritative source records at $base"

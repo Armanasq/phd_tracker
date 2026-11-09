@@ -1,0 +1,17 @@
+{
+  "repository": "Armanasq/phd_tracker",
+  "description": "Evidence-backed PhD application tracker with deadlines, research fit, source verification, and optional private AI agents.",
+  "homepage": "https://armanasq.github.io/phd_tracker/",
+  "topics": [
+    "phd-applications",
+    "phd-tracker",
+    "research-management",
+    "source-verification",
+    "github-pages",
+    "agentic-ai",
+    "ai-agents",
+    "python",
+    "javascript",
+    "llm"
+  ]
+}

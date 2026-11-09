@@ -11,6 +11,10 @@ on:
       - phd_agents/**
       - requirements-intelligence.txt
       - .github/workflows/**
+      - .github/README_TEMPLATE.md
+      - README.md
+      - CHANGELOG.md
+      - VERSION
   pull_request:
     paths:
       - scripts/**

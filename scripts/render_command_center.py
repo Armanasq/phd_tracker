@@ -573,6 +573,31 @@ The following earlier preparation steps are **not** additional November 6 submis
     return doc
 
 
+PUBLIC_README = (ROOT / ".github" / "README_TEMPLATE.md").read_text(encoding="utf-8")
+
+
+def report_paths(markdown: str) -> str:
+    def link(match: re.Match[str]) -> str:
+        target = match.group(1)
+        if target.startswith(("#", "http:", "https:", "mailto:", "/")):
+            return match.group(0)
+        if target.startswith("../../actions/") or target.startswith("../../issues/"):
+            return "](" + "https://github.com/Armanasq/phd_tracker/" + target.removeprefix("../../") + ")"
+        return "](../" + target + ")"
+
+    markdown = re.sub(r"\]\(([^)]+)\)", link, markdown)
+
+    def html_link(match: re.Match[str]) -> str:
+        target = match.group(2)
+        if target.startswith("../../actions/") or target.startswith("../../issues/"):
+            target = "https://github.com/Armanasq/phd_tracker/" + target.removeprefix("../../")
+        else:
+            target = "../" + target
+        return match.group(1) + '="' + target + '"'
+
+    return re.sub(r'(src|href)="(?!https?://|#|/)([^"]+)"', html_link, markdown)
+
+
 def render(root=ROOT):
     plan=load(root/"data"/"execution_plan.json")
     if not plan or "today" not in plan:
@@ -593,12 +618,20 @@ def render(root=ROOT):
     experience_block=experience_markdown(load(view_path)) if view_path.is_file() else ""
     legacy=dashboard_md(plan,metrics,experience_block)
     if view_path.is_file():
-        studio=generate_readme_studio(root,load(view_path),plan)
-        readme=(studio+"\n\n<details>\n<summary><b>Engineering deep dive · original execution intelligence and source diagnostics</b></summary>\n\n"
-                +legacy+"\n\n</details>\n")
+        studio = generate_readme_studio(root, load(view_path), plan)
+        report = (studio + "\n\n<details>\n<summary><b>Engineering detail · execution intelligence and source diagnostics</b></summary>\n\n"
+                  + legacy + "\n\n</details>\n")
     else:
-        readme=legacy
-    (root/"README.md").write_text(readme,encoding="utf-8")
+        report = legacy
+    (docs / "RESEARCH_REPORT.md").write_text(
+        "# Generated evidence report\n\n[Overview](../README.md) · [Open workspace](https://armanasq.github.io/phd_tracker/)\n\n"
+        + "**Snapshot:** " + str(plan.get("as_of", "unavailable"))
+        + ". This report is generated from committed evidence, not live admissions information.\n\n"
+        + report_paths(report), encoding="utf-8",
+    )
+    template = root / ".github" / "README_TEMPLATE.md"
+    readme = template.read_text(encoding="utf-8") if template.is_file() else PUBLIC_README
+    (root / "README.md").write_text(readme, encoding="utf-8")
     (docs/"TODAY.md").write_text(todays_md(plan,metrics),encoding="utf-8")
     output={
       "rendered_as_of":plan["as_of"],

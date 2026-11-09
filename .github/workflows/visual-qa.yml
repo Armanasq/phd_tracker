@@ -18,13 +18,21 @@ on:
       - scripts/readme_studio.py
       - tests/ui_smoke.cjs
       - .github/workflows/visual-qa.yml
+  pull_request:
+    paths:
+      - dashboard/**
+      - site/**
+      - scripts/build_workspace.py
+      - scripts/render_command_center.py
+      - tests/**
+      - .github/workflows/visual-qa.yml
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: evidencegraph-browser-visual-qa
+  group: evidencegraph-browser-visual-qa-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
