@@ -12,6 +12,11 @@ from urllib.request import Request, urlopen
 
 from openpyxl import load_workbook
 
+if __package__:
+    from .source_policy import classify_deadline_note
+else:
+    from source_policy import classify_deadline_note
+
 ROOT = Path(__file__).resolve().parents[1]
 STATE_PATH = ROOT / "data" / "notification_state.json"
 REPORT_PATH = ROOT / "data" / "notification_report.json"
@@ -72,15 +77,18 @@ def evaluate(today: date, workbook: Path, data_dir: Path) -> dict:
         if days < 0:
             continue
         sid = str(row[20])
+        deadline_type = classify_deadline_note(row[2])
+        kind = {"final": "deadline", "priority": "priority", "unverified": "unverified_date"}[deadline_type]
         item = {"source_id": sid, "name": clean(row[6], 135), "deadline": due.isoformat(),
-                "days": days, "source": clean(row[19], 300), "next_step": clean(row[10], 250)}
+                "date_type": deadline_type, "days": days,
+                "source": clean(row[19], 300), "next_step": clean(row[10], 250)}
         if days <= 45:
             upcoming.append(item)
         milestone = milestone_for(days)
         if milestone is None:
             continue
-        events.append({**item, "kind": "deadline", "milestone": milestone,
-                       "id": key_event("deadline", sid, due.isoformat() + ":" + str(milestone))})
+        events.append({**item, "kind": kind, "milestone": milestone,
+                       "id": key_event(kind, sid, due.isoformat() + ":" + str(milestone))})
         all_text = " ".join(str(row[i] or "") for i in (10, 11, 12, 13, 14)).lower()
         for document, triggers in ASSETS.items():
             if any(term in all_text for term in triggers):
@@ -184,7 +192,7 @@ def apply_policy(events: list[dict], policy: dict, today: date) -> list[dict]:
     selected = []
     for event in events:
         sid = event["source_id"]
-        critical = event["kind"] == "deadline" and event.get("days", 99) <= 1
+        critical = event["kind"] in ("deadline", "priority") and event.get("days", 99) <= 1
         if not critical:
             if sid in muted:
                 continue
@@ -199,7 +207,7 @@ def apply_policy(events: list[dict], policy: dict, today: date) -> list[dict]:
     selected.sort(key=lambda x: (
         0 if x["kind"] == "conflict" else 1,
         0 if x["source_id"] in priority else 1,
-        0 if x["kind"] == "deadline" else 1 if x["kind"] == "new_lead" else 2,
+        0 if x["kind"] in ("deadline", "priority") else 1 if x["kind"] == "new_lead" else 2,
         x.get("days", 9999),
         x["source_id"],
     ))
@@ -214,12 +222,12 @@ def outstanding(events: list[dict], state: dict, channel: str, limit: int = 30) 
 def digest(evaluated: dict, selected: list[dict]) -> str:
     lines = [MARKER, "# PhD Intelligence — Action Center", "",
              "As of " + evaluated["as_of"] + " (UTC). A live page indicator is not a guarantee of eligibility.", "",
-             "## Deadlines in the next 45 days", "",
-             "| Days | Date | Opportunity |", "|---:|---|---|"]
+             "## Dated application milestones in the next 45 days", "",
+             "| Days | Date | Type | Opportunity |", "|---:|---|---|---|"]
     for row in evaluated["upcoming"][:35]:
-        lines.append(f'| {row["days"]} | {row["deadline"]} | {row["name"]} |')
+        lines.append(f'| {row["days"]} | {row["deadline"]} | {row["date_type"]} | {row["name"]} |')
     if not evaluated["upcoming"]:
-        lines.append("| — | — | None in the next 45 days |")
+        lines.append("| — | — | — | None in the next 45 days |")
     lines += ["", "## Portfolio leverage — documents to prepare once", "",
               "These are potentially required, not verified as missing. Rank = reuse count / (1 + closest deadline days).",
               "", "| Document | Relevant applications | Closest deadline |",
@@ -247,13 +255,17 @@ def digest(evaluated: dict, selected: list[dict]) -> str:
     if daily:
         counted = daily.get("counts", {})
         lines += ["", "## Full-workbook execution plan — " + evaluated["as_of"], "",
-                  "**" + str(counted.get("deadline_actions", 0)) + "** application submission deadlines · " +
+                  "**" + str(counted.get("deadline_actions", 0)) + "** final application deadlines · " +
+                  "**" + str(counted.get("priority_reviews", 0)) + "** priority-review dates · " +
+                  "**" + str(counted.get("unverified_dates", 0)) + "** unverified dates · " +
                   "**" + str(counted.get("timeline_tasks", 0)) + "** scheduled programme steps · " +
                   "**" + str(counted.get("shared_tasks", 0)) + "** explicit cross-route tasks.",
                   "",
                   "These are separate clocks. Earlier steps associated with today's final deadline are not counted as tasks due today.",
                   ""]
         for item in (daily.get("eligible_application_deadlines", []) +
+                     daily.get("priority_review_dates", []) +
+                     daily.get("unverified_application_dates", []) +
                      daily.get("cross_route_tasks", []) +
                      daily.get("scheduled_timeline_tasks", []))[:13]:
             lines.append("- " + clean(item.get("action", ""), 150) + " — " +
@@ -263,7 +275,11 @@ def digest(evaluated: dict, selected: list[dict]) -> str:
     lines += ["", "## Recently triggered notifications", ""]
     for item in selected[:20]:
         if item["kind"] == "deadline":
-            lines.append(f'- Deadline in {item["days"]}d: {item["name"]} ({item["deadline"]})')
+            lines.append(f'- Final deadline in {item["days"]}d: {item["name"]} ({item["deadline"]})')
+        elif item["kind"] == "priority":
+            lines.append(f'- Priority-review date (not final) in {item["days"]}d: {item["name"]} ({item["deadline"]})')
+        elif item["kind"] == "unverified_date":
+            lines.append(f'- Unverified application date in {item["days"]}d: {item["name"]} ({item["deadline"]})')
         elif item["kind"] == "daily_plan":
             lines.append("- Daily workbook task agenda ready: " + str(item["counts"].get("total_distinct_scheduled_actions", 0)) + " scheduled actions across all original sources.")
         elif item["kind"] == "new_lead":
@@ -291,7 +307,11 @@ def comment_body(selected: list[dict]) -> str:
     lines = ["### New research signals and deadline thresholds", ""]
     for item in selected:
         if item["kind"] == "deadline":
-            lines.append(f'- **{item["days"]} days remaining:** {item["name"]} — {item["deadline"]}')
+            lines.append(f'- **{item["days"]} days to final deadline:** {item["name"]} — {item["deadline"]}')
+        elif item["kind"] == "priority":
+            lines.append(f'- **{item["days"]} days to priority review (NOT final):** {item["name"]} — {item["deadline"]}')
+        elif item["kind"] == "unverified_date":
+            lines.append(f'- **Unverified date in {item["days"]} days:** {item["name"]} — {item["deadline"]}')
         elif item["kind"] == "daily_plan":
             lines.append("- **Today\'s full-workbook agenda:** " + str(item["counts"].get("total_distinct_scheduled_actions", 0)) + " dated actions; see docs/TODAY.md (application deadlines and preparation tasks are distinct).")
         elif item["kind"] == "new_lead":
