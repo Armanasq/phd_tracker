@@ -153,7 +153,7 @@ function configModal(kind,id=""){
   body=textField("id","Agent identifier",old.id||"")+textField("label","Agent name",old.label||"")+
   area("description","Purpose and human-facing description",old.description||"",2)+
   area("instructions","Specialized system instructions",old.instructions||"",7)+
-  textField("tools","Allowlisted tools, comma-separated",(old.tools||[]).join(", "), "Optional tools: preflight, daily_agenda, deadline_clocks, referee_dependencies, evidence_disputes, research_alignment, capacity_screen, discovery_health");
+  textField("tools","Allowlisted tools, comma-separated",(old.tools||[]).join(", "), "Optional tools: preflight, daily_agenda, deadline_clocks, referee_dependencies, evidence_disputes, research_alignment, capacity_screen, discovery_health, paper_radar, proof_obligations");
  }else{
   body=textField("id","Workflow identifier",old.id||"")+textField("label","Workflow name",old.label||"")+
   '<div class="field"><label>Assigned agent</label><select name="agent_id">'+selectChoices(d.catalog.agents.map(x=>({id:x.id,label:x.label})),old.agent_id||"portfolio_planner")+'</select></div>'+

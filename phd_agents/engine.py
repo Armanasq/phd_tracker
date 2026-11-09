@@ -64,8 +64,14 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str,
                     "source_health": source.get("providers", [])}
     tool_names = agent.get("tools") if isinstance(agent.get("tools"), list) else DEFAULT_TOOLS.get(agent_id, [])
     private = {kind: store.items(kind) for kind in ("profile", "referee", "reference", "milestone", "evidence")}
+    papers = []
+    if "paper_radar" in tool_names:
+        try:
+            papers = json.loads((root / "data" / "research_radar.json").read_text(encoding="utf-8")).get("papers", [])
+        except (OSError, ValueError, TypeError):
+            papers = []
     tool_pack = run_tools(tool_names, data=source, records=records, private=private,
-                          today=today, application_id=application_id)
+                          today=today, application_id=application_id, papers=papers)
     evidence["tool_results"] = tool_pack
     evidence_json = json.dumps(evidence, ensure_ascii=False, separators=(",", ":"))
     if len(evidence_json) > 15500:

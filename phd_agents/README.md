@@ -46,3 +46,7 @@ AI Studio includes separate views for referee requests, source-backed multi-cloc
 The agents use a deterministic tool allowlist: `preflight`, `daily_agenda`, `deadline_clocks`, `referee_dependencies`, `evidence_disputes`, `research_alignment`, `capacity_screen`, and `discovery_health`. Custom agents select any safe subset. Custom workflows can chain 1–3 registered agent stages; each stage's unverified output feeds subsequent stages as untrusted context. Scheduled cloud workflows require explicit stored consent.
 
 API endpoints: `GET /api/operations`, `POST /api/private/{referee,reference,milestone,evidence,profile}`, `POST /api/private/{kind}/{id}/delete`, `POST /api/schedule`. No API route sends external mail, contacts faculty, changes the public tracker, or submits a portal.
+
+## Research evidence tool
+
+The `paper_radar` tool supplies titles, original arXiv links, publication dates and research topics from the repository's committed research radar. Papers do not establish faculty availability or recruitment. The `proof_obligations` tool prioritizes unresolved deterministic preflight checks; neither tool invents admission probabilities or externally verified claims.
