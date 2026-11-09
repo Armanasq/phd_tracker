@@ -1,5 +1,6 @@
 import {daysUntil,isActionable,isClosed as domainClosed,riskSignal,priorityScore,validateSnapshot,documentReadiness,applyRecordFilters,draftState,deadlineCollisions,freshnessState} from "./modules/domain.mjs";
 import {createConsole} from "./modules/console.mjs";
+import {mountAtlasLens} from "./modules/lens.mjs";
 (() => {
 "use strict";
 const VIEWS=[["dashboard","home","Overview"],["applications","file","Applications"],["operations","layers","Operations"],["actions","check","Actions"],["calendar","calendar","Calendar"],["pipeline","columns","Pipeline"],["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],["review","shield","Verification"],["archive","archive","Archive"],["sources","database","Sources"],["ai","sparkles","Copilot"],["agents","bot","Agents"],["automations","flow","Automations"],["activity","activity","Run history"],["settings","settings","Settings"]];
@@ -418,6 +419,7 @@ function go(view){
  window.scrollTo({top:0,behavior:"instant"});render();
 }
 const aiConsole=createConsole({notify,onChange:()=>{if(state.data)render()},navigate:go,getRecords:records,getSourceRecords:()=>state.data?.records||[],onReload:loadSnapshot,getView:()=>state.view});
+let atlasLens=null;
 function explainNotifications(){const supported=("Notification" in window);const permission=supported?Notification.permission:"unsupported";openModal("<h2>Reminder settings</h2>",'<p class="muted">Reminders are computed locally from source dates while this page is open. Closing the tab disables on-page notifications. GitHub Actions provides separate scheduled reminders.</p><div class="notifications"><div class="notification"><strong>Browser permission</strong>'+escapeHTML(permission)+'</div><div class="notification"><strong>Current horizon</strong>Today, 1, 3 and 7 days before a recorded date</div></div><div class="buttons">'+button("Request browser permission","permission","","primary")+button("View GitHub notifications","url",OWNER_REPO+"/actions/workflows/phd-intelligence.yml")+'</div>')}
 function checkNotifications(){if(!state.data||!state.prefs.reminders||!("Notification" in window)||Notification.permission!=="granted")return;const alerted=state.prefs.notified||{};let changed=false;for(const r of records().filter(r=>r.record_type==="tracked")){const d=days(r.deadline);if(!open(r)||![0,1,3,7].includes(d))continue;const key=r.id+"|"+r.deadline+"|"+d;if(alerted[key])continue;try{const n=new Notification("PhD deadline: "+stamp(r.deadline),{body:r.name.slice(0,140)+" — verify portal cutoff and submission state.",tag:key});n.onclick=()=>{window.focus();go("applications");detail(getRecord(r.id));n.close()};alerted[key]=TODAY();changed=true}catch{}}if(changed){state.prefs.notified=Object.fromEntries(Object.entries(alerted).slice(-500));saveStore(PREFS,state.prefs)}}
 function events(){
@@ -427,7 +429,7 @@ function events(){
   const {action:type,value}=el.dataset;
   if(type==="nav")go(value);
   else if(type==="record"){closeModal();detail(getRecord(value))}
-  else if(type==="ai-record"){closeModal();aiConsole.selectApplication(value);go("ai")}
+  else if(type==="ai-record"){closeModal();aiConsole.selectApplication(value);atlasLens?.setApplication(value);atlasLens?.open()}
   else if(type==="ops-record"){closeModal();aiConsole.openApplication(value);go("operations")}
    else if(type==="close")closeModal();
   else if(type==="save-record")saveRecord(false);
@@ -553,6 +555,7 @@ async function loadSnapshot(){
 }
 function init(){
  events();
+ atlasLens=mountAtlasLens({getRecords:records,getView:()=>state.view,getSelectedApplication:()=>state.selected,openSettings:()=>go("settings"),onFocusApplication:id=>detail(getRecord(id))});
  document.body.classList.toggle("dark",state.prefs.theme==="dark");
  const route=location.hash.replace(/^#/,"");
  if(VIEWS.some(([id])=>id===route))state.view=route;
