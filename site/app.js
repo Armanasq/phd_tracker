@@ -428,6 +428,7 @@ function events(){
   const el=e.target.closest("[data-action]");if(!el)return;
   const {action:type,value}=el.dataset;
   if(type==="nav")go(value);
+  else if(type==="lens-open")atlasLens?.open();
   else if(type==="record"){closeModal();detail(getRecord(value))}
   else if(type==="ai-record"){closeModal();aiConsole.selectApplication(value);atlasLens?.setApplication(value);atlasLens?.open()}
   else if(type==="ops-record"){closeModal();aiConsole.openApplication(value);go("operations")}
