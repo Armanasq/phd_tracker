@@ -23,3 +23,7 @@ Do not open a public issue containing a working exploit, secret, or sensitive pe
 Keep the private service bound to `127.0.0.1`. Do not expose its API with an unauthenticated reverse proxy. Publicly hosting it requires independent work on authentication, authorization, TLS, CSRF controls, user isolation, audit access and secure secret storage.
 
 The presence of automated tests or successful deployment workflows does not establish a complete security review.
+
+## Model-provider credential forwarding
+
+Built-in vendor API-key environment variables are bound to their respective official provider hostnames. Custom gateways must use a dedicated, isolated `*_API_KEY` variable, and the outbound request adapters validate this binding even for legacy persisted providers. Local HTTP inference is permitted only on loopback; remote self-hosted endpoints require HTTPS and explicit cloud-data disclosure approval. Redirects are rejected. The service is intended for a trusted single user and does not provide DNS-pinned egress filtering or a secure multi-user secret manager.

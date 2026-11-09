@@ -58,8 +58,44 @@ def validate_url(value: object, local: bool) -> str:
     return candidate
 
 
+_CREDENTIAL_HOSTS: dict[str, tuple[str, ...]] = {
+    "OPENAI_API_KEY": ("api.openai.com",),
+    "AZURE_OPENAI_API_KEY": (".openai.azure.com", ".cognitiveservices.azure.com"),
+    "ANTHROPIC_API_KEY": ("api.anthropic.com",),
+    "GEMINI_API_KEY": ("generativelanguage.googleapis.com",),
+    "OPENROUTER_API_KEY": ("openrouter.ai",),
+    "GROQ_API_KEY": ("api.groq.com",),
+    "DEEPSEEK_API_KEY": ("api.deepseek.com",),
+    "XAI_API_KEY": ("api.x.ai",),
+    "TOGETHER_API_KEY": ("api.together.xyz",),
+    "FIREWORKS_API_KEY": ("api.fireworks.ai",),
+    "MISTRAL_API_KEY": ("api.mistral.ai",),
+    "CEREBRAS_API_KEY": ("api.cerebras.ai",),
+}
+
+
+def validate_credential_binding(provider: dict[str, Any]) -> None:
+    key_name = str(provider.get("api_key_env") or "")
+    local = bool(provider.get("local"))
+    base = validate_url(provider.get("base_url"), local)
+    host = urlsplit(base).hostname
+    if not host:
+        raise ValueError("Provider endpoint hostname is required")
+    if key_name == "VLLM_API_KEY" and not local:
+        raise ValueError("Use a dedicated credential variable for a remote self-hosted model gateway")
+    approved_hosts = _CREDENTIAL_HOSTS.get(key_name)
+    if approved_hosts and not any(
+        host.endswith(name) if name.startswith(".") else host == name
+        for name in approved_hosts
+    ):
+        raise ValueError(
+            "Credential " + key_name + " is restricted to its official provider host. "
+            "Use a dedicated *_API_KEY variable for a custom gateway"
+        )
+
+
 def invoke(provider: dict[str, Any], system: str, prompt: str, *, timeout: int | None = None) -> ModelReply:
-    validate_url(provider["base_url"], bool(provider["local"]))
+    validate_credential_binding(provider)
     key_name = provider.get("api_key_env", "")
     api_key = read_secret(key_name) if key_name else ""
     if key_name and not api_key and not provider["local"]:

@@ -11,7 +11,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, build_opener
 from urllib.parse import quote
 
-from .providers import NoRedirect, ProviderError, validate_url
+from .providers import NoRedirect, ProviderError, validate_url, validate_credential_binding
 from .catalog import PROVIDERS
 from .store import Store, utcnow
 
@@ -86,6 +86,7 @@ def provider_states(store: Store, providers: list[dict[str, Any]]) -> dict[str, 
 
 def model_list(provider: dict[str, Any], timeout: int = 12) -> dict[str, Any]:
     base = validate_url(provider["base_url"], bool(provider["local"]))
+    validate_credential_binding(provider)
     env = str(provider.get("api_key_env") or "")
     api_key = read_secret(env) if env else ""
     if env and not api_key and not provider["local"]:

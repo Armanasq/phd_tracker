@@ -59,7 +59,7 @@ def validate_id(value: object) -> str:
     return value
 
 def provider_spec(value: dict[str, Any]) -> dict[str, Any]:
-    from .providers import validate_url
+    from .providers import validate_url, validate_credential_binding
     if not isinstance(value, dict):
         raise ValueError("Provider must be an object")
     identity = validate_id(value.get("id"))
@@ -92,6 +92,7 @@ def provider_spec(value: dict[str, Any]) -> dict[str, Any]:
               "timeout_seconds": timeout_seconds}
     if temperature not in (None, ""):
         result["temperature"] = float(temperature)
+    validate_credential_binding(result)
     if kind == "azure_deployment":
         version = str(value.get("api_version") or "2024-10-21")
         if not re.fullmatch(r"20[2-9][0-9]-(?:0[1-9]|1[0-2])-[0-3][0-9](?:-preview)?", version):

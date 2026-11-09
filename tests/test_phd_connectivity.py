@@ -83,6 +83,62 @@ class SettingsAndConnectivityTests(unittest.TestCase):
         self.assertFalse(connection_fresh("invalid"))
         self.assertFalse(connection_fresh((datetime.now(timezone.utc) - timedelta(days=2)).isoformat()))
 
+    def test_sensitive_provider_keys_are_bound_to_official_hosts(self) -> None:
+        from phd_agents.catalog import provider_spec
+        from phd_agents.providers import validate_credential_binding
+        safe = {
+            "id": "custom_openai", "kind": "openai_compatible",
+            "base_url": "https://api.openai.com/v1",
+            "model": "sample-model", "api_key_env": "OPENAI_API_KEY",
+            "local": False,
+        }
+        self.assertEqual(provider_spec(safe)["api_key_env"], "OPENAI_API_KEY")
+        for destination in (
+            "https://api.openai.com.evil.example/v1",
+            "https://api.openai.com.attacker.example/v1",
+            "https://unrelated-gateway.example/v1",
+        ):
+            with self.subTest(destination=destination), self.assertRaisesRegex(ValueError, "official provider host"):
+                provider_spec({**safe, "base_url": destination})
+            with self.subTest(legacy_config=destination), self.assertRaisesRegex(ValueError, "official provider host"):
+                validate_credential_binding({**safe, "base_url": destination})
+        self.assertEqual(
+            provider_spec({
+                **safe, "id": "custom_gateway", "base_url": "https://custom-gateway.example/v1",
+                "api_key_env": "CUSTOM_GATEWAY_API_KEY",
+            })["api_key_env"],
+            "CUSTOM_GATEWAY_API_KEY",
+        )
+        azure = {
+            **safe, "id": "custom_azure", "kind": "azure_deployment",
+            "base_url": "https://my-resource.openai.azure.com",
+            "api_key_env": "AZURE_OPENAI_API_KEY",
+        }
+        self.assertEqual(provider_spec(azure)["api_key_env"], "AZURE_OPENAI_API_KEY")
+        with self.assertRaisesRegex(ValueError, "dedicated credential"):
+            provider_spec({
+                **safe, "id": "remote_local_key", "base_url": "https://models.example.com/v1",
+                "api_key_env": "VLLM_API_KEY",
+            })
+
+    def test_legacy_custom_provider_cannot_send_another_vendor_key(self) -> None:
+        from phd_agents.providers import ProviderError
+        legacy = {
+            "id": "legacy", "kind": "openai_compatible", "local": False,
+            "base_url": "https://unrelated-gateway.example/v1",
+            "model": "sample-model", "api_key_env": "OPENAI_API_KEY",
+            "token_parameter": "max_tokens", "max_output_tokens": 128,
+        }
+        with patch.dict(os.environ, {"OPENAI_API_KEY": "synthetic-sensitive"}):
+            with patch("phd_agents.providers.build_opener") as transport:
+                with self.assertRaisesRegex(ValueError, "official provider host"):
+                    invoke(legacy, "System", "Hello")
+                transport.assert_not_called()
+            with patch("phd_agents.connectivity.build_opener") as transport:
+                with self.assertRaisesRegex(ValueError, "official provider host"):
+                    model_list(legacy)
+                transport.assert_not_called()
+
     def test_cloud_loopback_is_not_a_valid_destination(self) -> None:
         with self.assertRaises(ValueError):
             validate_url("https://127.0.0.1:9000/v1", False)
