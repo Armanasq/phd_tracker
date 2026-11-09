@@ -48,7 +48,8 @@ class AutomaticRoutingTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             save_settings(self.store, {"approved_cloud_providers": ["openai"]})
         remember_check(self.store, "openai", status="responded", model="gpt-test")
-        self.assertEqual(save_settings(self.store, {"approved_cloud_providers": ["openai"]})["approved_cloud_providers"], ["openai"])
+        with patch.dict("os.environ", {"OPENAI_API_KEY": "synthetic-only-test-key"}):
+            self.assertEqual(save_settings(self.store, {"approved_cloud_providers": ["openai"]})["approved_cloud_providers"], ["openai"])
         route = resolve_route(self.store, self.providers, "portfolio_planner", "openai")
         self.assertTrue(route.approved)
         self.store.put_custom("provider", provider_spec(next(p for p in self.providers if p["id"] == "openai")))
