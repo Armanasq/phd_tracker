@@ -55,8 +55,8 @@ class MetricsTests(unittest.TestCase):
             "schedule": "daily", "enabled": True, "cloud_consent": True,
             "provider_id": "openai"
         }))
-        remember_check(self.store, "openai", status="responded", model="verified-test-model")
         with patch.dict("os.environ", {"OPENAI_API_KEY": "synthetic-test-only"}):
+            remember_check(self.store, "openai", status="responded", model="verified-test-model")
             save_settings(self.store, {"approved_cloud_providers": ["openai"]})
         now = datetime(2026, 11, 9, 8, 0, tzinfo=timezone.utc)
         with patch("phd_agents.engine.run_workflow", return_value={"id": "run1"}) as run:
