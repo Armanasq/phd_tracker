@@ -101,3 +101,28 @@ def test_main_list_promotion_policy_shared_with_validator():
     assert not refresh.should_promote({**base, "confidence": "search_lead_unverified"})
     assert not refresh.should_promote({**base, "confidence": "email_only"})
     assert not refresh.should_promote({**base, "confidence": "official_institution", "deadline": None})
+
+def test_source_watch_deadline_mismatch_is_distinct_from_portal_closure(monkeypatch):
+    class Response:
+        def __init__(self, content):
+            self.content = content
+        def __enter__(self):
+            return self
+        def __exit__(self, *args):
+            return False
+        def geturl(self):
+            return "https://www.mos.ed.tum.de/en/avs/career/our-jobs/ki-motorsport-1/"
+        def read(self, _):
+            return self.content.encode("utf8")
+
+    watch = {
+        "id": "N263-07-LIVE",
+        "url": "https://www.mos.ed.tum.de/en/avs/career/our-jobs/ki-motorsport-1/",
+        "anchor": "15th of November 2026",
+        "negative_anchor": "July 17, 2026",
+        "negative_state": "contradiction_deadline_mismatch",
+    }
+    monkeypatch.setattr(refresh, "urlopen", lambda *args, **kwargs: Response("Application Deadline: Friday, July 17, 2026"))
+    assert refresh.monitor_one(watch)[1] == "contradiction_deadline_mismatch"
+    monkeypatch.setattr(refresh, "urlopen", lambda *args, **kwargs: Response("Application Deadline: 15th of November 2026"))
+    assert refresh.monitor_one(watch)[1] == "anchor_present"
