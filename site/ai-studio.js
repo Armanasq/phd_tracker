@@ -68,7 +68,7 @@ function providers(){
  const d=state.data;
  return heading("04 / MODEL INFRASTRUCTURE","Local and cloud models","Configure OpenAI-compatible inference, Azure OpenAI, Anthropic, Gemini or OpenRouter; use the local runtime for credentials and execution.",btn("Add model provider","new-provider","","primary"))+
  '<div class="notice">Provider entries contain model identifiers and credential environment-variable names only. No secret values are saved or displayed. A listed provider is not necessarily reachable until its endpoint and credentials are configured.</div>'+
- '<div class="cards">'+d.catalog.providers.map(p=>'<article class="catalog-card"><div class="catalog-top"><span class="catalog-badge">'+escape(p.kind)+'</span>'+tag(p.local?"Local":"Cloud",p.local?"":"warn")+'</div><h3>'+escape(p.label)+'</h3><p class="mono">'+escape(p.model)+'<br>'+escape(p.base_url)+'</p><div class="row-meta">'+tag(p.api_key_env||"No key required")+'</div><div class="buttons">'+minor("Configure","edit-provider",p.id)+'</div></article>').join("")+'</div>';
+ '<div class="cards">'+d.catalog.providers.map(p=>'<article class="catalog-card"><div class="catalog-top"><span class="catalog-badge">'+escape(p.kind)+'</span>'+tag(p.local?"Local":"Cloud",p.local?"":"warn")+'</div><h3>'+escape(p.label)+'</h3><p class="mono">'+escape(p.model)+'<br>'+escape(p.base_url)+'</p><div class="row-meta">'+tag(p.api_key_env||"No key required")+'</div><div class="buttons">'+minor("Configure","edit-provider",p.id)+minor("Test model","provider-probe",p.id)+'</div></article>').join("")+'</div>';
 }
 function applications(){
  const list=state.data.records.filter(r=>r.record_type==="tracked").filter(r=>(r.name+" "+r.id+" "+r.topic).toLowerCase().includes(state.query.toLowerCase())).slice(0,160);
@@ -339,6 +339,17 @@ document.addEventListener("click",async e=>{
  if(action==="edit-workflow"){configModal("workflow",id);return}
  if(action==="inspect"){await inspect(id);return}
  if(action==="edit-application"){applicationModal(id);return}
+ if(action==="provider-probe"){
+  const p=state.data.catalog.providers.find(x=>x.id===id);
+  if(!p)return;
+  const consent=!p.local;
+  if(consent&&!confirm("Send a one-sentence diagnostic prompt to "+p.label+"? This may incur API charges. No applicant records will be included."))return;
+  try{
+   const result=await api("/api/providers/probe",{provider_id:id,cloud_consent:consent});
+   modal("Model test · "+p.label,'<div class="row-meta">'+tag(result.status)+tag(result.model)+'</div><pre class="terminal" style="margin-top:18px">'+escape(result.response)+'</pre><p class="subtitle" style="margin-top:12px">This confirms one model response only, not sustained availability.</p>');
+  }catch(error){toast(error.message)}
+  return;
+ }
  if(action==="new-private"){privateModal(id);return}
  if(action==="edit-private"){const at=id.indexOf(":");privateModal(id.slice(0,at),id.slice(at+1));return}
  if(action==="generate-schedule"){try{await generateSchedule($("capacityForm"))}catch(err){toast(err.message)}return}
