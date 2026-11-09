@@ -50,6 +50,12 @@ def make_event(task,today):
     if task_type=="application_deadline":
         label="APPLICATION DEADLINE"
         action=task.get("action") or "Check original application"
+    elif task_type=="application_priority":
+        label="PRIORITY REVIEW DATE (NOT FINAL)"
+        action=task.get("action") or "Submit for priority consideration"
+    elif task_type=="application_unverified":
+        label="UNVERIFIED APPLICATION DATE"
+        action=task.get("action") or "Verify institutional deadline"
     elif task_type=="timeline_step":
         label="SCHEDULED APPLICATION STEP"
         action=task.get("action") or "Verify scheduled step"
@@ -64,7 +70,7 @@ def make_event(task,today):
         "Status: "+str(task.get("state") or "unconfirmed"),
         "Original source: "+str(task.get("sheet") or "")+" row "+str(task.get("row") or ""),
         "Official URL: "+str(task.get("source") or "not linked"),
-        "Final programme deadline: "+str(task.get("final_deadline") or "unposted"),
+        "Final programme deadline: "+str(task.get("final_deadline") or "unconfirmed / not applicable"),
         "Original note: "+str(task.get("notes") or ""),
         "All-day date. DO NOT infer a closing time from this event.",
         "Confirm actual portal availability and individual eligibility.",
@@ -83,7 +89,7 @@ def make_event(task,today):
     uri=task.get("source") or ""
     if uri.startswith("https://") and urlsplit(uri).hostname:
         lines.append("URL:"+escaped(uri))
-    durations=("-P7D","-P1D") if task_type=="application_deadline" else ("-P1D",)
+    durations=("-P7D","-P1D") if task_type in ("application_deadline", "application_priority") else ("-P1D",)
     for duration in durations:
         lines+=["BEGIN:VALARM","TRIGGER:"+duration,"ACTION:DISPLAY",
                 "DESCRIPTION:"+escaped(label+" — check original source"),"END:VALARM"]
