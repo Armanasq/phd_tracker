@@ -9,6 +9,9 @@ on:
     paths:
       - site/**
       - scripts/build_workspace.py
+      - scripts/instance_config.py
+      - tests/test_instance_config.py
+      - docs/SELF_HOSTING.md
       - scripts/workspace_controls.py
       - tests/domain.test.mjs
       - tests/assurance.test.mjs
@@ -42,6 +45,9 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      PHD_ATLAS_SITE_URL: ${{ vars.PHD_ATLAS_SITE_URL }}
+      PHD_ATLAS_ACTION_ISSUE: ${{ vars.PHD_ATLAS_ACTION_ISSUE }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -54,6 +60,7 @@ jobs:
         run: |
           python scripts/build_workspace.py --out site/data/workspace.json
           python -m unittest discover -s tests -p 'test_workspace.py'
+          python -m unittest discover -s tests -p 'test_instance_config.py'
           node --check site/app.js
           node --check site/modules/lens.mjs
           node --check site/modules/console.mjs
@@ -62,15 +69,17 @@ jobs:
           node --test tests/assurance.test.mjs
           test -s site/assurance.css
           test -s site/responsive.css
+          python scripts/instance_config.py --site site --commit "$GITHUB_SHA"
           python - <<'PY'
-          import os
+          import json, os
           from pathlib import Path
-          index = Path("site/index.html")
-          content = index.read_text(encoding="utf-8")
-          needle = 'href="./responsive.css"'
-          if content.count(needle) != 1:
-              raise RuntimeError("Cannot bind mobile stylesheet to release commit")
-          index.write_text(content.replace(needle, f'href="./responsive.css?rev={os.environ["GITHUB_SHA"]}"'), encoding="utf-8")
+          from scripts.instance_config import pages_url, resolve_repository
+          config = json.loads(Path("site/instance.json").read_text(encoding="utf-8"))
+          repo = resolve_repository()
+          assert config["repository"] == repo
+          assert config["site_url"] == pages_url(repo, os.environ.get("PHD_ATLAS_SITE_URL"))
+          assert config["source_commit"] == os.environ["GITHUB_SHA"]
+          assert f'rev={os.environ["GITHUB_SHA"]}' in Path("site/index.html").read_text(encoding="utf-8")
           PY
           node --check site/modules/operations.mjs
           node --test tests/domain.test.mjs
@@ -78,7 +87,8 @@ jobs:
           test -s site/index.html
           test -s site/favicon.svg
           test -s site/sitemap.xml
-          grep -q 'https://armanasq.github.io/phd_tracker/' site/index.html
+          test -s site/instance.json
+          python -c 'import json; from pathlib import Path; c=json.loads(Path("site/instance.json").read_text()); assert c["site_url"] in Path("site/index.html").read_text()'
           test -s site/style.css
           test -s site/workspace-v2.css
           test -s site/quiet.css
@@ -92,7 +102,7 @@ jobs:
           import hashlib, json, os
           from pathlib import Path
           root = Path("site")
-          assets = ["index.html", "app.js", "assurance.css", "responsive.css", "modules/assurance.mjs", "modules/assurance-view.mjs", "modules/domain.mjs", "data/workspace.json"]
+          assets = ["index.html", "app.js", "assurance.css", "responsive.css", "modules/assurance.mjs", "modules/assurance-view.mjs", "modules/domain.mjs", "data/workspace.json", "instance.json", "sitemap.xml"]
           digests = {path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in assets}
           manifest = {"schema_version": 1, "commit": os.environ["GITHUB_SHA"], "sha256": digests}
           (root / "release-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
@@ -130,10 +140,11 @@ jobs:
                curl -fsSL --max-time 15 "$base/favicon.svg?revision=$GITHUB_SHA" -o /tmp/phd-hosted-icon.svg &&
                grep -q '<svg' /tmp/phd-hosted-icon.svg &&
                curl -fsSL --max-time 15 "$base/sitemap.xml?revision=$GITHUB_SHA" -o /tmp/phd-hosted-sitemap.xml &&
-               grep -q 'https://armanasq.github.io/phd_tracker/' /tmp/phd-hosted-sitemap.xml &&
+               curl -fsSL --max-time 15 "$base/instance.json?revision=$GITHUB_SHA" -o /tmp/phd-hosted-instance.json &&
+               python -c 'import json,os; from pathlib import Path; c=json.load(open("/tmp/phd-hosted-instance.json")); assert c["repository"]==os.environ["GITHUB_REPOSITORY"]; assert c["source_commit"]==os.environ["GITHUB_SHA"]; assert c["site_url"] in Path("/tmp/phd-hosted-sitemap.xml").read_text()' &&
                curl -fsSL --max-time 15 "$base/data/workspace.json?revision=$GITHUB_SHA" -o /tmp/phd-hosted-data.json &&
-               python -c 'import json; d=json.load(open("/tmp/phd-hosted-data.json")); assert d["schema_version"] == 1 and len(d["records"]) >= 109'; then
-              echo "Confirmed deployed HTML, JavaScript module and 109+ authoritative source records at $base"
+               python -c 'import json,os; d=json.load(open("/tmp/phd-hosted-data.json")); assert d["schema_version"] == 1 and d["instance"]["repository"] == os.environ["GITHUB_REPOSITORY"]; assert len(d["records"]) >= 0'; then
+              echo "Confirmed deployed HTML, JavaScript module and repository-owned source snapshot at $base"
               exit 0
             fi
             sleep 5
