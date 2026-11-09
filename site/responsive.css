@@ -28,6 +28,7 @@
  .runway-days{max-width:100%;min-width:0;overscroll-behavior-x:contain}
  .os-page,.os-panel,.ops-columns,.ops-row,.os-head,.os-connection-layout,.os-routing-grid,.os-builder-layout,.os-pref-layout{min-width:0;max-width:100%}
  .source-grid,.compare-grid{max-width:100%;min-width:0}
+ .kpis>.kpi,.kpis>.kpi:first-child,.kpis>.kpi:nth-child(4),.kpis>.kpi:nth-child(5){padding-left:18px;padding-right:18px}
 }
 @media (max-width:760px){
  :root{--atlas-gutter:16px}
