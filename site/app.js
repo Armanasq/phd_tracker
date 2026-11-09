@@ -443,7 +443,7 @@ async function runIntegratedAgent(){
  const cloud=!entry.local;
  if(cloud&&!confirm("Send this task and application context to "+entry.label+"? Cloud usage may incur charges."))return;
  const result=$("aiInlineResult");
- const prompt=$("aiPrompt")?.value?.trim()||"Identify the three highest priority verifiable next steps for this view.";
+ const prompt="Tracker view: "+state.view+". "+($("aiPrompt")?.value?.trim()||"Identify the three highest priority verifiable next steps for this view.")+" Use only evidence available in the tracker and identify uncertainty.";
  aiRuntime.busy=true;if(result)result.textContent="Running inference…";
  try{
   const response=await fetch("./api/agents/run",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({agent_id:"portfolio_planner",provider_id:provider,input_text:prompt,cloud_consent:cloud})});
