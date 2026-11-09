@@ -77,3 +77,7 @@ The original root defect was an older higher-specificity \`:nth-child()\` select
 The strict mobile regression also found and fixed a separate 768px breakpoint error: the fourth metric card inherited an obsolete zero-left-padding selector. The shared responsive layer now explicitly normalizes metric-card inline padding through the tablet breakpoint, and the fast geometry audit runs before the slower full route suite.
 
 Visual screenshot review additionally detected an inherited `grid-column: 1 / -1` rule incorrectly expanding the last card in even-sized KPI collections. The new layout resets the final card to normal grid placement and only spans the row for odd-sized collections. The browser audit now enforces this invariant for all routes at phone widths.
+
+## Repository-independent local and GitHub Pages deployment
+
+The same static frontend can be hosted locally or published by another GitHub account. The Pages build derives repository identity from `GITHUB_REPOSITORY` and rewrites canonical metadata, sitemap, source/issue links and the commit-linked stylesheet. Forks must replace inherited public source data and create their own owner Action Center. No private model credential or SQLite state is ever hosted on Pages. See [self-hosting and fork setup](../docs/SELF_HOSTING.md).

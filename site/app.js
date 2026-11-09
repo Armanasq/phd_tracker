@@ -6,13 +6,14 @@ import {renderAssurance,renderCoverage} from "./modules/assurance-view.mjs";
 (() => {
 "use strict";
 const VIEWS=[["dashboard","home","Overview"],["applications","file","Applications"],["operations","layers","Operations"],["actions","check","Actions"],["ledger","check","Task ledger"],["calendar","calendar","Calendar"],["pipeline","columns","Pipeline"],["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],["review","shield","Verification"],["archive","archive","Archive"],["sources","database","Sources"],["ai","sparkles","Copilot"],["agents","bot","Agents"],["automations","flow","Automations"],["activity","activity","Run history"],["settings","settings","Settings"]];
-const OWNER_REPO="https://github.com/Armanasq/phd_tracker";
+const FALLBACK_REPO="https://github.com/Armanasq/phd_tracker";
 let selectedAuditCategory="all",assuranceLimit=75;
 let ledgerQuery="",ledgerType="all",ledgerPage=1;
 const STORE="phd-atlas-drafts-v1",PREFS="phd-atlas-prefs-v1",VIEW_STORE="phd-atlas-views-v2",COMPARE_STORE="phd-atlas-compare-v1";
 const $=id=>document.getElementById(id);
 const escapeHTML=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safeURL=value=>{try{const u=new URL(String(value));return u.protocol==="https:"?u.href:""}catch{return""}};
+const ownerRepo=()=>safeURL(state.data?.source_links?.repository)||safeURL(document.querySelector(".side-link")?.href)||FALLBACK_REPO;
 const readStore=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch{return d}};
 const saveStore=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{notify("Local storage unavailable. Export drafts as JSON.")}};
 const storedViews=readStore(VIEW_STORE,{saved:[],last:{scope:"tracked",query:"",status:"all",verification:"all",country:"all",horizon:"all",sort:"deadline"}});
@@ -190,7 +191,7 @@ function updates(){
  const statuses=Object.fromEntries(edited.map(id=>[id,draftState(state.drafts[id],state.data.records.find(r=>r.id===id))]));
  const conflicting=edited.filter(id=>["conflict","needs-review"].includes(statuses[id]));
  const pending=edited.filter(id=>statuses[id]==="pending");
- return heading("Changes","Local changes, synchronization status and research leads.",button("Export drafts","export","drafts","primary")+button("Git history","url",OWNER_REPO+"/commits/main"))+
+ return heading("Changes","Local changes, synchronization status and research leads.",button("Export drafts","export","drafts","primary")+button("Git history","url",ownerRepo()+"/commits/main"))+
  '<div class="kpis">'+kpi("Local drafts",edited.length,"Only in this browser")+kpi("Awaiting confirmation",pending.length,"GitHub issue required")+kpi("Needs reconciliation",conflicting.length,"Source version changed or unknown")+kpi("Owner updates",committed.length,"Committed overrides")+kpi("Evidence snapshot",stamp(state.data.as_of),"Source projection")+'</div>'+
  statCard("Local change register",edited.length?'<div class="mini-list">'+edited.map(id=>{
   const r=getRecord(id),status=statuses[id],message={"draft":"Local draft","pending":"Awaiting GitHub confirmation","conflict":"Conflict — source changed","needs-review":"Review source version","committed":"Matches committed source","missing-source":"Source unavailable"}[status]||"Draft";
@@ -250,14 +251,14 @@ function compare(){const selected=state.compare.map(getRecord).filter(Boolean);r
 '<div class="info">'+selected.length+' of 4 applications selected. Use checkboxes in Applications. Funding and eligibility are recorded claims, not verified personal eligibility decisions.</div>'+
 (selected.length?'<div class="compare-grid">'+selected.map(r=>'<div class="compare-card"><h3>'+escapeHTML(r.name)+'</h3><label>Deadline</label><p>'+escapeHTML(stamp(r.deadline))+' '+dateRisk(days(r.deadline))+'</p><label>Evidence</label><p>'+verificationPill(r)+'</p><label>Status</label><p>'+escapeHTML(statusLabel(r.status))+'</p><label>Funding</label><p>'+escapeHTML(r.funding||"Unverified")+'</p><label>Eligibility</label><p>'+escapeHTML(r.eligibility||"Unverified")+'</p><label>Fit rationale</label><p>'+escapeHTML(r.fit||"Not recorded")+'</p><label>Document proof</label><p>'+Object.values(r.document_states||{}).filter(x=>x==="unknown").length+' unknown, '+Object.values(r.document_states||{}).filter(x=>x==="not_started").length+' explicitly not started</p><label>Next step</label><p>'+escapeHTML(r.next_step||"Unknown")+'</p><p>'+link(r.source_url,"Source")+'</p>'+button("Open details","record",r.id)+'</div>').join("")+'</div>':'<div class="empty">Select two to four applications from the Applications table to compare them.</div>')}
 function assurancePanel(){return renderAssurance({snapshot:state.data,records:records(),today:TODAY(),filter:selectedAuditCategory,limit:assuranceLimit,escape:escapeHTML,button,link})}
-function coveragePanel(){return renderCoverage({snapshot:state.data,escape:escapeHTML,link,repository:OWNER_REPO})}
+function coveragePanel(){return renderCoverage({snapshot:state.data,escape:escapeHTML,link,repository:ownerRepo()})}
 function review(){const rs=records().filter(r=>r.verification!=="source_verified"&&r.verification!=="owner_verified"||r.duplicate_submission_advisory||r.blockers||r.document_states&&Object.values(r.document_states).includes("not_started"));const suspect=state.data.duplicates||[];return heading("Verification","Unconfirmed sources, duplicate pathways and document risk.",button("Open source monitoring","url",state.data.source_links.source_monitor,"primary"))+
 assurancePanel()+
 '<div class="info">Duplicate detection is an advisory similarity screen, not a determination that two calls are the same. Some programmes require two distinct submissions; others forbid two independent applications.</div>'+
 '<div class="kpis">'+kpi("Needs evidence review",records().filter(r=>r.recheck_required).length,"No automatic promotion")+kpi("Potential title matches",suspect.length,"Requires human assessment")+kpi("Multi-route cautions",records().filter(r=>r.duplicate_submission_advisory).length,"Manual interpretation")+kpi("Document gaps",records().filter(r=>Object.values(r.document_states||{}).includes("not_started")).length,"Explicitly confirmed")+kpi("Unverified dates",records().filter(r=>!r.deadline).length,"Date is unknown")+'</div>'+
 statCard("Programme and source duplicate advisories",suspect.length?'<div class="mini-list">'+suspect.map(d=>'<div class="mini-row"><div>'+d.ids.map(id=>'<button data-action="record" data-value="'+escapeHTML(id)+'">'+escapeHTML(id)+'</button>').join(' / ')+'<small>'+escapeHTML(d.reason)+' · Similarity '+escapeHTML(d.similarity)+' · NOT confirmed</small></div></div>').join("")+'</div>':'<div class="empty">No high-similarity programme titles detected. This does not rule out duplicate routes.</div>')+
 statCard("Verification and submission risks",table(rs.slice().sort((a,b)=>priority(b)-priority(a))))}
-function archive(){const all=records().filter(r=>r.status==="blocked"||days(r.deadline)!==null&&days(r.deadline)<0||["archived","withdrawn","rejected"].includes(r.status));return heading("Expired & blocked","Deadlines in the past, blocked routes and historical exclusions.",button("View exclusions in GitHub","url",OWNER_REPO+"/blob/main/data/exclusion_memory.json"))+
+function archive(){const all=records().filter(r=>r.status==="blocked"||days(r.deadline)!==null&&days(r.deadline)<0||["archived","withdrawn","rejected"].includes(r.status));return heading("Expired & blocked","Deadlines in the past, blocked routes and historical exclusions.",button("View exclusions in GitHub","url",ownerRepo()+"/blob/main/data/exclusion_memory.json"))+
 '<div class="kpis">'+kpi("Expired",all.filter(r=>days(r.deadline)!==null&&days(r.deadline)<0).length,"Deadline in the past")+kpi("Owner blocked",all.filter(r=>r.status==="blocked").length,"Explicit status")+kpi("Archived / withdrawn",all.filter(r=>["archived","withdrawn"].includes(r.status)).length,"Explicit status")+kpi("Historical exclusions",state.data.archive.length,"Workbook-derived snapshot")+kpi("Undated opportunities",records().filter(r=>!r.deadline).length,"Not automatically expired")+'</div>'+
 statCard("Closed or blocked opportunities",all.length?table(sortList(filters(all))):'<div class="empty">No records in this category.</div>')+
 statCard("Historical exclusion memory",'<p class="subtle">This is a concise projection only; inspect source workbook for original reasons and dates. Prior-cycle exclusions cannot automatically disqualify a new call.</p><div class="tablewrap"><table class="table"><thead><tr><th>Source ID</th><th>Recorded route</th><th>Historical classification</th></tr></thead><tbody>'+state.data.archive.map(x=>'<tr><td>'+escapeHTML(x.id)+'</td><td>'+escapeHTML(x.name)+'</td><td>'+pill(x.status,"neutral")+'</td></tr>').join("")+'</tbody></table></div>')}
@@ -270,10 +271,10 @@ statCard("Evidence and workflow entry points",'<div class="mini-list">'+[
 ["Original Excel tracker",state.data.source_links.workbook],
 ["Run multi-source discovery",state.data.source_links.source_monitor],
 ["Owner action center",state.data.source_links.control_issue],
-["Recent repository changes",OWNER_REPO+"/commits/main"],
-["Original interactive evidence graph","https://armanasq.github.io/phd_tracker/evidencegraph/"],
-["Structured new opportunity",OWNER_REPO+"/issues/new?template=02-opportunity-lead.yml"],
-["Correct disputed evidence",OWNER_REPO+"/issues/new?template=01-source-correction.yml"]
+["Recent repository changes",ownerRepo()+"/commits/main"],
+["Original interactive evidence graph",new URL("./evidencegraph/",location.href).href],
+["Structured new opportunity",ownerRepo()+"/issues/new?template=02-opportunity-lead.yml"],
+["Correct disputed evidence",ownerRepo()+"/issues/new?template=01-source-correction.yml"]
 ].map(([name,url])=>'<div class="mini-row"><span>'+escapeHTML(name)+'</span>'+link(url,"Open")+'</div>').join("")+'</div>')+
 statCard("Contact & application control model",'<p class="muted">New owner decisions are submitted as authenticated GitHub issue commands. Local draft values are provisional until the issue-control workflow commits an updated versioned record. The original workbook, data pipeline, reminders and source-monitor workflow remain intact.</p><p class="muted">The public-site projection deliberately excludes mailbox permalinks, email addresses, correspondence bodies and full exclusion rationales. GitHub Pages is not an access-controlled datastore.</p>')}
 const DOC_LABELS={unknown:"Unknown",ready:"Ready",in_progress:"In progress",not_started:"Not started",not_applicable:"Not required"};
@@ -442,7 +443,7 @@ function render(){
  if(runtimeNote)runtimeNote.textContent=aiConsole.isLive()?"Private runtime connected":"Private runtime offline · model settings require local service";
  const unhealthy=state.data.providers.filter(p=>p.health!=="ok").length;
  $("providerStatus").innerHTML='<strong>'+escapeHTML(stamp(state.data.as_of))+'</strong><span class="signal"><span class="signal-dot '+(unhealthy?"":"ok")+'" aria-hidden="true"></span>'+unhealthy+' source feeds need attention</span>';
- const topAsOf=$("topEvidenceAsOf");if(topAsOf)topAsOf.textContent="Evidence observed "+stamp(state.data.as_of);
+ const topAsOf=$("topEvidenceAsOf");if(topAsOf)topAsOf.textContent="Evidence observed "+stamp(state.data.as_of)+(state.data.instance?.type==="independent"?" · Independent deployment: verify inherited evidence":"");
 }
 function go(view){
  if(!VIEWS.some(([id])=>id===view))return;
@@ -453,7 +454,7 @@ function go(view){
 }
 const aiConsole=createConsole({notify,onChange:()=>{if(state.data)render()},navigate:go,getRecords:records,getSourceRecords:()=>state.data?.records||[],onReload:loadSnapshot,getView:()=>state.view});
 let atlasLens=null;
-function explainNotifications(){const supported=("Notification" in window);const permission=supported?Notification.permission:"unsupported";openModal("<h2>Reminder settings</h2>",'<p class="muted">Reminders are computed locally from source dates while this page is open. Closing the tab disables on-page notifications. GitHub Actions provides separate scheduled reminders.</p><div class="notifications"><div class="notification"><strong>Browser permission</strong>'+escapeHTML(permission)+'</div><div class="notification"><strong>Current horizon</strong>Today, 1, 3 and 7 days before a recorded date</div></div><div class="buttons">'+button("Request browser permission","permission","","primary")+button("View GitHub notifications","url",OWNER_REPO+"/actions/workflows/phd-intelligence.yml")+'</div>')}
+function explainNotifications(){const supported=("Notification" in window);const permission=supported?Notification.permission:"unsupported";openModal("<h2>Reminder settings</h2>",'<p class="muted">Reminders are computed locally from source dates while this page is open. Closing the tab disables on-page notifications. GitHub Actions provides separate scheduled reminders.</p><div class="notifications"><div class="notification"><strong>Browser permission</strong>'+escapeHTML(permission)+'</div><div class="notification"><strong>Current horizon</strong>Today, 1, 3 and 7 days before a recorded date</div></div><div class="buttons">'+button("Request browser permission","permission","","primary")+button("View GitHub notifications","url",ownerRepo()+"/actions/workflows/phd-intelligence.yml")+'</div>')}
 function checkNotifications(){if(!state.data||!state.prefs.reminders||!("Notification" in window)||Notification.permission!=="granted")return;const alerted=state.prefs.notified||{};let changed=false;for(const r of records().filter(r=>r.record_type==="tracked")){const d=days(r.deadline);if(!open(r)||![0,1,3,7].includes(d))continue;const key=r.id+"|"+r.deadline+"|"+d;if(alerted[key])continue;try{const n=new Notification("PhD deadline: "+stamp(r.deadline),{body:r.name.slice(0,140)+" — verify portal cutoff and submission state.",tag:key});n.onclick=()=>{window.focus();go("applications");detail(getRecord(r.id));n.close()};alerted[key]=TODAY();changed=true}catch{}}if(changed){state.prefs.notified=Object.fromEntries(Object.entries(alerted).slice(-500));saveStore(PREFS,state.prefs)}}
 function events(){
  document.addEventListener("click",e=>{
@@ -581,6 +582,12 @@ function events(){
  $("themeToggle").addEventListener("click",()=>{state.prefs.theme=state.prefs.theme==="light"?"dark":"light";saveStore(PREFS,state.prefs);document.body.classList.toggle("dark",state.prefs.theme==="dark")});
  $("notificationToggle").addEventListener("click",explainNotifications);
 }
+function updateInstanceLinks(data){
+ const repo=safeURL(data?.source_links?.repository);
+ if(!repo)return;
+ const sidebar=document.querySelector(".side-link");if(sidebar)sidebar.href=repo;
+ const release=document.querySelector(".main-footer a");if(release)release.href=repo+"/releases";
+}
 async function loadSnapshot(){
  try{
   const response=await fetch("./data/workspace.json",{cache:"no-store"});
@@ -589,6 +596,7 @@ async function loadSnapshot(){
   if(!validation.ok)throw new Error(validation.error);
   const prior=state.data?.generated_at;
   state.data=data;
+  updateInstanceLinks(data);
   atlasLens?.refreshData();
   if(!Array.isArray(state.compare))state.compare=[];
   state.compare=state.compare.filter(id=>validation.ids.has(id)).slice(0,4);
@@ -600,7 +608,7 @@ async function loadSnapshot(){
   if(state.data){notify("Source refresh failed. The last verified snapshot remains available.");return}
   $("body").innerHTML=heading("Source unavailable","The workspace cannot validate its source snapshot.")+
   '<div class="alert">'+escapeHTML(error.message||"The data could not be loaded.")+'</div>'+
-  '<div class="buttons">'+button("Retry loading","retry-load","","primary")+button("Open repository","url",OWNER_REPO)+'</div>';
+  '<div class="buttons">'+button("Retry loading","retry-load","","primary")+button("Open repository","url",ownerRepo())+'</div>';
  }
 }
 function init(){

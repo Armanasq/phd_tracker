@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 from datetime import date, datetime, timezone
 from difflib import SequenceMatcher
@@ -10,8 +11,10 @@ from urllib.parse import urlsplit, urlunsplit
 
 if __package__:
     from .source_policy import classify_deadline_note_strict
+    from .instance_config import DEFAULT_REPOSITORY, action_center_url, pages_url, repository_url, resolve_repository
 else:
     from source_policy import classify_deadline_note_strict
+    from instance_config import DEFAULT_REPOSITORY, action_center_url, pages_url, repository_url, resolve_repository
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCUMENTS = {
@@ -82,7 +85,9 @@ def duplicate_advisories(records: list[dict]) -> list[dict]:
     return sorted(result, key=lambda d: -d["similarity"])[:100]
 
 
-def build(root: Path = ROOT) -> dict:
+def build(root: Path = ROOT, *, repository: str | None = None) -> dict:
+    repo = resolve_repository(repository, root=root)
+    repo_url = repository_url(repo)
     experience = load(root, "experience_view.json")
     frontier = load(root, "portfolio_frontier.json")
     details = {str(r["id"]): r for r in load(root, "opportunities.json").get("records", []) if r.get("id")}
@@ -265,6 +270,7 @@ def build(root: Path = ROOT) -> dict:
         {"name": "Source monitoring watchlist", "path": "data/watchlist.json", "description": "Official source links tracked for changes."},
         {"name": "Portfolio evidence frontier", "path": "data/portfolio_frontier.json", "description": "Heuristic research-fit records, not admission probabilities."},
     ]
+    source_files = [item for item in source_files if (root / item["path"]).is_file()]
     coverage = {
         "workbook_audit_as_of": iso_day(workbook_audit.get("as_of")),
         "worksheets": worksheets,
@@ -291,6 +297,7 @@ def build(root: Path = ROOT) -> dict:
         "timezone": experience.get("timezone", "Europe/Berlin"),
         "policy": "Source snapshot; no live deadline guarantee. Unknown document states are not missing. No applicant submission state is inferred.",
         "privacy": "Public Pages snapshot omits mailbox links, email addresses, personal correspondence bodies and historical exclusion reasons.",
+        "instance": {"repository": repo, "type": "upstream" if repo.casefold() == DEFAULT_REPOSITORY.casefold() else "independent", "site_url": pages_url(repo, os.environ.get("PHD_ATLAS_SITE_URL")), "data_policy": "public_committed_snapshot"},
         "meta": {"tracked": sum(r["record_type"] == "tracked" for r in records), "candidates": sum(r["record_type"] == "candidate" for r in records), "unpromoted_leads": len(leads), "discovery_snapshot": provider_report.get("run_date"), "notification_delivery": notification.get("delivery", {})},
         "records": records, "leads": leads, "archive": archive, "tasks": tasks,
         "task_ledger": full_task_ledger,
@@ -304,11 +311,11 @@ def build(root: Path = ROOT) -> dict:
             "The interface stores edits locally as drafts until a verified GitHub issue command is committed.",
         ],
         "source_links": {
-            "workbook": "https://github.com/Armanasq/phd_tracker/blob/main/PhD_Action_List.xlsx",
-            "opportunities": "https://github.com/Armanasq/phd_tracker/blob/main/data/opportunities.json",
-            "source_monitor": "https://github.com/Armanasq/phd_tracker/actions/workflows/phd-intelligence.yml",
-            "control_issue": "https://github.com/Armanasq/phd_tracker/issues/1",
-            "repository": "https://github.com/Armanasq/phd_tracker",
+            "workbook": repo_url + "/blob/main/PhD_Action_List.xlsx",
+            "opportunities": repo_url + "/blob/main/data/opportunities.json",
+            "source_monitor": repo_url + "/actions/workflows/phd-intelligence.yml",
+            "control_issue": action_center_url(repo),
+            "repository": repo_url,
         },
         "watches": [{"id": clean(w.get("id"), 90), "source_url": public_url(w.get("url"))} for w in watchlist.get("watches", [])],
     }
@@ -317,10 +324,11 @@ def build(root: Path = ROOT) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--out", default="site/data/workspace.json")
+    parser.add_argument("--repository", help="GitHub owner/repository (automatically detected in GitHub Actions)")
     args = parser.parse_args()
     output = Path(args.out)
     output.parent.mkdir(parents=True, exist_ok=True)
-    snapshot = build()
+    snapshot = build(repository=args.repository)
     ids = [r["id"] for r in snapshot["records"]]
     if len(ids) != len(set(ids)):
         raise ValueError("Duplicate source IDs in workspace projection")
