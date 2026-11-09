@@ -30,9 +30,10 @@ class LocalBootstrapTests(unittest.TestCase):
             (root / "site").mkdir()
             (root / "site" / "index.html").write_text("<html></html>", encoding="utf-8")
             (root / "data").mkdir()
-            (root / "data" / "experience_view.json").write_text(json.dumps({
+            (root / "data" / "user_opportunities.json").write_text(json.dumps({
+                "schema_version": 1,
                 "as_of": "2026-11-09",
-                "applications": [{"id": "LOCAL-01", "name": "My own researched PhD", "deadline": None}],
+                "records": [{"id": "LOCAL-01", "name": "My own researched PhD", "deadline": None}],
             }), encoding="utf-8")
             with patch.dict(os.environ, {"PHD_ATLAS_REPOSITORY": "ForkOwner/local-tracker", "PHD_ATLAS_DATA_MODE": "source"}):
                 result = prepare_public_snapshot(root)
