@@ -43,6 +43,16 @@ async function run() {
     assert.equal(await page.locator('body').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(250, 249, 246)');
     assert.ok((await page.locator('.agenda-item').count())>=5);
     assert.ok((await page.locator('.nav-btn').count())>=11);
+    assert.equal(await page.locator('.runway-day').count(),7);
+    assert.ok((await page.locator('.decision-brief').count())===1);
+    const briefOverlap=await page.evaluate(()=>{
+      const number=document.querySelector('.decision-brief-days strong');
+      const title=document.querySelector('.decision-brief-link');
+      if(!number||!title)return false;
+      const a=number.getBoundingClientRect(),b=title.getBoundingClientRect();
+      return a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;
+    });
+    assert.equal(briefOverlap,false,'Deadline countdown must not overlap the programme title on desktop');
     await page.screenshot({path:path.join(out,'phd-atlas-desktop.png'),fullPage:true});
 
     await page.locator('#navigation [data-action="nav"][data-value="calendar"]').click();
@@ -122,6 +132,15 @@ async function run() {
     mobile.on('pageerror',error=>errors.push(error.message));
     await mobile.goto(base+'/',{waitUntil:'networkidle'});
     await mobile.locator('#body h1').waitFor();
+    assert.equal(await mobile.locator('.runway-day').count(),7);
+    const mobileBriefOverlap=await mobile.evaluate(()=>{
+      const number=document.querySelector('.decision-brief-days strong');
+      const title=document.querySelector('.decision-brief-link');
+      if(!number||!title)return false;
+      const a=number.getBoundingClientRect(),b=title.getBoundingClientRect();
+      return a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;
+    });
+    assert.equal(mobileBriefOverlap,false,'Deadline countdown must not overlap the programme title on mobile');
     await mobile.screenshot({path:path.join(out,'phd-atlas-mobile.png'),fullPage:true});
     await mobile.locator('#navigation [data-action="nav"][data-value="calendar"]').click();
     assert.ok((await mobile.locator('.cal-day').count())>=28);
