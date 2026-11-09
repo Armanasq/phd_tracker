@@ -2,7 +2,7 @@ name: EvidenceGraph | Browser Interaction and Visual QA
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'feature/**']
     paths:
       - dashboard/**
       - site/**
