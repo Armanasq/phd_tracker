@@ -11,6 +11,7 @@ from urllib.parse import parse_qs, unquote, urlsplit
 from .catalog import agent_spec, provider_spec, workflow_spec
 from .domain import agenda, plan_capacity, preflight, today_in
 from .operations import evidence_conflicts, milestones_for, referee_matrix, research_fit_signals, resource_schedule
+from .proof_queue import evidence_work_queue
 from .providers import invoke, ProviderError
 from .connectivity import model_list, provider_states, remember_check
 from .settings import read_settings, save_settings
@@ -163,6 +164,7 @@ class ApiHandler(BaseHTTPRequestHandler):
                             "deadline_events": milestones_for(records, milestones, today),
                             "evidence_conflicts": evidence_conflicts(claims),
                             "research_fit_signals": research_fit_signals(profile, records),
+                            "proof_queue": evidence_work_queue(records, milestones, references, claims, today),
                             "as_of": today.isoformat()})
         elif path == "/api/runs":
             self.send_json(store.runs())
