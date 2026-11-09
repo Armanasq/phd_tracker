@@ -80,6 +80,28 @@ class SettingsAndConnectivityTests(unittest.TestCase):
         self.assertTrue(observed["url"].endswith("/v1/models"))
         self.assertEqual(observed["timeout"], 12)
 
+    def test_local_saved_secret_authenticates_model_discovery(self) -> None:
+        from phd_agents.secrets import write_secret
+        from phd_agents.catalog import provider_spec
+        with patch.dict(os.environ, {"PHDAI_PRIVATE_DIR": self.temp.name, "OPENAI_API_KEY": ""}):
+            write_secret("OPENAI_API_KEY", "only-in-local-private-file")
+            config = provider_spec({"id": "testcloud", "label": "Test gateway", "kind": "openai_compatible",
+                                    "base_url": "https://api.openai.com/v1", "model": "testmodel",
+                                    "api_key_env": "OPENAI_API_KEY", "local": False})
+            captured = {}
+            class Stub:
+                def open(self, request, timeout):
+                    captured["authorization"] = request.get_header("Authorization")
+                    return io.BytesIO(b'{"data":[{"id":"testmodel"}]}')
+            with patch("phd_agents.connectivity.build_opener", return_value=Stub()):
+                result = model_list(config)
+            self.assertEqual(captured["authorization"], "Bearer only-in-local-private-file")
+            self.assertEqual(result["models"][0]["id"], "testmodel")
+            state = provider_state(config)
+            self.assertEqual(state["credential_source"], "private_store")
+            self.assertTrue(state["credential_configured"])
+            self.assertNotIn("only-in-local-private-file", json.dumps(state))
+
     def test_azure_deployment_constructs_versioned_route(self) -> None:
         from phd_agents.catalog import provider_spec
         config = provider_spec({"id": "azure_demo", "kind": "azure_deployment",

@@ -28,7 +28,7 @@ def provider_state(provider: dict[str, Any], last: dict[str, Any] | None = None)
     elif model in {"configure-me", "your-model", "model-name"}:
         reason = "Choose an installed or provisioned model"
     elif not credential_ready(provider):
-        reason = "Set " + env + " in the private runtime environment"
+        reason = "Configure a credential for " + env + " in private Settings"
     prior = last or {}
     state = "needs_setup" if reason else "ready_to_test"
     if not reason and prior.get("status") == "responded":
@@ -39,7 +39,7 @@ def provider_state(provider: dict[str, Any], last: dict[str, Any] | None = None)
         state = "failed"
     return {
         "provider_id": provider["id"], "state": state, "reason": reason,
-        "credential_source": "environment" if env else "none",
+        "credential_source": ("environment" if env and os.environ.get(env) else "private_store" if env and read_secret(env) else "none"),
         "credential_configured": bool(read_secret(env)) if env else None,
         "last_checked": prior.get("checked_at"),
         "latency_ms": prior.get("latency_ms"),
@@ -57,15 +57,16 @@ def provider_states(store: Store, providers: list[dict[str, Any]]) -> dict[str, 
 def model_list(provider: dict[str, Any], timeout: int = 12) -> dict[str, Any]:
     base = validate_url(provider["base_url"], bool(provider["local"]))
     env = str(provider.get("api_key_env") or "")
-    if env and not read_secret(env) and not provider["local"]:
-        raise ProviderError("Missing credential environment variable " + env)
+    api_key = read_secret(env) if env else ""
+    if env and not api_key and not provider["local"]:
+        raise ProviderError("Missing private credential " + env)
     headers = {"Accept": "application/json"}
     kind = provider["kind"]
     if kind == "anthropic":
         endpoint = base + "/v1/models"
         headers["anthropic-version"] = "2023-06-01"
-        if env and read_secret(env):
-            headers["x-api-key"] = os.environ[env]
+        if api_key:
+            headers["x-api-key"] = api_key
     else:
         if kind == "azure_deployment":
             version = str(provider.get("api_version") or "2024-10-21")
@@ -73,10 +74,10 @@ def model_list(provider: dict[str, Any], timeout: int = 12) -> dict[str, Any]:
         else:
             endpoint = base + "/models"
         if kind in {"azure_openai", "azure_deployment"}:
-            if env and read_secret(env):
-                headers["api-key"] = os.environ[env]
-        elif env and read_secret(env):
-            headers["Authorization"] = "Bearer " + os.environ[env]
+            if api_key:
+                headers["api-key"] = api_key
+        elif api_key:
+            headers["Authorization"] = "Bearer " + api_key
     started = time.perf_counter()
     try:
         with build_opener(NoRedirect()).open(Request(endpoint, headers=headers), timeout=timeout) as response:
