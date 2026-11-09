@@ -53,3 +53,13 @@ def test_reminders_and_escaped_unsafe_text():
 def test_utf8_line_wrapping_is_bounded_by_octets():
     result=folded("SUMMARY:"+("Université" * 45))
     assert all(len(segment.encode("utf-8"))<=73 for segment in result.split("\r\n"))
+
+def test_calendar_priority_and_unverified_date_are_not_final_deadlines():
+    for kind, expected in (
+        ("application_priority", "PRIORITY REVIEW DATE (NOT FINAL)"),
+        ("application_unverified", "UNVERIFIED APPLICATION DATE"),
+    ):
+        entry = {**task(kind=kind), "final_deadline": None}
+        event = make_event(entry, date(2026, 11, 6))
+        assert any(line.startswith("SUMMARY:" + expected) for line in event)
+        assert "Final programme deadline: unconfirmed / not applicable" in "\n".join(event)
