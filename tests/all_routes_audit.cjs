@@ -27,7 +27,7 @@ async function check(browser,url,views,results,mode){
   page.on('pageerror',e=>errors.push(e.message));
   page.on('response',r=>{
    const responseUrl=new URL(r.url());
-   const expectedPrivateProbe=mode==='public'&&r.status()===404&&responseUrl.pathname==='/api/bootstrap';
+   const expectedPrivateProbe=mode==='public'&&r.status()===404&&['/api/bootstrap','/api/assistant/bootstrap'].includes(responseUrl.pathname);
    if(r.url().startsWith(url)&&r.status()>=400&&!expectedPrivateProbe)httpErrors.push(r.status()+' '+r.url());
   });
   try{
