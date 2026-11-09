@@ -38,7 +38,7 @@
     }
   ],
   "delivery": {
-    "github": "not_requested",
+    "github": "delivered",
     "apprise": "not_configured"
   }
 }
