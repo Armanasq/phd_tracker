@@ -88,3 +88,7 @@ The [independent opportunity input contract and browser-to-GitHub export workflo
 ### Private runtime isolation across local clones
 
 A clone of another owner's fork automatically receives a private SQLite database and provider credential file under a checkout-scoped subdirectory of `~/.local/share/phd-atlas/instances/`. This is separate from the upstream installation's legacy path, which remains unchanged. Explicit `PHDAI_PRIVATE_DIR` takes precedence. A downloaded source archive without a Git origin must set `PHD_ATLAS_REPOSITORY=YOUR_ACCOUNT/YOUR_REPOSITORY` when starting the private runtime to avoid upstream fallback. Use separate identities for separate users; this is not an authenticated multi-user server.
+
+## GitHub-hosted authenticated AI
+
+Repository and environment secrets can power automated model calls in GitHub Actions without running a local server. Enable `PHD_ATLAS_ENABLE_HOSTED_AI=true`, configure the dedicated `phd-atlas-ai` environment secret and provider variables, and run the [Hosted AI Verification Triage workflow](../.github/workflows/hosted-ai-advisories.yml). The `Verification` view displays only current, validated, enum-based proof-gap proposals. Secrets and raw model output are not committed to Pages. See [Hosted Actions AI setup](HOSTED_ACTIONS_AI.md). For interactive chat, an independently authenticated server is still required.

@@ -12,9 +12,11 @@ from urllib.parse import urlsplit, urlunsplit
 if __package__:
     from .source_policy import classify_deadline_note_strict
     from .instance_config import DEFAULT_REPOSITORY, action_center_url, pages_url, repository_url, resolve_data_mode, resolve_repository
+    from .hosted_ai_advisories import validate_advisory, HostedAIError
 else:
     from source_policy import classify_deadline_note_strict
     from instance_config import DEFAULT_REPOSITORY, action_center_url, pages_url, repository_url, resolve_data_mode, resolve_repository
+    from hosted_ai_advisories import validate_advisory, HostedAIError
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCUMENTS = {
@@ -287,13 +289,34 @@ def independent_snapshot(root: Path, repo: str) -> dict:
     return snapshot
 
 
+def attach_hosted_ai(root: Path, snapshot: dict) -> dict:
+    path = root / "data" / "hosted_ai_advisories.json"
+    snapshot["hosted_ai"] = {"state": "not_configured", "items": []}
+    if not path.is_file():
+        return snapshot
+    try:
+        entry = json.loads(path.read_text(encoding="utf-8"))
+        validated = validate_advisory(entry, snapshot, today=datetime.now(timezone.utc).date())
+    except (OSError, ValueError, TypeError, KeyError, HostedAIError):
+        snapshot["hosted_ai"] = {"state": "stale_or_invalid", "items": []}
+        return snapshot
+    snapshot["hosted_ai"] = {
+        "state": "current",
+        "status": validated["status"],
+        "observation_date": validated["observation_date"],
+        "source_digest": validated["source_digest"],
+        "items": validated["items"],
+    }
+    return snapshot
+
+
 def build(root: Path = ROOT, *, repository: str | None = None, data_mode: str | None = None) -> dict:
     repo = resolve_repository(repository, root=root)
     mode = resolve_data_mode(repo, data_mode)
     if mode == "starter":
-        return starter_snapshot(repo)
+        return attach_hosted_ai(root, starter_snapshot(repo))
     if repo.casefold() != DEFAULT_REPOSITORY.casefold():
-        return independent_snapshot(root, repo)
+        return attach_hosted_ai(root, independent_snapshot(root, repo))
     experience = load(root, "experience_view.json")
     frontier = load(root, "portfolio_frontier.json")
     details = {str(r["id"]): r for r in load(root, "opportunities.json").get("records", []) if r.get("id")}
@@ -497,7 +520,7 @@ def build(root: Path = ROOT, *, repository: str | None = None, data_mode: str | 
             if isinstance(errors, list) and errors
         },
     }
-    return {
+    return attach_hosted_ai(root, {
         "schema_version": 1, "as_of": as_of,
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "timezone": experience.get("timezone", "Europe/Berlin"),
@@ -518,7 +541,7 @@ def build(root: Path = ROOT, *, repository: str | None = None, data_mode: str | 
         ],
         "source_links": source_links(repo),
         "watches": [{"id": clean(w.get("id"), 90), "source_url": public_url(w.get("url"))} for w in watchlist.get("watches", [])],
-    }
+    })
 
 
 def main() -> None:

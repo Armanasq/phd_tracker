@@ -9,6 +9,10 @@ on:
     paths:
       - site/**
       - scripts/build_workspace.py
+      - scripts/hosted_ai_advisories.py
+      - tests/test_hosted_ai_advisories.py
+      - tests/hosted_ai.test.mjs
+      - data/hosted_ai_advisories.json
       - scripts/instance_config.py
       - tests/test_instance_config.py
       - tests/local_records.test.mjs
@@ -67,6 +71,9 @@ jobs:
           python -m unittest discover -s tests -p 'test_workspace.py'
           python -m unittest discover -s tests -p 'test_instance_config.py'
           node --check site/app.js
+          node --check site/modules/hosted-ai.mjs
+          node --test tests/hosted_ai.test.mjs
+          python -m unittest discover -s tests -p 'test_hosted_ai_advisories.py'
           node --check site/modules/storage.mjs
           node --test tests/storage.test.mjs
           node --check site/modules/local-records.mjs
@@ -111,7 +118,7 @@ jobs:
           import hashlib, json, os
           from pathlib import Path
           root = Path("site")
-          assets = ["index.html", "app.js", "assurance.css", "responsive.css", "modules/assurance.mjs", "modules/assurance-view.mjs", "modules/domain.mjs", "modules/storage.mjs", "modules/local-records.mjs", "data/workspace.json", "instance.json", "sitemap.xml"]
+          assets = ["index.html", "app.js", "assurance.css", "responsive.css", "modules/assurance.mjs", "modules/assurance-view.mjs", "modules/domain.mjs", "modules/storage.mjs", "modules/local-records.mjs", "modules/hosted-ai.mjs", "data/workspace.json", "instance.json", "sitemap.xml"]
           digests = {path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in assets}
           manifest = {"schema_version": 1, "commit": os.environ["GITHUB_SHA"], "sha256": digests}
           (root / "release-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")

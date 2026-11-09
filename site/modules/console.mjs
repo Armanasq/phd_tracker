@@ -128,12 +128,16 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
  }
  function offline(view) {
   return '<div class="os-page">'+heading("PRIVATE INFERENCE / CONNECTION REQUIRED","Connect the private workspace",
-    "This same application supports local vLLM, LiteLLM and cloud LLMs. GitHub Pages can display the public tracker but cannot securely execute models or store API keys.")+
+    "Use the same interface locally for interactive models. On GitHub Pages, authenticated scheduled AI workflows run in GitHub Actions with repository or environment secrets, never in the browser.")+
    '<div class="os-offline"><div class="os-offline-graphic"><div class="os-core"></div><div class="os-orbit a"></div><div class="os-orbit b"></div></div>'+
    '<div><div class="os-kicker">SAME INTERFACE · PRIVATE BACKEND</div><h2>Start your workspace locally</h2><p>From the repository checkout, start the Python service. Open the resulting local address and configure a model once in Settings. No separate AI Studio or external credentials are needed for an unauthenticated local model.</p>'+
    '<div class="os-code">python -m phd_agents serve --port 8765</div>'+
    '<div class="os-actions">'+btn("Copy start command","copy-command","","primary")+btn("Retry connection","reconnect","","quiet")+'</div>'+
-   '<p class="os-note">Then open <strong>http://127.0.0.1:8765/#settings</strong>. The public site never receives provider keys, private applicant data, or agent execution logs.</p></div></div></div>';
+   '<p class="os-note">Then open <strong>http://127.0.0.1:8765/#settings</strong>. The public site never receives provider keys, private applicant data, or agent execution logs.</p></div></div>'+
+   '<section class="os-panel"><div class="os-panel-heading"><div><h2>Run AI workflows on GitHub</h2><p>Configure encrypted environment secrets for scheduled verification triage; no local server is required for batch jobs.</p></div></div>'+
+   '<div class="os-actions"><a class="os-btn quiet" href="'+esc((document.querySelector(".side-link")?.href||"https://github.com/Armanasq/phd_tracker")+"/actions/workflows/hosted-ai-advisories.yml")+'" target="_blank" rel="noopener noreferrer">Hosted AI workflow</a> '+
+   '<a class="os-btn quiet" href="'+esc((document.querySelector(".side-link")?.href||"https://github.com/Armanasq/phd_tracker")+"/blob/main/docs/HOSTED_ACTIONS_AI.md")+'" target="_blank" rel="noopener noreferrer">Setup and security</a></div>'+
+   '<p class="os-note">Secrets stay in GitHub Actions. Hosted verification proposals are batch results, not live chatbot replies. Interactive chat still requires an authenticated private service.</p></section></div>';
  }
 
  function steps() {

@@ -1,5 +1,6 @@
 import {daysUntil,isActionable,isClosed as domainClosed,riskSignal,priorityScore,validateSnapshot,documentReadiness,applyRecordFilters,draftState,deadlineCollisions,freshnessState} from "./modules/domain.mjs";
 import {storageKey,legacyKeyForMigration} from "./modules/storage.mjs";
+import {hostedAdvisories,hostedStatus} from "./modules/hosted-ai.mjs";
 import {createLocalRecord,normalizeLocalRecords,mergeLocalRecords,exportIndependentSource} from "./modules/local-records.mjs";
 import {createConsole} from "./modules/console.mjs";
 import {mountAtlasLens} from "./modules/lens.mjs";
@@ -264,10 +265,26 @@ function pipeline(){
 function compare(){const selected=state.compare.map(getRecord).filter(Boolean);return heading("Compare opportunities","Compare deadline, funding, evidence and requirements side by side.",button("Choose applications","nav","applications","primary")+button("Clear selection","clear-compare"))+
 '<div class="info">'+selected.length+' of 4 applications selected. Use checkboxes in Applications. Funding and eligibility are recorded claims, not verified personal eligibility decisions.</div>'+
 (selected.length?'<div class="compare-grid">'+selected.map(r=>'<div class="compare-card"><h3>'+escapeHTML(r.name)+'</h3><label>Deadline</label><p>'+escapeHTML(stamp(r.deadline))+' '+dateRisk(days(r.deadline))+'</p><label>Evidence</label><p>'+verificationPill(r)+'</p><label>Status</label><p>'+escapeHTML(statusLabel(r.status))+'</p><label>Funding</label><p>'+escapeHTML(r.funding||"Unverified")+'</p><label>Eligibility</label><p>'+escapeHTML(r.eligibility||"Unverified")+'</p><label>Fit rationale</label><p>'+escapeHTML(r.fit||"Not recorded")+'</p><label>Document proof</label><p>'+Object.values(r.document_states||{}).filter(x=>x==="unknown").length+' unknown, '+Object.values(r.document_states||{}).filter(x=>x==="not_started").length+' explicitly not started</p><label>Next step</label><p>'+escapeHTML(r.next_step||"Unknown")+'</p><p>'+link(r.source_url,"Source")+'</p>'+button("Open details","record",r.id)+'</div>').join("")+'</div>':'<div class="empty">Select two to four applications from the Applications table to compare them.</div>')}
+function hostedAIPanel(){
+ const advisory = state.data?.hosted_ai;
+ const utcToday = new Date().toISOString().slice(0,10);
+ const selected = hostedAdvisories(state.data,utcToday).slice(0,24);
+ const status = hostedStatus(advisory,utcToday);
+ const path = ownerRepo()+"/actions/workflows/hosted-ai-advisories.yml";
+ const entries = selected.length?'<div class="mini-list">'+selected.map(item=>{
+  const r=getRecord(item.id);
+  if(!r)return"";
+  return '<div class="mini-row"><div>'+button(escapeHTML(r.name),"record",r.id)+
+   '<small>'+escapeHTML(item.category.replace(/_/g," "))+' · '+escapeHTML(item.priority)+' priority · unverified AI proposal</small></div></div>';
+ }).join("")+'</div>':'<p class="subtle">'+escapeHTML(status)+'</p>';
+ return statCard("Hosted AI verification triage",'<p class="muted">An opt-in GitHub Actions job can call a model using repository or environment secrets. These are provisional proof-gap priorities, not source verification, submission confirmation, or admission probabilities.</p>'+entries+
+ '<p>'+link(path,"Configure or run workflow")+'</p>');
+}
 function assurancePanel(){return renderAssurance({snapshot:state.data,records:records(),today:TODAY(),filter:selectedAuditCategory,limit:assuranceLimit,escape:escapeHTML,button,link})}
 function coveragePanel(){return renderCoverage({snapshot:state.data,escape:escapeHTML,link,repository:ownerRepo()})}
 function review(){const rs=records().filter(r=>r.verification!=="source_verified"&&r.verification!=="owner_verified"||r.duplicate_submission_advisory||r.blockers||r.document_states&&Object.values(r.document_states).includes("not_started"));const suspect=state.data.duplicates||[];return heading("Verification","Unconfirmed sources, duplicate pathways and document risk.",button("Open source monitoring","url",state.data.source_links.source_monitor,"primary"))+
 assurancePanel()+
+hostedAIPanel()+
 '<div class="info">Duplicate detection is an advisory similarity screen, not a determination that two calls are the same. Some programmes require two distinct submissions; others forbid two independent applications.</div>'+
 '<div class="kpis">'+kpi("Needs evidence review",records().filter(r=>r.recheck_required).length,"No automatic promotion")+kpi("Potential title matches",suspect.length,"Requires human assessment")+kpi("Multi-route cautions",records().filter(r=>r.duplicate_submission_advisory).length,"Manual interpretation")+kpi("Document gaps",records().filter(r=>Object.values(r.document_states||{}).includes("not_started")).length,"Explicitly confirmed")+kpi("Unverified dates",records().filter(r=>!r.deadline).length,"Date is unknown")+'</div>'+
 statCard("Programme and source duplicate advisories",suspect.length?'<div class="mini-list">'+suspect.map(d=>'<div class="mini-row"><div>'+d.ids.map(id=>'<button data-action="record" data-value="'+escapeHTML(id)+'">'+escapeHTML(id)+'</button>').join(' / ')+'<small>'+escapeHTML(d.reason)+' · Similarity '+escapeHTML(d.similarity)+' · NOT confirmed</small></div></div>').join("")+'</div>':'<div class="empty">No high-similarity programme titles detected. This does not rule out duplicate routes.</div>')+

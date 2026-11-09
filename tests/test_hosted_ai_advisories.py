@@ -3,10 +3,11 @@ from __future__ import annotations
 import json
 import tempfile
 import unittest
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
 from unittest.mock import patch
 
+from scripts.build_workspace import build
 from scripts.hosted_ai_advisories import (
     HostedAIError, infer_candidates, input_digest, main,
     make_advisory, provider_endpoint, public_candidates, validate_advisory,
@@ -114,6 +115,34 @@ class HostedAIContracts(unittest.TestCase):
         self.assertNotIn("Research opening", payload)
         self.assertNotIn("private-credential", payload)
         self.assertIn("Bearer private-credential", received[0].get_header("Authorization"))
+
+    def test_pages_builder_carries_only_current_validated_advisories(self) -> None:
+        today = datetime.now(timezone.utc).date()
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            data = root / "data"
+            data.mkdir()
+            (data / "user_opportunities.json").write_text(json.dumps({
+                "schema_version": 1, "as_of": today.isoformat(), "records": [
+                    {"id": "A-1", "name": "Observed programme", "record_type": "tracked",
+                     "deadline": None, "verification": "unverified", "status": "unconfirmed"}
+                ],
+            }), encoding="utf-8")
+            kwargs = {"repository": "IndependentOwner/atlas", "data_mode": "source"}
+            base = build(root, **kwargs)
+            self.assertEqual(base["hosted_ai"]["state"], "not_configured")
+            advisory = make_advisory(base, today=today, model_response={
+                "items": [{"id": "A-1", "category": "source_review", "priority": "high"}]
+            })
+            (data / "hosted_ai_advisories.json").write_text(json.dumps(advisory), encoding="utf-8")
+            verified = build(root, **kwargs)
+            self.assertEqual(verified["hosted_ai"]["state"], "current")
+            self.assertEqual(verified["hosted_ai"]["items"][0]["id"], "A-1")
+            self.assertNotIn("credentials", json.dumps(verified["hosted_ai"]))
+            (data / "hosted_ai_advisories.json").write_text(json.dumps({**advisory, "repository": "Other/atlas"}), encoding="utf-8")
+            rejected = build(root, **kwargs)
+            self.assertEqual(rejected["hosted_ai"]["state"], "stale_or_invalid")
+            self.assertEqual(rejected["hosted_ai"]["items"], [])
 
     def test_validate_only_needs_no_provider_secret(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
