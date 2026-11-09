@@ -23,7 +23,7 @@ const link=(url,name)=>{const u=safeURL(url);return u?'<a href="'+escapeHTML(u)+
 const count=(key)=>records().filter(key).length;
 const records=()=>state.data.records.map(r=>{const draft=state.drafts[r.id]||{};const {documents:localDocs,...fields}=draft;return {...r,...fields,document_states:{...(r.document_states||{}),...(localDocs||{})}}});
 const getRecord=id=>records().find(x=>x.id===id);
-const thisWeek=r=>{const d=days(r.deadline);return d!==null&&d>=0&&d<=7};
+const thisWeek=r=>{const d=days(r.status==="submitted"?r.followup:r.deadline);return d!==null&&d>=0&&d<=7};
 const open=r=>isActionable(r,TODAY());
 function notify(message){const el=$("toast");el.textContent=message;el.style.display="block";clearTimeout(notify.timer);notify.timer=setTimeout(()=>el.style.display="none",3600)}
 function copyText(text){if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(()=>notify("Copied to clipboard."),()=>fallbackCopy(text))}else fallbackCopy(text)}
@@ -97,7 +97,7 @@ function toolbar(list){
 }
 function dashboard(){
  const all=records(),tracked=all.filter(r=>r.record_type==="tracked");
- const active=tracked.filter(open),today=active.filter(r=>days(r.deadline)===0),week=active.filter(thisWeek);
+ const active=tracked.filter(open),today=active.filter(r=>r.status!=="submitted"&&days(r.deadline)===0),week=active.filter(thisWeek);
  const verify=active.filter(r=>r.verification!=="source_verified"&&r.verification!=="owner_verified");
  const queue=active.slice().sort((a,b)=>priority(b)-priority(a)).slice(0,9);
  const bins=[["Today",0,0],["1–3 days",1,3],["4–7 days",4,7],["8–14 days",8,14],["15–30 days",15,30]];
@@ -107,7 +107,7 @@ function dashboard(){
  const followups=active.filter(r=>r.followup&&days(r.followup)!==null&&days(r.followup)<=0).length;
  const failing=state.data.providers.filter(p=>p.health!=="ok").length;
  const collisions=deadlineCollisions(active,TODAY());
- const nearest=active.filter(r=>{const d=days(r.deadline);return d!==null&&d>=0}).sort((a,b)=>days(a.deadline)-days(b.deadline)||priority(b)-priority(a))[0]||null;
+ const nearest=active.filter(r=>{const d=days(r.deadline);return r.status!=="submitted"&&d!==null&&d>=0}).sort((a,b)=>days(a.deadline)-days(b.deadline)||priority(b)-priority(a))[0]||null;
  const closingDays=nearest?days(nearest.deadline):null;
  const timeZero=new Date(TODAY()+"T12:00:00Z");
  const runway=Array.from({length:7},(_,offset)=>{
@@ -152,7 +152,7 @@ function contacts(){const all=records().filter(r=>r.faculty!=="Not recorded"||r.
 statCard("Faculty and supervisor pipeline",toolbar(list)+'<div class="tablewrap"><table class="table"><thead><tr><th>Opportunity</th><th>Faculty / contact</th><th>Outreach status</th><th>Next follow-up</th><th>Action</th></tr></thead><tbody>'+list.map(r=>'<tr><td>'+rowButton(r)+'</td><td>'+escapeHTML(r.faculty)+'</td><td>'+pill(r.contact_status==="unrecorded"?"Not recorded":r.contact_status)+'</td><td>'+escapeHTML(stamp(r.followup))+(r.followup?" "+dateRisk(days(r.followup)):"")+'</td><td>'+button("Update","record",r.id)+'</td></tr>').join("")+'</tbody></table></div>')}
 function actions(){const rs=records().filter(r=>r.record_type==="tracked").filter(open).sort((a,b)=>priority(b)-priority(a));const tasks=(state.data.tasks||[]).filter(t=>!t.application_id||!getRecord(t.application_id)||open(getRecord(t.application_id))).slice(0,120);return heading("Next actions","Your deadline-first application tasks and the original workbook steps.",button("Download calendar (.ics)","export","ics","primary"))+
 '<div class="kpis">'+kpi("Due today",rs.filter(r=>days(r.deadline)===0).length,"Final or priority dates")+kpi("Within 72h",rs.filter(r=>days(r.deadline)!==null&&days(r.deadline)>=0&&days(r.deadline)<=3).length,"Check portal cutoff")+kpi("Follow-ups overdue",rs.filter(r=>r.followup&&days(r.followup)<0).length,"Manual date entries")+kpi("Plan steps surfaced",tasks.length,"Original tracker snapshot")+kpi("Explicit document gaps",rs.filter(r=>Object.values(r.document_states||{}).includes("not_started")).length,"Never infer from unknown")+'</div>'+
-statCard("Prioritized opportunities",'<div class="mini-list">'+rs.slice(0,35).map((r,i)=>'<div class="mini-row"><div><span class="subtle">#'+(i+1)+' &nbsp;</span>'+rowButton(r)+'<small>'+escapeHTML(r.next_step||"Confirm next action")+'</small></div><div>'+dateRisk(days(r.deadline))+'</div></div>').join("")+'</div>')+
+statCard("Prioritized opportunities",'<div class="mini-list">'+rs.slice(0,35).map((r,i)=>'<div class="mini-row"><div><span class="subtle">#'+(i+1)+' &nbsp;</span>'+rowButton(r)+'<small>'+escapeHTML(r.status==="submitted"?"Follow-up after submission: "+(r.next_step||"Check receipt and referee states"):(r.next_step||"Confirm next action"))+'</small></div><div>'+dateRisk(days(r.status==="submitted"?r.followup:r.deadline))+'</div></div>').join("")+'</div>')+
 statCard("Existing workbook execution steps",'<p class="subtle">Task completion should be confirmed through the existing authenticated GitHub issue workflow; a listed task is not automatically unfinished.</p>'+(tasks.length?'<div class="tablewrap"><table class="table"><thead><tr><th>Action</th><th>Due</th><th>Source status</th><th>Related application</th><th>Control</th></tr></thead><tbody>'+tasks.slice(0,80).map(t=>'<tr><td>'+escapeHTML(t.action||t.name)+'</td><td>'+escapeHTML(stamp(t.due))+'</td><td>'+pill(t.state)+'</td><td>'+escapeHTML(t.application_id||"Shared")+'</td><td>'+button("Copy /done","task",t.id)+'</td></tr>').join("")+'</tbody></table></div>':'<div class="empty">No planned steps in the displayed horizon.</div>'))}
 function updates(){
  const committed=records().filter(r=>r.updated_at);
@@ -352,7 +352,7 @@ function updatePalette(){state.focus=$("paletteQuery").value;const matches=recor
 function exportFile(filename,content,type="text/plain;charset=utf-8"){const blob=new Blob([content],{type});const u=URL.createObjectURL(blob);const a=document.createElement("a");a.href=u;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
 const csvVal=v=>'"'+String(v??"").replace(/"/g,'""')+'"';
 function asCSV(rows,columns){return[columns.map(csvVal).join(","),...rows.map(row=>columns.map(c=>csvVal(row[c])).join(","))].join("\r\n")}
-function calendar(){return"BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//PhD Atlas//Fall 2027//EN\r\n"+records().filter(r=>r.deadline&&r.status!=="archived").map(r=>{const date=r.deadline.replace(/-/g,"");const uid=r.id.replace(/[^a-zA-Z0-9_-]/g,"_")+"@phd-atlas";return"BEGIN:VEVENT\r\nUID:"+uid+"\r\nDTSTART;VALUE=DATE:"+date+"\r\nDTEND;VALUE=DATE:"+String(new Date(new Date(r.deadline+"T12:00:00Z").getTime()+86400000).toISOString().slice(0,10)).replace(/-/g,"")+"\r\nSUMMARY:"+r.name.replace(/[,\n;]/g," ")+" (verify cutoff)\r\nDESCRIPTION:Deadline type and closing time may require verification.\r\nEND:VEVENT\r\n"}).join("")+"END:VCALENDAR\r\n"}
+function calendar(){return"BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//PhD Atlas//Fall 2027//EN\r\n"+records().filter(r=>r.record_type==="tracked"&&r.deadline&&!["archived","withdrawn","rejected"].includes(r.status)).map(r=>{const date=r.deadline.replace(/-/g,"");const uid=r.id.replace(/[^a-zA-Z0-9_-]/g,"_")+"@phd-atlas";return"BEGIN:VEVENT\r\nUID:"+uid+"\r\nDTSTART;VALUE=DATE:"+date+"\r\nDTEND;VALUE=DATE:"+String(new Date(new Date(r.deadline+"T12:00:00Z").getTime()+86400000).toISOString().slice(0,10)).replace(/-/g,"")+"\r\nSUMMARY:"+r.name.replace(/[,\n;]/g," ")+" (verify cutoff)\r\nDESCRIPTION:Deadline type and closing time may require verification.\r\nEND:VEVENT\r\n"}).join("")+"END:VCALENDAR\r\n"}
 function exportData(kind){const filename="phd-atlas-"+TODAY();if(kind==="csv"){const cols=["id","name","country","deadline","deadline_kind","verification","status","next_step","source_url","funding","eligibility"];exportFile(filename+"-applications.csv",asCSV(sortList(filters(records())),cols),"text/csv;charset=utf-8")}else if(kind==="contacts"){exportFile(filename+"-contacts.csv",asCSV(records().filter(r=>r.faculty!=="Not recorded"),["id","name","faculty","contact_status","followup","source_url"]),"text/csv;charset=utf-8")}else if(kind==="ics"){exportFile(filename+"-deadlines.ics",calendar(),"text/calendar;charset=utf-8")}else if(kind==="drafts"){exportFile(filename+"-local-drafts.json",JSON.stringify({as_of:TODAY(),drafts:state.drafts},null,2),"application/json")}else{exportFile(filename+"-workspace.json",JSON.stringify({source_snapshot:state.data,local_drafts:state.drafts},null,2),"application/json")}}
 const ICONS={
  home:'<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16M10 10v10"/>',
@@ -378,7 +378,7 @@ function navigation(){
   '<span class="nav-label">'+escapeHTML(label)+'</span>'+(counts[id]?'<em>'+counts[id]+'</em>':"")+'</button>'
  ).join("");
  $("crumbName").textContent=VIEWS.find(x=>x[0]===state.view)?.[2]||"Overview";
- const next=tracked.filter(r=>open(r)&&days(r.deadline)!==null&&days(r.deadline)>=0).sort((a,b)=>days(a.deadline)-days(b.deadline)||priority(b)-priority(a))[0];
+ const next=tracked.filter(r=>open(r)&&r.status!=="submitted"&&days(r.deadline)!==null&&days(r.deadline)>=0).sort((a,b)=>days(a.deadline)-days(b.deadline)||priority(b)-priority(a))[0];
  const sidebarDue=$("sidebarDue");
  if(sidebarDue)sidebarDue.innerHTML=next?
   '<span class="sidebar-deadline-label">NEXT RECORDED CLOSING</span><strong>'+(days(next.deadline)===0?'TODAY':days(next.deadline)+' DAYS')+'</strong><button type="button" class="sidebar-deadline-link" data-action="record" data-value="'+escapeHTML(next.id)+'">'+escapeHTML(next.name)+'</button><small>'+escapeHTML(stamp(next.deadline))+'</small>':
