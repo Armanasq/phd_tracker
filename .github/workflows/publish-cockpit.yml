@@ -53,6 +53,7 @@ jobs:
           python scripts/build_workspace.py --out site/data/workspace.json
           python -m unittest discover -s tests -p 'test_workspace.py'
           node --check site/app.js
+          node --check site/ai-studio.js
           node --test tests/domain.test.mjs
           test -s site/modules/domain.mjs
           test -s site/index.html

@@ -50,3 +50,31 @@ API endpoints: `GET /api/operations`, `POST /api/private/{referee,reference,mile
 ## Research evidence tool
 
 The `paper_radar` tool supplies titles, original arXiv links, publication dates and research topics from the repository's committed research radar. Papers do not establish faculty availability or recruitment. The `proof_obligations` tool prioritizes unresolved deterministic preflight checks; neither tool invents admission probabilities or externally verified claims.
+
+## Connection setup and diagnostics
+
+The AI Studio **Models & providers** page now separates `needs_setup`, `ready_to_test`, `reachable`, `responded`, and `failed` status. No provider is marked connected until an explicit request succeeds. Use **Discover models** to query the provider model catalog without sending applicant data, then **Select model** and **Test inference** to validate chat compatibility. Cloud inference diagnostics may incur charges. Statuses are stored in the local SQLite database and invalidated whenever the provider configuration is edited.
+
+Select **Settings & diagnostics** to persist the default provider, default research agent, IANA timezone, and maximum scheduler attempts per check. Cloud disclosure authorization is never disabled globally.
+
+For local Ollama, start the Ollama service and pull an available model; choose that model identifier in AI Studio. For vLLM, LiteLLM, LM Studio, or another OpenAI-compatible endpoint, point the custom provider at an actual loopback `/v1` API. The default vLLM/LiteLLM port is an example, not a guarantee that a server is running.
+
+Cloud credentials must be supplied to the **private runtime environment**, not pasted into GitHub Issues or the public site. Use the environment variable shown on each provider card, for example `OPENAI_API_KEY` or `AZURE_OPENAI_API_KEY`. The server does not store API-key values, and a configured key does not imply a successful provider response.
+
+Azure has two supported routes. `azure` uses the v1 base `https://YOUR_RESOURCE.openai.azure.com/openai/v1`. `azure_deploy` uses the deployment-based base `https://YOUR_RESOURCE.openai.azure.com` and a dated API version, with the model field naming the deployment. Model-list discovery does not establish which Azure deployment is authorized for inference. The supported deployment-based route is documented by Microsoft for `/openai/deployments/{deployment}/chat/completions?api-version=...`.
+
+OpenAI-compatible custom providers can also point at supported model gateways. Direct native AWS Bedrock authentication, direct Google Vertex authentication, credential vault integrations, full provider streaming and automatic remote service deployment are not implemented; use a locally managed compatible gateway where appropriate.
+
+## Opt-in recurring execution on Linux
+
+The repository now includes a systemd user-service installer for the private runtime and twice-daily scheduler. Review the generated units before installing:
+
+```bash
+python scripts/install_ai_runtime.py
+python scripts/install_ai_runtime.py --install
+python scripts/install_ai_runtime.py --enable --overwrite
+```
+
+The installer generates a **private empty environment file** at `~/.config/phd-atlas-ai/provider.env` with mode `0600`. Add only the provider keys you intend to use. Units reference that file but never copy its contents into Git. `--install` writes units without enabling them. `--enable` activates the private loopback server and timer for this machine. A running timer is not an enabled workflow: each automated workflow remains disabled until approved in AI Studio. On non-systemd platforms, schedule `python -m phd_agents scheduler-once` with an OS-appropriate private scheduler.
+
+For production operations, keep the SQLite database outside the public checkout, audit outgoing model context, monitor individual workflow failures and protect the host. The default HTTP service is **not** a publicly authenticated multi-user API.

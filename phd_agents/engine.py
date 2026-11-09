@@ -133,7 +133,7 @@ def period_for(schedule: str, now: datetime) -> str:
     return ""
 
 def scheduler_once(store: Store, root: Path, *, now: datetime | None = None) -> list[dict[str, Any]]:
-    current = now or datetime.now(ZoneInfo("UTC"))
+    current = (now or datetime.now(ZoneInfo("UTC"))).astimezone(ZoneInfo(read_settings(store)["timezone"]))
     result = []
     settings = catalog(store)
     max_runs = read_settings(store)["max_runs_per_tick"]
