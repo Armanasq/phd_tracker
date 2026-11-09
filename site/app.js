@@ -1,5 +1,6 @@
 import {daysUntil,isActionable,isClosed as domainClosed,riskSignal,priorityScore,validateSnapshot,documentReadiness,applyRecordFilters,draftState,deadlineCollisions,freshnessState} from "./modules/domain.mjs";
 import {storageKey,legacyKeyForMigration} from "./modules/storage.mjs";
+import {createLocalRecord,normalizeLocalRecords,mergeLocalRecords,exportExperienceView} from "./modules/local-records.mjs";
 import {createConsole} from "./modules/console.mjs";
 import {mountAtlasLens} from "./modules/lens.mjs";
 import {auditWorkspace} from "./modules/assurance.mjs";
@@ -10,7 +11,7 @@ const VIEWS=[["dashboard","home","Overview"],["applications","file","Application
 const FALLBACK_REPO="https://github.com/Armanasq/phd_tracker";
 let selectedAuditCategory="all",assuranceLimit=75;
 let ledgerQuery="",ledgerType="all",ledgerPage=1;
-const STORE=storageKey("phd-atlas-drafts-v1"),PREFS=storageKey("phd-atlas-prefs-v1"),VIEW_STORE=storageKey("phd-atlas-views-v2"),COMPARE_STORE=storageKey("phd-atlas-compare-v1");
+const STORE=storageKey("phd-atlas-drafts-v1"),PREFS=storageKey("phd-atlas-prefs-v1"),VIEW_STORE=storageKey("phd-atlas-views-v2"),COMPARE_STORE=storageKey("phd-atlas-compare-v1"),LOCAL_STORE=storageKey("phd-atlas-local-records-v1");
 const $=id=>document.getElementById(id);
 const escapeHTML=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safeURL=value=>{try{const u=new URL(String(value));return u.protocol==="https:"?u.href:""}catch{return""}};
@@ -25,7 +26,8 @@ const readStore=(k,d)=>{try{
  }catch{return d}};
 const saveStore=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{notify("Local storage unavailable. Export drafts as JSON.")}};
 const storedViews=readStore(VIEW_STORE,{saved:[],last:{scope:"tracked",query:"",status:"all",verification:"all",country:"all",horizon:"all",sort:"deadline"}});
-const state={data:null,view:"dashboard",scope:storedViews.last?.scope||"tracked",query:storedViews.last?.query||"",status:storedViews.last?.status||"all",verification:storedViews.last?.verification||"all",country:storedViews.last?.country||"all",horizon:storedViews.last?.horizon||"all",sort:storedViews.last?.sort||"deadline",presets:Array.isArray(storedViews.saved)?storedViews.saved:[],activePreset:"",compare:readStore(COMPARE_STORE,[]),selected:null,drafts:readStore(STORE,{}),prefs:readStore(PREFS,{theme:"light",horizon:7,reminders:true,notified:{}}),modal:"",focus:null,calendarMonth:null,selectedDate:null,draggedId:null};
+const readLocalRecords=()=>{try{return normalizeLocalRecords(readStore(LOCAL_STORE,[]))}catch{return []}};
+const state={data:null,view:"dashboard",scope:storedViews.last?.scope||"tracked",query:storedViews.last?.query||"",status:storedViews.last?.status||"all",verification:storedViews.last?.verification||"all",country:storedViews.last?.country||"all",horizon:storedViews.last?.horizon||"all",sort:storedViews.last?.sort||"deadline",presets:Array.isArray(storedViews.saved)?storedViews.saved:[],activePreset:"",compare:readStore(COMPARE_STORE,[]),selected:null,drafts:readStore(STORE,{}),localRecords:readLocalRecords(),prefs:readStore(PREFS,{theme:"light",horizon:7,reminders:true,notified:{}}),modal:"",focus:null,calendarMonth:null,selectedDate:null,draggedId:null};
 const TODAY=()=>{const zone=state.data?.timezone||"Europe/Berlin";const parts=new Intl.DateTimeFormat("en-US",{timeZone:zone,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());const get=k=>parts.find(p=>p.type===k)?.value||"";return get("year")+"-"+get("month")+"-"+get("day")};
 const days=due=>daysUntil(due,TODAY());
 const stamp=due=>due?new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"short",year:"numeric",timeZone:"UTC"}).format(new Date(due+"T12:00:00Z")):"Unverified";
@@ -36,7 +38,7 @@ const risk=r=>riskSignal(r,TODAY());
 const pill=(t,style)=>'<span class="pill '+(style||"")+'">'+escapeHTML(t)+'</span>';
 const link=(url,name)=>{const u=safeURL(url);return u?'<a href="'+escapeHTML(u)+'" target="_blank" rel="noopener noreferrer">'+escapeHTML(name)+' ↗</a>':""};
 const count=(key)=>records().filter(key).length;
-const records=()=>state.data.records.map(r=>{const draft=state.drafts[r.id]||{};const {documents:localDocs,...fields}=draft;return {...r,...fields,document_states:{...(r.document_states||{}),...(localDocs||{})}}});
+const records=()=>[...state.data.records,...state.localRecords.filter(r=>!state.data.records.some(source=>source.id===r.id))].map(r=>{if(r.local_only)return r;const draft=state.drafts[r.id]||{};const {documents:localDocs,...fields}=draft;return {...r,...fields,document_states:{...(r.document_states||{}),...(localDocs||{})}}});
 const getRecord=id=>records().find(x=>x.id===id);
 const thisWeek=r=>{const d=days(r.status==="submitted"?r.followup:r.deadline);return d!==null&&d>=0&&d<=7};
 const open=r=>isActionable(r,TODAY());
@@ -111,7 +113,7 @@ function toolbar(list){
  button("Clear","clear-filters")+'<span class="count" aria-live="polite">'+list.length+' records</span></div>';
 }
 function dashboard(){
- if(state.data.instance?.data_mode==="starter")return heading("Set up your PhD workspace","This independent deployment starts without inherited applications or unverified opportunity claims.",button("Setup guide","url",ownerRepo()+"/blob/main/docs/SELF_HOSTING.md","primary")+button("Repository","url",ownerRepo()))+
+ if(state.data.instance?.data_mode==="starter"&&!state.localRecords.length)return heading("Set up your PhD workspace","This independent deployment starts without inherited applications or unverified opportunity claims.",button("Create local opportunity","new-local","","primary")+button("Setup guide","url",ownerRepo()+"/blob/main/docs/SELF_HOSTING.md")+button("Repository","url",ownerRepo()))+
  '<div class="info">No PhD application evidence has been imported. This does not mean no opportunities exist. Add your own reviewed sources, then enable source mode in this repository’s Actions settings.</div>'+
  statCard("First-run checklist",'<div class="mini-list"><div class="mini-row"><strong>01 · Review and replace inherited source files in data/</strong></div><div class="mini-row"><strong>02 · Confirm deadlines, eligibility and primary university links</strong></div><div class="mini-row"><strong>03 · Set PHD_ATLAS_DATA_MODE to source in GitHub Actions variables</strong></div><div class="mini-row"><strong>04 · Rerun the Pages publisher and inspect the release manifest</strong></div></div>');
  const all=records(),tracked=all.filter(r=>r.record_type==="tracked");
@@ -161,9 +163,10 @@ function applications(){
  const dueSoon=list.filter(r=>{const d=days(r.deadline);return d!==null&&d>=0&&d<=7}).length;
  const needsEvidence=list.filter(r=>r.verification!=="source_verified"&&r.verification!=="owner_verified").length;
  const candidates=list.filter(r=>r.record_type==="candidate").length;
- return heading("Applications","Tracked opportunities and research candidates, with source provenance and device-local views.",button("Compare selected ("+state.compare.length+")","nav","compare","primary")+button("Export filtered CSV","export","csv"))+
+ return heading("Applications","Tracked opportunities and research candidates, with source provenance and device-local views.",button("Add opportunity","new-local","","primary")+button("Compare selected ("+state.compare.length+")","nav","compare")+button("Export filtered CSV","export","csv")+button("Local backup","export","local")+button("Import backup","import-local"))+
+ '<input id="localImportFile" type="file" accept=".json,application/json" hidden aria-label="Import local opportunity backup">'+
  '<div class="registry-summary" aria-label="Current filtered results"><div><span>RECORDS IN VIEW</span><strong>'+list.length+'</strong><small>current filters</small></div><div><span>DUE WITHIN 7 DAYS</span><strong>'+dueSoon+'</strong><small>recorded dates</small></div><div><span>NEEDS VERIFICATION</span><strong>'+needsEvidence+'</strong><small>source or owner review</small></div><div><span>RESEARCH CANDIDATES</span><strong>'+candidates+'</strong><small>not promoted</small></div></div>'+
- '<div class="info">Deadline dates may omit portal cutoff times and time zones. Source review does not establish current availability. Local edits require explicit GitHub synchronization.</div>'+
+ '<div class="info">Deadline dates may omit portal cutoff times and time zones. Source review does not establish current availability. Device-local records are never published automatically. Source-record edits require explicit GitHub confirmation.</div>'+
  statCard("Application registry",toolbar(list)+(list.length?table(list,true):'<div class="empty">No records match these filters. Clear filters or select a saved view.</div>'));
 }
 function contacts(){const all=records().filter(r=>r.faculty!=="Not recorded"||r.contact_status!=="unrecorded"||r.followup);const list=sortList(filters(all));return heading("Faculty contacts","Contacts and follow-up dates, recorded explicitly.",button("Export contacts CSV","export","contacts"))+
@@ -289,7 +292,7 @@ statCard("Evidence and workflow entry points",'<div class="mini-list">'+[
 ].map(([name,url])=>'<div class="mini-row"><span>'+escapeHTML(name)+'</span>'+link(url,"Open")+'</div>').join("")+'</div>')+
 statCard("Contact & application control model",'<p class="muted">New owner decisions are submitted as authenticated GitHub issue commands. Local draft values are provisional until the issue-control workflow commits an updated versioned record. The original workbook, data pipeline, reminders and source-monitor workflow remain intact.</p><p class="muted">The public-site projection deliberately excludes mailbox permalinks, email addresses, correspondence bodies and full exclusion rationales. GitHub Pages is not an access-controlled datastore.</p>')}
 const DOC_LABELS={unknown:"Unknown",ready:"Ready",in_progress:"In progress",not_started:"Not started",not_applicable:"Not required"};
-function sourceRecord(id){return state.data?.records.find(r=>r.id===id)}
+function sourceRecord(id){return state.data?.records.find(r=>r.id===id)||state.localRecords.find(r=>r.id===id)}
 function withDraftBase(id){const saved=state.drafts[id]||{};return {...saved,base_updated_at:typeof saved.base_updated_at==="string"?saved.base_updated_at:sourceRecord(id)?.updated_at||""}}
 function stageStatus(id,status){
  const r=getRecord(id);
@@ -400,6 +403,43 @@ function exportFile(filename,content,type="text/plain;charset=utf-8"){const blob
 const csvVal=v=>{const raw=String(v??"");const safe=/^[\s\u0000-\u001f]*[=+\-@\t\r]/.test(raw)?"'"+raw:raw;return '"'+safe.replace(/"/g,'""')+'"'};
 function asCSV(rows,columns){return[columns.map(csvVal).join(","),...rows.map(row=>columns.map(c=>csvVal(row[c])).join(","))].join("\r\n")}
 function calendar(){return"BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//PhD Atlas//Fall 2027//EN\r\n"+records().filter(r=>r.record_type==="tracked"&&r.deadline&&!["archived","withdrawn","rejected"].includes(r.status)).map(r=>{const date=r.deadline.replace(/-/g,"");const uid=r.id.replace(/[^a-zA-Z0-9_-]/g,"_")+"@phd-atlas";return"BEGIN:VEVENT\r\nUID:"+uid+"\r\nDTSTART;VALUE=DATE:"+date+"\r\nDTEND;VALUE=DATE:"+String(new Date(new Date(r.deadline+"T12:00:00Z").getTime()+86400000).toISOString().slice(0,10)).replace(/-/g,"")+"\r\nSUMMARY:"+r.name.replace(/[,\n;]/g," ")+" (verify cutoff)\r\nDESCRIPTION:Deadline type and closing time may require verification.\r\nEND:VEVENT\r\n"}).join("")+"END:VCALENDAR\r\n"}
+function saveLocalRecord(value){
+ const record=createLocalRecord(value,value.id);
+ if(!state.localRecords.some(r=>r.id===record.id))throw new TypeError("Local opportunity not found");
+ state.localRecords=state.localRecords.map(r=>r.id===record.id?record:r);
+ saveStore(LOCAL_STORE,state.localRecords);
+}
+function openLocalCreator(){
+ openModal("<h2>Add an opportunity on this device</h2>",'<p class="muted">This record is local-only; it has not been verified, published or submitted. Export a backup before clearing browser data.</p>'+
+ '<div class="field"><label for="localName">Programme or position</label><input id="localName" class="input" maxlength="350" required placeholder="PhD in robotics"></div>'+
+ '<div class="field"><label for="localDeadline">Recorded deadline (optional)</label><input id="localDeadline" class="input" type="date"></div>'+
+ '<div class="field"><label for="localCountry">Country</label><input id="localCountry" class="input" maxlength="70"></div>'+
+ '<div class="field"><label for="localSource">Public official-source URL (optional, HTTPS)</label><input id="localSource" class="input" type="url" placeholder="https://university.example/"></div>'+
+ '<div class="field"><label for="localNext">Next action</label><textarea id="localNext" class="input" maxlength="650" placeholder="Verify the primary source, eligibility and funding"></textarea></div>'+
+ '<p class="form-error" id="localError" role="alert"></p><div class="buttons">'+button("Add to this device","create-local","","primary")+button("Cancel","close")+'</div>');
+ $("localName")?.focus();
+}
+function createLocal(){
+ try{
+  if(!globalThis.crypto?.randomUUID)throw new Error("Secure browser UUID generation is unavailable.");
+  const input={name:$("localName").value,country:$("localCountry").value,deadline:$("localDeadline").value,source_url:$("localSource").value,next_step:$("localNext").value};
+  const id="LOCAL-"+globalThis.crypto.randomUUID(),record=createLocalRecord(input,id);
+  if(sourceRecord(id))throw new Error("Generated identifier collides with an existing opportunity");
+  if(state.localRecords.length>=1000)throw new Error("Maximum 1000 device-local opportunities");
+  state.localRecords.push(record);saveStore(LOCAL_STORE,state.localRecords);
+  closeModal();state.scope="tracked";state.query="";state.status="all";state.horizon="all";persistViews();go("applications");detail(record);notify("Opportunity saved locally; GitHub was not changed.");
+ }catch(error){const target=$("localError");if(target)target.textContent=String(error.message||error)}
+}
+async function importLocalBackup(file){
+ try{
+  if(!file||file.size>2_000_000)throw new TypeError("Choose a local backup JSON file no larger than 2 MB");
+  const source=JSON.parse(await file.text());
+  if(source?.schema_version!==1||!Array.isArray(source.local_records))throw new TypeError("Expected a PhD Atlas local-records v1 backup");
+  const result=mergeLocalRecords(state.localRecords,source.local_records,state.data.records.map(r=>r.id));
+  state.localRecords=result.records;saveStore(LOCAL_STORE,state.localRecords);render();
+  notify(result.imported+" opportunity records imported; "+result.skipped+" existing IDs preserved.");
+ }catch(error){notify("Import rejected: "+String(error.message||error))}
+}
 function exportData(kind){const filename="phd-atlas-"+TODAY();if(kind==="csv"){const cols=["id","name","country","deadline","deadline_kind","verification","status","next_step","source_url","funding","eligibility"];exportFile(filename+"-applications.csv",asCSV(sortList(filters(records())),cols),"text/csv;charset=utf-8")}else if(kind==="contacts"){exportFile(filename+"-contacts.csv",asCSV(records().filter(r=>r.faculty!=="Not recorded"),["id","name","faculty","contact_status","followup","source_url"]),"text/csv;charset=utf-8")}else if(kind==="ics"){exportFile(filename+"-deadlines.ics",calendar(),"text/calendar;charset=utf-8")}else if(kind==="drafts"){exportFile(filename+"-local-drafts.json",JSON.stringify({as_of:TODAY(),drafts:state.drafts},null,2),"application/json")}else{exportFile(filename+"-workspace.json",JSON.stringify({source_snapshot:state.data,local_drafts:state.drafts},null,2),"application/json")}}
 const ICONS={
  home:'<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16M10 10v10"/>',
@@ -610,7 +650,7 @@ async function loadSnapshot(){
   updateInstanceLinks(data);
   atlasLens?.refreshData();
   if(!Array.isArray(state.compare))state.compare=[];
-  state.compare=state.compare.filter(id=>validation.ids.has(id)).slice(0,4);
+  state.compare=state.compare.filter(id=>validation.ids.has(id)||state.localRecords.some(r=>r.id===id)).slice(0,4);
   saveStore(COMPARE_STORE,state.compare);
   render();
   if(prior&&prior!==data.generated_at)notify("Source snapshot updated. Local drafts have been checked for conflicts.");
