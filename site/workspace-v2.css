@@ -343,3 +343,9 @@ body.dark .os-provider-icon,body.dark .os-avatar,body.dark .os-workflow-mark,bod
  .topbar .crumb{max-width:65px;min-width:0;overflow:hidden}
  .topbar .crumb strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 }
+
+.os-context-banner{border:1px solid #d5dff4;background:#eef3ff;border-radius:12px;margin:0 0 18px;padding:16px 19px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.os-context-banner .os-kicker{margin-bottom:5px}
+.os-context-banner strong{font-size:13px;display:block;overflow-wrap:anywhere}
+.os-context-banner small{font-size:11px;color:var(--muted);display:block;margin-top:4px}
+body.dark .os-context-banner{background:#223155;border-color:#425780}

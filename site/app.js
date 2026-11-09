@@ -289,7 +289,7 @@ openModal('<div class="eyebrow">'+escapeHTML(r.id)+' · '+escapeHTML(r.record_ty
 '<div class="field"><label>Required document evidence</label><p>'+escapeHTML(r.document_requirements_note||"Verify document list on official portal")+'</p></div>'+
 '<div class="field"><label>Blockers, source reservations & submission precautions</label><p>'+escapeHTML(r.blockers||r.verification_note||"No specific blocker documented")+'</p>'+riskPill(r)+'</div>'+
 '<div class="field"><label>Evidence excerpt</label><p>'+escapeHTML(r.evidence||"No detailed excerpt recorded")+'</p></div></div><div>'+fields+'</div></div>',
-'<div class="buttons">'+button("Save local draft","save-record",r.id,"primary")+button("Review GitHub update","save-command",r.id)+(r.record_type==="candidate"?button("Promote candidate","promote",r.id):"")+button("Action Center","url",state.data.source_links.control_issue)+'</div><p class="footnote">Drafts stay in your browser until confirmed through GitHub. Notes and receipt URLs remain local; public issues must not contain private applicant data.</p>');
+'<div class="buttons">'+(r.record_type==="tracked"?button("Analyze with Copilot","ai-record",r.id,"primary"):"")+button("Save local draft","save-record",r.id)+button("Review GitHub update","save-command",r.id)+(r.record_type==="candidate"?button("Promote candidate","promote",r.id):"")+button("Action Center","url",state.data.source_links.control_issue)+'</div><p class="footnote">Drafts stay in your browser until confirmed through GitHub. Notes and receipt URLs remain local; public issues must not contain private applicant data.</p>');
 }
 function openModal(title,body,footer=""){
  if(!state.modal)state.returnFocus=document.activeElement;
@@ -426,6 +426,7 @@ function events(){
   const {action:type,value}=el.dataset;
   if(type==="nav")go(value);
   else if(type==="record"){closeModal();detail(getRecord(value))}
+  else if(type==="ai-record"){closeModal();aiConsole.selectApplication(value);go("ai")}
    else if(type==="close")closeModal();
   else if(type==="save-record")saveRecord(false);
   else if(type==="save-command")saveRecord(true);

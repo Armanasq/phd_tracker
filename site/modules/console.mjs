@@ -296,8 +296,10 @@ export function createConsole({notify,onChange,navigate,getRecords,getView}) {
   const visibleRecords=(records||[]).filter(r=>r.record_type==="tracked").slice(0,300);
   const options=[["","Portfolio · all tracked opportunities"],...visibleRecords.map(r=>[r.id,short(r.name,85)])];
   const recent=(state.data.runs||[]).slice(0,6);
+  const scoped=(records||[]).find(r=>r.id===state.selectedApplication);
+  const context=scoped?'<div class="os-context-banner"><div><span class="os-kicker">APPLICATION IN CONTEXT</span><strong>'+esc(short(scoped.name,125))+'</strong><small>'+esc(scoped.id)+' · Evidence '+esc(state.data.as_of||"unknown")+'</small></div>'+btn("Clear context","clear-application","","quiet")+'</div>':'';
   return '<section class="os-page">'+heading("AI / RESEARCH COPILOT","Research Copilot","Evidence-backed analysis and application decisions, driven by the model and agent routes configured in Settings.",
-    btn("Configure AI","go","settings","quiet"))+
+    btn("Configure AI","go","settings","quiet"))+context+
    '<div class="os-copilot-layout"><section class="os-panel os-chat-panel"><div class="os-copilot-banner"><div class="os-avatar-large">A</div><div><div class="os-kicker">AUTOMATIC INFERENCE</div>'+
    '<h2>What should we investigate?</h2><p>One workspace. One model configuration. No provider selection per request.</p></div></div>'+
    '<form data-os-form="run" class="os-form os-copilot-form">'+
@@ -367,6 +369,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getView}) {
   if(action==="new-workflow"){selectWorkflow("__new__");return;}
   if(action==="edit-workflow"){selectWorkflow(id);return;}
   if(action==="run-selected-agent"){state.selectedAgent=id;navigate("ai");return;}
+  if(action==="clear-application"){state.selectedApplication="";state.prompt="";state.lastAnswer=null;onChange();return;}
   if(action==="prompt"){
    const suggestions={priorities:"Identify the three highest-value actions I can complete today, with supporting evidence and unknowns.",evidence:"Audit application evidence conflicts, missing primary sources and incomplete documentation.",fit:"Compare my documented work against current research requirements without inventing supervisor availability.",steps:"Produce a prioritized dependency-aware application action plan with explicit proof obligations."};
    state.prompt=suggestions[id]||"";onChange();const el=document.getElementById("osPrompt");if(el)el.focus();return;
@@ -521,5 +524,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getView}) {
  setupEvents();
  return {connect,view,isLive,activeLabel:()=>active()?.label||"Configure a model",
   activeModel:()=>active()?.model||"",isVerified:()=>!!active()&&status(active())==="responded",
-  settings:()=>prefs(),setContext:view=>{state.sourceView=view},selectTab:tab=>{state.tab=tab;onChange()}};
+  settings:()=>prefs(),setContext:view=>{state.sourceView=view},
+  selectApplication:id=>{state.selectedApplication=id;state.prompt="Audit this application's official-source evidence, eligibility, exact deadline, documents, blockers and next actions. Separate verified facts from unknowns.";state.lastAnswer=null;},
+  selectTab:tab=>{state.tab=tab;onChange()}};
 }
