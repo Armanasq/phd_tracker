@@ -33,6 +33,29 @@ from .recovery import runtime_lock
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
 
+
+def prepare_public_snapshot(root: Path) -> dict:
+    from scripts.build_workspace import build
+    root = Path(root).resolve()
+    target = root / "site" / "data" / "workspace.json"
+    if not (root / "site" / "index.html").is_file():
+        raise ValueError("The PhD Atlas site directory is missing; run the service from a complete clone")
+    data = build(root)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    temporary = target.with_name("." + target.name + "." + uuid.uuid4().hex + ".tmp")
+    try:
+        temporary.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        temporary.replace(target)
+    finally:
+        temporary.unlink(missing_ok=True)
+    return {
+        "path": str(target),
+        "records": len(data["records"]),
+        "data_mode": data["instance"]["data_mode"],
+        "repository": data["instance"]["repository"],
+    }
+
+
 class ApiServer(ThreadingHTTPServer):
     daemon_threads = True
     def __init__(self, address: tuple[str, int], *, store: Store, root: Path):
@@ -472,6 +495,7 @@ def serve(host: str = "127.0.0.1", port: int = 8765, *, root: Path = ROOT, state
 
 def _serve_locked(host: str, port: int, *, root: Path, state_path: Path | None) -> None:
     from threading import Event, Thread
+    prepared = prepare_public_snapshot(root)
     store = Store(state_path)
     httpd = ApiServer((host, port), store=store, root=root)
     stop = Event()
@@ -489,7 +513,8 @@ def _serve_locked(host: str, port: int, *, root: Path, state_path: Path | None) 
     thread = Thread(target=schedule_loop, name="phd-atlas-scheduler", daemon=True)
     thread.start()
     try:
-        print(f"PhD Atlas private runtime listening at http://127.0.0.1:{port}/ai-studio.html", flush=True)
+        print(f"PhD Atlas private runtime listening at http://127.0.0.1:{port}/", flush=True)
+        print("Public source projection initialized: " + str(prepared["records"]) + " records (" + prepared["data_mode"] + ").", flush=True)
         print("Opt-in scheduled AI workflows are checked every five minutes while the private runtime is running.", flush=True)
         httpd.serve_forever(poll_interval=0.5)
     finally:
