@@ -45,3 +45,17 @@ node --check site/app.js
 The existing interactive EvidenceGraph dashboard is preserved and published at `/evidencegraph/` beside PhD Atlas. The `visual-qa.yml` workflow runs the legacy dashboard smoke test and the new PhD Atlas browser suite, including filters, calendar, pipeline drag-and-drop, comparisons, local edits, exports and mobile screenshots. It uploads rendered screenshots as a GitHub Actions artifact.
 
 For narrow screens, the application registry uses accessible application cards rather than a horizontally cropped desktop data table. The underlying source rows, comparison controls, and filters are unchanged.
+
+
+## Operational architecture (2026-11-09 increment)
+
+The frontend remains static, with a tested ES module at site/modules/domain.mjs for source validation, readiness, priority/risk rules, date arithmetic, and draft conflicts. Existing Pages and GitHub issue-control workflows are preserved.
+
+- Tracked applications are separate from research candidates, with a verified owner-promotion flow.
+- Named filter views and comparison selections are stored on the local device. Hash-based navigation preserves view state.
+- Application owner edits include an expected source version, and stale GitHub issue commands are rejected. Resolve conflicts explicitly in Changes.
+- The pipeline includes non-drag stage selectors. Owner priority is an explicit, validated field.
+- Private applicant notes and receipt URLs are never included in public issue commands or generated public snapshots.
+- Source refresh failure preserves the last valid snapshot; source freshness is displayed when needed.
+
+Detailed audit, decisions, design contract, QA limits, and remaining service dependencies are documented in docs/PRODUCT_ENGINEERING.md.

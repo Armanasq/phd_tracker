@@ -429,3 +429,46 @@ body.dark{--muted:#b6c3b7;--soft:#a5b2a7}
  .app-card-compare{display:flex;align-items:center;gap:9px;padding-top:12px;margin-top:12px;border-top:1px solid var(--line);font-size:11px;color:var(--text);cursor:pointer}
  .app-card-compare .check{width:16px;height:16px}
 }
+
+
+/* Operational controls: compact, predictable and accessible. */
+.view-presets{display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:0 0 13px;margin-bottom:13px;border-bottom:1px solid var(--line)}
+.view-presets>label{font-size:11px;font-weight:650;color:var(--text);margin-right:1px}
+.view-presets .select{min-width:185px;max-width:235px}
+.view-presets-note{font-size:10px;color:var(--muted);margin-left:auto}
+.view-presets .btn{min-height:36px}
+.toolbar .btn{min-height:36px}
+.form-error{font-size:11px;color:var(--red);line-height:1.45;min-height:0;margin:5px 0 0}
+.field [aria-invalid="true"]{border-color:var(--red);outline-color:var(--red)}
+.kanban-stage{display:flex;flex-direction:column;gap:5px;margin-top:11px;padding-top:10px;border-top:1px solid var(--line);font-size:10px;color:var(--muted)}
+.kanban-stage select{width:100%;min-height:34px;padding:6px 7px;border:1px solid var(--line-strong);border-radius:5px;background:var(--surface);color:var(--text);font-size:11px;cursor:pointer}
+.kanban-stage select:hover{border-color:var(--accent)}
+.freshness-note{display:flex;align-items:center;justify-content:space-between;gap:17px;margin-bottom:21px;padding:11px 14px;border:1px solid #e4d4b7;border-left:3px solid var(--amber);background:var(--amber-bg);border-radius:5px;font-size:11px;color:var(--ink);line-height:1.6}
+.freshness-note .btn{flex-shrink:0;background:transparent;border-color:currentColor}
+.reconcile-line{border-top:1px solid var(--line);padding:12px 0;display:grid;grid-template-columns:104px 1fr;gap:13px;align-items:start}
+.reconcile-line>strong{font-size:11px;color:var(--ink)}
+.reconcile-line>div{display:flex;flex-direction:column;gap:5px;overflow-wrap:anywhere;font-size:11px}
+.reconcile-line>div span:first-child{color:var(--muted)}
+.reconcile-line>div span:last-child{color:var(--ink)}
+.kanban-card[draggable="true"]{cursor:grab}
+.kanban-card:focus-within{outline:2px solid var(--focus);outline-offset:2px}
+.app-card-due{font-variant-numeric:tabular-nums}
+.count{font-variant-numeric:tabular-nums}
+input[type="date"]{font-variant-numeric:tabular-nums}
+button,.btn,.nav-btn,input,select,textarea{touch-action:manipulation}
+@media(max-width:980px){
+ .view-presets-note{margin-left:0}
+ .view-presets .select{min-width:155px}
+}
+@media(max-width:680px){
+ .view-presets{gap:8px;margin-bottom:14px}
+ .view-presets>label{width:100%}
+ .view-presets .select{flex:1;min-width:0;max-width:none}
+ .view-presets-note{width:100%}
+ .freshness-note{flex-direction:column;align-items:flex-start}
+ .freshness-note .btn{align-self:flex-start}
+ .reconcile-line{grid-template-columns:1fr;gap:3px}
+}
+@media(prefers-reduced-motion:reduce){
+ .kanban-card,.nav-btn,.btn{transition:none}
+}

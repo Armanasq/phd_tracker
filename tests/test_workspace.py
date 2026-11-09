@@ -59,5 +59,33 @@ class WorkspaceTests(unittest.TestCase):
         self.assertEqual(unchanged, previous)
 
 
+    def test_version_checked_updates_reject_stale_source(self):
+        previous = {"schema_version":1, "records":{"N263-05":{"status":"shortlisted","updated_at":"2026-11-09T10:00:00+00:00"}}, "processed_comment_ids":[]}
+        event = {"action":"created","issue":{"body":"<!-- phd-intelligence-action-center-v1 -->"},"comment":{"id":677,"user":{"login":"Armanasq"},"body":'/workspace {"id":"N263-05","expected_updated_at":"2026-11-08T10:00:00+00:00","status":"preparing"}'}}
+        unchanged, result=transform(event,"Armanasq",{"N263-05"},previous)
+        self.assertFalse(result["accepted"])
+        self.assertIn("source_version_conflict",result["reason"])
+        self.assertEqual(unchanged,previous)
+        event["comment"]["body"]='/workspace {"id":"N263-05","expected_updated_at":"2026-11-09T10:00:00+00:00","priority":"high","status":"preparing"}'
+        changed,accepted=transform(event,"Armanasq",{"N263-05"},previous)
+        self.assertTrue(accepted["accepted"])
+        self.assertEqual(changed["records"]["N263-05"]["priority"],"high")
+
+    def test_verified_candidate_promotion_and_sensitive_data_rejection(self):
+        previous={"schema_version":1,"records":{},"processed_comment_ids":[]}
+        event={"action":"created","issue":{"body":"<!-- phd-intelligence-action-center-v1 -->"},"comment":{"id":781,"user":{"login":"Armanasq"},"body":'/workspace {"id":"N263-05","promoted":true,"expected_updated_at":""}'}}
+        same,denied=transform(event,"Armanasq",{"N263-05"},previous)
+        self.assertFalse(denied["accepted"])
+        event["comment"]["body"]='/workspace {"id":"N263-05","promoted":true,"verification":"source_verified","expected_updated_at":""}'
+        updated,accepted=transform(event,"Armanasq",{"N263-05"},previous)
+        self.assertTrue(accepted["accepted"])
+        self.assertTrue(updated["records"]["N263-05"]["promoted"])
+        event["comment"]["body"]='/workspace {"id":"N263-05","notes":"private"}'
+        same,denied=transform(event,"Armanasq",{"N263-05"},previous)
+        self.assertFalse(denied["accepted"])
+        self.assertEqual(same,previous)
+
+
+
 if __name__ == "__main__":
     unittest.main()

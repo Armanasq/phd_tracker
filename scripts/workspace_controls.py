@@ -14,7 +14,7 @@ VERIFY = {"unverified", "needs_review", "source_verified", "owner_verified"}
 CONTACT = {"unrecorded", "to_contact", "contacted", "awaiting_reply", "followup_due", "replied", "declined", "completed"}
 DOC = {"unknown", "ready", "in_progress", "not_started", "not_applicable"}
 DOCUMENT_KEYS = {"academic_cv", "research_statement", "transcripts", "recommendations", "english_proof", "research_portfolio"}
-FIELDS = {"id", "status", "verification", "followup", "contact_status", "next_step", "documents"}
+FIELDS = {"id", "status", "verification", "followup", "contact_status", "next_step", "documents", "priority", "promoted", "expected_updated_at"}
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -70,7 +70,27 @@ def transform(event: dict, owner: str, known_ids: set[str], previous: dict) -> t
         rid = payload.get("id")
         if not isinstance(rid, str) or rid not in known_ids:
             raise ValueError("Application ID not in source registry")
+        expected = payload.get("expected_updated_at")
+        current_state = previous.get("records", {}).get(rid, {})
+        if expected is not None:
+            if not isinstance(expected, str) or len(expected) > 60:
+                raise ValueError("Invalid source version")
+            actual = str(current_state.get("updated_at") or "")
+            if expected != actual:
+                raise ValueError("source_version_conflict: reload source, compare edits, and reconcile")
         record = {}
+        if "priority" in payload:
+            level = text(payload["priority"], 12)
+            if level not in {"low", "normal", "high"}:
+                raise ValueError("Invalid priority")
+            record["priority"] = level
+        if "promoted" in payload:
+            if payload["promoted"] is not True:
+                raise ValueError("Promotion must be explicitly true")
+            confirmation = payload.get("verification", current_state.get("verification", "unverified"))
+            if confirmation not in {"source_verified", "owner_verified"}:
+                raise ValueError("Verified official evidence is required before promotion")
+            record["promoted"] = True
         for key in ("status", "verification", "contact_status"):
             if key in payload:
                 value = text(payload[key], 50)
@@ -79,11 +99,8 @@ def transform(event: dict, owner: str, known_ids: set[str], previous: dict) -> t
                 record[key] = value
         if "followup" in payload:
             record["followup"] = valid_date(payload["followup"])
-        for key,limit in (("next_step",650),("notes",750)):
-            if key in payload:
-                record[key] = text(payload[key], limit)
-        if "receipt" in payload:
-            record["receipt"] = url(payload["receipt"])
+        if "next_step" in payload:
+            record["next_step"] = text(payload["next_step"], 650)
         if "documents" in payload:
             docs = payload["documents"]
             if not isinstance(docs, dict) or set(docs)-DOCUMENT_KEYS:

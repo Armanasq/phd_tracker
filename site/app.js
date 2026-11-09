@@ -1,50 +1,38 @@
+import {daysUntil,isActionable,isClosed as domainClosed,riskSignal,priorityScore,validateSnapshot,documentReadiness,applyRecordFilters,draftState,deadlineCollisions,freshnessState} from "./modules/domain.mjs";
 (() => {
 "use strict";
 const VIEWS=[["dashboard","home","Overview"],["applications","file","Applications"],["calendar","calendar","Calendar"],["pipeline","columns","Pipeline"],["actions","check","Actions"],["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],["review","shield","Verification"],["archive","archive","Expired / blocked"],["sources","database","Sources"]];
 const OWNER_REPO="https://github.com/Armanasq/phd_tracker";
-const STORE="phd-atlas-drafts-v1",PREFS="phd-atlas-prefs-v1";
+const STORE="phd-atlas-drafts-v1",PREFS="phd-atlas-prefs-v1",VIEW_STORE="phd-atlas-views-v2",COMPARE_STORE="phd-atlas-compare-v1";
 const $=id=>document.getElementById(id);
 const escapeHTML=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const safeURL=value=>{try{const u=new URL(String(value));return u.protocol==="https:"?u.href:""}catch{return""}};
 const readStore=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch{return d}};
 const saveStore=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{notify("Local storage unavailable. Export drafts as JSON.")}};
-const state={data:null,view:"dashboard",query:"",status:"all",verification:"all",country:"all",horizon:"all",sort:"deadline",compare:[],selected:null,drafts:readStore(STORE,{}),prefs:readStore(PREFS,{theme:"light",horizon:7,reminders:true,notified:{}}),modal:"",focus:null,calendarMonth:null,selectedDate:null,draggedId:null};
+const storedViews=readStore(VIEW_STORE,{saved:[],last:{scope:"tracked",query:"",status:"all",verification:"all",country:"all",horizon:"all",sort:"deadline"}});
+const state={data:null,view:"dashboard",scope:storedViews.last?.scope||"tracked",query:storedViews.last?.query||"",status:storedViews.last?.status||"all",verification:storedViews.last?.verification||"all",country:storedViews.last?.country||"all",horizon:storedViews.last?.horizon||"all",sort:storedViews.last?.sort||"deadline",presets:Array.isArray(storedViews.saved)?storedViews.saved:[],activePreset:"",compare:readStore(COMPARE_STORE,[]),selected:null,drafts:readStore(STORE,{}),prefs:readStore(PREFS,{theme:"light",horizon:7,reminders:true,notified:{}}),modal:"",focus:null,calendarMonth:null,selectedDate:null,draggedId:null};
 const TODAY=()=>{const zone=state.data?.timezone||"Europe/Berlin";const parts=new Intl.DateTimeFormat("en-US",{timeZone:zone,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());const get=k=>parts.find(p=>p.type===k)?.value||"";return get("year")+"-"+get("month")+"-"+get("day")};
-const days=due=>due?Math.round((new Date(due+"T12:00:00Z").getTime()-new Date(TODAY()+"T12:00:00Z").getTime())/86400000):null;
+const days=due=>daysUntil(due,TODAY());
 const stamp=due=>due?new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"short",year:"numeric",timeZone:"UTC"}).format(new Date(due+"T12:00:00Z")):"Unverified";
 const statusLabel=s=>({unconfirmed:"Unconfirmed",shortlisted:"Shortlisted",preparing:"Preparing",submitted:"Submitted",interview:"Interview",offer:"Offer",rejected:"Rejected",withdrawn:"Withdrawn",blocked:"Blocked",archived:"Archived"})[s]||s;
 const verifiedLabel=s=>({source_verified:"Source reviewed",owner_verified:"Owner verified",needs_review:"Review required",unverified:"Unverified"})[s]||"Unverified";
-const isClosed=r=>["submitted","rejected","withdrawn","archived","offer"].includes(r.status);
-const risk=r=>{const d=days(r.deadline);if(r.status==="blocked")return"Blocked";if(isClosed(r))return"Closed";if(d!==null&&d<0)return"Expired";if(r.duplicate_submission_advisory)return"Duplicate route caution";if(r.verification!=="source_verified"&&r.verification!=="owner_verified")return"Verify";if(Object.values(r.document_states||{}).some(x=>x==="not_started"))return"Confirmed gap";if(d!==null&&d<=7)return"Urgent";return"Review"};
+const isClosed=domainClosed;
+const risk=r=>riskSignal(r,TODAY());
 const pill=(t,style)=>'<span class="pill '+(style||"")+'">'+escapeHTML(t)+'</span>';
 const link=(url,name)=>{const u=safeURL(url);return u?'<a href="'+escapeHTML(u)+'" target="_blank" rel="noopener noreferrer">'+escapeHTML(name)+' ↗</a>':""};
 const count=(key)=>records().filter(key).length;
 const records=()=>state.data.records.map(r=>{const draft=state.drafts[r.id]||{};const {documents:localDocs,...fields}=draft;return {...r,...fields,document_states:{...(r.document_states||{}),...(localDocs||{})}}});
 const getRecord=id=>records().find(x=>x.id===id);
 const thisWeek=r=>{const d=days(r.deadline);return d!==null&&d>=0&&d<=7};
-const open=r=>!isClosed(r)&&r.status!=="blocked"&&(days(r.deadline)===null||days(r.deadline)>=0);
+const open=r=>isActionable(r,TODAY());
 function notify(message){const el=$("toast");el.textContent=message;el.style.display="block";clearTimeout(notify.timer);notify.timer=setTimeout(()=>el.style.display="none",3600)}
 function copyText(text){if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(()=>notify("Copied to clipboard."),()=>fallbackCopy(text))}else fallbackCopy(text)}
 function fallbackCopy(text){const t=document.createElement("textarea");t.value=text;t.style.position="fixed";t.style.left="-10000px";document.body.appendChild(t);t.select();try{document.execCommand("copy");notify("Copied to clipboard.")}catch{notify("Use the text box to copy the command.")}t.remove()}
 function dateRisk(d){if(d===null)return pill("Date unknown","neutral");if(d<0)return pill("Expired "+Math.abs(d)+"d","red");if(d===0)return pill("Today","red");if(d<=3)return pill(d+"d left","red");if(d<=7)return pill(d+"d left","warning");return pill(d+"d left","neutral")}
 function verificationPill(r){return pill(verifiedLabel(r.verification),r.verification==="source_verified"||r.verification==="owner_verified"?"green":"warning")}
 function riskPill(r){let x=risk(r);return pill(x,["Expired","Blocked","Confirmed gap"].includes(x)?"red":["Verify","Urgent","Duplicate route caution"].includes(x)?"warning":"neutral")}
-function priority(r){const d=days(r.deadline);let p=0;if(r.status==="blocked"||isClosed(r))return-100;if(d===null)p+=5;else if(d<0)return-70;else if(d===0)p+=100;else if(d<=3)p+=80;else if(d<=7)p+=56;else if(d<=14)p+=35;else if(d<=30)p+=18;else p+=3;if(r.verification==="needs_review"||r.verification==="unverified")p+=16;if(r.duplicate_submission_advisory)p+=18;if(Object.values(r.document_states||{}).some(x=>x==="not_started"))p+=16;if(r.followup&&days(r.followup)!==null&&days(r.followup)<=2)p+=28;if(r.status==="preparing")p+=6;return p}
-function filters(list){
-  const q=state.query.toLowerCase();
-  return list.filter(r=>{
-    const searchable=[r.id,r.name,r.country,r.institution,r.topic,r.faculty,r.next_step,r.evidence,r.funding,r.eligibility].join(" ").toLowerCase();
-    if(q&&!searchable.includes(q))return false;
-    if(state.status!=="all"&&r.status!==state.status)return false;
-    if(state.verification!=="all"&&r.verification!==state.verification)return false;
-    if(state.country!=="all"&&r.country!==state.country)return false;
-    const d=days(r.deadline);
-    if(state.horizon==="expired")return d!==null&&d<0;
-    if(state.horizon==="unknown")return d===null;
-    if(state.horizon!=="all")return d!==null&&d>=0&&d<=Number(state.horizon);
-    return true;
-  });
-}
+function priority(r){return priorityScore(r,TODAY())}
+function filters(list){return applyRecordFilters(list,state,TODAY())}
 function sortList(list){return list.slice().sort((a,b)=>state.sort==="priority"?priority(b)-priority(a):state.sort==="name"?a.name.localeCompare(b.name):state.sort==="updated"?String(b.updated_at||"").localeCompare(String(a.updated_at||"")):(a.deadline||"9999").localeCompare(b.deadline||"9999")||a.name.localeCompare(b.name))}
 function heading(title,desc,buttons=""){return '<div class="heading"><div><div class="page-context">Fall 2027 &nbsp;/&nbsp; Applications</div><h1>'+escapeHTML(title)+'</h1><p>'+desc+'</p></div><div class="buttons">'+buttons+'</div></div>'}
 function kpi(name,value,caption){return'<div class="kpi"><div class="label">'+escapeHTML(name)+'</div><strong>'+escapeHTML(value)+'</strong><small>'+escapeHTML(caption)+'</small></div>'}
@@ -65,8 +53,48 @@ function table(list,compare=false){
  ).join("")+'</div>';
  return desktop+mobile;
 }
-function toolbar(list){const countries=[...new Set(records().map(r=>r.country).filter(Boolean))].sort();const options=(values,current)=>values.map(([v,label])=>'<option value="'+escapeHTML(v)+'"'+(v===current?" selected":"")+'>'+escapeHTML(label)+'</option>').join("");
-return'<div class="toolbar"><input class="input" type="search" id="filterQuery" placeholder="Search programme, faculty, topic, source ID…" value="'+escapeHTML(state.query)+'" aria-label="Search applications"><select class="select" id="filterStatus" aria-label="Filter by owner status">'+options([["all","All statuses"],...["unconfirmed","shortlisted","preparing","submitted","interview","offer","rejected","withdrawn","blocked","archived"].map(v=>[v,statusLabel(v)])],state.status)+'</select><select class="select" id="filterVerify" aria-label="Filter by evidence">'+options([["all","All evidence"],["source_verified","Source reviewed"],["owner_verified","Owner verified"],["needs_review","Needs review"],["unverified","Unverified"]],state.verification)+'</select><select class="select" id="filterHorizon" aria-label="Filter by deadline">'+options([["all","Any deadline"],["3","Next 3 days"],["7","Next 7 days"],["14","Next 14 days"],["30","Next 30 days"],["expired","Expired"],["unknown","Undated"]],state.horizon)+'</select><select class="select" id="filterCountry" aria-label="Filter by country">'+options([["all","All countries"],...countries.map(x=>[x,x])],state.country)+'</select><select class="select" id="filterSort" aria-label="Sort order">'+options([["deadline","Soonest first"],["priority","Priority first"],["name","Name A–Z"],["updated","Recently edited"]],state.sort)+'</select><span class="count">'+list.length+' records</span></div>'}
+const filterFields=["scope","query","status","verification","country","horizon","sort"];
+function currentFilters(){return Object.fromEntries(filterFields.map(k=>[k,state[k]]))}
+function persistViews(){saveStore(VIEW_STORE,{saved:state.presets,last:currentFilters()})}
+function resetFilters(){Object.assign(state,{scope:"tracked",query:"",status:"all",verification:"all",country:"all",horizon:"all",sort:"deadline",activePreset:""});persistViews();render();notify("Filters cleared.")}
+function applySavedView(name){
+ const view=state.presets.find(x=>x.name===name);
+ if(!view)return;
+ for(const k of filterFields)if(typeof view.filters?.[k]==="string")state[k]=view.filters[k];
+ state.activePreset=name;persistViews();render();notify("Restored view: "+name);
+}
+function saveCurrentView(){
+ openModal("<h2>Save this view</h2>",'<div class="field"><label for="viewName">View name</label><input id="viewName" class="input" maxlength="42" autocomplete="off" placeholder="e.g. Near-term verified calls" value="'+escapeHTML(state.activePreset)+'"><p class="subtle">Saved on this device. Includes the current search, scope, filters, and sort order.</p><p id="viewError" class="form-error" role="alert"></p></div><div class="buttons">'+button("Save view","confirm-view","","primary")+button("Cancel","close")+'</div>');
+ $("viewName")?.focus();
+}
+function commitSavedView(){
+ const name=$("viewName")?.value.trim()||"";
+ const error=$("viewError");
+ if(name.length<2||name.length>42){if(error)error.textContent="Use a name between 2 and 42 characters.";return}
+ const saved=state.presets.filter(x=>x.name.toLocaleLowerCase()!==name.toLocaleLowerCase());
+ if(saved.length>=12){if(error)error.textContent="Maximum 12 saved views. Delete an unused view first.";return}
+ state.presets=[...saved,{name,filters:currentFilters()}].sort((a,b)=>a.name.localeCompare(b.name));
+ state.activePreset=name;persistViews();closeModal();render();notify("Saved view “"+name+"” on this device.");
+}
+function deleteSavedView(){
+ const name=state.activePreset;
+ if(!name)return;
+ if(!confirm("Delete saved view “"+name+"”? Current filters will remain."))return;
+ state.presets=state.presets.filter(x=>x.name!==name);state.activePreset="";persistViews();render();notify("Saved view deleted.");
+}
+function toolbar(list){
+ const countries=[...new Set(records().map(r=>r.country).filter(Boolean))].sort();
+ const options=(values,current)=>values.map(([value,label])=>'<option value="'+escapeHTML(value)+'"'+(value===current?" selected":"")+'>'+escapeHTML(label)+'</option>').join("");
+ return '<div class="view-presets"><label for="viewPreset">Saved view</label><select id="viewPreset" class="select" aria-label="Choose a saved view">'+options([["","Choose a view…"],...state.presets.map(x=>[x.name,x.name])],state.activePreset)+'</select>'+button("Save view","save-view")+ (state.activePreset?button("Delete","delete-view"):"")+'<span class="view-presets-note">Stored on this device</span></div>'+
+ '<div class="toolbar"><input class="input" type="search" id="filterQuery" placeholder="Search programme, faculty, topic, source ID…" value="'+escapeHTML(state.query)+'" aria-label="Search applications">'+
+ '<select class="select" id="filterScope" aria-label="Application lifecycle scope">'+options([["tracked","Tracked applications"],["candidate","Research candidates"],["all","All records"]],state.scope)+'</select>'+
+ '<select class="select" id="filterStatus" aria-label="Filter by owner status">'+options([["all","All statuses"],...["unconfirmed","shortlisted","preparing","submitted","interview","offer","rejected","withdrawn","blocked","archived"].map(v=>[v,statusLabel(v)])],state.status)+'</select>'+
+ '<select class="select" id="filterVerify" aria-label="Filter by evidence">'+options([["all","All evidence"],["source_verified","Source reviewed"],["owner_verified","Owner verified"],["needs_review","Needs review"],["unverified","Unverified"]],state.verification)+'</select>'+
+ '<select class="select" id="filterHorizon" aria-label="Filter by deadline">'+options([["all","Any deadline"],["3","Next 3 days"],["7","Next 7 days"],["14","Next 14 days"],["30","Next 30 days"],["expired","Expired"],["unknown","Undated"]],state.horizon)+'</select>'+
+ '<select class="select" id="filterCountry" aria-label="Filter by country">'+options([["all","All countries"],...countries.map(x=>[x,x])],state.country)+'</select>'+
+ '<select class="select" id="filterSort" aria-label="Sort order">'+options([["deadline","Soonest first"],["priority","Priority first"],["name","Name A–Z"],["updated","Recently edited"]],state.sort)+'</select>'+
+ button("Clear","clear-filters")+'<span class="count" aria-live="polite">'+list.length+' records</span></div>';
+}
 function dashboard(){
  const all=records(),tracked=all.filter(r=>r.record_type==="tracked");
  const active=tracked.filter(open),today=active.filter(r=>days(r.deadline)===0),week=active.filter(thisWeek);
@@ -95,7 +123,7 @@ function dashboard(){
  ].map(([name,n,help,view])=>'<div class="attention-item"><div><button data-action="nav" data-value="'+view+'">'+escapeHTML(name)+'</button><small>'+escapeHTML(help)+'</small></div><strong>'+n+'</strong></div>').join("")+'</div></section>'+
  '<section class="desk-section"><div class="desk-header"><h2>Source checks</h2>'+link(state.data.source_links.source_monitor,"Monitoring")+'</div><div style="padding:9px 20px 16px"><p style="margin:0 0 11px;font-size:11px;color:var(--muted)">'+failing+' of '+state.data.providers.length+' feeds need attention</p>'+state.data.providers.map(p=>'<div class="week-row" style="grid-template-columns:minmax(0,1fr) auto"><span>'+escapeHTML(p.name)+'</span>'+pill(p.health,p.health==="ok"?"green":"warning")+'</div>').join("")+'</div></section></div></div>';
 }
-function applications(){const list=sortList(filters(records()));return heading("Applications","Review each programme, its evidence and application progress.",button("Compare selected ("+state.compare.length+")","nav","compare","primary")+button("Export filtered CSV","export","csv"))+
+function applications(){const list=sortList(filters(records()));return heading("Applications","Track verified opportunities and research candidates separately. Saved views and filters stay on this device.",button("Compare selected ("+state.compare.length+")","nav","compare","primary")+button("Export filtered CSV","export","csv"))+
 '<div class="info">The date alone is insufficient when a portal closes at a stated time or time zone. “Source reviewed” is not a guarantee that an opportunity is still open. Local edits require GitHub synchronization.</div>'+
 statCard("Application registry",toolbar(list)+(list.length?table(list,true):'<div class="empty">No records match the current filters.</div>'))}
 function contacts(){const all=records().filter(r=>r.faculty!=="Not recorded"||r.contact_status!=="unrecorded"||r.followup);const list=sortList(filters(all));return heading("Faculty contacts","Contacts and follow-up dates, recorded explicitly.",button("Export contacts CSV","export","contacts"))+
@@ -104,11 +132,22 @@ function actions(){const rs=records().filter(r=>r.record_type==="tracked").filte
 '<div class="kpis">'+kpi("Due today",rs.filter(r=>days(r.deadline)===0).length,"Final or priority dates")+kpi("Within 72h",rs.filter(r=>days(r.deadline)!==null&&days(r.deadline)>=0&&days(r.deadline)<=3).length,"Check portal cutoff")+kpi("Follow-ups overdue",rs.filter(r=>r.followup&&days(r.followup)<0).length,"Manual date entries")+kpi("Plan steps surfaced",tasks.length,"Original tracker snapshot")+kpi("Explicit document gaps",rs.filter(r=>Object.values(r.document_states||{}).includes("not_started")).length,"Never infer from unknown")+'</div>'+
 statCard("Prioritized opportunities",'<div class="mini-list">'+rs.slice(0,35).map((r,i)=>'<div class="mini-row"><div><span class="subtle">#'+(i+1)+' &nbsp;</span>'+rowButton(r)+'<small>'+escapeHTML(r.next_step||"Confirm next action")+'</small></div><div>'+dateRisk(days(r.deadline))+'</div></div>').join("")+'</div>')+
 statCard("Existing workbook execution steps",'<p class="subtle">Task completion should be confirmed through the existing authenticated GitHub issue workflow; a listed task is not automatically unfinished.</p>'+(tasks.length?'<div class="tablewrap"><table class="table"><thead><tr><th>Action</th><th>Due</th><th>Source status</th><th>Related application</th><th>Control</th></tr></thead><tbody>'+tasks.slice(0,80).map(t=>'<tr><td>'+escapeHTML(t.action||t.name)+'</td><td>'+escapeHTML(stamp(t.due))+'</td><td>'+pill(t.state)+'</td><td>'+escapeHTML(t.application_id||"Shared")+'</td><td>'+button("Copy /done","task",t.id)+'</td></tr>').join("")+'</tbody></table></div>':'<div class="empty">No planned steps in the displayed horizon.</div>'))}
-function updates(){const rs=records().filter(r=>r.updated_at||state.drafts[r.id]);const edited=Object.keys(state.drafts);return heading("Changes","Local drafts, committed changes and new research leads.",button("Export drafts","export","drafts","primary")+button("Open Git commit history","url",OWNER_REPO+"/commits/main"))+
-'<div class="kpis">'+kpi("Unsynchronized local records",edited.length,"Local browser only")+kpi("Owner-updated records",rs.filter(r=>r.updated_at).length,"Repository + local overlay")+kpi("Discovery candidates",state.data.meta.candidates,"Not necessarily promoted")+kpi("Unpromoted leads",state.data.leads.length,"Search queue")+kpi("Evidence snapshot",stamp(state.data.as_of),"Source projection")+'</div>'+
-statCard("Local changes awaiting GitHub confirmation",edited.length?'<div class="mini-list">'+edited.map(id=>'<div class="mini-row"><div>'+rowButton(getRecord(id)||{id,name:id})+'<small>'+escapeHTML(Object.keys(state.drafts[id]||{}).join(", "))+'</small></div><div>'+button("Copy command","command",id,"primary")+' '+button("Discard draft","discard",id,"danger")+'</div></div>').join("")+'</div>':'<div class="empty">No unsynchronized local drafts.</div>')+
-statCard("Existing discovery leads",'<p class="subtle">Third-party leads are not automatically approved applications. Open the primary listing and verify eligibility, exact deadline and submission route.</p><div class="tablewrap"><table class="table"><thead><tr><th>Lead</th><th>Source</th><th>Deadline</th><th>Evidence</th></tr></thead><tbody>'+state.data.leads.slice(0,70).map(r=>'<tr><td><strong>'+escapeHTML(r.name)+'</strong><small>'+escapeHTML(r.id)+'</small></td><td>'+escapeHTML(r.provider)+'<small>'+link(r.source_url,"Listing")+'</small></td><td>'+escapeHTML(stamp(r.deadline))+'</td><td>'+pill(r.evidence_status,"warning")+'</td></tr>').join("")+'</tbody></table></div>')}
-
+function updates(){
+ const committed=records().filter(r=>r.updated_at);
+ const edited=Object.keys(state.drafts).filter(id=>state.data.records.some(r=>r.id===id));
+ const statuses=Object.fromEntries(edited.map(id=>[id,draftState(state.drafts[id],state.data.records.find(r=>r.id===id))]));
+ const conflicting=edited.filter(id=>["conflict","needs-review"].includes(statuses[id]));
+ const pending=edited.filter(id=>statuses[id]==="pending");
+ return heading("Changes","Local changes, synchronization status and research leads.",button("Export drafts","export","drafts","primary")+button("Git history","url",OWNER_REPO+"/commits/main"))+
+ '<div class="kpis">'+kpi("Local drafts",edited.length,"Only in this browser")+kpi("Awaiting confirmation",pending.length,"GitHub issue required")+kpi("Needs reconciliation",conflicting.length,"Source version changed or unknown")+kpi("Owner updates",committed.length,"Committed overrides")+kpi("Evidence snapshot",stamp(state.data.as_of),"Source projection")+'</div>'+
+ statCard("Local change register",edited.length?'<div class="mini-list">'+edited.map(id=>{
+  const r=getRecord(id),status=statuses[id],message={"draft":"Local draft","pending":"Awaiting GitHub confirmation","conflict":"Conflict — source changed","needs-review":"Review source version","committed":"Matches committed source","missing-source":"Source unavailable"}[status]||"Draft";
+  return '<div class="mini-row"><div>'+rowButton(r)+'<small>'+escapeHTML(message)+' · '+escapeHTML(id)+'</small></div><div class="buttons">'+
+  (status==="conflict"||status==="needs-review"?button("Reconcile","reconcile",id,"primary"):status==="committed"?button("Review source","record",id):button("Copy update","command",id,"primary"))+
+  button("Discard","discard",id,"danger")+'</div></div>';
+ }).join("")+'</div>':'<div class="empty">No local changes. Application edits are saved on this device until confirmed through GitHub.</div>')+
+ statCard("Discovery leads",'<p class="subtle">These leads have not been promoted to applications. Verify the primary listing before taking action.</p><div class="tablewrap"><table class="table"><thead><tr><th>Lead</th><th>Provider</th><th>Deadline</th><th>Evidence</th></tr></thead><tbody>'+state.data.leads.slice(0,70).map(r=>'<tr><td><strong>'+escapeHTML(r.name)+'</strong><small>'+escapeHTML(r.id)+'</small></td><td>'+escapeHTML(r.provider)+'<small>'+link(r.source_url,"Listing")+'</small></td><td>'+escapeHTML(stamp(r.deadline))+'</td><td>'+pill(r.evidence_status,"warning")+'</td></tr>').join("")+'</tbody></table></div>');
+}
 function calendarView(){
   const today=TODAY(),month=state.calendarMonth||today.slice(0,7);
   const parts=month.split("-").map(Number);
@@ -116,7 +155,7 @@ function calendarView(){
   const last=new Date(Date.UTC(year,monthNumber,0)).getUTCDate();
   const offset=(first.getUTCDay()+6)%7;
   const from=month+"-01";
-  const deadlineRows=records().filter(r=>r.deadline&&r.deadline.slice(0,7)===month);
+  const deadlineRows=records().filter(r=>r.record_type==="tracked"&&r.deadline&&r.deadline.slice(0,7)===month);
   const byDate=new Map();
   deadlineRows.forEach(r=>{const items=byDate.get(r.deadline)||[];items.push(r);byDate.set(r.deadline,items)});
   const selected=state.selectedDate&&state.selectedDate.slice(0,7)===month?state.selectedDate:(byDate.has(today)?today:Array.from(byDate.keys()).sort()[0]||from);
@@ -141,17 +180,17 @@ function calendarView(){
 }
 function pipeline(){
   const lanes=[["unconfirmed","Unconfirmed"],["shortlisted","Shortlisted"],["preparing","Preparing"],["submitted","Submitted"],["interview","Interview"],["offer","Offer"],["blocked","Blocked"]];
-  const rows=records(),counts=Object.fromEntries(lanes.map(([id])=>[id,rows.filter(r=>r.status===id).length]));
+  const rows=records().filter(r=>r.record_type==="tracked"),counts=Object.fromEntries(lanes.map(([id])=>[id,rows.filter(r=>r.status===id).length]));
   const laneMarkup=lanes.map(([id,label])=>{
     const items=rows.filter(r=>r.status===id).sort((a,b)=>priority(b)-priority(a));
     return '<div class="kanban-lane" data-lane="'+id+'"><div class="kanban-head"><strong>'+escapeHTML(label)+'</strong>'+pill(items.length,'neutral')+'</div><div class="kanban-body">'+items.slice(0,11).map(r=>
-      '<div class="kanban-card" data-drag-id="'+escapeHTML(r.id)+'" draggable="true"><div class="eyebrow">'+escapeHTML(r.id)+'</div>'+rowButton(r)+'<div class="kanban-meta">'+dateRisk(days(r.deadline))+' '+verificationPill(r)+'</div><small>'+escapeHTML(r.next_step||"Next action unrecorded").slice(0,105)+'</small></div>'
+      '<div class="kanban-card" data-drag-id="'+escapeHTML(r.id)+'" draggable="true"><div class="eyebrow">'+escapeHTML(r.id)+'</div>'+rowButton(r)+'<div class="kanban-meta">'+dateRisk(days(r.deadline))+' '+verificationPill(r)+'</div><small>'+escapeHTML(r.next_step||"Next action unrecorded").slice(0,105)+'</small><label class="kanban-stage">Move to <select data-stage-id="'+escapeHTML(r.id)+'" aria-label="Move '+escapeHTML(r.name)+' to stage">'+lanes.map(([value,name])=>'<option value="'+value+'"'+(r.status===value?' selected':'')+'>'+name+'</option>').join("")+'</select></label></div>'
     ).join("")+(items.length>11?button("View all "+items.length,"pipeline-filter",id):"")+
     (items.length===0?'<p class="subtle">No records in this state</p>':"")+'</div></div>';
   }).join("");
-  return heading("Application pipeline","A status-driven board for owner-confirmed application progress. Dragging moves a local draft only; GitHub confirmation is required to persist changes.",button("Export application statuses","export","csv","primary")+button("Review local changes","nav","updates"))+
+  return heading("Application pipeline","A status-driven board for owner-confirmed application progress. Use the stage selector or drag a card. Changes remain local until confirmed through GitHub.",button("Export application statuses","export","csv","primary")+button("Review local changes","nav","updates"))+
     '<div class="kpis">'+kpi("Shortlisted",counts.shortlisted,"Explicit owner selection")+kpi("In preparation",counts.preparing,"Active document work")+kpi("Submitted",counts.submitted,"Confirmation required")+kpi("In interview",counts.interview,"Recorded stage")+kpi("Offers",counts.offer,"Recorded stage")+'</div>'+
-    '<div class="info">Drag an application card between columns to stage an owner status update locally. This does not submit an application or change the GitHub source. To persist a change, open Updates, copy the GitHub command, and confirm it in the Action Center.</div>'+
+    '<div class="info">Cards can be moved with the labelled stage selector (keyboard accessible) or drag-and-drop. This creates a local draft; it never submits an application or updates GitHub by itself.</div>'+
     '<div class="kanban-board" aria-label="Application status board">'+laneMarkup+'</div>'+
     '<p class="footnote">Other statuses (withdrawn, rejected, archived) remain available in the application registry and Expired / blocked view. A submission is not counted as owner-confirmed until committed.</p>';
 }
@@ -181,16 +220,45 @@ statCard("Evidence and workflow entry points",'<div class="mini-list">'+[
 ["Correct disputed evidence",OWNER_REPO+"/issues/new?template=01-source-correction.yml"]
 ].map(([name,url])=>'<div class="mini-row"><span>'+escapeHTML(name)+'</span>'+link(url,"Open")+'</div>').join("")+'</div>')+
 statCard("Contact & application control model",'<p class="muted">New owner decisions are submitted as authenticated GitHub issue commands. Local draft values are provisional until the issue-control workflow commits an updated versioned record. The original workbook, data pipeline, reminders and source-monitor workflow remain intact.</p><p class="muted">The public-site projection deliberately excludes mailbox permalinks, email addresses, correspondence bodies and full exclusion rationales. GitHub Pages is not an access-controlled datastore.</p>')}
-function detail(r){if(!r)return;state.selected=r.id;const docs=Object.entries(r.document_states||{});const opts=(values,current)=>values.map(v=>'<option value="'+escapeHTML(v)+'"'+(current===v?' selected':'')+'>'+escapeHTML(statusLabel(v))+'</option>').join('');
-const fields='<div class="field"><label for="editStatus">Owner-confirmed status</label><select id="editStatus" class="select">'+opts(["unconfirmed","shortlisted","preparing","submitted","interview","offer","rejected","withdrawn","blocked","archived"],r.status)+'</select><small class="subtle">Never mark submitted without actual portal confirmation.</small></div>'+
+const DOC_LABELS={unknown:"Unknown",ready:"Ready",in_progress:"In progress",not_started:"Not started",not_applicable:"Not required"};
+function sourceRecord(id){return state.data?.records.find(r=>r.id===id)}
+function withDraftBase(id){const saved=state.drafts[id]||{};return {...saved,base_updated_at:typeof saved.base_updated_at==="string"?saved.base_updated_at:sourceRecord(id)?.updated_at||""}}
+function stageStatus(id,status){
+ const r=getRecord(id);
+ if(!r || !["unconfirmed","shortlisted","preparing","submitted","interview","offer","blocked"].includes(status))return;
+ if(r.record_type==="candidate"){notify("Verify and promote this candidate before changing its application stage.");return}
+ if(status==="submitted"&& !confirm("Confirm this application was submitted through the official portal? This change is only a local draft."))return;
+ state.drafts[id]={...withDraftBase(id),status,_sync_status:"draft"};
+ saveStore(STORE,state.drafts);render();notify("Status saved locally. Confirm it on GitHub from Changes.");
+}
+function reconcileDraft(id){
+ const source=sourceRecord(id),draft=state.drafts[id];
+ if(!source||!draft)return;
+ const changed=[["Status",source.status,draft.status],["Verification",source.verification,draft.verification],["Next step",source.next_step,draft.next_step],["Priority",source.priority||"normal",draft.priority||"normal"]]
+ .filter(([name,oldValue,newValue])=>newValue!==undefined&&oldValue!==newValue);
+ const compare=changed.length?changed.map(([name,oldValue,newValue])=>'<div class="reconcile-line"><strong>'+escapeHTML(name)+'</strong><div><span>Committed: '+escapeHTML(oldValue||"Not recorded")+'</span><span>Draft: '+escapeHTML(newValue||"Not recorded")+'</span></div></div>').join(""):'<p class="muted">No differences in the main status fields. Review documents separately before keeping a draft.</p>';
+ state.selected=id;
+ openModal("<h2>Resolve source conflict</h2>",'<p class="muted">The source changed after this draft was created or the original version is unknown. Review these differences before rebasing. This does not commit any change.</p>'+compare+
+ '<p class="subtle">Last committed version: '+escapeHTML(source.updated_at||"No owner update")+'</p>'+
+ '<div class="buttons">'+button("Keep draft against current source","confirm-rebase",id,"primary")+button("Discard draft","discard",id)+button("Cancel","close")+'</div>');
+}
+function commitRebase(id){
+ const source=sourceRecord(id),draft=state.drafts[id];
+ if(!source||!draft)return;
+ state.drafts[id]={...draft,base_updated_at:source.updated_at||"",_sync_status:"draft"};
+ saveStore(STORE,state.drafts);closeModal();render();notify("Draft rebased locally. Review and confirm the GitHub update.");
+}
+function detail(r){if(!r)return;state.selected=r.id;const docs=Object.entries(r.document_states||{});const opts=(values,current)=>values.map(v=>'<option value="'+escapeHTML(v)+'"'+(current===v?' selected':'')+'>'+escapeHTML(DOC_LABELS[v]||statusLabel(v))+'</option>').join('');
+const sync=draftState(state.drafts[r.id],sourceRecord(r.id)),readiness=documentReadiness(r);
+const fields='<div class="field"><label for="editPriority">My priority</label><select id="editPriority" class="select">'+opts(["normal","high","low"],r.priority||"normal")+'</select><small class="subtle">Affects this application's rank in your action queue.</small></div><div class="field"><label for="editStatus">Application status (owner-confirmed only after GitHub sync)</label><select id="editStatus" class="select">'+opts(["unconfirmed","shortlisted","preparing","submitted","interview","offer","rejected","withdrawn","blocked","archived"],r.status)+'</select><small class="subtle">Never mark submitted without actual portal confirmation.</small></div>'+
 '<div class="field"><label for="editVerification">Verification status</label><select id="editVerification" class="select">'+opts(["unverified","needs_review","source_verified","owner_verified"],r.verification)+'</select><small class="subtle">Choose verified only after inspecting supporting primary evidence.</small></div>'+
 '<div class="field"><label for="editFollowup">Next faculty follow-up</label><input id="editFollowup" type="date" class="input" value="'+escapeHTML(r.followup||"")+'"></div>'+
 '<div class="field"><label for="editContact">Contact / outreach stage</label><select id="editContact" class="select">'+opts(["unrecorded","to_contact","contacted","awaiting_reply","followup_due","replied","declined","completed"],r.contact_status)+'</select></div>'+
 '<div class="field"><label for="editStep">Next action</label><textarea id="editStep" class="input" maxlength="650">'+escapeHTML(r.next_step||"")+'</textarea></div>'+
 '<div class="field"><label for="editNotes">Local notes (this device)</label><textarea id="editNotes" class="input" maxlength="750">'+escapeHTML(r.notes||"")+'</textarea></div>'+
-'<div class="field"><label for="editReceipt">Receipt link (local only, HTTPS)</label><input id="editReceipt" type="url" class="input" value="'+escapeHTML(r.submission_receipt||"")+'" placeholder="https://..."><small class="subtle">Only use shareable links; do not include access tokens or private applicant data.</small></div>'+
-'<h3>Document readiness</h3><p class="subtle">Unknown is not missing. Document requirements should be confirmed with the official application portal.</p><div class="documents">'+docs.map(([id,st])=>'<div class="docrow"><span>'+escapeHTML(state.data.documents[id]||id)+'</span><select class="select" data-document="'+escapeHTML(id)+'">'+opts(["unknown","ready","in_progress","not_started","not_applicable"],st)+'</select></div>').join("")+'</div>';
-openModal('<div class="eyebrow">'+escapeHTML(r.id)+' · '+escapeHTML(r.record_type)+'</div><h2>'+escapeHTML(r.name)+'</h2>',
+'<div class="field"><label for="editReceipt">Receipt link (local only, HTTPS)</label><input id="editReceipt" type="url" class="input" value="'+escapeHTML(r.receipt||r.submission_receipt||"")+'" placeholder="https://..."><p class="form-error" id="receiptError" role="alert"></p><small class="subtle">Private browser-local URL; never sent to public GitHub.</small></div>'+
+'<h3>Document readiness</h3><p class="subtle">'+escapeHTML(readiness.label)+'. Unknown is not missing. Verify the complete official document list.</p><div class="documents">'+docs.map(([id,st])=>'<div class="docrow"><span>'+escapeHTML(state.data.documents[id]||id)+'</span><select class="select" data-document="'+escapeHTML(id)+'">'+opts(["unknown","ready","in_progress","not_started","not_applicable"],st)+'</select></div>').join("")+'</div>';
+openModal('<div class="eyebrow">'+escapeHTML(r.id)+' · '+escapeHTML(r.record_type)+(sync!=="none"?' · '+escapeHTML(sync):"")+'</div><h2>'+escapeHTML(r.name)+'</h2>',
 '<div class="detail-layout"><div><div class="field"><label>Deadline & evidence classification</label><p>'+escapeHTML(stamp(r.deadline))+' · '+dateRisk(days(r.deadline))+' · '+verificationPill(r)+'</p><p class="subtle">'+escapeHTML(r.deadline_kind||"Closing time not verified")+'</p></div>'+
 '<div class="field"><label>Evidence links</label><div class="linkset">'+link(r.source_url,"Primary evidence")+link(r.secondary_url,"Secondary evidence")+link(r.apply_url,"Application route")+'</div></div>'+
 '<div class="field"><label>Funding / eligibility</label><p>'+escapeHTML(r.funding||"Not verified")+'</p><p>'+escapeHTML(r.eligibility||"Eligibility not verified")+'</p></div>'+
@@ -198,7 +266,7 @@ openModal('<div class="eyebrow">'+escapeHTML(r.id)+' · '+escapeHTML(r.record_ty
 '<div class="field"><label>Required document evidence</label><p>'+escapeHTML(r.document_requirements_note||"Verify document list on official portal")+'</p></div>'+
 '<div class="field"><label>Blockers, source reservations & submission precautions</label><p>'+escapeHTML(r.blockers||r.verification_note||"No specific blocker documented")+'</p>'+riskPill(r)+'</div>'+
 '<div class="field"><label>Evidence excerpt</label><p>'+escapeHTML(r.evidence||"No detailed excerpt recorded")+'</p></div></div><div>'+fields+'</div></div>',
-'<div class="buttons">'+button("Save local draft","save-record",r.id,"primary")+button("Copy GitHub update command","save-command",r.id)+button("Open owner Action Center","url",state.data.source_links.control_issue)+'</div><p class="footnote">Drafts stay in your browser until confirmed through GitHub. Notes and receipt URLs remain local; public issues must not contain private applicant data.</p>');
+'<div class="buttons">'+button("Save local draft","save-record",r.id,"primary")+button("Review GitHub update","save-command",r.id)+(r.record_type==="candidate"?button("Promote candidate","promote",r.id):"")+button("Action Center","url",state.data.source_links.control_issue)+'</div><p class="footnote">Drafts stay in your browser until confirmed through GitHub. Notes and receipt URLs remain local; public issues must not contain private applicant data.</p>');
 }
 function openModal(title,body,footer=""){
  if(!state.modal)state.returnFocus=document.activeElement;
@@ -214,18 +282,46 @@ function closeModal(){
  if(state.returnFocus?.isConnected&&typeof state.returnFocus.focus==="function")state.returnFocus.focus();
  state.returnFocus=null;
 }
-function saveRecord(copy){const id=state.selected;if(!id)return;const r=getRecord(id);if(!r)return;const status=$("editStatus").value,verification=$("editVerification").value,followup=$("editFollowup").value,contact_status=$("editContact").value,next_step=$("editStep").value.trim(),notes=$("editNotes").value.trim(),receipt=$("editReceipt").value.trim();if(status==="submitted"&&!confirm("Confirm that you actually submitted this application through its official portal?"))return;if(verification==="owner_verified"&&!confirm("Confirm you checked primary evidence and the stated deadline?"))return;if(receipt&&!safeURL(receipt)){notify("Receipt URL must be valid HTTPS.");return}const documents={};$("dialogRoot").querySelectorAll("[data-document]").forEach(el=>documents[el.dataset.document]=el.value);state.drafts[id]={status,verification,followup:followup||null,contact_status,next_step,notes,receipt,documents};saveStore(STORE,state.drafts);closeModal();render();if(copy){issueCommand(id)}else notify("Local draft saved; GitHub update remains pending.")}
+function saveRecord(copy){
+ const id=state.selected,r=getRecord(id);
+ if(!r)return;
+ const status=$("editStatus").value,verification=$("editVerification").value,followup=$("editFollowup").value,contact_status=$("editContact").value;
+ const priority=$("editPriority").value,next_step=$("editStep").value.trim(),notes=$("editNotes").value.trim(),receipt=$("editReceipt").value.trim();
+ if(receipt&&!safeURL(receipt)){const el=$("receiptError");if(el)el.textContent="Enter an HTTPS address or leave this blank."; $("editReceipt").setAttribute("aria-invalid","true");$("editReceipt").focus();return}
+ if(status==="submitted"&&r.status!=="submitted"&&!confirm("Confirm that this application was actually submitted through the official portal?"))return;
+ if(verification==="owner_verified"&&r.verification!=="owner_verified"&&!confirm("Confirm that you inspected the official source, including the exact deadline?"))return;
+ const documents={};$("dialogRoot").querySelectorAll("[data-document]").forEach(el=>documents[el.dataset.document]=el.value);
+ state.drafts[id]={...withDraftBase(id),status,verification,priority,followup:followup||null,contact_status,next_step,notes,receipt,documents,_sync_status:"draft"};
+ saveStore(STORE,state.drafts);closeModal();render();
+ if(copy)issueCommand(id);else notify("Saved on this device. GitHub confirmation is still required.");
+}
+function promoteCandidate(id){
+ const r=getRecord(id);
+ if(!r||r.record_type!=="candidate")return;
+ if(!["source_verified","owner_verified"].includes(r.verification)){
+  notify("Verify the official opportunity before promoting the research candidate.");return
+ }
+ if(!confirm("Promote this evidence-verified candidate into tracked applications? This stages a local draft and requires GitHub confirmation."))return;
+ state.drafts[id]={...withDraftBase(id),promoted:true,verification:r.verification,_sync_status:"draft"};
+ saveStore(STORE,state.drafts);closeModal();go("updates");notify("Promotion staged. Commit from Changes to make it authoritative.");
+}
 function issueCommand(id){
- const v=state.drafts[id];
- if(!v){notify("Save a local draft first.");return}
- const {status,verification,followup,contact_status,next_step,documents}=v;
- const command="/workspace "+JSON.stringify({id,status,verification,followup,contact_status,next_step,documents});
+ const v=state.drafts[id],source=sourceRecord(id);
+ if(!v||!source){notify("Source or local draft unavailable.");return}
+ const sync=draftState(v,source);
+ if(["conflict","needs-review"].includes(sync)){reconcileDraft(id);return}
+ if(sync==="committed"){notify("The operational fields already match the committed source.");return}
+ const {status,verification,followup,contact_status,next_step,documents,priority,promoted}=v;
+ const payload={id,expected_updated_at:v.base_updated_at||""};
+ for(const [key,value] of Object.entries({status,verification,followup,contact_status,next_step,documents,priority,promoted})){
+  if(value!==undefined)payload[key]=value;
+ }
+ const command="/workspace "+JSON.stringify(payload);
+ state.drafts[id]={...v,_sync_status:"pending"};saveStore(STORE,state.drafts);
  copyText(command);
- openModal("<h2>Review GitHub update</h2>",
-  '<p class="muted">The repository and its issue tracker are public. This command excludes private notes and receipt URLs, which stay on this device.</p>'+
-  '<div class="command">'+escapeHTML(command)+'</div>'+
-  '<p>'+link(state.data.source_links.control_issue,"Open GitHub Action Center")+'</p>'+
-  '<p class="footnote">Only the repository owner can authorize the change. Confirm the committed update before discarding the local draft.</p>');
+ openModal("<h2>Confirm update in GitHub</h2>",'<p class="muted">Copied a version-checked command. Open the owner Action Center and post this command to request a commit. Private notes and receipt links are excluded.</p>'+
+ '<div class="command">'+escapeHTML(command)+'</div><p>'+link(state.data.source_links.control_issue,"Open Action Center")+'</p>'+
+ '<p class="footnote">Awaiting confirmation is not the same as committed. If the source changes, the backend rejects stale commands rather than overwriting them.</p>');
 }
 function commandPalette(){const q=state.focus||"";const matches=records().filter(r=>!q||[r.id,r.name,r.faculty,r.topic,r.next_step].join(" ").toLowerCase().includes(q.toLowerCase())).slice(0,15);openModal("<h2>Search across workspace</h2>",'<input class="input" id="paletteQuery" type="search" placeholder="Find an application, faculty member, source ID…" value="'+escapeHTML(q)+'" style="width:100%" aria-label="Universal search"><div id="paletteResults" class="searchresults">'+matches.map(r=>'<div class="mini-row"><div>'+rowButton(r)+'<small>'+escapeHTML(r.id)+' · '+escapeHTML(r.topic||r.country||"Unknown")+'</small></div>'+dateRisk(days(r.deadline))+'</div>').join("")+'</div><p class="footnote">Press Ctrl/Cmd+K anywhere to open, Escape to close.</p>');$("paletteQuery")?.focus()}
 function updatePalette(){state.focus=$("paletteQuery").value;const matches=records().filter(r=>[r.id,r.name,r.faculty,r.topic,r.next_step].join(" ").toLowerCase().includes(state.focus.toLowerCase())).slice(0,15);$("paletteResults").innerHTML=matches.map(r=>'<div class="mini-row"><div>'+rowButton(r)+'<small>'+escapeHTML(r.id)+' · '+escapeHTML(r.country||"Unknown")+'</small></div>'+dateRisk(days(r.deadline))+'</div>').join("")||'<div class="empty">No results found.</div>'}
@@ -263,31 +359,157 @@ function render(){
  if(!state.data)return;
  navigation();
  const views={dashboard,calendar:calendarView,applications,pipeline,contacts,actions,updates,compare,review,archive,sources};
- $("body").innerHTML=views[state.view]();
+ const freshness=freshnessState(state.data.as_of,TODAY());
+ const note=["aging","stale","unknown","future"].includes(freshness.state)
+   ?'<div class="freshness-note" role="status"><span>'+escapeHTML(freshness.label)+'. Verify critical deadlines using official sources.</span>'+button("Review sources","nav","sources")+'</div>':"";
+ $("body").innerHTML=note+views[state.view]();
  const unhealthy=state.data.providers.filter(p=>p.health!=="ok").length;
  $("providerStatus").innerHTML='<strong>'+escapeHTML(stamp(state.data.as_of))+'</strong><span class="signal"><span class="signal-dot '+(unhealthy?"":"ok")+'" aria-hidden="true"></span>'+unhealthy+' source feeds need attention</span>';
 }
-function go(view){state.view=view;state.query="";state.status="all";state.verification="all";state.country="all";state.horizon="all";window.scrollTo({top:0,behavior:"instant"});render()}
+function go(view){
+ if(!VIEWS.some(([id])=>id===view))return;
+ state.view=view;
+ if(location.hash!=="#"+view)location.hash=view;
+ window.scrollTo({top:0,behavior:"instant"});render();
+}
 function explainNotifications(){const supported=("Notification" in window);const permission=supported?Notification.permission:"unsupported";openModal("<h2>Reminder settings</h2>",'<p class="muted">Reminders are computed locally from source dates while this page is open. Closing the tab disables on-page notifications. GitHub Actions provides separate scheduled reminders.</p><div class="notifications"><div class="notification"><strong>Browser permission</strong>'+escapeHTML(permission)+'</div><div class="notification"><strong>Current horizon</strong>Today, 1, 3 and 7 days before a recorded date</div></div><div class="buttons">'+button("Request browser permission","permission","","primary")+button("View GitHub notifications","url",OWNER_REPO+"/actions/workflows/phd-intelligence.yml")+'</div>')}
 function checkNotifications(){if(!state.data||!state.prefs.reminders||!("Notification" in window)||Notification.permission!=="granted")return;const alerted=state.prefs.notified||{};let changed=false;for(const r of records().filter(r=>r.record_type==="tracked")){const d=days(r.deadline);if(!open(r)||![0,1,3,7].includes(d))continue;const key=r.id+"|"+r.deadline+"|"+d;if(alerted[key])continue;try{new Notification("PhD deadline: "+stamp(r.deadline),{body:r.name.slice(0,140)+" — verify portal cutoff and submission state.",tag:key});alerted[key]=TODAY();changed=true}catch{}}if(changed){state.prefs.notified=Object.fromEntries(Object.entries(alerted).slice(-500));saveStore(PREFS,state.prefs)}}
-function events(){document.addEventListener("click",e=>{if(e.target?.dataset?.close==="true"){closeModal();return}const el=e.target.closest("[data-action]");if(!el)return;const type=el.dataset.action,value=el.dataset.value;if(type==="nav")go(value);else if(type==="record"){closeModal();detail(getRecord(value))}else if(type==="close")closeModal();else if(type==="save-record")saveRecord(false);else if(type==="save-command")saveRecord(true);else if(type==="command")issueCommand(value);else if(type==="discard"){if(confirm("Discard unsynchronized draft for "+value+"?")){delete state.drafts[value];saveStore(STORE,state.drafts);render()}}else if(type==="cal-day"){state.selectedDate=value;render()}else if(type==="cal-today"){state.calendarMonth=TODAY().slice(0,7);state.selectedDate=TODAY();render()}else if(type==="cal-prev"||type==="cal-next"){const base=state.calendarMonth||TODAY().slice(0,7);const [y,m]=base.split("-").map(Number);const next=new Date(Date.UTC(y,m-1+(type==="cal-next"?1:-1),1));state.calendarMonth=next.toISOString().slice(0,7);state.selectedDate=null;render()}else if(type==="pipeline-filter"){state.view="applications";state.status=value;state.horizon="all";render()}else if(type==="clear-compare"){state.compare=[];render()}else if(type==="url"){const u=safeURL(value);if(u)window.open(u,"_blank","noopener,noreferrer")}else if(type==="export")exportData(value);else if(type==="task"){copyText("/done "+value);notify("Paste the task command into the GitHub Action Center.")}else if(type==="permission"){if("Notification" in window)Notification.requestPermission().then(()=>{closeModal();checkNotifications();notify("Browser notification setting updated.")});else notify("Browser notifications are not supported.")}});
-document.addEventListener("change",e=>{if(e.target.matches("[data-compare]")){const id=e.target.dataset.compare;if(e.target.checked){if(state.compare.length>=4){e.target.checked=false;notify("Compare up to four opportunities.");return}state.compare.push(id)}else state.compare=state.compare.filter(x=>x!==id);navigation();const selectedButton=$("body").querySelector('[data-action="nav"][data-value="compare"]');if(selectedButton)selectedButton.textContent="Compare selected ("+state.compare.length+")";return}const key={filterStatus:"status",filterVerify:"verification",filterHorizon:"horizon",filterCountry:"country",filterSort:"sort"}[e.target.id];if(key){state[key]=e.target.value;render()}});
-document.addEventListener("input",e=>{if(e.target.id==="filterQuery"){const pos=e.target.selectionStart;state.query=e.target.value;render();const next=$("filterQuery");next?.focus();next?.setSelectionRange(pos,pos)}else if(e.target.id==="paletteQuery")updatePalette()});
-document.addEventListener("keydown",e=>{
- if(e.key==="Tab"&&state.modal){
-  const nodes=[...$("dialogRoot").querySelectorAll('button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled])')].filter(el=>el.getClientRects().length);
-  if(nodes.length){
-   const first=nodes[0],last=nodes[nodes.length-1],active=document.activeElement;
-   if(e.shiftKey&&(active===first||active?.classList.contains("modal"))){e.preventDefault();last.focus()}
-   else if(!e.shiftKey&&(active===last||active?.classList.contains("modal"))){e.preventDefault();first.focus()}
+function events(){
+ document.addEventListener("click",e=>{
+  if(e.target?.dataset?.close==="true"){closeModal();return}
+  const el=e.target.closest("[data-action]");if(!el)return;
+  const {action:type,value}=el.dataset;
+  if(type==="nav")go(value);
+  else if(type==="record"){closeModal();detail(getRecord(value))}
+  else if(type==="close")closeModal();
+  else if(type==="save-record")saveRecord(false);
+  else if(type==="save-command")saveRecord(true);
+  else if(type==="command")issueCommand(value);
+  else if(type==="reconcile")reconcileDraft(value);
+  else if(type==="confirm-rebase")commitRebase(value);
+  else if(type==="promote")promoteCandidate(value);
+  else if(type==="save-view")saveCurrentView();
+  else if(type==="confirm-view")commitSavedView();
+  else if(type==="delete-view")deleteSavedView();
+  else if(type==="clear-filters")resetFilters();
+  else if(type==="retry-load")loadSnapshot();
+  else if(type==="discard"){
+   if(confirm("Discard the unsynchronized draft for "+value+"? The change cannot be undone.")){
+    delete state.drafts[value];saveStore(STORE,state.drafts);closeModal();render();notify("Local draft discarded.")
+   }
   }
+  else if(type==="cal-day"){state.selectedDate=value;render()}
+  else if(type==="cal-today"){state.calendarMonth=TODAY().slice(0,7);state.selectedDate=TODAY();render()}
+  else if(type==="cal-prev"||type==="cal-next"){
+   const base=state.calendarMonth||TODAY().slice(0,7),[y,m]=base.split("-").map(Number);
+   const next=new Date(Date.UTC(y,m-1+(type==="cal-next"?1:-1),1));
+   state.calendarMonth=next.toISOString().slice(0,7);state.selectedDate=null;render();
+  }
+  else if(type==="pipeline-filter"){state.status=value;state.scope="tracked";state.horizon="all";state.activePreset="";persistViews();go("applications")}
+  else if(type==="clear-compare"){state.compare=[];saveStore(COMPARE_STORE,[]);render();notify("Comparison cleared.")}
+  else if(type==="url"){const u=safeURL(value);if(u)window.open(u,"_blank","noopener,noreferrer")}
+  else if(type==="export")exportData(value);
+  else if(type==="task"){copyText("/done "+value);notify("Task command copied. Post to GitHub Action Center.")}
+  else if(type==="permission"){
+   if("Notification" in window)Notification.requestPermission().then(()=>{closeModal();checkNotifications();notify("Browser notification preference updated.")});
+   else notify("Notifications are not supported by this browser.");
+  }
+ });
+ document.addEventListener("change",e=>{
+  const t=e.target;
+  if(t.matches("[data-stage-id]")){stageStatus(t.dataset.stageId,t.value);return}
+  if(t.matches("[data-compare]")){
+   const id=t.dataset.compare;
+   if(t.checked){
+    if(state.compare.length>=4&&!state.compare.includes(id)){t.checked=false;notify("Compare up to four opportunities.");return}
+    if(!state.compare.includes(id))state.compare.push(id);
+   }else state.compare=state.compare.filter(x=>x!==id);
+   saveStore(COMPARE_STORE,state.compare);
+   $("body").querySelectorAll("[data-compare]").forEach(c=>c.checked=state.compare.includes(c.dataset.compare));
+   const chosen=$("body").querySelector('[data-action="nav"][data-value="compare"]');
+   if(chosen)chosen.textContent="Compare selected ("+state.compare.length+")";
+   navigation();return;
+  }
+  if(t.id==="viewPreset"){
+   if(t.value)applySavedView(t.value);
+   else{state.activePreset="";persistViews();render()}
+   return;
+  }
+  const key={filterScope:"scope",filterStatus:"status",filterVerify:"verification",filterHorizon:"horizon",filterCountry:"country",filterSort:"sort"}[t.id];
+  if(key){
+   const focusId=t.id;state[key]=t.value;state.activePreset="";persistViews();render();$(focusId)?.focus();
+  }
+ });
+ document.addEventListener("input",e=>{
+  if(e.target.id==="filterQuery"){
+   const pos=e.target.selectionStart;
+   state.query=e.target.value;state.activePreset="";persistViews();render();
+   $("filterQuery")?.focus();$("filterQuery")?.setSelectionRange(pos,pos);
+  }else if(e.target.id==="paletteQuery")updatePalette();
+ });
+ document.addEventListener("keydown",e=>{
+  if(e.key==="Tab"&&state.modal){
+   const nodes=[...$("dialogRoot").querySelectorAll('button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled])')].filter(el=>el.getClientRects().length);
+   if(nodes.length){
+    const first=nodes[0],last=nodes[nodes.length-1],active=document.activeElement;
+    if(e.shiftKey&&(active===first||active?.classList.contains("modal"))){e.preventDefault();last.focus()}
+    else if(!e.shiftKey&&(active===last||active?.classList.contains("modal"))){e.preventDefault();first.focus()}
+   }
+  }
+  if(e.key==="Escape"&&state.modal){closeModal();return}
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();state.focus="";commandPalette();return}
+  if(e.key==="/"&&!state.modal&&!["INPUT","TEXTAREA","SELECT"].includes(document.activeElement?.tagName)){e.preventDefault();$("filterQuery")?.focus()}
+ });
+ document.addEventListener("dragstart",e=>{
+  const card=e.target.closest(".kanban-card");if(!card)return;
+  state.draggedId=card.dataset.dragId;
+  if(e.dataTransfer){e.dataTransfer.effectAllowed="move";e.dataTransfer.setData("text/plain",state.draggedId)}
+ });
+ document.addEventListener("dragover",e=>{if(e.target.closest(".kanban-lane"))e.preventDefault()});
+ document.addEventListener("drop",e=>{
+  const lane=e.target.closest(".kanban-lane");if(!lane||!state.draggedId)return;
+  e.preventDefault();const id=state.draggedId,target=lane.dataset.lane;state.draggedId=null;stageStatus(id,target);
+ });
+ document.addEventListener("dragend",()=>{state.draggedId=null});
+ window.addEventListener("hashchange",()=>{
+  const requested=location.hash.replace(/^#/,"");
+  if(!VIEWS.some(([id])=>id===requested)||state.view===requested)return;
+  state.view=requested;closeModal();render();
+ });
+ $("openSearch").addEventListener("click",()=>{state.focus="";commandPalette()});
+ $("exportMenu").addEventListener("click",()=>openModal("<h2>Export workspace</h2>",'<p class="muted">Exports clearly separate committed evidence from local browser drafts.</p><div class="buttons">'+button("Applications CSV","export","csv")+button("Contacts CSV","export","contacts")+button("Calendar ICS","export","ics")+button("Local draft JSON","export","drafts")+button("Full workspace JSON","export","json")+'</div>'));
+ $("themeToggle").addEventListener("click",()=>{state.prefs.theme=state.prefs.theme==="light"?"dark":"light";saveStore(PREFS,state.prefs);document.body.classList.toggle("dark",state.prefs.theme==="dark")});
+ $("notificationToggle").addEventListener("click",explainNotifications);
+}
+async function loadSnapshot(){
+ try{
+  const response=await fetch("./data/workspace.json",{cache:"no-store"});
+  if(!response.ok)throw new Error("The source could not be retrieved.");
+  const data=await response.json(),validation=validateSnapshot(data);
+  if(!validation.ok)throw new Error(validation.error);
+  const prior=state.data?.generated_at;
+  state.data=data;
+  if(!Array.isArray(state.compare))state.compare=[];
+  state.compare=state.compare.filter(id=>validation.ids.has(id)).slice(0,4);
+  saveStore(COMPARE_STORE,state.compare);
+  render();
+  if(prior&&prior!==data.generated_at)notify("Source snapshot updated. Local drafts have been checked for conflicts.");
+  checkNotifications();
+ }catch(error){
+  if(state.data){notify("Source refresh failed. The last verified snapshot remains available.");return}
+  $("body").innerHTML=heading("Source unavailable","The workspace cannot validate its source snapshot.")+
+  '<div class="alert">'+escapeHTML(error.message||"The data could not be loaded.")+'</div>'+
+  '<div class="buttons">'+button("Retry loading","retry-load","","primary")+button("Open repository","url",OWNER_REPO)+'</div>';
  }
- if(e.key==="Escape"&&state.modal){closeModal();return}
- if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();state.focus="";commandPalette()}
-});
-document.addEventListener("dragstart",e=>{const card=e.target.closest(".kanban-card");if(!card)return;state.draggedId=card.dataset.dragId;if(e.dataTransfer){e.dataTransfer.effectAllowed="move";e.dataTransfer.setData("text/plain",state.draggedId)}});document.addEventListener("dragover",e=>{if(e.target.closest(".kanban-lane"))e.preventDefault()});document.addEventListener("drop",e=>{const lane=e.target.closest(".kanban-lane");if(!lane||!state.draggedId)return;e.preventDefault();const id=state.draggedId,target=lane.dataset.lane;state.draggedId=null;const record=getRecord(id);if(!record||record.status===target)return;if(target==="submitted"&&!confirm("Confirm that you actually submitted this application through its official portal? This stages only a local draft."))return;state.drafts[id]={...(state.drafts[id]||{}),status:target};saveStore(STORE,state.drafts);render();notify("Status drafted locally. Commit the GitHub command from Updates.")});document.addEventListener("dragend",()=>{state.draggedId=null});
-$("openSearch").addEventListener("click",()=>{state.focus="";commandPalette()});$("exportMenu").addEventListener("click",()=>openModal("<h2>Export workspace</h2>",'<p class="muted">Exports include recorded source values and the explicitly indicated local draft overlay.</p><div class="buttons">'+button("Applications CSV","export","csv")+button("Contacts CSV","export","contacts")+button("Calendar ICS","export","ics")+button("Draft JSON","export","drafts")+button("Complete workspace JSON","export","json")+'</div>'));
-$("themeToggle").addEventListener("click",()=>{state.prefs.theme=state.prefs.theme==="light"?"dark":"light";saveStore(PREFS,state.prefs);document.body.classList.toggle("dark",state.prefs.theme==="dark")});$("notificationToggle").addEventListener("click",explainNotifications)}
-async function init(){events();document.body.classList.toggle("dark",state.prefs.theme==="dark");try{const response=await fetch("./data/workspace.json",{cache:"no-store"});if(!response.ok)throw new Error("HTTP "+response.status);const data=await response.json();if(data.schema_version!==1||!Array.isArray(data.records))throw new Error("Workspace schema mismatch");state.data=data;const ids=new Set(data.records.map(x=>x.id));if(ids.size!==data.records.length)throw new Error("Duplicate source IDs in workspace snapshot");render();checkNotifications();setInterval(checkNotifications,60000)}catch(err){$("body").innerHTML=heading("Source snapshot unavailable","Unable to load the committed data projection. The original workbook and evidence files remain in GitHub.")+'<div class="alert">'+escapeHTML(err.message)+'</div>'+link(OWNER_REPO,"Open original repository")}}
+}
+function init(){
+ events();
+ document.body.classList.toggle("dark",state.prefs.theme==="dark");
+ const route=location.hash.replace(/^#/,"");
+ if(VIEWS.some(([id])=>id===route))state.view=route;
+ loadSnapshot();
+ setInterval(checkNotifications,60_000);
+ setInterval(loadSnapshot,15*60_000);
+}
 init();
 })();

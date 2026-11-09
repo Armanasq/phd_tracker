@@ -16,7 +16,7 @@ async function run() {
       const full = path.resolve(site, '.' + name);
       if (!full.startsWith(site + path.sep)) {res.writeHead(403);res.end();return}
       const body = await fs.readFile(full);
-      const type = full.endsWith('.js') ? 'application/javascript' : full.endsWith('.css') ? 'text/css' : full.endsWith('.json') ? 'application/json' : 'text/html';
+      const type = (full.endsWith('.js') || full.endsWith('.mjs')) ? 'application/javascript' : full.endsWith('.css') ? 'text/css' : full.endsWith('.json') ? 'application/json' : 'text/html';
       res.writeHead(200, {'Content-Type':type+'; charset=utf-8'});
       res.end(body);
     } catch {
@@ -53,6 +53,20 @@ async function run() {
     await page.locator('#filterQuery').fill('N263-05');
     assert.equal(await page.locator('tbody tr').count(),1);
     await page.locator('#filterQuery').fill('');
+    await page.locator('#filterScope').selectOption('candidate');
+    assert.equal(await page.locator('#body .count').innerText().then(s=>s.includes('21 records')),true);
+    await page.locator('[data-action="save-view"]').click();
+    await page.locator('#viewName').fill('Candidates to review');
+    await page.locator('[data-action="confirm-view"]').click();
+    assert.equal(await page.locator('#viewPreset').inputValue(),'Candidates to review');
+    await page.locator('[data-action="clear-filters"]').click();
+    assert.equal(await page.locator('#filterScope').inputValue(),'tracked');
+    await page.locator('#viewPreset').selectOption('Candidates to review');
+    assert.equal(await page.locator('#filterScope').inputValue(),'candidate');
+    await page.reload({waitUntil:'networkidle'});
+    await page.locator('#body h1').waitFor();
+    assert.equal(await page.locator('#filterScope').inputValue(),'candidate');
+    await page.locator('[data-action="clear-filters"]').click();
     await page.locator('[data-compare]').nth(0).check();
     await page.locator('[data-compare]').nth(1).check();
     assert.match(await page.locator('#body [data-action="nav"][data-value="compare"]').innerText(),/Compare selected \(2\)/);
@@ -61,12 +75,16 @@ async function run() {
 
     await page.locator('#navigation [data-action="nav"][data-value="pipeline"]').click();
     assert.equal(await page.locator('.kanban-lane').count(),7);
+    assert.ok((await page.locator('[data-stage-id]').count())>0);
+    const keyboardStage=page.locator('.kanban-lane[data-lane="unconfirmed"] [data-stage-id]').first();
+    await keyboardStage.selectOption('shortlisted');
+    assert.ok((await page.locator('.kanban-lane[data-lane="shortlisted"] .kanban-card').count())>=1);
     const before = await page.locator('.kanban-lane[data-lane="shortlisted"] .kanban-card').count();
     await page.locator('.kanban-lane[data-lane="unconfirmed"] .kanban-card').first().dragTo(page.locator('.kanban-lane[data-lane="shortlisted"]'));
     assert.equal(await page.locator('.kanban-lane[data-lane="shortlisted"] .kanban-card').count(),before+1);
 
     await page.locator('#navigation [data-action="nav"][data-value="updates"]').click();
-    assert.ok((await page.locator('#body').innerText()).includes('Unsynchronized local records'));
+    assert.ok((await page.locator('#body').innerText()).includes('Local change register'));
 
     await page.locator('#navigation [data-action="nav"][data-value="applications"]').click();
     const first = page.locator('tbody .rowbutton').first();
@@ -77,9 +95,11 @@ async function run() {
     await page.locator('[data-action="save-record"]').click();
     assert.equal(await page.locator('.modal').count(),0);
     await page.locator('#navigation [data-value="updates"]').click();
+    assert.ok((await page.locator('#body').innerText()).includes('Local draft'));
     await page.locator('[data-action="command"][data-value="'+editedId+'"]').click();
     const publicCommand = await page.locator('.command').innerText();
     assert.ok(!publicCommand.includes('Local QA draft only'), 'Private notes must not enter GitHub commands');
+    assert.ok(publicCommand.includes('expected_updated_at'), 'Optimistic source precondition must be carried');
     await page.keyboard.press('Escape');
     await page.locator('#navigation [data-value="applications"]').click();
     const [download] = await Promise.all([
@@ -114,12 +134,33 @@ async function run() {
     assert.ok(mobileOverflow<=2, 'Mobile page must not overflow: '+mobileOverflow+'px');
     await mobile.screenshot({path:path.join(out,'phd-atlas-mobile-applications.png'),fullPage:false});
     await mobile.close();
+    for(const [label,width,height] of [['laptop',1280,800],['tablet',820,1180],['narrow',320,700]]){
+      const screen=await browser.newPage({viewport:{width,height},deviceScaleFactor:1});
+      screen.on('pageerror',error=>errors.push(error.message));
+      await screen.goto(base+'/',{waitUntil:'networkidle'});
+      await screen.locator('#body h1').waitFor();
+      await screen.screenshot({path:path.join(out,'phd-atlas-'+label+'.png'),fullPage:false});
+      await screen.locator('#navigation [data-value="applications"]').click();
+      const overflow=await screen.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
+      assert.ok(overflow<=2,label+' overflow: '+overflow+'px');
+      await screen.close();
+    }
+    const bad=await browser.newPage({viewport:{width:1024,height:768}});
+    bad.on('pageerror',error=>errors.push(error.message));
+    await bad.route('**/data/workspace.json',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({schema_version:1,providers:[],records:[{id:'broken'}]})}));
+    await bad.goto(base+'/',{waitUntil:'networkidle'});
+    assert.match(await bad.locator('#body h1').innerText(),/Source unavailable/);
+    assert.ok((await bad.locator('[data-action="retry-load"]').count())===1);
+    await bad.unroute('**/data/workspace.json');
+    await bad.locator('[data-action="retry-load"]').click();
+    await bad.locator('.agenda-item').first().waitFor();
+    await bad.close();
 
     assert.deepEqual(errors,[]);
     console.log(JSON.stringify({
       status:'pass',
       applicationRows:'100+',
-      checked:['dashboard','calendar','applications','filter','compare','pipeline','drag and draft','updates','editing','export','search','mobile'],
+      checked:['dashboard','calendar','applications','saved views','scope','compare','pipeline','accessible status select','drag and draft','source preconditions','editing','export','search','schema-recovery','mobile','tablet','narrow'],
       screenshots:['phd-atlas-desktop.png','phd-atlas-mobile.png']
     }));
   } finally {
