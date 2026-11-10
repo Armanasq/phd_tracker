@@ -92,3 +92,18 @@ A clone of another owner's fork automatically receives a private SQLite database
 ## GitHub-hosted authenticated AI
 
 Repository and environment secrets can power automated model calls in GitHub Actions without running a local server. Enable `PHD_ATLAS_ENABLE_HOSTED_AI=true`, configure the dedicated `phd-atlas-ai` environment secret and provider variables, and run the [Hosted AI Verification Triage workflow](../.github/workflows/hosted-ai-advisories.yml). The `Verification` view displays only current, validated, enum-based proof-gap proposals. Secrets and raw model output are not committed to Pages. See [Hosted Actions AI setup](HOSTED_ACTIONS_AI.md). For interactive chat, an independently authenticated server is still required.
+
+
+## Direct GitHub Pages to local model (browser-only mode)
+
+**Supported scope:** browser-executed OpenAI-compatible Chat Completions, model discovery, a synthetic inference probe, optional public-record context, and temporary conversation history. This path is separate from the Python agent runtime: it cannot execute private Python tools, SQLite mutations, scheduled agents, cloud credentials, or authenticated application submissions.
+
+1. Start a local OpenAI-compatible server bound to loopback. For example, Ollama typically serves `http://127.0.0.1:11434/v1`; vLLM and LM Studio may use different local ports. Verify the model ID and service health independently.
+2. Configure the model server to allow **your actual Pages origin** using a narrowly scoped CORS policy. For upstream Pages, the origin is `https://armanasq.github.io`; for another fork, use that fork's actual origin. Ollama supports `OLLAMA_ORIGINS=https://armanasq.github.io ollama serve` when started with that environment variable. Prefer server-side allowlisting over browser security bypass flags.
+3. Open your published Pages site, go to **Settings → Local model connection**, enter the local `/v1` URL, save, discover models, then test inference. The app does not silently activate an untested endpoint. Grant a browser Local Network Access permission when prompted, if your browser implements it.
+4. Use **Copilot** for direct local inference. The browser sends the prompt and only explicitly selected public opportunity fields. AI replies are unverified proposals. Conversation messages are session-only, while the nonsecret endpoint and model identifier persist on the device.
+5. If the browser blocks access (CORS, Local Network Access restrictions, or browser policy), use the existing same-origin private runtime: `python -m phd_agents serve --port 8765` and open `http://127.0.0.1:8765/`. Do not expose the loopback runtime to the public internet.
+
+**Security boundary:** The browser model adapter accepts only HTTP `localhost`, `127.0.0.1`, or `[::1]` endpoints ending in `/v1`. It sends no API key, authorization header, cookies, or automatically selected private records. Treat locally hosted models as code with access to data you submit: review prompts before sending. Browser local-network security rules vary by browser and release; test the browser/version you actually deploy with.
+
+The hosted Pages origin is not a private application server. Full agent execution, persistent applicant data, GitHub Actions secrets, authentication, and cloud inference still require their respective server-side components. GitHub Actions jobs are not a streaming chat API.
