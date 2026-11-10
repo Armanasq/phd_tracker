@@ -8,6 +8,7 @@ Updated 2026-11-10. This is a source-backed route inventory, not a product featu
 | `#applications` | Source records + device-local opportunities | Yes | Add, edit, export and stage records |
 | `#discovery` | Explicit research candidate records | Yes | Review proof gaps, filter, inspect, stage verified promotions |
 | `#readiness` | Deterministic evidence and document state | Yes | Inspect missing proofs and export readiness |
+| `#documents` | Source-listed document requirements across tracked applications | Yes | Review shared document demand and readiness without uploading files |
 | `#operations` | Private SQLite application/referee/evidence state | No | Owner-managed private updates, conflicts, reference planning |
 | `#actions` | Public tasks and deadline evidence | Yes | Prioritize, navigate, export |
 | `#ledger` | Public original workbook task projection | Yes | Search, filter and export |
@@ -34,19 +35,21 @@ Updated 2026-11-10. This is a source-backed route inventory, not a product featu
 - Browser-local `#ai`, Settings and the floating Ask Atlas assistant share one ephemeral model client. An actual model response must be verified before interactive inference.
 - Browser-local AI does **not** imply access to Python tools, SQLite, cloud secrets or server-side schedules. Only committed public record fields explicitly selected by the user can be included in a local-model prompt.
 - Private `#automations` supports a read-only route preview. A multi-stage workflow must validate all provider routes and fresh cloud consent *before* executing its first stage.
+- Document inventory aggregates only explicitly declared requirements and recorded readiness; an absent document list is unconfirmed, not evidence that documents are unnecessary.
 - Discovery candidates are never automatically promoted, marked eligible, or treated as admitted. A recorded source review may be stale, and a recorded passed date does not prove a programme is permanently closed.
 - Source records remain distinct from local drafts; uploaded public data must exclude applicant notes, receipts and credentials.
 
 ## Regression gates
 
 - `tests/routes.test.mjs`: canonical routes, alias resolution and invalid hashes.
+- `tests/documents.test.mjs`: portfolio document demand, deduplication, unknowns and provenance discipline.
 - `tests/discovery.test.mjs`: candidate classification, expiry and explicit review states.
 - `tests/runtime_capabilities.test.mjs`: capability gating by private, browser-local and static mode.
 - `tests/browser_model*.mjs`: endpoint restrictions, model probing, direct inference and ephemeral history.
 - `tests/browser_lens_smoke.cjs`: real browser path from Settings to the global assistant and new routes.
 - `tests/test_workflow_plan.py`: multi-agent preflight and no partial cloud execution.
 - `tests/test_runtime_capabilities.py`: local capability API, correct readiness and secret exclusion.
-- `tests/all_routes_audit.cjs` and `tests/mobile_layout_audit.cjs`: all 21 routes across form factors.
+- `tests/all_routes_audit.cjs` and `tests/mobile_layout_audit.cjs`: all 22 routes across form factors.
 
 ## Outstanding product boundaries
 
