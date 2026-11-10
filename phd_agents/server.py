@@ -422,6 +422,18 @@ class ApiHandler(BaseHTTPRequestHandler):
         root = self.server.root
         if path == "/api/settings":
             self.send_json({"settings": save_settings(store, data)})
+        elif path == "/api/source-observations/review":
+            from .source_reviews import record_source_review
+            if "expected_digest" not in data:
+                raise ValueError("Source review requires an explicit observed digest")
+            review = record_source_review(
+                store,
+                observation_id=data.get("observation_id"),
+                decision=data.get("decision"),
+                note=data.get("note"),
+                expected_digest=data["expected_digest"],
+            )
+            self.send_json({"review": review})
         elif path == "/api/maintenance/backup":
             self.send_json({"backup": store.create_backup(retain=data.get("retain", 7))})
         elif path == "/api/providers/setup":
