@@ -24,6 +24,7 @@ Updated 2026-11-10. This is a source-backed route inventory, not a product featu
 | `#agents` | Private agent registry and deterministic tools | No | Configure agent responsibilities, allowlisted tools and routes |
 | `#automations` | Private workflows, scheduler and model routes | No | Preview workflow routes, configure execution and opt-in schedules |
 | `#activity` | Private model audit ledger | No | Inspect actual private runs and usage |
+| `#evaluations` | Private aggregated run ledger, citation audit and workflow stage outcomes | No | Inspect measured provider/agent failures, token reports, latency and provenance; filter recent traces |
 | `#source-observations` | Private SQLite observation history, byte-change categories and source URLs | No | Review official-source drift; manual CLI collection only; no factual promotion |
 | `#source-claims` | Private retained source excerpts and exact-quote candidate claims | No | Inspect observed text, capture provenance to SQLite without promoting facts |
 | `#onboarding` | Public deployment identity, model probe and runtime capability checks | Yes | Choose deployment mode, inspect requirements and export a nonsecret setup summary; no GitHub changes |
@@ -52,7 +53,7 @@ Updated 2026-11-10. This is a source-backed route inventory, not a product featu
 - `tests/browser_lens_smoke.cjs`: real browser path from Settings to the global assistant and new routes.
 - `tests/test_workflow_plan.py`: multi-agent preflight and no partial cloud execution.
 - `tests/test_runtime_capabilities.py`: local capability API, correct readiness and secret exclusion.
-- `tests/all_routes_audit.cjs` and `tests/mobile_layout_audit.cjs`: all 25 routes across form factors.
+- `tests/all_routes_audit.cjs` and `tests/mobile_layout_audit.cjs`: all 26 routes across form factors.
 
 ## Outstanding product boundaries
 

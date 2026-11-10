@@ -104,6 +104,8 @@ jobs:
           node --check site/modules/routes.mjs
           node --test tests/routes.test.mjs
           node --check site/modules/source-claims.mjs
+          node --check site/modules/evaluations.mjs
+          node --test tests/evaluations.test.mjs
           node --test tests/source_claims.test.mjs
           node --check site/modules/source-observations.mjs
           node --test tests/source_observations.test.mjs

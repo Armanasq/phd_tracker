@@ -5,7 +5,7 @@ export const VIEWS=Object.freeze([
   ["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],
   ["review","shield","Verification"],["archive","archive","Archive"],["sources","database","Sources"],
   ["ai","sparkles","Copilot"],["agents","bot","Agents"],["automations","flow","Automations"],
-  ["activity","activity","Run history"],["source-observations","database","Source observations"],["source-claims","shield","Source evidence"],["onboarding","check","First-run setup"],["deployment","settings","Deployment"],["settings","settings","Settings"]
+  ["activity","activity","Run history"],["evaluations","activity","Agent evaluations"],["source-observations","database","Source observations"],["source-claims","shield","Source evidence"],["onboarding","check","First-run setup"],["deployment","settings","Deployment"],["settings","settings","Settings"]
 ].map(entry=>Object.freeze(entry)));
 
 const ALIASES=Object.freeze({
@@ -28,6 +28,8 @@ const ALIASES=Object.freeze({
   "source-drift":"source-observations",
   observations:"source-observations",
   "source-monitor":"source-observations",
+  "agent-evaluations":"evaluations",
+  "model-metrics":"evaluations",
   "claim-evidence":"source-claims",
   "source-excerpts":"source-claims"
 });
