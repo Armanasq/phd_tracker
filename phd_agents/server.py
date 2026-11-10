@@ -314,6 +314,9 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.send_json(report_observability(store))
         elif path == "/api/metrics":
             self.send_json(usage_summary(store))
+        elif path == "/api/evaluations":
+            from .evaluations import evaluation_report
+            self.send_json(evaluation_report(store))
         elif path == "/api/diagnostics":
             self.send_json(store.diagnostics())
         elif path == "/api/scheduler/preview":
