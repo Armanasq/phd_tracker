@@ -9,7 +9,7 @@ from .store import Store
 _MAX_TOKENS = 2500
 _MAX_CHANGES = 40
 _TOPICS = {
-    "deadline": ("deadline", "closing", "cutoff", "cut-off", "due date"),
+    "deadline": ("deadline", "closing", "cutoff", "cut-off", "due date", "applications close", "application closes", "apply by"),
     "eligibility": ("eligible", "eligibility", "admission", "requirement", "residency"),
     "funding": ("funding", "stipend", "scholarship", "tuition", "salary"),
     "documents": ("document", "transcript", "letter", "recommendation", "certificate"),

@@ -40,6 +40,14 @@ class SourceDiffTests(unittest.TestCase):
         self.assertFalse(result["semantic_claim_verified"])
         self.assertEqual(compare_source_text(self.store, first["id"])["status"], "no_preceding_observation")
 
+    def test_programme_applications_close_phrase_is_detected(self) -> None:
+        self.observe("<p>Doctoral applications close on 11 December 2026.</p>")
+        second = self.observe("<p>Doctoral applications close on 15 December 2026.</p>")
+        review = compare_source_text(self.store, second["id"])
+        self.assertEqual(review["status"], "visible_text_changed")
+        self.assertIn("deadline", review["possible_topics"])
+        self.assertFalse(review["semantic_claim_verified"])
+
     def test_markup_only_and_legacy_text_are_not_claim_changes(self) -> None:
         self.observe("<p>Funding is available to eligible applicants.</p>")
         latest = self.observe("<div>Funding is available to eligible applicants.</div>")
