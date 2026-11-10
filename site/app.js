@@ -8,6 +8,7 @@ import {createLocalRecord,normalizeLocalRecords,mergeLocalRecords,exportIndepend
 import {createConsole} from "./modules/console.mjs";
 import {candidateQueue} from "./modules/discovery.mjs";
 import {runtimeCapabilities} from "./modules/runtime-capabilities.mjs";
+import {portfolioDocumentInventory} from "./modules/documents.mjs";
 import {VIEWS,resolveWorkspaceRoute} from "./modules/routes.mjs";
 import {mountAtlasLens} from "./modules/lens.mjs";
 import {auditWorkspace} from "./modules/assurance.mjs";
@@ -200,6 +201,34 @@ function deploymentView(){
    '<div class="mini-row"><div><strong>Private Python or Linux Docker</strong><small>SQLite, model routes, agents and scheduled workflows; service remains bound to loopback.</small></div>'+button("Instructions","url",ownerRepo()+"/blob/main/docs/DOCKER_LOCAL.md")+'</div>'+
    '<div class="mini-row"><div><strong>Authenticated cloud edition</strong><small>Not implemented; identity, per-user authorization, hardened API and durable workers are mandatory before exposure.</small></div></div>')+
   '<div class="info">Capabilities are evaluated for this session only. A passing code-quality check does not prove that a model endpoint is running or that university evidence is current.</div>';
+}
+function documentsView(){
+ const inventory=portfolioDocumentInventory(records());
+ const labels=state.data.documents||{};
+ const rows=inventory.items.map(item=>{
+  const related=item.applications.filter(r=>r.active);
+  const details=related.slice(0,25).map(record=>
+   '<div class="mini-row"><div>'+button(record.name,"record",record.id)+
+   '<small>'+escapeHTML(record.status)+' · '+escapeHTML(({
+    ready:"Reported ready",unknown:"Readiness unknown",in_progress:"In progress",
+    not_started:"Not started",not_applicable:"Not applicable"
+   })[record.state]||"Unknown")+(record.verified_requirements?" · Source requirement recorded":" · Requirement evidence unconfirmed")+
+   '</small></div><small>'+escapeHTML(record.deadline||"No recorded deadline")+'</small></div>').join("");
+  return '<details class="os-panel document-group"><summary><strong>'+escapeHTML(labels[item.id]||item.id)+'</strong>'+
+   '<span>'+item.active+' active · '+item.unknown_or_unstarted+' unresolved · '+item.reported_ready+' reported ready</span></summary>'+
+   '<p class="subtle">Shared requirements are aggregated across application records. A marked-ready file is not verified against a current portal specification.</p>'+
+   '<div class="mini-list">'+details+(related.length>25?'<p class="subtle">Showing 25 of '+related.length+' records. Open Applications for the complete inventory.</p>':"")+'</div></details>';
+ }).join("");
+ const stats=inventory.summary;
+ return heading("Document inventory","Consolidated dossier demand, declared requirements and readiness across your recorded applications.",
+  button("Applications","nav","applications","primary")+button("Readiness","nav","readiness"))+
+  '<div class="kpis">'+kpi("Active applications",stats.active,"Tracked records with active states")+
+  kpi("Requirements unconfirmed",stats.unconfirmed_requirements,"No document list recorded")+
+  kpi("Unknown readiness",stats.unknown,"Recorded requirements without a status")+
+  kpi("Not started",stats.not_started,"Explicitly marked incomplete")+
+  kpi("Reported ready",stats.ready,"Applicant record; not portal proof")+'</div>'+
+  '<div class="info">Document titles and readiness reflect recorded evidence, not uploaded files. No document contents or private credentials are stored on GitHub Pages.</div>'+
+  (rows||'<div class="empty">No recorded document requirements. Add a reviewed opportunity or inspect the official portal before assuming documents are unnecessary.</div>');
 }
 function discoveryView(){
  const report=candidateQueue(records(),TODAY(),{stage:discoveryFilter,query:discoveryQuery});
@@ -565,7 +594,7 @@ function navigation(){
 function render(){
  if(!state.data)return;
  navigation();
- const views={dashboard,calendar:calendarView,applications,discovery:discoveryView,deployment:deploymentView,readiness,pipeline,contacts,actions,ledger:ledgerView,updates,compare,review,archive,sources};
+ const views={dashboard,calendar:calendarView,applications,discovery:discoveryView,deployment:deploymentView,documents:documentsView,readiness,pipeline,contacts,actions,ledger:ledgerView,updates,compare,review,archive,sources};
  const intelligence=["ai","agents","automations","activity","settings","operations"].includes(state.view);
  const freshness=freshnessState(state.data.as_of,TODAY());
  const note=["aging","stale","unknown","future"].includes(freshness.state)
