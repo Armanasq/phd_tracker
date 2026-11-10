@@ -5,7 +5,7 @@ export const VIEWS=Object.freeze([
   ["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],
   ["review","shield","Verification"],["archive","archive","Archive"],["sources","database","Sources"],
   ["ai","sparkles","Copilot"],["agents","bot","Agents"],["automations","flow","Automations"],
-  ["activity","activity","Run history"],["source-observations","database","Source observations"],["deployment","settings","Deployment"],["settings","settings","Settings"]
+  ["activity","activity","Run history"],["source-observations","database","Source observations"],["onboarding","check","First-run setup"],["deployment","settings","Deployment"],["settings","settings","Settings"]
 ].map(entry=>Object.freeze(entry)));
 
 const ALIASES=Object.freeze({
@@ -21,6 +21,8 @@ const ALIASES=Object.freeze({
   copilot:"ai",
   workflows:"automations",
   setup:"deployment",
+  "get-started":"onboarding",
+  "first-run":"onboarding",
   runtime:"deployment",
   verification:"review",
   "source-drift":"source-observations",
