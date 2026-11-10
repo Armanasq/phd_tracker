@@ -21,6 +21,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   state.sourceClaims=[];state.sourceClaimError="";state.sourceClaimLoading=false;
   state.selectedClaimObservation=null;state.claimObservationText=null;state.sourceTextDiff=null;
   state.sourceDiffError="";state.claimReviewHistory=null;
+  state.sourceDateCandidates=null;state.sourceCandidateError="";
   state.evaluationReport=null;state.evaluationsError="";state.evaluationsLoading=false;
   state.schedulePreview=null;state.workflowPreview=null;state.scheduleTick=null;
   state.diagnostics=null;state.latestBackup=null;state.lastAnswer=null;
@@ -597,16 +598,18 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   }
   if(action==="suggest-source-dates"){
    if(!isLive()||state.sourceClaimLoading||!state.claimObservationText)return;
+   const generation=connectionGeneration;
    const identity=state.claimObservationText.id;
    if(!Number.isSafeInteger(identity)||identity<1)return;
    state.sourceClaimLoading=true;state.sourceCandidateError="";state.sourceDateCandidates=null;onChange();
    try{
     const response=await request("/api/source-observations/"+identity+"/candidates");
+    if(generation!==connectionGeneration)return;
     if(response.result?.observation_id!==identity||!Array.isArray(response.result?.candidates))
       throw new Error("Invalid private date extraction response");
     state.sourceDateCandidates=response.result;
-   }catch(error){state.sourceCandidateError=short(error.message,240);}
-   finally{state.sourceClaimLoading=false;onChange();}
+   }catch(error){if(generation===connectionGeneration)state.sourceCandidateError=short(error.message,240);}
+   finally{if(generation===connectionGeneration){state.sourceClaimLoading=false;onChange();}}
    return;
   }
   if(action==="fill-source-candidate"){
