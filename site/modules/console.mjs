@@ -630,7 +630,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   });
  }
  setupEvents();
- return {connect,view,isLive,activeLabel:()=>active()?.label||"Configure a model",
+ return {connect,view,isLive,browserModel,activeLabel:()=>active()?.label||"Configure a model",
   activeModel:()=>active()?.model||"",isVerified:()=>!!active()&&status(active())==="responded",
   settings:()=>prefs(),setContext:view=>{state.sourceView=view},
   selectApplication:id=>{state.selectedApplication=id;state.prompt="Audit this application's official-source evidence, eligibility, exact deadline, documents, blockers and next actions. Separate verified facts from unknowns.";state.lastAnswer=null;},
