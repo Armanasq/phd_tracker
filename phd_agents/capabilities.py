@@ -21,6 +21,7 @@ def private_runtime_capabilities(*, provider_verified: bool, provider_name: str 
             "interactive_inference": {"supported": True, "ready": provider_verified},
             "agent_execution": {"supported": True, "ready": provider_verified},
             "native_streaming": {"supported": True, "ready": provider_verified and provider_kind in {"openai_compatible", "azure_openai", "azure_deployment"}, "requires": ["verified_stream_compatible_provider", "opt_in"]},
+            "local_background_jobs": {"supported": True, "ready": True, "requires": ["operator_started_worker", "local_model_provider"], "note": "The API can queue work; readiness does not establish that a worker process is running"},
             "workflow_execution": {"supported": True, "ready": provider_verified, "requires": ["workflow_policy", "provider_approval"]},
             "background_scheduler": {"supported": True, "ready": True, "requires": ["enabled_workflow", "running_runtime"]},
             "authenticated_cloud": {"supported": False, "ready": False},
