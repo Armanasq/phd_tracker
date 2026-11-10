@@ -47,7 +47,7 @@ const driftLabel = value => ({
   baseline_only:"Initial baseline · no comparison"
 })[value] || "Legacy observation · classification unknown";
 
-export function renderSourceObservations({records=[],loading=false,error="",filter="all"}={}) {
+export function renderSourceObservations({records=[],loading=false,error="",message="",filter="all"}={}) {
   const data=observationSummary(records);
   const choices=new Set(["all","changed","unavailable","unchanged","baseline","legacy"]);
   const selected=choices.has(filter)?filter:"all";
