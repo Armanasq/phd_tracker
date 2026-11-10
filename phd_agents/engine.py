@@ -272,6 +272,8 @@ def workflow_plan(store: Store, *, workflow_id: str, provider_id: str | None = N
         scheduled_approval = False
     if cloud_providers and not workflow.get("cloud_consent"):
         scheduled_approval = False
+    if compatibility_blockers:
+        scheduled_approval = False
     return {
         "schema_version": 1,
         "execution_mode": "sequential_bounded",
@@ -369,6 +371,7 @@ def scheduler_once(store: Store, root: Path, *, now: datetime | None = None) -> 
     max_runs = preferences["max_runs_per_tick"]
     cloud_cap = preferences["max_cloud_model_calls_per_day"]
     cloud_ids = [p["id"] for p in settings["providers"] if not p["local"]]
+    agent_definitions = {item["id"]: item for item in settings["agents"]}
     day_start = current.replace(hour=0, minute=0, second=0, microsecond=0).astimezone(timezone.utc).isoformat(timespec="seconds")
     for workflow in settings["workflows"]:
         if len(result) >= max_runs:
@@ -381,6 +384,13 @@ def scheduler_once(store: Store, root: Path, *, now: datetime | None = None) -> 
         requested = workflow.get("provider_id") or "auto"
         stages = workflow.get("steps") or [workflow["agent_id"]]
         routes = [resolve_route(store, settings["providers"], agent, requested) for agent in stages]
+        capability_checks = [
+            assess_provider_contract(route.provider, agent_definitions[agent].get("requirements"))
+            for agent, route in zip(stages, routes)
+        ]
+        if any(not check["compatible"] for check in capability_checks):
+            result.append({"workflow_id": workflow["id"], "status": "skipped", "reason": "model_capability_mismatch"})
+            continue
         consent = bool(workflow.get("cloud_consent", False))
         if any(not route.provider["local"] for route in routes) and not consent:
             result.append({"workflow_id": workflow["id"], "status": "skipped", "reason": "cloud_consent_missing"})

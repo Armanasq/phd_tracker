@@ -7,6 +7,7 @@ from zoneinfo import ZoneInfo
 from .connectivity import provider_states
 from .engine import catalog, period_for
 from .routing import resolve_route
+from .route_contract import assess_provider_contract
 from .settings import read_settings
 from .store import Store
 
@@ -16,6 +17,7 @@ def scheduler_preview(store: Store, now: datetime | None = None) -> dict[str, An
     prefs = read_settings(store)
     current = (now or datetime.now(timezone.utc)).astimezone(ZoneInfo(prefs["timezone"]))
     providers = config["providers"]
+    agent_definitions = {agent["id"]: agent for agent in config["agents"]}
     health = provider_states(store, providers)
     cloud_ids = [p["id"] for p in providers if not p["local"]]
     day_start = current.replace(hour=0, minute=0, second=0, microsecond=0).astimezone(timezone.utc).isoformat(timespec="seconds")
@@ -25,6 +27,11 @@ def scheduler_preview(store: Store, now: datetime | None = None) -> dict[str, An
         stages = workflow.get("steps") or [workflow["agent_id"]]
         override = workflow.get("provider_id") or "auto"
         route_steps = [resolve_route(store, providers, agent, override) for agent in stages]
+        capability_checks = [
+            assess_provider_contract(route.provider, agent_definitions[agent].get("requirements"))
+            for agent, route in zip(stages, route_steps)
+        ]
+        capability_mismatch = any(not contract["compatible"] for contract in capability_checks)
         cloud_count = sum(not step.provider["local"] for step in route_steps)
         period = period_for(workflow.get("schedule", "manual"), current)
         last = store.schedule_last(workflow["id"])
@@ -34,6 +41,8 @@ def scheduler_preview(store: Store, now: datetime | None = None) -> dict[str, An
             state = "manual_only"
         elif period == last:
             state = "already_executed"
+        elif capability_mismatch:
+            state = "model_capability_mismatch"
         elif cloud_count and not workflow.get("cloud_consent"):
             state = "cloud_disclosure_not_approved"
         elif any(not step.approved for step in route_steps):
@@ -53,8 +62,10 @@ def scheduler_preview(store: Store, now: datetime | None = None) -> dict[str, An
             "cloud_calls": cloud_count,
             "stages": [{"agent_id": agent, "provider_id": route.provider["id"],
                         "model": route.provider["model"], "source": route.source,
-                        "connection_status": health[route.provider["id"]]["state"]}
-                       for agent, route in zip(stages, route_steps)],
+                        "connection_status": health[route.provider["id"]]["state"],
+                        "capability_compatible": contract["compatible"],
+                        "capability_blockers": contract["blockers"]}
+                       for agent, route, contract in zip(stages, route_steps, capability_checks)],
         })
     return {
         "checked_at": current.isoformat(timespec="seconds"),
