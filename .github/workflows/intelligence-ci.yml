@@ -13,6 +13,11 @@ on:
       - site/**
       - phd_agents/**
       - requirements-intelligence.txt
+      - Dockerfile
+      - .dockerignore
+      - .env.example
+      - compose.local-linux.yml
+      - docs/DOCKER_LOCAL.md
       - .github/workflows/**
       - .github/README_TEMPLATE.md
       - README.md
@@ -26,6 +31,11 @@ on:
       - site/**
       - phd_agents/**
       - requirements-intelligence.txt
+      - Dockerfile
+      - .dockerignore
+      - .env.example
+      - compose.local-linux.yml
+      - docs/DOCKER_LOCAL.md
       - .github/workflows/**
   workflow_dispatch:
 
@@ -70,6 +80,15 @@ jobs:
       - run: node --test tests/assurance.test.mjs
       - run: test -s site/quiet.css
       - run: python -m pytest tests -q
+      - name: Validate fork deployment modes
+        run: |
+          python scripts/deployment_check.py --mode pages
+          python scripts/deployment_check.py --mode local-full-stack
+          if python scripts/deployment_check.py --mode cloud-full-stack; then
+            echo "Cloud mode must remain blocked until authenticated runtime exists"
+            exit 1
+          fi
+          docker compose -f compose.local-linux.yml config --quiet
       - run: python -m unittest discover -s tests -p 'test_instance_privacy.py'
       - name: Validate snapshot builder as deployed script
         run: |
