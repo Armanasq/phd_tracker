@@ -476,9 +476,15 @@ class ApiHandler(BaseHTTPRequestHandler):
                         raise ValueError("Unknown application ID")
                 if kind == "reference" and data.get("referee_id") not in {r["id"] for r in store.items("referee")}:
                     raise ValueError("Unknown referee ID")
-                self.send_json({"saved": True, "entry": store.put_item(kind, data)})
+                expected = data.pop("expected_version", None)
+                if type(expected) is not int or expected < 0:
+                    raise ValueError("Private record updates require a non-negative expected_version")
+                self.send_json({"saved": True, "entry": store.put_item(kind, data, expected_version=expected)})
             elif len(parts) == 3 and parts[-1] == "delete":
-                self.send_json({"deleted": store.delete_item(parts[0], unquote(parts[1]))})
+                expected = data.get("expected_version")
+                if type(expected) is not int or expected < 1:
+                    raise ValueError("Private record deletion requires a positive expected_version")
+                self.send_json({"deleted": store.delete_item(parts[0], unquote(parts[1]), expected_version=expected)})
             else:
                 self.send_json({"error": "Unknown private record route"}, 404)
         elif path == "/api/schedule":
