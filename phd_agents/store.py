@@ -81,7 +81,7 @@ class Store:
             CREATE TABLE IF NOT EXISTS schedule_claims(id TEXT PRIMARY KEY, period TEXT NOT NULL, token TEXT NOT NULL, claimed_at TEXT NOT NULL, expires_at TEXT NOT NULL, cloud_calls INTEGER NOT NULL, day_start TEXT NOT NULL);
             CREATE TABLE IF NOT EXISTS request_idempotency(key TEXT PRIMARY KEY, endpoint TEXT NOT NULL, digest TEXT NOT NULL, state TEXT NOT NULL, response TEXT, expires_at TEXT NOT NULL);
             CREATE INDEX IF NOT EXISTS idx_schedule_claims_active ON schedule_claims(day_start,expires_at);
-            CREATE TABLE IF NOT EXISTS private_objects(kind TEXT NOT NULL, id TEXT NOT NULL, payload TEXT NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY(kind,id));
+            CREATE TABLE IF NOT EXISTS private_objects(kind TEXT NOT NULL, id TEXT NOT NULL, payload TEXT NOT NULL, updated_at TEXT NOT NULL, version INTEGER NOT NULL DEFAULT 1, PRIMARY KEY(kind,id));
             CREATE TABLE IF NOT EXISTS worker_jobs(
                 id TEXT PRIMARY KEY,agent_id TEXT NOT NULL,provider_id TEXT NOT NULL,
                 application_id TEXT,input_text TEXT NOT NULL,status TEXT NOT NULL,
@@ -103,6 +103,9 @@ class Store:
             CREATE INDEX IF NOT EXISTS idx_conversations_recent ON conversations(updated_at DESC);
 
             """)
+            columns = {item["name"] for item in self.db.execute("PRAGMA table_info(private_objects)")}
+            if "version" not in columns:
+                self.db.execute("ALTER TABLE private_objects ADD COLUMN version INTEGER NOT NULL DEFAULT 1")
             self.db.commit()
         except BaseException:
             if hasattr(self, "db"):
