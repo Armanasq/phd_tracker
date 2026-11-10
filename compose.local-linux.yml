@@ -1,0 +1,35 @@
+name: phd-atlas-local
+
+services:
+  atlas:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: phd-atlas:local
+    network_mode: host
+    user: "10001:10001"
+    environment:
+      PHDAI_PRIVATE_DIR: /var/lib/phd-atlas
+      PHD_ATLAS_REPOSITORY: ${PHD_ATLAS_REPOSITORY:?Set your own GitHub owner/repository in .env}
+      PHDAI_MAX_CONCURRENT_INFERENCE: ${PHDAI_MAX_CONCURRENT_INFERENCE:-2}
+    volumes:
+      - private_state:/var/lib/phd-atlas
+      - generated_site:/opt/phd-atlas/site/data
+    read_only: true
+    tmpfs:
+      - /tmp:rw,nosuid,nodev,noexec,size=64m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8765/api/health',timeout=5).read()"]
+      interval: 30s
+      timeout: 8s
+      retries: 3
+      start_period: 90s
+
+volumes:
+  private_state:
+  generated_site:
