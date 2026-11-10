@@ -92,3 +92,31 @@ test("owner audit history displays dated decisions without leaking HTML",()=>{
   assert.ok(!result.includes("<script>"));
   assert.match(result,/factual interpretation unverified/);
 });
+
+test("date suggestions remain unverified until explicit manual capture",()=>{
+ const suggestion={
+   observation_id:9,source_url:"https://university.example/phd",scan_complete:false,
+   ambiguous_deadline_dates:true,notice:"Review before recording",
+   candidates:[{date_mention:"15 December 2026",normalized_date:"2026-12-15",
+     context_signal:"deadline_language_near_date",span_start:22,span_end:38,
+     exact_quote:"Applications close on 15 December 2026."}]
+ };
+ const sample={id:9,content_sha256:"a".repeat(64),visible_text:"Applications close on 15 December 2026."};
+ const html=renderSourceClaims({observations:observed,selectedId:9,sourceText:sample,dateCandidates:suggestion});
+ assert.match(html,/Find date mentions/);
+ assert.match(html,/Date mentions for manual review/);
+ assert.match(html,/Multiple deadline-like dates/);
+ assert.match(html,/Partial scan/);
+ assert.match(html,/Review in claim form/);
+ assert.match(html,/no cutoff time or timezone inferred/);
+ assert.match(html,/Review before recording/);
+ const stale=renderSourceClaims({observations:observed,selectedId:9,sourceText:sample,
+   dateCandidates:{...suggestion,observation_id:8}});
+ assert.doesNotMatch(stale,/Date mentions for manual review/);
+ const untrusted=renderSourceClaims({observations:observed,selectedId:9,sourceText:sample,
+   dateCandidates:{...suggestion,candidates:[{...suggestion.candidates[0],date_mention:"<script>bad</script>",
+     exact_quote:'<img src=x onerror=alert(1)> untrusted quote'}]}});
+ assert.ok(!untrusted.includes("<script>"));
+ assert.ok(!untrusted.includes("<img"));
+ assert.match(untrusted,/&lt;script&gt;/);
+});

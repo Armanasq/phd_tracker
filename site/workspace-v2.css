@@ -429,3 +429,6 @@ body.dark .os-context-banner{background:#223155;border-color:#425780}
 .os-eval-row strong{font-weight:600;min-width:0;overflow-wrap:anywhere}
 .os-eval-header{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.035em}
 @media(max-width:680px){.os-eval-filters{padding:0 12px 14px}.os-eval-table{padding:4px 12px 14px}.os-eval-row{grid-template-columns:minmax(0,1.5fr) repeat(4,minmax(0,1fr));gap:6px;font-size:10px}.os-eval-header{font-size:9px}}
+
+.os-ledger-row [data-os-action="fill-source-candidate"]{align-self:center;flex-shrink:0}
+@media(max-width:600px){.os-ledger-row [data-os-action="fill-source-candidate"]{max-width:100%;white-space:normal}}

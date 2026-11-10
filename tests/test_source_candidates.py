@@ -33,6 +33,8 @@ class CandidateDateTests(unittest.TestCase):
         self.assertEqual([x["normalized_date"] for x in parsed["candidates"]],
                          ["2026-12-15", "2026-12-20", "2027-01-12"])
         self.assertTrue(parsed["ambiguous_deadline_dates"])
+        self.assertEqual([item["candidate_type"] for item in parsed["candidates"]],
+                         ["deadline", "deadline", "other"])
         self.assertTrue(parsed["scan_complete"])
         self.assertFalse(parsed["semantic_claim_verified"])
         for item in parsed["candidates"]:

@@ -10,7 +10,7 @@ export function claimCandidates(observations=[]) {
     .sort((a,b)=>b.id-a.id).slice(0,200);
 }
 
-export function renderSourceClaims({observations=[],claims=[],selectedId=null,sourceText=null,diff=null,diffError="",error="",message="",loading=false,filter="all",reviewHistory=null}={}) {
+export function renderSourceClaims({observations=[],claims=[],selectedId=null,sourceText=null,diff=null,diffError="",error="",message="",loading=false,filter="all",reviewHistory=null,dateCandidates=null,candidateError=""}={}) {
   if(!Array.isArray(claims))throw new TypeError("Expected captured source claims");
   const candidates=claimCandidates(observations);
   const selected=candidates.find(o=>o.id===selectedId)||candidates[0]||null;
@@ -31,6 +31,21 @@ export function renderSourceClaims({observations=[],claims=[],selectedId=null,so
       '<div class="os-diff-after"><strong>Current</strong><p>'+esc(change.after||"No text")+'</p></div></div>').join("")+
     ((comparison.changes||[]).length===0?'<p class="os-note">No comparable changes are available for this observation.</p>':'')+
     '</div><p class="os-footnote">'+esc(comparison.notice||"")+'</p></section>':"";
+  const suggestions=dateCandidates?.observation_id===selected?.id&&dateCandidates?.source_url===selected?.source_url?dateCandidates:null;
+  const candidatePanel=suggestions?'<section class="os-panel"><div class="os-panel-heading"><div><h2>Date mentions for manual review</h2>'+
+    '<p>Deterministic source-text extraction, not a verified application deadline or portal availability.</p></div></div>'+
+    (suggestions.ambiguous_deadline_dates?'<p class="os-warning" role="status">Multiple deadline-like dates were found. Confirm the relevant programme and application round.</p>':'')+
+    (!suggestions.scan_complete?'<p class="os-warning" role="status">Partial scan: source excerpt or candidate results were truncated.</p>':'')+
+    '<div class="os-ledger">'+((suggestions.candidates||[]).length?suggestions.candidates.map((item,index)=>
+      '<article class="os-ledger-row"><div><strong>'+esc(item.date_mention)+' · '+esc(item.normalized_date)+'</strong>'+
+      '<small>'+esc(item.context_signal.replaceAll("_"," "))+' · Characters '+esc(item.span_start)+'–'+esc(item.span_end)+'</small>'+
+      '<p class="os-evidence-quote">'+esc(item.exact_quote)+'</p>'+
+      '<small>Unverified date mention; no cutoff time or timezone inferred</small></div>'+
+      (item.exact_quote?.length>=20?
+       '<button type="button" class="os-btn quiet" data-os-action="fill-source-candidate" data-id="'+index+'">Review in claim form</button>':
+       '<span class="os-meta">Quote too short for capture</span>')+'</article>').join(""):
+      '<p class="os-empty">No recognized dates. Inspect the original source manually.</p>')+'</div>'+
+    '<p class="os-footnote">'+esc(suggestions.notice||"")+'</p></section>':"";
   const capture=quoted?'<form class="os-form" data-os-form="source-claim">'+
     '<input type="hidden" name="observation_id" value="'+selected.id+'">'+
     '<input type="hidden" name="expected_digest" value="'+esc(text.content_sha256)+'">'+
@@ -46,7 +61,8 @@ export function renderSourceClaims({observations=[],claims=[],selectedId=null,so
       '<p>Captured from a public HTTPS source. Scripts and styles are excluded; dynamically rendered information may be absent.</p></div></div>'+
       '<label class="os-field os-source-selector"><span>Observation</span><select data-os-claim-observation aria-label="Choose source observation">'+options+'</select></label>'+
       '<div class="os-actions"><button type="button" class="os-btn quiet" data-os-action="load-claim-source"'+(loading?' disabled':'')+'>Load captured text</button>'+
-      (quoted?'<button type="button" class="os-btn quiet" data-os-action="compare-claim-source"'+(loading?' disabled':'')+'>Compare previous fetch</button>':'')+'</div>'+
+      (quoted?'<button type="button" class="os-btn quiet" data-os-action="compare-claim-source"'+(loading?' disabled':'')+'>Compare previous fetch</button>'+
+      '<button type="button" class="os-btn quiet" data-os-action="suggest-source-dates"'+(loading?' disabled':'')+'>Find date mentions</button>':'')+'</div>'+
       (quoted?'<div class="os-source-sample" id="sourceCapturedText" tabindex="0" aria-label="Captured institutional source text">'+esc(text.visible_text)+'</div>'+
         '<p class="os-footnote">Text hash: '+esc(text.visible_text_sha256)+
         (text.visible_text_truncated?' · Extracted text truncated to the retained prefix; quote matching is limited to that prefix.':'')+'</p>':
@@ -97,7 +113,8 @@ export function renderSourceClaims({observations=[],claims=[],selectedId=null,so
     (error?'<p class="os-warning" role="alert">'+esc(error)+'</p>':'')+
     (message?'<p class="os-message" role="status">'+esc(message)+'</p>':'')+
     (diffError?'<p class="os-warning" role="alert">'+esc(diffError)+'</p>':'')+
-    sourcePanel+diffPanel+
+    (candidateError?'<p class="os-warning" role="alert">'+esc(candidateError)+'</p>':'')+
+    sourcePanel+diffPanel+candidatePanel+
     '<section class="os-panel"><div class="os-panel-heading"><div><h2>Capture a candidate claim</h2>'+
     '<p>The exact quote and content digest become immutable private provenance. No deadline, eligibility, funding or portal state is promoted automatically.</p></div></div>'+
     capture+'</section>'+
