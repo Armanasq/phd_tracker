@@ -29,6 +29,7 @@ from time import perf_counter
 from .calendar import line_items
 from .engine import catalog, owner_records, run_agent, run_workflow, workflow_plan, scheduler_once, selected
 from .store import ConflictError, Store, default_path
+from .job_queue import enqueue_local_agent, list_jobs, job_status, cancel_job
 from .recovery import runtime_lock
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -247,6 +248,10 @@ class ApiHandler(BaseHTTPRequestHandler):
                 "as_of": as_of,
                 "security": {"local_only": True, "auto_application_submission": False},
             })
+        elif path == "/api/jobs":
+            self.send_json({"jobs": list_jobs(store)})
+        elif path.startswith("/api/jobs/"):
+            self.send_json(job_status(store, unquote(path.removeprefix("/api/jobs/"))))
         elif path == "/api/conversations":
             self.send_json({"conversations": store.conversations(30)})
         elif path.startswith("/api/conversations/"):
@@ -484,6 +489,15 @@ class ApiHandler(BaseHTTPRequestHandler):
             if hours is None:
                 raise ValueError("Configure available hours per week in your private applicant profile")
             self.send_json(resource_schedule(records, today, hours, profile))
+        elif path == "/api/jobs/enqueue":
+            self.send_json({"job": enqueue_local_agent(
+                store, agent_id=data["agent_id"], input_text=data.get("input_text", ""),
+                provider_id=data.get("provider_id"), application_id=data.get("application_id"),
+                max_attempts=data.get("max_attempts", 2),
+            )}, 202)
+        elif path.startswith("/api/jobs/") and path.endswith("/cancel"):
+            identity = unquote(path[len("/api/jobs/"):-len("/cancel")].strip("/"))
+            self.send_json({"job": cancel_job(store, identity)})
         elif path == "/api/agents/stream":
             self.stream_agent(data)
         elif path == "/api/agents/run":
