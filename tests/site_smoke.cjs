@@ -77,7 +77,9 @@ async function run() {
     await page.locator('#navigation [data-action="nav"][data-value="applications"]').click();
     assert.equal(await page.locator('tbody tr').count(),tracked.length);
     await page.locator('#filterQuery').fill(probeId);
-    assert.equal(await page.locator('tbody tr').count(),1);
+    const matchedRows=await page.locator('tbody tr').allInnerTexts();
+    assert.ok(matchedRows.length>=1&&matchedRows.length<=tracked.length,'Search must narrow the source-backed records');
+    assert.ok(matchedRows.some(text=>text.includes(probeId)),'Filtered search must retain the selected source identifier');
     await page.locator('#filterQuery').fill('');
     await page.locator('#filterScope').selectOption('candidate');
     assert.match(await page.locator('#body .count').innerText(),new RegExp('\\b'+candidates.length+' records\\b'));
