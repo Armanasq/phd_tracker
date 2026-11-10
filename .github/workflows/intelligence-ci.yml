@@ -65,6 +65,8 @@ jobs:
       - run: node --check site/modules/local-records.mjs
       - run: node --test tests/local_records.test.mjs
       - run: node --check site/modules/lens.mjs
+      - run: node --check site/modules/sse-client.mjs
+      - run: node --test tests/streaming.test.mjs
       - run: node --check site/modules/console.mjs
       - run: node --check site/modules/discovery.mjs
       - run: node --check site/modules/runtime-capabilities.mjs
