@@ -16,7 +16,7 @@ const dates=x=>!x?"Unrecorded":String(x);
 const options=choices=>choices.map(x=>[x,title(x)]);
 
 export function createOperations({request,onChange,onReload,getRecords,notify}){
- const state={data:null,loading:false,loadedAttempt:false,tab:"overview",busy:false,editing:null,kind:null,applicationId:"",schedule:null,showProof:false,message:""};
+ const state={data:null,loading:false,loadedAttempt:false,tab:"overview",busy:false,editing:null,kind:null,applicationId:"",schedule:null,showProof:false,message:"",generation:0};
  const records=()=>getRecords().filter(x=>x.record_type==="tracked");
  const apps=()=>records().map(r=>[r.id,r.name]);
  const byId=id=>records().find(x=>x.id===id)||null;
@@ -191,12 +191,9 @@ export function createOperations({request,onChange,onReload,getRecords,notify}){
    (state.kind==="profile"?editor("profile","applicant"):"");
  }
  function view(){
-  if(!state.data&&!state.loading&&!state.loadedAttempt){
-   state.loading=true;state.loadedAttempt=true;
-   request("/api/operations").then(result=>{state.data=result;state.loading=false;onChange();})
-    .catch(error=>{state.loading=false;state.message=error.message;onChange();});
-  }
-  if(!state.data)return '<section class="os-page"><div class="os-head"><div><div class="os-kicker">PRIVATE / PORTFOLIO</div><h1>Application operations</h1><p>'+esc(state.message||"Loading verified application dependencies and private records…")+'</p></div></div></section>';
+  if(!state.data&&!state.loading&&!state.loadedAttempt)void reload().catch(()=>{});
+  if(!state.data)return '<section class="os-page"><div class="os-head"><div><div class="os-kicker">PRIVATE / PORTFOLIO</div><h1>Application operations</h1><p role="'+(state.message?"alert":"status")+'">'+esc(state.message||"Loading verified application dependencies and private records…")+'</p></div>'+
+    (state.message?'<div class="os-actions">'+button("Retry private data","refresh")+'</div>':"")+'</div></section>';
   return '<section class="os-page"><div class="os-head"><div><div class="os-kicker">PRIVATE / APPLICANT OPERATIONS</div><h1>Application operations</h1>'+
    '<p>Manage private applicant state, recommendations, independent deadline clocks, claim evidence and realistic workload in the same workspace.</p></div>'+
    '<div class="os-head-actions">'+button("Refresh evidence","refresh","","quiet")+'</div></div>'+
@@ -206,8 +203,27 @@ export function createOperations({request,onChange,onReload,getRecords,notify}){
    (state.message?'<div class="os-message" role="status">'+esc(state.message)+'</div>':"")+'</section>';
  }
  async function reload(){
-  state.loading=true;state.loadedAttempt=true;
-  try{state.data=await request("/api/operations");state.message="";}finally{state.loading=false;onChange();}
+  const generation=++state.generation;
+  state.loading=true;state.loadedAttempt=true;state.data=null;state.message="";
+  try{
+   const result=await request("/api/operations");
+   if(generation!==state.generation)return;
+   if(!result||typeof result!=="object"||Array.isArray(result))
+    throw new Error("Private operations returned an invalid response");
+   state.data=result;
+  }catch(error){
+   if(generation!==state.generation)return;
+   state.message=String(error?.message||"Private operations are unavailable").slice(0,300);
+   throw error;
+  }finally{
+   if(generation===state.generation){state.loading=false;onChange();}
+  }
+ }
+ function reset(){
+  state.generation++;
+  state.data=null;state.loading=false;state.loadedAttempt=false;state.message="";
+  state.tab="overview";state.busy=false;state.editing=null;state.kind=null;
+  state.applicationId="";state.schedule=null;state.showProof=false;
  }
  document.addEventListener("click",async event=>{
   const element=event.target.closest("[data-ops-action]");if(!element)return;
@@ -293,5 +309,5 @@ export function createOperations({request,onChange,onReload,getRecords,notify}){
   }catch(error){state.message=error.message;notify(error.message);onChange();}
   finally{state.busy=false;}
  });
- return {view,reload,selectApplication:id=>{state.applicationId=id;state.tab="application";state.kind=null;onChange();}};
+ return {view,reload,reset,selectApplication:id=>{state.applicationId=id;state.tab="application";state.kind=null;onChange();}};
 }

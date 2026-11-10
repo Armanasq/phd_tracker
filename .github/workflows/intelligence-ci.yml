@@ -91,6 +91,7 @@ jobs:
       - run: node --test tests/source_observations.test.mjs
       - run: node --test tests/browser_model.test.mjs tests/browser_model_integration.test.mjs tests/browser_model_streaming.test.mjs
       - run: node --check site/modules/operations.mjs
+      - run: node --test tests/operations_lifecycle.test.mjs
       - run: node --check site/modules/capacity-view.mjs
       - run: node --test tests/capacity_view.test.mjs
       - run: node --check site/modules/deadline-cutoff.mjs

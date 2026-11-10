@@ -14,6 +14,20 @@ const opt = (items,value) => choose(items,value);
 
 export function createConsole({notify,onChange,navigate,getRecords,getSourceRecords,onReload,getView}) {
  const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:"",jobs:[],observability:null,sourceObservations:[],sourceObservationsLoading:false,sourceObservationsError:"",sourceObservationFilter:"all",sourceClaims:[],sourceClaimError:"",sourceClaimFilter:"all",selectedClaimObservation:null,claimObservationText:null,sourceClaimLoading:false,sourceTextDiff:null,sourceDiffError:"",claimReviewHistory:null,evaluationReport:null,evaluationsError:"",evaluationsLoading:false,evaluationProvider:"all",evaluationAgent:"all"};
+ let connectionGeneration=0;
+ function clearPrivateState(){
+  state.online=false;state.data=null;state.jobs=[];state.observability=null;
+  state.sourceObservations=[];state.sourceObservationsError="";state.sourceObservationsLoading=false;
+  state.sourceClaims=[];state.sourceClaimError="";state.sourceClaimLoading=false;
+  state.selectedClaimObservation=null;state.claimObservationText=null;state.sourceTextDiff=null;
+  state.sourceDiffError="";state.claimReviewHistory=null;
+  state.evaluationReport=null;state.evaluationsError="";state.evaluationsLoading=false;
+  state.schedulePreview=null;state.workflowPreview=null;state.scheduleTick=null;
+  state.diagnostics=null;state.latestBackup=null;state.lastAnswer=null;
+  state.selectedApplication="";state.selectedProvider=null;state.selectedAgent=null;
+  state.selectedWorkflow=null;state.models={};state.message="";
+  operations.reset();
+ }
  const providers = () => state.data?.catalog?.providers || [];
  const agents = () => state.data?.catalog?.agents || [];
  const workflows = () => state.data?.catalog?.workflows || [];
@@ -82,40 +96,50 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   if(!response.ok) throw new Error(result.error || "Private runtime returned HTTP "+response.status);
   return result;
  }
- async function connect({silent=false}={}) {
-  if(!["localhost","127.0.0.1"].includes(location.hostname)||location.protocol!=="http:"){
-   state.online=false;
-   state.message="";
-   if(!silent)onChange();
+ async function connect({silent=false,preserveAnswer=false}={}) {
+  const generation=++connectionGeneration;
+  const previousAnswer=preserveAnswer?state.lastAnswer:null;
+  const previousApplication=preserveAnswer?state.selectedApplication:"";
+  const previousAgent=preserveAnswer?state.selectedAgent:null;
+  const previousProvider=preserveAnswer?state.selectedProvider:null;
+  const previousWorkflow=preserveAnswer?state.selectedWorkflow:null;
+  clearPrivateState();
+  if(!silent)onChange();
+  if(!["localhost","127.0.0.1"].includes(location.hostname)||location.protocol!=="http:")
    return false;
-  }
   try{
    const data=await request("/api/bootstrap");
-   if(data.security?.local_only!==true||!Array.isArray(data.catalog?.providers))throw new Error("Private runtime identity could not be verified");
-   state.online=true;
-   state.data=data;
-   const jobs=await request("/api/jobs").catch(()=>({jobs:[]}));
+   if(data.security?.local_only!==true||!Array.isArray(data.catalog?.providers))
+    throw new Error("Private runtime identity could not be verified");
+   const [jobs,observations,evidence,observed,evaluation]=await Promise.all([
+    request("/api/jobs").catch(()=>({jobs:[]})),
+    request("/api/source-observations").catch(error=>({error:String(error.message||error)})),
+    request("/api/source-claims").catch(error=>({error:String(error.message||error)})),
+    request("/api/observability").catch(()=>null),
+    request("/api/evaluations").catch(error=>({error:String(error.message||error)})),
+   ]);
+   if(generation!==connectionGeneration)return false;
+   state.online=true;state.data=data;
    state.jobs=Array.isArray(jobs.jobs)?jobs.jobs:[];
-   const observations=await request("/api/source-observations").catch(error=>({error:String(error.message||error)}));
    state.sourceObservationsError=observations.error||"";
    state.sourceObservations=Array.isArray(observations.observations)?observations.observations:[];
-   const evidence=await request("/api/source-claims").catch(error=>({error:String(error.message||error)}));
    state.sourceClaimError=evidence.error||"";
    state.sourceClaims=Array.isArray(evidence.claims)?evidence.claims:[];
-   const observed=await request("/api/observability").catch(()=>null);
    state.observability=observed?.schema_version===1?observed:null;
-   const evaluation=await request("/api/evaluations").catch(error=>({error:String(error.message||error)}));
    state.evaluationsError=evaluation.error||"";
    state.evaluationReport=evaluation.schema_version===1?evaluation:null;
-   state.selectedAgent=agents().some(a=>a.id===state.selectedAgent)?state.selectedAgent:(prefs().default_agent||agents()[0]?.id);
-   state.selectedProvider=providers().some(p=>p.id===state.selectedProvider)?state.selectedProvider:prefs().default_provider;
-   state.selectedWorkflow=workflows().some(w=>w.id===state.selectedWorkflow)?state.selectedWorkflow:workflows()[0]?.id;
+   state.selectedAgent=agents().some(a=>a.id===previousAgent)?previousAgent:(prefs().default_agent||agents()[0]?.id);
+   state.selectedProvider=providers().some(p=>p.id===previousProvider)?previousProvider:prefs().default_provider;
+   state.selectedWorkflow=workflows().some(w=>w.id===previousWorkflow)?previousWorkflow:workflows()[0]?.id;
+   state.lastAnswer=previousAnswer;
+   state.selectedApplication=previousApplication;
    if(!silent)onChange();
    return true;
   }catch(error){
-   state.online=false;
-   state.data=null;
-   if(!silent)onChange();
+   if(generation===connectionGeneration){
+    clearPrivateState();
+    if(!silent)onChange();
+   }
    return false;
   }
  }
@@ -126,7 +150,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   onChange();
   try{
    await task();
-   await connect({silent:true});
+   await connect({silent:true,preserveAnswer:true});
    state.schedulePreviewRequested=false;state.schedulePreview=null;
   }catch(error){
    state.message=short(error.message || "Operation failed",260);
