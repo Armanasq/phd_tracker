@@ -26,6 +26,9 @@ def main() -> None:
     worker.add_argument("--max-jobs", type=int, default=0)
     commands.add_parser("catalog")
     commands.add_parser("diagnostics")
+    compare = commands.add_parser("compare-sources")
+    compare.add_argument("--previous", type=Path, required=True)
+    compare.add_argument("--current", type=Path, required=True)
     backup_command = commands.add_parser("backup")
     backup_command.add_argument("--retain", type=int, default=7)
     verify_command = commands.add_parser("verify-backup")
@@ -59,6 +62,11 @@ def main() -> None:
         else:
             result = restore_backup(args.filename, sha256=args.sha256, confirm=args.confirm)
         print(json.dumps(result, indent=2, ensure_ascii=False))
+        return
+    if args.command == "compare-sources":
+        from .source_changes import compare_sources, load_snapshot
+        result = compare_sources(load_snapshot(args.previous), load_snapshot(args.current))
+        print(json.dumps(result, ensure_ascii=False, indent=2))
         return
     if args.command == "worker-loop":
         if not 1 <= args.interval_seconds <= 60 or not 0 <= args.max_jobs <= 100000:
