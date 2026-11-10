@@ -63,21 +63,27 @@ def capture_source_claim(
     if len(needle) < 20:
         raise ValueError("Source quote is too short after normalization")
     quoted_digest = hashlib.sha256(needle.encode("utf-8")).hexdigest()
+    matching_occurrences = observed["visible_text"].count(needle)
+    span_start = observed["visible_text"].find(needle) if matching_occurrences == 1 else None
+    span_end = span_start + len(needle) if span_start is not None else None
     recorded = datetime.now(timezone.utc).isoformat(timespec="seconds")
     with store.db:
         inserted = store.db.execute(
             "INSERT OR IGNORE INTO source_claims("
             "observation_id,application_id,source_url,source_digest,claim_type,"
-            "exact_quote,candidate_value,quote_digest,captured_at)"
-            " VALUES(?,?,?,?,?,?,?,?,?)",
+            "exact_quote,candidate_value,quote_digest,captured_at,"
+            "source_text_sha256,span_start,span_end,matching_occurrences)"
+            " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (
                 observation_id, observed["application_id"], observed["source_url"],
                 expected_digest, claim_type, needle, value, quoted_digest, recorded,
+                observed["visible_text_sha256"], span_start, span_end, matching_occurrences,
             ),
         )
         row = store.db.execute(
             "SELECT id,observation_id,application_id,source_url,source_digest,"
-            "claim_type,exact_quote,candidate_value,quote_digest,captured_at,verification "
+            "claim_type,exact_quote,candidate_value,quote_digest,captured_at,verification,"
+            "source_text_sha256,span_start,span_end,matching_occurrences "
             "FROM source_claims WHERE observation_id=? AND claim_type=? "
             "AND quote_digest=? AND candidate_value=?",
             (observation_id, claim_type, quoted_digest, value),
@@ -93,6 +99,7 @@ def source_claims(store: Store, *, limit: int = 200) -> list[dict[str, Any]]:
     return [dict(row) for row in store.db.execute(
         "SELECT c.id,c.observation_id,c.application_id,c.source_url,c.source_digest,"
         "c.claim_type,c.exact_quote,c.candidate_value,c.quote_digest,c.captured_at,c.verification,"
+        "c.source_text_sha256,c.span_start,c.span_end,c.matching_occurrences,"
         "r.decision AS owner_review_decision,r.reviewed_at AS owner_reviewed_at "
         "FROM source_claims AS c LEFT JOIN source_claim_reviews AS r ON "
         "r.id=(SELECT MAX(v.id) FROM source_claim_reviews AS v WHERE v.claim_id=c.id) "

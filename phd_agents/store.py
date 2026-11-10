@@ -123,6 +123,10 @@ class Store:
                 quote_digest TEXT NOT NULL,
                 captured_at TEXT NOT NULL,
                 verification TEXT NOT NULL DEFAULT 'source_quote_observed_not_fact_verified',
+                source_text_sha256 TEXT,
+                span_start INTEGER,
+                span_end INTEGER,
+                matching_occurrences INTEGER,
                 UNIQUE(observation_id,quote_digest,claim_type,candidate_value)
             );
             CREATE INDEX IF NOT EXISTS idx_source_claims_observation
@@ -173,6 +177,15 @@ class Store:
             ):
                 if field not in observed_columns:
                     self.db.execute(f"ALTER TABLE source_observations ADD COLUMN {field} {definition}")
+            claim_columns = {item["name"] for item in self.db.execute("PRAGMA table_info(source_claims)")}
+            for field, definition in (
+                ("source_text_sha256", "TEXT"),
+                ("span_start", "INTEGER"),
+                ("span_end", "INTEGER"),
+                ("matching_occurrences", "INTEGER"),
+            ):
+                if field not in claim_columns:
+                    self.db.execute(f"ALTER TABLE source_claims ADD COLUMN {field} {definition}")
             self.db.commit()
         except BaseException:
             if hasattr(self, "db"):
