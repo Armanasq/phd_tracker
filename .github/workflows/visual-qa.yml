@@ -10,6 +10,7 @@ on:
       - tests/site_smoke.cjs
       - tests/local_records_smoke.cjs
       - tests/ai_studio_smoke.cjs
+      - tests/browser_lens_smoke.cjs
       - tests/all_routes_audit.cjs
       - tests/mobile_layout_audit.cjs
       - tests/site_accessibility.cjs
@@ -72,11 +73,13 @@ jobs:
         run: node tests/local_records_smoke.cjs
       - name: Verify unified Settings and automatic local model routing
         run: node tests/ai_studio_smoke.cjs
+      - name: Verify direct local model through global Atlas assistant
+        run: node tests/browser_lens_smoke.cjs
       - name: Audit WCAG 2.2 A/AA across key views and dialogs
         run: node tests/site_accessibility.cjs
       - name: Audit responsive alignment, gutters, typography and overflow at six phone/tablet widths
         run: node tests/mobile_layout_audit.cjs
-      - name: Audit all 19 unified workspace routes in public and private modes across four viewports
+      - name: Audit all 21 unified workspace routes in public and private modes across four viewports
         run: node tests/all_routes_audit.cjs
       - name: Publish desktop and mobile screenshots
         if: always()
