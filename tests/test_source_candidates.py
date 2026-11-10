@@ -12,12 +12,13 @@ import json
 from phd_agents.server import ApiServer
 from phd_agents.source_candidates import extract_date_candidates, source_date_candidates
 from phd_agents.source_observer import observe_record
-from phd_agents.source_text import extract_visible_text
+from phd_agents.source_text import extract_visible_text, normalize_excerpt
 from phd_agents.store import Store
 
 
 class CandidateDateTests(unittest.TestCase):
     def parse(self, text: str, *, truncated: bool = False) -> dict:
+        text = normalize_excerpt(text)
         digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
         return extract_date_candidates(
             text, source_url="https://university.example/program",
