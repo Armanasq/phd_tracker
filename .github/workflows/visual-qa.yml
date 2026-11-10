@@ -12,6 +12,7 @@ on:
       - tests/ai_studio_smoke.cjs
       - tests/browser_lens_smoke.cjs
       - tests/all_routes_audit.cjs
+      - tests/onboarding_review_smoke.cjs
       - tests/mobile_layout_audit.cjs
       - tests/site_accessibility.cjs
       - tests/domain.test.mjs
@@ -75,6 +76,8 @@ jobs:
         run: node tests/ai_studio_smoke.cjs
       - name: Verify direct local model through global Atlas assistant
         run: node tests/browser_lens_smoke.cjs
+      - name: Validate persistent private source review and fork onboarding
+        run: node tests/onboarding_review_smoke.cjs
       - name: Audit WCAG 2.2 A/AA across key views and dialogs
         run: node tests/site_accessibility.cjs
       - name: Audit responsive alignment, gutters, typography and overflow at six phone/tablet widths
