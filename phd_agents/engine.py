@@ -3,12 +3,12 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 from zoneinfo import ZoneInfo
 
 from .catalog import AGENTS, POLICY, PROVIDERS, WORKFLOWS
 from .domain import agenda, merged_records, preflight, snapshot, today_in
-from .providers import invoke, ProviderError
+from .providers import invoke, invoke_stream, ProviderError
 from .store import Store
 from .toolkit import DEFAULT_TOOLS, run_tools
 from .settings import read_settings
@@ -64,7 +64,8 @@ def owner_records(store: Store, root: Path) -> tuple[dict[str, Any], list[dict[s
 def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str | None = None,
               application_id: str | None = None, input_text: str = "",
               cloud_consent: bool = False, workflow_id: str | None = None,
-              conversation_id: str | None = None, conversation_mode: bool = False) -> dict[str, Any]:
+              conversation_id: str | None = None, conversation_mode: bool = False,
+              on_delta: Callable[[str], None] | None = None) -> dict[str, Any]:
     configuration = catalog(store)
     agent = selected(configuration["agents"], agent_id, "agent")
     route = resolve_route(store, configuration["providers"], agent_id, provider_id)
@@ -136,7 +137,8 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str | Non
               "\n\nOutput a concise, evidence-grounded analysis with proposed next actions and open proof obligations. " +
               "Do not report any external action as completed.")
     try:
-        reply = invoke(provider, system, prompt)
+        reply = (invoke_stream(provider, system, prompt, on_delta)
+                 if on_delta is not None else invoke(provider, system, prompt))
     except ProviderError as error:
         store.put_run("workflow" if workflow_id else "agent", agent_id, application_id,
                       "failed", provider_id,
