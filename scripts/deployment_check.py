@@ -42,10 +42,12 @@ def inspect(root: Path, mode: str, env: Mapping[str, str]) -> list[Check]:
     elif mode != "browser-local":
         add("repository", "warning", "Set PHD_ATLAS_REPOSITORY for an independent fork")
 
-    data_mode = (env.get("PHD_ATLAS_DATA_MODE") or "starter").lower()
+    data_mode = (env.get("PHD_ATLAS_DATA_MODE") or ("source" if repository.casefold() == "armanasq/phd_tracker" else "starter")).lower()
     if mode in ("pages", "actions", "local-full-stack"):
         if data_mode not in ("starter", "source"):
             add("data-mode", "error", "PHD_ATLAS_DATA_MODE must be starter or source")
+        elif data_mode == "source" and repository.casefold() == "armanasq/phd_tracker":
+            add("data-mode", "ok", "Upstream repository uses its own source builder")
         elif data_mode == "source":
             src = root / "data/user_opportunities.json"
             if not src.is_file():
