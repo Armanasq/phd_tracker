@@ -5,9 +5,10 @@ import json
 import os
 from .secrets import read_secret
 from .egress import PinnedHTTPHandler, PinnedHTTPSHandler
+from .streaming import StreamFormatError, sse_events
 from dataclasses import dataclass
 from time import perf_counter
-from typing import Any
+from typing import Any, Callable
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit, quote
 from urllib.request import HTTPRedirectHandler, Request, build_opener, ProxyHandler
@@ -165,3 +166,100 @@ def invoke(provider: dict[str, Any], system: str, prompt: str, *, timeout: int |
                           round((perf_counter() - started) * 1000))
     except (KeyError, TypeError, ValueError, json.JSONDecodeError) as error:
         raise ProviderError("Malformed model-provider response") from error
+
+
+def invoke_stream(provider: dict[str, Any], system: str, prompt: str,
+                  on_delta: Callable[[str], None], *,
+                  timeout: int | None = None) -> ModelReply:
+    validate_credential_binding(provider)
+    kind = provider["kind"]
+    if kind not in {"openai_compatible", "azure_openai", "azure_deployment"}:
+        raise ProviderError("Native SSE streaming is unavailable for this provider type")
+    if not callable(on_delta):
+        raise TypeError("Stream callback must be callable")
+    if len(prompt) > 25000:
+        raise ValueError("Prompt exceeds the configured input budget")
+    key_name = provider.get("api_key_env", "")
+    api_key = read_secret(key_name) if key_name else ""
+    if key_name and not api_key and not provider["local"]:
+        raise ProviderError("Missing provider credential in environment variable " + key_name)
+    model = provider["model"]
+    base = provider["base_url"].rstrip("/")
+    if kind == "azure_deployment":
+        version = str(provider.get("api_version") or "2024-10-21")
+        url = base + "/openai/deployments/" + quote(model, safe="") + "/chat/completions?api-version=" + quote(version, safe="")
+    else:
+        url = base + "/chat/completions"
+    headers = {"Content-Type": "application/json", "Accept": "text/event-stream"}
+    if kind in {"azure_openai", "azure_deployment"}:
+        if not api_key:
+            raise ProviderError("Azure OpenAI requires the configured API key")
+        headers["api-key"] = api_key
+    elif api_key:
+        headers["Authorization"] = "Bearer " + api_key
+    payload = {"model": model, "messages": [
+        {"role": "system", "content": system}, {"role": "user", "content": prompt}],
+        provider["token_parameter"]: int(provider["max_output_tokens"]), "stream": True}
+    if "temperature" in provider:
+        payload["temperature"] = provider["temperature"]
+    request = Request(url, json.dumps(payload).encode("utf-8"), headers=headers, method="POST")
+    effective_timeout = int(provider.get("timeout_seconds", 55)) if timeout is None else timeout
+    opener = build_opener(NoRedirect(), ProxyHandler({}),
+                          PinnedHTTPHandler(local=bool(provider["local"])),
+                          PinnedHTTPSHandler(local=bool(provider["local"])))
+    started = perf_counter()
+    text_parts: list[str] = []
+    total_chars = 0
+    completed = False
+    usage: dict[str, int] = {}
+    reported_model = model
+    try:
+        with opener.open(request, timeout=effective_timeout) as response:
+            if "text/event-stream" not in response.headers.get("Content-Type", "").casefold():
+                raise ProviderError("Provider did not return a native SSE stream")
+            for event, item in sse_events(response):
+                if item == "[DONE]":
+                    completed = True
+                    break
+                if event == "error":
+                    raise ProviderError("Provider reported a streaming error")
+                try:
+                    data = json.loads(item)
+                except (ValueError, TypeError) as error:
+                    raise ProviderError("Provider returned invalid SSE data") from error
+                if not isinstance(data, dict) or data.get("error"):
+                    raise ProviderError("Provider returned an inference error")
+                if isinstance(data.get("model"), str):
+                    reported_model = data["model"][:160]
+                if isinstance(data.get("usage"), dict):
+                    usage = {key: value for key, value in data["usage"].items()
+                             if key in {"prompt_tokens", "completion_tokens", "input_tokens", "output_tokens"}
+                             and isinstance(value, int) and not isinstance(value, bool) and value >= 0}
+                choices = data.get("choices")
+                if not choices:
+                    continue
+                if not isinstance(choices, list) or not isinstance(choices[0], dict):
+                    raise ProviderError("Provider SSE choices are malformed")
+                delta = choices[0].get("delta")
+                if not isinstance(delta, dict):
+                    raise ProviderError("Provider SSE delta is malformed")
+                fragment = delta.get("content")
+                if fragment is None:
+                    continue
+                if not isinstance(fragment, str):
+                    raise ProviderError("Provider SSE text delta is malformed")
+                total_chars += len(fragment)
+                if total_chars > 20_000:
+                    raise ProviderError("Provider SSE response exceeded the text limit")
+                text_parts.append(fragment)
+                on_delta(fragment)
+    except HTTPError as error:
+        raise ProviderError("Model request failed: HTTP " + str(error.code)) from None
+    except (URLError, TimeoutError, OSError) as error:
+        raise ProviderError("Model streaming unavailable (" + type(error).__name__ + ")") from error
+    except StreamFormatError as error:
+        raise ProviderError("Malformed or oversized provider SSE stream") from error
+    if not completed or not "".join(text_parts).strip():
+        raise ProviderError("Provider SSE stream terminated before a complete response")
+    return ModelReply("".join(text_parts), reported_model, usage, provider["id"],
+                      round((perf_counter() - started) * 1000))
