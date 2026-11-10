@@ -20,7 +20,7 @@ _PUBLIC_SUFFIXES = frozenset({
     ".md", ".txt", ".webmanifest", ".ico", ".png", ".jpg", ".jpeg",
     ".webp", ".woff2", ".wasm",
 })
-_PRIVATE_NAME_TOKENS = frozenset({"secret", "secrets", "private", "credential", "credentials", "password", "passwords", "backup", "backups"})
+_PRIVATE_NAME_TOKENS = frozenset({"secret", "secrets", "private", "credential", "credentials", "password", "passwords", "token", "tokens", "backup", "backups"})
 _SHA40 = re.compile(r"[0-9a-fA-F]{40}\Z")
 
 
