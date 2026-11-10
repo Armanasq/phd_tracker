@@ -9,6 +9,7 @@ from phd_agents.catalog import agent_spec, provider_spec, workflow_spec
 from phd_agents.engine import run_agent, run_workflow, workflow_plan
 from phd_agents.route_contract import (
     adapter_capabilities, assess_provider_contract, normalize_requirements,
+    provider_route_fingerprint,
 )
 from phd_agents.store import Store
 
@@ -84,6 +85,21 @@ class CapabilityContractTests(unittest.TestCase):
             "native_sse_not_supported_by_adapter",
         })
         self.assertFalse(blocked["compatible"])
+
+    def test_provider_fingerprint_tracks_endpoint_model_and_credential_routing(self) -> None:
+        provider = provider_spec({
+            "id": "local_test", "kind": "openai_compatible",
+            "base_url": "http://127.0.0.1:5050/v1", "local": True,
+            "model": "original", "api_key_env": "",
+        })
+        current = provider_route_fingerprint(provider)
+        self.assertEqual(len(current), 64)
+        self.assertEqual(current, provider_route_fingerprint(dict(reversed(list(provider.items())))))
+        self.assertNotEqual(current, provider_route_fingerprint({**provider, "model": "changed"}))
+        self.assertNotEqual(current, provider_route_fingerprint({**provider, "base_url": "http://127.0.0.1:5051/v1"}))
+        with self.assertRaises(ValueError):
+            provider_route_fingerprint(None)
+        self.assertNotIn("base_url", current)
 
     def test_existing_agents_without_requirements_remain_supported(self) -> None:
         provider = provider_spec({

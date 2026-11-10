@@ -1,11 +1,27 @@
 from __future__ import annotations
 
+import hashlib
+import json
 from typing import Any
 
 _REQUIREMENT_FLAGS = frozenset({
     "requires_native_tools", "requires_structured_output", "requires_vision",
 })
 _STREAM_ADAPTERS = frozenset({"openai_compatible", "azure_openai", "azure_deployment"})
+_ROUTE_FIELDS = (
+    "id", "kind", "base_url", "model", "api_key_env", "local",
+    "api_version", "max_output_tokens", "timeout_seconds",
+    "token_parameter", "temperature",
+)
+
+
+def provider_route_fingerprint(provider: dict[str, Any]) -> str:
+    if not isinstance(provider, dict):
+        raise ValueError("Provider route must be an object")
+    values = {field: provider.get(field) for field in _ROUTE_FIELDS}
+    serialized = json.dumps(values, sort_keys=True, separators=(",", ":"), allow_nan=False)
+    return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
+
 
 
 def normalize_requirements(value: object = None) -> dict[str, Any]:

@@ -10,7 +10,7 @@ from zoneinfo import ZoneInfo
 from .catalog import AGENTS, POLICY, PROVIDERS, WORKFLOWS
 from .domain import agenda, merged_records, preflight, snapshot, today_in
 from .providers import invoke, invoke_stream, ProviderError
-from .store import Store
+from .store import ConflictError, Store
 from .toolkit import DEFAULT_TOOLS, run_tools
 from .settings import read_settings
 from .routing import resolve_route
@@ -21,7 +21,7 @@ from .proof_queue import evidence_work_queue
 from .claim_audit import audit_generated_claims
 from .prompt_contract import agent_system, conversation_block, build_agent_prompt
 from .source_claims import source_claims
-from .route_contract import assess_provider_contract
+from .route_contract import assess_provider_contract, provider_route_fingerprint
 
 def paper_radar_for_instance(root: Path, source: dict[str, Any]) -> list[dict[str, Any]]:
     instance = source.get("instance", {})
@@ -82,12 +82,18 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str | Non
               application_id: str | None = None, input_text: str = "",
               cloud_consent: bool = False, workflow_id: str | None = None,
               conversation_id: str | None = None, conversation_mode: bool = False,
-              on_delta: Callable[[str], None] | None = None) -> dict[str, Any]:
+              on_delta: Callable[[str], None] | None = None,
+              expected_provider_fingerprint: str | None = None) -> dict[str, Any]:
     configuration = catalog(store)
     agent = selected(configuration["agents"], agent_id, "agent")
     route = resolve_route(store, configuration["providers"], agent_id, provider_id)
     provider = route.provider
     provider_id = provider["id"]
+    if expected_provider_fingerprint is not None:
+        if not isinstance(expected_provider_fingerprint, str) or len(expected_provider_fingerprint) != 64:
+            raise ValueError("Expected provider route fingerprint is invalid")
+        if provider_route_fingerprint(provider) != expected_provider_fingerprint:
+            raise ConflictError("Provider configuration changed after workflow preflight; review routes again")
     compatibility = assess_provider_contract(
         provider, agent.get("requirements"), stream_requested=on_delta is not None,
     )
@@ -254,6 +260,7 @@ def workflow_plan(store: Store, *, workflow_id: str, provider_id: str | None = N
             "step": index + 1,
             "agent_id": agent,
             "provider_id": provider["id"],
+            "provider_fingerprint": provider_route_fingerprint(provider),
             "provider_label": provider["label"],
             "model": provider["model"],
             "route_source": route.source,
@@ -322,6 +329,7 @@ def run_workflow(store: Store, root: Path, *, workflow_id: str,
                 input_text=("Workflow step " + str(index + 1) + "/" + str(len(agent_ids)) +
                             ": " + objective + prior)[:5000],
                 cloud_consent=cloud_consent, workflow_id=workflow_id,
+                expected_provider_fingerprint=stage["provider_fingerprint"],
             )
         except (ProviderError, ValueError, PermissionError, OSError, RuntimeError) as error:
             audit_id = store.put_run(

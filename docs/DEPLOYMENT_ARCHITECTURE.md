@@ -111,3 +111,7 @@ Private agent inference uses a deterministic `phd_evidence_analysis_v1` prompt c
 ### Scheduled execution uses the same adapter preflight
 
 The scheduler preview and scheduler runner now check each stage's explicit model capability requirements before declaring a run due or reserving a schedule lease/cloud-call quota. Incompatible workflows show `model_capability_mismatch` with stage-specific blockers and are skipped without any model call, quota reservation or change to the last executed period. `workflow_plan.scheduled_policy_approved` is false when any stage cannot be executed by the selected adapter. This is a deterministic implementation guard, not live model capability certification.
+
+## Provider-configuration fencing during local workflows
+
+A manual multi-stage workflow fixes each stage's provider route with a deterministic SHA-256 fingerprint of its adapter, endpoint, model, credential-variable name, locality and inference parameters. Immediately before each stage's inference, the runner recomputes that fingerprint from the current private catalog and rejects a changed route. The failed workflow summary records only an error type, stage number, and prior proposal IDs rather than publishing applicant text or provider configuration. This is a local configuration-change guard; it does not freeze upstream model deployments, capture provider API keys, or make external vendor runs idempotent.

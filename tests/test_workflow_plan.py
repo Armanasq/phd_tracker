@@ -8,8 +8,8 @@ from pathlib import Path
 from unittest.mock import patch
 from urllib.request import Request, urlopen
 
-from phd_agents.catalog import workflow_spec
-from phd_agents.engine import run_workflow, workflow_plan
+from phd_agents.catalog import provider_spec, workflow_spec
+from phd_agents.engine import WorkflowExecutionError, catalog, run_agent, run_workflow, workflow_plan
 from phd_agents.server import ApiServer
 from phd_agents.settings import save_settings
 from phd_agents.store import Store
@@ -106,6 +106,34 @@ class WorkflowPreflightTests(unittest.TestCase):
         self.assertEqual(rows[0]["completed_run_ids"], ["run-first"])
         self.assertEqual(rows[0]["error_type"], "ProviderError")
         self.assertNotIn("Sensitive upstream error", json.dumps(rows))
+
+    def test_provider_edit_between_stages_is_fenced_before_second_inference(self) -> None:
+        states = {"ollama": {"state": "responded"}, "openai": {"state": "responded"}}
+        actual_run_agent = run_agent
+
+        def stage(store, root, *, agent_id, **kwargs):
+            if agent_id == "portfolio_planner":
+                configured = next(p for p in catalog(store)["providers"] if p["id"] == "openai")
+                store.put_custom("provider", provider_spec({
+                    **configured, "model": "provider-model-changed-during-workflow",
+                }))
+                return {"id": "first-stage", "agent_id": agent_id,
+                        "text": "Unverified proposal", "usage": {}, "tools": []}
+            return actual_run_agent(store, root, agent_id=agent_id, **kwargs)
+
+        with patch("phd_agents.engine.provider_states", return_value=states):
+            with patch("phd_agents.engine.run_agent", side_effect=stage) as calls:
+                with patch("phd_agents.engine.invoke") as model:
+                    with self.assertRaises(WorkflowExecutionError) as failed:
+                        run_workflow(self.store, self.root, workflow_id="mixed_routes",
+                                     cloud_consent=True)
+                    model.assert_not_called()
+        self.assertEqual(calls.call_count, 2)
+        self.assertEqual(failed.exception.stage, 2)
+        summary = next(row for row in self.store.runs() if row["kind"] == "workflow_summary")
+        self.assertEqual(summary["error_type"], "ConflictError")
+        self.assertEqual(summary["completed_run_ids"], ["first-stage"])
+        self.assertEqual(summary["failed_provider_id"], "openai")
 
     def test_successful_workflow_records_a_separate_execution_summary(self) -> None:
         states = {"ollama": {"state": "responded"}, "openai": {"state": "responded"}}
