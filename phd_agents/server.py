@@ -217,6 +217,7 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.send_json(private_runtime_capabilities(
                 provider_verified=verified,
                 provider_name=current["label"] if current else None,
+                provider_kind=current["kind"] if current else None,
             ))
         elif path == "/api/bootstrap":
             source, records = owner_records(store, self.server.root)
