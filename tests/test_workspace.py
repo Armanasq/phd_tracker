@@ -16,29 +16,42 @@ class WorkspaceTests(unittest.TestCase):
     def test_projection_preserves_ids_and_explicit_unknowns(self):
         value = build()
         rows = value["records"]
-        self.assertGreaterEqual(len(rows), 109)
         ids = [row["id"] for row in rows]
         self.assertEqual(len(ids), len(set(ids)))
-        self.assertEqual(value["meta"]["tracked"], 109)
+        self.assertEqual(value["meta"]["tracked"], sum(row["record_type"] == "tracked" for row in rows))
+        self.assertEqual(value["meta"]["candidates"], sum(row["record_type"] == "candidate" for row in rows))
+        self.assertEqual(value["meta"]["tracked"] + value["meta"]["candidates"], len(rows))
         self.assertTrue(all(row["status"] in {"unconfirmed", "shortlisted", "preparing", "submitted", "interview", "offer", "rejected", "withdrawn", "blocked", "archived"} for row in rows))
-        self.assertTrue(any("unknown" in row["document_states"].values() for row in rows))
         self.assertTrue(all("mail.google.com" not in json.dumps(row) for row in rows))
         self.assertTrue(all("@" not in row["faculty"] for row in rows))
+        if value["instance"]["data_mode"] == "starter":
+            self.assertEqual(rows, [])
+        elif value["instance"]["type"] == "upstream":
+            self.assertTrue(rows)
+            self.assertTrue(any("unknown" in row["document_states"].values() for row in rows))
 
     def test_coverage_reports_source_grain_without_invented_opportunities(self):
         snapshot = build()
         coverage = snapshot["coverage"]
         self.assertEqual(coverage["totals"]["tracked"], snapshot["meta"]["tracked"])
-        self.assertGreaterEqual(coverage["totals"]["workbook_tabs"], 1)
-        self.assertTrue(any(sheet["name"] == "Action list" for sheet in coverage["worksheets"]))
+        self.assertEqual(coverage["totals"]["research_candidates"], snapshot["meta"]["candidates"])
+        if snapshot["instance"]["type"] == "upstream" and snapshot["instance"]["data_mode"] == "source":
+            self.assertGreaterEqual(coverage["totals"]["workbook_tabs"], 1)
+            self.assertTrue(any(sheet["name"] == "Action list" for sheet in coverage["worksheets"]))
+        else:
+            self.assertEqual(coverage["worksheets"], [])
+            self.assertEqual(coverage["totals"]["workbook_tabs"], 0)
         self.assertTrue(all(item["path"] == "PhD_Action_List.xlsx" or item["path"].startswith("data/") for item in coverage["files"]))
         self.assertFalse(any("mail.google.com" in json.dumps(item) for item in coverage["files"]))
 
     def test_full_task_ledger_is_source_faithful_and_public_safe(self):
         snapshot = build()
-        source = json.loads((Path(__file__).resolve().parents[1] / "data" / "execution_plan.json").read_text(encoding="utf-8"))
         ledger = snapshot["task_ledger"]
-        self.assertEqual(len(ledger), len(source["all_tasks"]))
+        if snapshot["instance"]["type"] == "upstream" and snapshot["instance"]["data_mode"] == "source":
+            source = json.loads((Path(__file__).resolve().parents[1] / "data" / "execution_plan.json").read_text(encoding="utf-8"))
+            self.assertEqual(len(ledger), len(source["all_tasks"]))
+        else:
+            self.assertEqual(ledger, [])
         self.assertEqual(snapshot["coverage"]["totals"]["full_task_ledger"], len(ledger))
         self.assertEqual(len({item["id"] for item in ledger}), len(ledger))
         self.assertTrue(all("mail.google.com" not in json.dumps(item) for item in ledger))

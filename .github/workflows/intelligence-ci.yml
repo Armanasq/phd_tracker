@@ -74,7 +74,20 @@ jobs:
       - name: Validate snapshot builder as deployed script
         run: |
           python scripts/build_workspace.py --out /tmp/phd-atlas-smoke.json
-          python -c 'import json; d=json.load(open("/tmp/phd-atlas-smoke.json")); assert d["schema_version"] == 1 and len(d["records"]) >= 109'
+          python - <<'PY'
+          import json
+          from scripts.instance_config import resolve_data_mode, resolve_repository
+          d = json.load(open("/tmp/phd-atlas-smoke.json", encoding="utf-8"))
+          repository = resolve_repository()
+          assert d["schema_version"] == 1
+          assert d["instance"]["repository"] == repository
+          assert d["instance"]["data_mode"] == resolve_data_mode(repository)
+          assert isinstance(d["records"], list)
+          assert d["meta"]["tracked"] == sum(row["record_type"] == "tracked" for row in d["records"])
+          assert d["meta"]["candidates"] == sum(row["record_type"] == "candidate" for row in d["records"])
+          if d["instance"]["data_mode"] == "starter":
+              assert d["records"] == []
+          PY
       - name: Render observatory against repository snapshots
         run: |
           python scripts/experience_engine.py
