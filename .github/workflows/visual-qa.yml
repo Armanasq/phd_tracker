@@ -13,6 +13,11 @@ on:
       - tests/browser_lens_smoke.cjs
       - tests/all_routes_audit.cjs
       - tests/onboarding_review_smoke.cjs
+      - phd_agents/source_diff.py
+      - phd_agents/source_claims.py
+      - phd_agents/source_observer.py
+      - tests/test_source_diff.py
+      - tests/test_phd_claim_reviews.py
       - tests/mobile_layout_audit.cjs
       - tests/site_accessibility.cjs
       - tests/domain.test.mjs
