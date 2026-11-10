@@ -460,7 +460,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   if(name==="agents")return '<section class="os-page">'+heading("AI / AGENT DEFINITIONS","Agent builder","Configure each research agent's instructions, deterministic tools and automatic model assignment.",btn("Model settings","go","settings","quiet"))+agentPanel()+'</section>';
   if(name==="automations")return '<section class="os-page">'+heading("AI / WORKFLOW ENGINE","Automations","Compose multi-agent workflows, inspect scheduling rules and control approvals.",btn("Runtime settings","go","settings","quiet"))+workflowPanel()+'</section>';
   if(name==="activity")return activity();
-  if(name==="source-observations")return renderSourceObservations({records:state.sourceObservations,loading:state.sourceObservationsLoading,error:state.sourceObservationsError,filter:state.sourceObservationFilter});
+  if(name==="source-observations")return renderSourceObservations({records:state.sourceObservations,loading:state.sourceObservationsLoading,error:state.sourceObservationsError,filter:state.sourceObservationFilter,message:state.message});
   return '';
  }
  function selectConnection(id) {state.selectedProvider=id;state.models={};onChange();}
