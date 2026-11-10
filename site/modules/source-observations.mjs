@@ -18,7 +18,7 @@ export function observationSummary(records) {
     if (item.drift === "unavailable_no_source_conclusion") counts.unavailable++;
     else if (item.drift === "unchanged_bytes") counts.unchanged++;
     else if (item.drift === "baseline_only") counts.baseline++;
-    else counts.legacy++;
+    else if (item.drift !== "source_bytes_changed_needs_review") counts.legacy++;
   }
   return {sources:latest.size,counts,latest:candidates.sort((a,b)=>String(b.observed_at??"").localeCompare(String(a.observed_at??"")))};
 }
