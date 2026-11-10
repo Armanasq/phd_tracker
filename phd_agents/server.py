@@ -670,6 +670,8 @@ class ApiHandler(BaseHTTPRequestHandler):
         self.wfile.write(content)
 
 def serve(host: str = "127.0.0.1", port: int = 8765, *, root: Path = ROOT, state_path: Path | None = None) -> None:
+    if os.name != "posix":
+        raise RuntimeError("Private runtime requires POSIX permissions and advisory locks; use Linux or WSL2")
     if host not in {"127.0.0.1", "localhost"}:
         raise ValueError("The private API binds to loopback only; use a separately secured reverse proxy for remote access")
     with runtime_lock(Path(state_path) if state_path is not None else default_path()):

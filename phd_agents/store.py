@@ -53,6 +53,8 @@ class ConflictError(ValueError):
 
 class Store:
     def __init__(self, path: Path | None = None):
+        if os.name != "posix":
+            raise RuntimeError("Private SQLite state requires POSIX owner-only permissions and advisory locks; use Linux or WSL2")
         self.path = Path(path) if path else default_path()
         self.path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
         self._state_guard = acquire_state_guard(self.path, exclusive=False)
