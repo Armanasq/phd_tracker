@@ -198,3 +198,28 @@
 @media (prefers-reduced-motion:reduce){
  .runway-days{scroll-snap-type:none}
 }
+
+
+.readiness-controls{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0}
+.readiness-controls .btn[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.readiness-columns{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(260px,1fr);gap:18px;margin-top:18px;align-items:start}
+.readiness-columns>*{min-width:0}
+.readiness-row{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:12px;padding:15px 0;border-bottom:1px solid var(--line);align-items:start}
+.readiness-row:last-child,.readiness-doc:last-child{border-bottom:0}
+.readiness-index{font-size:11px;color:var(--muted);padding-top:3px}
+.readiness-record{min-width:0}
+.readiness-record .rowbutton{font-size:13px;font-weight:650;max-width:100%;overflow-wrap:anywhere;text-align:left}
+.readiness-record p{margin:6px 0 5px;line-height:1.5;font-size:12px}
+.readiness-record small{display:block;color:var(--muted);font-size:11px;line-height:1.5;overflow-wrap:anywhere}
+.readiness-record .readiness-owner{margin-top:7px}
+.readiness-right{display:flex;align-items:flex-end;flex-direction:column;gap:8px;max-width:130px}
+.readiness-right .btn{min-height:30px}
+.readiness-doc{display:flex;justify-content:space-between;gap:11px;padding:12px 0;border-bottom:1px solid var(--line)}
+.readiness-doc>div{min-width:0}
+.readiness-doc strong{display:block;font-size:12px;font-weight:650}
+.readiness-doc small{display:block;font-size:11px;color:var(--muted);margin-top:5px;line-height:1.5}
+.readiness-doc .btn{flex:none;align-self:start}
+.readiness-summary{margin-top:18px}
+.readiness-note{color:var(--muted);font-size:12px;line-height:1.65;margin:13px 0}
+@media(max-width:1010px){.readiness-columns{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:620px){.readiness-row{grid-template-columns:24px minmax(0,1fr)}.readiness-right{grid-column:2;flex-direction:row;align-items:center;flex-wrap:wrap;max-width:none}.readiness-doc{flex-direction:column}.readiness-doc .btn{align-self:flex-start}}
