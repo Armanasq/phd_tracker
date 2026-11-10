@@ -13,10 +13,10 @@ const cleanId = value => String(value||"").trim().toLowerCase().replace(/[^a-z0-
 const opt = (items,value) => choose(items,value);
 
 export function createConsole({notify,onChange,navigate,getRecords,getSourceRecords,onReload,getView}) {
- const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:"",jobs:[],observability:null,sourceObservations:[],sourceObservationsLoading:false,sourceObservationsError:"",sourceObservationFilter:"all",sourceClaims:[],sourceClaimError:"",sourceClaimFilter:"all",selectedClaimObservation:null,claimObservationText:null,sourceClaimLoading:false,sourceTextDiff:null,sourceDiffError:"",claimReviewHistory:null,evaluationReport:null,evaluationsError:"",evaluationsLoading:false,evaluationProvider:"all",evaluationAgent:"all",sourceDateCandidates:null,sourceCandidateError:""};
+ const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:"",jobs:[],jobsError:"",observability:null,observabilityError:"",sourceObservations:[],sourceObservationsLoading:false,sourceObservationsError:"",sourceObservationFilter:"all",sourceClaims:[],sourceClaimError:"",sourceClaimFilter:"all",selectedClaimObservation:null,claimObservationText:null,sourceClaimLoading:false,sourceTextDiff:null,sourceDiffError:"",claimReviewHistory:null,evaluationReport:null,evaluationsError:"",evaluationsLoading:false,evaluationProvider:"all",evaluationAgent:"all",sourceDateCandidates:null,sourceCandidateError:""};
  let connectionGeneration=0;
  function clearPrivateState(){
-  state.online=false;state.data=null;state.jobs=[];state.observability=null;
+  state.online=false;state.data=null;state.jobs=[];state.jobsError="";state.observability=null;state.observabilityError="";
   state.sourceObservations=[];state.sourceObservationsError="";state.sourceObservationsLoading=false;
   state.sourceClaims=[];state.sourceClaimError="";state.sourceClaimLoading=false;
   state.selectedClaimObservation=null;state.claimObservationText=null;state.sourceTextDiff=null;
@@ -112,19 +112,21 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    if(data.security?.local_only!==true||!Array.isArray(data.catalog?.providers))
     throw new Error("Private runtime identity could not be verified");
    const [jobs,observations,evidence,observed,evaluation]=await Promise.all([
-    request("/api/jobs").catch(()=>({jobs:[]})),
+    request("/api/jobs").catch(error=>({error:String(error.message||error)})),
     request("/api/source-observations").catch(error=>({error:String(error.message||error)})),
     request("/api/source-claims").catch(error=>({error:String(error.message||error)})),
-    request("/api/observability").catch(()=>null),
+    request("/api/observability").catch(error=>({error:String(error.message||error)})),
     request("/api/evaluations").catch(error=>({error:String(error.message||error)})),
    ]);
    if(generation!==connectionGeneration)return false;
    state.online=true;state.data=data;
+   state.jobsError=jobs.error||(!Array.isArray(jobs.jobs)?"Private job ledger returned an invalid response":"");
    state.jobs=Array.isArray(jobs.jobs)?jobs.jobs:[];
    state.sourceObservationsError=observations.error||"";
    state.sourceObservations=Array.isArray(observations.observations)?observations.observations:[];
    state.sourceClaimError=evidence.error||"";
    state.sourceClaims=Array.isArray(evidence.claims)?evidence.claims:[];
+   state.observabilityError=observed?.error||(observed?.schema_version!==1?"Private observability returned an invalid response":"");
    state.observability=observed?.schema_version===1?observed:null;
    state.evaluationsError=evaluation.error||"";
    state.evaluationReport=evaluation.schema_version===1?evaluation:null;
@@ -471,6 +473,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    box("Agent executions","Costs are not inferred without verified provider pricing.",'<div class="os-ledger">'+ledger+'</div>')+
    box("Per-provider usage","Only measured calls and reported tokens are included.",'<div class="os-ledger">'+usage+'</div>')+
    box("Private reliability signals","Observed local runtime calls only; no hosted SLA or applicant text in traces.",
+     (state.observabilityError?'<div role="alert" class="os-message">'+esc(state.observabilityError)+'</div>':'')+
      '<div class="os-kpi-strip">'+
        '<div><strong>'+esc(state.observability?.window?.completed_calls??"—")+'</strong><span>Calls in window</span></div>'+
        '<div><strong>'+esc(state.observability?.window?.error_rate==null?"Unmeasured":(100*state.observability.window.error_rate).toFixed(1)+"%")+'</strong><span>Observed error rate</span></div>'+
@@ -484,7 +487,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
      '</div><p class="os-footnote">Objective requires at least 20 recent calls and measured latencies. A citation or healthy model is not evidence that an admission fact is true.</p>','os-observability')+
    box("Private local background jobs","Durable SQLite queue. A separate worker process must be running; cloud jobs are not permitted.",
      '<div class="os-actions">'+btn("Copy worker command","copy-worker-command","","quiet")+'</div>'+
-     '<div class="os-ledger">'+(state.jobs.length?state.jobs.map(job=>
+     '<div class="os-ledger">'+(state.jobsError?'<p role="alert" class="os-message">'+esc(state.jobsError)+'</p>':state.jobs.length?state.jobs.map(job=>
        '<article class="os-ledger-row"><div><strong>'+esc(job.agent_id)+'</strong><small>'+
        esc(job.id.slice(0,12))+' · '+esc(job.attempts)+'/'+esc(job.max_attempts)+
        ' attempts · '+esc(stamp(job.updated_at))+'</small></div>'+
@@ -520,66 +523,76 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   if(action==="reconnect"){await connect();return;}
   if(action==="refresh-evaluations"){
    if(!isLive()||state.evaluationsLoading)return;
+   const generation=connectionGeneration;
    state.evaluationsLoading=true;state.evaluationsError="";onChange();
    try{
     const result=await request("/api/evaluations");
+    if(generation!==connectionGeneration)return;
     if(result.schema_version!==1||!Array.isArray(result.providers)||!Array.isArray(result.agents))
       throw new Error("Invalid private evaluation response");
     state.evaluationReport=result;
-   }catch(error){state.evaluationsError=short(error.message,240);}
-   finally{state.evaluationsLoading=false;onChange();}
+   }catch(error){if(generation===connectionGeneration)state.evaluationsError=short(error.message,240);}
+   finally{if(generation===connectionGeneration){state.evaluationsLoading=false;onChange();}}
    return;
   }
   if(action==="refresh-observations"){
    if(!isLive()||state.sourceObservationsLoading)return;
+   const generation=connectionGeneration;
    state.sourceObservationsLoading=true;state.sourceObservationsError="";onChange();
    try{
     const response=await request("/api/source-observations");
+    if(generation!==connectionGeneration)return;
     if(!Array.isArray(response.observations))throw new Error("Invalid source observation response");
     state.sourceObservations=response.observations;
-   }catch(error){state.sourceObservationsError=String(error.message||error).slice(0,200);}
-   finally{state.sourceObservationsLoading=false;onChange();}
+   }catch(error){if(generation===connectionGeneration)state.sourceObservationsError=String(error.message||error).slice(0,200);}
+   finally{if(generation===connectionGeneration){state.sourceObservationsLoading=false;onChange();}}
    return;
   }
   if(action==="refresh-claim-evidence"){
    if(!isLive()||state.sourceClaimLoading)return;
+   const generation=connectionGeneration;
    state.sourceClaimLoading=true;state.sourceClaimError="";onChange();
    try{
     const [observed,claims]=await Promise.all([request("/api/source-observations"),request("/api/source-claims")]);
+    if(generation!==connectionGeneration)return;
     if(!Array.isArray(observed.observations)||!Array.isArray(claims.claims))throw new Error("Invalid private evidence response");
     state.sourceObservations=observed.observations;state.sourceClaims=claims.claims;
     state.claimObservationText=null;state.sourceTextDiff=null;state.sourceDiffError="";state.sourceDateCandidates=null;state.sourceCandidateError="";
-   }catch(error){state.sourceClaimError=short(error.message,240);}
-   finally{state.sourceClaimLoading=false;onChange();}
+   }catch(error){if(generation===connectionGeneration)state.sourceClaimError=short(error.message,240);}
+   finally{if(generation===connectionGeneration){state.sourceClaimLoading=false;onChange();}}
    return;
   }
   if(action==="load-claim-source"){
    if(!isLive()||state.sourceClaimLoading)return;
+   const generation=connectionGeneration;
    const source=claimCandidates(state.sourceObservations).find(x=>x.id===state.selectedClaimObservation)||claimCandidates(state.sourceObservations)[0];
    if(!source)return;
    state.selectedClaimObservation=source.id;
    state.claimObservationText=null;state.sourceTextDiff=null;state.sourceDiffError="";state.sourceDateCandidates=null;state.sourceCandidateError="";state.sourceClaimLoading=true;state.sourceClaimError="";onChange();
    try{
     const result=await request("/api/source-observations/"+source.id+"/text");
+    if(generation!==connectionGeneration)return;
     if(result.observation?.id!==source.id)throw new Error("Source observation identifier changed");
     state.claimObservationText=result.observation;
-   }catch(error){state.sourceClaimError=short(error.message,240);}
-   finally{state.sourceClaimLoading=false;onChange();}
+   }catch(error){if(generation===connectionGeneration)state.sourceClaimError=short(error.message,240);}
+   finally{if(generation===connectionGeneration){state.sourceClaimLoading=false;onChange();}}
    return;
   }
   if(action==="claim-history"){
    if(!isLive()||state.sourceClaimLoading)return;
+   const generation=connectionGeneration;
    const identity=Number(id);
    if(!Number.isSafeInteger(identity)||identity<1)return;
    if(state.claimReviewHistory?.claim_id===identity){state.claimReviewHistory=null;onChange();return;}
    state.sourceClaimLoading=true;state.sourceClaimError="";onChange();
    try{
     const response=await request("/api/source-claims/"+identity+"/reviews");
+    if(generation!==connectionGeneration)return;
     if(response.claim_id!==identity||!Array.isArray(response.reviews))
      throw new Error("Invalid private source review history");
     state.claimReviewHistory=response;
-   }catch(error){state.sourceClaimError=short(error.message,240);}
-   finally{state.sourceClaimLoading=false;onChange();}
+   }catch(error){if(generation===connectionGeneration)state.sourceClaimError=short(error.message,240);}
+   finally{if(generation===connectionGeneration){state.sourceClaimLoading=false;onChange();}}
    return;
   }
   if(action==="suggest-source-dates"){
@@ -617,15 +630,17 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   }
   if(action==="compare-claim-source"){
    if(!isLive()||state.sourceClaimLoading||!state.claimObservationText)return;
+   const generation=connectionGeneration;
    const identity=state.claimObservationText.id;
    if(!Number.isSafeInteger(identity)||identity<1)return;
    state.sourceClaimLoading=true;state.sourceDiffError="";state.sourceTextDiff=null;onChange();
    try{
     const response=await request("/api/source-observations/"+identity+"/diff");
+    if(generation!==connectionGeneration)return;
     if(response.diff?.observation_id!==identity)throw new Error("Invalid source comparison response");
     state.sourceTextDiff=response.diff;
-   }catch(error){state.sourceDiffError=short(error.message,240);}
-   finally{state.sourceClaimLoading=false;onChange();}
+   }catch(error){if(generation===connectionGeneration)state.sourceDiffError=short(error.message,240);}
+   finally{if(generation===connectionGeneration){state.sourceClaimLoading=false;onChange();}}
    return;
   }
   if(action==="use-selected-quote"){

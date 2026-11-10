@@ -242,6 +242,16 @@ async function main(){
   await page.locator('#atlasLensPanel [data-lens="close"]').click();
   await page.unroute('**/api/agents/run');
   await page.unroute('**/api/assistant/bootstrap');
+  await page.route('**/api/jobs',route=>route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({error:'Synthetic private job ledger failure'})}));
+  await page.route('**/api/observability',route=>route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({error:'Synthetic observability failure'})}));
+  await page.locator('#workspaceSection').selectOption('activity');
+  await page.locator('[data-os-action="reconnect"]').click();
+  await page.getByText('Synthetic private job ledger failure',{exact:true}).waitFor({timeout:15000});
+  await page.getByText('Synthetic observability failure',{exact:true}).waitFor({timeout:15000});
+  assert.equal(await page.locator('#body').getByText('No local jobs queued.',{exact:false}).count(),0,
+   'Failed private job retrieval must not be presented as an empty ledger');
+  await page.unroute('**/api/jobs');
+  await page.unroute('**/api/observability');
   await page.goto(base+'/ai-studio.html#providers',{waitUntil:'domcontentloaded'});
   await page.waitForURL('**/index.html#settings');
   await page.locator('#body h1').first().waitFor({timeout:12000});
