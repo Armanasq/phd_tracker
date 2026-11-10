@@ -215,7 +215,7 @@ def run_workflow(store: Store, root: Path, *, workflow_id: str,
     preview = workflow_plan(store, workflow_id=workflow_id, provider_id=provider_id,
                             cloud_consent=cloud_consent)
     if not preview["manual_ready"]:
-        raise PermissionError("Workflow requires explicit cloud evidence disclosure before any agent stage")
+        raise PermissionError("Workflow requires explicit per-run cloud evidence disclosure before any agent stage")
     workflow = selected(catalog(store)["workflows"], workflow_id, "workflow")
     agent_ids = [stage["agent_id"] for stage in preview["stages"]]
     objective = workflow.get("prompt") or workflow.get("description", "")
