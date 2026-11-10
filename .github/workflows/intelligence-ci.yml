@@ -79,6 +79,7 @@ jobs:
       - run: node --check site/modules/routes.mjs
       - run: node --test tests/routes.test.mjs
       - run: node --check site/modules/onboarding.mjs
+      - run: node --check tests/onboarding_review_smoke.cjs
       - run: node --test tests/onboarding.test.mjs
       - run: node --check site/modules/source-observations.mjs
       - run: node --test tests/source_observations.test.mjs
