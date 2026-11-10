@@ -73,7 +73,9 @@ class PrivateSourceObservationTests(unittest.TestCase):
                    ("legacy", self.url, "http_error", "2026-11-09T00:00:00+00:00"))
         db.commit()
         db.close()
-        with Store(db_path) as migrated:
+        migrated = Store(db_path)
+        self.addCleanup(migrated.close)
+        if True:
             history = recent_observations(migrated)
             self.assertEqual(len(history), 1)
             self.assertIsNone(history[0]["drift"])
