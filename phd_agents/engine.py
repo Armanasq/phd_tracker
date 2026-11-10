@@ -160,15 +160,64 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str | Non
             "retrieval_method": retrieval["method"],
             "status": "proposed", "tools": [x["name"] for x in tool_pack["tools"]], "source_as_of": source.get("as_of")}
 
-def run_workflow(store: Store, root: Path, *, workflow_id: str,
-                 provider_id: str | None = None, application_id: str | None = None,
-                 input_text: str = "", cloud_consent: bool = False) -> dict[str, Any]:
+def workflow_plan(store: Store, *, workflow_id: str, provider_id: str | None = None,
+                  cloud_consent: bool = False) -> dict[str, Any]:
     options = catalog(store)
     workflow = selected(options["workflows"], workflow_id, "workflow")
     agent_ids = workflow.get("steps") or [workflow["agent_id"]]
     known = {agent["id"] for agent in options["agents"]}
-    if not agent_ids or len(agent_ids) > 3 or any(x not in known for x in agent_ids):
+    if not agent_ids or len(agent_ids) > 3 or any(agent not in known for agent in agent_ids):
         raise ValueError("Workflow must select 1–3 known agents")
+    route_override = provider_id if provider_id not in (None, "", "auto") else workflow.get("provider_id", "auto")
+    stages = []
+    cloud_providers = set()
+    scheduled_approval = True
+    for index, agent in enumerate(agent_ids):
+        route = resolve_route(store, options["providers"], agent, route_override)
+        provider = route.provider
+        if not provider["local"]:
+            cloud_providers.add(provider["id"])
+            scheduled_approval = scheduled_approval and route.approved
+        stages.append({
+            "step": index + 1,
+            "agent_id": agent,
+            "provider_id": provider["id"],
+            "provider_label": provider["label"],
+            "model": provider["model"],
+            "route_source": route.source,
+            "cloud": not provider["local"],
+            "scheduled_provider_approved": route.approved,
+        })
+    blockers = []
+    if cloud_providers and not cloud_consent:
+        blockers.append("cloud_disclosure_consent_required")
+    if not workflow.get("enabled"):
+        scheduled_approval = False
+    if cloud_providers and not workflow.get("cloud_consent"):
+        scheduled_approval = False
+    return {
+        "workflow_id": workflow_id,
+        "schedule": workflow.get("schedule", "manual"),
+        "enabled": bool(workflow.get("enabled")),
+        "stages": stages,
+        "model_calls": len(stages),
+        "cloud_provider_count": len(cloud_providers),
+        "manual_ready": not blockers,
+        "blockers": blockers,
+        "scheduled_policy_approved": scheduled_approval,
+        "notice": "Preview validates route selection and consent; it does not verify live model health, quotas or due times.",
+    }
+
+
+def run_workflow(store: Store, root: Path, *, workflow_id: str,
+                 provider_id: str | None = None, application_id: str | None = None,
+                 input_text: str = "", cloud_consent: bool = False) -> dict[str, Any]:
+    preview = workflow_plan(store, workflow_id=workflow_id, provider_id=provider_id,
+                            cloud_consent=cloud_consent)
+    if not preview["manual_ready"]:
+        raise PermissionError("Workflow requires explicit cloud evidence disclosure before any agent stage")
+    workflow = selected(catalog(store)["workflows"], workflow_id, "workflow")
+    agent_ids = [stage["agent_id"] for stage in preview["stages"]]
     objective = workflow.get("prompt") or workflow.get("description", "")
     if input_text:
         objective += "\n\n" + input_text
