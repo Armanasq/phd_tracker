@@ -402,3 +402,9 @@ body.dark .os-context-banner{background:#223155;border-color:#425780}
 .discovery-row .linkset{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
 .discovery-actions{display:flex;align-items:flex-end;flex-direction:column;gap:8px;flex-shrink:0;text-align:right}
 @media(max-width:600px){.discovery-row{flex-direction:column;gap:12px}.discovery-actions{align-items:flex-start;flex-direction:row;flex-wrap:wrap;text-align:left;width:100%}.discovery-controls .buttons{gap:6px}}
+
+.os-source-selector{padding:14px 20px;max-width:680px}
+.os-source-sample{margin:0 20px 18px;padding:16px 18px;max-height:420px;overflow:auto;overflow-wrap:anywhere;white-space:pre-wrap;border:1px solid var(--line);border-radius:10px;background:var(--surface);font:12px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}
+.os-source-sample:focus-visible{outline:2px solid var(--focus,#4560cc);outline-offset:2px}
+.os-evidence-quote{max-width:100%;overflow-wrap:anywhere;font-size:12px;line-height:1.6;margin:8px 0;color:var(--text)}
+@media(max-width:600px){.os-source-selector{padding:12px 14px}.os-source-sample{margin:0 12px 14px;padding:12px;font-size:11px}}

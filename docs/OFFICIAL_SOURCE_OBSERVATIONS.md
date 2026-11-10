@@ -24,3 +24,11 @@ The private `#source-observations` route displays recent observations from `GET 
 The UI offers manual history refresh and a command to perform another observation locally. It does **not** initiate network collection, store source HTML, authenticate university portals, or infer official deadline/eligibility changes. Data access remains limited to the loopback private API. The public Pages build does not have access to this history.
 
 Remaining semantic proof requirements are tracked in [Issue #8](https://github.com/Armanasq/phd_tracker/issues/8).
+
+## Exact-quote source evidence
+
+The private `#source-claims` route now displays bounded, normalized visible source text collected by the existing HTTPS-only observer. Scripts, styles, SVGs, and template blocks are omitted; pages rendered by JavaScript and documents requiring authentication may not expose usable text. Every text observation retains its original byte SHA-256, a distinct normalized visible-text SHA-256 and a truncation indicator. A byte change with unchanged extracted text is still treated as **requiring manual source review**.
+
+A candidate claim must identify the exact observation, its original byte digest, an exact 20–320-character quote found in the retained text, its claim category and a candidate value. The API rejects forged quotes, nonexistent observation identifiers and stale digests; duplicates resolve to the existing private claim record. The owner-only ledger never changes applicant status, deadline, eligibility or portal state, and it does not claim semantic truth from the source digest. Historical observations created before text capture are preserved with no invented text.
+
+The following private, local-only endpoints support the workflow: `GET /api/source-observations/{id}/text`, `GET /api/source-claims` and `POST /api/source-claims/capture`. The captured body is limited to 24,000 normalized characters per observation and is not published to GitHub Pages. Sensitive institutional pages, PDFs and login-dependent portals require an independently authorized capture adapter and remain outside this workflow. This is not an admissions portal scraper or an automated application submitter.

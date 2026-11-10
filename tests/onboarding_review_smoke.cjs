@@ -56,8 +56,17 @@ from pathlib import Path
 from phd_agents.store import Store
 store = Store(Path(sys.argv[1]) / "state.sqlite3")
 digest = hashlib.sha256(b"official source bytes").hexdigest()
+text = "Doctoral applications close on 15 December 2026."
+visible = hashlib.sha256(text.encode("utf-8")).hexdigest()
 with store.db:
-    store.db.execute("INSERT INTO source_observations(application_id,source_url,status,content_sha256,observed_at,http_status,content_length,drift) VALUES(?,?,?,?,?,?,?,?)",("EXAMPLE-1","https://university.example/program","fetched",digest,"2026-11-10T08:00:00+00:00",200,21,"source_bytes_changed_needs_review"))
+    store.db.execute(
+        "INSERT INTO source_observations(application_id,source_url,status,content_sha256,"
+        "observed_at,http_status,content_length,drift,visible_text_sha256,"
+        "visible_text_excerpt,visible_text_truncated,text_drift) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+        ("EXAMPLE-1","https://university.example/program","fetched",digest,
+         "2026-11-10T08:00:00+00:00",200,21,"source_bytes_changed_needs_review",
+         visible,text,0,"visible_text_changed"),
+    )
 store.close()
 `;
   const seeded=spawnSync('python',['-c',seed,folder],{cwd:root,encoding:'utf8'});
@@ -87,7 +96,22 @@ store.close()
     await privatePage.reload({waitUntil:'networkidle'});
     await privatePage.locator('#body h1').first().waitFor();
     assert.equal(await privatePage.locator('form[data-os-form="source-review"]').count(),0);
-    assert.deepEqual(errors,[],'Private source review JavaScript errors');
+    await privatePage.goto(privateUrl+'/index.html#source-claims',{waitUntil:'networkidle'});
+    await privatePage.locator('[data-os-action="load-claim-source"]').waitFor({timeout:15000});
+    await privatePage.locator('[data-os-action="load-claim-source"]').click();
+    await privatePage.locator('#sourceCapturedText').getByText('Doctoral applications close on 15 December 2026.').waitFor({timeout:10000});
+    const capture=privatePage.locator('form[data-os-form="source-claim"]');
+    await capture.locator('[name="claim_type"]').selectOption('deadline');
+    await capture.locator('[name="candidate_value"]').fill('2026-12-15');
+    await capture.locator('[name="quote"]').fill('Doctoral applications close on 15 December 2026.');
+    await capture.locator('button[type="submit"]').click();
+    await privatePage.getByText('Exact source quotation captured privately.',{exact:false}).waitFor({timeout:10000});
+    const captured=await (await fetch(privateUrl+'/api/source-claims')).json();
+    assert.equal(captured.claims.length,1);
+    assert.equal(captured.claims[0].verification,'source_quote_observed_not_fact_verified');
+    await privatePage.reload({waitUntil:'networkidle'});
+    await privatePage.locator('.os-evidence-quote').getByText('Doctoral applications close on 15 December 2026.').waitFor({timeout:10000});
+    assert.deepEqual(errors,[],'Private source review and claim capture JavaScript errors');
     await privatePage.close();
 
     const publicPage=await browser.newPage({acceptDownloads:true,viewport:{width:375,height:812}});
@@ -108,7 +132,7 @@ store.close()
     assert.equal(exported.contains_secrets,false);
     assert.deepEqual(publicErrors,[],'Public first-run setup JavaScript errors');
     await publicPage.close();
-    console.log('Private source review and browser-local fork setup smoke passed');
+    console.log('Private source review, exact-quote capture, and fork setup smoke passed');
   } finally {
     if(browser)await browser.close();
     child.kill('SIGTERM');
