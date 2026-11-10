@@ -10,8 +10,8 @@ from unittest.mock import patch
 
 from phd_agents import recovery_encrypted
 
-from phd_agents.recovery_encrypted import drill_encrypted_backup, export_encrypted_backup
-from phd_agents.store import Store
+from phd_agents.recovery_encrypted import drill_encrypted_backup, export_encrypted_backup, restore_encrypted_backup
+from phd_agents.store import ConflictError, Store
 
 
 @unittest.skipUnless(os.name == "posix" and importlib.util.find_spec("cryptography"),
@@ -114,6 +114,91 @@ class EncryptedBackupDrillTests(unittest.TestCase):
                     state_path=self.state, sha256=backup["sha256"], repo_root=self.checkout,
                 )
         self.assertFalse(self.output.exists())
+
+    def test_explicit_encrypted_restore_replaces_database_and_preserves_previous_state(self):
+        backup = self.make_backup()
+        export_encrypted_backup(
+            backup["filename"], self.output, self.passphrase,
+            state_path=self.state, sha256=backup["sha256"], repo_root=self.checkout,
+        )
+        result = restore_encrypted_backup(
+            self.output, self.passphrase, sha256=backup["sha256"],
+            state_path=self.state, confirm=True,
+        )
+        self.assertTrue(result["restored"])
+        self.assertTrue(result["encrypted_source"])
+        self.assertFalse(result["off_host_copy_verified"])
+        self.assertEqual(result["sha256"], backup["sha256"])
+        self.assertIsNotNone(result["previous_state"])
+        self.assertTrue((self.state.parent / "backups" / result["previous_state"]).is_file())
+        self.assertEqual(stat.S_IMODE(self.state.stat().st_mode), 0o600)
+        self.assertEqual(
+            sorted(x.name for x in (self.state.parent / "backups").glob("phd-atlas-*.sqlite3")),
+            sorted([backup["filename"], result["previous_state"]]),
+        )
+        restored = Store(self.state)
+        try:
+            self.assertEqual(restored.get_application("APP1")["notes"], "Private data sample")
+        finally:
+            restored.close()
+
+    def test_encrypted_restore_denied_without_confirmation_or_with_wrong_passphrase(self):
+        backup = self.make_backup()
+        export_encrypted_backup(
+            backup["filename"], self.output, self.passphrase,
+            state_path=self.state, repo_root=self.checkout,
+        )
+        with self.assertRaisesRegex(PermissionError, "explicit --confirm"):
+            restore_encrypted_backup(
+                self.output, self.passphrase, sha256=backup["sha256"],
+                state_path=self.state,
+            )
+        with self.assertRaisesRegex(ValueError, "authentication failed"):
+            restore_encrypted_backup(
+                self.output, "Different but sufficiently long passphrase 2026", sha256=backup["sha256"],
+                state_path=self.state, confirm=True,
+            )
+        existing = Store(self.state)
+        try:
+            self.assertEqual(existing.get_application("APP1")["notes"], "Current live data")
+        finally:
+            existing.close()
+
+    def test_encrypted_restore_rejected_while_private_database_is_open(self):
+        backup = self.make_backup()
+        export_encrypted_backup(
+            backup["filename"], self.output, self.passphrase,
+            state_path=self.state, repo_root=self.checkout,
+        )
+        active = Store(self.state)
+        try:
+            with self.assertRaises(ConflictError):
+                restore_encrypted_backup(
+                    self.output, self.passphrase, sha256=backup["sha256"],
+                    state_path=self.state, confirm=True,
+                )
+            self.assertEqual(active.get_application("APP1")["notes"], "Current live data")
+        finally:
+            active.close()
+
+    def test_encrypted_restore_can_recover_fresh_isolated_workspace(self):
+        backup = self.make_backup()
+        export_encrypted_backup(
+            backup["filename"], self.output, self.passphrase,
+            state_path=self.state, repo_root=self.checkout,
+        )
+        recovered_path = self.root / "isolated-owner" / "state.sqlite3"
+        result = restore_encrypted_backup(
+            self.output, self.passphrase, sha256=backup["sha256"],
+            state_path=recovered_path, confirm=True,
+        )
+        self.assertTrue(result["restored"])
+        self.assertIsNone(result["previous_state"])
+        restored = Store(recovered_path)
+        try:
+            self.assertEqual(restored.get_application("APP1")["notes"], "Private data sample")
+        finally:
+            restored.close()
 
     def test_export_refuses_git_checkout_and_overwrites(self):
         backup = self.make_backup()

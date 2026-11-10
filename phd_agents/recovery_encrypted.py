@@ -5,9 +5,14 @@ import os
 import re
 import stat
 import tempfile
+import uuid
+from datetime import datetime, timezone
 from pathlib import Path
 
-from .recovery import _verify_database, verify_backup
+from .recovery import (
+    _copy_private, _sync_directory, _verify_database,
+    restore_backup, verify_backup,
+)
 from .store import default_path
 
 _MAGIC = b"PHDAIENC1"
@@ -106,18 +111,22 @@ def export_encrypted_backup(
     }
 
 
-def drill_encrypted_backup(
-    encrypted_path: Path, passphrase: str, *, sha256: str,
-) -> dict[str, object]:
+def _decrypt_authenticated_backup(
+    encrypted_path: Path, passphrase: str, *, sha256: str, destination: Path,
+) -> None:
     if os.name != "posix":
-        raise RuntimeError("Encrypted restore drills require POSIX owner-only temporary files")
+        raise RuntimeError("Encrypted recovery requires POSIX owner-only temporary files")
     if not isinstance(sha256, str) or not re.fullmatch(r"[0-9a-f]{64}", sha256):
         raise ValueError("An independently recorded SHA-256 digest is required")
     encrypted = Path(encrypted_path).expanduser()
-    if encrypted.is_symlink() or not encrypted.is_file() or encrypted.stat().st_size <= _HEADER_SIZE + _TAG_SIZE:
-        raise ValueError("Encrypted backup is missing or malformed")
+    if encrypted.is_symlink() or not encrypted.is_file():
+        raise ValueError("Encrypted backup is missing or unsafe")
     InvalidTag, Cipher, algorithms, modes, _ = _crypto()
-    with encrypted.open("rb") as source:
+    source_flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+    with os.fdopen(os.open(encrypted, source_flags), "rb") as source:
+        metadata = os.fstat(source.fileno())
+        if not stat.S_ISREG(metadata.st_mode) or metadata.st_size <= _HEADER_SIZE + _TAG_SIZE:
+            raise ValueError("Encrypted backup is malformed")
         header = source.read(_HEADER_SIZE)
         if len(header) != _HEADER_SIZE or not header.startswith(_MAGIC):
             raise ValueError("Unsupported encrypted backup format")
@@ -127,39 +136,98 @@ def drill_encrypted_backup(
         source.seek(-_TAG_SIZE, os.SEEK_END)
         tag = source.read(_TAG_SIZE)
         source.seek(_HEADER_SIZE)
-        remaining = encrypted.stat().st_size - _HEADER_SIZE - _TAG_SIZE
+        remaining = metadata.st_size - _HEADER_SIZE - _TAG_SIZE
         decryptor = Cipher(algorithms.AES(key), modes.GCM(nonce, tag)).decryptor()
         decryptor.authenticate_additional_data(header)
-        with tempfile.TemporaryDirectory(prefix="phd-encrypted-drill-") as folder:
-            temporary = Path(folder) / "recovered.sqlite3"
-            flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0)
-            descriptor = os.open(temporary, flags, 0o600)
-            try:
-                with os.fdopen(descriptor, "wb") as plaintext:
-                    while remaining:
-                        chunk = source.read(min(_BLOCK, remaining))
-                        if not chunk:
-                            raise ValueError("Encrypted backup ended prematurely")
-                        remaining -= len(chunk)
-                        plaintext.write(decryptor.update(chunk))
-                    plaintext.write(decryptor.finalize())
-                    plaintext.flush()
-                    os.fsync(plaintext.fileno())
-            except InvalidTag as error:
-                raise ValueError("Encrypted backup authentication failed") from error
-            if stat.S_IMODE(temporary.stat().st_mode) != 0o600:
-                raise PermissionError("Decrypted drill data was not stored with owner-only permissions")
-            if _sha256(temporary) != sha256:
-                raise ValueError("Decrypted backup does not match the independently recorded SHA-256")
-            _verify_database(temporary)
-            return {
-                "drill": "passed",
-                "format": "PHDAIENC1_scrypt_aes256gcm",
-                "sha256": sha256,
-                "private_file_mode": "0o600",
-                "sqlite_integrity": "ok",
-                "restored_in_isolation": True,
-                "live_state_writes_performed": False,
-                "off_host_copy_verified": False,
-                "provider_credentials_restored": False,
-            }
+        flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0)
+        descriptor = os.open(destination, flags, 0o600)
+        try:
+            with os.fdopen(descriptor, "wb") as plaintext:
+                while remaining:
+                    chunk = source.read(min(_BLOCK, remaining))
+                    if not chunk:
+                        raise ValueError("Encrypted backup ended prematurely")
+                    remaining -= len(chunk)
+                    plaintext.write(decryptor.update(chunk))
+                plaintext.write(decryptor.finalize())
+                plaintext.flush()
+                os.fsync(plaintext.fileno())
+        except InvalidTag as error:
+            raise ValueError("Encrypted backup authentication failed") from error
+    if stat.S_IMODE(destination.stat().st_mode) != 0o600:
+        raise PermissionError("Recovered data was not stored with owner-only permissions")
+    if _sha256(destination) != sha256:
+        raise ValueError("Decrypted backup does not match the independently recorded SHA-256")
+    _verify_database(destination)
+
+
+def drill_encrypted_backup(
+    encrypted_path: Path, passphrase: str, *, sha256: str,
+) -> dict[str, object]:
+    with tempfile.TemporaryDirectory(prefix="phd-encrypted-drill-") as folder:
+        _decrypt_authenticated_backup(
+            encrypted_path, passphrase, sha256=sha256,
+            destination=Path(folder) / "recovered.sqlite3",
+        )
+        return {
+            "drill": "passed",
+            "format": "PHDAIENC1_scrypt_aes256gcm",
+            "sha256": sha256,
+            "private_file_mode": "0o600",
+            "sqlite_integrity": "ok",
+            "restored_in_isolation": True,
+            "live_state_writes_performed": False,
+            "off_host_copy_verified": False,
+            "provider_credentials_restored": False,
+        }
+
+
+def restore_encrypted_backup(
+    encrypted_path: Path, passphrase: str, *, sha256: str,
+    state_path: Path | None = None, confirm: bool = False,
+) -> dict[str, object]:
+    if confirm is not True:
+        raise PermissionError("Encrypted restore requires explicit --confirm and a stopped runtime")
+    if os.name != "posix":
+        raise RuntimeError("Encrypted state restore requires POSIX owner-only locks and permissions")
+    state = (Path(state_path) if state_path is not None else default_path()).expanduser()
+    parent = state.parent
+    if parent.is_symlink():
+        raise PermissionError("Private state directory cannot be a symlink")
+    parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+    if stat.S_IMODE(parent.stat().st_mode) & 0o077:
+        raise PermissionError("Private state directory must be owner-only")
+    if hasattr(os, "getuid") and parent.stat().st_uid != os.getuid():
+        raise PermissionError("Private state directory must be owned by the current user")
+    backups = parent / "backups"
+    if backups.is_symlink():
+        raise PermissionError("Private backup directory cannot be a symlink")
+    backups.mkdir(mode=0o700, exist_ok=True)
+    if stat.S_IMODE(backups.stat().st_mode) & 0o077:
+        raise PermissionError("Private backup directory must be owner-only")
+    if hasattr(os, "getuid") and backups.stat().st_uid != os.getuid():
+        raise PermissionError("Private backup directory must be owned by the current user")
+    with tempfile.TemporaryDirectory(prefix=".phd-encrypted-restore-", dir=parent) as folder:
+        recovered = Path(folder) / "recovered.sqlite3"
+        _decrypt_authenticated_backup(
+            encrypted_path, passphrase, sha256=sha256, destination=recovered,
+        )
+        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        filename = "phd-atlas-" + stamp + "-" + uuid.uuid4().hex[:10] + ".sqlite3"
+        staged_backup = backups / filename
+        _copy_private(recovered, staged_backup)
+        _sync_directory(backups)
+        try:
+            result = restore_backup(
+                filename, state_path=state, sha256=sha256, confirm=True,
+            )
+        finally:
+            staged_backup.unlink(missing_ok=True)
+            _sync_directory(backups)
+    return {
+        **result,
+        "encrypted_source": True,
+        "format": "PHDAIENC1_scrypt_aes256gcm",
+        "off_host_copy_verified": False,
+        "provider_credentials_restored": False,
+    }

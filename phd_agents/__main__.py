@@ -48,6 +48,10 @@ def main() -> None:
     encrypted_drill = commands.add_parser("drill-encrypted-backup")
     encrypted_drill.add_argument("encrypted_path", type=Path)
     encrypted_drill.add_argument("--sha256", required=True)
+    encrypted_restore = commands.add_parser("restore-encrypted-backup")
+    encrypted_restore.add_argument("encrypted_path", type=Path)
+    encrypted_restore.add_argument("--sha256", required=True)
+    encrypted_restore.add_argument("--confirm", action="store_true")
     drill_command = commands.add_parser("drill-backup")
     drill_command.add_argument("filename")
     drill_command.add_argument("--sha256")
@@ -78,9 +82,13 @@ def main() -> None:
         result = compare_sources(load_snapshot(args.previous), load_snapshot(args.current))
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return
-    if args.command in {"encrypt-backup", "drill-encrypted-backup"}:
+    if args.command in {"encrypt-backup", "drill-encrypted-backup", "restore-encrypted-backup"}:
         from getpass import getpass
-        from .recovery_encrypted import drill_encrypted_backup, export_encrypted_backup
+        from .recovery_encrypted import (
+            drill_encrypted_backup, export_encrypted_backup, restore_encrypted_backup,
+        )
+        if args.command == "restore-encrypted-backup" and not args.confirm:
+            parser.error("Offline encrypted restore requires --confirm")
         password = getpass("Backup encryption passphrase: ")
         if args.command == "encrypt-backup":
             repeat = getpass("Repeat backup passphrase: ")
@@ -90,9 +98,14 @@ def main() -> None:
                 args.filename, args.output, password,
                 sha256=args.sha256, repo_root=args.repo,
             )
-        else:
+        elif args.command == "drill-encrypted-backup":
             result = drill_encrypted_backup(
                 args.encrypted_path, password, sha256=args.sha256,
+            )
+        else:
+            result = restore_encrypted_backup(
+                args.encrypted_path, password, sha256=args.sha256,
+                confirm=args.confirm,
             )
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return
