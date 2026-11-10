@@ -13,11 +13,11 @@ test("unreviewed byte drift remains visible after later unchanged fetch",()=>{
   ];
   const result=observationSummary(records);
   assert.equal(result.sources,5);
-  assert.deepEqual(result.counts,{changed:2,unavailable:1,unchanged:1,baseline:1,legacy:1});
+  assert.deepEqual(result.counts,{changed:2,pending:2,unavailable:1,unchanged:1,baseline:1,legacy:1});
   const changed=renderSourceObservations({records,filter:"changed"});
   assert.match(changed,/>B<\/strong>/);
   assert.match(changed,/>A<\/strong>/);
-  assert.match(changed,/Earlier byte drift in loaded history/);
+  assert.match(changed,/Byte drift requires owner review/);
   assert.match(changed,/manual review/);
   assert.doesNotMatch(changed,/automatically verified/i);
 });
@@ -41,4 +41,26 @@ test("rendering escapes untrusted source data, preserves unknown states",()=>{
   assert.ok(!view.includes("<img"));
   assert.ok(!view.includes("<script"));
   assert.throws(()=>observationSummary({}),TypeError);
+});
+
+test("reviewing a particular changed observation resolves only that observation",()=>{
+  const records=[
+    {id:11,application_id:"A",source_url:"https://uni.example/app",
+     observed_at:"2026-11-08T10:00:00Z",drift:"source_bytes_changed_needs_review",
+     content_sha256:"a".repeat(64),review_decision:"reviewed_no_fact_change"},
+    {id:12,application_id:"A",source_url:"https://uni.example/app",
+     observed_at:"2026-11-09T10:00:00Z",drift:"unchanged_bytes"},
+  ];
+  assert.equal(observationSummary(records).counts.pending,0);
+  const queue=renderSourceObservations({records,filter:"changed"});
+  assert.doesNotMatch(queue,/>A<\/strong>/);
+  records.push({id:13,application_id:"A",source_url:"https://uni.example/app",
+    observed_at:"2026-11-10T10:00:00Z",drift:"source_bytes_changed_needs_review",
+    content_sha256:"b".repeat(64),review_decision:"needs_follow_up"});
+  const next=observationSummary(records);
+  assert.equal(next.counts.pending,1);
+  const review=renderSourceObservations({records,filter:"changed"});
+  assert.match(review,/name="observation_id" value="13"/);
+  assert.match(review,/name="expected_digest"/);
+  assert.match(review,/owner review/i);
 });
