@@ -64,7 +64,8 @@ class ProviderContractMatrixTests(unittest.TestCase):
     def test_openai_and_local_chat_contracts(self) -> None:
         body = {"model": "synthetic", "choices": [{"message": {"content": "Traceable response"}}],
                 "usage": {"prompt_tokens": 40, "completion_tokens": 2}}
-        for name in ("openai", "ollama", "vllm", "lmstudio", "gemini", "openrouter", "groq"):
+        for name in ("openai", "ollama", "vllm", "lmstudio", "gemini", "openrouter", "groq",
+                     "deepseek", "xai", "together", "fireworks", "mistral", "cerebras"):
             with self.subTest(provider=name):
                 request, reply, _ = self.send(name, body)
                 payload = json.loads(request.data)
