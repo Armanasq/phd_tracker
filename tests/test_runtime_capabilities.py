@@ -18,6 +18,8 @@ class PrivateCapabilitiesTests(unittest.TestCase):
         self.assertEqual(report["schema_version"], 1)
         self.assertTrue(report["capabilities"]["private_state"]["ready"])
         self.assertFalse(report["capabilities"]["interactive_inference"]["ready"])
+        self.assertTrue(report["capabilities"]["local_background_jobs"]["ready"])
+        self.assertIn("operator_started_worker", report["capabilities"]["local_background_jobs"]["requires"])
         self.assertFalse(report["capabilities"]["authenticated_cloud"]["supported"])
         self.assertTrue(private_runtime_capabilities(provider_verified=True)["capabilities"]["agent_execution"]["ready"])
 
