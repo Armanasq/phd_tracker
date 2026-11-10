@@ -77,3 +77,18 @@ test("every source-claim owner verdict remains explicitly provisional",()=>{
     assert.match(rendered,/no automatic official-fact verification/);
   }
 });
+
+test("owner audit history displays dated decisions without leaking HTML",()=>{
+  const claim={id:17,observation_id:9,application_id:"APP1",source_url:"https://university.example",
+    source_digest:"a".repeat(64),quote_digest:"b".repeat(64),claim_type:"deadline",
+    exact_quote:"Institutional deadline from captured source.",
+    candidate_value:"2026-12-15",captured_at:"2026-11-10"};
+  const result=renderSourceClaims({claims:[claim],reviewHistory:{
+    claim_id:17,reviews:[{id:22,decision:"owner_interpretation_supported",
+      rationale:"<script>untrusted rationale</script>",reviewed_at:"2026-11-10"}]
+  }});
+  assert.match(result,/Owner review history/);
+  assert.match(result,/&lt;script&gt;untrusted rationale&lt;\/script&gt;/);
+  assert.ok(!result.includes("<script>"));
+  assert.match(result,/factual interpretation unverified/);
+});

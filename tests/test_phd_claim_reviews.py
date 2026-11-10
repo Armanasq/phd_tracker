@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from phd_agents.source_claims import capture_source_claim, review_source_claim, source_claims
+from phd_agents.source_claims import capture_source_claim, review_source_claim, source_claims, claim_review_history
 from phd_agents.source_observer import observe_record
 from phd_agents.source_text import extract_visible_text
 from phd_agents.store import Store
@@ -63,6 +63,11 @@ class ClaimReviewTests(unittest.TestCase):
         self.assertEqual(self.store.db.execute(
             "SELECT COUNT(*) FROM source_claim_reviews",
         ).fetchone()[0], 2)
+        history = claim_review_history(self.store, claim_id=self.claim["id"])
+        self.assertEqual(len(history), 2)
+        self.assertEqual(history[0]["decision"], "owner_interpretation_supported")
+        self.assertIn("date interpretation appears consistent", history[0]["rationale"])
+        self.assertNotIn("rationale", str(source_claims(self.store)[0]))
         self.assertEqual(self.store.list_applications(), {})
 
     def test_invalid_id_decision_digests_and_rationale_rejected(self) -> None:
@@ -80,6 +85,11 @@ class ClaimReviewTests(unittest.TestCase):
         self.assertEqual(self.store.db.execute(
             "SELECT COUNT(*) FROM source_claim_reviews",
         ).fetchone()[0], 0)
+
+    def test_history_requires_existing_claim_id(self) -> None:
+        for identity in (0, True, 999999):
+            with self.subTest(identity=identity), self.assertRaises(ValueError):
+                claim_review_history(self.store, claim_id=identity)
 
     def test_duplicate_quote_capture_does_not_inflate_audit_log(self) -> None:
         before = self.store.db.execute(

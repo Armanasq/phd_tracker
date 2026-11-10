@@ -290,6 +290,14 @@ class ApiHandler(BaseHTTPRequestHandler):
         elif path == "/api/source-claims":
             from .source_claims import source_claims
             self.send_json({"claims": source_claims(store), "scope": "private_owner_captured"})
+        elif path.startswith("/api/source-claims/") and path.endswith("/reviews"):
+            from .source_claims import claim_review_history
+            identity = path.removeprefix("/api/source-claims/").removesuffix("/reviews").strip("/")
+            if not re.fullmatch(r"[1-9][0-9]{0,12}", identity):
+                raise ValueError("Invalid captured source claim ID")
+            self.send_json({"claim_id": int(identity),
+                            "reviews": claim_review_history(store, claim_id=int(identity)),
+                            "scope": "private_owner_audit_history"})
         elif path.startswith("/api/source-observations/") and path.endswith("/text"):
             from .source_claims import observation_text
             identity = path.removeprefix("/api/source-observations/").removesuffix("/text").strip("/")

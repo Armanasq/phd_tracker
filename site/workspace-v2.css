@@ -416,3 +416,9 @@ body.dark .os-context-banner{background:#223155;border-color:#425780}
 .os-diff-row strong{font-size:11px;color:var(--ink)}
 .os-diff-row p{overflow-wrap:anywhere;font-size:12px;line-height:1.6;margin:4px 0 0}
 @media(max-width:600px){.os-diff-list{padding:12px}.os-diff-row{grid-template-columns:1fr}}
+
+.os-review-history{max-width:100%;padding:12px 14px;margin:12px 0;border:1px solid var(--line);border-radius:10px}
+.os-review-history h3{font-size:12px;margin:0 0 9px}
+.os-review-history article{padding:12px 0;border-top:1px solid var(--line)}
+.os-review-history strong,.os-review-history small{display:block;overflow-wrap:anywhere}
+.os-review-history p{font-size:12px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0 0}

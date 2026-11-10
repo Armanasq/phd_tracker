@@ -10,7 +10,7 @@ export function claimCandidates(observations=[]) {
     .sort((a,b)=>b.id-a.id).slice(0,200);
 }
 
-export function renderSourceClaims({observations=[],claims=[],selectedId=null,sourceText=null,diff=null,diffError="",error="",message="",loading=false,filter="all"}={}) {
+export function renderSourceClaims({observations=[],claims=[],selectedId=null,sourceText=null,diff=null,diffError="",error="",message="",loading=false,filter="all",reviewHistory=null}={}) {
   if(!Array.isArray(claims))throw new TypeError("Expected captured source claims");
   const candidates=claimCandidates(observations);
   const selected=candidates.find(o=>o.id===selectedId)||candidates[0]||null;
@@ -64,6 +64,18 @@ export function renderSourceClaims({observations=[],claims=[],selectedId=null,so
         owner_interpretation_rejected:"Owner rejected the interpretation"
       })[item.owner_review_decision]||"Not reviewed")+'</small>'+
       (link?'<a href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">Inspect source</a>':'')+
+      '<button type="button" class="os-btn quiet" data-os-action="claim-history" data-id="'+esc(item.id)+'">Review history</button>'+
+      (reviewHistory?.claim_id===item.id?
+        '<div class="os-review-history"><h3>Owner review history</h3>'+
+        (reviewHistory.reviews||[]).map(entry=>
+          '<article><strong>'+esc(({
+            needs_recheck:"Needs recheck",
+            owner_interpretation_supported:"Owner considers supported",
+            owner_interpretation_rejected:"Owner rejects interpretation"
+          })[entry.decision]||"Unknown verdict")+'</strong><small>'+esc(entry.reviewed_at)+'</small>'+
+          '<p>'+esc(entry.rationale)+'</p></article>').join("")+
+        ((reviewHistory.reviews||[]).length===0?'<p class="os-note">No owner decisions have been recorded.</p>':'')+
+        '</div>':'')+
       '<form class="os-form" data-os-form="source-claim-review">'+
       '<input type="hidden" name="claim_id" value="'+esc(item.id)+'">'+
       '<input type="hidden" name="expected_source_digest" value="'+esc(item.source_digest)+'">'+

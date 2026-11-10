@@ -127,6 +127,8 @@ store.close()
     const afterReview=await (await fetch(privateUrl+'/api/source-claims')).json();
     assert.equal(afterReview.claims[0].owner_review_decision,'owner_interpretation_supported');
     assert.equal(afterReview.claims[0].verification,'source_quote_observed_not_fact_verified');
+    await privatePage.locator('[data-os-action="claim-history"]').first().click();
+    await privatePage.locator('.os-review-history').getByText('The captured primary text explicitly states the date.',{exact:false}).waitFor({timeout:10000});
     await privatePage.locator('[data-os-action="compare-claim-source"]').click();
     await privatePage.getByText('Visible text comparison',{exact:true}).waitFor({timeout:10000});
     const difference=await (await fetch(privateUrl+'/api/source-observations/'+saved.observations[0].id+'/diff')).json();

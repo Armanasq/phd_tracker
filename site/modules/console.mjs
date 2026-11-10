@@ -12,7 +12,7 @@ const cleanId = value => String(value||"").trim().toLowerCase().replace(/[^a-z0-
 const opt = (items,value) => choose(items,value);
 
 export function createConsole({notify,onChange,navigate,getRecords,getSourceRecords,onReload,getView}) {
- const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:"",jobs:[],observability:null,sourceObservations:[],sourceObservationsLoading:false,sourceObservationsError:"",sourceObservationFilter:"all",sourceClaims:[],sourceClaimError:"",sourceClaimFilter:"all",selectedClaimObservation:null,claimObservationText:null,sourceClaimLoading:false,sourceTextDiff:null,sourceDiffError:""};
+ const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:"",jobs:[],observability:null,sourceObservations:[],sourceObservationsLoading:false,sourceObservationsError:"",sourceObservationFilter:"all",sourceClaims:[],sourceClaimError:"",sourceClaimFilter:"all",selectedClaimObservation:null,claimObservationText:null,sourceClaimLoading:false,sourceTextDiff:null,sourceDiffError:"",claimReviewHistory:null};
  const providers = () => state.data?.catalog?.providers || [];
  const agents = () => state.data?.catalog?.agents || [];
  const workflows = () => state.data?.catalog?.workflows || [];
@@ -465,7 +465,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   if(name==="automations")return '<section class="os-page">'+heading("AI / WORKFLOW ENGINE","Automations","Compose multi-agent workflows, inspect scheduling rules and control approvals.",btn("Runtime settings","go","settings","quiet"))+workflowPanel()+'</section>';
   if(name==="activity")return activity();
   if(name==="source-observations")return renderSourceObservations({records:state.sourceObservations,loading:state.sourceObservationsLoading,error:state.sourceObservationsError,filter:state.sourceObservationFilter,message:state.message});
-  if(name==="source-claims")return renderSourceClaims({observations:state.sourceObservations,claims:state.sourceClaims,selectedId:state.selectedClaimObservation,sourceText:state.claimObservationText,diff:state.sourceTextDiff,diffError:state.sourceDiffError,error:state.sourceClaimError,filter:state.sourceClaimFilter,message:state.message,loading:state.sourceClaimLoading});
+  if(name==="source-claims")return renderSourceClaims({observations:state.sourceObservations,claims:state.sourceClaims,selectedId:state.selectedClaimObservation,sourceText:state.claimObservationText,diff:state.sourceTextDiff,diffError:state.sourceDiffError,error:state.sourceClaimError,filter:state.sourceClaimFilter,message:state.message,loading:state.sourceClaimLoading,reviewHistory:state.claimReviewHistory});
   return '';
  }
  function selectConnection(id) {state.selectedProvider=id;state.models={};onChange();}
@@ -509,6 +509,21 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
     const result=await request("/api/source-observations/"+source.id+"/text");
     if(result.observation?.id!==source.id)throw new Error("Source observation identifier changed");
     state.claimObservationText=result.observation;
+   }catch(error){state.sourceClaimError=short(error.message,240);}
+   finally{state.sourceClaimLoading=false;onChange();}
+   return;
+  }
+  if(action==="claim-history"){
+   if(!isLive()||state.sourceClaimLoading)return;
+   const identity=Number(id);
+   if(!Number.isSafeInteger(identity)||identity<1)return;
+   if(state.claimReviewHistory?.claim_id===identity){state.claimReviewHistory=null;onChange();return;}
+   state.sourceClaimLoading=true;state.sourceClaimError="";onChange();
+   try{
+    const response=await request("/api/source-claims/"+identity+"/reviews");
+    if(response.claim_id!==identity||!Array.isArray(response.reviews))
+     throw new Error("Invalid private source review history");
+    state.claimReviewHistory=response;
    }catch(error){state.sourceClaimError=short(error.message,240);}
    finally{state.sourceClaimLoading=false;onChange();}
    return;
@@ -685,6 +700,10 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
     const response=await request("/api/source-claims");
     if(!Array.isArray(response.claims))throw new Error("Owner review saved but claim history reload failed");
     state.sourceClaims=response.claims;
+    if(state.claimReviewHistory?.claim_id===id){
+     const history=await request("/api/source-claims/"+id+"/reviews");
+     if(Array.isArray(history.reviews))state.claimReviewHistory=history;
+    }
     state.message="Owner assessment recorded privately. The claim remains unverified as an institutional fact.";
    });return;
   }

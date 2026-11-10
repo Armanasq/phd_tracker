@@ -153,3 +153,18 @@ def review_source_claim(
         "decision": decision, "reviewed_at": timestamp,
         "reused": False, "authority": "owner_interpretation_only",
     }
+
+
+def claim_review_history(store: Store, *, claim_id: int, limit: int = 50) -> list[dict[str, Any]]:
+    if type(claim_id) is not int or claim_id < 1:
+        raise ValueError("Claim ID must be a positive integer")
+    if type(limit) is not int or not 1 <= limit <= 100:
+        raise ValueError("Claim review history limit must be 1–100")
+    exists = store.db.execute("SELECT id FROM source_claims WHERE id=?", (claim_id,)).fetchone()
+    if exists is None:
+        raise ValueError("Unknown captured source claim")
+    return [dict(row) for row in store.db.execute(
+        "SELECT id,claim_id,decision,rationale,reviewed_at "
+        "FROM source_claim_reviews WHERE claim_id=? ORDER BY id DESC LIMIT ?",
+        (claim_id, limit),
+    ).fetchall()]
