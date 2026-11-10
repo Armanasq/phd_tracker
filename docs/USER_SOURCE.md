@@ -53,6 +53,14 @@ Supported document keys: `academic_cv`, `research_statement`, `transcripts`, `re
 
 `source_url` and `apply_url` must be public HTTPS links without embedded credentials. Marking `source_verified` or `owner_verified` requires a primary URL, `source_date` and explanatory `evidence`; the validator checks these fields but **cannot prove a university page remains current**.
 
+### Source-confirmed exact submission cutoffs
+
+A reviewed final-deadline record may additionally include `deadline_time` (24-hour `HH:MM`), `deadline_timezone` (IANA name such as `Europe/London`), `deadline_cutoff_evidence` (a short note referencing the primary source's exact cutoff), and `deadline_cutoff_verified: true`.
+
+A verified cutoff requires `deadline`, `deadline_type: final`, `verification: source_verified` or `owner_verified`, `source_url`, `source_date`, a general evidence note and a specific cutoff evidence note. The builder validates the IANA timezone, converts the local time to a canonical UTC instant, and rejects invalid, ambiguous or nonexistent daylight-saving times. Exact UTC instants are published only after that gate passes.
+
+A user may record a time and timezone without marking the cutoff verified. The site labels that pair **unverified**, and its calendar remains a date-only reminder until supported by reviewed official evidence. Do not assume that the standard `23:59` applies: universities may close in a different country, at a different hour, or in a separate application portal. The site cannot independently prove the linked institution has not changed its call since the observation date. Do not put personalized portal links into public evidence.
+
 Private `notes`, `receipt`, `submission_receipt`, applicant email and authentication tokens must not enter this file. Unknown keys are rejected. The file is public after a GitHub commit.
 
 ## Owner updates and private runtime

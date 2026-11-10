@@ -12,10 +12,12 @@ from urllib.parse import urlsplit, urlunsplit
 if __package__:
     from .source_policy import classify_deadline_note_strict
     from .instance_config import DEFAULT_REPOSITORY, action_center_url, pages_url, repository_url, resolve_data_mode, resolve_repository
+    from .deadline_cutoffs import normalize_cutoff
     from .hosted_ai_advisories import validate_advisory, HostedAIError
 else:
     from source_policy import classify_deadline_note_strict
     from instance_config import DEFAULT_REPOSITORY, action_center_url, pages_url, repository_url, resolve_data_mode, resolve_repository
+    from deadline_cutoffs import normalize_cutoff
     from hosted_ai_advisories import validate_advisory, HostedAIError
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -170,6 +172,7 @@ def independent_snapshot(root: Path, repo: str) -> dict:
         "status", "followup", "contact_status", "faculty", "funding", "eligibility",
         "fit", "topic", "next_step", "blockers", "decision", "documents", "document_states",
         "priority", "duplicate_submission_advisory",
+        "deadline_time", "deadline_timezone", "deadline_cutoff_verified", "deadline_cutoff_evidence",
     }
     contacts = {"unrecorded", "to_contact", "contacted", "awaiting_reply", "followup_due", "replied", "declined", "completed"}
     verification_states = {"unverified", "needs_review", "source_verified", "owner_verified"}
@@ -242,12 +245,20 @@ def independent_snapshot(root: Path, repo: str) -> dict:
         advisory = raw.get("duplicate_submission_advisory", False)
         if not isinstance(advisory, bool):
             raise ValueError(f"Independent record {rid}: invalid duplicate advisory")
+        try:
+            cutoff = normalize_cutoff(
+                raw, deadline=deadline, verification=verification, source_url=source_url,
+                source_date=source_date, deadline_type=deadline_type, evidence=evidence,
+            )
+        except ValueError as exc:
+            raise ValueError(f"Independent record {rid}: {exc}") from exc
+        cutoff["deadline_cutoff_evidence"] = clean(cutoff["deadline_cutoff_evidence"], 400)
         results.append({
             "id": rid, "record_type": "tracked" if raw.get("record_type") == "candidate" and owner.get("promoted") is True else raw.get("record_type", "tracked"),
             "name": name, "institution": clean(raw.get("institution"), 160),
             "country": clean(raw.get("country"), 70), "deadline": deadline,
             "deadline_kind": clean(raw.get("deadline_kind"), 200),
-            "deadline_type": deadline_type, "deadline_cutoff_verified": False,
+            "deadline_type": deadline_type, **cutoff,
             "verification": verification, "verification_note": evidence,
             "status": status, "status_confirmed": "status" in owner or "status" in raw,
             "submission_receipt": "", "documents": documents, "document_states": doc_states,

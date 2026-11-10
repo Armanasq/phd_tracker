@@ -129,3 +129,7 @@ Independent forks use `data/user_opportunities.json` plus isolated `data/user_wo
 Default private storage is isolated per GitHub repository identity and local checkout path for independent forks. The original upstream installation retains its existing SQLite location for backward compatibility; `PHDAI_PRIVATE_DIR` is an explicit operator override. The credential JSON is stored beside that checkout's SQLite file. GitHub Pages still contains no secrets or SQLite data.
 
 The `paper_radar` agent tool is also scoped to the deployment: upstream uses `data/research_radar.json`, while independent runtimes can supply `data/user_research_radar.json`. No fork inherits the upstream radar records implicitly. Static Pages does not execute this agent tool.
+
+## Source-attested exact deadline cutoffs
+
+An independent fork can record an exact final submission hour and IANA timezone only with explicit source evidence and observation date. `scripts/deadline_cutoffs.py` checks daylight-saving gaps and repeated local times and generates a canonical UTC instant only when the owner explicitly marks a final cutoff verified. Draft/unverified time fields do not produce calendar instants. No date-only record is silently assigned a closing hour.

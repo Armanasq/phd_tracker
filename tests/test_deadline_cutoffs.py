@@ -1,6 +1,11 @@
 from __future__ import annotations
 
 import unittest
+import json
+import tempfile
+from pathlib import Path
+
+from scripts.build_workspace import build
 
 from scripts.deadline_cutoffs import normalize_cutoff, verified_cutoff_utc
 
@@ -56,6 +61,58 @@ class CutoffTests(unittest.TestCase):
                 deadline_type="final", evidence="Official call reviewed",
             )
 
+
+
+class IndependentCutoffProjectionTests(unittest.TestCase):
+    def test_verified_fork_deadline_survives_public_projection(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "data").mkdir()
+            record = {
+                "id": "LOCAL-1", "name": "Illustrative programme",
+                "deadline": "2027-06-01", "deadline_type": "final",
+                "deadline_time": "23:59", "deadline_timezone": "Europe/London",
+                "deadline_cutoff_verified": True,
+                "deadline_cutoff_evidence": "Official call explicitly states 23:59 local time",
+                "source_url": "https://example.edu/call",
+                "source_date": "2026-11-10", "evidence": "Original call reviewed",
+                "verification": "source_verified",
+            }
+            source = root / "data" / "user_opportunities.json"
+            source.write_text(json.dumps({"schema_version": 1, "records": [record]}), encoding="utf-8")
+            snapshot = build(root, repository="ExampleUser/my-apps", data_mode="source")
+            published = snapshot["records"][0]
+            self.assertTrue(published["deadline_cutoff_verified"])
+            self.assertEqual(published["deadline_cutoff_utc"], "2027-06-01T22:59:00Z")
+            self.assertEqual(published["deadline_timezone"], "Europe/London")
+            self.assertNotIn("private", json.dumps(snapshot).lower())
+
+    def test_no_source_proof_never_becomes_verified(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "data").mkdir()
+            path = root / "data" / "user_opportunities.json"
+            base = {
+                "id": "LOCAL-1", "name": "Illustrative programme",
+                "deadline": "2027-06-01", "deadline_time": "23:59",
+                "deadline_timezone": "Europe/London", "verification": "unverified",
+            }
+            path.write_text(json.dumps({"schema_version": 1, "records": [base]}), encoding="utf-8")
+            record = build(root, repository="ExampleUser/my-apps", data_mode="source")["records"][0]
+            self.assertFalse(record["deadline_cutoff_verified"])
+            self.assertIsNone(record["deadline_cutoff_utc"])
+            for patch in (
+                {"deadline_cutoff_verified": True},
+                {"deadline_cutoff_verified": "true"},
+                {"deadline_time": "01:30", "deadline": "2027-03-28"},
+                {"deadline_timezone": "Bad/Timezone"},
+                {"deadline_time": "23:59", "deadline_timezone": ""},
+                {"deadline_cutoff_evidence": "Unattributed claim"},
+            ):
+                with self.subTest(patch=patch):
+                    path.write_text(json.dumps({"schema_version": 1, "records": [{**base, **patch}]}), encoding="utf-8")
+                    with self.assertRaises(ValueError):
+                        build(root, repository="ExampleUser/my-apps", data_mode="source")
 
 if __name__ == "__main__":
     unittest.main()
