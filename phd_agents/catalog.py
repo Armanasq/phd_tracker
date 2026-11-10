@@ -112,6 +112,10 @@ def agent_spec(value: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("Agent tools must be selected from the safe, deterministic tool registry")
     result = {"id": identity, "label": label, "description": str(value.get("description") or "")[:400],
               "instructions": instructions}
+    if "requirements" in value:
+        from .route_contract import normalize_requirements
+        result["requirements"] = normalize_requirements(value["requirements"])
+        result["requirements"].pop("schema_version", None)
     if tools is not None:
         result["tools"] = tools
     return result

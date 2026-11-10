@@ -21,6 +21,7 @@ from .proof_queue import evidence_work_queue
 from .claim_audit import audit_generated_claims
 from .prompt_contract import agent_system, conversation_block, build_agent_prompt
 from .source_claims import source_claims
+from .route_contract import assess_provider_contract
 
 def paper_radar_for_instance(root: Path, source: dict[str, Any]) -> list[dict[str, Any]]:
     instance = source.get("instance", {})
@@ -87,6 +88,11 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str | Non
     route = resolve_route(store, configuration["providers"], agent_id, provider_id)
     provider = route.provider
     provider_id = provider["id"]
+    compatibility = assess_provider_contract(
+        provider, agent.get("requirements"), stream_requested=on_delta is not None,
+    )
+    if not compatibility["compatible"]:
+        raise ValueError("Incompatible agent model route: " + ", ".join(compatibility["blockers"]))
     if not provider["local"] and not cloud_consent:
         raise PermissionError("Manual cloud inference requires fresh per-run applicant-data disclosure consent")
     if not isinstance(input_text, str) or len(input_text) > 5000:
@@ -225,16 +231,22 @@ def workflow_plan(store: Store, *, workflow_id: str, provider_id: str | None = N
     workflow = selected(options["workflows"], workflow_id, "workflow")
     agent_ids = workflow.get("steps") or [workflow["agent_id"]]
     known = {agent["id"] for agent in options["agents"]}
+    agent_definitions = {agent["id"]: agent for agent in options["agents"]}
     if not agent_ids or len(agent_ids) > 3 or any(agent not in known for agent in agent_ids):
         raise ValueError("Workflow must select 1–3 known agents")
     route_override = provider_id if provider_id not in (None, "", "auto") else workflow.get("provider_id", "auto")
     stages = []
     states = provider_states(store, options["providers"])
     cloud_providers = set()
+    compatibility_blockers = []
     scheduled_approval = bool(workflow.get("enabled") and workflow.get("schedule") in {"daily", "twice_daily", "weekly"})
     for index, agent in enumerate(agent_ids):
         route = resolve_route(store, options["providers"], agent, route_override)
         provider = route.provider
+        contract = assess_provider_contract(provider, agent_definitions[agent].get("requirements"))
+        compatibility_blockers.extend(
+            "stage_" + str(index + 1) + "_" + blocker for blocker in contract["blockers"]
+        )
         if not provider["local"]:
             cloud_providers.add(provider["id"])
             scheduled_approval = scheduled_approval and route.approved
@@ -249,10 +261,12 @@ def workflow_plan(store: Store, *, workflow_id: str, provider_id: str | None = N
             "scheduled_provider_approved": route.approved,
             "inference_state": states.get(provider["id"], {}).get("state", "needs_setup"),
             "inference_verified": states.get(provider["id"], {}).get("state") == "responded",
+            "capability_contract": contract,
         })
     blockers = []
     if cloud_providers and not cloud_consent:
         blockers.append("cloud_disclosure_consent_required")
+    blockers.extend(compatibility_blockers)
     probe_required = sorted({stage["provider_id"] for stage in stages if not stage["inference_verified"]})
     if not workflow.get("enabled"):
         scheduled_approval = False
@@ -270,6 +284,7 @@ def workflow_plan(store: Store, *, workflow_id: str, provider_id: str | None = N
         "manual_ready": not blockers,
         "execution_ready": not blockers and (len(stages) == 1 or not probe_required),
         "model_probe_required": probe_required,
+        "compatibility_blockers": compatibility_blockers,
         "blockers": blockers,
         "scheduled_policy_approved": scheduled_approval,
         "notice": "Multi-stage execution requires recent successful inference probes for all providers. This preview does not test external models, quotas or due times.",
@@ -281,6 +296,8 @@ def run_workflow(store: Store, root: Path, *, workflow_id: str,
                  input_text: str = "", cloud_consent: bool = False) -> dict[str, Any]:
     preview = workflow_plan(store, workflow_id=workflow_id, provider_id=provider_id,
                             cloud_consent=cloud_consent)
+    if preview["compatibility_blockers"]:
+        raise ValueError("Workflow provider capability mismatch: " + ", ".join(preview["compatibility_blockers"]))
     if not preview["manual_ready"]:
         raise PermissionError("Workflow requires explicit per-run cloud evidence disclosure before any agent stage")
     if len(preview["stages"]) > 1 and not preview["execution_ready"]:
