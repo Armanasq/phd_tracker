@@ -8,7 +8,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from phd_agents.recovery import restore_backup, runtime_lock, verify_backup
+from phd_agents.recovery import drill_backup, restore_backup, runtime_lock, verify_backup
 from phd_agents.store import ConflictError, Store
 
 
@@ -18,6 +18,27 @@ class VerifiedRestoreTests(unittest.TestCase):
         self.folder = tempfile.TemporaryDirectory()
         self.addCleanup(self.folder.cleanup)
         self.path = Path(self.folder.name) / "state.sqlite3"
+
+    def test_isolated_restore_drill_preserves_live_state(self) -> None:
+        live = Store(self.path)
+        live.update_application("APP-DRILL", {"notes": "backed up"}, 0)
+        backup = live.create_backup()
+        live.update_application("APP-DRILL", {"notes": "current"}, 1)
+        live.close()
+        result = drill_backup(backup["filename"], state_path=self.path, sha256=backup["sha256"])
+        self.assertEqual(result["status"], "passed")
+        self.assertTrue(result["restored_in_isolation"])
+        self.assertFalse(result["live_state_writes_performed"])
+        self.assertFalse(result["credentials_restored"])
+        self.assertFalse(result["off_host_encryption_verified"])
+        self.assertIn("applications", result["tables_verified"])
+        reopened = Store(self.path)
+        try:
+            self.assertEqual(reopened.get_application("APP-DRILL")["notes"], "current")
+        finally:
+            reopened.close()
+        with self.assertRaisesRegex(ValueError, "SHA-256"):
+            drill_backup(backup["filename"], state_path=self.path, sha256="0" * 64)
 
     def test_restores_verified_backup_and_preserves_previous_private_state(self) -> None:
         store = Store(self.path)
