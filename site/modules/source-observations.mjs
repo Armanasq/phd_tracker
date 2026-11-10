@@ -15,7 +15,7 @@ export function observationSummary(records) {
   const candidates = [...latest.entries()].map(([key,item])=>({...item,change_seen_in_loaded_history:observedChanges.has(key)}));
   for (const item of candidates) {
     if (item.change_seen_in_loaded_history) counts.changed++;
-    else if (item.drift === "unavailable_no_source_conclusion") counts.unavailable++;
+    if (item.drift === "unavailable_no_source_conclusion") counts.unavailable++;
     else if (item.drift === "unchanged_bytes") counts.unchanged++;
     else if (item.drift === "baseline_only") counts.baseline++;
     else counts.legacy++;
@@ -47,7 +47,7 @@ export function renderSourceObservations({records=[],loading=false,error="",filt
     if(selected==="all")return true;
     if(selected==="changed")return x.change_seen_in_loaded_history;
     if(selected==="unavailable")return x.drift==="unavailable_no_source_conclusion";
-    if(selected==="unchanged")return x.drift==="unchanged_bytes"&&!x.change_seen_in_loaded_history;
+    if(selected==="unchanged")return x.drift==="unchanged_bytes";
     if(selected==="baseline")return x.drift==="baseline_only";
     return !["source_bytes_changed_needs_review","unavailable_no_source_conclusion","unchanged_bytes","baseline_only"].includes(x.drift);
   });
@@ -68,8 +68,8 @@ export function renderSourceObservations({records=[],loading=false,error="",filt
     '<section class="os-panel"><div class="os-kpi-strip">'+
     kpi("Recent sources",data.sources,"Latest result in the loaded history")+
     kpi("Drift seen",data.counts.changed,"Changes in loaded history; review unknown")+
-    kpi("Unavailable",data.counts.unavailable,"No source conclusion")+
-    kpi("Unknown",data.counts.legacy,"Legacy/unclassified")+
+    kpi("Unavailable",data.counts.unavailable,"Latest observation unavailable")+
+    kpi("Unknown",data.counts.legacy,"Latest observation unclassified")+
     '</div><p class="os-footnote">A later byte-identical fetch does not clear an earlier change. Review resolution is not tracked; this view covers only the bounded loaded history. An initial baseline is not proof of unchanged institutional facts.</p></section>'+
     '<section class="os-panel"><div class="os-panel-heading"><div><h2>Review queue</h2><p>Each source is shown once at its latest observation within the loaded history. Older records remain in private SQLite.</p></div></div>'+
     '<label class="os-field"><span>Observation class</span><select data-os-observation-filter aria-label="Filter source observations by outcome">'+
