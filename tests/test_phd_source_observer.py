@@ -73,6 +73,7 @@ class PrivateSourceObservationTests(unittest.TestCase):
                    ("legacy", self.url, "http_error", "2026-11-09T00:00:00+00:00"))
         db.commit()
         db.close()
+        db_path.chmod(0o600)
         migrated = Store(db_path)
         self.addCleanup(migrated.close)
             history = recent_observations(migrated)
