@@ -15,6 +15,12 @@ _SECRET_BASENAMES = frozenset({
     ".pypirc", ".npmrc",
 })
 _SECRET_SUFFIXES = frozenset({".sqlite", ".sqlite3", ".db", ".pem", ".key", ".p12", ".pfx"})
+_PUBLIC_SUFFIXES = frozenset({
+    ".html", ".htm", ".js", ".mjs", ".css", ".json", ".svg", ".xml",
+    ".md", ".txt", ".webmanifest", ".ico", ".png", ".jpg", ".jpeg",
+    ".webp", ".woff2", ".wasm",
+})
+_PRIVATE_NAME_TOKENS = frozenset({"secret", "secrets", "private", "credential", "credentials", "password", "passwords", "backup", "backups"})
 _SHA40 = re.compile(r"[0-9a-fA-F]{40}\Z")
 
 
@@ -31,9 +37,15 @@ def site_digests(root: Path) -> dict[str, str]:
         if relative == "release-manifest.json":
             continue
         name = entry.name.casefold()
+        components = [part.casefold() for part in entry.relative_to(root).parts]
         if (name in _SECRET_BASENAMES or name == ".env" or name.startswith(".env.")
-                or entry.suffix.casefold() in _SECRET_SUFFIXES):
+                or entry.suffix.casefold() in _SECRET_SUFFIXES
+                or any(part.startswith(".") for part in components)
+                or any(token in component.replace("-", "_").split("_")
+                       for component in components for token in _PRIVATE_NAME_TOKENS)):
             raise ValueError("Private or credential file cannot be included in GitHub Pages: " + relative)
+        if entry.suffix.casefold() not in _PUBLIC_SUFFIXES:
+            raise ValueError("Unsupported public asset type in GitHub Pages: " + relative)
         if len(results) >= _MAX_FILES:
             raise ValueError("Static site exceeded the asset-count limit")
         if entry.stat().st_size > _MAX_FILE_BYTES:

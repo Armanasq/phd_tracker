@@ -51,3 +51,7 @@ Source observations referenced by captured claims or review events are retained 
 ## Pages artifact integrity
 
 The Pages pipeline rejects recognized credential files, private SQLite databases and symlinks from its static bundle, creates SHA-256 checksums for all published files and verifies downloaded assets against the commit-bound manifest. These are useful release-integrity controls, **not** exhaustive secret scanning or evidence-truth certification. A fork owner must still review Git history, static inputs and any public data before publication.
+
+### Static asset allowlist
+
+Release generation allows only ordinary static asset formats (HTML, JavaScript, CSS, JSON, XML, Markdown, text, supported images/fonts and WebAssembly), and rejects hidden directories, recognized private/credential/backup paths, database auxiliary files, arbitrary logs, spreadsheets and other unexpected artifacts. This is a file-boundary check rather than content-level secret detection: private values can still be embedded in an otherwise valid JSON or JS file, so independent source-data review remains mandatory for each public fork.

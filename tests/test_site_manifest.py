@@ -55,6 +55,26 @@ class SiteManifestTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             site_digests(self.root)
 
+    def test_unsupported_private_artifacts_and_hidden_dirs_fail_closed(self) -> None:
+        for name in ("application.sqlite-wal", "app.log", "app.xlsx", "records.csv",
+                     "private_records.json", "credentials-backup.txt", ".aws/config",
+                     "account_token.json", "old_backup/site.json"):
+            target = self.root / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(b"UNTRUSTED_INTERNAL_TEST")
+            with self.subTest(name=name), self.assertRaises(ValueError):
+                site_digests(self.root)
+            target.unlink()
+
+    def test_allowlisted_static_media_can_be_published(self) -> None:
+        images = self.root / "images"
+        images.mkdir()
+        (images / "research-diagram.webp").write_bytes(b"static-image-test")
+        (images / "logo.svg").write_bytes(b"<svg xmlns='http://www.w3.org/2000/svg'/>")
+        manifest = build_manifest(self.root, COMMIT)
+        self.assertIn("images/research-diagram.webp", manifest["sha256"])
+        verify_manifest(self.root, manifest)
+
     def test_invalid_commit_or_missing_entrypoint_rejected(self) -> None:
         with self.assertRaises(ValueError):
             build_manifest(self.root, "latest")
