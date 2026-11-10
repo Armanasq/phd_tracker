@@ -41,7 +41,9 @@ def extract_date_candidates(
         raise ValueError("Source text must be in its stored normalized form")
     if not isinstance(source_digest, str) or not re.fullmatch(r"[a-f0-9]{64}", source_digest):
         raise ValueError("Source candidate requires a captured byte digest")
-    if not isinstance(text_digest, str) or hashlib.sha256(text.encode("utf-8")).hexdigest() != text_digest and not source_truncated:
+    if not isinstance(text_digest, str) or not re.fullmatch(r"[a-f0-9]{64}", text_digest):
+        raise ValueError("Source text digest must be a SHA-256 hex digest")
+    if not source_truncated and hashlib.sha256(text.encode("utf-8")).hexdigest() != text_digest:
         raise ValueError("Full retained source text must match the captured text digest")
     matches: list[tuple[int, int, str]] = []
     for pattern in _DATE_PATTERNS:
@@ -61,9 +63,11 @@ def extract_date_candidates(
     exceeded = len(matches) > _MAX_CANDIDATES
     results = []
     for start, end, iso in matches[:_MAX_CANDIDATES]:
-        context_start = max(0, start - 100)
-        context_end = min(len(text), end + 50)
-        context = text[context_start:context_end]
+        previous_boundary = max(text.rfind(character, 0, start) for character in ".!?;\n")
+        next_positions = [position for character in ".!?;\n"
+                          if (position := text.find(character, end)) >= 0]
+        next_boundary = min(next_positions) if next_positions else len(text)
+        context = text[max(previous_boundary + 1, start - 130):min(next_boundary, end + 110)]
         detected = bool(_DEADLINE_LANGUAGE.search(context))
         quote_start = max(0, start - 110)
         quote_end = min(len(text), end + 110)
