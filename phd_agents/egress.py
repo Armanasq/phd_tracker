@@ -94,4 +94,4 @@ class PinnedHTTPSHandler(HTTPSHandler):
 
     def https_open(self, request: object) -> object:
         return self.do_open(PinnedHTTPSConnection, request, context=self._context,
-                            check_hostname=self._check_hostname, local=self.local)
+                            local=self.local)
