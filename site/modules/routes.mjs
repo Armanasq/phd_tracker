@@ -1,6 +1,6 @@
 export const VIEWS=Object.freeze([
   ["dashboard","home","Overview"],["applications","file","Applications"],["discovery","database","Discovery"],
-  ["readiness","check","Readiness"],["operations","layers","Operations"],["actions","check","Actions"],
+  ["readiness","check","Readiness"],["documents","file","Documents"],["operations","layers","Operations"],["actions","check","Actions"],
   ["ledger","check","Task ledger"],["calendar","calendar","Calendar"],["pipeline","columns","Pipeline"],
   ["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],
   ["review","shield","Verification"],["archive","archive","Archive"],["sources","database","Sources"],
@@ -12,6 +12,8 @@ const ALIASES=Object.freeze({
   home:"dashboard",
   opportunities:"applications",
   research:"discovery",
+  dossier:"documents",
+  document:"documents",
   models:"settings",
   providers:"settings",
   connect:"settings",
