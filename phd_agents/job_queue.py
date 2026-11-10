@@ -42,6 +42,10 @@ def enqueue_local_agent(
     now = _iso(_utc_now())
     identity = uuid.uuid4().hex
     with store.db:
+        store.db.execute("BEGIN IMMEDIATE")
+        occupied = store.db.execute("SELECT COUNT(*) FROM worker_jobs WHERE status IN (\'queued\',\'running\')").fetchone()[0]
+        if occupied >= 100:
+            raise PermissionError("Background job queue has reached its bounded capacity")
         store.db.execute(
             "INSERT INTO worker_jobs(id,agent_id,provider_id,application_id,input_text,status,"
             "attempts,max_attempts,available_at,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
