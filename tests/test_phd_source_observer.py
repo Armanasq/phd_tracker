@@ -75,15 +75,14 @@ class PrivateSourceObservationTests(unittest.TestCase):
         db.close()
         migrated = Store(db_path)
         self.addCleanup(migrated.close)
-        if True:
             history = recent_observations(migrated)
-            self.assertEqual(len(history), 1)
-            self.assertIsNone(history[0]["drift"])
-            result = observe_record(migrated, "legacy", self.url,
-                                    fetcher=lambda _: {"status": "http_error", "http_status": 404,
-                                                       "content_sha256": None, "content_length": 0})
-            self.assertEqual(result["drift"], "unavailable_no_source_conclusion")
-            self.assertEqual(recent_observations(migrated)[0]["drift"], result["drift"])
+        self.assertEqual(len(history), 1)
+        self.assertIsNone(history[0]["drift"])
+        result = observe_record(migrated, "legacy", self.url,
+                                fetcher=lambda _: {"status": "http_error", "http_status": 404,
+                                                   "content_sha256": None, "content_length": 0})
+        self.assertEqual(result["drift"], "unavailable_no_source_conclusion")
+        self.assertEqual(recent_observations(migrated)[0]["drift"], result["drift"])
 
     def test_unsupported_media_and_unsafe_endpoints(self):
         fake = FakeTransport(b"%PDF-1.5", "application/pdf")
