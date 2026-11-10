@@ -4,7 +4,7 @@ import hashlib
 import re
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 from urllib.error import HTTPError, URLError
 from urllib.request import ProxyHandler, Request, build_opener
 
@@ -55,7 +55,8 @@ def fetch_public_source(url: str, *, timeout: int = 15, max_bytes: int = 1_000_0
 
 def observe_record(
     store: Store, application_id: str, source_url: str, *,
-    observed_at: datetime | None = None, fetcher=fetch_public_source,
+    observed_at: datetime | None = None,
+    fetcher: Callable[[str], dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     if not isinstance(application_id, str) or not 1 <= len(application_id) <= 120:
         raise ValueError("Invalid source observation identifier")
@@ -65,7 +66,7 @@ def observe_record(
     instant = observed_at or datetime.now(timezone.utc)
     if instant.tzinfo is None:
         raise ValueError("Observation requires a timezone-aware time")
-    result = fetcher(validated)
+    result = (fetcher or fetch_public_source)(validated)
     if not isinstance(result, dict) or result.get("status") not in {
         "fetched", "http_error", "redirect_denied", "connection_error",
         "unsupported_media_type", "oversize",
