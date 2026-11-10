@@ -10,7 +10,7 @@ const cleanId = value => String(value||"").trim().toLowerCase().replace(/[^a-z0-
 const opt = (items,value) => choose(items,value);
 
 export function createConsole({notify,onChange,navigate,getRecords,getSourceRecords,onReload,getView}) {
- const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:""};
+ const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:"",jobs:[]};
  const providers = () => state.data?.catalog?.providers || [];
  const agents = () => state.data?.catalog?.agents || [];
  const workflows = () => state.data?.catalog?.workflows || [];
@@ -91,6 +91,8 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    if(data.security?.local_only!==true||!Array.isArray(data.catalog?.providers))throw new Error("Private runtime identity could not be verified");
    state.online=true;
    state.data=data;
+   const jobs=await request("/api/jobs").catch(()=>({jobs:[]}));
+   state.jobs=Array.isArray(jobs.jobs)?jobs.jobs:[];
    state.selectedAgent=agents().some(a=>a.id===state.selectedAgent)?state.selectedAgent:(prefs().default_agent||agents()[0]?.id);
    state.selectedProvider=providers().some(p=>p.id===state.selectedProvider)?state.selectedProvider:prefs().default_provider;
    state.selectedWorkflow=workflows().some(w=>w.id===state.selectedWorkflow)?state.selectedWorkflow:workflows()[0]?.id;
@@ -386,7 +388,8 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
     btn("Prepare next steps","prompt","steps","chip")+'</div>'+
    '<div class="os-run-footer"><div class="os-route-description">'+
    '<span class="os-status-dot '+(route?.state==="responded"?"is-live":"")+'"></span><div><strong>'+esc(route?.provider_label||"No route")+'</strong><small>'+esc(route?.model||"Configure provider")+' · '+esc(route?.source==="agent_assignment"?"Agent route":"Workspace route")+'</small></div></div>'+
-   '<button type="submit" class="os-btn primary" '+(state.busy||!route?.allowed?"disabled":"")+'>Run analysis</button></div>'+
+   '<button type="submit" class="os-btn primary" '+(state.busy||!route?.allowed?"disabled":"")+'>Run analysis</button>'+
+   '<button type="button" class="os-btn quiet" data-os-action="queue-agent" '+(state.busy||!route?.allowed||!providerForAgent(agentId)?.local?"disabled":"")+'>Queue locally</button></div>'+
    (!route?.allowed?'<p class="os-warning">This agent is assigned to a cloud provider that has not been approved for automatic use. Activate it in Settings first.</p>':'')+
    '</form></section>'+
    '<aside class="os-copilot-side">'+box("Operating context","Evidence and actions remain traceable.",
@@ -413,7 +416,17 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    '<div><strong>'+esc(stats.total_output_tokens??0)+'</strong><span>Reported output tokens</span></div>'+
    '<div><strong>'+esc(stats.total_failed??0)+'</strong><span>Failures</span></div></div>'+
    box("Agent executions","Costs are not inferred without verified provider pricing.",'<div class="os-ledger">'+ledger+'</div>')+
-   box("Per-provider usage","Only measured calls and reported tokens are included.",'<div class="os-ledger">'+usage+'</div>')+'</section>';
+   box("Per-provider usage","Only measured calls and reported tokens are included.",'<div class="os-ledger">'+usage+'</div>')+
+   box("Private local background jobs","Durable SQLite queue. A separate worker process must be running; cloud jobs are not permitted.",
+     '<div class="os-actions">'+btn("Copy worker command","copy-worker-command","","quiet")+'</div>'+
+     '<div class="os-ledger">'+(state.jobs.length?state.jobs.map(job=>
+       '<article class="os-ledger-row"><div><strong>'+esc(job.agent_id)+'</strong><small>'+
+       esc(job.id.slice(0,12))+' · '+esc(job.attempts)+'/'+esc(job.max_attempts)+
+       ' attempts · '+esc(stamp(job.updated_at))+'</small></div>'+
+       badge(job.status,job.status==="failed"?"warn":job.status==="succeeded"?"good":"")+
+       ((!["succeeded","failed","canceled"].includes(job.status)&&!job.cancel_requested)?
+         btn("Request cancel","cancel-job",job.id,"quiet"):"")+'</article>').join(""):
+       '<p class="os-empty">No local jobs queued. Use Queue locally from Copilot.</p>')+'</div>')+'</section>';
  }
  const operations=createOperations({request,onChange,onReload,getRecords:getSourceRecords||getRecords,notify});
  const browserModel=createBrowserModel({notify,onChange,navigate,getSourceRecords:getSourceRecords||getRecords});
@@ -454,7 +467,31 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    });return;
   }
   if(action==="copy-command"){await navigator.clipboard?.writeText("python -m phd_agents serve --port 8765");notify("Start command copied");return;}
+  if(action==="copy-worker-command"){await navigator.clipboard?.writeText("python -m phd_agents worker-loop --interval-seconds 3");notify("Local worker command copied");return;}
   if(!isLive())return;
+  if(action==="queue-agent"){
+   const form=document.querySelector('form[data-os-form="run"]');
+   if(!form)return;
+   const agentId=form.elements.agent_id.value;
+   const provider=providerForAgent(agentId);
+   if(!provider?.local){notify("Queued jobs are local-only. Select a verified local model.");return;}
+   const input=String(form.elements.prompt.value||"").trim();
+   if(!input||input.length>5000){notify("Enter a research question before queueing.");return;}
+   await change(async()=>{
+    const result=await request("/api/jobs/enqueue",{agent_id:agentId,provider_id:provider.id,
+     input_text:input,application_id:form.elements.application_id.value||null});
+    state.message="Queued job "+result.job.id.slice(0,12)+". Start a private worker process to execute independently of this tab.";
+    navigate("activity");
+   });return;
+  }
+  if(action==="cancel-job"){
+   await change(async()=>{
+    const result=await request("/api/jobs/"+encodeURIComponent(id)+"/cancel",{});
+    state.message=result.job.status==="running"?
+     "Cancellation requested. An in-flight model call may still complete.":
+     "Queued job cancelled.";
+   });return;
+  }
   if(action==="new-provider"){selectConnection("__new__");state.tab="connections";return;}
   if(action==="edit-provider"){selectConnection(id);state.tab="connections";return;}
   if(action==="toggle-providers"){state.showAllProviders=!state.showAllProviders;onChange();return;}
