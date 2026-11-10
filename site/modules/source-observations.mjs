@@ -60,13 +60,13 @@ export function renderSourceObservations({records=[],loading=false,error="",filt
     '<p>Recorded official-source byte comparisons. No automatic eligibility or deadline conclusions.</p></div><div class="os-head-actions">'+
     '<button type="button" class="os-btn quiet" data-os-action="refresh-observations"'+(loading?' disabled':'')+'>Refresh history</button></div></div>'+
     '<section class="os-panel"><div class="os-kpi-strip">'+
-    kpi("Observed sources",data.sources,"Latest record per source")+
+    kpi("Recent sources",data.sources,"Latest result in the loaded history")+
     kpi("Changed",data.counts.changed,"Requires manual comparison")+
     kpi("Unavailable",data.counts.unavailable,"No source conclusion")+
     kpi("Unknown",data.counts.legacy,"Legacy/unclassified")+
     '</div><p class="os-footnote">Byte stability does not verify an institution’s current requirements. An initial baseline is not proof of unchanged content.</p></section>'+
-    '<section class="os-panel"><div class="os-panel-heading"><div><h2>Review queue</h2><p>Each source is shown once, at its most recent recorded observation; historical observations remain in private SQLite.</p></div></div>'+
-    '<label class="os-field"><span>Observation class</span><select data-os-observation-filter>'+
+    '<section class="os-panel"><div class="os-panel-heading"><div><h2>Review queue</h2><p>Each source is shown once at its latest observation within the loaded history. Older records remain in private SQLite.</p></div></div>'+
+    '<label class="os-field"><span>Observation class</span><select data-os-observation-filter aria-label="Filter source observations by outcome">'+
     [["all","All"],["changed","Changed bytes"],["unavailable","Unavailable"],["unchanged","Unchanged bytes"],["baseline","Initial baselines"],["legacy","Legacy unknown"]].map(([value,label])=>
       '<option value="'+value+'"'+(selected===value?' selected':'')+'>'+label+'</option>').join("")+
     '</select></label>'+
