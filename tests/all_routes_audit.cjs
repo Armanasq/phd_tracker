@@ -22,7 +22,8 @@ async function staticServer(root){
  return {server:s,url:'http://127.0.0.1:'+s.address().port}
 }
 async function check(browser,url,views,results,mode){
- for(const [device,width,height] of SIZES){
+ for(let batch=0;batch<SIZES.length;batch+=2){
+ await Promise.all(SIZES.slice(batch,batch+2).map(async([device,width,height])=>{
   const page=await browser.newPage({viewport:{width,height}}),errors=[],httpErrors=[];
   page.on('pageerror',e=>errors.push(e.message));
   page.on('response',r=>{
@@ -65,6 +66,7 @@ async function check(browser,url,views,results,mode){
    assert.deepEqual(errors,[],mode+' '+device+' JavaScript errors');
    assert.deepEqual(httpErrors,[],mode+' '+device+' HTTP errors');
   }finally{await page.close()}
+ }));
  }
 }
 async function main(){
@@ -92,6 +94,9 @@ async function main(){
    assert.match(await page.locator('#body').innerText(),/local model connection/i);
 
   }finally{await page.close()}
+  const modeOrder={public:0,private:1},deviceOrder=Object.fromEntries(SIZES.map(([id],index)=>[id,index]));
+  const routeOrder=Object.fromEntries(TRACKER.map((id,index)=>[id,index]));
+  results.sort((a,b)=>modeOrder[a.mode]-modeOrder[b.mode]||deviceOrder[a.device]-deviceOrder[b.device]||routeOrder[a.view]-routeOrder[b.view]);
   await fs.writeFile(path.join(out,'all-routes-audit.json'),JSON.stringify({status:'pass',checks:results.length,results},null,2));
   console.log('All '+results.length+' route/viewport checks passed');
  }finally{
