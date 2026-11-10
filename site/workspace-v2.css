@@ -383,3 +383,11 @@ body.dark .os-context-banner{background:#223155;border-color:#425780}
 .os-schedule-results strong{font-size:12px}
 .os-schedule-results p{color:var(--muted);margin:6px 0}
 @media(max-width:680px){.os-schedule-row{align-items:flex-start;flex-direction:column}.os-schedule-summary{gap:10px}}
+
+
+/* Browser-local inference view */
+.bm-history {display:flex;flex-direction:column;gap:12px;max-height:48rem;overflow:auto;padding:12px 0;margin-bottom:16px;}
+.bm-message {padding:14px 16px;border:1px solid var(--line, #d6dbdc);border-radius:12px;background:var(--surface, transparent);min-width:0;}
+.bm-message small {display:block;font-size:10px;letter-spacing:.09em;font-weight:700;margin-bottom:8px;color:var(--muted, #667085);}
+.bm-message .os-answer-text {white-space:pre-wrap;overflow-wrap:anywhere;margin:0;max-height:40rem;overflow-y:auto;font-family:inherit;font-size:13px;line-height:1.6;}
+@media(max-width:600px){.bm-message{padding:12px}.bm-history{max-height:65vh}}
