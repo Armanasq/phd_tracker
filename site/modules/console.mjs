@@ -1,4 +1,5 @@
 import {createOperations} from "./operations.mjs";
+import {createBrowserModel} from "./browser-model.mjs";
 const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const pretty = value => String(value ?? "").replaceAll("_"," ").replace(/\b\w/g, c => c.toUpperCase());
 const short = (value, length=125) => String(value ?? "").slice(0,length);
@@ -407,8 +408,9 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    box("Per-provider usage","Only measured calls and reported tokens are included.",'<div class="os-ledger">'+usage+'</div>')+'</section>';
  }
  const operations=createOperations({request,onChange,onReload,getRecords:getSourceRecords||getRecords,notify});
+ const browserModel=createBrowserModel({notify,onChange,navigate,getSourceRecords:getSourceRecords||getRecords});
  function view(name,{records=[]}={}) {
-  if(!isLive())return offline(name);
+  if(!isLive())return ["ai","settings"].includes(name)?browserModel.render(name):offline(name);
   if(name==="ai")return copilot(records);
   if(name==="operations")return operations.view();
   if(name==="settings")return settings();
@@ -425,6 +427,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   if(action==="go"){navigate(id);return;}
   if(action==="tab"){state.tab=id;onChange();return;}
   if(action==="reconnect"){await connect();return;}
+  if(action.startsWith("bm-")){await browserModel.action(action.slice(3));return;}
   if(action==="state-diagnostics"){
    if(!isLive())return;
    await change(async()=>{
@@ -522,6 +525,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   const form=event.target,kind=form.dataset.osForm;
   if(!kind)return;
   event.preventDefault();
+  if(kind.startsWith("bm-")){try{await browserModel.submit(event);}catch(error){notify(short(error.message,220));}return;}
   const values=Object.fromEntries(new FormData(form));
   if(kind==="provider"){
    const id=cleanId(values.id||values.label);
@@ -622,6 +626,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   });
   document.addEventListener("input",event=>{
    if(event.target.id==="osPrompt")state.prompt=event.target.value;
+   browserModel.input(event);
   });
  }
  setupEvents();
