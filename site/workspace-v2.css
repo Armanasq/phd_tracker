@@ -391,3 +391,14 @@ body.dark .os-context-banner{background:#223155;border-color:#425780}
 .bm-message small {display:block;font-size:10px;letter-spacing:.09em;font-weight:700;margin-bottom:8px;color:var(--muted, #667085);}
 .bm-message .os-answer-text {white-space:pre-wrap;overflow-wrap:anywhere;margin:0;max-height:40rem;overflow-y:auto;font-family:inherit;font-size:13px;line-height:1.6;}
 @media(max-width:600px){.bm-message{padding:12px}.bm-history{max-height:65vh}}
+
+
+.discovery-controls{display:grid;gap:12px;margin:16px 0;min-width:0}
+.discovery-controls .buttons{display:flex;flex-wrap:wrap;gap:8px}
+.discovery-controls .field{min-width:0;max-width:540px}
+.discovery-row{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
+.discovery-row>div:first-child{flex:1;min-width:0}
+.discovery-row small{display:block;margin-top:6px;overflow-wrap:anywhere}
+.discovery-row .linkset{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+.discovery-actions{display:flex;align-items:flex-end;flex-direction:column;gap:8px;flex-shrink:0;text-align:right}
+@media(max-width:600px){.discovery-row{flex-direction:column;gap:12px}.discovery-actions{align-items:flex-start;flex-direction:row;flex-wrap:wrap;text-align:left;width:100%}.discovery-controls .buttons{gap:6px}}
