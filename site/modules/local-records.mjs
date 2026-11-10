@@ -52,10 +52,19 @@ export function createLocalRecord(input,id){
  const notes=safeText(input.notes??"",750,"local notes");
  const followup=optionalDay(input.followup,"follow-up date");
  const deadline=optionalDay(input.deadline,"deadline");
+ const cutoffTime=safeText(input.deadline_time??"",5,"cutoff time");
+ const cutoffZone=safeText(input.deadline_timezone??"",80,"cutoff timezone");
+ if(Boolean(cutoffTime)!==Boolean(cutoffZone))throw new TypeError("Record both the cutoff time and institution timezone");
+ if(cutoffTime){
+  if(!deadline||!/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(cutoffTime))throw new TypeError("A cutoff needs a valid deadline and HH:MM time");
+  try{new Intl.DateTimeFormat("en-GB",{timeZone:cutoffZone}).format(new Date())}catch{throw new TypeError("Invalid institution IANA timezone")}
+ }
  const updated=typeof input.updated_at==="string"&&/^\d{4}-\d{2}-\d{2}T/.test(input.updated_at)?input.updated_at:null;
  return {
   id,record_type:"tracked",local_only:true,name,country:safeText(input.country??"",70,"country"),
   institution:safeText(input.institution??"",160,"institution"),deadline,
+  deadline_time:cutoffTime||null,deadline_timezone:cutoffZone||null,
+  deadline_cutoff_verified:false,deadline_cutoff_utc:null,
   deadline_kind:"Recorded date; cutoff unverified",deadline_type:"unverified",verification,
   verification_note:"User-entered locally; not verified by public source pipeline",
   status,status_confirmed:false,submission_receipt:"",
@@ -170,6 +179,7 @@ export function exportIndependentSource(records,today,timezone="UTC",committed=[
   records:[...existing,...local.map(r=>({
    id:r.id,record_type:"tracked",name:r.name,institution:r.institution,country:r.country,deadline:r.deadline,
    verification:"unverified",source_url:r.source_url?new URL(r.source_url).origin+new URL(r.source_url).pathname:"",
+   ...(r.deadline_time&&r.deadline_timezone?{deadline_time:r.deadline_time,deadline_timezone:r.deadline_timezone}:{}),
    documents:r.documents,
   }))],
  };

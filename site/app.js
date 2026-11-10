@@ -353,7 +353,8 @@ const fields='<div class="field"><label for="editPriority">My priority</label><s
 '<div class="field"><label for="editFollowup">Next faculty follow-up</label><input id="editFollowup" type="date" class="input" value="'+escapeHTML(r.followup||"")+'"></div>'+
 '<div class="field"><label for="editContact">Contact / outreach stage</label><select id="editContact" class="select">'+opts(["unrecorded","to_contact","contacted","awaiting_reply","followup_due","replied","declined","completed"],r.contact_status)+'</select></div>'+
 '<div class="field"><label for="editStep">Next action</label><textarea id="editStep" class="input" maxlength="650">'+escapeHTML(r.next_step||"")+'</textarea></div>'+
-'<div class="field"><label for="editNotes">Local notes (this device)</label><textarea id="editNotes" class="input" maxlength="750">'+escapeHTML(r.notes||"")+'</textarea></div>'+
+(r.local_only?'<div class="field"><label for="editCutoffTime">Recorded closing time (unverified)</label><input id="editCutoffTime" class="input" type="time" value="'+escapeHTML(r.deadline_time||"")+'"></div><div class="field"><label for="editCutoffZone">Institution IANA timezone</label><input id="editCutoffZone" class="input" maxlength="80" value="'+escapeHTML(r.deadline_timezone||"")+'" placeholder="Europe/London"><small class="subtle">Both fields are required together. Local edits never attest to cutoff verification.</small></div>':'')+
+ '<div class="field"><label for="editNotes">Local notes (this device)</label><textarea id="editNotes" class="input" maxlength="750">'+escapeHTML(r.notes||"")+'</textarea></div>'+
 '<div class="field"><label for="editReceipt">Receipt link (local only, HTTPS)</label><input id="editReceipt" type="url" class="input" value="'+escapeHTML(r.receipt||r.submission_receipt||"")+'" placeholder="https://..."><p class="form-error" id="receiptError" role="alert"></p><small class="subtle">Private browser-local URL; never sent to public GitHub.</small></div>'+
 '<h3>Document readiness</h3><p class="subtle">'+escapeHTML(readiness.label)+'. Unknown is not missing. Verify the complete official document list.</p><div class="documents">'+docs.map(([id,st])=>'<div class="docrow"><span>'+escapeHTML(state.data.documents[id]||id)+'</span><select class="select" aria-label="Readiness for '+escapeHTML(state.data.documents[id]||id)+'" data-document="'+escapeHTML(id)+'">'+opts(["unknown","ready","in_progress","not_started","not_applicable"],st)+'</select></div>').join("")+'</div>';
 openModal('<div class="eyebrow">'+escapeHTML(r.id)+' · '+escapeHTML(r.record_type)+(sync!=="none"?' · '+escapeHTML(sync):"")+'</div><h2>'+escapeHTML(r.name)+'</h2>',
@@ -392,7 +393,12 @@ function saveRecord(copy){
  if(status==="submitted"&&r.status!=="submitted"&&!confirm("Confirm that this application was actually submitted through the official portal?"))return;
  if(verification==="owner_verified"&&r.verification!=="owner_verified"&&!confirm("Confirm that you inspected the official source, including the exact deadline?"))return;
  const documents={};$("dialogRoot").querySelectorAll("[data-document]").forEach(el=>documents[el.dataset.document]=el.value);
- if(r.local_only){saveLocalRecord({...r,status,verification,priority,followup:followup||null,contact_status,next_step,notes,receipt,document_states:documents,updated_at:new Date().toISOString()});closeModal();render();notify("Local opportunity updated. Export a backup to preserve it.");return}
+ if(r.local_only){try{
+  saveLocalRecord({...r,status,verification,priority,followup:followup||null,contact_status,next_step,notes,receipt,
+   deadline_time:$("editCutoffTime")?.value||null,deadline_timezone:$("editCutoffZone")?.value.trim()||null,
+   document_states:documents,updated_at:new Date().toISOString()});
+  closeModal();render();notify("Local opportunity updated. Export a backup to preserve it.");
+ }catch(error){notify("Local record rejected: "+String(error.message||error))}return}
  state.drafts[id]={...withDraftBase(id),status,verification,priority,followup:followup||null,contact_status,next_step,notes,receipt,documents,_sync_status:"draft"};
  saveStore(STORE,state.drafts);closeModal();render();
  if(copy)issueCommand(id);else notify("Saved on this device. GitHub confirmation is still required.");
@@ -442,6 +448,8 @@ function openLocalCreator(){
  openModal("<h2>Add an opportunity on this device</h2>",'<p class="muted">This record is local-only; it has not been verified, published or submitted. Export a backup before clearing browser data.</p>'+
  '<div class="field"><label for="localName">Programme or position</label><input id="localName" class="input" maxlength="350" required placeholder="PhD in robotics"></div>'+
  '<div class="field"><label for="localDeadline">Recorded deadline (optional)</label><input id="localDeadline" class="input" type="date"></div>'+
+ '<div class="field"><label for="localCutoffTime">Recorded closing time (optional, unverified)</label><input id="localCutoffTime" class="input" type="time"><small class="subtle">Record the institution-local time, not your own local time.</small></div>'+
+ '<div class="field"><label for="localCutoffZone">Institution timezone (IANA; paired with time)</label><input id="localCutoffZone" class="input" maxlength="80" placeholder="Europe/London"><small class="subtle">A recorded clock is provisional until an official source establishes the cutoff.</small></div>'+
  '<div class="field"><label for="localCountry">Country</label><input id="localCountry" class="input" maxlength="70"></div>'+
  '<div class="field"><label for="localSource">Public official-source URL (optional, HTTPS)</label><input id="localSource" class="input" type="url" placeholder="https://university.example/"></div>'+
  '<div class="field"><label for="localNext">Next action</label><textarea id="localNext" class="input" maxlength="650" placeholder="Verify the primary source, eligibility and funding"></textarea></div>'+
@@ -451,7 +459,7 @@ function openLocalCreator(){
 function createLocal(){
  try{
   if(!globalThis.crypto?.randomUUID)throw new Error("Secure browser UUID generation is unavailable.");
-  const input={name:$("localName").value,country:$("localCountry").value,deadline:$("localDeadline").value,source_url:$("localSource").value,next_step:$("localNext").value};
+  const input={name:$("localName").value,country:$("localCountry").value,deadline:$("localDeadline").value,deadline_time:$("localCutoffTime").value,deadline_timezone:$("localCutoffZone").value,source_url:$("localSource").value,next_step:$("localNext").value};
   const id="LOCAL-"+globalThis.crypto.randomUUID(),record=createLocalRecord(input,id);
   if(sourceRecord(id))throw new Error("Generated identifier collides with an existing opportunity");
   if(state.localRecords.length>=1000)throw new Error("Maximum 1000 device-local opportunities");

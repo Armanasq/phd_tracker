@@ -110,3 +110,19 @@ test("independent source re-export preserves verified final cutoff fields but no
  assert.throws(()=>exportIndependentSource([],"2026-11-09","UTC",[{...existing,deadline_timezone:null}]),/paired/);
  assert.throws(()=>exportIndependentSource([],"2026-11-09","UTC",[{...existing,deadline_cutoff_evidence:""}]),/proof/);
 });
+
+test("device-only recorded clocks stay unverified when exported to a fork",()=>{
+ const row=createLocalRecord({...input,deadline_time:"23:59",deadline_timezone:"Europe/London"},id);
+ assert.equal(row.deadline_time,"23:59");
+ assert.equal(row.deadline_timezone,"Europe/London");
+ assert.equal(row.deadline_cutoff_verified,false);
+ const exported=exportIndependentSource([row],"2026-11-09","Europe/London").records[0];
+ assert.equal(exported.deadline_time,"23:59");
+ assert.equal(exported.deadline_timezone,"Europe/London");
+ assert.equal(exported.verification,"unverified");
+ assert.notEqual(exported.deadline_cutoff_verified,true);
+ assert.equal(Object.hasOwn(exported,"deadline_cutoff_utc"),false);
+ for(const change of ([{deadline_timezone:""},{deadline_time:""},{deadline_time:"24:03"},{deadline_timezone:"Nowhere/Invalid"},{deadline:null}])){
+  assert.throws(()=>createLocalRecord({...input,deadline_time:"23:59",deadline_timezone:"Europe/London",...change},id),TypeError);
+ }
+});
