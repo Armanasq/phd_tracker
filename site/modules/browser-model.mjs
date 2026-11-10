@@ -274,6 +274,7 @@ export function createBrowserModel({notify, onChange, navigate, getSourceRecords
   function input(event) {if(event.target.id === "bmPrompt")state.prompt = event.target.value;}
   return {render,action,submit,input,ask,cancel:()=>state.controller?.abort(),
     history:()=>state.messages.map(row=>({role:row.role,content:row.content})),
+    clear:()=>{if(state.busy)throw new Error("Cannot clear an active inference");state.messages=[];state.selectedRecord="";state.prompt="";state.answer="";onChange();},
     status:()=>({verified:state.verified,busy:state.busy,model:state.model,endpoint:state.baseUrl,streaming:state.streaming}),
     activeModel:()=>state.model,activeLabel:()=>state.verified?"Local browser model":"Local model not tested",
     isVerified:()=>state.verified};
