@@ -69,6 +69,8 @@ jobs:
       - run: node --check site/modules/discovery.mjs
       - run: node --check site/modules/runtime-capabilities.mjs
       - run: node --test tests/discovery.test.mjs tests/runtime_capabilities.test.mjs
+      - run: node --check site/modules/routes.mjs
+      - run: node --test tests/routes.test.mjs
       - run: node --test tests/browser_model.test.mjs tests/browser_model_integration.test.mjs tests/browser_model_streaming.test.mjs
       - run: node --check site/modules/operations.mjs
       - run: node --check site/modules/capacity-view.mjs
