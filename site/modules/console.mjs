@@ -156,8 +156,14 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   state.message="";
   onChange();
   try{
+   const generation=connectionGeneration;
    await task();
-   await connect({silent:true,preserveAnswer:true});
+   if(generation!==connectionGeneration)
+    throw new Error("Private connection changed during the operation; reload before retrying");
+   const resultMessage=state.message;
+   const reconnected=await connect({silent:true,preserveAnswer:true});
+   if(!reconnected)throw new Error("Operation may have completed, but the private runtime could not be refreshed. Reconnect before retrying.");
+   state.message=resultMessage;
    state.schedulePreviewRequested=false;state.schedulePreview=null;
   }catch(error){
    state.message=short(error.message || "Operation failed",260);
