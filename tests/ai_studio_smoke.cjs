@@ -29,6 +29,12 @@ async function stubModelServer(){
   if(req.url==='/v1/chat/completions'&&req.method==='POST'){
    let payload={};try{payload=JSON.parse(raw)}catch{}
    if(payload.model!=='smoke-chat'){res.writeHead(422);res.end(JSON.stringify({error:{message:'unknown stub model'}}));return}
+   if(payload.stream===true){
+    res.setHeader('Content-Type','text/event-stream');
+    res.end('data: {"choices":[{"delta":{"content":"Synthetic verified local "}}]}\n\n'+
+      'data: {"choices":[{"delta":{"content":"inference response. No application was submitted."}}]}\n\n'+
+      'data: [DONE]\n\n');return;
+   }
    res.end(JSON.stringify({id:'chatcmpl-test',model:'smoke-chat',
     choices:[{message:{role:'assistant',content:'Synthetic verified local inference response. No application was submitted.'}}],
     usage:{prompt_tokens:42,completion_tokens:13}}));return;
@@ -136,6 +142,15 @@ async function main(){
   const lastModelCall=seen.filter(x=>x.path==='/v1/chat/completions').at(-1);
   assert.match(lastModelCall.body,/conversation_history/);
   assert.match(lastModelCall.body,/Evaluate the applicant evidence/);
+  await page.locator('#lensStreaming').check();
+  await page.locator('#lensInput').fill('Stream the next evidence check.');
+  await page.locator('#lensForm button[type="submit"]').click();
+  await page.locator('.lens-turn.assistant').nth(2).waitFor({timeout:30000});
+  assert.match(await page.locator('.lens-turn.assistant').nth(2).innerText(),/Synthetic verified local inference response/);
+  const streamedCall=seen.filter(x=>x.path==='/v1/chat/completions').at(-1);
+  assert.equal(JSON.parse(streamedCall.body).stream,true,'Private assistant must request native model SSE');
+  const streamedThread=await fetch(base+'/api/conversations/'+threadId).then(r=>r.json());
+  assert.equal(streamedThread.messages.length,6,'Streamed output must persist exactly once');
   await page.locator('#atlasLensPanel [data-lens="close"]').click();
   await page.reload({waitUntil:'networkidle'});
   await page.locator('.topbar [data-action="lens-open"]').click();
