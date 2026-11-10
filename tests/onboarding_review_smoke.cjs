@@ -119,6 +119,14 @@ store.close()
     const captured=await (await fetch(privateUrl+'/api/source-claims')).json();
     assert.equal(captured.claims.length,1);
     assert.equal(captured.claims[0].verification,'source_quote_observed_not_fact_verified');
+    const reviewForm=privatePage.locator('form[data-os-form="source-claim-review"]').first();
+    await reviewForm.locator('[name="decision"]').selectOption('owner_interpretation_supported');
+    await reviewForm.locator('[name="rationale"]').fill('The captured primary text explicitly states the date. Submission cutoff time remains unknown.');
+    await reviewForm.locator('button[type="submit"]').click();
+    await privatePage.getByText('Owner assessment recorded privately.',{exact:false}).waitFor({timeout:10000});
+    const afterReview=await (await fetch(privateUrl+'/api/source-claims')).json();
+    assert.equal(afterReview.claims[0].owner_review_decision,'owner_interpretation_supported');
+    assert.equal(afterReview.claims[0].verification,'source_quote_observed_not_fact_verified');
     await privatePage.locator('[data-os-action="compare-claim-source"]').click();
     await privatePage.getByText('Visible text comparison',{exact:true}).waitFor({timeout:10000});
     const difference=await (await fetch(privateUrl+'/api/source-observations/'+saved.observations[0].id+'/diff')).json();
