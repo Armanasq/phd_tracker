@@ -108,7 +108,8 @@ export function createOperations({request,onChange,onReload,getRecords,notify}){
     area("notes","Private applicant profile",selected.notes||"");
   }
   return '<section class="os-panel ops-edit"><div class="os-panel-heading"><div><h2>'+(existing?"Edit "+title(kind):"Add "+title(kind))+'</h2><p>Saved in the private database. Nothing is published to GitHub Pages.</p></div>'+button("Close","close-edit")+'</div>'+
-   '<form data-ops-form="private" data-kind="'+kind+'" class="os-form">'+body+
+   '<form data-ops-form="private" data-kind="'+kind+'" class="os-form">'+
+   '<input type="hidden" name="expected_version" value="'+esc(selected.version||0)+'">'+body+
    '<div class="os-form-footer"><button type="submit" class="os-btn primary">Save private record</button>'+
    (existing&&kind!=="profile"?button("Delete","delete",kind+":"+formId):"")+'</div></form></section>';
  }
@@ -237,7 +238,10 @@ export function createOperations({request,onChange,onReload,getRecords,notify}){
    const [kind,...parts]=id.split(":"),identity=parts.join(":");
    if(!window.confirm("Delete private "+kind+" record "+identity+"? This action is recorded in the local audit log."))return;
    try{
-    await request("/api/private/"+encodeURIComponent(kind)+"/"+encodeURIComponent(identity)+"/delete",{});
+    const item=storeItems(kind).find(row=>row.id===identity);
+    if(!item?.version){notify("Private record version unavailable. Refresh before deleting.");return;}
+    await request("/api/private/"+encodeURIComponent(kind)+"/"+encodeURIComponent(identity)+"/delete",
+      {expected_version:item.version});
     state.kind=null;state.editing=null;await reload();
    }catch(error){notify(error.message);}
   }
@@ -266,6 +270,7 @@ export function createOperations({request,onChange,onReload,getRecords,notify}){
     }
     for(const key of ["date","deadline","time","timezone","source_url","observed_at"])
      if(values[key]==="")delete values[key];
+    values.expected_version=Number(values.expected_version);
     await request("/api/private/"+encodeURIComponent(name),values);
     state.editing=null;state.kind=null;await reload();notify(title(name)+" saved privately.");
    }else if(kind==="application"){
