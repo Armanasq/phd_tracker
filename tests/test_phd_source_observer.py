@@ -58,8 +58,30 @@ class PrivateSourceObservationTests(unittest.TestCase):
         ]
         self.assertEqual([x["drift"] for x in results],
                          ["baseline_only", "unchanged_bytes", "source_bytes_changed_needs_review"])
-        self.assertEqual(len(recent_observations(self.store)), 3)
+        history = recent_observations(self.store)
+        self.assertEqual(len(history), 3)
+        self.assertEqual([item["drift"] for item in reversed(history)],
+                         ["baseline_only", "unchanged_bytes", "source_bytes_changed_needs_review"])
         self.assertEqual(self.store.list_applications(), {})
+
+    def test_existing_observation_schema_migrates_preserving_history(self):
+        import sqlite3
+        db_path = self.root / "legacy.sqlite3"
+        db = sqlite3.connect(db_path)
+        db.execute("CREATE TABLE source_observations (id INTEGER PRIMARY KEY AUTOINCREMENT, application_id TEXT NOT NULL, source_url TEXT NOT NULL, status TEXT NOT NULL, content_sha256 TEXT, observed_at TEXT NOT NULL, http_status INTEGER, content_length INTEGER)")
+        db.execute("INSERT INTO source_observations(application_id,source_url,status,observed_at) VALUES(?,?,?,?)",
+                   ("legacy", self.url, "http_error", "2026-11-09T00:00:00+00:00"))
+        db.commit()
+        db.close()
+        with Store(db_path) as migrated:
+            history = recent_observations(migrated)
+            self.assertEqual(len(history), 1)
+            self.assertIsNone(history[0]["drift"])
+            result = observe_record(migrated, "legacy", self.url,
+                                    fetcher=lambda _: {"status": "http_error", "http_status": 404,
+                                                       "content_sha256": None, "content_length": 0})
+            self.assertEqual(result["drift"], "unavailable_no_source_conclusion")
+            self.assertEqual(recent_observations(migrated)[0]["drift"], result["drift"])
 
     def test_unsupported_media_and_unsafe_endpoints(self):
         fake = FakeTransport(b"%PDF-1.5", "application/pdf")
