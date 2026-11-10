@@ -14,6 +14,7 @@ from .store import Store
 from .toolkit import DEFAULT_TOOLS, run_tools
 from .settings import read_settings
 from .routing import resolve_route
+from .connectivity import provider_states
 from .evidence_pack import bounded_evidence
 from .relevance import select_evidence
 from .proof_queue import evidence_work_queue
@@ -195,6 +196,7 @@ def workflow_plan(store: Store, *, workflow_id: str, provider_id: str | None = N
         raise ValueError("Workflow must select 1–3 known agents")
     route_override = provider_id if provider_id not in (None, "", "auto") else workflow.get("provider_id", "auto")
     stages = []
+    states = provider_states(store, options["providers"])
     cloud_providers = set()
     scheduled_approval = bool(workflow.get("enabled") and workflow.get("schedule") in {"daily", "twice_daily", "weekly"})
     for index, agent in enumerate(agent_ids):
@@ -212,10 +214,13 @@ def workflow_plan(store: Store, *, workflow_id: str, provider_id: str | None = N
             "route_source": route.source,
             "cloud": not provider["local"],
             "scheduled_provider_approved": route.approved,
+            "inference_state": states.get(provider["id"], {}).get("state", "needs_setup"),
+            "inference_verified": states.get(provider["id"], {}).get("state") == "responded",
         })
     blockers = []
     if cloud_providers and not cloud_consent:
         blockers.append("cloud_disclosure_consent_required")
+    probe_required = sorted({stage["provider_id"] for stage in stages if not stage["inference_verified"]})
     if not workflow.get("enabled"):
         scheduled_approval = False
     if cloud_providers and not workflow.get("cloud_consent"):
@@ -228,9 +233,11 @@ def workflow_plan(store: Store, *, workflow_id: str, provider_id: str | None = N
         "model_calls": len(stages),
         "cloud_provider_count": len(cloud_providers),
         "manual_ready": not blockers,
+        "execution_ready": not blockers and (len(stages) == 1 or not probe_required),
+        "model_probe_required": probe_required,
         "blockers": blockers,
         "scheduled_policy_approved": scheduled_approval,
-        "notice": "Preview validates route selection and consent; it does not verify live model health, quotas or due times.",
+        "notice": "Multi-stage execution requires recent successful inference probes for all providers. This preview does not test external models, quotas or due times.",
     }
 
 
@@ -241,6 +248,8 @@ def run_workflow(store: Store, root: Path, *, workflow_id: str,
                             cloud_consent=cloud_consent)
     if not preview["manual_ready"]:
         raise PermissionError("Workflow requires explicit per-run cloud evidence disclosure before any agent stage")
+    if len(preview["stages"]) > 1 and not preview["execution_ready"]:
+        raise ValueError("Verify inference for every multi-stage model route before execution: " + ", ".join(preview["model_probe_required"]))
     workflow = selected(catalog(store)["workflows"], workflow_id, "workflow")
     agent_ids = [stage["agent_id"] for stage in preview["stages"]]
     objective = workflow.get("prompt") or workflow.get("description", "")
