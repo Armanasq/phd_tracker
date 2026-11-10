@@ -614,6 +614,24 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   event.preventDefault();
   if(kind.startsWith("bm-")){try{await browserModel.submit(event);}catch(error){notify(short(error.message,220));}return;}
   const values=Object.fromEntries(new FormData(form));
+  if(kind==="source-review"){
+   if(!isLive())throw new Error("Private source review requires the local runtime");
+   const observationId=Number(values.observation_id);
+   if(!Number.isSafeInteger(observationId)||observationId<1)throw new Error("Invalid source observation");
+   const note=String(values.note||"").trim();
+   if(note.length<24||note.length>1500)throw new Error("Provide a 24–1500-character evidence review");
+   await change(async()=>{
+    await request("/api/source-observations/review",{
+     observation_id:observationId,decision:values.decision,
+     note,expected_digest:values.expected_digest||null
+    });
+    const response=await request("/api/source-observations");
+    if(!Array.isArray(response.observations))throw new Error("Invalid observation history");
+    state.sourceObservations=response.observations;
+    state.sourceObservationFilter="changed";
+    state.message="Owner review recorded privately. No application facts or deadlines were modified.";
+   });return;
+  }
   if(kind==="provider"){
    const id=cleanId(values.id||values.label);
    const isLocal=form.elements.local.checked;
