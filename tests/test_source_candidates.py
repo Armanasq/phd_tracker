@@ -55,7 +55,7 @@ class CandidateDateTests(unittest.TestCase):
         self.assertEqual(parsed["status"], "review_candidates_only")
 
     def test_bounded_input_and_truncation_are_explicit(self) -> None:
-        repeated = "Apply by 15 January 2027. " * 60
+        repeated = ("Apply by 15 January 2027. " * 60).strip()
         parsed = self.parse(repeated)
         self.assertEqual(parsed["candidate_count"], 25)
         self.assertTrue(parsed["candidate_limit_exceeded"])
