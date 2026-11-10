@@ -138,14 +138,33 @@ export function mountAtlasLens({getRecords,getPublicRecords,getView,getSelectedA
  if(v){byId("lensInput")?.focus();const h=byId("lensHistory");if(h&&state.turns.length)h.scrollTop=h.scrollHeight;void refresh().then(()=>{if(state.open)byId("lensInput")?.focus()})}
  else if(focusReturn?.isConnected)focusReturn.focus();
  }
+ function useBrowserRoute() {
+   const local=browserModel?.status?.();
+   state.direct=true;
+   state.connected=Boolean(local?.verified);
+   state.verified=state.connected;
+   state.model=local?.model||"";
+   state.provider="Browser-local model";
+   state.routeSource="Direct browser inference";
+   state.routeState=state.connected?"responded":"needs_setup";
+   state.routeReason=state.connected?"":"Verify a localhost model in Settings.";
+   state.agent="browser_local";
+   state.agents=[{id:"browser_local",label:"Direct local chat"}];
+   state.providers=[{id:"browser_local",label:"Browser-local model",kind:"openai_compatible",base_url:local?.endpoint||"",local:true}];
+   state.providerStates={browser_local:{reason:state.routeReason,credential_configured:false}};
+   state.routes={browser_local:{provider_id:"browser_local",provider_label:"Browser-local model",model:state.model,source:"browser_local",state:state.routeState,allowed:state.connected}};
+   state.conversations=[];
+   state.historyOpen=false;
+   state.turns=(browserModel?.history?.()||[]).map(item=>({role:item.role,text:item.content,model:state.model,provider:"browser_local",agent:"browser_local",tools:[]}));
+ }
  async function refresh({silent=false}={}){
-   if(!isLocal()){state.connected=false;state.verified=false;if(!silent)render();return}
+   if(!isLocal()){useBrowserRoute();if(!silent)render();return}
    try{
      const response=await fetch("./api/assistant/bootstrap",{headers:{"Accept":"application/json"},cache:"no-store"});
      if(!response.ok)throw Error("Private AI runtime unavailable");
      const data=await response.json();
      if(data.security?.local_only!==true||!Array.isArray(data.catalog?.agents))throw Error("Invalid private runtime response");
-     state.connected=true;state.agents=data.catalog.agents;
+     state.direct=false;state.connected=true;state.agents=data.catalog.agents;
      state.providers=Array.isArray(data.catalog.providers)?data.catalog.providers:[];
      state.providerStates=data.provider_states||{};
      state.routes=data.routing?.agent_assignments||{};
@@ -162,8 +181,8 @@ export function mountAtlasLens({getRecords,getPublicRecords,getView,getSelectedA
        }catch{}
      }
    }catch(error){
-     state.connected=false;state.verified=false;state.provider="Not connected";
-     state.model="";state.routeState="unavailable";state.routeReason=String(error.message||"");
+     useBrowserRoute();
+     if(!state.connected)state.routeReason=String(error.message||"")||state.routeReason;
    }
    if(!silent)render();
  }
