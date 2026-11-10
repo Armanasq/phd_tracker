@@ -19,7 +19,7 @@ from .proof_queue import evidence_work_queue
 from .providers import invoke, ProviderError
 from .connectivity import model_list, provider_states, remember_check
 from .settings import read_settings, save_settings
-from .routing import routing_status
+from .routing import resolve_route, routing_status
 from .secrets import read_secret, write_secret
 from .metrics import usage_summary
 from .capabilities import private_runtime_capabilities
@@ -167,7 +167,7 @@ class ApiHandler(BaseHTTPRequestHandler):
             return
         path = urlsplit(self.path).path
         costly = method == "POST" and path in {
-            "/api/agents/run", "/api/workflows/run", "/api/providers/probe",
+            "/api/agents/run", "/api/agents/stream", "/api/workflows/run", "/api/providers/probe",
             "/api/providers/models", "/api/scheduler/tick",
         }
         if costly and not self.server.inference_slots.acquire(blocking=False):
@@ -333,6 +333,65 @@ class ApiHandler(BaseHTTPRequestHandler):
             raise
         self.send_json(result)
 
+    def stream_agent(self, data: dict) -> None:
+        if self.headers.get("Idempotency-Key"):
+            raise ValueError("Streaming requests do not support replay keys; use /api/agents/run")
+        agent_id = data.get("agent_id")
+        if not isinstance(agent_id, str):
+            raise ValueError("Agent ID is required")
+        input_text = data.get("input_text", "")
+        if not isinstance(input_text, str) or len(input_text) > 5000:
+            raise ValueError("Agent input must contain at most 5000 characters")
+        config = catalog(self.request_store)
+        selected(config["agents"], agent_id, "agent")
+        route = resolve_route(self.request_store, config["providers"], agent_id, data.get("provider_id"))
+        if route.provider["kind"] not in {"openai_compatible", "azure_openai", "azure_deployment"}:
+            raise ValueError("Selected provider does not support native SSE streaming")
+        if not route.provider["local"] and data.get("cloud_consent") is not True:
+            raise PermissionError("Cloud streaming requires fresh per-run applicant-data disclosure consent")
+
+        self.send_response(200)
+        self.send_header("Content-Type", "text/event-stream; charset=utf-8")
+        self.send_header("Cache-Control", "no-cache, no-store")
+        self.send_header("X-Content-Type-Options", "nosniff")
+        self.send_header("X-Accel-Buffering", "no")
+        self.send_header("X-Frame-Options", "DENY")
+        self.send_header("X-Request-ID", self.request_id)
+        self.send_header("Connection", "close")
+        self.end_headers()
+        self.close_connection = True
+
+        def emit(event: str, payload: dict) -> None:
+            body = "event: " + event + "\\n" + "data: " + json.dumps(
+                payload, ensure_ascii=False, separators=(",", ":")) + "\\n\\n"
+            self.wfile.write(body.encode("utf-8"))
+            self.wfile.flush()
+
+        try:
+            emit("status", {"status": "running", "request_id": self.request_id})
+            response = run_agent(
+                self.request_store, self.server.root,
+                agent_id=agent_id, provider_id=data.get("provider_id"),
+                application_id=data.get("application_id"),
+                input_text=input_text,
+                cloud_consent=data.get("cloud_consent") is True,
+                conversation_mode=data.get("conversation") is True,
+                conversation_id=data.get("conversation_id"),
+                on_delta=lambda fragment: emit("delta", {"text": fragment}),
+            )
+            emit("result", response)
+            emit("done", {"status": "complete"})
+        except (BrokenPipeError, ConnectionResetError):
+            return
+        except (ProviderError, RuntimeError, OSError, ValueError, KeyError, PermissionError) as error:
+            message = ("Cloud consent required" if isinstance(error, PermissionError) else
+                       "Invalid streaming request" if isinstance(error, (ValueError, KeyError)) else
+                       "Streaming run failed; inspect the private run history")
+            try:
+                emit("error", {"code": type(error).__name__, "error": message})
+            except (BrokenPipeError, ConnectionResetError):
+                return
+
     def post_route(self, path: str, data: dict) -> None:
         store = self.request_store
         root = self.server.root
@@ -424,6 +483,8 @@ class ApiHandler(BaseHTTPRequestHandler):
             if hours is None:
                 raise ValueError("Configure available hours per week in your private applicant profile")
             self.send_json(resource_schedule(records, today, hours, profile))
+        elif path == "/api/agents/stream":
+            self.stream_agent(data)
         elif path == "/api/agents/run":
             self.inference_reply(path, data, lambda: run_agent(store, root,
                                      agent_id=data["agent_id"], provider_id=data.get("provider_id"),
