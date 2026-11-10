@@ -50,13 +50,19 @@ async function main(){
   await page.locator('[data-action="new-local"]').click();
   await page.locator("#localName").fill("Robotics and perception PhD");
   await page.locator("#localDeadline").fill("2027-01-31");
+  await page.locator("#localCutoffTime").fill("16:00");
   await page.locator("#localCountry").fill("DE");
   await page.locator("#localSource").fill("https://example.edu/phd");
   await page.locator("#localNext").fill("Verify admission portal");
   await page.locator('[data-action="create-local"]').click();
+  assert.match(await page.locator("#localError").innerText(),/cutoff time and institution timezone/);
+  await page.locator("#localCutoffZone").fill("Europe/Berlin");
+  await page.locator('[data-action="create-local"]').click();
   assert.ok((await page.locator(".modal").innerText()).includes("device-only"));
   assert.equal(await page.locator('.modal [data-action="save-command"]').count(),0);
   await page.locator("#editNotes").fill("PRIVATE draft note; not for GitHub");
+  await page.locator("#editCutoffTime").fill("23:59");
+  await page.locator("#editCutoffZone").fill("Europe/London");
   await page.locator("#editStatus").selectOption("preparing");
   await page.locator('[data-action="save-record"]').click();
   assert.equal(await page.locator(".modal").count(),0);
@@ -74,12 +80,17 @@ async function main(){
   assert.equal(exported.records.length,1);
   assert.equal(exported.records[0].name,"Robotics and perception PhD");
   assert.equal(exported.records[0].source_url,"https://example.edu/phd");
+  assert.equal(exported.records[0].deadline_time,"23:59");
+  assert.equal(exported.records[0].deadline_timezone,"Europe/London");
+  assert.notEqual(exported.records[0].deadline_cutoff_verified,true);
+  assert.equal("deadline_cutoff_utc" in exported.records[0],false);
   assert.ok(!JSON.stringify(exported).includes("PRIVATE draft note"));
   assert.ok(!JSON.stringify(exported).includes("preparing"));
   const [backupDownload]=await Promise.all([page.waitForEvent("download"),page.locator('.modal [data-action="export"][data-value="local"]').click()]);
   const backup=path.join(output,"local-backup.json");
   await backupDownload.saveAs(backup);
   assert.ok((await fs.readFile(backup,"utf8")).includes("PRIVATE draft note"));
+  assert.ok((await fs.readFile(backup,"utf8")).includes("Europe/London"));
   await page.locator('.modal [data-action="close"]').click();
   await page.locator(".modal").waitFor({state:"detached"});
   await page.locator('#workspaceSection').selectOption("applications");
@@ -95,7 +106,7 @@ async function main(){
   assert.ok((await page.locator("#body").innerText()).includes("Robotics and perception PhD"));
   assert.equal(await page.locator('.sidebar .side-link').getAttribute("href"),"https://github.com/TestAccount/atlas");
   assert.deepEqual(errors,[]);
-  console.log(JSON.stringify({status:"pass",checks:["starter isolation","create","local edit","reload","public export scrub","backup","delete","import","repo identity","mobile"]}));
+  console.log(JSON.stringify({status:"pass",checks:["starter isolation","create","cutoff pair validation","local cutoff edit","reload","public export scrub","backup","delete","import","repo identity","mobile"]}));
  }finally{
   await page.close();await browser.close();await new Promise(ok=>server.close(ok));
   await fs.rm(output,{recursive:true,force:true});
