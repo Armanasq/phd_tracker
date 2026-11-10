@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sqlite3
 import tempfile
 import threading
@@ -47,6 +48,8 @@ class PrivateObjectVersionTests(unittest.TestCase):
                 ("profile", "applicant", json.dumps({"id": "applicant", "skills": ["SLAM"]}),
                  "2026-11-09T12:00:00+00:00"),
             )
+        if os.name == "posix":
+            os.chmod(self.path, 0o600)
         store = Store(self.path)
         self.addCleanup(store.close)
         original = store.items("profile")[0]
