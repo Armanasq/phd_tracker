@@ -85,7 +85,7 @@ class IndependentCutoffProjectionTests(unittest.TestCase):
             self.assertTrue(published["deadline_cutoff_verified"])
             self.assertEqual(published["deadline_cutoff_utc"], "2027-06-01T22:59:00Z")
             self.assertEqual(published["deadline_timezone"], "Europe/London")
-            self.assertNotIn("private", json.dumps(snapshot).lower())
+            self.assertNotIn("submission_receipt", json.dumps(published).lower())
 
     def test_no_source_proof_never_becomes_verified(self):
         with tempfile.TemporaryDirectory() as directory:
