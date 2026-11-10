@@ -11,6 +11,12 @@ The existing `compare-sources` command reports field-level differences between i
 CI: `python -m pytest tests/test_phd_source_observer.py -q` uses a fake HTTPS transport; no real university URL is contacted in tests.
 
 
+## Owner review decisions
+
+The private runtime now supports **append-only source observation review notes** via `POST /api/source-observations/review`. A review references a specific immutable observation ID and expected content digest, accepts a bounded owner rationale, and records either `needs_follow_up` or `reviewed_no_fact_change`. Stale digest submissions are rejected. Changing a previously recorded decision creates a new audit event; duplicate sequential submissions are idempotent. The API does not alter an application deadline, mark eligibility, upload university source HTML, or certify institutional facts.
+
+`GET /api/source-observations` includes the latest owner decision for each observation, but not the private rationale text. The UI retains outstanding changes across subsequent unchanged fetches. It considers only the bounded loaded history and cannot certify that older retained events were already reviewed. Source excerpt capture and official-claim semantic verification remain in [Issue #8](https://github.com/Armanasq/phd_tracker/issues/8).
+
 ## Review workspace
 
 The private `#source-observations` route displays recent observations from `GET /api/source-observations`, one latest entry per tracked application/source URL. The saved `drift` classification is immutable for each observation; SQLite schema migration leaves historic classifications unknown rather than inventing a previous comparison outcome. Review categories are **changed bytes**, **unavailable**, **unchanged bytes**, **baseline**, or **legacy unknown**.
