@@ -82,6 +82,16 @@ class Store:
             CREATE TABLE IF NOT EXISTS request_idempotency(key TEXT PRIMARY KEY, endpoint TEXT NOT NULL, digest TEXT NOT NULL, state TEXT NOT NULL, response TEXT, expires_at TEXT NOT NULL);
             CREATE INDEX IF NOT EXISTS idx_schedule_claims_active ON schedule_claims(day_start,expires_at);
             CREATE TABLE IF NOT EXISTS private_objects(kind TEXT NOT NULL, id TEXT NOT NULL, payload TEXT NOT NULL, updated_at TEXT NOT NULL, PRIMARY KEY(kind,id));
+            CREATE TABLE IF NOT EXISTS worker_jobs(
+                id TEXT PRIMARY KEY,agent_id TEXT NOT NULL,provider_id TEXT NOT NULL,
+                application_id TEXT,input_text TEXT NOT NULL,status TEXT NOT NULL,
+                attempts INTEGER NOT NULL,max_attempts INTEGER NOT NULL,
+                available_at TEXT NOT NULL,lease_token TEXT,lease_expires_at TEXT,
+                run_id TEXT,error_type TEXT,cancel_requested INTEGER NOT NULL DEFAULT 0,
+                created_at TEXT NOT NULL,updated_at TEXT NOT NULL
+            );
+            CREATE INDEX IF NOT EXISTS idx_worker_jobs_pick ON worker_jobs(status,available_at,created_at);
+
             CREATE TABLE IF NOT EXISTS conversations(
                 id TEXT PRIMARY KEY, agent_id TEXT NOT NULL, application_id TEXT,
                 title TEXT NOT NULL, created_at TEXT NOT NULL, updated_at TEXT NOT NULL);
