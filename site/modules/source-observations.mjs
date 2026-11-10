@@ -91,6 +91,7 @@ export function renderSourceObservations({records=[],loading=false,error="",mess
       '<option value="'+value+'"'+(selected===value?' selected':'')+'>'+label+'</option>').join("")+
     '</select></label>'+
     (error?'<p class="os-warning" role="alert">'+esc(error)+'</p>':'')+
+    (message?'<p class="os-message" role="status">'+esc(message)+'</p>':'')+
     (loading?'<p class="os-note" role="status">Loading private observation history…</p>':'')+
     '<div class="os-ledger">'+(entries||'<p class="os-empty">'+(loading?"History request pending.":"No matching source observations are recorded.")+'</p>')+'</div></section>'+
     '<section class="os-panel"><div class="os-panel-heading"><div><h2>Run a new observation</h2><p>Source fetching is deliberate, server-side and limited to previously reviewed HTTPS sources.</p></div></div>'+
