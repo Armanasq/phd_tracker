@@ -29,6 +29,9 @@ def main() -> None:
     restore_command.add_argument("filename")
     restore_command.add_argument("--sha256")
     restore_command.add_argument("--confirm", action="store_true")
+    drill_command = commands.add_parser("drill-backup")
+    drill_command.add_argument("filename")
+    drill_command.add_argument("--sha256")
     agent = commands.add_parser("run")
     agent.add_argument("--agent", default="portfolio_planner")
     agent.add_argument("--provider", default="ollama")
@@ -41,10 +44,12 @@ def main() -> None:
     if args.command == "serve":
         serve(port=args.port, root=args.repo)
         return
-    if args.command in {"verify-backup", "restore-backup"}:
-        from .recovery import restore_backup, verify_backup
+    if args.command in {"verify-backup", "restore-backup", "drill-backup"}:
+        from .recovery import drill_backup, restore_backup, verify_backup
         if args.command == "verify-backup":
             result = verify_backup(args.filename, sha256=args.sha256)
+        elif args.command == "drill-backup":
+            result = drill_backup(args.filename, sha256=args.sha256)
         else:
             result = restore_backup(args.filename, sha256=args.sha256, confirm=args.confirm)
         print(json.dumps(result, indent=2, ensure_ascii=False))
