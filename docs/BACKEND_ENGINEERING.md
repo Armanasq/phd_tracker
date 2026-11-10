@@ -83,6 +83,10 @@ The read-only `GET /api/observability` endpoint returns a fixed-schema, allowlis
 
 Illustrative operator objectives use the previous 24 hours, at least 20 completed calls **and** 20 measured latencies, error rate ≤5% and p95 latency ≤60 seconds. These are configuration defaults for local monitoring, **not a published production availability SLA**. The report explicitly returns `insufficient_data` until sample thresholds are met. No synthetic values are inserted for missing usage or latency. Tests: `tests/test_phd_observability.py`.
 
+## Model adapter contract matrix
+
+The synthetic, credential-free adapter suite (`tests/test_phd_provider_contracts.py`) verifies the request envelope and response contract for local OpenAI-compatible gateways, OpenAI, Gemini gateway, OpenRouter, Groq, Azure v1, Azure versioned deployments and Anthropic Messages. It validates routing paths, provider-specific authentication headers, token-limit parameter names, native SSE delta order, bounded response parsing, invalid usage handling and failure redaction. It does **not** certify live vendor credentials, model availability, quotas or CORS/Local Network Access behavior.
+
 ## Release quality gates
 
 - Run Python and JavaScript tests for every backend or private frontend change.

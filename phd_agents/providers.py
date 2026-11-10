@@ -27,6 +27,16 @@ class ModelReply:
     latency_ms: int | None = None
 
 
+_USAGE_KEYS = frozenset({"prompt_tokens", "completion_tokens", "input_tokens", "output_tokens"})
+
+
+def bounded_usage(value: object) -> dict[str, int]:
+    if not isinstance(value, dict):
+        return {}
+    return {key: count for key, count in value.items()
+            if key in _USAGE_KEYS and type(count) is int and 0 <= count <= 1_000_000_000}
+
+
 class NoRedirect(HTTPRedirectHandler):
     def redirect_request(self, request, fp, code, msg, headers, newurl):
         raise ProviderError("Model provider redirected its request; redirects are disabled")
@@ -159,12 +169,12 @@ def invoke(provider: dict[str, Any], system: str, prompt: str, *, timeout: int |
             content = data["choices"][0]["message"]["content"]
         if not isinstance(content, str) or not content.strip():
             raise ValueError("No model text")
-        usage = data.get("usage") or {}
-        return ModelReply(content[:20000], str(data.get("model") or model),
-                          {k: int(usage.get(k, 0)) for k in ("prompt_tokens", "completion_tokens", "input_tokens", "output_tokens")
-                           if isinstance(usage.get(k), (int, float))}, provider["id"],
+        if len(content) > 20000:
+            raise ProviderError("Model response exceeded the text limit")
+        return ModelReply(content, str(data.get("model") or model)[:160],
+                          bounded_usage(data.get("usage")), provider["id"],
                           round((perf_counter() - started) * 1000))
-    except (KeyError, TypeError, ValueError, json.JSONDecodeError) as error:
+    except (KeyError, IndexError, TypeError, ValueError, json.JSONDecodeError) as error:
         raise ProviderError("Malformed model-provider response") from error
 
 
@@ -231,10 +241,8 @@ def invoke_stream(provider: dict[str, Any], system: str, prompt: str,
                     raise ProviderError("Provider returned an inference error")
                 if isinstance(data.get("model"), str):
                     reported_model = data["model"][:160]
-                if isinstance(data.get("usage"), dict):
-                    usage = {key: value for key, value in data["usage"].items()
-                             if key in {"prompt_tokens", "completion_tokens", "input_tokens", "output_tokens"}
-                             and isinstance(value, int) and not isinstance(value, bool) and value >= 0}
+                if "usage" in data:
+                    usage = bounded_usage(data["usage"])
                 choices = data.get("choices")
                 if not choices:
                     continue
