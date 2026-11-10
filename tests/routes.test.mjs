@@ -5,7 +5,7 @@ import {VIEWS,resolveWorkspaceRoute} from "../site/modules/routes.mjs";
 test("each public route has unique stable identity and title",()=>{
   const ids=VIEWS.map(x=>x[0]);
   assert.equal(new Set(ids).size,ids.length);
-  assert.equal(ids.length,22);
+  assert.equal(ids.length,23);
   assert.ok(VIEWS.every(x=>x.length===3&&x.every(y=>typeof y==="string"&&y)));
 });
 
@@ -13,7 +13,7 @@ test("legacy deep links resolve without exposing undefined views",()=>{
   const entries={
     "#setup":"deployment","#runtime":"deployment","#research":"discovery","#dossier":"documents",
     "#providers":"settings","#models":"settings","#copilot":"ai",
-    "#workflows":"automations","#home":"dashboard","#verification":"review"
+    "#workflows":"automations","#source-drift":"source-observations","#observations":"source-observations","#home":"dashboard","#verification":"review"
   };
   for(const [source,target] of Object.entries(entries))assert.equal(resolveWorkspaceRoute(source),target);
 });
