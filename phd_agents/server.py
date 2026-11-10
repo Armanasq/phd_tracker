@@ -287,6 +287,15 @@ class ApiHandler(BaseHTTPRequestHandler):
             from .source_observer import recent_observations
             self.send_json({"observations": recent_observations(store, limit=2000),
                             "retention_cap": 2000, "scope": "private_retained_history"})
+        elif path == "/api/source-claims":
+            from .source_claims import source_claims
+            self.send_json({"claims": source_claims(store), "scope": "private_owner_captured"})
+        elif path.startswith("/api/source-observations/") and path.endswith("/text"):
+            from .source_claims import observation_text
+            identity = path.removeprefix("/api/source-observations/").removesuffix("/text").strip("/")
+            if not re.fullmatch(r"[1-9][0-9]{0,12}", identity):
+                raise ValueError("Invalid observation ID")
+            self.send_json({"observation": observation_text(store, int(identity))})
         elif path == "/api/observability":
             self.send_json(report_observability(store))
         elif path == "/api/metrics":
@@ -437,6 +446,15 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.send_json({"review": review})
         elif path == "/api/maintenance/backup":
             self.send_json({"backup": store.create_backup(retain=data.get("retain", 7))})
+        elif path == "/api/source-claims/capture":
+            from .source_claims import capture_source_claim
+            claim = capture_source_claim(
+                store, observation_id=data.get("observation_id"),
+                claim_type=data.get("claim_type"), quote=data.get("quote"),
+                candidate_value=data.get("candidate_value"),
+                expected_digest=data.get("expected_digest"),
+            )
+            self.send_json({"claim": claim}, 201)
         elif path == "/api/providers/setup":
             spec = provider_spec(data["provider"])
             store.put_custom("provider", spec)

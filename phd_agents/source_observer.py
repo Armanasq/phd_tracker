@@ -12,6 +12,7 @@ from .egress import PinnedHTTPSHandler
 from .engine import owner_records
 from .providers import NoRedirect, ProviderError, validate_url
 from .store import Store
+from .source_text import EXCERPT_LIMIT, extract_visible_text
 
 _ALLOWED_MEDIA = frozenset({"text/html", "text/plain"})
 _VERIFIED_RECORDS = frozenset({"source_verified", "owner_verified"})
@@ -50,7 +51,8 @@ def fetch_public_source(url: str, *, timeout: int = 15, max_bytes: int = 1_000_0
         return {"status": "oversize", "http_status": 200,
                 "content_sha256": None, "content_length": len(raw)}
     return {"status": "fetched", "http_status": 200,
-            "content_sha256": hashlib.sha256(raw).hexdigest(), "content_length": len(raw)}
+            "content_sha256": hashlib.sha256(raw).hexdigest(), "content_length": len(raw),
+            **extract_visible_text(raw, mime)}
 
 
 def observe_record(
@@ -78,8 +80,21 @@ def observe_record(
         raise ValueError("Invalid source digest")
     if result["status"] == "fetched" and not fingerprint:
         raise ValueError("Successful source observation requires a digest")
+    visible_digest = result.get("visible_text_sha256")
+    if visible_digest is not None and (
+        not isinstance(visible_digest, str) or not _DIGEST.fullmatch(visible_digest)
+    ):
+        raise ValueError("Invalid visible text digest")
+    excerpt = result.get("visible_text_excerpt", "")
+    if not isinstance(excerpt, str) or len(excerpt) > EXCERPT_LIMIT:
+        raise ValueError("Invalid bounded source text")
+    if excerpt and not visible_digest:
+        raise ValueError("Visible text requires a digest")
+    truncated = result.get("visible_text_truncated", False)
+    if type(truncated) is not bool:
+        raise ValueError("Invalid source text truncation flag")
     previous = store.db.execute(
-        "SELECT content_sha256 FROM source_observations "
+        "SELECT content_sha256,visible_text_sha256 FROM source_observations "
         "WHERE application_id=? AND source_url=? AND status='fetched' "
         "ORDER BY id DESC LIMIT 1", (application_id, validated),
     ).fetchone()
@@ -91,13 +106,24 @@ def observe_record(
         drift = "unchanged_bytes"
     else:
         drift = "source_bytes_changed_needs_review"
+    if result["status"] != "fetched" or not visible_digest:
+        text_drift = "text_unavailable"
+    elif previous is None or not previous["visible_text_sha256"]:
+        text_drift = "not_comparable"
+    elif previous["visible_text_sha256"] == visible_digest:
+        text_drift = "visible_text_unchanged"
+    else:
+        text_drift = "visible_text_changed"
     timestamp = instant.astimezone(timezone.utc).isoformat(timespec="seconds")
     with store.db:
-        store.db.execute(
+        cursor = store.db.execute(
             "INSERT INTO source_observations(application_id,source_url,status,"
-            "content_sha256,observed_at,http_status,content_length,drift) VALUES(?,?,?,?,?,?,?,?)",
+            "content_sha256,observed_at,http_status,content_length,drift,"
+            "visible_text_sha256,visible_text_excerpt,visible_text_truncated,text_drift)"
+            " VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
             (application_id, validated, result["status"], fingerprint, timestamp,
-             result.get("http_status"), result.get("content_length"), drift),
+             result.get("http_status"), result.get("content_length"), drift,
+             visible_digest, excerpt, int(truncated), text_drift),
         )
         store.db.execute(
             "DELETE FROM source_observations WHERE id NOT IN "
@@ -105,10 +131,12 @@ def observe_record(
         )
         store._audit("source:observed", application_id)
     return {
+        "id": cursor.lastrowid,
         "application_id": application_id, "source_url": validated, "observed_at": timestamp,
         "status": result["status"], "http_status": result.get("http_status"),
         "content_sha256": fingerprint, "content_length": result.get("content_length"),
-        "drift": drift, "conclusion": (
+        "drift": drift, "text_drift": text_drift,
+        "excerpt_available": bool(excerpt), "conclusion": (
             "A website request and content hash do not verify an admissions deadline, "
             "funding eligibility or whether an application portal is open."
         ),
@@ -121,6 +149,9 @@ def recent_observations(store: Store, *, limit: int = 50) -> list[dict[str, Any]
     rows = store.db.execute(
         "SELECT o.id,o.application_id,o.source_url,o.status,o.content_sha256,"
         "o.observed_at,o.http_status,o.content_length,o.drift,"
+        "o.visible_text_sha256,o.text_drift,"
+        "CASE WHEN o.visible_text_excerpt IS NOT NULL "
+        "AND LENGTH(o.visible_text_excerpt)>0 THEN 1 ELSE 0 END AS excerpt_available,"
         "r.decision AS review_decision,r.reviewed_at "
         "FROM source_observations AS o LEFT JOIN source_observation_reviews AS r "
         "ON r.id=(SELECT MAX(v.id) FROM source_observation_reviews AS v "

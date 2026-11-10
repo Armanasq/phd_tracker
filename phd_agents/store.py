@@ -91,7 +91,11 @@ class Store:
                 observed_at TEXT NOT NULL,
                 http_status INTEGER,
                 content_length INTEGER,
-                drift TEXT
+                drift TEXT,
+                visible_text_sha256 TEXT,
+                visible_text_excerpt TEXT,
+                visible_text_truncated INTEGER NOT NULL DEFAULT 0,
+                text_drift TEXT
             );
             CREATE INDEX IF NOT EXISTS idx_source_observations_record
                 ON source_observations(application_id,source_url,id);
@@ -107,6 +111,22 @@ class Store:
             );
             CREATE INDEX IF NOT EXISTS idx_source_reviews_observation
                 ON source_observation_reviews(observation_id,id);
+            CREATE TABLE IF NOT EXISTS source_claims(
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                observation_id INTEGER NOT NULL,
+                application_id TEXT NOT NULL,
+                source_url TEXT NOT NULL,
+                source_digest TEXT NOT NULL,
+                claim_type TEXT NOT NULL,
+                exact_quote TEXT NOT NULL,
+                candidate_value TEXT NOT NULL,
+                quote_digest TEXT NOT NULL,
+                captured_at TEXT NOT NULL,
+                verification TEXT NOT NULL DEFAULT 'source_quote_observed_not_fact_verified',
+                UNIQUE(observation_id,quote_digest,claim_type,candidate_value)
+            );
+            CREATE INDEX IF NOT EXISTS idx_source_claims_observation
+                ON source_claims(observation_id,id);
             CREATE TABLE IF NOT EXISTS worker_jobs(
                 id TEXT PRIMARY KEY,agent_id TEXT NOT NULL,provider_id TEXT NOT NULL,
                 application_id TEXT,input_text TEXT NOT NULL,status TEXT NOT NULL,
@@ -134,6 +154,14 @@ class Store:
             observed_columns = {item["name"] for item in self.db.execute("PRAGMA table_info(source_observations)")}
             if "drift" not in observed_columns:
                 self.db.execute("ALTER TABLE source_observations ADD COLUMN drift TEXT")
+            for field, definition in (
+                ("visible_text_sha256", "TEXT"),
+                ("visible_text_excerpt", "TEXT"),
+                ("visible_text_truncated", "INTEGER NOT NULL DEFAULT 0"),
+                ("text_drift", "TEXT"),
+            ):
+                if field not in observed_columns:
+                    self.db.execute(f"ALTER TABLE source_observations ADD COLUMN {field} {definition}")
             self.db.commit()
         except BaseException:
             if hasattr(self, "db"):
