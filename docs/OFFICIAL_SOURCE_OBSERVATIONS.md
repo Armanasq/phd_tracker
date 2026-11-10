@@ -44,3 +44,7 @@ The observer keeps the newest **2,000 uncited** observations plus every observat
 ### Deterministic before/after source comparison
 
 The private `GET /api/source-observations/{id}/diff` endpoint compares the selected fetched observation with the immediately previous fetched observation for the same application and HTTPS URL. The bounded word-level comparison includes additions, removals, replacements, limited context, possible lexical review topics and explicit completeness. Comparisons with missing or truncated text are partial or unavailable. The UI displays changes only on request. No model is called and no admission facts or applicant records are changed by the diff.
+
+### Owner interpretation review
+
+Owners can now attach a dated, append-only interpretation verdict to a captured source claim using `POST /api/source-claims/review`. The request requires both the stored source SHA-256 and quoted-text SHA-256 and a 30–1,500-character rationale. Supported verdicts: `needs_recheck`, `owner_interpretation_supported`, `owner_interpretation_rejected`. Later decisions append new audit events; exact immediate repeats are idempotent. The claim list includes only the latest owner decision timestamp, not private rationale text. All claim records retain `source_quote_observed_not_fact_verified`, even after owner assessment. The AI citation checker deliberately keeps such evidence **unverified**; no deadline, eligibility or admission status is silently modified.

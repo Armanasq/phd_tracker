@@ -672,6 +672,22 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   event.preventDefault();
   if(kind.startsWith("bm-")){try{await browserModel.submit(event);}catch(error){notify(short(error.message,220));}return;}
   const values=Object.fromEntries(new FormData(form));
+  if(kind==="source-claim-review"){
+   if(!isLive())throw new Error("Source evidence review requires the private runtime");
+   const id=Number(values.claim_id),rationale=String(values.rationale||"").trim();
+   if(!Number.isSafeInteger(id)||id<1||rationale.length<30||rationale.length>1500)
+    throw new Error("Choose an existing claim and provide 30–1500 characters of source-review rationale");
+   await change(async()=>{
+    await request("/api/source-claims/review",{
+     claim_id:id,expected_source_digest:values.expected_source_digest,
+     expected_quote_digest:values.expected_quote_digest,decision:values.decision,rationale
+    });
+    const response=await request("/api/source-claims");
+    if(!Array.isArray(response.claims))throw new Error("Owner review saved but claim history reload failed");
+    state.sourceClaims=response.claims;
+    state.message="Owner assessment recorded privately. The claim remains unverified as an institutional fact.";
+   });return;
+  }
   if(kind==="source-claim"){
    if(!isLive())throw new Error("Source quotation capture requires the private runtime");
    const identity=Number(values.observation_id),quote=String(values.quote||"").trim();

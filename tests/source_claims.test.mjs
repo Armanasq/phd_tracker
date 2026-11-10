@@ -60,3 +60,20 @@ test("visible-text diff is explicitly provisional and safely escaped",()=>{
   assert.ok(!untrusted.includes("<script>"));
   assert.ok(!untrusted.includes("<img"));
 });
+
+test("every source-claim owner verdict remains explicitly provisional",()=>{
+  for(const decision of [null,"needs_recheck","owner_interpretation_supported","owner_interpretation_rejected"]){
+    const rendered=renderSourceClaims({claims:[{
+      id:17,observation_id:9,application_id:"APP1",source_url:"https://uni.example",
+      source_digest:"a".repeat(64),quote_digest:"b".repeat(64),claim_type:"deadline",
+      exact_quote:"Institutional deadline shown on public website.",
+      candidate_value:"2026-12-15",captured_at:"2026-11-10",
+      owner_review_decision:decision
+    }]});
+    assert.match(rendered,/data-os-form="source-claim-review"/);
+    assert.match(rendered,/name="claim_id" value="17"/);
+    assert.match(rendered,/name="expected_quote_digest"/);
+    assert.match(rendered,/factual interpretation unverified/);
+    assert.match(rendered,/no automatic official-fact verification/);
+  }
+});

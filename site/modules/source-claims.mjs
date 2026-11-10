@@ -58,8 +58,25 @@ export function renderSourceClaims({observations=[],claims=[],selectedId=null,so
       '<small>'+esc(item.captured_at)+' · Observation #'+esc(item.observation_id)+'</small>'+
       '<p class="os-evidence-quote">'+esc(item.exact_quote)+'</p>'+
       '<small>Candidate: '+esc(item.candidate_value)+' · Captured quote, factual interpretation unverified</small>'+
+      '<small>Owner review: '+esc(({
+        needs_recheck:"Needs further review",
+        owner_interpretation_supported:"Owner considers the interpretation supported (unverified)",
+        owner_interpretation_rejected:"Owner rejected the interpretation"
+      })[item.owner_review_decision]||"Not reviewed")+'</small>'+
       (link?'<a href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">Inspect source</a>':'')+
-      '</div></article>';
+      '<form class="os-form" data-os-form="source-claim-review">'+
+      '<input type="hidden" name="claim_id" value="'+esc(item.id)+'">'+
+      '<input type="hidden" name="expected_source_digest" value="'+esc(item.source_digest)+'">'+
+      '<input type="hidden" name="expected_quote_digest" value="'+esc(item.quote_digest)+'">'+
+      '<label class="os-field"><span>Owner interpretation decision</span><select name="decision">'+
+      '<option value="needs_recheck">Needs recheck</option>'+
+      '<option value="owner_interpretation_supported">Owner considers supported</option>'+
+      '<option value="owner_interpretation_rejected">Owner rejects interpretation</option></select></label>'+
+      '<label class="os-field"><span>Reasoning and reviewed primary evidence</span>'+
+      '<textarea name="rationale" minlength="30" maxlength="1500" required rows="2" placeholder="Describe the evidence, any ambiguity and why this interpretation was accepted or rejected."></textarea></label>'+
+      '<button type="submit" class="os-btn quiet"'+(loading?' disabled':'')+'>Record owner decision</button>'+
+      '<p class="os-footnote">Append-only owner attestation; no automatic official-fact verification or applicant state changes.</p>'+
+      '</form></div></article>';
   }).join("");
   return '<section class="os-page"><div class="os-head"><div><div class="os-kicker">PRIVATE SOURCE PROVENANCE</div>'+
     '<h1>Source evidence</h1><p>Link proposed requirements to exact captured institutional text without fabricating official verification.</p></div>'+
