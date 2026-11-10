@@ -87,3 +87,13 @@ Independent GitHub forks start in a blank `starter` data mode; the owner must re
 ## Deterministic submission readiness
 
 The [Readiness view](./index.html#readiness) prioritizes verifiable next actions, cutoff proof, explicit preparation gaps, post-submission receipt checks and shared document demand. It runs without an AI key on Pages or locally. See [the readiness contract](../docs/READINESS_ENGINE.md).
+
+## Evidence discovery and deployment routes
+
+**Discovery (`#discovery`)** is an evidence-first research candidate queue. It distinguishes recorded source reviews, unresolved primary-source verification, staged promotions and recorded passed dates without inventing rankings or admissions availability. Candidates move into tracked applications only after explicit owner review and confirmation.
+
+**Deployment (`#deployment`)** shows actual runtime capabilities. Static Pages, verified browser-local inference, private Python/SQLite and opt-in GitHub Actions have different permissions. Cloud hosting is explicitly unavailable until its authentication and data-isolation requirements are implemented.
+
+The floating **Ask Atlas** assistant and Copilot share a single session-only browser model client on static Pages. On the private runtime the existing agent/tool client remains authoritative. The model-status chip reflects the active execution mode; it must not present a browser-only model as a private agent server. Local model configuration must pass an inference probe before use.
+
+Hash routes, legacy aliases and invalid-hash recovery are specified in [the route coverage contract](../docs/ROUTE_COVERAGE.md). Private automations expose a read-only model-routing and cloud-disclosure preflight using `POST /api/workflows/preview`; no model is invoked until execution is explicitly requested.
