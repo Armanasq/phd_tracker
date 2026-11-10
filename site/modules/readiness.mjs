@@ -1,3 +1,4 @@
+import {cutoffElapsed} from "./deadline-cutoff.mjs";
 import {daysUntil,deadlineCollisions,isDay} from "./domain.mjs";
 
 const CLOSED=new Set(["offer","rejected","withdrawn","archived"]);
@@ -7,10 +8,10 @@ const VALID_DOC_STATES=new Set(["ready","unknown","in_progress","not_started","n
 const hasText=x=>typeof x==="string"&&x.trim().length>0;
 const requirements=r=>Array.isArray(r?.documents)?[...new Set(r.documents.filter(d=>typeof d==="string"&&d in DOCS))]:[];
 
-export function assessApplication(record,today){
+export function assessApplication(record,today,now=Date.now()){
  if(!record||record.record_type!=="tracked"||!isDay(today))return null;
  const due=daysUntil(record.deadline,today),followup=daysUntil(record.followup,today);
- const phase=CLOSED.has(record.status)?"closed":record.status==="submitted"?"submitted":record.status==="blocked"?"blocked":due!==null&&due<0?"expired":"active";
+ const phase=CLOSED.has(record.status)?"closed":record.status==="submitted"?"submitted":record.status==="blocked"?"blocked":due!==null&&due<0||cutoffElapsed(record,now)?"expired":"active";
  const tasks=[];
  const add=(key,label,detail,kind,score)=>tasks.push({key,label,detail,kind,score});
  if(phase==="submitted"){
@@ -48,9 +49,9 @@ export function assessApplication(record,today){
   openProof:tasks.filter(t=>t.kind==="evidence").length,knownPreparation:tasks.filter(t=>t.kind==="preparation").length};
 }
 
-export function portfolioReadiness(records,today){
+export function portfolioReadiness(records,today,now=Date.now()){
  if(!Array.isArray(records)||!isDay(today))throw new TypeError("Valid records and an ISO observation date are required");
- const assessed=records.map(r=>assessApplication(r,today)).filter(Boolean);
+ const assessed=records.map(r=>assessApplication(r,today,now)).filter(Boolean);
  const active=assessed.filter(x=>x.phase==="active").sort((a,b)=>b.priority-a.priority||(a.due??Infinity)-(b.due??Infinity)||String(a.id).localeCompare(String(b.id)));
  const submitted=assessed.filter(x=>x.phase==="submitted").sort((a,b)=>b.priority-a.priority||String(a.id).localeCompare(String(b.id)));
  const halted=assessed.filter(x=>["blocked","expired"].includes(x.phase));

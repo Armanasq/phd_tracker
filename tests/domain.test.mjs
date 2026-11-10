@@ -63,3 +63,15 @@ test("stale data is labeled without guessing source correctness",()=>{
  assert.equal(freshnessState("2026-11-08",today).state,"current");
  assert.equal(freshnessState(null,today).state,"unknown");
 });
+
+test("verified exact cutoff overrides same-day calendar urgency after the instant",()=>{
+ const item={...base,deadline:"2027-06-01",deadline_time:"23:59",deadline_timezone:"Europe/London",
+  deadline_cutoff_verified:true,deadline_cutoff_utc:"2027-06-01T22:59:00Z"};
+ const before=Date.parse("2027-06-01T22:58:00Z"),after=Date.parse("2027-06-01T22:59:00Z");
+ assert.equal(isActionable(item,"2027-06-01",before),true);
+ assert.equal(isActionable(item,"2027-06-01",after),false);
+ assert.equal(riskSignal(item,"2027-06-01",after),"Cutoff elapsed");
+ assert.equal(priorityScore(item,"2027-06-01",after),-100);
+ assert.equal(validateSnapshot({schema_version:1,providers:[],records:[item]}).ok,true);
+ assert.equal(validateSnapshot({schema_version:1,providers:[],records:[{...item,deadline_cutoff_utc:"wrong"}]}).ok,false);
+});

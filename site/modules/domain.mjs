@@ -1,3 +1,4 @@
+import {cutoffElapsed,verifiedCutoff} from "./deadline-cutoff.mjs";
 const STATUSES = new Set(["unconfirmed","shortlisted","preparing","submitted","interview","offer","rejected","withdrawn","blocked","archived"]);
 const VERIFICATIONS = new Set(["unverified","needs_review","source_verified","owner_verified"]);
 const DOC_STATES = new Set(["unknown","ready","in_progress","not_started","not_applicable"]);
@@ -18,12 +19,13 @@ export function daysUntil(date, today) {
 
 export function isClosed(record){return CLOSED.has(record?.status)}
 
-export function isActionable(record,today) {
+export function isActionable(record,today,now=Date.now()) {
   if(!record || record.record_type!=="tracked" || isClosed(record) || record.status==="blocked")return false;
   if(record.status==="submitted"){
     const follow=daysUntil(record.followup,today);
     return follow!==null&&follow<=14;
   }
+  if(cutoffElapsed(record,now))return false;
   const due=daysUntil(record.deadline,today);
   return due===null||due>=0;
 }
@@ -43,7 +45,7 @@ export function documentReadiness(record) {
     :{state:"provisional",label:"Documents marked ready; requirements unverified",verified:false};
 }
 
-export function riskSignal(record,today) {
+export function riskSignal(record,today,now=Date.now()) {
   const due=daysUntil(record?.deadline,today);
   if(record?.status==="blocked")return"Blocked";
   if(record?.status==="submitted"){
@@ -51,6 +53,7 @@ export function riskSignal(record,today) {
     return follow===null?"Submitted":follow<=0?"Follow-up overdue":follow<=14?"Follow-up due":"Submitted";
   }
   if(isClosed(record))return"Closed";
+  if(cutoffElapsed(record,now))return"Cutoff elapsed";
   if(due!==null&&due<0)return"Expired";
   if(documentReadiness(record).state==="incomplete")return"Confirmed gap";
   if(record?.duplicate_submission_advisory)return"Duplicate route caution";
@@ -59,9 +62,9 @@ export function riskSignal(record,today) {
   return"Review";
 }
 
-export function priorityScore(record,today) {
+export function priorityScore(record,today,now=Date.now()) {
   const due=daysUntil(record?.deadline,today);
-  if(!isActionable(record,today))return -100;
+  if(!isActionable(record,today,now))return -100;
   if(record.status==="submitted"){
     const follow=daysUntil(record.followup,today);
     return (follow<=0?102:follow<=3?74:follow<=7?46:24)+(record.priority==="high"?20:0);
@@ -88,6 +91,9 @@ export function validateSnapshot(snapshot) {
       return {ok:false,error:"The source contains duplicate or invalid application identifiers (row "+(i+1)+")."};
     }
     ids.add(r.id);
+    if(r.deadline_cutoff_verified===true&&verifiedCutoff(r)===null){
+      return {ok:false,error:"A verified cutoff must include a valid UTC timestamp, local clock and timezone (source ID "+r.id+")."};
+    }
     if(typeof r.name!=="string"||!STATUSES.has(r.status)||!VERIFICATIONS.has(r.verification)||!["tracked","candidate"].includes(r.record_type)||(r.deadline!==null&&!isDay(r.deadline))){
       return {ok:false,error:"An application record is malformed (source ID "+r.id+")."};
     }

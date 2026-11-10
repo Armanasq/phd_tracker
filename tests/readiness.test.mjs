@@ -45,3 +45,13 @@ test("deadline ordering is deterministic; invalid dates fail closed",()=>{
  assert.equal(assessApplication(base,"2026-02-30"),null);
  assert.throws(()=>portfolioReadiness({},today),TypeError);
 });
+
+test("verified cutoff completed today enters the halted queue, not active preparation",()=>{
+ const item={...base,id:"CUT",deadline:"2027-06-01",deadline_cutoff_verified:true,
+  deadline_time:"23:59",deadline_timezone:"Europe/London",deadline_cutoff_utc:"2027-06-01T22:59:00Z"};
+ const after=Date.parse("2027-06-01T23:00:00Z");
+ const result=portfolioReadiness([item],"2027-06-01",after);
+ assert.equal(result.active.length,0);
+ assert.equal(result.halted.length,1);
+ assert.equal(result.halted[0].phase,"expired");
+});
