@@ -79,7 +79,7 @@ jobs:
         run: node tests/site_accessibility.cjs
       - name: Audit responsive alignment, gutters, typography and overflow at six phone/tablet widths
         run: node tests/mobile_layout_audit.cjs
-      - name: Audit all 22 unified workspace routes in public and private modes across four viewports
+      - name: Audit all 24 unified workspace routes in public and private modes across four viewports
         run: node tests/all_routes_audit.cjs
       - name: Publish desktop and mobile screenshots
         if: always()
