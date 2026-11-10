@@ -330,9 +330,13 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
      box("Workflow route preview","Read-only preflight; no model was called.",
        '<div class="os-policy">'+state.workflowPreview.stages.map(stage=>
          '<div><strong>'+esc(stage.agent_id)+' · '+esc(stage.model)+'</strong><p>'+esc(stage.provider_label)+
-         ' · '+esc(stage.route_source)+(stage.cloud?' · Cloud provider':' · Local provider')+'</p></div>').join("")+
+         ' · '+esc(stage.route_source)+(stage.cloud?' · Cloud provider':' · Local provider')+
+         ' · '+esc(stage.inference_state||"needs_setup")+'</p></div>').join("")+
        '<div><strong>'+esc(state.workflowPreview.model_calls)+' planned model calls</strong><p>'+
-       (state.workflowPreview.manual_ready?'Routes resolved; actual model health and quotas require verification':'Manual execution requires fresh cloud-data consent')+
+       (!state.workflowPreview.manual_ready?'Fresh cloud-data consent required before execution':
+        state.workflowPreview.stages.length>1&&!state.workflowPreview.execution_ready?
+         'Verify inference on all model routes before the first stage: '+esc((state.workflowPreview.model_probe_required||[]).join(", ")):
+         'Policy preflight passed. Check live model availability, quotas and execution results independently.')+
        '</p></div></div>'):"")+schedulerPanel()+note();
  }
  function preferencesPanel() {
