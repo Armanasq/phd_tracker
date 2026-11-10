@@ -75,6 +75,10 @@ def inspect(root: Path, mode: str, env: Mapping[str, str]) -> list[Check]:
             add("private-storage", "error" if private_path.is_relative_to(root) else "ok", "Private state must stay outside repository" if private_path.is_relative_to(root) else "Private storage configured outside repository")
         else:
             add("private-storage", "ok", "Runtime uses its own checkout-scoped private directory")
+        compose_project = env.get("PHD_ATLAS_COMPOSE_PROJECT")
+        if compose_project is not None:
+            valid_project = bool(re.fullmatch(r"[a-z0-9][a-z0-9_-]{0,62}", compose_project))
+            add("compose-project", "ok" if valid_project else "error", "Compose state namespace is explicit" if valid_project else "Compose project name must be lowercase letters, digits, hyphens or underscores")
         if env.get("PHDAI_API_TOKEN"):
             add("api-token", "warning", "API token requires an authenticated client; the bundled browser does not provide a bearer token")
 
