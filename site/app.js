@@ -7,12 +7,13 @@ import {renderReadinessView} from "./modules/readiness-view.mjs";
 import {createLocalRecord,normalizeLocalRecords,mergeLocalRecords,exportIndependentSource} from "./modules/local-records.mjs";
 import {createConsole} from "./modules/console.mjs";
 import {candidateQueue} from "./modules/discovery.mjs";
+import {runtimeCapabilities} from "./modules/runtime-capabilities.mjs";
 import {mountAtlasLens} from "./modules/lens.mjs";
 import {auditWorkspace} from "./modules/assurance.mjs";
 import {renderAssurance,renderCoverage} from "./modules/assurance-view.mjs";
 (() => {
 "use strict";
-const VIEWS=[["dashboard","home","Overview"],["applications","file","Applications"],["discovery","database","Discovery"],["readiness","check","Readiness"],["operations","layers","Operations"],["actions","check","Actions"],["ledger","check","Task ledger"],["calendar","calendar","Calendar"],["pipeline","columns","Pipeline"],["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],["review","shield","Verification"],["archive","archive","Archive"],["sources","database","Sources"],["ai","sparkles","Copilot"],["agents","bot","Agents"],["automations","flow","Automations"],["activity","activity","Run history"],["settings","settings","Settings"]];
+const VIEWS=[["dashboard","home","Overview"],["applications","file","Applications"],["discovery","database","Discovery"],["readiness","check","Readiness"],["operations","layers","Operations"],["actions","check","Actions"],["ledger","check","Task ledger"],["calendar","calendar","Calendar"],["pipeline","columns","Pipeline"],["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],["review","shield","Verification"],["archive","archive","Archive"],["sources","database","Sources"],["ai","sparkles","Copilot"],["agents","bot","Agents"],["automations","flow","Automations"],["activity","activity","Run history"],["deployment","settings","Deployment"],["settings","settings","Settings"]];
 const FALLBACK_REPO="https://github.com/Armanasq/phd_tracker";
 let selectedAuditCategory="all",assuranceLimit=75;
 let readinessFilter="all";
@@ -177,6 +178,28 @@ function applications(){
  '<div class="registry-summary" aria-label="Current filtered results"><div><span>RECORDS IN VIEW</span><strong>'+list.length+'</strong><small>current filters</small></div><div><span>DUE WITHIN 7 DAYS</span><strong>'+dueSoon+'</strong><small>recorded dates</small></div><div><span>NEEDS VERIFICATION</span><strong>'+needsEvidence+'</strong><small>source or owner review</small></div><div><span>RESEARCH CANDIDATES</span><strong>'+candidates+'</strong><small>not promoted</small></div></div>'+
  '<div class="info">Deadline dates may omit portal cutoff times and time zones. Source review does not establish current availability. Device-local records are never published automatically. Source-record edits require explicit GitHub confirmation.</div>'+
  statCard("Application registry",toolbar(list)+(list.length?table(list,true):'<div class="empty">No records match these filters. Clear filters or select a saved view.</div>'));
+}
+function deploymentView(){
+ const report=runtimeCapabilities({privateConnected:aiConsole.isLive(),privateModelVerified:aiConsole.isVerified(),browserModelVerified:aiConsole.browserModel.isVerified()});
+ const labels={private:"Private Python workspace", "browser-local":"Browser-local model","static":"Public static workspace"};
+ const rows=report.capabilities.map(item=>
+  '<div class="mini-row"><div><strong>'+escapeHTML(item.label)+'</strong><small>'+escapeHTML(item.reason)+'</small></div>'+
+  pill(item.available?"Available":item.id==="cloud_batch"?"Requires fork setup":"Unavailable",item.available?"green":"neutral")+'</div>').join("");
+ return heading("Deployment & capabilities","Inspect execution boundaries, connect a provider, and deploy an independent fork without exposing secrets.",
+   button("Configure model","nav","settings","primary")+
+   button("Self-hosting guide","url",ownerRepo()+"/blob/main/docs/SELF_HOSTING.md"))+
+  '<div class="kpis">'+kpi("Execution mode",labels[report.mode],"Determined from this browser session")+
+  kpi("Available capabilities",report.available.length,"Verified or supported locally")+
+  kpi("Private runtime",aiConsole.isLive()?"Connected":"Not connected","Single owner, loopback only")+
+  kpi("Browser model",aiConsole.browserModel.isVerified()?"Verified":"Not tested","Direct inference only")+'</div>'+
+  statCard("Runtime capability contract",'<div class="mini-list">'+rows+'</div>')+
+  statCard("Choose an execution boundary",'<div class="mini-list">'+
+   '<div class="mini-row"><div><strong>GitHub Pages</strong><small>Read-only committed research data, local drafts, and offline deterministic assessment.</small></div>'+button("Open workspace","nav","dashboard")+'</div>'+
+   '<div class="mini-row"><div><strong>Pages + local model</strong><small>Browser-initiated /v1 inference. Requires an origin-approved model server and browser network permission.</small></div>'+button("Configure","nav","settings")+'</div>'+
+   '<div class="mini-row"><div><strong>GitHub Actions</strong><small>Opt-in, asynchronous cloud validation. Model keys remain in GitHub environment secrets.</small></div>'+button("Workflow","url",ownerRepo()+"/actions/workflows/hosted-ai-advisories.yml")+'</div>'+
+   '<div class="mini-row"><div><strong>Private Python or Linux Docker</strong><small>SQLite, model routes, agents and scheduled workflows; service remains bound to loopback.</small></div>'+button("Instructions","url",ownerRepo()+"/blob/main/docs/DOCKER_LOCAL.md")+'</div>'+
+   '<div class="mini-row"><div><strong>Authenticated cloud edition</strong><small>Not implemented; identity, per-user authorization, hardened API and durable workers are mandatory before exposure.</small></div></div>')+
+  '<div class="info">Capabilities are evaluated for this session only. A passing code-quality check does not prove that a model endpoint is running or that university evidence is current.</div>';
 }
 function discoveryView(){
  const report=candidateQueue(records(),TODAY(),{stage:discoveryFilter,query:discoveryQuery});
@@ -542,7 +565,7 @@ function navigation(){
 function render(){
  if(!state.data)return;
  navigation();
- const views={dashboard,calendar:calendarView,applications,discovery:discoveryView,readiness,pipeline,contacts,actions,ledger:ledgerView,updates,compare,review,archive,sources};
+ const views={dashboard,calendar:calendarView,applications,discovery:discoveryView,deployment:deploymentView,readiness,pipeline,contacts,actions,ledger:ledgerView,updates,compare,review,archive,sources};
  const intelligence=["ai","agents","automations","activity","settings","operations"].includes(state.view);
  const freshness=freshnessState(state.data.as_of,TODAY());
  const note=["aging","stale","unknown","future"].includes(freshness.state)
