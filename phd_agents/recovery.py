@@ -171,6 +171,8 @@ def drill_backup(
         )
         if _file_digest(target) != expected["sha256"]:
             raise ValueError("Drill restored state does not match the source backup")
+        if _file_digest(source) != expected["sha256"]:
+            raise ValueError("Source backup changed during the restore drill")
         if stat.S_IMODE(target.stat().st_mode) != 0o600:
             raise PermissionError("Drill restored state is not owner-only")
         _verify_database(target)
@@ -186,7 +188,7 @@ def drill_backup(
             "restored_in_isolation": True,
             "private_file_mode": "0o600",
             "tables_verified": tables,
-            "source_state_modified": False,
+            "live_state_writes_performed": False,
             "credentials_restored": False,
             "off_host_encryption_verified": False,
         }
