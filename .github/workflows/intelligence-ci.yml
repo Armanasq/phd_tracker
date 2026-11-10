@@ -88,7 +88,7 @@ jobs:
             echo "Cloud mode must remain blocked until authenticated runtime exists"
             exit 1
           fi
-          PHD_ATLAS_REPOSITORY="$GITHUB_REPOSITORY" docker compose -f compose.local-linux.yml config --quiet
+          PHD_ATLAS_REPOSITORY="$GITHUB_REPOSITORY" PHD_ATLAS_COMPOSE_PROJECT=phdatlas-ci docker compose -f compose.local-linux.yml config --quiet
       - run: python -m unittest discover -s tests -p 'test_instance_privacy.py'
       - name: Validate snapshot builder as deployed script
         run: |
