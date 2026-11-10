@@ -452,6 +452,14 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.send_json({"review": review})
         elif path == "/api/maintenance/backup":
             self.send_json({"backup": store.create_backup(retain=data.get("retain", 7))})
+        elif path == "/api/source-claims/review":
+            from .source_claims import review_source_claim
+            self.send_json({"review": review_source_claim(
+                store, claim_id=data.get("claim_id"),
+                expected_source_digest=data.get("expected_source_digest"),
+                expected_quote_digest=data.get("expected_quote_digest"),
+                decision=data.get("decision"), rationale=data.get("rationale"),
+            )})
         elif path == "/api/source-claims/capture":
             from .source_claims import capture_source_claim
             claim = capture_source_claim(

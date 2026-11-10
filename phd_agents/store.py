@@ -127,6 +127,17 @@ class Store:
             );
             CREATE INDEX IF NOT EXISTS idx_source_claims_observation
                 ON source_claims(observation_id,id);
+            CREATE TABLE IF NOT EXISTS source_claim_reviews(
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                claim_id INTEGER NOT NULL REFERENCES source_claims(id),
+                source_digest TEXT NOT NULL,
+                quote_digest TEXT NOT NULL,
+                decision TEXT NOT NULL,
+                rationale TEXT NOT NULL,
+                reviewed_at TEXT NOT NULL
+            );
+            CREATE INDEX IF NOT EXISTS idx_source_claim_reviews_lookup
+                ON source_claim_reviews(claim_id,id);
             CREATE TABLE IF NOT EXISTS worker_jobs(
                 id TEXT PRIMARY KEY,agent_id TEXT NOT NULL,provider_id TEXT NOT NULL,
                 application_id TEXT,input_text TEXT NOT NULL,status TEXT NOT NULL,

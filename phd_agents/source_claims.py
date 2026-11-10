@@ -9,6 +9,9 @@ from .source_text import normalize_excerpt
 from .store import Store
 
 CLAIM_TYPES = frozenset({"deadline", "eligibility", "funding", "documents", "recruitment", "other"})
+REVIEW_DECISIONS = frozenset({
+    "needs_recheck", "owner_interpretation_supported", "owner_interpretation_rejected",
+})
 _DIGEST = re.compile(r"[0-9a-f]{64}\Z")
 
 
@@ -62,7 +65,7 @@ def capture_source_claim(
     quoted_digest = hashlib.sha256(needle.encode("utf-8")).hexdigest()
     recorded = datetime.now(timezone.utc).isoformat(timespec="seconds")
     with store.db:
-        store.db.execute(
+        inserted = store.db.execute(
             "INSERT OR IGNORE INTO source_claims("
             "observation_id,application_id,source_url,source_digest,claim_type,"
             "exact_quote,candidate_value,quote_digest,captured_at)"
@@ -79,7 +82,8 @@ def capture_source_claim(
             "AND quote_digest=? AND candidate_value=?",
             (observation_id, claim_type, quoted_digest, value),
         ).fetchone()
-        store._audit("source:quote_captured", observed["application_id"])
+        if inserted.rowcount:
+            store._audit("source:quote_captured", observed["application_id"])
     return dict(row)
 
 
@@ -87,7 +91,65 @@ def source_claims(store: Store, *, limit: int = 200) -> list[dict[str, Any]]:
     if type(limit) is not int or not 1 <= limit <= 500:
         raise ValueError("Source claim list limit must be 1–500")
     return [dict(row) for row in store.db.execute(
-        "SELECT id,observation_id,application_id,source_url,source_digest,"
-        "claim_type,exact_quote,candidate_value,quote_digest,captured_at,verification "
-        "FROM source_claims ORDER BY id DESC LIMIT ?", (limit,),
+        "SELECT c.id,c.observation_id,c.application_id,c.source_url,c.source_digest,"
+        "c.claim_type,c.exact_quote,c.candidate_value,c.quote_digest,c.captured_at,c.verification,"
+        "r.decision AS owner_review_decision,r.reviewed_at AS owner_reviewed_at "
+        "FROM source_claims AS c LEFT JOIN source_claim_reviews AS r ON "
+        "r.id=(SELECT MAX(v.id) FROM source_claim_reviews AS v WHERE v.claim_id=c.id) "
+        "ORDER BY c.id DESC LIMIT ?", (limit,),
     ).fetchall()]
+
+
+def review_source_claim(
+    store: Store, *, claim_id: int, expected_source_digest: str,
+    expected_quote_digest: str, decision: str, rationale: str,
+) -> dict[str, Any]:
+    if type(claim_id) is not int or claim_id < 1:
+        raise ValueError("Claim ID must be a positive integer")
+    if decision not in REVIEW_DECISIONS:
+        raise ValueError("Unsupported owner claim-review decision")
+    if not isinstance(rationale, str) or not 30 <= len(rationale.strip()) <= 1500:
+        raise ValueError("Owner review rationale must contain 30–1500 characters")
+    if any(ord(c) < 32 and c not in "\t\n" for c in rationale):
+        raise ValueError("Owner review rationale contains control characters")
+    if not all(
+        isinstance(digest, str) and _DIGEST.fullmatch(digest)
+        for digest in (expected_source_digest, expected_quote_digest)
+    ):
+        raise ValueError("Review requires both exact source and quotation SHA-256 digests")
+    item = store.db.execute(
+        "SELECT id,application_id,source_digest,quote_digest FROM source_claims WHERE id=?",
+        (claim_id,),
+    ).fetchone()
+    if item is None:
+        raise ValueError("Unknown captured source claim")
+    if (item["source_digest"] != expected_source_digest
+            or item["quote_digest"] != expected_quote_digest):
+        raise ValueError("Source claim evidence changed; refresh the review before submitting")
+    normalized = rationale.strip()
+    prior = store.db.execute(
+        "SELECT id,decision,rationale,reviewed_at FROM source_claim_reviews "
+        "WHERE claim_id=? ORDER BY id DESC LIMIT 1",
+        (claim_id,),
+    ).fetchone()
+    if prior is not None and prior["decision"] == decision and prior["rationale"] == normalized:
+        return {
+            "id": prior["id"], "claim_id": claim_id,
+            "decision": decision, "reviewed_at": prior["reviewed_at"],
+            "reused": True, "authority": "owner_interpretation_only",
+        }
+    timestamp = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    with store.db:
+        cursor = store.db.execute(
+            "INSERT INTO source_claim_reviews("
+            "claim_id,source_digest,quote_digest,decision,rationale,reviewed_at"
+            ") VALUES(?,?,?,?,?,?)",
+            (claim_id, expected_source_digest, expected_quote_digest, decision,
+             normalized, timestamp),
+        )
+        store._audit("source:claim_owner_review", item["application_id"])
+    return {
+        "id": cursor.lastrowid, "claim_id": claim_id,
+        "decision": decision, "reviewed_at": timestamp,
+        "reused": False, "authority": "owner_interpretation_only",
+    }
