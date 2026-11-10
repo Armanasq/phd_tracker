@@ -6,15 +6,17 @@ import {assessApplication,portfolioReadiness} from "./modules/readiness.mjs";
 import {renderReadinessView} from "./modules/readiness-view.mjs";
 import {createLocalRecord,normalizeLocalRecords,mergeLocalRecords,exportIndependentSource} from "./modules/local-records.mjs";
 import {createConsole} from "./modules/console.mjs";
+import {candidateQueue} from "./modules/discovery.mjs";
 import {mountAtlasLens} from "./modules/lens.mjs";
 import {auditWorkspace} from "./modules/assurance.mjs";
 import {renderAssurance,renderCoverage} from "./modules/assurance-view.mjs";
 (() => {
 "use strict";
-const VIEWS=[["dashboard","home","Overview"],["applications","file","Applications"],["readiness","check","Readiness"],["operations","layers","Operations"],["actions","check","Actions"],["ledger","check","Task ledger"],["calendar","calendar","Calendar"],["pipeline","columns","Pipeline"],["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],["review","shield","Verification"],["archive","archive","Archive"],["sources","database","Sources"],["ai","sparkles","Copilot"],["agents","bot","Agents"],["automations","flow","Automations"],["activity","activity","Run history"],["settings","settings","Settings"]];
+const VIEWS=[["dashboard","home","Overview"],["applications","file","Applications"],["discovery","database","Discovery"],["readiness","check","Readiness"],["operations","layers","Operations"],["actions","check","Actions"],["ledger","check","Task ledger"],["calendar","calendar","Calendar"],["pipeline","columns","Pipeline"],["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],["review","shield","Verification"],["archive","archive","Archive"],["sources","database","Sources"],["ai","sparkles","Copilot"],["agents","bot","Agents"],["automations","flow","Automations"],["activity","activity","Run history"],["settings","settings","Settings"]];
 const FALLBACK_REPO="https://github.com/Armanasq/phd_tracker";
 let selectedAuditCategory="all",assuranceLimit=75;
 let readinessFilter="all";
+let discoveryFilter="all",discoveryQuery="";
 let ledgerQuery="",ledgerType="all",ledgerPage=1;
 const STORE=storageKey("phd-atlas-drafts-v1"),PREFS=storageKey("phd-atlas-prefs-v1"),VIEW_STORE=storageKey("phd-atlas-views-v2"),COMPARE_STORE=storageKey("phd-atlas-compare-v1"),LOCAL_STORE=storageKey("phd-atlas-local-records-v1");
 const $=id=>document.getElementById(id);
@@ -175,6 +177,26 @@ function applications(){
  '<div class="registry-summary" aria-label="Current filtered results"><div><span>RECORDS IN VIEW</span><strong>'+list.length+'</strong><small>current filters</small></div><div><span>DUE WITHIN 7 DAYS</span><strong>'+dueSoon+'</strong><small>recorded dates</small></div><div><span>NEEDS VERIFICATION</span><strong>'+needsEvidence+'</strong><small>source or owner review</small></div><div><span>RESEARCH CANDIDATES</span><strong>'+candidates+'</strong><small>not promoted</small></div></div>'+
  '<div class="info">Deadline dates may omit portal cutoff times and time zones. Source review does not establish current availability. Device-local records are never published automatically. Source-record edits require explicit GitHub confirmation.</div>'+
  statCard("Application registry",toolbar(list)+(list.length?table(list,true):'<div class="empty">No records match these filters. Clear filters or select a saved view.</div>'));
+}
+function discoveryView(){
+ const report=candidateQueue(records(),TODAY(),{stage:discoveryFilter,query:discoveryQuery});
+ const stages=[["all","All candidates"],["reviewed","Source reviewed"],["review","Verification needed"],["staged","Staged updates"],["closed","Recorded date passed"]];
+ const filters=stages.map(([id,label])=>button(label+" ("+(id==="all"?report.counts.total:report.counts[id])+")","discovery-filter",id,discoveryFilter===id?"primary":"secondary")).join("");
+ const cards=report.items.map(({record:r,stage,action,reasons})=>
+  '<div class="mini-row discovery-row"><div><div>'+rowButton(r)+' '+pill(({reviewed:"Source reviewed",review:"Review needed",closed:"Recorded date passed",staged:"Staged"})[stage]||"Unverified")+'</div>'+
+  '<small>'+escapeHTML(r.institution||"Institution unknown")+' · '+escapeHTML(r.country||"Country unknown")+' · '+escapeHTML(r.topic||"Research focus not recorded")+'</small>'+
+  '<small>'+escapeHTML(action)+(reasons.length?" · "+escapeHTML(reasons.slice(0,2).join("; ")):"")+'</small>'+
+  '<div class="linkset">'+link(r.source_url,"Primary source")+link(r.apply_url,"Official application route")+'</div></div>'+
+  '<div class="discovery-actions"><div>'+escapeHTML(r.deadline||"Date unknown")+'</div>'+
+  button("Inspect","record",r.id)+(stage==="reviewed"?button("Stage promotion","promote",r.id):"")+'</div></div>'
+ ).join("");
+ return heading("Discovery","Evidence-first research candidate triage. Recorded verification is not a guarantee of open admissions.",
+   button("Add opportunity","new-local","","primary")+button("Tracked applications","nav","applications"))+
+  '<div class="kpis">'+kpi("Candidates",report.counts.total,"Research leads; not applications")+kpi("Source reviewed",report.counts.reviewed,"Explicitly recorded review")+kpi("Needs verification",report.counts.review,"Primary proof still needed")+kpi("Staged changes",report.counts.staged,"Require confirmation")+kpi("Recorded date passed",report.counts.closed,"Check current call")+'</div>'+
+  '<div class="discovery-controls"><div class="buttons" role="group" aria-label="Discovery status filters">'+filters+'</div>'+
+  '<label class="field"><span>Search candidate evidence</span><input id="discoveryQuery" class="input" type="search" maxlength="200" value="'+escapeHTML(discoveryQuery)+'" placeholder="Institution, programme, topic, country"></label></div>'+
+  statCard("Candidate review queue",cards||'<div class="empty">No matching research candidates. Review your source records or adjust filters.</div>')+
+  '<div class="info">Candidate promotion is staged as a local draft. Official source review, deadline validation and a separate GitHub confirmation are required before treating it as tracked.</div>';
 }
 function readiness(){
  const report=portfolioReadiness(records(),TODAY());
@@ -500,7 +522,7 @@ const ICONS={
 };
 function navigation(){
  const tracked=records().filter(r=>r.record_type==="tracked");
- const counts={applications:tracked.length,actions:tracked.filter(open).filter(thisWeek).length,review:tracked.filter(r=>r.recheck_required).length};
+ const counts={applications:tracked.length,discovery:records().filter(r=>r.record_type==="candidate").length,actions:tracked.filter(open).filter(thisWeek).length,review:tracked.filter(r=>r.recheck_required).length};
  const chapters={dashboard:"Workspace",applications:"Tracking",ai:"Assistant",settings:"Configuration"};
  $("navigation").innerHTML=VIEWS.map(([id,icon,label])=>
   (chapters[id]?'<div class="nav-chapter" aria-hidden="true">'+chapters[id]+'</div>':"")+
@@ -520,7 +542,7 @@ function navigation(){
 function render(){
  if(!state.data)return;
  navigation();
- const views={dashboard,calendar:calendarView,applications,readiness,pipeline,contacts,actions,ledger:ledgerView,updates,compare,review,archive,sources};
+ const views={dashboard,calendar:calendarView,applications,discovery:discoveryView,readiness,pipeline,contacts,actions,ledger:ledgerView,updates,compare,review,archive,sources};
  const intelligence=["ai","agents","automations","activity","settings","operations"].includes(state.view);
  const freshness=freshnessState(state.data.as_of,TODAY());
  const note=["aging","stale","unknown","future"].includes(freshness.state)
@@ -607,6 +629,7 @@ function events(){
   else if(type==="clear-filters")resetFilters();
   else if(type==="retry-load")loadSnapshot();
   else if(type==="readiness-filter"){readinessFilter=value;render()}
+   else if(type==="discovery-filter"){discoveryFilter=value;render()}
   else if(type==="audit-filter"){selectedAuditCategory=value;assuranceLimit=75;render()}
   else if(type==="audit-more"){assuranceLimit+=75;render()}
   else if(type==="ledger-page"){ledgerPage=Math.max(1,Number(value)||1);render()}
@@ -675,7 +698,13 @@ function events(){
   }
  });
  document.addEventListener("input",e=>{
-  if(e.target.id==="ledgerQuery"){
+  if(e.target.id==="discoveryQuery"){
+    const pos=e.target.selectionStart;
+    discoveryQuery=e.target.value.slice(0,200);
+    render();
+    const field=$("discoveryQuery");
+    if(field){field.focus();field.setSelectionRange(pos,pos)}
+   }else if(e.target.id==="ledgerQuery"){
    const pos=e.target.selectionStart;ledgerQuery=e.target.value;ledgerPage=1;render();$("ledgerQuery")?.focus();$("ledgerQuery")?.setSelectionRange(pos,pos);
   }else if(e.target.id==="filterQuery"){
    const pos=e.target.selectionStart;
