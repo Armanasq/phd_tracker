@@ -276,6 +276,15 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    selector("Model route","provider_id",[["auto","Automatic · workspace default"],...providers().map(p=>[p.id,p.label+" · "+p.model])],modelChoice)+
    '<fieldset class="os-tool-field"><legend>Allowed deterministic tools</legend><div class="os-tool-grid">'+tools.map(name=>
     '<label class="os-tool"><input type="checkbox" name="tools" value="'+esc(name)+'" '+(selectedTools.includes(name)?"checked":"")+'><span>'+esc(pretty(name))+'</span></label>').join("")+'</div></fieldset>'+
+   '<fieldset class="os-tool-field"><legend>Model capability contract</legend>'+
+   field("Minimum output token capacity","min_output_tokens",item.requirements?.min_output_tokens??64,"number",'required min="64" max="16384" step="1"')+
+   '<div class="os-tool-grid">'+[
+     ["requires_native_tools","Native model tool-calling"],
+     ["requires_structured_output","Validated structured JSON output"],
+     ["requires_vision","Visual input"]
+   ].map(([key,label])=>'<label class="os-tool"><input type="checkbox" name="'+key+'" '+
+     (item.requirements?.[key]?"checked":"")+'><span>'+label+'</span></label>').join("")+
+   '</div><p class="os-footnote">Only text inference and deterministic pre-executed tools are implemented. Unsupported capabilities block inference before data transmission.</p></fieldset>'+
    '<div class="os-form-footer"><button type="submit" class="os-btn primary" '+(state.busy?"disabled":"")+'>Save agent definition</button>'+
    (isNew?'':btn("Run this agent","run-selected-agent",item.id,"quiet"))+'</div>'+
    footnote("Agents can analyze evidence using allowlisted local tools. They cannot send mail, submit applications or change records without a separate, audited authorization workflow.")+
@@ -341,7 +350,9 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
          ' · '+esc(stage.route_source)+(stage.cloud?' · Cloud provider':' · Local provider')+
          ' · '+esc(stage.inference_state||"needs_setup")+'</p></div>').join("")+
        '<div><strong>'+esc(state.workflowPreview.model_calls)+' planned model calls</strong><p>'+
-       (!state.workflowPreview.manual_ready?'Fresh cloud-data consent required before execution':
+       (state.workflowPreview.compatibility_blockers?.length?
+          'Incompatible model capabilities: '+esc(state.workflowPreview.compatibility_blockers.join(", ")):
+        !state.workflowPreview.manual_ready?'Fresh cloud-data consent required before execution':
         state.workflowPreview.stages.length>1&&!state.workflowPreview.execution_ready?
          'Verify inference on all model routes before the first stage: '+esc((state.workflowPreview.model_probe_required||[]).join(", ")):
          'Policy preflight passed. Check live model availability, quotas and execution results independently.')+
@@ -793,7 +804,13 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   }
   if(kind==="agent"){
    const agent={id:cleanId(values.id||values.label),label:values.label,description:values.description,
-                instructions:values.instructions,tools:new FormData(form).getAll("tools")};
+                instructions:values.instructions,tools:new FormData(form).getAll("tools"),
+                requirements:{
+                  min_output_tokens:Number(values.min_output_tokens),
+                  requires_native_tools:form.elements.requires_native_tools.checked,
+                  requires_structured_output:form.elements.requires_structured_output.checked,
+                  requires_vision:form.elements.requires_vision.checked
+                }};
    const route=values.provider_id;
    await change(async()=>{
     await request("/api/catalog/agent",agent);
