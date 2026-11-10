@@ -1,5 +1,6 @@
 import {createOperations} from "./operations.mjs";
 import {createBrowserModel} from "./browser-model.mjs";
+import {renderSourceObservations} from "./source-observations.mjs";
 const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const pretty = value => String(value ?? "").replaceAll("_"," ").replace(/\b\w/g, c => c.toUpperCase());
 const short = (value, length=125) => String(value ?? "").slice(0,length);
@@ -10,7 +11,7 @@ const cleanId = value => String(value||"").trim().toLowerCase().replace(/[^a-z0-
 const opt = (items,value) => choose(items,value);
 
 export function createConsole({notify,onChange,navigate,getRecords,getSourceRecords,onReload,getView}) {
- const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:"",jobs:[],observability:null};
+ const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:"",jobs:[],observability:null,sourceObservations:[],sourceObservationsLoading:false,sourceObservationsError:"",sourceObservationFilter:"all"};
  const providers = () => state.data?.catalog?.providers || [];
  const agents = () => state.data?.catalog?.agents || [];
  const workflows = () => state.data?.catalog?.workflows || [];
@@ -93,6 +94,9 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    state.data=data;
    const jobs=await request("/api/jobs").catch(()=>({jobs:[]}));
    state.jobs=Array.isArray(jobs.jobs)?jobs.jobs:[];
+   const observations=await request("/api/source-observations").catch(error=>({error:String(error.message||error)}));
+   state.sourceObservationsError=observations.error||"";
+   state.sourceObservations=Array.isArray(observations.observations)?observations.observations:[];
    const observed=await request("/api/observability").catch(()=>null);
    state.observability=observed?.schema_version===1?observed:null;
    state.selectedAgent=agents().some(a=>a.id===state.selectedAgent)?state.selectedAgent:(prefs().default_agent||agents()[0]?.id);
@@ -452,6 +456,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   if(name==="agents")return '<section class="os-page">'+heading("AI / AGENT DEFINITIONS","Agent builder","Configure each research agent's instructions, deterministic tools and automatic model assignment.",btn("Model settings","go","settings","quiet"))+agentPanel()+'</section>';
   if(name==="automations")return '<section class="os-page">'+heading("AI / WORKFLOW ENGINE","Automations","Compose multi-agent workflows, inspect scheduling rules and control approvals.",btn("Runtime settings","go","settings","quiet"))+workflowPanel()+'</section>';
   if(name==="activity")return activity();
+  if(name==="source-observations")return renderSourceObservations({records:state.sourceObservations,loading:state.sourceObservationsLoading,error:state.sourceObservationsError,filter:state.sourceObservationFilter});
   return '';
  }
  function selectConnection(id) {state.selectedProvider=id;state.models={};onChange();}
@@ -462,6 +467,23 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   if(action==="go"){navigate(id);return;}
   if(action==="tab"){state.tab=id;onChange();return;}
   if(action==="reconnect"){await connect();return;}
+  if(action==="refresh-observations"){
+   if(!isLive()||state.sourceObservationsLoading)return;
+   state.sourceObservationsLoading=true;state.sourceObservationsError="";onChange();
+   try{
+    const response=await request("/api/source-observations");
+    if(!Array.isArray(response.observations))throw new Error("Invalid source observation response");
+    state.sourceObservations=response.observations;
+   }catch(error){state.sourceObservationsError=String(error.message||error).slice(0,200);}
+   finally{state.sourceObservationsLoading=false;onChange();}
+   return;
+  }
+  if(action==="copy-observer-command"){
+   if(!isLive())return;
+   try{await navigator.clipboard.writeText("python -m phd_agents observe-sources --limit 8");notify("Source observation command copied.");}
+   catch{notify("Copy unavailable. Select the visible command manually.");}
+   return;
+  }
   if(action.startsWith("bm-")){await browserModel.action(action.slice(3));return;}
   if(action==="state-diagnostics"){
    if(!isLive())return;
@@ -681,6 +703,10 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    handleForm(event).catch(error=>notify(short(error.message,220)));
   });
   document.addEventListener("change",event=>{
+   if(event.target.matches("[data-os-observation-filter]")){
+    state.sourceObservationFilter=event.target.value;
+    onChange();return;
+   }
    if(event.target.matches('select[name="agent_id"]')&&event.target.closest('form[data-os-form="run"]')){
     const form=event.target.form;
     state.prompt=form.elements.prompt.value;
