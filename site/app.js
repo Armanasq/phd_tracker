@@ -527,9 +527,14 @@ function render(){
    ?'<div class="freshness-note" role="status"><span>'+escapeHTML(freshness.label)+'. Verify critical deadlines using official sources.</span>'+button("Review sources","nav","sources")+'</div>':"";
  $("body").innerHTML=note+(intelligence?aiConsole.view(state.view,{records:records()}):views[state.view]());
  const activeBadge=$("currentModel");
- if(activeBadge){activeBadge.textContent=aiConsole.isLive()?aiConsole.activeLabel()+" / "+aiConsole.activeModel():"Connect model";activeBadge.classList.toggle("is-online",aiConsole.isLive()&&aiConsole.isVerified());}
+ const browserStatus=aiConsole.browserModel.status();
+ const modelReady=aiConsole.isLive()?aiConsole.isVerified():browserStatus.verified;
+ if(activeBadge){
+   activeBadge.textContent=aiConsole.isLive()?aiConsole.activeLabel()+" / "+aiConsole.activeModel():browserStatus.verified?"Local / "+browserStatus.model:"Connect model";
+   activeBadge.classList.toggle("is-online",modelReady);
+ }
  const runtimeNote=$("aiRuntimeState");
- if(runtimeNote)runtimeNote.textContent=aiConsole.isLive()?"Private runtime connected":"Private runtime offline · model settings require local service";
+ if(runtimeNote)runtimeNote.textContent=aiConsole.isLive()?"Private runtime · agents and persistence ready":browserStatus.verified?"Browser-local model verified · direct inference only":"No verified inference · configure in Settings";
  const unhealthy=state.data.providers.filter(p=>p.health!=="ok").length;
  $("providerStatus").innerHTML='<strong>'+escapeHTML(stamp(state.data.as_of))+'</strong><span class="signal"><span class="signal-dot '+(unhealthy?"":"ok")+'" aria-hidden="true"></span>'+unhealthy+' source feeds need attention</span>';
  const topAsOf=$("topEvidenceAsOf");if(topAsOf)topAsOf.textContent="Evidence observed "+stamp(state.data.as_of)+(state.data.instance?.type==="independent"?" · Independent deployment: verify evidence provenance":"");
@@ -743,7 +748,7 @@ async function loadSnapshot(){
 }
 function init(){
  events();
- atlasLens=mountAtlasLens({getRecords:()=>state.data?records():[],getView:()=>state.view,getSelectedApplication:()=>state.selected,openSettings:()=>go("settings"),onFocusApplication:id=>detail(getRecord(id)),onRunComplete:()=>aiConsole.connect()});
+ atlasLens=mountAtlasLens({getRecords:()=>state.data?records():[],getPublicRecords:()=>state.data?.records||[],browserModel:aiConsole.browserModel,getView:()=>state.view,getSelectedApplication:()=>state.selected,openSettings:()=>go("settings"),onFocusApplication:id=>detail(getRecord(id)),onRunComplete:()=>aiConsole.isLive()?aiConsole.connect():undefined});
  document.body.classList.toggle("dark",state.prefs.theme==="dark");
  const route=location.hash.replace(/^#/,"");
  if(VIEWS.some(([id])=>id===route))state.view=route;
