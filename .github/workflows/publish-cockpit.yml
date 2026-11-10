@@ -93,6 +93,8 @@ jobs:
           node --check site/modules/discovery.mjs
           node --check site/modules/runtime-capabilities.mjs
           node --test tests/discovery.test.mjs tests/runtime_capabilities.test.mjs
+          node --check site/modules/documents.mjs
+          node --test tests/documents.test.mjs
           node --check site/modules/routes.mjs
           node --test tests/routes.test.mjs
           node --check site/modules/browser-model.mjs
