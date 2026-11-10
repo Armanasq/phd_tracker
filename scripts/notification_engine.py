@@ -224,6 +224,30 @@ def outstanding(events: list[dict], state: dict, channel: str, limit: int = 30) 
     return [r for r in events if r["id"] not in previous][:limit]
 
 
+def distinct_daily_actions(daily: dict, *, limit: int = 13) -> list[str]:
+    if not isinstance(daily, dict) or not 1 <= limit <= 100:
+        raise ValueError("Invalid action digest input")
+    sections = ("eligible_application_deadlines", "priority_review_dates",
+                "unverified_application_dates", "cross_route_tasks", "scheduled_timeline_tasks")
+    seen: set[tuple[str, str, str]] = set()
+    lines: list[str] = []
+    for section in sections:
+        for task in daily.get(section, []):
+            if not isinstance(task, dict):
+                continue
+            action = clean(task.get("action"), 150)
+            name = clean(task.get("name"), 85)
+            due = str(task.get("due") or task.get("deadline") or "")
+            key = (" ".join(action.casefold().split()), " ".join(name.casefold().split()), due)
+            if not action or key in seen:
+                continue
+            seen.add(key)
+            lines.append("- " + action + " — " + name)
+            if len(lines) >= limit:
+                return lines
+    return lines
+
+
 def digest(evaluated: dict, selected: list[dict]) -> str:
     lines = [MARKER, "# PhD Intelligence — Action Center", "",
              "As of " + evaluated["as_of"] + " (UTC). A live page indicator is not a guarantee of eligibility.", "",
@@ -268,13 +292,7 @@ def digest(evaluated: dict, selected: list[dict]) -> str:
                   "",
                   "These are separate clocks. Earlier steps associated with today's final deadline are not counted as tasks due today.",
                   ""]
-        for item in (daily.get("eligible_application_deadlines", []) +
-                     daily.get("priority_review_dates", []) +
-                     daily.get("unverified_application_dates", []) +
-                     daily.get("cross_route_tasks", []) +
-                     daily.get("scheduled_timeline_tasks", []))[:13]:
-            lines.append("- " + clean(item.get("action", ""), 150) + " — " +
-                         clean(item.get("name", ""), 85))
+        lines.extend(distinct_daily_actions(daily))
         lines += ["", "[Complete source-linked daily agenda](../blob/main/docs/TODAY.md)",
                   "[Editable Execution board and full Task ledger](../blob/main/PhD_Action_List.xlsx)"]
     lines += ["", "## Recently triggered notifications", ""]
@@ -301,7 +319,7 @@ def digest(evaluated: dict, selected: list[dict]) -> str:
         lines.append("- No new threshold crossings or conflicting evidence since the last notification.")
     lines += ["", "## Controls", "",
               "- Edit the workbook for application decisions. A research lead is never automatically marked eligible or submitted.",
-              "- Sources: data/discovered_candidates.json and data/latest_run.json in this private repository.",
+              "- Sources: data/discovered_candidates.json and data/latest_run.json in the repository. Published repository contents are public when this fork is public.",
               "- To silence a completed application, set its verdict to Submitted, Skipped or Withdrawn.",
               "- Owner-only Issue controls: /priority APPLICATION_ID; /snooze APPLICATION_ID 3d; /mute APPLICATION_ID; /unsnooze APPLICATION_ID.",
               "- Explicit readiness controls: /asset academic_cv ready; /asset research_statement in_progress; /asset transcripts unknown.",
