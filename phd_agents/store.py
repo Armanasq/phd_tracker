@@ -95,6 +95,18 @@ class Store:
             );
             CREATE INDEX IF NOT EXISTS idx_source_observations_record
                 ON source_observations(application_id,source_url,id);
+            CREATE TABLE IF NOT EXISTS source_observation_reviews(
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                observation_id INTEGER NOT NULL,
+                application_id TEXT NOT NULL,
+                source_url TEXT NOT NULL,
+                source_sha256 TEXT,
+                decision TEXT NOT NULL,
+                note TEXT NOT NULL,
+                reviewed_at TEXT NOT NULL
+            );
+            CREATE INDEX IF NOT EXISTS idx_source_reviews_observation
+                ON source_observation_reviews(observation_id,id);
             CREATE TABLE IF NOT EXISTS worker_jobs(
                 id TEXT PRIMARY KEY,agent_id TEXT NOT NULL,provider_id TEXT NOT NULL,
                 application_id TEXT,input_text TEXT NOT NULL,status TEXT NOT NULL,
