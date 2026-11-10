@@ -164,50 +164,5 @@ def research_fit_signals(profile: dict[str, Any], records: list[dict[str, Any]])
     return sorted(result, key=lambda x: (-x["matched_count"], x["application_id"]))[:80]
 
 def resource_schedule(records: list[dict[str, Any]], as_of: date, hours_per_week: float, profile: dict[str, Any] | None = None) -> dict[str, Any]:
-    if isinstance(hours_per_week, bool) or not isinstance(hours_per_week, (int, float)) or not 0 < hours_per_week <= 168:
-        raise ValueError("Available hours must be between 0 and 168")
-    entries = []
-    unknown = []
-    documents = set()
-    effort = (profile or {}).get("document_effort", {})
-    for r in records:
-        if r.get("record_type") != "tracked" or r.get("status") in {"submitted", "offer", "rejected", "withdrawn", "archived", "blocked"}:
-            continue
-        try:
-            due = date.fromisoformat(r["deadline"])
-        except (ValueError, TypeError, KeyError):
-            unknown.append({"application_id": r["id"], "reason": "Deadline unavailable"})
-            continue
-        if due < as_of:
-            continue
-        hours = r.get("estimated_hours")
-        if not isinstance(hours, (int, float)) or isinstance(hours, bool) or hours <= 0:
-            unknown.append({"application_id": r["id"], "reason": "Effort estimate required"})
-            continue
-        entries.append({"id": r["id"], "due": due, "hours": float(hours), "priority": r.get("priority")})
-        for d in r.get("documents", []):
-            if r.get("document_states", {}).get(d) not in {"ready", "not_applicable"} and d in effort:
-                documents.add(d)
-    per_day = hours_per_week / 7
-    horizon = max((e["due"] for e in entries), default=as_of)
-    horizon = min(horizon, as_of + timedelta(days=365))
-    remaining = {e["id"]: e["hours"] for e in entries}
-    allocations = []
-    for d in (as_of + timedelta(days=i) for i in range((horizon-as_of).days+1)):
-        available = per_day
-        open_items = sorted((e for e in entries if e["due"] >= d and remaining[e["id"]] > 0),
-                            key=lambda x: (x["due"], 0 if x["priority"] == "high" else 1, x["id"]))
-        for item in open_items:
-            amount = min(available, remaining[item["id"]])
-            if amount <= 1e-9:
-                break
-            remaining[item["id"]] -= amount
-            available -= amount
-            allocations.append({"date": d.isoformat(), "application_id": item["id"], "hours": round(amount, 3)})
-    unfinished = [{"application_id": x["id"], "hours_unallocated": round(remaining[x["id"]], 2),
-                   "deadline": x["due"].isoformat()} for x in entries if remaining[x["id"]] > 0.001]
-    return {"method": "earliest-deadline-first capacity allocation (heuristic, not optimal)",
-            "available_hours_per_week": hours_per_week, "scheduled": allocations[:1000],
-            "unallocated": unfinished, "unknown_effort_or_date": unknown,
-            "shared_document_hours": {key: effort[key] for key in sorted(documents)},
-            "caution": "Shared-document effort is identified but not yet included in the time allocation; feasibility is optimistic until all dependencies are scheduled."}
+    from .capacity import joint_capacity_schedule
+    return joint_capacity_schedule(records, as_of, hours_per_week, profile)
