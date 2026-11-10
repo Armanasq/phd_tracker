@@ -55,3 +55,16 @@ test("verified cutoff completed today enters the halted queue, not active prepar
  assert.equal(result.halted.length,1);
  assert.equal(result.halted[0].phase,"expired");
 });
+
+test("verified west-coast cutoff is not prematurely expired in an eastern workspace",()=>{
+ const record={...base,id:"WEST",deadline:"2027-06-01",deadline_time:"23:59",
+  deadline_timezone:"America/Los_Angeles",deadline_cutoff_verified:true,
+  deadline_cutoff_utc:"2027-06-02T06:59:00Z"};
+ const now=Date.parse("2027-06-02T01:00:00Z");
+ const ready=portfolioReadiness([record],"2027-06-02",now);
+ assert.deepEqual(ready.active.map(r=>r.id),["WEST"]);
+ assert.equal(ready.active[0].due,0);
+ assert.equal(ready.halted.length,0);
+ const expired=portfolioReadiness([record],"2027-06-02",Date.parse("2027-06-02T07:00:00Z"));
+ assert.equal(expired.halted.length,1);
+});

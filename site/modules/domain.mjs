@@ -25,7 +25,8 @@ export function isActionable(record,today,now=Date.now()) {
     const follow=daysUntil(record.followup,today);
     return follow!==null&&follow<=14;
   }
-  if(cutoffElapsed(record,now))return false;
+  const exact=verifiedCutoff(record);
+  if(exact!==null)return Number.isFinite(now)&&now<exact;
   const due=daysUntil(record.deadline,today);
   return due===null||due>=0;
 }
@@ -53,17 +54,19 @@ export function riskSignal(record,today,now=Date.now()) {
     return follow===null?"Submitted":follow<=0?"Follow-up overdue":follow<=14?"Follow-up due":"Submitted";
   }
   if(isClosed(record))return"Closed";
-  if(cutoffElapsed(record,now))return"Cutoff elapsed";
-  if(due!==null&&due<0)return"Expired";
+  const exact=verifiedCutoff(record);
+  if(exact!==null&&now>=exact)return"Cutoff elapsed";
+  if(exact===null&&due!==null&&due<0)return"Expired";
   if(documentReadiness(record).state==="incomplete")return"Confirmed gap";
   if(record?.duplicate_submission_advisory)return"Duplicate route caution";
-  if(due!==null&&due<=7)return"Urgent";
+  if(exact!==null?exact-now<=7*DAY_MS:due!==null&&due<=7)return"Urgent";
   if(!VERIFICATIONS.has(record?.verification)||!["source_verified","owner_verified"].includes(record.verification))return"Verify";
   return"Review";
 }
 
 export function priorityScore(record,today,now=Date.now()) {
-  const due=daysUntil(record?.deadline,today);
+  const exact=verifiedCutoff(record);
+  const due=exact===null?daysUntil(record?.deadline,today):Math.floor((exact-now)/DAY_MS);
   if(!isActionable(record,today,now))return -100;
   if(record.status==="submitted"){
     const follow=daysUntil(record.followup,today);
@@ -115,7 +118,7 @@ export function draftState(draft,source){
   return draft._sync_status==="pending"?"pending":"draft";
 }
 
-export function applyRecordFilters(items,filters,today) {
+export function applyRecordFilters(items,filters,today,now=Date.now()) {
   const q=String(filters.query||"").trim().toLocaleLowerCase();
   return items.filter(r=>{
     if(filters.scope==="tracked"&&r.record_type!=="tracked")return false;
@@ -124,7 +127,7 @@ export function applyRecordFilters(items,filters,today) {
     if(filters.status&&filters.status!=="all"&&r.status!==filters.status)return false;
     if(filters.verification&&filters.verification!=="all"&&r.verification!==filters.verification)return false;
     if(filters.country&&filters.country!=="all"&&r.country!==filters.country)return false;
-    const d=daysUntil(r.deadline,today),h=String(filters.horizon||"all");
+    const exact=verifiedCutoff(r),d=exact===null?daysUntil(r.deadline,today):Math.floor((exact-now)/DAY_MS),h=String(filters.horizon||"all");
     if(h==="expired")return d!==null&&d<0;
     if(h==="unknown")return d===null;
     if(h!=="all")return d!==null&&d>=0&&d<=Number(h);

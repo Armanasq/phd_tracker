@@ -75,3 +75,16 @@ test("verified exact cutoff overrides same-day calendar urgency after the instan
  assert.equal(validateSnapshot({schema_version:1,providers:[],records:[item]}).ok,true);
  assert.equal(validateSnapshot({schema_version:1,providers:[],records:[{...item,deadline_cutoff_utc:"wrong"}]}).ok,false);
 });
+
+test("verified cutoff remains actionable after applicant local midnight when institution is behind",()=>{
+ const record={...base,deadline:"2027-06-01",deadline_time:"23:59",deadline_timezone:"America/Los_Angeles",
+  deadline_cutoff_verified:true,deadline_cutoff_utc:"2027-06-02T06:59:00Z"};
+ const now=Date.parse("2027-06-02T01:00:00Z"),today="2027-06-02";
+ assert.equal(daysUntil(record.deadline,today),-1);
+ assert.equal(isActionable(record,today,now),true);
+ assert.notEqual(riskSignal(record,today,now),"Expired");
+ assert.ok(priorityScore(record,today,now)>=100);
+ assert.equal(applyRecordFilters([record],{horizon:"expired"},today,now).length,0);
+ assert.equal(applyRecordFilters([record],{horizon:"7"},today,now).length,1);
+ assert.equal(isActionable(record,today,Date.parse("2027-06-02T07:00:00Z")),false);
+});

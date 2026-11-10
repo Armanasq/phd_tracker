@@ -1,4 +1,4 @@
-import {cutoffElapsed} from "./deadline-cutoff.mjs";
+import {verifiedCutoff} from "./deadline-cutoff.mjs";
 import {daysUntil,deadlineCollisions,isDay} from "./domain.mjs";
 
 const CLOSED=new Set(["offer","rejected","withdrawn","archived"]);
@@ -10,8 +10,10 @@ const requirements=r=>Array.isArray(r?.documents)?[...new Set(r.documents.filter
 
 export function assessApplication(record,today,now=Date.now()){
  if(!record||record.record_type!=="tracked"||!isDay(today))return null;
- const due=daysUntil(record.deadline,today),followup=daysUntil(record.followup,today);
- const phase=CLOSED.has(record.status)?"closed":record.status==="submitted"?"submitted":record.status==="blocked"?"blocked":due!==null&&due<0||cutoffElapsed(record,now)?"expired":"active";
+ const exact=verifiedCutoff(record);
+ const due=exact===null?daysUntil(record.deadline,today):Math.floor((exact-now)/86400000);
+ const followup=daysUntil(record.followup,today);
+ const phase=CLOSED.has(record.status)?"closed":record.status==="submitted"?"submitted":record.status==="blocked"?"blocked":due!==null&&due<0?"expired":"active";
  const tasks=[];
  const add=(key,label,detail,kind,score)=>tasks.push({key,label,detail,kind,score});
  if(phase==="submitted"){
