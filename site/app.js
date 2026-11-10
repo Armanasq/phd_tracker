@@ -1,7 +1,7 @@
 import {daysUntil,isActionable,isClosed as domainClosed,riskSignal,priorityScore,validateSnapshot,documentReadiness,applyRecordFilters,draftState,deadlineCollisions,freshnessState} from "./modules/domain.mjs";
 import {storageKey,legacyKeyForMigration} from "./modules/storage.mjs";
 import {hostedAdvisories,hostedStatus} from "./modules/hosted-ai.mjs";
-import {calendarEvents,cutoffDescription,cutoffRisk} from "./modules/deadline-cutoff.mjs";
+import {calendarEvents,cutoffDescription,cutoffRisk,exactCutoffReminder,verifiedCutoff} from "./modules/deadline-cutoff.mjs";
 import {assessApplication,portfolioReadiness} from "./modules/readiness.mjs";
 import {renderReadinessView} from "./modules/readiness-view.mjs";
 import {createLocalRecord,normalizeLocalRecords,mergeLocalRecords,exportIndependentSource} from "./modules/local-records.mjs";
@@ -542,8 +542,32 @@ function go(view){
 }
 const aiConsole=createConsole({notify,onChange:()=>{if(state.data)render()},navigate:go,getRecords:records,getSourceRecords:()=>state.data?.records||[],onReload:loadSnapshot,getView:()=>state.view});
 let atlasLens=null;
-function explainNotifications(){const supported=("Notification" in window);const permission=supported?Notification.permission:"unsupported";openModal("<h2>Reminder settings</h2>",'<p class="muted">Reminders are computed locally from source dates while this page is open. Closing the tab disables on-page notifications. GitHub Actions provides separate scheduled reminders.</p><div class="notifications"><div class="notification"><strong>Browser permission</strong>'+escapeHTML(permission)+'</div><div class="notification"><strong>Current horizon</strong>Today, 1, 3 and 7 days before a recorded date</div></div><div class="buttons">'+button("Request browser permission","permission","","primary")+button("View GitHub notifications","url",ownerRepo()+"/actions/workflows/phd-intelligence.yml")+'</div>')}
-function checkNotifications(){if(!state.data||!state.prefs.reminders||!("Notification" in window)||Notification.permission!=="granted")return;const alerted=state.prefs.notified||{};let changed=false;for(const r of records().filter(r=>r.record_type==="tracked")){const d=days(r.deadline);if(!open(r)||![0,1,3,7].includes(d))continue;const key=r.id+"|"+r.deadline+"|"+d;if(alerted[key])continue;try{const n=new Notification("PhD deadline: "+stamp(r.deadline),{body:r.name.slice(0,140)+" — verify portal cutoff and submission state.",tag:key});n.onclick=()=>{window.focus();go("applications");detail(getRecord(r.id));n.close()};alerted[key]=TODAY();changed=true}catch{}}if(changed){state.prefs.notified=Object.fromEntries(Object.entries(alerted).slice(-500));saveStore(PREFS,state.prefs)}}
+function explainNotifications(){const supported=("Notification" in window);const permission=supported?Notification.permission:"unsupported";openModal("<h2>Reminder settings</h2>",'<p class="muted">Reminders are computed locally from source dates while this page is open. Closing the tab disables on-page notifications. GitHub Actions provides separate scheduled reminders.</p><div class="notifications"><div class="notification"><strong>Browser permission</strong>'+escapeHTML(permission)+'</div><div class="notification"><strong>Current horizon</strong>Date-only: 0, 1, 3 and 7 days. Verified cutoffs: 7d, 3d, 24h, 6h and 1h</div></div><div class="buttons">'+button("Request browser permission","permission","","primary")+button("View GitHub notifications","url",ownerRepo()+"/actions/workflows/phd-intelligence.yml")+'</div>')}
+function checkNotifications(){
+ if(!state.data||!state.prefs.reminders||!("Notification" in window)||Notification.permission!=="granted")return;
+ const alerted=state.prefs.notified||{};let changed=false;
+ for(const r of records().filter(r=>r.record_type==="tracked")){
+  if(!open(r))continue;
+  const exact=exactCutoffReminder(r),known=verifiedCutoff(r)!==null;
+  let key,title,body;
+  if(exact){key=exact.key;title=exact.title;body=exact.body}
+  else if(known)continue;
+  else{
+   const d=days(r.deadline);
+   if(![0,1,3,7].includes(d))continue;
+   key=r.id+"|"+r.deadline+"|"+d;
+   title="PhD deadline: "+stamp(r.deadline);
+   body=r.name.slice(0,140)+" — recorded date only; verify exact closing hour and official portal.";
+  }
+  if(alerted[key])continue;
+  try{
+   const n=new Notification(title,{body,tag:key});
+   n.onclick=()=>{window.focus();go("applications");detail(getRecord(r.id));n.close()};
+   alerted[key]=TODAY();changed=true;
+  }catch{}
+ }
+ if(changed){state.prefs.notified=Object.fromEntries(Object.entries(alerted).slice(-500));saveStore(PREFS,state.prefs)}
+}
 function events(){
  document.addEventListener("click",e=>{
   if(e.target?.dataset?.close==="true"){closeModal();return}
