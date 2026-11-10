@@ -25,6 +25,7 @@ Updated 2026-11-10. This is a source-backed route inventory, not a product featu
 | `#automations` | Private workflows, scheduler and model routes | No | Preview workflow routes, configure execution and opt-in schedules |
 | `#activity` | Private model audit ledger | No | Inspect actual private runs and usage |
 | `#source-observations` | Private SQLite observation history, byte-change categories and source URLs | No | Review official-source drift; manual CLI collection only; no factual promotion |
+| `#onboarding` | Public deployment identity, model probe and runtime capability checks | Yes | Choose deployment mode, inspect requirements and export a nonsecret setup summary; no GitHub changes |
 | `#deployment` | Runtime capability contract | Yes | Inspect trust boundaries and setup options |
 | `#settings` | Browser-local model config or private server config | Yes, different scope | Configure/test endpoints; private mode also exposes models, routing, agents and workflows |
 
@@ -50,7 +51,7 @@ Updated 2026-11-10. This is a source-backed route inventory, not a product featu
 - `tests/browser_lens_smoke.cjs`: real browser path from Settings to the global assistant and new routes.
 - `tests/test_workflow_plan.py`: multi-agent preflight and no partial cloud execution.
 - `tests/test_runtime_capabilities.py`: local capability API, correct readiness and secret exclusion.
-- `tests/all_routes_audit.cjs` and `tests/mobile_layout_audit.cjs`: all 23 routes across form factors.
+- `tests/all_routes_audit.cjs` and `tests/mobile_layout_audit.cjs`: all 24 routes across form factors.
 
 ## Outstanding product boundaries
 
