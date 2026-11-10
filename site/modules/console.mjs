@@ -329,10 +329,13 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
  }
  function schedulerPanel(){
   if(!state.schedulePreviewRequested){
+   const generation=connectionGeneration;
    state.schedulePreviewRequested=true;
    request("/api/scheduler/preview").then(data=>{
+    if(generation!==connectionGeneration||!isLive())return;
     state.schedulePreview=data;onChange();
    }).catch(error=>{
+    if(generation!==connectionGeneration||!isLive())return;
     state.schedulePreview={error:error.message,workflows:[]};onChange();
    });
   }
@@ -340,10 +343,14 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   if(!plan)return '<section class="os-panel"><div class="os-panel-heading"><div><h2>Automation execution plan</h2><p>Preparing an execution forecast without invoking models.</p></div></div></section>';
   const labels={due:"Ready to attempt",disabled:"Disabled",manual_only:"Manual",already_executed:"Completed this period",
    cloud_disclosure_not_approved:"Disclosure approval required",provider_not_approved:"Cloud provider not activated",
-   cloud_budget_disabled:"Cloud budget disabled",cloud_daily_limit:"Daily cloud limit reached"};
+   cloud_budget_disabled:"Cloud budget disabled",cloud_daily_limit:"Daily cloud limit reached",
+   model_capability_mismatch:"Model capability mismatch"};
   const rows=(plan.workflows||[]).map(w=>
    '<div class="os-schedule-row"><div><strong>'+esc(w.label)+'</strong><small>'+esc(pretty(w.schedule))+
-   ' · '+esc(w.stages.map(x=>x.agent_id+" → "+x.model).join(" / "))+'</small></div>'+
+   ' · '+esc(w.stages.map(x=>x.agent_id+" → "+x.model).join(" / "))+
+   (w.stages.some(x=>(x.capability_blockers||[]).length)?
+     '<small>Incompatible requirements: '+esc(w.stages.flatMap(x=>x.capability_blockers||[]).join(", "))+'</small>':'')+
+   '</small></div>'+
    '<span class="os-badge '+(w.state==="due"?"good":w.state==="disabled"||w.state==="manual_only"?"":"warn")+'">'+esc(labels[w.state]||w.state)+'</span></div>').join("");
   const results=state.scheduleTick?.results||[];
   return '<section class="os-panel"><div class="os-panel-heading"><div><h2>Automation execution plan</h2><p>Read-only status, agent model assignments and reasons for skipped workflows</p></div>'+
