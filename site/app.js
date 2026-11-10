@@ -604,7 +604,7 @@ function render(){
  if(!state.data)return;
  navigation();
  const views={dashboard,calendar:calendarView,applications,discovery:discoveryView,deployment:deploymentView,onboarding:onboardingView,documents:documentsView,readiness,pipeline,contacts,actions,ledger:ledgerView,updates,compare,review,archive,sources};
- const intelligence=["ai","agents","automations","activity","source-observations","source-claims","settings","operations"].includes(state.view);
+ const intelligence=["ai","agents","automations","activity","evaluations","source-observations","source-claims","settings","operations"].includes(state.view);
  const freshness=freshnessState(state.data.as_of,TODAY());
  const note=["aging","stale","unknown","future"].includes(freshness.state)
    ?'<div class="freshness-note" role="status"><span>'+escapeHTML(freshness.label)+'. Verify critical deadlines using official sources.</span>'+button("Review sources","nav","sources")+'</div>':"";

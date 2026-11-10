@@ -2,6 +2,7 @@ import {createOperations} from "./operations.mjs";
 import {createBrowserModel} from "./browser-model.mjs";
 import {renderSourceObservations} from "./source-observations.mjs";
 import {renderSourceClaims,claimCandidates} from "./source-claims.mjs";
+import {renderEvaluations} from "./evaluations.mjs";
 const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const pretty = value => String(value ?? "").replaceAll("_"," ").replace(/\b\w/g, c => c.toUpperCase());
 const short = (value, length=125) => String(value ?? "").slice(0,length);
@@ -12,7 +13,7 @@ const cleanId = value => String(value||"").trim().toLowerCase().replace(/[^a-z0-
 const opt = (items,value) => choose(items,value);
 
 export function createConsole({notify,onChange,navigate,getRecords,getSourceRecords,onReload,getView}) {
- const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:"",jobs:[],observability:null,sourceObservations:[],sourceObservationsLoading:false,sourceObservationsError:"",sourceObservationFilter:"all",sourceClaims:[],sourceClaimError:"",sourceClaimFilter:"all",selectedClaimObservation:null,claimObservationText:null,sourceClaimLoading:false,sourceTextDiff:null,sourceDiffError:"",claimReviewHistory:null};
+ const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:"",jobs:[],observability:null,sourceObservations:[],sourceObservationsLoading:false,sourceObservationsError:"",sourceObservationFilter:"all",sourceClaims:[],sourceClaimError:"",sourceClaimFilter:"all",selectedClaimObservation:null,claimObservationText:null,sourceClaimLoading:false,sourceTextDiff:null,sourceDiffError:"",claimReviewHistory:null,evaluationReport:null,evaluationsError:"",evaluationsLoading:false,evaluationProvider:"all",evaluationAgent:"all"};
  const providers = () => state.data?.catalog?.providers || [];
  const agents = () => state.data?.catalog?.agents || [];
  const workflows = () => state.data?.catalog?.workflows || [];
@@ -103,6 +104,9 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    state.sourceClaims=Array.isArray(evidence.claims)?evidence.claims:[];
    const observed=await request("/api/observability").catch(()=>null);
    state.observability=observed?.schema_version===1?observed:null;
+   const evaluation=await request("/api/evaluations").catch(error=>({error:String(error.message||error)}));
+   state.evaluationsError=evaluation.error||"";
+   state.evaluationReport=evaluation.schema_version===1?evaluation:null;
    state.selectedAgent=agents().some(a=>a.id===state.selectedAgent)?state.selectedAgent:(prefs().default_agent||agents()[0]?.id);
    state.selectedProvider=providers().some(p=>p.id===state.selectedProvider)?state.selectedProvider:prefs().default_provider;
    state.selectedWorkflow=workflows().some(w=>w.id===state.selectedWorkflow)?state.selectedWorkflow:workflows()[0]?.id;
@@ -464,6 +468,8 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   if(name==="agents")return '<section class="os-page">'+heading("AI / AGENT DEFINITIONS","Agent builder","Configure each research agent's instructions, deterministic tools and automatic model assignment.",btn("Model settings","go","settings","quiet"))+agentPanel()+'</section>';
   if(name==="automations")return '<section class="os-page">'+heading("AI / WORKFLOW ENGINE","Automations","Compose multi-agent workflows, inspect scheduling rules and control approvals.",btn("Runtime settings","go","settings","quiet"))+workflowPanel()+'</section>';
   if(name==="activity")return activity();
+  if(name==="evaluations")return renderEvaluations({report:state.evaluationReport,error:state.evaluationsError,
+    provider:state.evaluationProvider,agent:state.evaluationAgent,loading:state.evaluationsLoading});
   if(name==="source-observations")return renderSourceObservations({records:state.sourceObservations,loading:state.sourceObservationsLoading,error:state.sourceObservationsError,filter:state.sourceObservationFilter,message:state.message});
   if(name==="source-claims")return renderSourceClaims({observations:state.sourceObservations,claims:state.sourceClaims,selectedId:state.selectedClaimObservation,sourceText:state.claimObservationText,diff:state.sourceTextDiff,diffError:state.sourceDiffError,error:state.sourceClaimError,filter:state.sourceClaimFilter,message:state.message,loading:state.sourceClaimLoading,reviewHistory:state.claimReviewHistory});
   return '';
@@ -476,6 +482,18 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   if(action==="go"){navigate(id);return;}
   if(action==="tab"){state.tab=id;onChange();return;}
   if(action==="reconnect"){await connect();return;}
+  if(action==="refresh-evaluations"){
+   if(!isLive()||state.evaluationsLoading)return;
+   state.evaluationsLoading=true;state.evaluationsError="";onChange();
+   try{
+    const result=await request("/api/evaluations");
+    if(result.schema_version!==1||!Array.isArray(result.providers)||!Array.isArray(result.agents))
+      throw new Error("Invalid private evaluation response");
+    state.evaluationReport=result;
+   }catch(error){state.evaluationsError=short(error.message,240);}
+   finally{state.evaluationsLoading=false;onChange();}
+   return;
+  }
   if(action==="refresh-observations"){
    if(!isLive()||state.sourceObservationsLoading)return;
    state.sourceObservationsLoading=true;state.sourceObservationsError="";onChange();
@@ -832,6 +850,12 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    handleForm(event).catch(error=>notify(short(error.message,220)));
   });
   document.addEventListener("change",event=>{
+   if(event.target.matches("[data-os-eval-provider]")){
+    state.evaluationProvider=event.target.value;onChange();return;
+   }
+   if(event.target.matches("[data-os-eval-agent]")){
+    state.evaluationAgent=event.target.value;onChange();return;
+   }
    if(event.target.matches("[data-os-claim-observation]")){
     const id=Number(event.target.value);
     if(!Number.isSafeInteger(id)||id<1)return;
