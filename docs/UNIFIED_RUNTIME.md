@@ -4,7 +4,7 @@
 
 One responsive application owns navigation for applications, operations, evidence, Copilot, agents, automations, run history and settings. The application is implemented in `site/index.html`, `site/app.js`, `site/modules/console.mjs`, `site/modules/operations.mjs`, and `site/workspace-v2.css`. The former `ai-studio.html` is a compatibility redirect, not a second application.
 
-The public GitHub Pages deployment provides source-backed read-only tracking. It does not hold private API keys or expose a model-execution backend. The private Python service serves the **same application** on loopback; that is where model configuration, personal applicant records and execution actually work.
+The public GitHub Pages deployment provides source-backed tracking and an optional browser-to-localhost inference adapter. It does not hold private API keys or expose a privileged execution backend. The private Python service serves the **same application** on loopback; that is where model configuration, personal applicant records and execution actually work.
 
 ```
 Browser ── same UI and route table ─── PhD Atlas Python API (localhost)
@@ -16,7 +16,7 @@ Browser ── same UI and route table ─── PhD Atlas Python API (localhost
    │                                     ├── Provider adapters: OpenAI-compatible/Azure/Anthropic
    │                                     └── LLM endpoint: local loopback or approved HTTPS
    │
-   └── Public GitHub Pages (source snapshot only, no secrets or LLM calls)
+   └── Public GitHub Pages (public snapshot + optional direct loopback model calls, no secrets)
 ```
 
 ## First-use model setup
@@ -67,7 +67,7 @@ The loopback server is a single-user application, not an authenticated productio
 
 An externally hosted authenticated edition would require a separate private backend with TLS termination, identity, authorization, secure secrets, per-user data isolation, CSRF/origin policy, rate limiting, background worker durability, cancellation and continuous monitoring. None of those capabilities is implied by the public Pages frontend.
 
-Direct Bedrock/Vertex native authentication, autonomous Gmail ingestion, cloud-side recurring execution, model streaming, monetary cost estimation without verified pricing, and automatic external submissions are not implemented.
+Direct Bedrock/Vertex native authentication, autonomous Gmail ingestion, cloud-side recurring execution, private-backend model streaming, monetary cost estimation without verified pricing, and automatic external submissions are not implemented. Browser-local OpenAI-compatible SSE streaming is available separately, subject to model/browser support.
 
 ## Release verification
 
