@@ -362,8 +362,8 @@ class ApiHandler(BaseHTTPRequestHandler):
         self.close_connection = True
 
         def emit(event: str, payload: dict) -> None:
-            body = "event: " + event + "\\n" + "data: " + json.dumps(
-                payload, ensure_ascii=False, separators=(",", ":")) + "\\n\\n"
+            body = "event: " + event + "\n" + "data: " + json.dumps(
+                payload, ensure_ascii=False, separators=(",", ":")) + "\n\n"
             self.wfile.write(body.encode("utf-8"))
             self.wfile.flush()
 
