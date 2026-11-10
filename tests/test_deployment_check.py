@@ -48,3 +48,11 @@ def test_actions_does_not_disclose_credential(tmp_path):
     results = inspect(project(tmp_path), "actions", {"PHD_ATLAS_ENABLE_HOSTED_AI": "true", "PHD_ATLAS_AI_BASE_URL": "https://model.example/v1", "PHD_ATLAS_AI_MODEL": "example", "PHD_ATLAS_AI_API_KEY": secret})
     assert secret not in json.dumps([item.detail for item in results])
     assert next(item for item in results if item.code == "hosted-key").status == "ok"
+
+
+def test_compose_project_namespace_validation(tmp_path):
+    root = project(tmp_path)
+    valid = inspect(root, "local-full-stack", {"PHD_ATLAS_COMPOSE_PROJECT": "atlas-fork-2"})
+    invalid = inspect(root, "local-full-stack", {"PHD_ATLAS_COMPOSE_PROJECT": "Unsafe/Shared"})
+    assert next(item for item in valid if item.code == "compose-project").status == "ok"
+    assert next(item for item in invalid if item.code == "compose-project").status == "error"
