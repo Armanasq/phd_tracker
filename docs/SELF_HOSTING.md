@@ -8,7 +8,7 @@
 | Local static server | Same HTML/JS | Locally built snapshot | Browser-local drafts | No |
 | Python runtime on loopback | Same HTML/JS | Locally built snapshot | Private SQLite | Yes, when configured and consented |
 
-GitHub Pages is a static host. Python, SQLite, API keys, provider authentication, and recurring private agent runs do **not** run on GitHub Pages. The public application deliberately does not call a local service from a hosted origin. For authenticated AI execution, open the **same UI served by the local runtime**.
+GitHub Pages is a static host. Python, SQLite, API keys, provider authentication, and recurring private agent runs do **not** run on GitHub Pages. The public application can make user-initiated, browser-only inference calls to an explicitly configured loopback OpenAI-compatible model, subject to browser network permissions and server CORS settings. For private Python tools, SQLite, agent workflows, or authenticated cloud execution, open the **same UI served by the local runtime**.
 
 ### Run locally
 
