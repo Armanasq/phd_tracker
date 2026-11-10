@@ -4,7 +4,7 @@ The application tracker, Copilot, agent editor, model connections, workflows, an
 
 ## Runtime separation
 
-`https://armanasq.github.io/phd_tracker/` hosts the public, evidence-backed tracker. It does not store model API keys or connect to localhost. Start the private Python service on the machine running Ollama, vLLM, LiteLLM, LM Studio or your cloud credentials:
+`https://armanasq.github.io/phd_tracker/` hosts the public, evidence-backed tracker. It stores no cloud model credentials. Its browser-only Copilot can connect directly to a user-configured localhost OpenAI-compatible model after a successful inference probe. For private agents, durable workflows and application state, start the private Python service on the machine running Ollama, vLLM, LiteLLM, LM Studio or your cloud credentials:
 
 ```bash
 python -m phd_agents serve --port 8765
