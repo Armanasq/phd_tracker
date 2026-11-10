@@ -17,10 +17,12 @@ PhD Atlas brings application records, supporting sources, preparation tasks, con
 | Actions, Contacts & Updates | Track preparation dependencies, faculty follow-ups, document readiness and changes. |
 | Dashboard, Calendar & Pipeline | Prioritize work and distinguish recorded dates from confirmed closing times. |
 | Verification, Sources & Archive | Inspect provenance, conflicting claims, excluded routes and incomplete evidence. |
+| Private Source observations & Source evidence | Compare captured primary-source text and record exact quoted candidate claims with append-only owner review, without changing applicant status. |
+| First-run setup & Deployment | Check an independent fork's source policy, local-model connectivity, public release and runtime boundaries; export a nonsecret setup summary. |
 | Research & EvidenceGraph | Examine the [evidence workflow](assets/readme/evidence_flow.svg), [portfolio frontier](data/portfolio_frontier.json) and [generated research report](docs/RESEARCH_REPORT.md). |
 | Atlas assistant | Use direct browser-local OpenAI-compatible inference on Pages, or configured local/cloud providers through the *private* runtime; responses are proposals, not completed actions. |
 
-The [public workspace](https://armanasq.github.io/phd_tracker/) works without an AI provider. In hosted **Settings**, users can connect to a model on their own computer via an explicitly configured HTTP loopback `/v1` endpoint, subject to browser permissions and server CORS. No cloud key is stored on Pages. A provider preset, search result or model-produced suggestion is not proof of current availability, admission eligibility or a submitted application.
+The [public workspace](https://armanasq.github.io/phd_tracker/) works without an AI provider and exposes 25 canonical routes (private workflows require the local runtime). In hosted **Settings**, users can connect to a model on their own computer via an explicitly configured HTTP loopback `/v1` endpoint, subject to browser permissions and server CORS. No cloud key is stored on Pages. A provider preset, search result or model-produced suggestion is not proof of current availability, admission eligibility or a submitted application.
 
 ## Run locally
 
@@ -45,7 +47,7 @@ Open `http://127.0.0.1:8765/`, then configure **Settings → Connections**, test
 ## Evidence and state
 
 - **Original records:** [PhD_Action_List.xlsx](PhD_Action_List.xlsx) and reviewed JSON projections under [data/](data/). The [daily agenda](docs/TODAY.md) and **Full Task ledger** are generated from these sources.
-- **Evidence discipline:** A recorded deadline is not a verified cutoff time. Unknown funding, document or eligibility requirements remain unknown until confirmed against official sources.
+- **Evidence discipline:** A recorded deadline is not a verified cutoff time. Unknown funding, document or eligibility requirements remain unknown until confirmed against official sources. Exact captured source quotes and owner review decisions are retained privately and remain explicitly unverified as institutional facts. See [source observation and quote review](docs/OFFICIAL_SOURCE_OBSERVATIONS.md).
 - **Owner updates:** GitHub Issues and owner-controlled workflows retain explicit approvals; private local edits are kept in SQLite and do not silently synchronize into the public workbook.
 - **Discovery:** The [discovery report](data/discovery_report.json) describes observed source health. AcademicPositions, institutional feeds and other channels are not complete coverage. Gmail intake requires separately configured consent and credentials.
 - **Reproducibility:** See the [capability atlas](docs/CAPABILITY_ATLAS.md), [operator playbooks](docs/PLAYBOOKS.md), [generated evidence report](docs/RESEARCH_REPORT.md) and [source provenance](data/experience_lineage.jsonld).
@@ -71,7 +73,7 @@ Missing evidence is intentionally preserved as unknown. Private applicant corres
 
 ## Deployment and repository administration
 
-The Pages workflow generates the current workspace snapshot and a commit-bound SHA-256 release manifest. Post-deployment checks fetch the hosted manifest and verify the source commit and published JavaScript asset. A passing workflow verifies the deployed build, not the factual correctness of every university claim.
+The Pages workflow generates the current workspace snapshot and a commit-bound SHA-256 manifest covering **every static asset**. Publishing rejects recognizable private files, secret keys and symlinks; post-deployment checks independently fetch and verify each published asset against its source commit. A passing workflow verifies the deployed build, not the factual correctness of every university claim.
 
 The repository About description, website and topics are versioned in [metadata configuration](.github/repository-metadata.json), but **GitHub About fields require a separate administration-authorized API update**. Committing a description file alone does not populate GitHub's About sidebar. The synchronization workflow fails explicitly if authorization is missing.
 
@@ -79,11 +81,11 @@ The repository About description, website and topics are versioned in [metadata 
 
 ## Backend runtime and recovery
 
-The optional private Python service includes atomic applicant-state updates, scheduled-run SQLite leases, cloud-call reservations, credential-bound model providers, inference admission limits, retry idempotency, and verified local backups. These functions run on **private loopback**. GitHub Pages cannot execute private backend tools, although its browser-only mode can invoke a user-configured local model. See [backend engineering and operations](docs/BACKEND_ENGINEERING.md) for API semantics, recovery, concurrency and limitations.
+The optional private Python service includes atomic applicant-state updates, scheduled-run SQLite leases, cloud-call reservations, credential-bound model providers, inference admission limits, retry idempotency, and verified local backups. It also records versioned agent prompt fingerprints, bounded sequential workflow summaries, recoverable partial-stage failures and source-claim review histories. These functions run on **private loopback**. GitHub Pages cannot execute private backend tools, although its browser-only mode can invoke a user-configured local model. See [backend engineering and operations](docs/BACKEND_ENGINEERING.md) for API semantics, recovery, concurrency and limitations.
 
 ## Engineering
 
-The application separates public evidence and user-triggered browser-local model inference from privileged private agent execution. It uses a static JavaScript frontend, source normalization and verification scripts, deterministic application checks, a Python orchestration layer and SQLite for private state.
+The application separates public evidence and user-triggered browser-local model inference from privileged private agent execution. The 25-route workspace supports independent-fork onboarding, source evidence review and local agent inspection without requiring a public authenticated API. It uses a static JavaScript frontend, source normalization and verification scripts, deterministic application checks, a Python orchestration layer and SQLite for private state.
 
 | Directory | Responsibility |
 | --- | --- |
@@ -95,7 +97,7 @@ The application separates public evidence and user-triggered browser-local model
 | [tests/](tests/) | Contract, integration and UI regression checks |
 | [.github/workflows/](.github/workflows/) | Pages publishing, quality gates and controlled automation |
 
-The latest deployment status is visible in [GitHub Actions](https://github.com/Armanasq/phd_tracker/actions). The public site is not an authenticated backend, the assistant does not send mail or submit applications, and its references describe retrieved context rather than verified claim-level citations.
+The latest deployment status is visible in [GitHub Actions](https://github.com/Armanasq/phd_tracker/actions). The public site is not an authenticated backend, the assistant does not send mail or submit applications, and claim citations identify captured source text without certifying the interpretation as an official institutional fact.
 
 For change history and the scope of the current preview, see [CHANGELOG.md](CHANGELOG.md). Vulnerability reporting guidance is in [SECURITY.md](SECURITY.md). This repository does not currently include a software license.
 
