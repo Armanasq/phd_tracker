@@ -2,6 +2,16 @@
 
 Changes to the PhD Atlas application and its supporting tooling are recorded here. Source-data refreshes and individual PhD application status changes are tracked separately in the evidence ledger.
 
+## Unreleased — 2026-11-10 (forkable inference and local deployment)
+
+- Enabled explicit browser-to-loopback OpenAI-compatible inference from GitHub Pages, including model discovery, real inference probing, optional SSE streaming, cancellation and memory-only conversation state.
+- Added a hosted Settings deployment guide separating browser-only chat, GitHub Actions batch AI and private Python agents. No cloud API key is embedded in the static frontend.
+- Added a least-privilege Linux Docker Compose deployment with non-root execution, a read-only root filesystem, bounded temporary storage and project-scoped private volumes.
+- Added `scripts/deployment_check.py` with fork/source, inference, private storage and hosted-mode checks. The unimplemented cloud full-stack mode fails explicitly.
+- Extended CI with local-model security, integration and streaming tests; added a successful Docker runtime startup/health/bootstrap smoke workflow.
+- Reconciled README, self-hosting guidance, architecture contracts and the security policy with the implemented boundaries.
+- Authenticated cloud hosting, optional OAuth login, cross-platform Docker deployment, durable cloud workers and license selection remain open in [Issue #7](https://github.com/Armanasq/phd_tracker/issues/7).
+
 ## Unreleased — 2026-11-09 (private backend integrity)
 
 - Made applicant state updates atomically version-checked; conflicting writes now fail explicitly.
@@ -41,7 +51,7 @@ Changes to the PhD Atlas application and its supporting tooling are recorded her
 - Added canonical site metadata, a favicon, release documentation and repository-configuration guidance.
 
 ### Boundaries
-- The site does not provide public model inference, multi-user authentication, autonomous portal submissions, faculty email sending, native token streaming, or claim-level scholarly citation verification.
+- The 0.1.0 public preview did not provide browser-local inference, multi-user authentication, autonomous submissions, faculty email sending, native token streaming, or claim-level scholarly citation verification. The browser-local inference boundary was added in the 2026-11-10 unreleased changes above.
 - Model-provider connectivity depends on user configuration and has not been verified against any user's private cloud deployment.
 - Applications and deadline claims must be checked against original institutions before action.
 
