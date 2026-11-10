@@ -119,8 +119,12 @@ def recent_observations(store: Store, *, limit: int = 50) -> list[dict[str, Any]
     if type(limit) is not int or not 1 <= limit <= 100:
         raise ValueError("Invalid source observation limit")
     rows = store.db.execute(
-        "SELECT application_id,source_url,status,content_sha256,observed_at,"
-        "http_status,content_length,drift FROM source_observations ORDER BY id DESC LIMIT ?",
+        "SELECT o.id,o.application_id,o.source_url,o.status,o.content_sha256,"
+        "o.observed_at,o.http_status,o.content_length,o.drift,"
+        "r.decision AS review_decision,r.reviewed_at "
+        "FROM source_observations AS o LEFT JOIN source_observation_reviews AS r "
+        "ON r.id=(SELECT MAX(v.id) FROM source_observation_reviews AS v "
+        "WHERE v.observation_id=o.id) ORDER BY o.id DESC LIMIT ?",
         (limit,),
     ).fetchall()
     return [dict(row) for row in rows]
