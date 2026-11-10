@@ -124,3 +124,8 @@ body.dark #atlasLens .lens-mini{color:var(--lens-muted)}
 @media(max-width:680px){#atlasLens .lens-panel,#atlasLens .lens-panel.expanded{position:fixed;inset:0;right:0;bottom:0;height:100dvh;width:100vw;max-width:none;border:0;border-radius:0;box-shadow:none}#atlasLens .lens-panel.expanded .lens-layout{grid-template-columns:1fr}#atlasLens .lens-panel.expanded .lens-sidecar{display:none}#atlasLens .lens-header{padding:13px 16px}#atlasLens .lens-launcher{right:14px;bottom:15px;min-height:49px}#atlasLens .lens-history{padding:18px 18px}#atlasLens .lens-context{padding:10px 14px}#atlasLens .lens-prompts{gap:7px}#atlasLens .lens-facts strong{font-size:19px}#atlasLens .lens-footer-status{padding-bottom:max(8px,env(safe-area-inset-bottom))}}
 @media(max-width:370px){#atlasLens .lens-prompts{grid-template-columns:1fr 1fr}#atlasLens .lens-prompt{min-height:96px;padding:10px}#atlasLens .lens-provider{font-size:9px;max-width:110px}#atlasLens .lens-composer-hint{display:none}}
 @media(prefers-reduced-motion:reduce){#atlasLens .lens-panel{animation:none}#atlasLens .lens-launcher,#atlasLens .lens-prompt{transition:none}#atlasLens .lens-wait-orbit{animation-duration:1.8s}}
+
+.lens-stream-mode{display:inline-flex;align-items:center;gap:6px;font-size:11px;line-height:1.3;white-space:nowrap;cursor:pointer;color:var(--text-secondary,#66717c)}
+.lens-stream-mode input{width:14px;height:14px;margin:0;accent-color:currentColor}
+.lens-stream-mode:has(input:disabled){opacity:.6;cursor:default}
+@media(max-width:520px){.lens-stream-mode{flex:0 0 auto;font-size:10px}}
