@@ -9,7 +9,7 @@
     "next_seven_days": 19,
     "unknown_document_mentions": 335,
     "source_conflicts": 1,
-    "research_papers": 54
+    "research_papers": 68
   },
   "applications": [
     {
@@ -2765,6 +2765,14 @@
       "published": "2026-11-09"
     },
     {
+      "title": "$Σ$-LeWM: Learning World Models via S-Information for Robot Control",
+      "id": "arxiv:2611.12732",
+      "url": "https://arxiv.org/abs/2611.12732",
+      "topic": "robot_learning",
+      "relevance_score": 12,
+      "published": "2026-11-09"
+    },
+    {
       "title": "Action Representation for Spatial Generalization in Robot World Models",
       "id": "arxiv:2611.11869",
       "url": "https://arxiv.org/abs/2611.11869",
@@ -2778,6 +2786,38 @@
       "url": "https://arxiv.org/abs/2611.11934",
       "topic": "robot_learning",
       "relevance_score": 11,
+      "published": "2026-11-09"
+    },
+    {
+      "title": "LawKAN: Group-Law Layers for Composition -- When Imposing a Known Law Pays Off",
+      "id": "arxiv:2611.12567",
+      "url": "https://arxiv.org/abs/2611.12567",
+      "topic": "robot_learning",
+      "relevance_score": 10,
+      "published": "2026-11-09"
+    },
+    {
+      "title": "WanderBench: Can World Models Explore Dynamic Worlds from Video?",
+      "id": "arxiv:2611.12557",
+      "url": "https://arxiv.org/abs/2611.12557",
+      "topic": "medical_ai",
+      "relevance_score": 10,
+      "published": "2026-11-09"
+    },
+    {
+      "title": "Library of Hands: Fix the Hands, Not the World Model",
+      "id": "arxiv:2611.12678",
+      "url": "https://arxiv.org/abs/2611.12678",
+      "topic": "robot_learning",
+      "relevance_score": 9,
+      "published": "2026-11-09"
+    },
+    {
+      "title": "UniOMA: Unified Optimal-Transport Multi-Modal Structural Alignment for Robot Perception",
+      "id": "arxiv:2611.12351",
+      "url": "https://arxiv.org/abs/2611.12351",
+      "topic": "robot_learning",
+      "relevance_score": 9,
       "published": "2026-11-09"
     },
     {
@@ -2797,11 +2837,67 @@
       "published": "2026-11-09"
     },
     {
+      "title": "DreamLander: A 6-DOF World Model based Reinforcement Learning Planetary Lander",
+      "id": "arxiv:2611.12824",
+      "url": "https://arxiv.org/abs/2611.12824",
+      "topic": "robot_learning",
+      "relevance_score": 8,
+      "published": "2026-11-09"
+    },
+    {
+      "title": "Simulating Vein Compressibility for Ultrasound-Guided Femoral Access: Speed, Accuracy, and Phantom Validation",
+      "id": "arxiv:2611.12818",
+      "url": "https://arxiv.org/abs/2611.12818",
+      "topic": "robot_learning",
+      "relevance_score": 8,
+      "published": "2026-11-09"
+    },
+    {
+      "title": "VLA Adaptation with Real and Simulated Data: A Case Study on Robotic Chess",
+      "id": "arxiv:2611.12676",
+      "url": "https://arxiv.org/abs/2611.12676",
+      "topic": "robot_learning",
+      "relevance_score": 8,
+      "published": "2026-11-09"
+    },
+    {
+      "title": "V3DSAM: Semantic-Geometric Loop Verification and Geometry-Anchored Persistent Instance Mapping for Feed-Forward Dense SLAM",
+      "id": "arxiv:2611.12452",
+      "url": "https://arxiv.org/abs/2611.12452",
+      "topic": "slam",
+      "relevance_score": 8,
+      "published": "2026-11-09"
+    },
+    {
       "title": "Fade to... Red? Scheduling Coloured Noise Exploration Supports Efficient Robot Learning with Reduced Movement Jerk",
       "id": "arxiv:2611.11868",
       "url": "https://arxiv.org/abs/2611.11868",
       "topic": "robot_learning",
       "relevance_score": 8,
+      "published": "2026-11-09"
+    },
+    {
+      "title": "Learning Heterogeneous Tactile Representation for General Dexterous Manipulation",
+      "id": "arxiv:2611.12806",
+      "url": "https://arxiv.org/abs/2611.12806",
+      "topic": "robot_learning",
+      "relevance_score": 7,
+      "published": "2026-11-09"
+    },
+    {
+      "title": "Benchmarking Real-World Robotic Manipulation through Stochastic Challenges",
+      "id": "arxiv:2611.12804",
+      "url": "https://arxiv.org/abs/2611.12804",
+      "topic": "robot_learning",
+      "relevance_score": 6,
+      "published": "2026-11-09"
+    },
+    {
+      "title": "Safety-Constrained Intelligent Control of a 2-DOF Robotic Manipulator Using Control Barrier Functions",
+      "id": "arxiv:2611.12378",
+      "url": "https://arxiv.org/abs/2611.12378",
+      "topic": "robot_learning",
+      "relevance_score": 6,
       "published": "2026-11-09"
     },
     {
@@ -2866,6 +2962,22 @@
       "url": "https://arxiv.org/abs/2611.11809",
       "topic": "robot_learning",
       "relevance_score": 6,
+      "published": "2026-11-09"
+    },
+    {
+      "title": "AI-based characterization of lymphoid structures and the tumor microenvironment reveals lower mature tertiary lymphoid structures, lymph-node follicles, and plasma cells after neoadjuvant therapy in lung squamous cell carcinoma",
+      "id": "arxiv:2611.12855",
+      "url": "https://arxiv.org/abs/2611.12855",
+      "topic": "medical_ai",
+      "relevance_score": 5,
+      "published": "2026-11-09"
+    },
+    {
+      "title": "2D Gum-Net: Unsupervised Dense Elastic Image Registration via Symmetric Correlation and Spectral Pooling",
+      "id": "arxiv:2611.12805",
+      "url": "https://arxiv.org/abs/2611.12805",
+      "topic": "medical_ai",
+      "relevance_score": 4,
       "published": "2026-11-09"
     },
     {
@@ -2963,118 +3075,6 @@
       "topic": "robot_learning",
       "relevance_score": 7,
       "published": "2026-11-05"
-    },
-    {
-      "title": "OopsieRecover: Learning Transferable VLA Corrections from Semantic Interventions",
-      "id": "arxiv:2611.08462",
-      "url": "https://arxiv.org/abs/2611.08462",
-      "topic": "robot_learning",
-      "relevance_score": 6,
-      "published": "2026-11-05"
-    },
-    {
-      "title": "VFlash: Fast, Accurate Visual Planning via Flash Primitive Decoding",
-      "id": "arxiv:2611.08449",
-      "url": "https://arxiv.org/abs/2611.08449",
-      "topic": "robot_learning",
-      "relevance_score": 6,
-      "published": "2026-11-05"
-    },
-    {
-      "title": "SLA: Scaling Spatial-Language-Action Model via Continual Pre-training",
-      "id": "arxiv:2611.08373",
-      "url": "https://arxiv.org/abs/2611.08373",
-      "topic": "robot_learning",
-      "relevance_score": 6,
-      "published": "2026-11-05"
-    },
-    {
-      "title": "VisionSIM: Beyond Idealized Sensors - A Multi-Modal Simulator for Robot Perception",
-      "id": "arxiv:2611.08368",
-      "url": "https://arxiv.org/abs/2611.08368",
-      "topic": "robot_learning",
-      "relevance_score": 6,
-      "published": "2026-11-05"
-    },
-    {
-      "title": "Aligning Policy Encoders with a Shape Teacher",
-      "id": "arxiv:2611.08275",
-      "url": "https://arxiv.org/abs/2611.08275",
-      "topic": "robot_learning",
-      "relevance_score": 6,
-      "published": "2026-11-05"
-    },
-    {
-      "title": "T3R: Training-Free Two-Stage Token Refinement Towards Efficient and Robust VLA Models",
-      "id": "arxiv:2611.08413",
-      "url": "https://arxiv.org/abs/2611.08413",
-      "topic": "robot_learning",
-      "relevance_score": 5,
-      "published": "2026-11-05"
-    },
-    {
-      "title": "SHORE: Stability-Hybrid On-Policy Reinforcement Learning for Online Bin Packing",
-      "id": "arxiv:2611.08364",
-      "url": "https://arxiv.org/abs/2611.08364",
-      "topic": "robot_learning",
-      "relevance_score": 5,
-      "published": "2026-11-05"
-    },
-    {
-      "title": "How Far Can Untrained Neural Networks Go in Anomaly Detection? From Tables to Pixels",
-      "id": "arxiv:2611.08136",
-      "url": "https://arxiv.org/abs/2611.08136",
-      "topic": "medical_ai",
-      "relevance_score": 5,
-      "published": "2026-11-05"
-    },
-    {
-      "title": "TerraMesh-Masks: Open-Vocabulary Segmentation for Earth Observation",
-      "id": "arxiv:2611.08081",
-      "url": "https://arxiv.org/abs/2611.08081",
-      "topic": "medical_ai",
-      "relevance_score": 5,
-      "published": "2026-11-05"
-    },
-    {
-      "title": "Failure Prediction and Classification in Vision-Language-Action Models Via Calibrated Latent Probing",
-      "id": "arxiv:2611.08425",
-      "url": "https://arxiv.org/abs/2611.08425",
-      "topic": "robot_learning",
-      "relevance_score": 4,
-      "published": "2026-11-05"
-    },
-    {
-      "title": "Towards Scalable Diagnostic-Driven Whole-Slide Image Retrieval for Pathology Archives",
-      "id": "arxiv:2611.07935",
-      "url": "https://arxiv.org/abs/2611.07935",
-      "topic": "medical_ai",
-      "relevance_score": 4,
-      "published": "2026-11-05"
-    },
-    {
-      "title": "Scale Anchoring via Implicit Semantics and Sequence-Consistent Loop Closure for VGGT-Based SLAM",
-      "id": "arxiv:2611.06308",
-      "url": "https://arxiv.org/abs/2611.06308",
-      "topic": "slam",
-      "relevance_score": 8,
-      "published": "2026-11-04"
-    },
-    {
-      "title": "CoReMatch: Recurrent Continuous Coordinate Refinement for Real-Time Robotic Feature Matching",
-      "id": "arxiv:2611.03932",
-      "url": "https://arxiv.org/abs/2611.03932",
-      "topic": "slam",
-      "relevance_score": 23,
-      "published": "2026-11-02"
-    },
-    {
-      "title": "A Tightly Coupled Magnetic-Inertial SLAM System for Field Robots",
-      "id": "arxiv:2611.03106",
-      "url": "https://arxiv.org/abs/2611.03106",
-      "topic": "slam",
-      "relevance_score": 23,
-      "published": "2026-11-02"
     }
   ],
   "clocks": {

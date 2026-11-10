@@ -19,7 +19,28 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-10T05:11:22+00:00",
       "first_seen": "2026-11-10T05:11:22+00:00",
-      "last_seen": "2026-11-10T05:11:22+00:00"
+      "last_seen": "2026-11-10T07:19:19+00:00"
+    },
+    {
+      "id": "arxiv:2611.12732",
+      "title": "$Σ$-LeWM: Learning World Models via S-Information for Robot Control",
+      "authors": [
+        "Xinrui Zu",
+        "Michael Przystupa",
+        "Zhao Yang",
+        "Shujian Yu",
+        "Kevin Sebastian Luck"
+      ],
+      "abstract_excerpt": "World models have increasingly been applied as a model-based control method for robotics tasks such as manipulation and locomotion. While early world model architectures relied on decoders to prevent mode collapse and learn a predictable latent space, recent works on world models, such as Joint Embedding Predictive Architecture or LeWorldModel, increasingly aim to learn embeddings without a grounding decoder, utilising only a latent forward dynamics predictor and a stabilising entropy term. In this paper, we set out to demonstrate that the further introduction of two additi",
+      "paper_url": "https://arxiv.org/abs/2611.12732",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 12,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T07:19:19+00:00",
+      "first_seen": "2026-11-10T07:19:19+00:00",
+      "last_seen": "2026-11-10T07:19:19+00:00"
     },
     {
       "id": "arxiv:2611.11869",
@@ -61,6 +82,86 @@
       "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
+      "id": "arxiv:2611.12567",
+      "title": "LawKAN: Group-Law Layers for Composition -- When Imposing a Known Law Pays Off",
+      "authors": [
+        "Anna Mishchenko",
+        "Nikolai Gavrilin"
+      ],
+      "abstract_excerpt": "Many tasks compose transformations by a known rule: chained rotations in robotics and navigation. Learned models relearn it, compounding error; classical estimators hardcode it and miss hardware deviations. We impose the known structure and learn only the remainder: an exact non-commutative group law sits in the node of a self-contained layer, its edges learn local increments, and a zero-initialized correction psi learns unknown deviations of the law. A pre-training criterion predicts exact representability. On fixed-angle SU(2) composition, a 54-parameter dense edge is the",
+      "paper_url": "https://arxiv.org/abs/2611.12567",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 10,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T07:19:19+00:00",
+      "first_seen": "2026-11-10T07:19:19+00:00",
+      "last_seen": "2026-11-10T07:19:19+00:00"
+    },
+    {
+      "id": "arxiv:2611.12557",
+      "title": "WanderBench: Can World Models Explore Dynamic Worlds from Video?",
+      "authors": [
+        "Yuhang Chen",
+        "Jiheng Li",
+        "Jiale Wang",
+        "Zai Wang",
+        "Guangyue Liu"
+      ],
+      "abstract_excerpt": "Video world models conditioned on an input video make it possible to explore real, recorded dynamic scenes, enabling re-shooting of footage, free-viewpoint replay, and real-to-sim environments for embodied agents. Such uses require the generated rollout to stay faithful to the recorded world, yet existing benchmarks start from a single image or a text prompt, and video-conditioned generation is evaluated mainly on perceptual quality and camera following. These evaluations do not directly assess whether exploration preserves subject identity, event progression, and scene con",
+      "paper_url": "https://arxiv.org/abs/2611.12557",
+      "published": "2026-11-09",
+      "topic": "medical_ai",
+      "relevance_score": 10,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T07:19:19+00:00",
+      "first_seen": "2026-11-10T07:19:19+00:00",
+      "last_seen": "2026-11-10T07:19:19+00:00"
+    },
+    {
+      "id": "arxiv:2611.12678",
+      "title": "Library of Hands: Fix the Hands, Not the World Model",
+      "authors": [
+        "Hasaan Ahmad",
+        "Qizhen Ying",
+        "Yuxuan Sun",
+        "Tianjin Huang",
+        "Guangming Wang"
+      ],
+      "abstract_excerpt": "A world model predicts how a scene changes after an action, and a planner uses it to search for actions that reach a goal. If the camera moves or the controller changes, the same command moves the robot differently: when its commands are turned by 90 degrees, a frozen planner with the LeWM world model that succeeds in 77.5% of episodes succeeds in only 7.8%. Current fixes retrain the model, need training data, or forget a set-up when it returns. We propose Library of Hands (LoH), a training-free method that keeps the world model frozen and corrects only the map from command",
+      "paper_url": "https://arxiv.org/abs/2611.12678",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 9,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T07:19:19+00:00",
+      "first_seen": "2026-11-10T07:19:19+00:00",
+      "last_seen": "2026-11-10T07:19:19+00:00"
+    },
+    {
+      "id": "arxiv:2611.12351",
+      "title": "UniOMA: Unified Optimal-Transport Multi-Modal Structural Alignment for Robot Perception",
+      "authors": [
+        "Xinrui Zu",
+        "Mark Hoogendoorn",
+        "Kevin Sebastian Luck",
+        "Shujian Yu"
+      ],
+      "abstract_excerpt": "Achieving generalizable and well-aligned multimodal representations remains a core challenge in robot learning. While recent approaches have attempted to align modalities by modeling conditional or higher-order statistical dependencies, they do not explicitly consider the structural coherence across modalities. In this work, we propose a novel multimodal alignment method that augments existing contrastive losses with a geometry-aware Gromov--Wasserstein (GW) distance-based regularization. To this end, we encode intra-modal geometry for each modality and reduce cross-modal s",
+      "paper_url": "https://arxiv.org/abs/2611.12351",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 9,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T07:19:19+00:00",
+      "first_seen": "2026-11-10T07:19:19+00:00",
+      "last_seen": "2026-11-10T07:19:19+00:00"
+    },
+    {
       "id": "arxiv:2611.11996",
       "title": "OASIS: Optimization-Aware Subgoal Inference with Safety Constraints for Autonomous Mobile Robot Navigation",
       "authors": [
@@ -100,6 +201,88 @@
       "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
+      "id": "arxiv:2611.12824",
+      "title": "DreamLander: A 6-DOF World Model based Reinforcement Learning Planetary Lander",
+      "authors": [
+        "George Nehma",
+        "Patrick Quinn",
+        "Madhur Tiwari",
+        "Camilo Riano-Rios"
+      ],
+      "abstract_excerpt": "Soft powered descent landings are becoming evermore important in the field of space exploration and scientific advancement, because of their ability to deliver mission critical payloads, both highly accurately and safely. The high efficiency restriction on planetary landings due to the severely limited fuel supply results in the need for optimal guidance trajectories and control. Model based reinforcement learning is proving to be an important tool in simplifying the highly complex process of generating optimal guidance trajectories and control. In this work, we present Dre",
+      "paper_url": "https://arxiv.org/abs/2611.12824",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 8,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T07:19:19+00:00",
+      "first_seen": "2026-11-10T07:19:19+00:00",
+      "last_seen": "2026-11-10T07:19:19+00:00"
+    },
+    {
+      "id": "arxiv:2611.12818",
+      "title": "Simulating Vein Compressibility for Ultrasound-Guided Femoral Access: Speed, Accuracy, and Phantom Validation",
+      "authors": [
+        "Amit Manicka",
+        "Laurent Coulon",
+        "Darwin Ang",
+        "Michael Loushin",
+        "Timothy M. Kowalewski"
+      ],
+      "abstract_excerpt": "In ultrasound-guided femoral access, probe pressure deforms the tissue and changes the vascular anatomy a robot observes. A simulator must reproduce these mechanics fast enough for robotic interaction, yet the computational effort needed for a clinically meaningful signal like vein collapse before artery is unclear. We test the feasibility of a physics-based simulation in NVIDIA's Isaac Sim for Healthcare, with Stable Neo-Hookean tissue solved by Vertex Block Descent on one GPU. A simulation of a low-fidelity cylindrical benchtop phantom with known geometry and mechanical p",
+      "paper_url": "https://arxiv.org/abs/2611.12818",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 8,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T07:19:19+00:00",
+      "first_seen": "2026-11-10T07:19:19+00:00",
+      "last_seen": "2026-11-10T07:19:19+00:00"
+    },
+    {
+      "id": "arxiv:2611.12676",
+      "title": "VLA Adaptation with Real and Simulated Data: A Case Study on Robotic Chess",
+      "authors": [
+        "Matěj Kripner",
+        "Milan Straka"
+      ],
+      "abstract_excerpt": "Vision-language-action (VLA) models are trained as general-purpose foundation models for robot learning, and require fine-tuning for each downstream task and robot. This raises practical questions such as how much data and training updates are needed, how checkpoints should be selected, and whether simulation can be leveraged to alleviate the cost of real data collection. We study these questions on a task that requires both precise manipulation and spatial understanding of the scene. In this task, an SO-101 arm moves a chess king between two squares that are given only by ",
+      "paper_url": "https://arxiv.org/abs/2611.12676",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 8,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T07:19:19+00:00",
+      "first_seen": "2026-11-10T07:19:19+00:00",
+      "last_seen": "2026-11-10T07:19:19+00:00"
+    },
+    {
+      "id": "arxiv:2611.12452",
+      "title": "V3DSAM: Semantic-Geometric Loop Verification and Geometry-Anchored Persistent Instance Mapping for Feed-Forward Dense SLAM",
+      "authors": [
+        "Maolin Ye",
+        "Dongqing Zhao",
+        "Linyang Li",
+        "Shuai Xue",
+        "Yuan Liu",
+        "Yiyuan Wang",
+        "Wen Li"
+      ],
+      "abstract_excerpt": "To address unreliable cross-view association in long-sequence feed-forward dense SLAM, this letter presents V3DSAM, an open-vocabulary semantic dense SLAM system that establishes physical correspondences at both the scene and object levels. The system combines feed-forward geometric estimates from VGGT-SLAM 2.0 with open-vocabulary semantic observations from SAM3. We introduce semantic-geometric dual-scale loop verification, which identifies false loop closures using pixel-level bidirectional reprojection and object-level 3D spatial correspondences, without accessing backbo",
+      "paper_url": "https://arxiv.org/abs/2611.12452",
+      "published": "2026-11-09",
+      "topic": "slam",
+      "relevance_score": 8,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T07:19:19+00:00",
+      "first_seen": "2026-11-10T07:19:19+00:00",
+      "last_seen": "2026-11-10T07:19:19+00:00"
+    },
+    {
       "id": "arxiv:2611.11868",
       "title": "Fade to... Red? Scheduling Coloured Noise Exploration Supports Efficient Robot Learning with Reduced Movement Jerk",
       "authors": [
@@ -116,6 +299,77 @@
       "observed_at": "2026-11-10T05:11:22+00:00",
       "first_seen": "2026-11-10T05:11:22+00:00",
       "last_seen": "2026-11-10T05:11:22+00:00"
+    },
+    {
+      "id": "arxiv:2611.12806",
+      "title": "Learning Heterogeneous Tactile Representation for General Dexterous Manipulation",
+      "authors": [
+        "Bing Han",
+        "Yichuan Peng",
+        "Haoyu Dong",
+        "Yuanmeng Hu",
+        "Yongyi Jia",
+        "Fangjing Wang",
+        "Kecheng Zheng",
+        "Yiming Zhang",
+        "Yanhong Zeng",
+        "Xiaoqing Zhang",
+        "Chen Song",
+        "Rundong Zou",
+        "Anqi Dong",
+        "Yuan Guan"
+      ],
+      "abstract_excerpt": "Tactile sensing is an indispensable modality for contact-rich dexterous manipulation, a capability that hints at the ultimate frontiers of embodied intelligence. However, commercially available tactile sensors are still at a relatively early stage of development, with each type of sensor offering irreplaceable strengths alongside its own drawbacks. A key challenge is thus to free tactile understanding from sensor-specific physics, so that embodied models can effectively leverage heterogeneous tactile data. To this end, we develop LingBot-Touch, a tactile foundation model ch",
+      "paper_url": "https://arxiv.org/abs/2611.12806",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 7,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T07:19:19+00:00",
+      "first_seen": "2026-11-10T07:19:19+00:00",
+      "last_seen": "2026-11-10T07:19:19+00:00"
+    },
+    {
+      "id": "arxiv:2611.12804",
+      "title": "Benchmarking Real-World Robotic Manipulation through Stochastic Challenges",
+      "authors": [
+        "Elias Gläßer",
+        "Gülhan Şikaroğlu",
+        "Pavlo Kupyn",
+        "Marc Pollefeys",
+        "Zuria Bauer",
+        "Hermann Blum"
+      ],
+      "abstract_excerpt": "A challenging bottleneck in manipulation research is reproducibility and comparability of methods in real-world environments. Since manipulation is an interactive task, it cannot be evaluated on a static dataset of observations. Benchmarking in simulation is a common remedy, but cannot cover the whole complexity of real-world tests. This paper proposes a new paradigm of stochastic challenges. Like the well-known YCB objects, it is based on reproducible real-world scenes and therefore allows system-level innovation and comparability between different platforms. Due to their ",
+      "paper_url": "https://arxiv.org/abs/2611.12804",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 6,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T07:19:19+00:00",
+      "first_seen": "2026-11-10T07:19:19+00:00",
+      "last_seen": "2026-11-10T07:19:19+00:00"
+    },
+    {
+      "id": "arxiv:2611.12378",
+      "title": "Safety-Constrained Intelligent Control of a 2-DOF Robotic Manipulator Using Control Barrier Functions",
+      "authors": [
+        "Gabriel da Silva Lima",
+        "Made Widhi Surya Atman",
+        "Wallace Moreira Bessa"
+      ],
+      "abstract_excerpt": "Control barrier function (CBF) filters depend on dynamic models that can be inaccurate when their parameters and external forces are uncertain. This paper investigates a radial basis function (RBF) neural network compensator whose output is shared by a Cartesian tracking controller and a joint-space CBF filter. An auxiliary state driven by the difference between requested and applied torques corrects the learning signal, reducing the direct influence of filter intervention on adaptation. A two-link manipulator is evaluated through constrained regulation, ablations, matched ",
+      "paper_url": "https://arxiv.org/abs/2611.12378",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 6,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T07:19:19+00:00",
+      "first_seen": "2026-11-10T07:19:19+00:00",
+      "last_seen": "2026-11-10T07:19:19+00:00"
     },
     {
       "id": "arxiv:2611.12017",
@@ -284,6 +538,54 @@
       "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
+      "id": "arxiv:2611.12855",
+      "title": "AI-based characterization of lymphoid structures and the tumor microenvironment reveals lower mature tertiary lymphoid structures, lymph-node follicles, and plasma cells after neoadjuvant therapy in lung squamous cell carcinoma",
+      "authors": [
+        "Arne Schmidt",
+        "Justin Nieder",
+        "Cornelius Boehm",
+        "Julika Ribbat-Idel",
+        "Marius Teodorescu",
+        "Marie-Lisa Eich",
+        "Simon Schallenberg",
+        "Gabriel Dernbach",
+        "Katja Lingelbach",
+        "Miriam Haegele",
+        "Timo Milbich",
+        "Adam Narai",
+        "Maria Stoelben",
+        "Hans Pinckaers"
+      ],
+      "abstract_excerpt": "Mature, germinal centre-bearing tertiary lymphoid structures (TLS) and mature lymph node follicles (secondary lymphoid structures, SLS) sustain the plasma cell response that shapes outcome and immunotherapy benefit in lung cancer. How this loco-regional axis differs between neoadjuvant-treated and therapy-naive tumors is poorly defined. We analyzed H&E whole-slide images of resected tumors and paired proximal and distal lymph nodes from matched neoadjuvant-treated (neoLUSC, n=20) and therapy-naive (naivLUSC, n=20) lung squamous cell carcinoma (LUSC) patients. Aignostics Atl",
+      "paper_url": "https://arxiv.org/abs/2611.12855",
+      "published": "2026-11-09",
+      "topic": "medical_ai",
+      "relevance_score": 5,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T07:19:19+00:00",
+      "first_seen": "2026-11-10T07:19:19+00:00",
+      "last_seen": "2026-11-10T07:19:19+00:00"
+    },
+    {
+      "id": "arxiv:2611.12805",
+      "title": "2D Gum-Net: Unsupervised Dense Elastic Image Registration via Symmetric Correlation and Spectral Pooling",
+      "authors": [
+        "Aarya Bhave",
+        "Anushka Ajay Bhave"
+      ],
+      "abstract_excerpt": "Dense non-rigid registration, the recovery of a pixel-wise deformation field that warps one image into geometric agreement with another, is fundamental across medical imaging, structural biology, and correspondence estimation, yet learning-based approaches face a severe bottleneck: ground-truth deformation fields are notoriously difficult to obtain for real data. We present 2D Gum-Net, an end-to-end architecture that predicts dense elastic deformation fields fully unsupervised. We transfer the Geometric Unsupervised Matching Network (Gum-Net), originally developed for 3D su",
+      "paper_url": "https://arxiv.org/abs/2611.12805",
+      "published": "2026-11-09",
+      "topic": "medical_ai",
+      "relevance_score": 4,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T07:19:19+00:00",
+      "first_seen": "2026-11-10T07:19:19+00:00",
+      "last_seen": "2026-11-10T07:19:19+00:00"
+    },
+    {
       "id": "arxiv:2611.10239",
       "title": "DASH-SLAM: Calibration-Free Metric Monocular SLAM via Depth Scale Propagation",
       "authors": [
@@ -300,7 +602,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-10T05:11:22+00:00",
       "first_seen": "2026-11-10T05:11:22+00:00",
-      "last_seen": "2026-11-10T05:11:22+00:00"
+      "last_seen": "2026-11-10T07:19:19+00:00"
     },
     {
       "id": "arxiv:2611.09864",
@@ -421,7 +723,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T05:11:22+00:00"
+      "last_seen": "2026-11-10T07:19:19+00:00"
     },
     {
       "id": "arxiv:2611.08372",
@@ -816,7 +1118,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T05:11:22+00:00"
+      "last_seen": "2026-11-10T07:19:19+00:00"
     },
     {
       "id": "arxiv:2611.03932",
@@ -835,7 +1137,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T05:11:22+00:00"
+      "last_seen": "2026-11-10T07:19:19+00:00"
     },
     {
       "id": "arxiv:2611.03106",
@@ -853,7 +1155,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T05:11:22+00:00"
+      "last_seen": "2026-11-10T07:19:19+00:00"
     },
     {
       "id": "arxiv:2611.00482",
@@ -870,7 +1172,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T05:11:22+00:00"
+      "last_seen": "2026-11-10T07:19:19+00:00"
     },
     {
       "id": "arxiv:2610.41768",
@@ -890,7 +1192,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T05:11:22+00:00"
+      "last_seen": "2026-11-10T07:19:19+00:00"
     },
     {
       "id": "arxiv:2610.41602",
@@ -911,7 +1213,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T05:11:22+00:00"
+      "last_seen": "2026-11-10T07:19:19+00:00"
     },
     {
       "id": "arxiv:2610.39385",
@@ -933,7 +1235,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T05:11:22+00:00"
+      "last_seen": "2026-11-10T07:19:19+00:00"
     },
     {
       "id": "arxiv:2610.39691",
@@ -956,7 +1258,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T05:11:22+00:00"
+      "last_seen": "2026-11-10T07:19:19+00:00"
     },
     {
       "id": "arxiv:2610.38141",
@@ -982,7 +1284,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T05:11:22+00:00"
+      "last_seen": "2026-11-10T07:19:19+00:00"
     },
     {
       "id": "arxiv:2610.37111",
@@ -1002,7 +1304,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T05:11:22+00:00"
+      "last_seen": "2026-11-10T07:19:19+00:00"
     },
     {
       "id": "arxiv:2610.36454",
@@ -1025,7 +1327,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T05:11:22+00:00"
+      "last_seen": "2026-11-10T07:19:19+00:00"
     },
     {
       "id": "arxiv:2610.35642",
@@ -1043,7 +1345,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T05:11:22+00:00"
+      "last_seen": "2026-11-10T07:19:19+00:00"
     },
     {
       "id": "arxiv:2610.36312",
@@ -1067,7 +1369,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T05:11:22+00:00"
+      "last_seen": "2026-11-10T07:19:19+00:00"
     },
     {
       "id": "arxiv:2610.34041",
@@ -1085,7 +1387,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T05:11:22+00:00"
+      "last_seen": "2026-11-10T07:19:19+00:00"
     },
     {
       "id": "arxiv:2610.33174",
