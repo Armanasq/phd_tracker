@@ -10,6 +10,7 @@ Changes to the PhD Atlas application and its supporting tooling are recorded her
 - Added `scripts/deployment_check.py` with fork/source, inference, private storage and hosted-mode checks. The unimplemented cloud full-stack mode fails explicitly.
 - Extended CI with local-model security, integration and streaming tests; added a successful Docker runtime startup/health/bootstrap smoke workflow.
 - Reconciled README, self-hosting guidance, architecture contracts and the security policy with the implemented boundaries.
+- Synchronized the canonical `.github/README_TEMPLATE.md` with `README.md` after release tests detected a generated-file mismatch; future README rendering retains the documented deployment contract.
 - Authenticated cloud hosting, optional OAuth login, cross-platform Docker deployment, durable cloud workers and license selection remain open in [Issue #7](https://github.com/Armanasq/phd_tracker/issues/7).
 
 ## Unreleased — 2026-11-09 (private backend integrity)
