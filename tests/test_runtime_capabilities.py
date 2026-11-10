@@ -21,6 +21,16 @@ class PrivateCapabilitiesTests(unittest.TestCase):
         self.assertFalse(report["capabilities"]["authenticated_cloud"]["supported"])
         self.assertTrue(private_runtime_capabilities(provider_verified=True)["capabilities"]["agent_execution"]["ready"])
 
+    def test_native_streaming_requires_compatible_verified_model(self) -> None:
+        from phd_agents.capabilities import private_runtime_capabilities
+
+        pending = private_runtime_capabilities(provider_verified=False, provider_kind="openai_compatible")
+        self.assertFalse(pending["capabilities"]["native_streaming"]["ready"])
+        compatible = private_runtime_capabilities(provider_verified=True, provider_kind="openai_compatible")
+        self.assertTrue(compatible["capabilities"]["native_streaming"]["ready"])
+        unsupported = private_runtime_capabilities(provider_verified=True, provider_kind="anthropic")
+        self.assertFalse(unsupported["capabilities"]["native_streaming"]["ready"])
+
     def test_capabilities_endpoint_does_not_expose_private_credentials(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             store = Store(Path(temp) / "state.sqlite3")
