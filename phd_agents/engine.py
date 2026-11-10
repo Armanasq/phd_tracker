@@ -171,7 +171,7 @@ def workflow_plan(store: Store, *, workflow_id: str, provider_id: str | None = N
     route_override = provider_id if provider_id not in (None, "", "auto") else workflow.get("provider_id", "auto")
     stages = []
     cloud_providers = set()
-    scheduled_approval = True
+    scheduled_approval = bool(workflow.get("enabled") and workflow.get("schedule") in {"daily", "twice_daily", "weekly"})
     for index, agent in enumerate(agent_ids):
         route = resolve_route(store, options["providers"], agent, route_override)
         provider = route.provider
