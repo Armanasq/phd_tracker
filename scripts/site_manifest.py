@@ -41,8 +41,9 @@ def site_digests(root: Path) -> dict[str, str]:
         if (name in _SECRET_BASENAMES or name == ".env" or name.startswith(".env.")
                 or entry.suffix.casefold() in _SECRET_SUFFIXES
                 or any(part.startswith(".") for part in components)
-                or any(token in component.replace("-", "_").split("_")
-                       for component in components for token in _PRIVATE_NAME_TOKENS)):
+                or any(token in _PRIVATE_NAME_TOKENS
+                       for component in components
+                       for token in re.split(r"[._-]+", component))):
             raise ValueError("Private or credential file cannot be included in GitHub Pages: " + relative)
         if entry.suffix.casefold() not in _PUBLIC_SUFFIXES:
             raise ValueError("Unsupported public asset type in GitHub Pages: " + relative)
