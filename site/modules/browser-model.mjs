@@ -39,12 +39,28 @@ export function createBrowserModel({notify, onChange, navigate, getSourceRecords
   const state = {baseUrl:typeof loaded.baseUrl === "string" ? loaded.baseUrl : "http://127.0.0.1:11434/v1",
     model:typeof loaded.model === "string" ? loaded.model : "",verified:false,discovered:[],
     status:"Not tested",error:"",busy:false,controller:null,streaming:true,
-    prompt:"",selectedRecord:"",messages:[],answer:"",usage:null,calls:0};
+    prompt:"",selectedRecord:"",messages:[],answer:"",usage:null,calls:0,
+    streaming:loaded.streaming !== false};
 
   const button = (label,action,kind="quiet",disabled=false) =>
     '<button type="button" class="os-btn ' + kind + '" data-os-action="bm-' + action + '"' + (disabled ? " disabled" : "") + ">" + escapeHTML(label) + "</button>";
   const notice = () => state.error ? '<p class="os-warning" role="alert">' + escapeHTML(state.error) + "</p>" : "";
   const publicRecords = () => (getSourceRecords() || []).filter(x => x && typeof x.id === "string").slice(0, 300);
+
+  function deploymentPanel() {
+    let repo = "";
+    try {
+      const target = new URL(document.querySelector?.(".side-link")?.href || "");
+      if (target.protocol === "https:" && target.hostname === "github.com" && /^\/[A-Za-z0-9-]+\/[A-Za-z0-9_.-]+\/?$/.test(target.pathname)) repo = target.origin + target.pathname.replace(/\/$/, "");
+    } catch {}
+    const actionLink = repo ? '<a class="os-btn quiet" href="' + escapeHTML(repo + "/actions/workflows/hosted-ai-advisories.yml") + '" target="_blank" rel="noopener noreferrer">GitHub Actions</a>' : "";
+    const guideLink = repo ? '<a class="os-btn quiet" href="' + escapeHTML(repo + "/blob/main/docs/SELF_HOSTING.md") + '" target="_blank" rel="noopener noreferrer">Deployment guide</a>' : "";
+    return '<section class="os-panel"><div class="os-panel-heading"><div><h2>Deployment and execution modes</h2><p>Each fork owns its source data, provider configuration, and runtime. A static page cannot hold privileged credentials or run Python workers.</p></div></div>' +
+      '<div class="os-policy"><div><strong>Browser-local model</strong><p>Direct chat in this browser after a successful localhost inference probe. No login or backend required.</p></div>' +
+      '<div><strong>GitHub Actions</strong><p>Opt-in scheduled cloud verification using your fork’s encrypted secrets. This is batch execution, not live chat.</p></div>' +
+      '<div><strong>Full private runtime</strong><p>Run <code>python -m phd_agents serve --port 8765</code> or use the Linux Docker Compose configuration for persistent agents and SQLite. Cloud hosting requires an independently secured backend.</p></div></div>' +
+      '<div class="os-actions">' + actionLink + guideLink + '</div></section>';
+  }
 
   function showSettings() {
     return '<section class="os-page"><div class="os-head"><div><div class="os-kicker">BROWSER-LOCAL INFERENCE</div><h1>Local model connection</h1>' +
@@ -54,13 +70,14 @@ export function createBrowserModel({notify, onChange, navigate, getSourceRecords
       '<label class="os-field"><span>Local endpoint</span><input name="baseUrl" type="url" required value="' + escapeHTML(state.baseUrl) + '" placeholder="http://127.0.0.1:8000/v1"></label>' +
       '<label class="os-field"><span>Model ID</span><input name="model" type="text" maxlength="160" value="' + escapeHTML(state.model) + '" placeholder="Exact deployed model ID" list="bm-models"></label>' +
       '<datalist id="bm-models">' + state.discovered.map(x => '<option value="' + escapeHTML(x) + '"></option>').join("") + '</datalist>' +
+      '<label class="os-field"><span>Response transport</span><label><input type="checkbox" name="streaming" ' + (state.streaming ? 'checked' : '') + '> Stream tokens when the endpoint supports SSE</label></label>' +
       '<div class="os-actions"><button type="submit" class="os-btn primary" ' + (state.busy ? "disabled" : "") + '>Save connection</button>' +
       button("Discover models","discover","quiet",state.busy) + button("Test inference","test","quiet",state.busy) + '</div></form>' +
       '<p class="os-note" role="status">Status: ' + escapeHTML(state.status) + (state.verified ? " · Verified this session" : " · No verified inference in this session") + '</p>' + notice() +
       '<div class="os-policy"><div><strong>Local browser permission</strong><p>Allow this Pages origin in the model server CORS configuration. Your browser may also request Local Network Access permission. Unsupported browsers can use the Python runtime instead.</p></div>' +
       '<div><strong>Security boundary</strong><p>No API keys, cookies, or private application data are sent automatically. Only the prompts and any public record you explicitly select are transmitted to this endpoint.</p></div>' +
       '<div><strong>Execution scope</strong><p>Direct chat works here; Python tools, agent workflows, private SQLite, and scheduled tasks require the separate private runtime.</p></div></div>' +
-      '<div class="os-actions">' + button("Open Copilot","copilot","primary",false) + '</div></section></section>';
+      '<div class="os-actions">' + button("Open Copilot","copilot","primary",false) + '</div></section>' + deploymentPanel() + '</section>';
   }
 
   function showCopilot() {
@@ -186,7 +203,7 @@ export function createBrowserModel({notify, onChange, navigate, getSourceRecords
       state.verified = true;
       state.status = "Verified local inference";
       state.usage = result.usage || null;
-      localStorage.setItem(storageKey(),JSON.stringify({baseUrl:state.baseUrl,model:state.model}));
+      localStorage.setItem(storageKey(),JSON.stringify({baseUrl:state.baseUrl,model:state.model,streaming:state.streaming}));
     });
   }
 
@@ -230,11 +247,12 @@ export function createBrowserModel({notify, onChange, navigate, getSourceRecords
     if (form.dataset.osForm === "bm-config") {
       const baseUrl = normalizeLoopbackEndpoint(form.elements.baseUrl.value);
       const model = form.elements.model.value.trim() ? normalizeModelId(form.elements.model.value) : "";
+      const streaming = form.elements.streaming?.checked ?? state.streaming;
       if (baseUrl !== state.baseUrl || model !== state.model) {
         state.verified = false;state.status = "Saved; inference test required.";state.messages = [];
       }
-      state.baseUrl = baseUrl;state.model = model;state.error = "";
-      try {localStorage.setItem(storageKey(),JSON.stringify({baseUrl,model}));}
+      state.baseUrl = baseUrl;state.model = model;state.streaming = streaming;state.error = "";
+      try {localStorage.setItem(storageKey(),JSON.stringify({baseUrl,model,streaming}));}
       catch {throw new Error("Browser storage unavailable. Model settings will not persist.");}
       onChange();
     } else if (form.dataset.osForm === "bm-chat") await send(form);
