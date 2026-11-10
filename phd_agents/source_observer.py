@@ -126,8 +126,14 @@ def observe_record(
              visible_digest, excerpt, int(truncated), text_drift),
         )
         store.db.execute(
-            "DELETE FROM source_observations WHERE id NOT IN "
-            "(SELECT id FROM source_observations ORDER BY id DESC LIMIT 2000)"
+            "DELETE FROM source_observations WHERE id NOT IN ("
+            "SELECT id FROM source_observations WHERE id NOT IN ("
+            "SELECT observation_id FROM source_claims "
+            "UNION SELECT observation_id FROM source_observation_reviews)"
+            " ORDER BY id DESC LIMIT 2000"
+            ") AND id NOT IN ("
+            "SELECT observation_id FROM source_claims "
+            "UNION SELECT observation_id FROM source_observation_reviews)"
         )
         store._audit("source:observed", application_id)
     return {

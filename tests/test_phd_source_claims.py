@@ -103,6 +103,57 @@ class SourceClaimsTests(unittest.TestCase):
                 })
         self.assertEqual(len(source_claims(self.store)), 1)
 
+    def test_cited_observations_survive_bounded_history_pruning(self) -> None:
+        canonical = "The published eligibility notice requires university transcripts."
+        raw = canonical.encode("utf-8")
+        first = observe_record(
+            self.store, "APP1", self.url,
+            fetcher=lambda _: {
+                "status": "fetched", "http_status": 200,
+                "content_sha256": hashlib.sha256(raw).hexdigest(),
+                "content_length": len(raw), **extract_visible_text(raw, "text/plain"),
+            },
+        )
+        evidence = capture_source_claim(
+            self.store, observation_id=first["id"], claim_type="documents",
+            quote=canonical, candidate_value="Official transcripts",
+            expected_digest=first["content_sha256"],
+        )
+        reviewed = self.store.db.execute(
+            "INSERT INTO source_observations(application_id,source_url,status,observed_at,drift)"
+            " VALUES(?,?,?,?,?)",
+            ("APP2", self.url, "http_error", "2026-11-08T00:00:00+00:00", "unavailable_no_source_conclusion"),
+        ).lastrowid
+        self.store.db.execute(
+            "INSERT INTO source_observation_reviews(observation_id,application_id,"
+            "source_url,source_sha256,decision,note,reviewed_at) VALUES(?,?,?,?,?,?,?)",
+            (reviewed, "APP2", self.url, None, "needs_follow_up",
+             "The source was unavailable and requires a fresh official check.", "2026-11-08T00:00:00+00:00"),
+        )
+        for index in range(2002):
+            self.store.db.execute(
+                "INSERT INTO source_observations(application_id,source_url,status,observed_at,drift)"
+                " VALUES(?,?,?,?,?)",
+                ("APP-RAW", self.url, "http_error", "2026-11-09T00:00:00+00:00", "unavailable_no_source_conclusion"),
+            )
+        self.store.db.commit()
+        observe_record(
+            self.store, "APP-CURRENT", self.url,
+            fetcher=lambda _: {
+                "status": "connection_error", "http_status": None,
+                "content_sha256": None, "content_length": 0,
+            },
+        )
+        self.assertIn(canonical, observation_text(self.store, first["id"])["visible_text"])
+        self.assertEqual(source_claims(self.store)[0]["id"], evidence["id"])
+        self.assertIsNotNone(self.store.db.execute(
+            "SELECT id FROM source_observations WHERE id=?", (reviewed,),
+        ).fetchone())
+        self.assertEqual(self.store.db.execute(
+            "SELECT COUNT(*) FROM source_observations WHERE application_id='APP-RAW'"
+        ).fetchone()[0], 1999)
+        self.assertEqual(self.store.db.execute("SELECT COUNT(*) FROM source_observations").fetchone()[0], 2002)
+
     def test_bounded_visible_text_and_unsupported_content(self) -> None:
         huge = extract_visible_text(b"A" * (EXCERPT_LIMIT + 400), "text/plain")
         self.assertTrue(huge["visible_text_truncated"])

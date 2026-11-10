@@ -36,3 +36,7 @@ The following private, local-only endpoints support the workflow: `GET /api/sour
 ## Agent retrieval semantics
 
 A private agent now receives up to six captured source quotations when their application IDs match its selected or retrieved records. The bounded context explicitly marks each quote as `source_quote_observed_not_fact_verified`, with an immutable `SRC-<id>` citation identifier and raw source digest. When the model cites `[claim:SRC-123]`, the citation auditor may match the stored record but **must mark it unverified** until independent evidence review establishes the interpretation. The model cannot update source records, deadline fields or applicant statuses through citation. Returned run traces include source claim references, not the entire stored excerpt.
+
+### Provenance retention
+
+The observer keeps the newest **2,000 uncited** observations plus every observation referenced by a saved source claim or owner review event. Older uncited observations may be pruned; cited observations are exempt from this pruning so their captured source text and SHA-256 remain inspectable. The normal history API still returns at most 2,000 recent entries; older pinned observations are accessible through their exact private observation IDs and claim records. Export and back up the local SQLite state before destructive maintenance. This is not an unlimited retention guarantee for deleted databases or manual data modifications.
