@@ -95,9 +95,9 @@ def observe_record(
     with store.db:
         store.db.execute(
             "INSERT INTO source_observations(application_id,source_url,status,"
-            "content_sha256,observed_at,http_status,content_length) VALUES(?,?,?,?,?,?,?)",
+            "content_sha256,observed_at,http_status,content_length,drift) VALUES(?,?,?,?,?,?,?,?)",
             (application_id, validated, result["status"], fingerprint, timestamp,
-             result.get("http_status"), result.get("content_length")),
+             result.get("http_status"), result.get("content_length"), drift),
         )
         store.db.execute(
             "DELETE FROM source_observations WHERE id NOT IN "
@@ -120,7 +120,7 @@ def recent_observations(store: Store, *, limit: int = 50) -> list[dict[str, Any]
         raise ValueError("Invalid source observation limit")
     rows = store.db.execute(
         "SELECT application_id,source_url,status,content_sha256,observed_at,"
-        "http_status,content_length FROM source_observations ORDER BY id DESC LIMIT ?",
+        "http_status,content_length,drift FROM source_observations ORDER BY id DESC LIMIT ?",
         (limit,),
     ).fetchall()
     return [dict(row) for row in rows]
