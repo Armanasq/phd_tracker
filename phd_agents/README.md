@@ -175,3 +175,7 @@ For a cloned fork, default private state and locally entered provider credential
 The `--repo` CLI argument selects an independent private directory for an alternative checkout when `PHDAI_PRIVATE_DIR` is not set. Non-git source archives must set `PHD_ATLAS_REPOSITORY=OWNER/REPO` to ensure identity detection instead of falling back to the upstream default.
 
 Fork research agents do not ingest the upstream `data/research_radar.json`: the optional `paper_radar` tool reads `data/user_research_radar.json` in an independent instance, or returns an empty result when that file is absent. The original runtime continues using its current `data/research_radar.json`.
+
+## Joint capacity and document effort
+
+The private **Operations → Capacity planning** tab now compares application-only time demand with one shared-document task per known document type, schedules the combined workload against a common seven-day weekly time budget, reports deadline bottlenecks and unknown hours, and supports a user-initiated allocation CSV export. It remains a scenario, not a feasibility guarantee. See [capacity planning and assumptions](../docs/CAPACITY_PLANNING.md).

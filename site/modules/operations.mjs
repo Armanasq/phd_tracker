@@ -1,3 +1,4 @@
+import {renderCapacityReport, capacityCsv} from "./capacity-view.mjs";
 const esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const title=x=>String(x||"").replaceAll("_"," ").replace(/\b\w/g,c=>c.toUpperCase());
 const opt=(pairs,selected)=>pairs.map(([value,label])=>'<option value="'+esc(value)+'"'+(value===selected?' selected':'')+'>'+esc(label)+'</option>').join("");
@@ -185,10 +186,7 @@ export function createOperations({request,onChange,onReload,getRecords,notify}){
    section("Capacity scenario","Deterministic scheduling using owner-provided effort estimates.",
     '<form data-ops-form="capacity" class="os-form">'+input("hours_per_week","Available hours per week",profile.hours_per_week??"","number",'required min="0.5" max="168" step="0.5"')+
     '<button class="os-btn primary" type="submit">Evaluate capacity</button><p class="os-footnote">Missing effort estimates remain unknown. The algorithm is an earliest-deadline-first heuristic, not an optimal project scheduler.</p></form>')+'</div>'+
-   (result?section("Feasibility findings","Only owner-entered effort and explicit deadlines are used.",
-    '<div class="os-kpi-strip">'+[[result.scheduled.length,"Scheduled blocks"],[result.unallocated.length,"Insufficient time"],[result.unknown_effort_or_date.length,"Unknown inputs"]].map(([value,label])=>'<div><strong>'+value+'</strong><span>'+label+'</span></div>').join("")+'</div>'+
-    '<div class="ops-rows">'+result.unallocated.slice(0,15).map(item=>'<div class="ops-row"><div><strong>'+esc(byId(item.application_id)?.name||item.application_id)+'</strong><small>'+esc(item.hours_unallocated)+' h unallocated · '+esc(item.deadline)+'</small></div></div>').join("")+
-    result.unknown_effort_or_date.slice(0,15).map(item=>'<div class="ops-row"><div><strong>'+esc(byId(item.application_id)?.name||item.application_id)+'</strong><small>'+esc(item.reason)+'</small></div></div>').join("")+'</div>'):"")+
+   (result?renderCapacityReport({report:result,esc,byId,button}):"")+
    (state.kind==="profile"?editor("profile","applicant"):"");
  }
  function view(){
@@ -216,6 +214,16 @@ export function createOperations({request,onChange,onReload,getRecords,notify}){
   const action=element.dataset.opsAction,id=element.dataset.id||"";
   if(action==="tab"){state.tab=id;state.editing=null;state.kind=null;onChange();return;}
   if(action==="toggle-proof"){state.showProof=!state.showProof;onChange();return;}
+  if(action==="capacity-export"){
+   if(!state.schedule)return;
+   const data=capacityCsv(state.schedule);
+   const blob=new Blob([data],{type:"text/csv;charset=utf-8"});
+   const objectUrl=URL.createObjectURL(blob);
+   const anchor=document.createElement("a");
+   anchor.href=objectUrl;anchor.download="phd-atlas-private-capacity.csv";anchor.click();
+   setTimeout(()=>URL.revokeObjectURL(objectUrl),1000);
+   return;
+  }
   if(action==="proof"){
    const task=d().proof_queue?.items?.find(x=>x.id===id);
    if(task){state.applicationId=task.application_id;state.tab=task.target_section;state.editing=null;state.kind=null;onChange();}

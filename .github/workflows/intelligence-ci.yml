@@ -57,6 +57,8 @@ jobs:
       - run: node --check site/modules/lens.mjs
       - run: node --check site/modules/console.mjs
       - run: node --check site/modules/operations.mjs
+      - run: node --check site/modules/capacity-view.mjs
+      - run: node --test tests/capacity_view.test.mjs
       - run: node --check site/modules/readiness.mjs
       - run: node --check site/modules/readiness-view.mjs
       - run: node --test tests/readiness.test.mjs tests/readiness_view.test.mjs
