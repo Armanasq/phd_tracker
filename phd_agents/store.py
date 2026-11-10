@@ -90,7 +90,8 @@ class Store:
                 content_sha256 TEXT,
                 observed_at TEXT NOT NULL,
                 http_status INTEGER,
-                content_length INTEGER
+                content_length INTEGER,
+                drift TEXT
             );
             CREATE INDEX IF NOT EXISTS idx_source_observations_record
                 ON source_observations(application_id,source_url,id);
@@ -118,6 +119,9 @@ class Store:
             columns = {item["name"] for item in self.db.execute("PRAGMA table_info(private_objects)")}
             if "version" not in columns:
                 self.db.execute("ALTER TABLE private_objects ADD COLUMN version INTEGER NOT NULL DEFAULT 1")
+            observed_columns = {item["name"] for item in self.db.execute("PRAGMA table_info(source_observations)")}
+            if "drift" not in observed_columns:
+                self.db.execute("ALTER TABLE source_observations ADD COLUMN drift TEXT")
             self.db.commit()
         except BaseException:
             if hasattr(self, "db"):
