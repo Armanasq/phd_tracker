@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {observationSummary,observationLink,renderSourceObservations} from "../site/modules/source-observations.mjs";
 
-test("latest observation replaces stale status per application and source",()=>{
+test("unreviewed byte drift remains visible after later unchanged fetch",()=>{
   const records=[
     {application_id:"A",source_url:"https://uni.example/app",observed_at:"2026-11-08T10:00:00Z",drift:"source_bytes_changed_needs_review"},
     {application_id:"A",source_url:"https://uni.example/app",observed_at:"2026-11-09T10:00:00Z",drift:"unchanged_bytes"},
@@ -13,10 +13,11 @@ test("latest observation replaces stale status per application and source",()=>{
   ];
   const result=observationSummary(records);
   assert.equal(result.sources,5);
-  assert.deepEqual(result.counts,{changed:1,unavailable:1,unchanged:1,baseline:1,legacy:1});
+  assert.deepEqual(result.counts,{changed:2,unavailable:1,unchanged:0,baseline:1,legacy:1});
   const changed=renderSourceObservations({records,filter:"changed"});
   assert.match(changed,/>B<\/strong>/);
-  assert.doesNotMatch(changed,/>A<\/strong>/);
+  assert.match(changed,/>A<\/strong>/);
+  assert.match(changed,/Earlier byte drift in loaded history/);
   assert.match(changed,/manual review/);
   assert.doesNotMatch(changed,/automatically verified/i);
 });
