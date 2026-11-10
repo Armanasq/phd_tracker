@@ -4,12 +4,13 @@ import ipaddress
 import json
 import os
 from .secrets import read_secret
+from .egress import PinnedHTTPHandler, PinnedHTTPSHandler
 from dataclasses import dataclass
 from time import perf_counter
 from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit, quote
-from urllib.request import HTTPRedirectHandler, Request, build_opener
+from urllib.request import HTTPRedirectHandler, Request, build_opener, ProxyHandler
 
 
 class ProviderError(RuntimeError):
@@ -137,7 +138,9 @@ def invoke(provider: dict[str, Any], system: str, prompt: str, *, timeout: int |
         raise ValueError("Prompt exceeds the configured input budget")
     request = Request(url, json.dumps(payload).encode("utf-8"), headers=headers, method="POST")
     started = perf_counter()
-    opener = build_opener(NoRedirect())
+    opener = build_opener(NoRedirect(), ProxyHandler({}),
+                          PinnedHTTPHandler(local=bool(provider["local"])),
+                          PinnedHTTPSHandler(local=bool(provider["local"])))
     try:
         with opener.open(request, timeout=effective_timeout) as response:
             raw = response.read(2_000_001)
