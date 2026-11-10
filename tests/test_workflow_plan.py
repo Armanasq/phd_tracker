@@ -51,6 +51,32 @@ class WorkflowPreflightTests(unittest.TestCase):
         self.assertFalse(planned["scheduled_policy_approved"])
         self.assertEqual(planned["stages"][0]["route_source"], "agent_assignment")
 
+    def test_multi_stage_requires_verified_models_before_first_call(self) -> None:
+        preview = workflow_plan(self.store, workflow_id="mixed_routes", cloud_consent=True)
+        self.assertTrue(preview["manual_ready"])
+        self.assertFalse(preview["execution_ready"])
+        self.assertEqual(set(preview["model_probe_required"]), {"ollama", "openai"})
+        with patch("phd_agents.engine.invoke") as invoke:
+            with self.assertRaisesRegex(ValueError, "Verify inference"):
+                run_workflow(self.store, self.root, workflow_id="mixed_routes",
+                             cloud_consent=True)
+            invoke.assert_not_called()
+
+    def test_verified_multi_stage_routes_do_not_trigger_extra_probe_calls(self) -> None:
+        status = {"ollama": {"state": "responded"}, "openai": {"state": "responded"}}
+        def proposal(store, root, *, agent_id, **kwargs):
+            return {"id": "run-" + agent_id, "agent_id": agent_id,
+                    "text": "Evidence review pending", "usage": {}, "tools": []}
+        with patch("phd_agents.engine.provider_states", return_value=status):
+            preview = workflow_plan(self.store, workflow_id="mixed_routes", cloud_consent=True)
+            self.assertTrue(preview["execution_ready"])
+            self.assertEqual(preview["model_probe_required"], [])
+            with patch("phd_agents.engine.run_agent", side_effect=proposal) as call:
+                result = run_workflow(self.store, self.root, workflow_id="mixed_routes",
+                                      cloud_consent=True)
+            self.assertEqual(len(result["steps"]), 2)
+            self.assertEqual(call.call_count, 2)
+
     def test_invalid_second_route_fails_before_inference(self) -> None:
         save_settings(self.store, {"agent_routes": {"portfolio_planner": "ollama", "research_fit": "openai"}})
         with self.assertRaises(ValueError):
