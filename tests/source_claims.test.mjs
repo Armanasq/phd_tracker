@@ -44,3 +44,19 @@ test("claims remain explicitly unverified, and untrusted content is escaped",()=
   assert.match(html,/factual interpretation unverified/);
   assert.match(html,/Unknown|No retained source text/);
 });
+
+test("visible-text diff is explicitly provisional and safely escaped",()=>{
+  const sample={id:9,content_sha256:"a".repeat(64),visible_text:"Application deadline changed from 15 to 20 December 2026."};
+  const comparison={observation_id:9,status:"visible_text_changed",comparison_complete:true,
+    possible_topics:["deadline"],changes:[{type:"replace",before:"15",after:"20"}],
+    notice:"Text changes do not constitute official fact verification"};
+  const screen=renderSourceClaims({observations:observed,selectedId:9,sourceText:sample,diff:comparison});
+  assert.match(screen,/Compare previous fetch/);
+  assert.match(screen,/Visible text comparison/);
+  assert.match(screen,/Possible review topics: deadline/);
+  assert.match(screen,/Text changes do not constitute official fact verification/);
+  const untrusted=renderSourceClaims({observations:observed,selectedId:9,sourceText:sample,
+    diff:{...comparison,changes:[{type:"replace",before:"<script>bad</script>",after:"<img onerror=alert(1)>"}]}});
+  assert.ok(!untrusted.includes("<script>"));
+  assert.ok(!untrusted.includes("<img"));
+});

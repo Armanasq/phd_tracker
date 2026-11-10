@@ -40,3 +40,7 @@ A private agent now receives up to six captured source quotations when their app
 ### Provenance retention
 
 The observer keeps the newest **2,000 uncited** observations plus every observation referenced by a saved source claim or owner review event. Older uncited observations may be pruned; cited observations are exempt from this pruning so their captured source text and SHA-256 remain inspectable. The normal history API still returns at most 2,000 recent entries; older pinned observations are accessible through their exact private observation IDs and claim records. Export and back up the local SQLite state before destructive maintenance. This is not an unlimited retention guarantee for deleted databases or manual data modifications.
+
+### Deterministic before/after source comparison
+
+The private `GET /api/source-observations/{id}/diff` endpoint compares the selected fetched observation with the immediately previous fetched observation for the same application and HTTPS URL. The bounded word-level comparison includes additions, removals, replacements, limited context, possible lexical review topics and explicit completeness. Comparisons with missing or truncated text are partial or unavailable. The UI displays changes only on request. No model is called and no admission facts or applicant records are changed by the diff.

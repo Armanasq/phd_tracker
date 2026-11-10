@@ -12,7 +12,7 @@ const cleanId = value => String(value||"").trim().toLowerCase().replace(/[^a-z0-
 const opt = (items,value) => choose(items,value);
 
 export function createConsole({notify,onChange,navigate,getRecords,getSourceRecords,onReload,getView}) {
- const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:"",jobs:[],observability:null,sourceObservations:[],sourceObservationsLoading:false,sourceObservationsError:"",sourceObservationFilter:"all",sourceClaims:[],sourceClaimError:"",sourceClaimFilter:"all",selectedClaimObservation:null,claimObservationText:null,sourceClaimLoading:false};
+ const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:"",jobs:[],observability:null,sourceObservations:[],sourceObservationsLoading:false,sourceObservationsError:"",sourceObservationFilter:"all",sourceClaims:[],sourceClaimError:"",sourceClaimFilter:"all",selectedClaimObservation:null,claimObservationText:null,sourceClaimLoading:false,sourceTextDiff:null,sourceDiffError:""};
  const providers = () => state.data?.catalog?.providers || [];
  const agents = () => state.data?.catalog?.agents || [];
  const workflows = () => state.data?.catalog?.workflows || [];
@@ -465,7 +465,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   if(name==="automations")return '<section class="os-page">'+heading("AI / WORKFLOW ENGINE","Automations","Compose multi-agent workflows, inspect scheduling rules and control approvals.",btn("Runtime settings","go","settings","quiet"))+workflowPanel()+'</section>';
   if(name==="activity")return activity();
   if(name==="source-observations")return renderSourceObservations({records:state.sourceObservations,loading:state.sourceObservationsLoading,error:state.sourceObservationsError,filter:state.sourceObservationFilter,message:state.message});
-  if(name==="source-claims")return renderSourceClaims({observations:state.sourceObservations,claims:state.sourceClaims,selectedId:state.selectedClaimObservation,sourceText:state.claimObservationText,error:state.sourceClaimError,filter:state.sourceClaimFilter,message:state.message,loading:state.sourceClaimLoading});
+  if(name==="source-claims")return renderSourceClaims({observations:state.sourceObservations,claims:state.sourceClaims,selectedId:state.selectedClaimObservation,sourceText:state.claimObservationText,diff:state.sourceTextDiff,diffError:state.sourceDiffError,error:state.sourceClaimError,filter:state.sourceClaimFilter,message:state.message,loading:state.sourceClaimLoading});
   return '';
  }
  function selectConnection(id) {state.selectedProvider=id;state.models={};onChange();}
@@ -494,7 +494,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
     const [observed,claims]=await Promise.all([request("/api/source-observations"),request("/api/source-claims")]);
     if(!Array.isArray(observed.observations)||!Array.isArray(claims.claims))throw new Error("Invalid private evidence response");
     state.sourceObservations=observed.observations;state.sourceClaims=claims.claims;
-    state.claimObservationText=null;
+    state.claimObservationText=null;state.sourceTextDiff=null;state.sourceDiffError="";
    }catch(error){state.sourceClaimError=short(error.message,240);}
    finally{state.sourceClaimLoading=false;onChange();}
    return;
@@ -504,12 +504,25 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    const source=claimCandidates(state.sourceObservations).find(x=>x.id===state.selectedClaimObservation)||claimCandidates(state.sourceObservations)[0];
    if(!source)return;
    state.selectedClaimObservation=source.id;
-   state.claimObservationText=null;state.sourceClaimLoading=true;state.sourceClaimError="";onChange();
+   state.claimObservationText=null;state.sourceTextDiff=null;state.sourceDiffError="";state.sourceClaimLoading=true;state.sourceClaimError="";onChange();
    try{
     const result=await request("/api/source-observations/"+source.id+"/text");
     if(result.observation?.id!==source.id)throw new Error("Source observation identifier changed");
     state.claimObservationText=result.observation;
    }catch(error){state.sourceClaimError=short(error.message,240);}
+   finally{state.sourceClaimLoading=false;onChange();}
+   return;
+  }
+  if(action==="compare-claim-source"){
+   if(!isLive()||state.sourceClaimLoading||!state.claimObservationText)return;
+   const identity=state.claimObservationText.id;
+   if(!Number.isSafeInteger(identity)||identity<1)return;
+   state.sourceClaimLoading=true;state.sourceDiffError="";state.sourceTextDiff=null;onChange();
+   try{
+    const response=await request("/api/source-observations/"+identity+"/diff");
+    if(response.diff?.observation_id!==identity)throw new Error("Invalid source comparison response");
+    state.sourceTextDiff=response.diff;
+   }catch(error){state.sourceDiffError=short(error.message,240);}
    finally{state.sourceClaimLoading=false;onChange();}
    return;
   }
@@ -788,7 +801,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
     const id=Number(event.target.value);
     if(!Number.isSafeInteger(id)||id<1)return;
     state.selectedClaimObservation=id;
-    state.claimObservationText=null;state.sourceClaimError="";onChange();return;
+    state.claimObservationText=null;state.sourceTextDiff=null;state.sourceDiffError="";state.sourceClaimError="";onChange();return;
    }
    if(event.target.matches("[data-os-claim-filter]")){
     state.sourceClaimFilter=event.target.value;onChange();return;

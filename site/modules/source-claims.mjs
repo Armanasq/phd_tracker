@@ -10,7 +10,7 @@ export function claimCandidates(observations=[]) {
     .sort((a,b)=>b.id-a.id).slice(0,200);
 }
 
-export function renderSourceClaims({observations=[],claims=[],selectedId=null,sourceText=null,error="",message="",loading=false,filter="all"}={}) {
+export function renderSourceClaims({observations=[],claims=[],selectedId=null,sourceText=null,diff=null,diffError="",error="",message="",loading=false,filter="all"}={}) {
   if(!Array.isArray(claims))throw new TypeError("Expected captured source claims");
   const candidates=claimCandidates(observations);
   const selected=candidates.find(o=>o.id===selectedId)||candidates[0]||null;
@@ -19,6 +19,18 @@ export function renderSourceClaims({observations=[],claims=[],selectedId=null,so
   const filtered=claims.filter(c=>selectedFilter==="all"||c.claim_type===selectedFilter);
   const options=candidates.map(o=>'<option value="'+o.id+'"'+(o.id===selected?.id?' selected':'')+'>'+esc(o.application_id)+' · '+esc(o.observed_at||"Unknown time")+' · #'+o.id+'</option>').join("");
   const quoted=text&&typeof text.visible_text==="string"&&text.visible_text.length>0;
+  const comparison=diff?.observation_id===selected?.id?diff:null;
+  const diffPanel=comparison?'<section class="os-panel"><div class="os-panel-heading"><div><h2>Visible text comparison</h2><p>'+
+    esc(comparison.status.replaceAll("_"," "))+' · '+(comparison.comparison_complete?"Captured text compared":"Partial or unavailable comparison")+
+    '</p></div></div>'+
+    '<p class="os-footnote">Possible review topics: '+esc((comparison.possible_topics||[]).join(", ")||"Not identified")+
+    '. These are lexical hints, not verified requirements.</p>'+
+    '<div class="os-diff-list">'+(comparison.changes||[]).map(change=>
+      '<div class="os-diff-row"><small>'+esc(change.type)+'</small>'+
+      '<div class="os-diff-before"><strong>Previous</strong><p>'+esc(change.before||"No text")+'</p></div>'+
+      '<div class="os-diff-after"><strong>Current</strong><p>'+esc(change.after||"No text")+'</p></div></div>').join("")+
+    ((comparison.changes||[]).length===0?'<p class="os-note">No comparable changes are available for this observation.</p>':'')+
+    '</div><p class="os-footnote">'+esc(comparison.notice||"")+'</p></section>':"";
   const capture=quoted?'<form class="os-form" data-os-form="source-claim">'+
     '<input type="hidden" name="observation_id" value="'+selected.id+'">'+
     '<input type="hidden" name="expected_digest" value="'+esc(text.content_sha256)+'">'+
@@ -33,7 +45,8 @@ export function renderSourceClaims({observations=[],claims=[],selectedId=null,so
   const sourcePanel=selected?'<section class="os-panel"><div class="os-panel-heading"><div><h2>Observed source text</h2>'+
       '<p>Captured from a public HTTPS source. Scripts and styles are excluded; dynamically rendered information may be absent.</p></div></div>'+
       '<label class="os-field os-source-selector"><span>Observation</span><select data-os-claim-observation aria-label="Choose source observation">'+options+'</select></label>'+
-      '<div class="os-actions"><button type="button" class="os-btn quiet" data-os-action="load-claim-source"'+(loading?' disabled':'')+'>Load captured text</button></div>'+
+      '<div class="os-actions"><button type="button" class="os-btn quiet" data-os-action="load-claim-source"'+(loading?' disabled':'')+'>Load captured text</button>'+
+      (quoted?'<button type="button" class="os-btn quiet" data-os-action="compare-claim-source"'+(loading?' disabled':'')+'>Compare previous fetch</button>':'')+'</div>'+
       (quoted?'<div class="os-source-sample" id="sourceCapturedText" tabindex="0" aria-label="Captured institutional source text">'+esc(text.visible_text)+'</div>'+
         '<p class="os-footnote">Text hash: '+esc(text.visible_text_sha256)+
         (text.visible_text_truncated?' · Extracted text truncated to the retained prefix; quote matching is limited to that prefix.':'')+'</p>':
@@ -54,7 +67,8 @@ export function renderSourceClaims({observations=[],claims=[],selectedId=null,so
     '<button type="button" class="os-btn quiet" data-os-action="refresh-claim-evidence"'+(loading?' disabled':'')+'>Refresh evidence</button></div></div>'+
     (error?'<p class="os-warning" role="alert">'+esc(error)+'</p>':'')+
     (message?'<p class="os-message" role="status">'+esc(message)+'</p>':'')+
-    sourcePanel+
+    (diffError?'<p class="os-warning" role="alert">'+esc(diffError)+'</p>':'')+
+    sourcePanel+diffPanel+
     '<section class="os-panel"><div class="os-panel-heading"><div><h2>Capture a candidate claim</h2>'+
     '<p>The exact quote and content digest become immutable private provenance. No deadline, eligibility, funding or portal state is promoted automatically.</p></div></div>'+
     capture+'</section>'+
