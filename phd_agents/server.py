@@ -22,6 +22,7 @@ from .settings import read_settings, save_settings
 from .routing import resolve_route, routing_status
 from .secrets import read_secret, write_secret
 from .metrics import usage_summary
+from .observability import report_observability
 from .capabilities import private_runtime_capabilities
 from .scheduler_preview import scheduler_preview
 from .toolkit import TOOL_NAMES, DEFAULT_TOOLS
@@ -269,6 +270,8 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             self.wfile.write(body)
+        elif path == "/api/observability":
+            self.send_json(report_observability(store))
         elif path == "/api/metrics":
             self.send_json(usage_summary(store))
         elif path == "/api/diagnostics":

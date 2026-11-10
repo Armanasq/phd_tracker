@@ -77,6 +77,12 @@ Profile, referee, reference, milestone and evidence writes now use compare-and-s
 
 Existing SQLite databases are migrated in place through a non-destructive column addition, with pre-existing objects initialized at version 1. The low-level Python Store API retains an unguarded compatibility path for legacy local callers; **the private HTTP API requires a version precondition**. See `tests/test_private_object_versions.py`.
 
+## Redacted local observability
+
+The read-only `GET /api/observability` endpoint returns a fixed-schema, allowlisted summary of recent local inference runs. It contains run identifiers, provider and agent IDs, timestamps, status, safe error *types*, token counts and measured latency; it excludes prompts, responses, credentials, source URLs and applicant/application IDs. Failed inference calls now record elapsed time and an error class, not arbitrary exception messages. Results are limited to 500 sampled run rows, with up to 50 redacted traces.
+
+Illustrative operator objectives use the previous 24 hours, at least 20 completed calls **and** 20 measured latencies, error rate ≤5% and p95 latency ≤60 seconds. These are configuration defaults for local monitoring, **not a published production availability SLA**. The report explicitly returns `insufficient_data` until sample thresholds are met. No synthetic values are inserted for missing usage or latency. Tests: `tests/test_phd_observability.py`.
+
 ## Release quality gates
 
 - Run Python and JavaScript tests for every backend or private frontend change.

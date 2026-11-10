@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+from time import perf_counter
 from typing import Any, Callable
 from zoneinfo import ZoneInfo
 
@@ -136,6 +137,7 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str | Non
               (input_text.strip() or "Analyze the evidence and produce the most valuable actionable, explicitly provisional findings.") +
               "\n\nOutput a concise, evidence-grounded analysis with proposed next actions and open proof obligations. " +
               "Do not report any external action as completed.")
+    inference_started = perf_counter()
     try:
         reply = (invoke_stream(provider, system, prompt, on_delta)
                  if on_delta is not None else invoke(provider, system, prompt))
@@ -143,7 +145,8 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str | Non
         store.put_run("workflow" if workflow_id else "agent", agent_id, application_id,
                       "failed", provider_id,
                       {"model": provider["model"], "error_type": type(error).__name__,
-                       "workflow_id": workflow_id, "source_as_of": source.get("as_of")})
+                       "workflow_id": workflow_id, "source_as_of": source.get("as_of"),
+                       "latency_ms": round((perf_counter() - inference_started) * 1000)})
         raise
     run_id = store.put_run("workflow" if workflow_id else "agent", agent_id, application_id,
                            "proposed", provider_id,
