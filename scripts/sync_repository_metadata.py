@@ -20,8 +20,9 @@ TOPIC = re.compile(r"^[a-z0-9][a-z0-9-]{0,49}$")
 
 def load_metadata(path: Path = METADATA, *, repository: str | None = None) -> dict[str, object]:
     settings = json.loads(path.read_text(encoding="utf-8"))
-    if settings.get("repository") != DEFAULT_REPOSITORY:
-        raise ValueError("The committed metadata source must identify the canonical upstream")
+    target = resolve_repository(repository)
+    if settings.get("repository") not in {DEFAULT_REPOSITORY, target}:
+        raise ValueError("Metadata source must identify the upstream or current fork")
     description, topics = settings.get("description"), settings.get("topics")
     if not isinstance(description, str) or not 1 <= len(description) <= 160:
         raise ValueError("GitHub description must contain 1–160 characters")
@@ -29,7 +30,6 @@ def load_metadata(path: Path = METADATA, *, repository: str | None = None) -> di
         not isinstance(topic, str) or not TOPIC.fullmatch(topic) for topic in topics
     ) or len(set(topics)) != len(topics):
         raise ValueError("Invalid or duplicate repository topics")
-    target = resolve_repository(repository)
     desired_homepage = pages_url(target, os.environ.get("PHD_ATLAS_SITE_URL"))
     if target.casefold() == DEFAULT_REPOSITORY.casefold() and settings.get("homepage") != desired_homepage:
         raise ValueError("Canonical homepage differs from the upstream metadata configuration")

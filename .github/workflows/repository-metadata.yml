@@ -1,0 +1,58 @@
+name: PhD Atlas | GitHub About metadata
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/repository-metadata.json
+      - .github/workflows/repository-metadata.yml
+      - scripts/sync_repository_metadata.py
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: "Apply About metadata using a protected repository Administration-write token"
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phd-atlas-metadata-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    if: github.event_name != 'workflow_dispatch' || inputs.apply != true
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate desired repository metadata
+        run: python scripts/sync_repository_metadata.py --repository "$GITHUB_REPOSITORY"
+      - name: Verify live GitHub About fields without modifying them
+        run: python scripts/sync_repository_metadata.py --verify --repository "$GITHUB_REPOSITORY"
+
+  apply:
+    if: github.event_name == 'workflow_dispatch' && inputs.apply == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: github-admin
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply and independently verify GitHub About metadata
+        env:
+          GITHUB_ADMIN_TOKEN: ${{ secrets.GITHUB_ADMIN_TOKEN }}
+        run: |
+          if [ -z "$GITHUB_ADMIN_TOKEN" ]; then
+            echo "::error::Missing protected GITHUB_ADMIN_TOKEN with repository Administration-write permission"
+            exit 1
+          fi
+          python scripts/sync_repository_metadata.py --apply --repository "$GITHUB_REPOSITORY"

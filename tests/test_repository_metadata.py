@@ -48,6 +48,21 @@ class GitHubAboutConfigurationTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 load_metadata(self.file, repository="Armanasq/phd_tracker")
 
+    def test_fork_can_define_its_own_versioned_about_metadata(self) -> None:
+        self.file.write_text(json.dumps({
+            "repository": "Independent/atlas",
+            "description": "Independent self-hostable PhD evidence workspace",
+            "homepage": "https://independent.github.io/atlas/",
+            "topics": ["independent", "research-applications"],
+        }), encoding="utf-8")
+        with patch.dict(os.environ, {"PHD_ATLAS_SITE_URL": ""}):
+            values = load_metadata(self.file, repository="Independent/atlas")
+        self.assertEqual(values["description"], "Independent self-hostable PhD evidence workspace")
+        self.assertEqual(values["topics"], ["independent", "research-applications"])
+        self.assertEqual(values["homepage"], "https://independent.github.io/atlas/")
+        with self.assertRaises(ValueError):
+            load_metadata(self.file, repository="Other/repository")
+
     def test_fork_update_uses_only_explicit_repository(self) -> None:
         settings = load_metadata(self.file, repository="Independent/atlas")
         requests: list = []

@@ -12,7 +12,7 @@ These settings describe the intended repository presentation and Pages configura
 
 Open the repository homepage, select the **About** gear icon, and enter the description, website, and topics above. Keep the repository name unchanged to preserve existing links.
 
-The same fields are versioned in [`repository-metadata.json`](repository-metadata.json). Run `python scripts/sync_repository_metadata.py` from the repository root for a read-only preview. To write them using an authorized personal token, set `GITHUB_ADMIN_TOKEN` with repository administration permission and run `python scripts/sync_repository_metadata.py --apply`. The GitHub App integration currently exposes repository file writes, not About-metadata updates; committing this file does not change the live About panel.
+The same fields are versioned in [`repository-metadata.json`](repository-metadata.json). Forks may replace the JSON repository identity with their own owner/name and customize description/topics. Run `python scripts/sync_repository_metadata.py` for a read-only preview. The [About metadata workflow](workflows/repository-metadata.yml) verifies these values on source changes; to **apply** them, a repository administrator must configure the `github-admin` protected Actions environment with a `GITHUB_ADMIN_TOKEN` secret that has repository Administration-write permission, then manually run the workflow with **Apply=true**. It never mutates About on a push and reports failure if authorization is absent or live verification disagrees. The connected GitHub App still lacks a direct About-metadata write action.
 
 ## Pages
 
@@ -43,4 +43,4 @@ The public tracker is not a user-authenticated service. The local private Python
 
 ## Latest verified About-field discrepancy (2026-11-09)
 
-The repository API returned an empty description, empty homepage and no topics even though the desired values were present in the tracked metadata JSON file. An authorized repository administrator must apply these settings using GitHub About or an administration-write token. The synchronization workflow now runs when metadata files change, checks GitHub's response, and fails instead of reporting success if live fields do not match. Do not interpret a metadata-sync failure as evidence that the Pages application failed to build.
+The repository API returned an empty description, empty homepage and no topics even though the desired values were present in the tracked metadata JSON file. An authorized repository administrator must apply these settings using GitHub About or the protected metadata workflow with an administration-write token. Verification runs on metadata changes and fails rather than reporting success when live fields do not match. Do not interpret a metadata-sync failure as evidence that the Pages application failed to build.
