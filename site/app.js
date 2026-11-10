@@ -8,12 +8,12 @@ import {createLocalRecord,normalizeLocalRecords,mergeLocalRecords,exportIndepend
 import {createConsole} from "./modules/console.mjs";
 import {candidateQueue} from "./modules/discovery.mjs";
 import {runtimeCapabilities} from "./modules/runtime-capabilities.mjs";
+import {VIEWS,resolveWorkspaceRoute} from "./modules/routes.mjs";
 import {mountAtlasLens} from "./modules/lens.mjs";
 import {auditWorkspace} from "./modules/assurance.mjs";
 import {renderAssurance,renderCoverage} from "./modules/assurance-view.mjs";
 (() => {
 "use strict";
-const VIEWS=[["dashboard","home","Overview"],["applications","file","Applications"],["discovery","database","Discovery"],["readiness","check","Readiness"],["operations","layers","Operations"],["actions","check","Actions"],["ledger","check","Task ledger"],["calendar","calendar","Calendar"],["pipeline","columns","Pipeline"],["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],["review","shield","Verification"],["archive","archive","Archive"],["sources","database","Sources"],["ai","sparkles","Copilot"],["agents","bot","Agents"],["automations","flow","Automations"],["activity","activity","Run history"],["deployment","settings","Deployment"],["settings","settings","Settings"]];
 const FALLBACK_REPO="https://github.com/Armanasq/phd_tracker";
 let selectedAuditCategory="all",assuranceLimit=75;
 let readinessFilter="all";
@@ -760,8 +760,9 @@ function events(){
  });
  document.addEventListener("dragend",()=>{state.draggedId=null});
  window.addEventListener("hashchange",()=>{
-  const requested=location.hash.replace(/^#/,"");
-  if(!VIEWS.some(([id])=>id===requested)||state.view===requested)return;
+  const requested=resolveWorkspaceRoute(location.hash);
+  if(location.hash&&location.hash!=="#"+requested)history.replaceState(null,"",location.pathname+location.search+"#"+requested);
+  if(state.view===requested)return;
   state.view=requested;closeModal();render();
  });
  $("openSearch").addEventListener("click",()=>{state.focus="";commandPalette()});
@@ -802,8 +803,9 @@ function init(){
  events();
  atlasLens=mountAtlasLens({getRecords:()=>state.data?records():[],getPublicRecords:()=>state.data?.records||[],browserModel:aiConsole.browserModel,getView:()=>state.view,getSelectedApplication:()=>state.selected,openSettings:()=>go("settings"),onFocusApplication:id=>detail(getRecord(id)),onRunComplete:()=>aiConsole.isLive()?aiConsole.connect():undefined});
  document.body.classList.toggle("dark",state.prefs.theme==="dark");
- const route=location.hash.replace(/^#/,"");
- if(VIEWS.some(([id])=>id===route))state.view=route;
+ const route=resolveWorkspaceRoute(location.hash);
+ if(location.hash&&location.hash!=="#"+route)history.replaceState(null,"",location.pathname+location.search+"#"+route);
+ state.view=route;
  loadSnapshot();
  aiConsole.connect();
  setInterval(checkNotifications,60_000);
