@@ -1,0 +1,48 @@
+name: PhD Atlas | Firefox and WebKit Compatibility
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - site/**
+      - phd_agents/**
+      - tests/cross_browser_routes.cjs
+      - tests/browser_lens_smoke.cjs
+      - scripts/build_workspace.py
+      - .github/workflows/cross-browser.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phd-atlas-cross-browser-main
+  cancel-in-progress: true
+
+jobs:
+  compatibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements-intelligence.txt
+      - run: npm install --no-save playwright@1.56.1
+      - run: npx playwright install --with-deps firefox webkit
+      - run: python scripts/build_workspace.py --out site/data/workspace.json
+      - name: Check all routes across public/private and desktop/mobile
+        run: node tests/cross_browser_routes.cjs
+      - name: Verify Firefox browser-local model probe and assistant
+        run: PHDAI_BROWSER_ENGINE=firefox node tests/browser_lens_smoke.cjs
+      - name: Verify WebKit browser-local model probe and assistant
+        run: PHDAI_BROWSER_ENGINE=webkit node tests/browser_lens_smoke.cjs
+      - name: Publish compatibility evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phd-atlas-cross-browser
+          path: artifacts/ui-qa/cross-browser-compatibility.json
+          if-no-files-found: ignore
+          retention-days: 14

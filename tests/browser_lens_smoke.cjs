@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs/promises');
 const path=require('node:path');
 const http=require('node:http');
-const {chromium}=require('playwright');
+const {chromium,firefox,webkit}=require('playwright');
 
 async function serveSite(root){
   const server=http.createServer(async(request,response)=>{
@@ -53,7 +53,11 @@ async function main(){
   const model=await serveModel(site.origin,requests);
   let browser;
   try{
-    browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+    const selected=process.env.PHDAI_BROWSER_ENGINE||'chromium';
+    const browsers={chromium,firefox,webkit};
+    if(!Object.hasOwn(browsers,selected))throw new Error('Unknown browser engine');
+    browser=await browsers[selected].launch(selected==='chromium'
+      ?{headless:true,args:['--no-sandbox']}:{headless:true});
     const page=await browser.newPage({viewport:{width:1280,height:850}});
     const errors=[];
     page.on('pageerror',error=>errors.push(error.message));
@@ -80,7 +84,7 @@ async function main(){
     await page.locator('#navigation [data-value="discovery"]').click();
     assert.match(await page.locator('#body h1').innerText(),/Discovery/);
     assert.deepEqual(errors,[]);
-    console.log('Browser-local model and floating assistant integration passed');
+    console.log((process.env.PHDAI_BROWSER_ENGINE||'chromium')+' browser-local model and floating assistant integration passed');
   }finally{
     if(browser)await browser.close();
     await new Promise(resolve=>site.server.close(resolve));

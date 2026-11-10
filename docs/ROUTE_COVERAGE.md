@@ -51,6 +51,7 @@ Updated 2026-11-10. This is a source-backed route inventory, not a product featu
 - `tests/runtime_capabilities.test.mjs`: capability gating by private, browser-local and static mode.
 - `tests/browser_model*.mjs`: endpoint restrictions, model probing, direct inference and ephemeral history.
 - `tests/browser_lens_smoke.cjs`: real browser path from Settings to the global assistant and new routes.
+- `.github/workflows/cross-browser.yml`: independent Firefox/WebKit smoke covers every canonical route in public and private modes at desktop/mobile widths, hash navigation/deep links, and synthetic loopback-model probe/assistant exchange. These tests are automated engine checks, not macOS Safari certification or live third-party-provider proof.
 - `tests/test_workflow_plan.py`: multi-agent preflight and no partial cloud execution.
 - `tests/test_phd_evaluations.py` and `tests/evaluations.test.mjs`: bounded, private inference metrics and XSS-safe evaluation presentation.
 - `tests/test_runtime_capabilities.py`: local capability API, correct readiness and secret exclusion.
