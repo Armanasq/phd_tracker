@@ -10,7 +10,7 @@ const cleanId = value => String(value||"").trim().toLowerCase().replace(/[^a-z0-
 const opt = (items,value) => choose(items,value);
 
 export function createConsole({notify,onChange,navigate,getRecords,getSourceRecords,onReload,getView}) {
- const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:"",jobs:[]};
+ const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:"",jobs:[],observability:null};
  const providers = () => state.data?.catalog?.providers || [];
  const agents = () => state.data?.catalog?.agents || [];
  const workflows = () => state.data?.catalog?.workflows || [];
@@ -93,6 +93,8 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    state.data=data;
    const jobs=await request("/api/jobs").catch(()=>({jobs:[]}));
    state.jobs=Array.isArray(jobs.jobs)?jobs.jobs:[];
+   const observed=await request("/api/observability").catch(()=>null);
+   state.observability=observed?.schema_version===1?observed:null;
    state.selectedAgent=agents().some(a=>a.id===state.selectedAgent)?state.selectedAgent:(prefs().default_agent||agents()[0]?.id);
    state.selectedProvider=providers().some(p=>p.id===state.selectedProvider)?state.selectedProvider:prefs().default_provider;
    state.selectedWorkflow=workflows().some(w=>w.id===state.selectedWorkflow)?state.selectedWorkflow:workflows()[0]?.id;
@@ -417,6 +419,18 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    '<div><strong>'+esc(stats.total_failed??0)+'</strong><span>Failures</span></div></div>'+
    box("Agent executions","Costs are not inferred without verified provider pricing.",'<div class="os-ledger">'+ledger+'</div>')+
    box("Per-provider usage","Only measured calls and reported tokens are included.",'<div class="os-ledger">'+usage+'</div>')+
+   box("Private reliability signals","Observed local runtime calls only; no hosted SLA or applicant text in traces.",
+     '<div class="os-kpi-strip">'+
+       '<div><strong>'+esc(state.observability?.window?.completed_calls??"—")+'</strong><span>Calls in window</span></div>'+
+       '<div><strong>'+esc(state.observability?.window?.error_rate==null?"Unmeasured":(100*state.observability.window.error_rate).toFixed(1)+"%")+'</strong><span>Observed error rate</span></div>'+
+       '<div><strong>'+esc(state.observability?.window?.p95_latency_ms??"—")+'</strong><span>p95 latency (ms)</span></div>'+
+       '<div><strong>'+esc(pretty(state.observability?.objectives?.status||"not_available"))+'</strong><span>Local objective status</span></div></div>'+
+     '<div class="os-ledger">'+(state.observability?.recent_traces||[]).slice(0,8).map(item=>
+       '<article class="os-ledger-row"><div><strong>'+esc(item.agent_id)+'</strong><small>'+
+       esc(short(item.run_id,12))+' · '+esc(stamp(item.created_at))+' · '+esc(item.provider_id)+
+       '</small></div>'+badge(item.status,item.status==="failed"?"warn":"good")+
+       '<span class="os-meta">'+esc(item.error_type||((item.latency_ms??"—")+" ms"))+'</span></article>').join("")+
+     '</div><p class="os-footnote">Objective requires at least 20 recent calls and measured latencies. A citation or healthy model is not evidence that an admission fact is true.</p>','os-observability')+
    box("Private local background jobs","Durable SQLite queue. A separate worker process must be running; cloud jobs are not permitted.",
      '<div class="os-actions">'+btn("Copy worker command","copy-worker-command","","quiet")+'</div>'+
      '<div class="os-ledger">'+(state.jobs.length?state.jobs.map(job=>

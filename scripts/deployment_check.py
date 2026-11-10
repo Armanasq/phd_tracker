@@ -69,6 +69,17 @@ def inspect(root: Path, mode: str, env: Mapping[str, str]) -> list[Check]:
         except ValueError:
             valid_limit = False
         add("inference-limit", "ok" if valid_limit else "error", "Inference admission limit valid" if valid_limit else "PHDAI_MAX_CONCURRENT_INFERENCE must be an integer from 1 to 8")
+        for setting, default, upper in (
+            ("PHDAI_MAX_INFERENCE_PER_MINUTE", "30", 6000),
+            ("PHDAI_MAX_WRITES_PER_MINUTE", "180", 12000),
+        ):
+            try:
+                valid_rate = 1 <= int(env.get(setting, default)) <= upper
+            except ValueError:
+                valid_rate = False
+            add(setting.lower().replace("_", "-"), "ok" if valid_rate else "error",
+                "Local request budget is bounded" if valid_rate
+                else setting + " must be a positive integer within the documented limit")
         private = env.get("PHDAI_PRIVATE_DIR", "")
         if private:
             private_path = Path(private).expanduser().resolve()

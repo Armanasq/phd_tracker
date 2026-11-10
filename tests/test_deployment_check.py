@@ -56,3 +56,20 @@ def test_compose_project_namespace_validation(tmp_path):
     invalid = inspect(root, "local-full-stack", {"PHD_ATLAS_COMPOSE_PROJECT": "Unsafe/Shared"})
     assert next(item for item in valid if item.code == "compose-project").status == "ok"
     assert next(item for item in invalid if item.code == "compose-project").status == "error"
+
+
+def test_local_rate_budget_preflight_matches_server_constraints(tmp_path):
+    root = project(tmp_path)
+    options = {
+        "PHDAI_MAX_INFERENCE_PER_MINUTE": "0",
+        "PHDAI_MAX_WRITES_PER_MINUTE": "invalid",
+    }
+    report = inspect(root, "local-full-stack", options)
+    failed = {entry.code for entry in report if entry.status == "error"}
+    assert "phdai-max-inference-per-minute" in failed
+    assert "phdai-max-writes-per-minute" in failed
+    valid = inspect(root, "local-full-stack", {
+        "PHDAI_MAX_INFERENCE_PER_MINUTE": "25",
+        "PHDAI_MAX_WRITES_PER_MINUTE": "100",
+    })
+    assert not any(item.code in failed and item.status == "error" for item in valid)
