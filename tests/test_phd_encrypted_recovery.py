@@ -6,6 +6,9 @@ import stat
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
+
+from phd_agents import recovery_encrypted
 
 from phd_agents.recovery_encrypted import drill_encrypted_backup, export_encrypted_backup
 from phd_agents.store import Store
@@ -71,6 +74,46 @@ class EncryptedBackupDrillTests(unittest.TestCase):
         self.output.write_bytes(data)
         with self.assertRaisesRegex(ValueError, "authentication failed"):
             drill_encrypted_backup(self.output, self.passphrase, sha256=backup["sha256"])
+
+    def test_export_rejects_source_mutation_after_verification(self):
+        backup = self.make_backup()
+        verified = recovery_encrypted.verify_backup
+
+        def mutate_after_verifying(*args, **kwargs):
+            result = verified(*args, **kwargs)
+            with (self.state.parent / "backups" / backup["filename"]).open("ab") as source:
+                source.write(b"modified after integrity verification")
+            return result
+
+        with patch("phd_agents.recovery_encrypted.verify_backup", side_effect=mutate_after_verifying):
+            with self.assertRaisesRegex(ValueError, "changed between verification"):
+                export_encrypted_backup(
+                    backup["filename"], self.output, self.passphrase,
+                    state_path=self.state, sha256=backup["sha256"], repo_root=self.checkout,
+                )
+        self.assertFalse(self.output.exists())
+
+    def test_export_rejects_symlink_replacement_after_verification(self):
+        backup = self.make_backup()
+        source = self.state.parent / "backups" / backup["filename"]
+        replacement = self.root / "other-private-file"
+        replacement.write_bytes(b"private file must not be followed")
+        replacement.chmod(0o600)
+        verified = recovery_encrypted.verify_backup
+
+        def replace_after_verifying(*args, **kwargs):
+            result = verified(*args, **kwargs)
+            source.unlink()
+            source.symlink_to(replacement)
+            return result
+
+        with patch("phd_agents.recovery_encrypted.verify_backup", side_effect=replace_after_verifying):
+            with self.assertRaises(OSError):
+                export_encrypted_backup(
+                    backup["filename"], self.output, self.passphrase,
+                    state_path=self.state, sha256=backup["sha256"], repo_root=self.checkout,
+                )
+        self.assertFalse(self.output.exists())
 
     def test_export_refuses_git_checkout_and_overwrites(self):
         backup = self.make_backup()

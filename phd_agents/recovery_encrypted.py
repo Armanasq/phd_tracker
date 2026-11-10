@@ -65,22 +65,35 @@ def export_encrypted_backup(
     _, Cipher, algorithms, modes, _ = _crypto()
     encryptor = Cipher(algorithms.AES(key), modes.GCM(nonce)).encryptor()
     encryptor.authenticate_additional_data(header)
-    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0)
-    descriptor = os.open(destination, flags, 0o600)
-    try:
-        with os.fdopen(descriptor, "wb") as output, (state.parent / "backups" / filename).open("rb") as source:
-            output.write(header)
-            for chunk in iter(lambda: source.read(_BLOCK), b""):
-                output.write(encryptor.update(chunk))
-            output.write(encryptor.finalize())
-            output.write(encryptor.tag)
-            output.flush()
-            os.fsync(output.fileno())
-        if stat.S_IMODE(destination.stat().st_mode) != 0o600:
-            raise PermissionError("Encrypted backup must be owner-only")
-    except BaseException:
-        destination.unlink(missing_ok=True)
-        raise
+    source_flags = os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0)
+    with os.fdopen(os.open(state.parent / "backups" / filename, source_flags), "rb") as source:
+        metadata = os.fstat(source.fileno())
+        if not stat.S_ISREG(metadata.st_mode) or stat.S_IMODE(metadata.st_mode) & 0o077:
+            raise PermissionError("Backup source must remain an owner-only ordinary file")
+        if hasattr(os, "getuid") and metadata.st_uid != os.getuid():
+            raise PermissionError("Backup source owner changed after verification")
+        flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0)
+        descriptor = os.open(destination, flags, 0o600)
+        try:
+            observed_digest = hashlib.sha256()
+            observed_size = 0
+            with os.fdopen(descriptor, "wb") as output:
+                output.write(header)
+                for chunk in iter(lambda: source.read(_BLOCK), b""):
+                    observed_digest.update(chunk)
+                    observed_size += len(chunk)
+                    output.write(encryptor.update(chunk))
+                if observed_size != report["size_bytes"] or observed_digest.hexdigest() != report["sha256"]:
+                    raise ValueError("Backup contents changed between verification and encrypted export")
+                output.write(encryptor.finalize())
+                output.write(encryptor.tag)
+                output.flush()
+                os.fsync(output.fileno())
+            if stat.S_IMODE(destination.stat().st_mode) != 0o600:
+                raise PermissionError("Encrypted backup must be owner-only")
+        except BaseException:
+            destination.unlink(missing_ok=True)
+            raise
     return {
         "encrypted": True,
         "path": str(destination),
