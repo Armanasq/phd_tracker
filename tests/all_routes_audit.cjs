@@ -7,7 +7,7 @@ const http=require('node:http');
 const net=require('node:net');
 const {spawn}=require('node:child_process');
 const {chromium}=require('playwright');
-const TRACKER=['dashboard','applications','operations','actions','ledger','calendar','pipeline','contacts','updates','compare','review','archive','sources','ai','agents','automations','activity','settings'];
+const TRACKER=['dashboard','applications','readiness','operations','actions','ledger','calendar','pipeline','contacts','updates','compare','review','archive','sources','ai','agents','automations','activity','settings'];
 
 const SIZES=[['desktop',1440,900],['tablet',820,1080],['mobile',390,844],['narrow',320,700]];
 async function freePort(){const s=net.createServer();await new Promise(ok=>s.listen(0,'127.0.0.1',ok));const port=s.address().port;await new Promise(ok=>s.close(ok));return port}
@@ -49,6 +49,12 @@ async function check(browser,url,views,results,mode){
     const title=(await page.locator(root+' h1').first().innerText()).trim();
     assert.ok(title,mode+' '+view+' missing heading');
     assert.equal(new URL(page.url()).hash.slice(1),view,mode+' '+view+' incorrect route');
+    if(view==='readiness'){
+     assert.ok(await page.locator('[data-action="export-readiness"]').count(),mode+' readiness export unavailable');
+     assert.ok((await page.locator('[data-action="readiness-filter"]').count())>=4,mode+' readiness filters missing');
+     await page.locator('[data-action="readiness-filter"][data-value="proof"]').click();
+     assert.ok(await page.locator('#body h1').first().isVisible(),mode+' readiness proof filter failed');
+    }
     const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
     assert.ok(overflow<=2,mode+' '+view+' '+device+' horizontal overflow '+overflow);
     await page.reload({waitUntil:'networkidle'});

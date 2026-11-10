@@ -5,7 +5,7 @@ const path=require('node:path');
 const http=require('node:http');
 const {chromium}=require('playwright');
 
-const routes=['dashboard','applications','operations','actions','ledger','calendar','pipeline','contacts','updates','compare','review','archive','sources','ai','agents','automations','activity','settings'];
+const routes=['dashboard','applications','readiness','operations','actions','ledger','calendar','pipeline','contacts','updates','compare','review','archive','sources','ai','agents','automations','activity','settings'];
 const widths=[320,360,375,390,430,768];
 
 async function main(){
@@ -83,7 +83,7 @@ async function main(){
       const cols=await page.locator('.kpis').evaluate(el=>getComputedStyle(el).gridTemplateColumns.trim().split(/\s+/).length);
       assert.equal(cols,1,'320px KPI grid must use a single column');
      }
-     if((width===320||width===390||width===430)&&['dashboard','applications','review','sources','ledger','settings'].includes(view)){
+     if((width===320||width===390||width===430)&&['dashboard','applications','readiness','review','sources','ledger','settings'].includes(view)){
       await page.screenshot({path:path.join(output,'layout-'+width+'-'+view+'.png'),fullPage:false});
      }
      results.push({width,view,passed:true});
