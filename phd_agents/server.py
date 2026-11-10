@@ -22,6 +22,7 @@ from .settings import read_settings, save_settings
 from .routing import routing_status
 from .secrets import read_secret, write_secret
 from .metrics import usage_summary
+from .capabilities import private_runtime_capabilities
 from .scheduler_preview import scheduler_preview
 from .toolkit import TOOL_NAMES, DEFAULT_TOOLS
 from time import perf_counter
@@ -207,6 +208,16 @@ class ApiHandler(BaseHTTPRequestHandler):
         store = self.request_store
         if path == "/api/health":
             self.send_json({"status": "ok", "mode": "loopback_private", "ai_side_effects": "none"})
+        elif path == "/api/capabilities":
+            available = catalog(store)
+            preferences = read_settings(store)
+            provider_id = preferences["default_provider"]
+            current = next((item for item in available["providers"] if item["id"] == provider_id), None)
+            verified = bool(current and provider_states(store, [current])[provider_id]["state"] == "responded")
+            self.send_json(private_runtime_capabilities(
+                provider_verified=verified,
+                provider_name=current["label"] if current else None,
+            ))
         elif path == "/api/bootstrap":
             source, records = owner_records(store, self.server.root)
             today = today_in(read_settings(store)["timezone"])
