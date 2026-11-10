@@ -7,7 +7,6 @@ const http=require('node:http');
 const net=require('node:net');
 const {spawn}=require('node:child_process');
 const {chromium}=require('playwright');
-const TRACKER=['dashboard','applications','discovery','readiness','documents','operations','actions','ledger','calendar','pipeline','contacts','updates','compare','review','archive','sources','ai','agents','automations','activity','evaluations','source-observations','source-claims','onboarding','deployment','settings'];
 
 const SIZES=[['desktop',1440,900],['tablet',820,1080],['mobile',390,844],['narrow',320,700]];
 async function freePort(){const s=net.createServer();await new Promise(ok=>s.listen(0,'127.0.0.1',ok));const port=s.address().port;await new Promise(ok=>s.close(ok));return port}
@@ -63,6 +62,13 @@ async function check(browser,url,views,results,mode){
     assert.equal(new URL(page.url()).hash.slice(1),view,mode+' '+view+' lost deep link');
     results.push({mode,view,device,title,status:'pass'});
    }
+   if(views.length>1){
+    const previous=views.at(-2),latest=views.at(-1);
+    await page.goBack();
+    await page.waitForFunction(expected=>location.hash==='#'+expected&&document.querySelector('#workspaceSection')?.value===expected,previous);
+    await page.goForward();
+    await page.waitForFunction(expected=>location.hash==='#'+expected&&document.querySelector('#workspaceSection')?.value===expected,latest);
+   }
    assert.deepEqual(errors,[],mode+' '+device+' JavaScript errors');
    assert.deepEqual(httpErrors,[],mode+' '+device+' HTTP errors');
   }finally{await page.close()}
@@ -70,6 +76,8 @@ async function check(browser,url,views,results,mode){
  }
 }
 async function main(){
+ const {VIEWS}=await import('../site/modules/routes.mjs');
+ const TRACKER=VIEWS.map(([id])=>id);
  const root=path.resolve('.'),out=path.join(root,'artifacts','ui-qa');
  await fs.mkdir(out,{recursive:true});
  const {server,url:publicUrl}=await staticServer(path.join(root,'site'));

@@ -54,7 +54,7 @@ Updated 2026-11-10. This is a source-backed route inventory, not a product featu
 - `tests/test_workflow_plan.py`: multi-agent preflight and no partial cloud execution.
 - `tests/test_phd_evaluations.py` and `tests/evaluations.test.mjs`: bounded, private inference metrics and XSS-safe evaluation presentation.
 - `tests/test_runtime_capabilities.py`: local capability API, correct readiness and secret exclusion.
-- `tests/all_routes_audit.cjs` and `tests/mobile_layout_audit.cjs`: all 26 routes across form factors.
+- `tests/all_routes_audit.cjs` and `tests/mobile_layout_audit.cjs`: import the canonical registry to test all current routes across form factors, including browser Back/Forward and deep links. They must not maintain parallel hardcoded route lists.
 
 ## Outstanding product boundaries
 
