@@ -81,6 +81,21 @@ class SourceReviewTests(unittest.TestCase):
             "SELECT COUNT(*) FROM source_observation_reviews"
         ).fetchone()[0], 0)
 
+    def test_private_api_includes_all_retained_observations(self) -> None:
+        for index in range(115):
+            self.store.db.execute(
+                "INSERT INTO source_observations(application_id,source_url,status,content_sha256,"
+                "observed_at,http_status,content_length,drift) VALUES(?,?,?,?,?,?,?,?)",
+                ("APP1", "https://university.example/doctorate", "fetched", self.digest,
+                 f"2026-11-09T{index % 24:02d}:00:00+00:00",
+                 200, 20, "unchanged_bytes"),
+            )
+        self.store.db.commit()
+        self.assertEqual(len(recent_observations(self.store)), 50)
+        self.assertEqual(len(recent_observations(self.store, limit=2000)), 116)
+        with self.assertRaises(ValueError):
+            recent_observations(self.store, limit=2001)
+
     def test_local_api_accepts_review_and_rejects_stale_digest(self) -> None:
         server = ApiServer(("127.0.0.1", 0), store=self.store, root=Path(self.tmp.name))
         thread = threading.Thread(target=server.serve_forever, daemon=True)
