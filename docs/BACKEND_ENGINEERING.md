@@ -71,6 +71,12 @@ The private runtime also supports a bounded SQLite job queue; see [durable worke
 
 Cloud-provider jobs and internet-exposed multi-user workers remain disabled until identity, authorization, job ownership, provider budgets and durable cloud disclosure policies are enforced and tested. A green queue test does not certify those hosted requirements.
 
+## Versioned private records
+
+Profile, referee, reference, milestone and evidence writes now use compare-and-swap versions. Each private object carries a monotonic `version` in `GET /api/operations`; forms must submit `expected_version` (0 for creation, current version for modification, positive current version for deletion). The API returns HTTP 409 on stale edits or deletes, requiring an explicit refresh rather than silently replacing another tab's newer data.
+
+Existing SQLite databases are migrated in place through a non-destructive column addition, with pre-existing objects initialized at version 1. The low-level Python Store API retains an unguarded compatibility path for legacy local callers; **the private HTTP API requires a version precondition**. See `tests/test_private_object_versions.py`.
+
 ## Release quality gates
 
 - Run Python and JavaScript tests for every backend or private frontend change.
