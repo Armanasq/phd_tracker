@@ -1,13 +1,10 @@
-name: PhD Atlas | Consolidate Merged Branches and Sync About
+name: PhD Atlas | Consolidate Merged Branches
 
 on:
   push:
     branches: [main]
     paths:
       - .github/workflows/consolidate-branches.yml
-      - .github/repository-metadata.json
-      - scripts/sync_repository_metadata.py
-  workflow_dispatch:
   pull_request:
     types: [closed]
 
@@ -60,35 +57,6 @@ jobs:
           fi
           echo "### Branch consolidation verified" >> "$GITHUB_STEP_SUMMARY"
           echo "Only main remains. Release tags and merged PRs are preserved." >> "$GITHUB_STEP_SUMMARY"
-
-  about:
-    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v4
-      - name: Verify or apply GitHub About for this repository
-        env:
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          REPOSITORY_ADMIN_TOKEN: ${{ secrets.REPOSITORY_ADMIN_TOKEN }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [ -z "$REPOSITORY_ADMIN_TOKEN" ]; then
-            if python scripts/sync_repository_metadata.py --verify --repository "$GITHUB_REPOSITORY"; then
-              echo "### GitHub About already matches" >> "$GITHUB_STEP_SUMMARY"
-              echo "No Administration-write token or mutation was needed." >> "$GITHUB_STEP_SUMMARY"
-            else
-              echo "::warning::GitHub About differs from the source metadata. A repository Administration-write token is required to update it."
-              echo "### GitHub About is pending administrator action" >> "$GITHUB_STEP_SUMMARY"
-              echo "Set REPOSITORY_ADMIN_TOKEN in this fork's Actions secrets and rerun, or update the About panel manually." >> "$GITHUB_STEP_SUMMARY"
-            fi
-            exit 0
-          fi
-          GITHUB_ADMIN_TOKEN="$REPOSITORY_ADMIN_TOKEN" python scripts/sync_repository_metadata.py --apply --repository "$GITHUB_REPOSITORY"
-          echo "### GitHub About updated and verified" >> "$GITHUB_STEP_SUMMARY"
-          echo "Description, homepage and topics match this repository's metadata." >> "$GITHUB_STEP_SUMMARY"
-
 
   prune_merged_pr:
     if: github.event_name == 'pull_request' && github.event.pull_request.merged == true && github.event.pull_request.head.repo.full_name == github.repository
