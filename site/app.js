@@ -35,6 +35,7 @@ const readLocalRecords=()=>{try{return normalizeLocalRecords(readStore(LOCAL_STO
 const state={data:null,view:"dashboard",scope:storedViews.last?.scope||"tracked",query:storedViews.last?.query||"",status:storedViews.last?.status||"all",verification:storedViews.last?.verification||"all",country:storedViews.last?.country||"all",horizon:storedViews.last?.horizon||"all",sort:storedViews.last?.sort||"deadline",presets:Array.isArray(storedViews.saved)?storedViews.saved:[],activePreset:"",compare:readStore(COMPARE_STORE,[]),selected:null,drafts:readStore(STORE,{}),localRecords:readLocalRecords(),prefs:readStore(PREFS,{theme:"light",horizon:7,reminders:true,notified:{}}),modal:"",focus:null,calendarMonth:null,selectedDate:null,draggedId:null};
 const TODAY=()=>{const zone=state.data?.timezone||"Europe/Berlin";const parts=new Intl.DateTimeFormat("en-US",{timeZone:zone,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());const get=k=>parts.find(p=>p.type===k)?.value||"";return get("year")+"-"+get("month")+"-"+get("day")};
 const days=due=>daysUntil(due,TODAY());
+const remainingDeadlineDays=r=>{const exact=verifiedCutoff(r);return exact===null?days(r?.deadline):Math.floor((exact-Date.now())/86400000)};
 const stamp=due=>due?new Intl.DateTimeFormat("en-GB",{day:"numeric",month:"short",year:"numeric",timeZone:"UTC"}).format(new Date(due+"T12:00:00Z")):"Unverified";
 const statusLabel=s=>({unconfirmed:"Unconfirmed",shortlisted:"Shortlisted",preparing:"Preparing",submitted:"Submitted",interview:"Interview",offer:"Offer",rejected:"Rejected",withdrawn:"Withdrawn",blocked:"Blocked",archived:"Archived"})[s]||s;
 const verifiedLabel=s=>({source_verified:"Source reviewed",owner_verified:"Owner verified",needs_review:"Review required",unverified:"Unverified"})[s]||"Unverified";
@@ -510,10 +511,10 @@ function navigation(){
  $("crumbName").textContent=VIEWS.find(x=>x[0]===state.view)?.[2]||"Overview";
  const mobile=$("workspaceSection");
  if(mobile)mobile.innerHTML=VIEWS.map(([id,,label])=>'<option value="'+id+'"'+(id===state.view?' selected':'')+'>'+escapeHTML(label)+'</option>').join("");
- const next=tracked.filter(r=>open(r)&&r.status!=="submitted"&&days(r.deadline)!==null&&days(r.deadline)>=0).sort((a,b)=>days(a.deadline)-days(b.deadline)||priority(b)-priority(a))[0];
+ const next=tracked.filter(r=>open(r)&&r.status!=="submitted"&&remainingDeadlineDays(r)!==null&&remainingDeadlineDays(r)>=0).sort((a,b)=>remainingDeadlineDays(a)-remainingDeadlineDays(b)||priority(b)-priority(a))[0];
  const sidebarDue=$("sidebarDue");
  if(sidebarDue)sidebarDue.innerHTML=next?
-  '<span class="sidebar-deadline-label">NEXT RECORDED CLOSING</span><strong>'+(days(next.deadline)===0?'TODAY':days(next.deadline)+' DAYS')+'</strong><button type="button" class="sidebar-deadline-link" data-action="record" data-value="'+escapeHTML(next.id)+'">'+escapeHTML(next.name)+'</button><small>'+escapeHTML(stamp(next.deadline))+'</small>':
+  '<span class="sidebar-deadline-label">NEXT RECORDED CLOSING</span><strong>'+(remainingDeadlineDays(next)===0?'TODAY':remainingDeadlineDays(next)+' DAYS')+'</strong><button type="button" class="sidebar-deadline-link" data-action="record" data-value="'+escapeHTML(next.id)+'">'+escapeHTML(next.name)+'</button><small>'+escapeHTML(stamp(next.deadline))+'</small>':
   '<span class="sidebar-deadline-label">NEXT RECORDED CLOSING</span><small>No upcoming dated applications</small>';
 }
 function render(){
