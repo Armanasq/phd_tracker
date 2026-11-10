@@ -23,7 +23,7 @@ async function main(){
  const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
  const issues=[];
  try{
-  for(const [width,height,view] of [[1512,980,'dashboard'],[1512,980,'applications'],[1512,980,'calendar'],[1512,980,'pipeline'],[1512,980,'review'],[1512,980,'settings'],[1512,980,'ai'],[390,844,'settings'],[390,844,'applications']]){
+  for(const [width,height,view] of [[1512,980,'dashboard'],[1512,980,'applications'],[1512,980,'discovery'],[1512,980,'documents'],[1512,980,'deployment'],[1512,980,'calendar'],[1512,980,'pipeline'],[1512,980,'review'],[1512,980,'settings'],[1512,980,'ai'],[390,844,'settings'],[390,844,'applications'],[390,844,'discovery'],[390,844,'documents'],[390,844,'deployment']]){
    const context=await browser.newContext({viewport:{width,height}});
    const page=await context.newPage();
    await page.goto('http://127.0.0.1:'+server.address().port+'/',{waitUntil:'networkidle'});
