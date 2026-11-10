@@ -38,6 +38,13 @@ def main() -> None:
     restore_command.add_argument("filename")
     restore_command.add_argument("--sha256")
     restore_command.add_argument("--confirm", action="store_true")
+    encrypted = commands.add_parser("encrypt-backup")
+    encrypted.add_argument("filename")
+    encrypted.add_argument("--sha256")
+    encrypted.add_argument("--output", type=Path, required=True)
+    encrypted_drill = commands.add_parser("drill-encrypted-backup")
+    encrypted_drill.add_argument("encrypted_path", type=Path)
+    encrypted_drill.add_argument("--sha256", required=True)
     drill_command = commands.add_parser("drill-backup")
     drill_command.add_argument("filename")
     drill_command.add_argument("--sha256")
@@ -66,6 +73,24 @@ def main() -> None:
     if args.command == "compare-sources":
         from .source_changes import compare_sources, load_snapshot
         result = compare_sources(load_snapshot(args.previous), load_snapshot(args.current))
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return
+    if args.command in {"encrypt-backup", "drill-encrypted-backup"}:
+        from getpass import getpass
+        from .recovery_encrypted import drill_encrypted_backup, export_encrypted_backup
+        password = getpass("Backup encryption passphrase: ")
+        if args.command == "encrypt-backup":
+            repeat = getpass("Repeat backup passphrase: ")
+            if password != repeat:
+                parser.error("Backup passphrases do not match")
+            result = export_encrypted_backup(
+                args.filename, args.output, password,
+                sha256=args.sha256, repo_root=args.repo,
+            )
+        else:
+            result = drill_encrypted_backup(
+                args.encrypted_path, password, sha256=args.sha256,
+            )
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return
     if args.command == "worker-loop":

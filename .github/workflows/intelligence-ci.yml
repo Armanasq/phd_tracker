@@ -56,8 +56,11 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-          cache-dependency-path: requirements-intelligence.txt
+          cache-dependency-path: |
+            requirements-intelligence.txt
+            requirements-recovery.txt
       - run: python -m pip install -r requirements-intelligence.txt
+      - run: python -m pip install -r requirements-recovery.txt
       - run: python -m compileall -q scripts phd_agents
       - run: node --check site/app.js
       - run: node --check site/modules/storage.mjs
