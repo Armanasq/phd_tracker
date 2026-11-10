@@ -7,6 +7,11 @@ const {chromium} = require('playwright');
 
 async function run() {
   const site = path.resolve('site');
+  const source = JSON.parse(await fs.readFile(path.join(site,'data','workspace.json'),'utf8'));
+  const tracked = source.records.filter(x=>x.record_type==='tracked');
+  const candidates = source.records.filter(x=>x.record_type==='candidate');
+  const probeId = tracked.find(x=>x.id==='N263-05')?.id || tracked[0]?.id;
+  assert.ok(probeId,'Browser smoke test requires a nonempty tracked source snapshot');
   const out = path.resolve('artifacts', 'ui-qa');
   await fs.mkdir(out, {recursive:true});
   const server = http.createServer(async (req, res) => {
@@ -39,7 +44,7 @@ async function run() {
     await page.locator('#body h1').waitFor({timeout:7500}).catch(async err=>{console.error('[bootstrap]',await page.locator('#body').innerHTML(),errors);throw err});
     assert.match(await page.locator('#body h1').innerText(),/Today’s work/);
     assert.equal(await page.locator('.kpi').count(),5);
-    assert.match(await page.locator('.kpi').first().innerText(),/Tracked applications\s*109/);
+    assert.match(await page.locator('.kpi').first().innerText(),new RegExp('Tracked applications\\s*'+tracked.length+'\\b'));
     assert.equal(await page.locator('body').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(250, 251, 250)');
     assert.equal(await page.locator('.sidebar').evaluate(el=>getComputedStyle(el).backgroundColor),'rgb(246, 247, 246)');
     assert.equal(await page.locator('.heading h1, .today-head h1').first().evaluate(el=>getComputedStyle(el).fontFamily.includes('Inter')),true);
@@ -70,12 +75,12 @@ async function run() {
     assert.ok((await page.locator('.cal-day').count())>=28);
 
     await page.locator('#navigation [data-action="nav"][data-value="applications"]').click();
-    assert.ok((await page.locator('tbody tr').count())>=100);
-    await page.locator('#filterQuery').fill('N263-05');
+    assert.equal(await page.locator('tbody tr').count(),tracked.length);
+    await page.locator('#filterQuery').fill(probeId);
     assert.equal(await page.locator('tbody tr').count(),1);
     await page.locator('#filterQuery').fill('');
     await page.locator('#filterScope').selectOption('candidate');
-    assert.equal(await page.locator('#body .count').innerText().then(s=>s.includes('21 records')),true);
+    assert.match(await page.locator('#body .count').innerText(),new RegExp('\\b'+candidates.length+' records\\b'));
     await page.locator('[data-action="save-view"]').click();
     await page.locator('#viewName').fill('Candidates to review');
     await page.locator('[data-action="confirm-view"]').click();
@@ -131,7 +136,7 @@ async function run() {
 
     await page.keyboard.press('Control+k');
     assert.equal(await page.locator('#paletteQuery').count(),1);
-    await page.locator('#paletteQuery').fill('N263-05');
+    await page.locator('#paletteQuery').fill(probeId);
     assert.ok((await page.locator('#paletteResults .mini-row').count())>=1);
     await page.keyboard.press('Escape');
     assert.equal(await page.locator('.modal').count(),0);
@@ -163,8 +168,8 @@ async function run() {
     await mobile.locator('#workspaceSection').selectOption('calendar');
     assert.ok((await mobile.locator('.cal-day').count())>=28);
     await mobile.locator('#workspaceSection').selectOption('applications');
-    assert.ok((await mobile.locator('tbody tr').count())>=100);
-    assert.ok((await mobile.locator('.app-card:visible').count())>=100);
+    assert.equal(await mobile.locator('tbody tr').count(),tracked.length);
+    assert.equal(await mobile.locator('.app-card:visible').count(),tracked.length);
     assert.equal(await mobile.locator('.desktop-table:visible').count(),0);
     await mobile.locator('.app-card .rowbutton').first().click();
     assert.equal(await mobile.locator('.modal [data-document]').count()>0,true);
