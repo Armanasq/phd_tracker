@@ -4,8 +4,8 @@
 
 | Deployment | User interface | Public evidence | Private state | Model execution |
 | --- | --- | --- | --- | --- |
-| GitHub Pages (upstream or fork) | Static HTML/JS | Published `data/workspace.json` | Device-local applications and drafts | No |
-| Local static server | Same HTML/JS | Locally built snapshot | Browser-local drafts | No |
+| GitHub Pages (upstream or fork) | Static HTML/JS | Published `data/workspace.json` | Device-local applications and drafts | Optional browser-initiated loopback model chat, not Python agents |
+| Local static server | Same HTML/JS | Locally built snapshot | Browser-local drafts | Optional browser-initiated loopback model chat |
 | Python runtime on loopback | Same HTML/JS | Locally built snapshot | Private SQLite | Yes, when configured and consented |
 
 GitHub Pages is a static host. Python, SQLite, API keys, provider authentication, and recurring private agent runs do **not** run on GitHub Pages. The public application can make user-initiated, browser-only inference calls to an explicitly configured loopback OpenAI-compatible model, subject to browser network permissions and server CORS settings. For private Python tools, SQLite, agent workflows, or authenticated cloud execution, open the **same UI served by the local runtime**.
@@ -31,6 +31,10 @@ python -m phd_agents serve --port 8765
 ```
 
 Open `http://127.0.0.1:8765/#settings`. Configure a real OpenAI-compatible/other supported endpoint in Settings; local models must already be running. The private server listens only on loopback and is not suitable for internet exposure without an independently designed authentication and reverse-proxy deployment.
+
+### Fork owner first-run checklist
+
+Open **First-run setup** (`#onboarding`) to inspect the published repository identity, starter/source data mode, supported execution options and real local connection state. Mode selection remains in this browser and **does not change GitHub settings or secrets**. The nonsecret JSON export records the intended target and observed prerequisites, not a deployment certification. The [24-route inventory](ROUTE_COVERAGE.md) distinguishes this setup view from the underlying Deployment capability matrix.
 
 ### Publish your own GitHub Pages site
 
