@@ -304,6 +304,12 @@ class ApiHandler(BaseHTTPRequestHandler):
             if not re.fullmatch(r"[1-9][0-9]{0,12}", identity):
                 raise ValueError("Invalid observation ID")
             self.send_json({"observation": observation_text(store, int(identity))})
+        elif path.startswith("/api/source-observations/") and path.endswith("/candidates"):
+            from .source_candidates import source_date_candidates
+            identity = path.removeprefix("/api/source-observations/").removesuffix("/candidates").strip("/")
+            if not re.fullmatch(r"[1-9][0-9]{0,12}", identity):
+                raise ValueError("Invalid observation ID")
+            self.send_json({"result": source_date_candidates(store, int(identity))})
         elif path.startswith("/api/source-observations/") and path.endswith("/diff"):
             from .source_diff import compare_source_text
             identity = path.removeprefix("/api/source-observations/").removesuffix("/diff").strip("/")
