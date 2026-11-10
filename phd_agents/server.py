@@ -287,6 +287,9 @@ class ApiHandler(BaseHTTPRequestHandler):
             from .source_observer import recent_observations
             self.send_json({"observations": recent_observations(store, limit=2000),
                             "retention_cap": 2000, "scope": "private_retained_history"})
+        elif path == "/api/source-claims/conflicts":
+            from .source_conflicts import source_claim_disagreements
+            self.send_json(source_claim_disagreements(store))
         elif path == "/api/source-claims":
             from .source_claims import source_claims
             self.send_json({"claims": source_claims(store), "scope": "private_owner_captured"})
