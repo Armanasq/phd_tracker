@@ -83,3 +83,7 @@ Visual screenshot review additionally detected an inherited `grid-column: 1 / -1
 The same static frontend can be hosted locally or published by another GitHub account. The Pages build derives repository identity from `GITHUB_REPOSITORY` and rewrites canonical metadata, sitemap, source/issue links and the commit-linked stylesheet. Forks must replace inherited public source data and create their own owner Action Center. No private model credential or SQLite state is ever hosted on Pages. See [self-hosting and fork setup](../docs/SELF_HOSTING.md).
 
 Independent GitHub forks start in a blank `starter` data mode; the owner must replace/review source evidence and explicitly set Actions variable `PHD_ATLAS_DATA_MODE=source` before those records are served. Browser draft keys are namespaced per Pages repository path, preventing accidental cross-project state collisions; path-based keys are not a security boundary against other same-origin scripts.
+
+## Deterministic submission readiness
+
+The [Readiness view](./index.html#readiness) prioritizes verifiable next actions, cutoff proof, explicit preparation gaps, post-submission receipt checks and shared document demand. It runs without an AI key on Pages or locally. See [the readiness contract](../docs/READINESS_ENGINE.md).

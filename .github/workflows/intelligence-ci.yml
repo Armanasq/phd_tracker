@@ -57,6 +57,9 @@ jobs:
       - run: node --check site/modules/lens.mjs
       - run: node --check site/modules/console.mjs
       - run: node --check site/modules/operations.mjs
+      - run: node --check site/modules/readiness.mjs
+      - run: node --check site/modules/readiness-view.mjs
+      - run: node --test tests/readiness.test.mjs tests/readiness_view.test.mjs
       - run: node --check site/modules/domain.mjs
       - run: node --check site/modules/assurance.mjs
       - run: node --check site/modules/assurance-view.mjs

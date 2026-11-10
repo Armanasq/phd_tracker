@@ -1,6 +1,8 @@
 import {daysUntil,isActionable,isClosed as domainClosed,riskSignal,priorityScore,validateSnapshot,documentReadiness,applyRecordFilters,draftState,deadlineCollisions,freshnessState} from "./modules/domain.mjs";
 import {storageKey,legacyKeyForMigration} from "./modules/storage.mjs";
 import {hostedAdvisories,hostedStatus} from "./modules/hosted-ai.mjs";
+import {assessApplication,portfolioReadiness} from "./modules/readiness.mjs";
+import {renderReadinessView} from "./modules/readiness-view.mjs";
 import {createLocalRecord,normalizeLocalRecords,mergeLocalRecords,exportIndependentSource} from "./modules/local-records.mjs";
 import {createConsole} from "./modules/console.mjs";
 import {mountAtlasLens} from "./modules/lens.mjs";
@@ -8,9 +10,10 @@ import {auditWorkspace} from "./modules/assurance.mjs";
 import {renderAssurance,renderCoverage} from "./modules/assurance-view.mjs";
 (() => {
 "use strict";
-const VIEWS=[["dashboard","home","Overview"],["applications","file","Applications"],["operations","layers","Operations"],["actions","check","Actions"],["ledger","check","Task ledger"],["calendar","calendar","Calendar"],["pipeline","columns","Pipeline"],["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],["review","shield","Verification"],["archive","archive","Archive"],["sources","database","Sources"],["ai","sparkles","Copilot"],["agents","bot","Agents"],["automations","flow","Automations"],["activity","activity","Run history"],["settings","settings","Settings"]];
+const VIEWS=[["dashboard","home","Overview"],["applications","file","Applications"],["readiness","check","Readiness"],["operations","layers","Operations"],["actions","check","Actions"],["ledger","check","Task ledger"],["calendar","calendar","Calendar"],["pipeline","columns","Pipeline"],["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],["review","shield","Verification"],["archive","archive","Archive"],["sources","database","Sources"],["ai","sparkles","Copilot"],["agents","bot","Agents"],["automations","flow","Automations"],["activity","activity","Run history"],["settings","settings","Settings"]];
 const FALLBACK_REPO="https://github.com/Armanasq/phd_tracker";
 let selectedAuditCategory="all",assuranceLimit=75;
+let readinessFilter="all";
 let ledgerQuery="",ledgerType="all",ledgerPage=1;
 const STORE=storageKey("phd-atlas-drafts-v1"),PREFS=storageKey("phd-atlas-prefs-v1"),VIEW_STORE=storageKey("phd-atlas-views-v2"),COMPARE_STORE=storageKey("phd-atlas-compare-v1"),LOCAL_STORE=storageKey("phd-atlas-local-records-v1");
 const $=id=>document.getElementById(id);
@@ -137,7 +140,7 @@ function dashboard(){
   const weekday=offset===0?"TODAY":new Intl.DateTimeFormat("en-GB",{weekday:"short",timeZone:"UTC"}).format(date).toUpperCase();
   return '<button type="button" class="runway-day'+(due?' has-due':'')+(offset===0?' is-today':'')+'" data-action="nav" data-value="calendar"><span class="runway-weekday">'+weekday+'</span><span class="runway-daynumber">'+date.getUTCDate()+'</span><span class="runway-due">'+(due?due+' due':'—')+'</span><span class="sr-only"> '+escapeHTML(stamp(iso))+'; open calendar</span></button>';
  }).join("");
- return '<div class="operational-hero"><div class="today-head"><div><div class="desk-kicker">Fall 2027 · '+escapeHTML(stamp(TODAY()))+'</div><h1>Today’s work</h1><p>Deadlines, decisions and evidence requiring attention.</p></div><div class="buttons">'+button("All applications","nav","applications")+button("Open actions","nav","actions","primary")+'</div></div>'+
+ return '<div class="operational-hero"><div class="today-head"><div><div class="desk-kicker">Fall 2027 · '+escapeHTML(stamp(TODAY()))+'</div><h1>Today’s work</h1><p>Deadlines, decisions and evidence requiring attention.</p></div><div class="buttons">'+button("All applications","nav","applications")+button("Readiness","nav","readiness")+button("Open actions","nav","actions","primary")+'</div></div>'+
  '<section class="decision-brief" aria-label="Next recorded application closing"><div class="decision-brief-label"><span>Next recorded deadline</span><span>Official cutoff unverified</span></div>' +
  (nearest?'<div class="decision-brief-body"><div class="decision-brief-days"><strong>'+(closingDays===0?'00':String(closingDays).padStart(2,'0'))+'</strong><span>'+(closingDays===0?'Due today':'Days remaining')+'</span></div><div class="decision-brief-context"><button type="button" class="decision-brief-link" data-action="record" data-value="'+escapeHTML(nearest.id)+'">'+escapeHTML(nearest.name)+'</button><span>'+escapeHTML(stamp(nearest.deadline))+' · '+escapeHTML(nearest.country||'Country unrecorded')+'</span></div></div>':'<div class="decision-brief-none">No upcoming dated calls are recorded. Undated opportunities remain in the registry.</div>')+
  '<div class="decision-brief-bottom"><span>Whole dates are not verified portal closing times.</span><button type="button" data-action="nav" data-value="calendar">Open calendar ↗</button></div></section></div>'+
@@ -170,6 +173,10 @@ function applications(){
  '<div class="info">Deadline dates may omit portal cutoff times and time zones. Source review does not establish current availability. Device-local records are never published automatically. Source-record edits require explicit GitHub confirmation.</div>'+
  statCard("Application registry",toolbar(list)+(list.length?table(list,true):'<div class="empty">No records match these filters. Clear filters or select a saved view.</div>'));
 }
+function readiness(){
+ const report=portfolioReadiness(records(),TODAY());
+ return renderReadinessView({report,filter:readinessFilter,heading,kpi,rowButton,button,pill,dateRisk,stamp,escape:escapeHTML});
+}
 function contacts(){const all=records().filter(r=>r.faculty!=="Not recorded"||r.contact_status!=="unrecorded"||r.followup);const list=sortList(filters(all));return heading("Faculty contacts","Contacts and follow-up dates, recorded explicitly.",button("Export contacts CSV","export","contacts"))+
 statCard("Faculty and supervisor pipeline",toolbar(list)+'<div class="tablewrap"><table class="table"><thead><tr><th>Opportunity</th><th>Faculty / contact</th><th>Outreach status</th><th>Next follow-up</th><th>Action</th></tr></thead><tbody>'+list.map(r=>'<tr><td>'+rowButton(r)+'</td><td>'+escapeHTML(r.faculty)+'</td><td>'+pill(r.contact_status==="unrecorded"?"Not recorded":r.contact_status)+'</td><td>'+escapeHTML(stamp(r.followup))+(r.followup?" "+dateRisk(days(r.followup)):"")+'</td><td>'+button("Update","record",r.id)+'</td></tr>').join("")+'</tbody></table></div>')}
 function ledgerView(){
@@ -196,7 +203,7 @@ function ledgerView(){
  '<div class="buttons" style="justify-content:flex-end;padding:14px 16px">'+button("Previous 60","ledger-page",String(Math.max(1,page-1)))+button("Next 60","ledger-page",String(Math.min(pageCount,page+1)))+'</div></section>'+
  '<p class="footnote">The original action list, timeline, proposed application dates and cross-route tasks are different records. Dates in the past are not necessarily unfinished. This view does not write completion state to the workbook.</p>';
 }
-function actions(){const rs=records().filter(r=>r.record_type==="tracked").filter(open).sort((a,b)=>priority(b)-priority(a));const tasks=(state.data.tasks||[]).filter(t=>!t.application_id||!getRecord(t.application_id)||open(getRecord(t.application_id)));return heading("Next actions","Your deadline-first application tasks and the original workbook steps.",button("Download calendar (.ics)","export","ics","primary")+button("Full task ledger","nav","ledger"))+
+function actions(){const rs=records().filter(r=>r.record_type==="tracked").filter(open).sort((a,b)=>priority(b)-priority(a));const tasks=(state.data.tasks||[]).filter(t=>!t.application_id||!getRecord(t.application_id)||open(getRecord(t.application_id)));return heading("Next actions","Your deadline-first application tasks and the original workbook steps.",button("Download calendar (.ics)","export","ics","primary")+button("Readiness plan","nav","readiness")+button("Full task ledger","nav","ledger"))+
 '<div class="kpis">'+kpi("Due today",rs.filter(r=>days(r.deadline)===0).length,"Final or priority dates")+kpi("Within 72h",rs.filter(r=>days(r.deadline)!==null&&days(r.deadline)>=0&&days(r.deadline)<=3).length,"Check portal cutoff")+kpi("Follow-ups overdue",rs.filter(r=>r.followup&&days(r.followup)<0).length,"Manual date entries")+kpi("Plan steps surfaced",tasks.length,"Original tracker snapshot")+kpi("Explicit document gaps",rs.filter(r=>Object.values(r.document_states||{}).includes("not_started")).length,"Never infer from unknown")+'</div>'+
 statCard("Prioritized opportunities",'<div class="mini-list">'+rs.map((r,i)=>'<div class="mini-row"><div><span class="subtle">#'+(i+1)+' &nbsp;</span>'+rowButton(r)+'<small>'+escapeHTML(r.status==="submitted"?"Follow-up after submission: "+(r.next_step||"Check receipt and referee states"):(r.next_step||"Confirm next action"))+'</small></div><div>'+dateRisk(days(r.status==="submitted"?r.followup:r.deadline))+'</div></div>').join("")+'</div>')+
 statCard("Existing workbook execution steps",'<p class="subtle">Task completion should be confirmed through the existing authenticated GitHub issue workflow; a listed task is not automatically unfinished.</p>'+(tasks.length?'<div class="tablewrap"><table class="table"><thead><tr><th>Action</th><th>Due</th><th>Source status</th><th>Related application</th><th>Control</th></tr></thead><tbody>'+tasks.map(t=>'<tr><td>'+escapeHTML(t.action||t.name)+'</td><td>'+escapeHTML(stamp(t.due))+'</td><td>'+pill(t.state)+'</td><td>'+escapeHTML(t.application_id||"Shared")+'</td><td>'+button("Copy /done","task",t.id)+'</td></tr>').join("")+'</tbody></table></div>':'<div class="empty">No planned steps in the displayed horizon.</div>'))}
@@ -338,7 +345,7 @@ function commitRebase(id){
  saveStore(STORE,state.drafts);closeModal();render();notify("Draft rebased locally. Review and confirm the GitHub update.");
 }
 function detail(r){if(!r)return;state.selected=r.id;const docs=Object.entries(r.document_states||{});const opts=(values,current)=>values.map(v=>'<option value="'+escapeHTML(v)+'"'+(current===v?' selected':'')+'>'+escapeHTML(DOC_LABELS[v]||statusLabel(v))+'</option>').join('');
-const sync=r.local_only?"device-only":draftState(state.drafts[r.id],sourceRecord(r.id)),readiness=documentReadiness(r);
+const sync=r.local_only?"device-only":draftState(state.drafts[r.id],sourceRecord(r.id)),readiness=documentReadiness(r),execution=assessApplication(r,TODAY());
 const fields='<div class="field"><label for="editPriority">My priority</label><select id="editPriority" class="select">'+opts(["normal","high","low"],r.priority||"normal")+'</select><small class="subtle">Adjusts priority in the action queue.</small></div><div class="field"><label for="editStatus">Application status (confirm any real portal submission)</label><select id="editStatus" class="select">'+opts(["unconfirmed","shortlisted","preparing","submitted","interview","offer","rejected","withdrawn","blocked","archived"],r.status)+'</select><small class="subtle">Never mark submitted without actual portal confirmation.</small></div>'+
 '<div class="field"><label for="editVerification">Verification status</label><select id="editVerification" class="select">'+opts(["unverified","needs_review","source_verified","owner_verified"],r.verification)+'</select><small class="subtle">Choose verified only after inspecting supporting primary evidence.</small></div>'+
 '<div class="field"><label for="editFollowup">Next faculty follow-up</label><input id="editFollowup" type="date" class="input" value="'+escapeHTML(r.followup||"")+'"></div>'+
@@ -349,7 +356,7 @@ const fields='<div class="field"><label for="editPriority">My priority</label><s
 '<h3>Document readiness</h3><p class="subtle">'+escapeHTML(readiness.label)+'. Unknown is not missing. Verify the complete official document list.</p><div class="documents">'+docs.map(([id,st])=>'<div class="docrow"><span>'+escapeHTML(state.data.documents[id]||id)+'</span><select class="select" aria-label="Readiness for '+escapeHTML(state.data.documents[id]||id)+'" data-document="'+escapeHTML(id)+'">'+opts(["unknown","ready","in_progress","not_started","not_applicable"],st)+'</select></div>').join("")+'</div>';
 openModal('<div class="eyebrow">'+escapeHTML(r.id)+' · '+escapeHTML(r.record_type)+(sync!=="none"?' · '+escapeHTML(sync):"")+'</div><h2>'+escapeHTML(r.name)+'</h2>',
 '<div class="detail-layout"><div><div class="field"><label>Deadline & evidence classification</label><p>'+escapeHTML(stamp(r.deadline))+' · '+dateRisk(days(r.deadline))+' · '+verificationPill(r)+'</p><p class="subtle">'+escapeHTML(r.deadline_kind||"Closing time not verified")+'</p></div>'+
-'<div class="field"><label>Evidence links</label><div class="linkset">'+link(r.source_url,"Primary evidence")+link(r.secondary_url,"Secondary evidence")+link(r.apply_url,"Application route")+'</div></div>'+
+'<div class="field"><label>Execution decision</label><p>'+escapeHTML(execution?.top?.label||"No active execution action; review the source")+'</p><p class="subtle">'+escapeHTML(execution?.top?.detail||"The presence or absence of an action does not establish submission readiness.")+'</p><small class="subtle">'+(execution?.openProof||0)+' evidence checks · '+(execution?.knownPreparation||0)+' known preparation tasks</small></div><div class="field"><label>Evidence links</label><div class="linkset">'+link(r.source_url,"Primary evidence")+link(r.secondary_url,"Secondary evidence")+link(r.apply_url,"Application route")+'</div></div>'+
 '<div class="field"><label>Institution / geography / decision</label><p>'+escapeHTML(r.institution||"Institution not recorded")+" · "+escapeHTML(r.country||"Country not recorded")+'</p><p>Recorded decision: '+escapeHTML(r.decision||"Not recorded")+" · Source observation: "+escapeHTML(r.source_date||"Not recorded")+'</p></div>'+
 '<div class="field"><label>Funding / eligibility</label><p>'+escapeHTML(r.funding||"Not verified")+'</p><p>'+escapeHTML(r.eligibility||"Eligibility not verified")+'</p></div>'+
 '<div class="field"><label>Academic fit & faculty</label><p>'+escapeHTML(r.fit||r.topic||"Not recorded")+'</p><p>'+escapeHTML(r.faculty)+'</p></div>'+
@@ -502,7 +509,7 @@ function navigation(){
 function render(){
  if(!state.data)return;
  navigation();
- const views={dashboard,calendar:calendarView,applications,pipeline,contacts,actions,ledger:ledgerView,updates,compare,review,archive,sources};
+ const views={dashboard,calendar:calendarView,applications,readiness,pipeline,contacts,actions,ledger:ledgerView,updates,compare,review,archive,sources};
  const intelligence=["ai","agents","automations","activity","settings","operations"].includes(state.view);
  const freshness=freshnessState(state.data.as_of,TODAY());
  const note=["aging","stale","unknown","future"].includes(freshness.state)
@@ -559,12 +566,18 @@ function events(){
   else if(type==="delete-view")deleteSavedView();
   else if(type==="clear-filters")resetFilters();
   else if(type==="retry-load")loadSnapshot();
+  else if(type==="readiness-filter"){readinessFilter=value;render()}
   else if(type==="audit-filter"){selectedAuditCategory=value;assuranceLimit=75;render()}
   else if(type==="audit-more"){assuranceLimit+=75;render()}
   else if(type==="ledger-page"){ledgerPage=Math.max(1,Number(value)||1);render()}
   else if(type==="export-ledger"){
    const full=state.data.task_ledger||[];
    exportFile("phd-atlas-full-task-ledger-"+TODAY()+".csv",asCSV(full,["id","application_id","name","action","due","type","state","sheet","row","source_url"]),"text/csv;charset=utf-8");
+  }
+  else if(type==="export-readiness"){
+   const report=portfolioReadiness(records(),TODAY());
+   const rows=[...report.active,...report.submitted,...report.halted].map(x=>({id:x.id,application:x.record.name,phase:x.phase,deadline:x.record.deadline||"",followup:x.record.followup||"",next_action:x.top?.label||"",action_type:x.top?.kind||"",open_proof_checks:x.openProof,recorded_preparation:x.knownPreparation,source_url:x.record.source_url||""}));
+   exportFile("phd-atlas-readiness-"+TODAY()+".csv",asCSV(rows,["id","application","phase","deadline","followup","next_action","action_type","open_proof_checks","recorded_preparation","source_url"]),"text/csv;charset=utf-8");
   }
   else if(type==="export-audit"){
    const report=auditWorkspace({...state.data,records:records()},TODAY());
