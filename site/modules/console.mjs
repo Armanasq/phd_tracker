@@ -10,7 +10,7 @@ const cleanId = value => String(value||"").trim().toLowerCase().replace(/[^a-z0-
 const opt = (items,value) => choose(items,value);
 
 export function createConsole({notify,onChange,navigate,getRecords,getSourceRecords,onReload,getView}) {
- const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:""};
+ const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:""};
  const providers = () => state.data?.catalog?.providers || [];
  const agents = () => state.data?.catalog?.agents || [];
  const workflows = () => state.data?.catalog?.workflows || [];
@@ -315,9 +315,17 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    '<label class="os-check"><input type="checkbox" name="enabled" '+(item.enabled?"checked":"")+'> <span>Enable scheduled evaluation for this workflow</span></label>'+
    '<label class="os-check"><input type="checkbox" name="cloud_consent" '+(item.cloud_consent?"checked":"")+'> <span>Approve this workflow to use configured, explicitly approved cloud models</span></label>'+
    '<div class="os-form-footer"><button class="os-btn primary" type="submit" '+(state.busy?"disabled":"")+'>Save workflow</button>'+
-   (isNew?"":btn("Run now","run-workflow",item.id,"quiet"))+'</div>'+
+   (isNew?"":btn("Preview routes","preview-workflow",item.id,"quiet")+btn("Run now","run-workflow",item.id,"quiet"))+'</div>'+
    footnote("Automation creates reviewable proposals, not submissions. Recurring runs require an enabled private scheduler and the daily cloud-call budget.")+
-   '</form></section></div>'+schedulerPanel()+note();
+   '</form></section></div>'+
+   (state.workflowPreview?.workflow_id===item.id?
+     box("Workflow route preview","Read-only preflight; no model was called.",
+       '<div class="os-policy">'+state.workflowPreview.stages.map(stage=>
+         '<div><strong>'+esc(stage.agent_id)+' · '+esc(stage.model)+'</strong><p>'+esc(stage.provider_label)+
+         ' · '+esc(stage.route_source)+(stage.cloud?' · Cloud provider':' · Local provider')+'</p></div>').join("")+
+       '<div><strong>'+esc(state.workflowPreview.model_calls)+' planned model calls</strong><p>'+
+       (state.workflowPreview.manual_ready?'Routes resolved; actual model health and quotas require verification':'Manual execution requires fresh cloud-data consent')+
+       '</p></div></div>'):"")+schedulerPanel()+note();
  }
  function preferencesPanel() {
   const p=prefs();
@@ -421,7 +429,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
  }
  function selectConnection(id) {state.selectedProvider=id;state.models={};onChange();}
  function selectAgent(id) {state.selectedAgent=id;onChange();}
- function selectWorkflow(id) {state.selectedWorkflow=id;onChange();}
+ function selectWorkflow(id) {state.selectedWorkflow=id;state.workflowPreview=null;onChange();}
  async function handleAction(element) {
   const action=element.dataset.osAction,id=element.dataset.id||"";
   if(action==="go"){navigate(id);return;}
@@ -506,6 +514,12 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    await change(async()=>{
     state.scheduleTick=await request("/api/scheduler/tick",{});
     state.message="Scheduler check completed. Review attempted, skipped and failed workflows below.";
+   });return;
+  }
+  if(action==="preview-workflow"){
+   await change(async()=>{
+    state.workflowPreview=await request("/api/workflows/preview",{workflow_id:id});
+    state.message="Read-only route preflight completed; no model inference performed.";
    });return;
   }
   if(action==="run-workflow"){
