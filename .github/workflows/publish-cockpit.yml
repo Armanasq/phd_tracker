@@ -90,6 +90,8 @@ jobs:
           node --test tests/local_records.test.mjs
           node --check site/modules/lens.mjs
           node --check site/modules/console.mjs
+          node --check site/modules/browser-model.mjs
+          node --test tests/browser_model.test.mjs
           node --check site/modules/assurance.mjs
           node --check site/modules/assurance-view.mjs
           node --test tests/assurance.test.mjs
