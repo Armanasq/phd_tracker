@@ -116,7 +116,7 @@ def observe_record(
 
 
 def recent_observations(store: Store, *, limit: int = 50) -> list[dict[str, Any]]:
-    if type(limit) is not int or not 1 <= limit <= 100:
+    if type(limit) is not int or not 1 <= limit <= 2000:
         raise ValueError("Invalid source observation limit")
     rows = store.db.execute(
         "SELECT o.id,o.application_id,o.source_url,o.status,o.content_sha256,"
