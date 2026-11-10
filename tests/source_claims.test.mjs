@@ -121,6 +121,23 @@ test("date suggestions remain unverified until explicit manual capture",()=>{
  assert.match(untrusted,/&lt;script&gt;/);
 });
 
+test("explicit offset timestamps are shown as provisional source evidence",()=>{
+ const source={id:9,content_sha256:"a".repeat(64),visible_text:"Deadline 2026-12-15T23:59-05:00"};
+ const suggestions={observation_id:9,source_url:"https://university.example/phd",scan_complete:true,
+  candidates:[{date_mention:"2026-12-15",normalized_date:"2026-12-15",source_explicit_timestamp:"2026-12-15T23:59-05:00",
+   normalized_utc_instant:"2026-12-16T04:59:00Z",context_signal:"deadline_language_near_date",span_start:9,span_end:19,
+   exact_quote:"Deadline 2026-12-15T23:59-05:00"}]};
+ const rendered=renderSourceClaims({observations:observed,selectedId:9,sourceText:source,dateCandidates:suggestions});
+ assert.match(rendered,/Explicit source timestamp/);
+ assert.match(rendered,/2026-12-16T04:59:00Z/);
+ assert.match(rendered,/unverified/);
+ const unsafe=renderSourceClaims({observations:observed,selectedId:9,sourceText:source,
+  dateCandidates:{...suggestions,candidates:[{...suggestions.candidates[0],
+   source_explicit_timestamp:"<script>unsafe</script>"}]}});
+ assert.ok(!unsafe.includes("<script>"));
+ assert.match(unsafe,/&lt;script&gt;/);
+});
+
 test("quote provenance distinguishes unique, repeated, and legacy locations",()=>{
  const base={id:17,observation_id:9,application_id:"APP1",source_url:"https://university.example",
    source_digest:"a".repeat(64),quote_digest:"b".repeat(64),claim_type:"deadline",

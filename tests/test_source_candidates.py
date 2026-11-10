@@ -71,6 +71,33 @@ class CandidateDateTests(unittest.TestCase):
                                     observed_at="", source_digest="a" * 64,
                                     text_digest="0" * 64)
 
+    def test_explicit_iso_datetime_offsets_are_normalized_without_verifying_deadlines(self) -> None:
+        report = self.parse(
+            "Applications close 2026-12-15T23:59:00-05:00. "
+            "A second round closes 2027-01-12T17:30+01:00. "
+            "Interview 2027-02-03T09:00Z."
+        )
+        self.assertEqual(
+            [c["normalized_utc_instant"] for c in report["candidates"]],
+            ["2026-12-16T04:59:00Z", "2027-01-12T16:30:00Z", "2027-02-03T09:00:00Z"],
+        )
+        self.assertEqual(report["candidates"][0]["source_explicit_timestamp"], "2026-12-15T23:59:00-05:00")
+        self.assertFalse(report["semantic_claim_verified"])
+        self.assertEqual(report["candidates"][2]["candidate_type"], "other")
+
+    def test_offset_free_invalid_and_abbreviated_times_remain_unknown(self) -> None:
+        report = self.parse(
+            "Deadline 2027-01-15T17:00. "
+            "Deadline 2027-02-15T10:30+14:30. "
+            "Deadline 2027-03-15 10:30 CET. "
+            "Deadline 15 April 2027 at 17:00 UTC. "
+            "Deadline 2027-05-15T25:00+01:00."
+        )
+        self.assertEqual(report["candidate_count"], 5)
+        self.assertTrue(all(c["normalized_utc_instant"] is None for c in report["candidates"]))
+        self.assertTrue(all(c["source_explicit_timestamp"] is None for c in report["candidates"]))
+        self.assertFalse(report["semantic_claim_verified"])
+
     def test_source_record_api_is_private_and_source_bound(self) -> None:
         with tempfile.TemporaryDirectory() as name:
             root = Path(name)

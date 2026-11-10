@@ -62,3 +62,7 @@ Captured source-claim records expose `schema_version=2`, the normalized visible-
 ### Cross-source and historical candidate disagreement triage
 
 The private `GET /api/source-claims/conflicts` endpoint groups up to 500 retained captured claims by application and field. Distinct normalized candidate values yield manual-review signals, distinguishing different source URLs from historical versions of one URL. Results retain original claim/observation IDs, candidate values, observed source addresses/digests and latest owner decisions, while omitting full source quotations. Rejected interpretations remain visible for audit. The source-evidence route displays disagreements with explicit truncation and unavailable/empty states. These are not verified semantic contradictions or automatic reconciliations.
+
+## Explicit-offset timestamp evidence
+
+Deterministic candidate extraction can normalize an ISO calendar date immediately followed by an explicit RFC3339-style numeric UTC offset or `Z` into a UTC instant. The API retains both the source-stated timestamp and normalized instant for manual review. Month-name statements, timezone abbreviations (including CET/CEST), daylight-saving-local timestamps without offsets, and offset-free times remain unknown. **No normalized instant is promoted to an official deadline**: the institution's exact application round, relevance, local-time policy, authority and closing-hour statement still require independent owner verification.

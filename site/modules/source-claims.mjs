@@ -40,7 +40,9 @@ export function renderSourceClaims({observations=[],claims=[],selectedId=null,so
       '<article class="os-ledger-row"><div><strong>'+esc(item.date_mention)+' · '+esc(item.normalized_date)+'</strong>'+
       '<small>'+esc(item.context_signal.replaceAll("_"," "))+' · Characters '+esc(item.span_start)+'–'+esc(item.span_end)+'</small>'+
       '<p class="os-evidence-quote">'+esc(item.exact_quote)+'</p>'+
-      '<small>Unverified date mention; no cutoff time or timezone inferred</small></div>'+
+      '<small>'+(item.normalized_utc_instant?
+        'Explicit source timestamp '+esc(item.source_explicit_timestamp)+' · UTC '+esc(item.normalized_utc_instant)+' (unverified)' :
+        'Unverified date mention; no cutoff time or timezone inferred')+'</small></div>'+
       (item.exact_quote?.length>=20?
        '<button type="button" class="os-btn quiet" data-os-action="fill-source-candidate" data-id="'+index+'">Review in claim form</button>':
        '<span class="os-meta">Quote too short for capture</span>')+'</article>').join(""):

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import re
-from datetime import date
+from datetime import date, datetime, timedelta, timezone
 from typing import Any
 
 from .source_claims import observation_text
@@ -27,6 +27,34 @@ _DEADLINE_LANGUAGE = re.compile(
     r"applications? must be received|apply by|submit by|submission closes?|"
     r"last date to apply|final date to apply)\b", re.I,
 )
+_EXPLICIT_OFFSET_TIME = re.compile(
+    r"^[Tt ](?P<hour>[01][0-9]|2[0-3]):(?P<minute>[0-5][0-9])"
+    r"(?::(?P<second>[0-5][0-9]))?(?P<offset>Z|[+-](?:0[0-9]|1[0-4]):[0-5][0-9])"
+    r"(?![A-Za-z0-9:+-])"
+)
+
+
+def explicit_source_instant(text: str, date_end: int, iso_date: str) -> dict[str, str | None]:
+    matched = _EXPLICIT_OFFSET_TIME.match(text[date_end:date_end + 24])
+    if matched is None:
+        return {"source_explicit_timestamp": None, "normalized_utc_instant": None}
+    raw = matched.group(0)
+    offset = matched.group("offset")
+    if offset != "Z" and offset[1:3] == "14" and offset[4:6] != "00":
+        return {"source_explicit_timestamp": None, "normalized_utc_instant": None}
+    try:
+        instant = datetime.fromisoformat(iso_date + "T" + raw[1:].replace("Z", "+00:00"))
+    except ValueError:
+        return {"source_explicit_timestamp": None, "normalized_utc_instant": None}
+    if instant.tzinfo is None or abs(instant.utcoffset() or timedelta()) > timedelta(hours=14):
+        return {"source_explicit_timestamp": None, "normalized_utc_instant": None}
+    normalized = instant.astimezone(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+    return {
+        "source_explicit_timestamp": iso_date + "T" + raw[1:],
+        "normalized_utc_instant": normalized,
+    }
+
+
 _MAX_CANDIDATES = 25
 _MAX_TEXT = 24_000
 
@@ -74,6 +102,11 @@ def extract_date_candidates(
         quote = text[quote_start:quote_end]
         if len(quote) > 320:
             quote = quote[:320]
+        explicit = (
+            explicit_source_instant(text, end, iso)
+            if text[start:end] == iso else
+            {"source_explicit_timestamp": None, "normalized_utc_instant": None}
+        )
         results.append({
             "schema_version": 1,
             "application_id": application_id,
@@ -86,6 +119,7 @@ def extract_date_candidates(
             "source_location": "normalized_visible_text_characters",
             "date_mention": text[start:end],
             "normalized_date": iso,
+            **explicit,
             "candidate_type": "deadline" if detected else "other",
             "context_signal": "deadline_language_near_date" if detected else "date_mention_only",
             "exact_quote": quote,
@@ -109,7 +143,9 @@ def extract_date_candidates(
         "semantic_claim_verified": False,
         "status": "review_candidates_only",
         "notice": "Parsed date mentions are not verified deadlines or proof that a portal is open. "
-        "Month-name and ISO dates are supported. Ambiguous numeric dates and timezone assumptions are excluded.",
+        "Month-name and ISO dates are supported. UTC instants are normalized only when "
+        "an ISO date immediately includes a valid time and explicit numeric UTC offset or Z. "
+        "Timezone abbreviations, offset-free local times and ambiguous numeric dates remain unknown.",
     }
 
 
