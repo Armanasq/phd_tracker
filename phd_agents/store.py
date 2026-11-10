@@ -547,28 +547,83 @@ class Store:
     def _audit(self, action: str, subject: str) -> None:
         self.db.execute("INSERT INTO audit(action,subject,created_at) VALUES(?,?,?)", (action, subject, utcnow()))
 
-    def put_item(self, kind: str, value: dict[str, Any]) -> dict[str, Any]:
+    def put_item(
+        self, kind: str, value: dict[str, Any],
+        expected_version: int | None = None,
+    ) -> dict[str, Any]:
         from .operations import normalize_item
+
         entry = normalize_item(kind, value)
+        if expected_version is not None and (
+            type(expected_version) is not int or expected_version < 0
+        ):
+            raise ValueError("expected_version must be a non-negative integer")
+        encoded = json.dumps(entry, ensure_ascii=False)
+        timestamp = utcnow()
         with self.db:
-            self.db.execute("INSERT INTO private_objects(kind,id,payload,updated_at) VALUES(?,?,?,?) ON CONFLICT(kind,id) DO UPDATE SET payload=excluded.payload,updated_at=excluded.updated_at",
-                            (kind, entry["id"], json.dumps(entry, ensure_ascii=False), utcnow()))
+            if expected_version is None:
+                self.db.execute(
+                    "INSERT INTO private_objects(kind,id,payload,updated_at,version) "
+                    "VALUES(?,?,?,?,1) ON CONFLICT(kind,id) DO UPDATE SET "
+                    "payload=excluded.payload,updated_at=excluded.updated_at,version=private_objects.version+1",
+                    (kind, entry["id"], encoded, timestamp),
+                )
+            elif expected_version == 0:
+                try:
+                    self.db.execute(
+                        "INSERT INTO private_objects(kind,id,payload,updated_at,version) VALUES(?,?,?,?,1)",
+                        (kind, entry["id"], encoded, timestamp),
+                    )
+                except sqlite3.IntegrityError as error:
+                    raise ConflictError("Private record created concurrently; reload") from error
+            else:
+                changed = self.db.execute(
+                    "UPDATE private_objects SET payload=?,updated_at=?,version=version+1 "
+                    "WHERE kind=? AND id=? AND version=?",
+                    (encoded, timestamp, kind, entry["id"], expected_version),
+                ).rowcount
+                if changed != 1:
+                    raise ConflictError("Private record changed concurrently; reload before saving")
+            row = self.db.execute(
+                "SELECT version FROM private_objects WHERE kind=? AND id=?",
+                (kind, entry["id"]),
+            ).fetchone()
             self._audit("private:" + kind + ":upsert", entry["id"])
-        return entry
+        return {"version": int(row["version"]), **entry}
 
     def items(self, kind: str) -> list[dict[str, Any]]:
         from .operations import KINDS
-        if kind not in KINDS:
-            raise ValueError("Unknown private record kind")
-        rows = self.db.execute("SELECT payload FROM private_objects WHERE kind=? ORDER BY id", (kind,)).fetchall()
-        return [json.loads(r["payload"]) for r in rows]
 
-    def delete_item(self, kind: str, identity: str) -> bool:
-        from .operations import KINDS
         if kind not in KINDS:
             raise ValueError("Unknown private record kind")
+        rows = self.db.execute(
+            "SELECT payload,version FROM private_objects WHERE kind=? ORDER BY id", (kind,),
+        ).fetchall()
+        return [{"version": int(row["version"]), **json.loads(row["payload"])} for row in rows]
+
+    def delete_item(
+        self, kind: str, identity: str, expected_version: int | None = None,
+    ) -> bool:
+        from .operations import KINDS
+
+        if kind not in KINDS:
+            raise ValueError("Unknown private record kind")
+        if expected_version is not None and (
+            type(expected_version) is not int or expected_version < 1
+        ):
+            raise ValueError("Deletion requires a positive expected_version")
         with self.db:
-            cursor = self.db.execute("DELETE FROM private_objects WHERE kind=? AND id=?", (kind, identity))
+            if expected_version is None:
+                cursor = self.db.execute(
+                    "DELETE FROM private_objects WHERE kind=? AND id=?", (kind, identity),
+                )
+            else:
+                cursor = self.db.execute(
+                    "DELETE FROM private_objects WHERE kind=? AND id=? AND version=?",
+                    (kind, identity, expected_version),
+                )
+                if cursor.rowcount != 1:
+                    raise ConflictError("Private record changed or was deleted; reload")
             if cursor.rowcount:
                 self._audit("private:" + kind + ":delete", identity)
         return bool(cursor.rowcount)
