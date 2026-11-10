@@ -432,3 +432,5 @@ body.dark .os-context-banner{background:#223155;border-color:#425780}
 
 .os-ledger-row [data-os-action="fill-source-candidate"]{align-self:center;flex-shrink:0}
 @media(max-width:600px){.os-ledger-row [data-os-action="fill-source-candidate"]{max-width:100%;white-space:normal}}
+
+.os-conflict-values{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px;margin:10px 0}.os-conflict-values>div{min-width:0;display:grid;gap:4px;padding:10px;border-radius:8px;background:var(--surface);border:1px solid var(--line);overflow-wrap:anywhere}.os-conflict-values strong,.os-conflict-values small{overflow-wrap:anywhere}

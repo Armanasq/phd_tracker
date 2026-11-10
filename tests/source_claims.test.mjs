@@ -130,3 +130,21 @@ test("quote provenance distinguishes unique, repeated, and legacy locations",()=
  assert.match(renderSourceClaims({claims:[{...base,matching_occurrences:2,span_start:null,span_end:null}]}),/Quote appears 2 times; unique span unknown/);
  assert.match(renderSourceClaims({claims:[base]}),/Unrecorded \/ legacy evidence/);
 });
+
+test("cross-source disagreements require manual review and do not establish authority",()=>{
+ const report={schema_version:1,scope:"private_owner_candidate_disagreements",
+  sample_truncated:true,semantic_claim_verified:false,
+  conflicts:[{application_id:"APP1",claim_type:"deadline",
+   source_pattern:"cross_source_candidate_disagreement",distinct_candidate_values:2,
+   claims:[{claim_id:21,candidate_value:"2026-12-15",source_url:"https://university.example/program",owner_review_decision:"needs_recheck"},
+    {claim_id:22,candidate_value:"2026-12-20",source_url:"https://department.example/program",owner_review_decision:null}]}],
+  notice:"Disagreement is not proof of an official deadline"};
+ const html=renderSourceClaims({disagreements:report});
+ assert.match(html,/Candidate disagreements/);
+ assert.match(html,/Partial sample/);
+ assert.match(html,/2026-12-15/);
+ assert.match(html,/2026-12-20/);
+ assert.match(html,/Manual review required/);
+ assert.match(html,/not proof of an official deadline/);
+ assert.match(renderSourceClaims({disagreementError:"Unavailable"}),/Unavailable/);
+});

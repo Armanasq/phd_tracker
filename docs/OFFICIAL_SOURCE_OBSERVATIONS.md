@@ -58,3 +58,7 @@ The private `GET /api/source-observations/{id}/candidates` endpoint proposes dat
 ### Exact normalized-text source spans and migration
 
 Captured source-claim records expose `schema_version=2`, the normalized visible-text SHA-256, exact quotation occurrence count, and a character span only when a quote appears **once**. Repeated quotations retain the digest but have `span_start=null`/`span_end=null` to avoid claiming an invented location. Legacy SQLite records migrate with missing text hashes/spans recorded as unknown. All records remain unverified candidate interpretations.
+
+### Cross-source and historical candidate disagreement triage
+
+The private `GET /api/source-claims/conflicts` endpoint groups up to 500 retained captured claims by application and field. Distinct normalized candidate values yield manual-review signals, distinguishing different source URLs from historical versions of one URL. Results retain original claim/observation IDs, candidate values, observed source addresses/digests and latest owner decisions, while omitting full source quotations. Rejected interpretations remain visible for audit. The source-evidence route displays disagreements with explicit truncation and unavailable/empty states. These are not verified semantic contradictions or automatic reconciliations.

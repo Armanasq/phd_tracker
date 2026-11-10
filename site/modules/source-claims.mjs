@@ -10,7 +10,7 @@ export function claimCandidates(observations=[]) {
     .sort((a,b)=>b.id-a.id).slice(0,200);
 }
 
-export function renderSourceClaims({observations=[],claims=[],selectedId=null,sourceText=null,diff=null,diffError="",error="",message="",loading=false,filter="all",reviewHistory=null,dateCandidates=null,candidateError=""}={}) {
+export function renderSourceClaims({observations=[],claims=[],selectedId=null,sourceText=null,diff=null,diffError="",error="",message="",loading=false,filter="all",reviewHistory=null,dateCandidates=null,candidateError="",disagreements=null,disagreementError=""}={}) {
   if(!Array.isArray(claims))throw new TypeError("Expected captured source claims");
   const candidates=claimCandidates(observations);
   const selected=candidates.find(o=>o.id===selectedId)||candidates[0]||null;
@@ -46,6 +46,22 @@ export function renderSourceClaims({observations=[],claims=[],selectedId=null,so
        '<span class="os-meta">Quote too short for capture</span>')+'</article>').join(""):
       '<p class="os-empty">No recognized dates. Inspect the original source manually.</p>')+'</div>'+
     '<p class="os-footnote">'+esc(suggestions.notice||"")+'</p></section>':"";
+  const disputes=disagreements?.schema_version===1&&Array.isArray(disagreements.conflicts)?disagreements:null;
+  const disagreementPanel='<section class="os-panel"><div class="os-panel-heading"><div><h2>Candidate disagreements</h2>'+
+    '<p>Different source quotations or historical versions can propose different values. No value is selected automatically.</p></div></div>'+
+    (disagreementError?'<p class="os-warning" role="alert">'+esc(disagreementError)+'</p>':'')+
+    (!disputes?'<p class="os-empty">Candidate disagreements unavailable. Refresh private evidence.</p>':
+      (disputes.sample_truncated?'<p class="os-warning" role="status">Partial sample: only newest retained claims scanned.</p>':'')+
+      '<div class="os-ledger">'+(disputes.conflicts.length?disputes.conflicts.map(group=>
+      '<article class="os-ledger-row"><div><strong>'+esc(group.application_id)+' · '+esc(group.claim_type)+'</strong>'+
+      '<small>'+esc(group.source_pattern.replaceAll("_"," "))+' · '+esc(group.distinct_candidate_values)+' distinct values</small>'+
+      '<div class="os-conflict-values">'+(group.claims||[]).map(item=>
+      '<div><strong>'+esc(item.candidate_value)+'</strong><small>Claim #'+esc(item.claim_id)+' · '+esc(item.owner_review_decision||"Not reviewed")+'</small>'+
+      (observationLink(item.source_url)?'<a href="'+esc(observationLink(item.source_url))+'" target="_blank" rel="noopener noreferrer">Inspect source</a>':'')+
+      '</div>').join("")+'</div><small>Manual review required; proposed claims are not verified deadlines.</small></div></article>').join(""):
+      '<p class="os-empty">No differing values found in the retained sample; this does not certify source agreement.</p>')+
+      '</div><p class="os-footnote">'+esc(disputes.notice||"")+'</p>')+
+    '</section>';
   const capture=quoted?'<form class="os-form" data-os-form="source-claim">'+
     '<input type="hidden" name="observation_id" value="'+selected.id+'">'+
     '<input type="hidden" name="expected_digest" value="'+esc(text.content_sha256)+'">'+
@@ -119,7 +135,7 @@ export function renderSourceClaims({observations=[],claims=[],selectedId=null,so
     (message?'<p class="os-message" role="status">'+esc(message)+'</p>':'')+
     (diffError?'<p class="os-warning" role="alert">'+esc(diffError)+'</p>':'')+
     (candidateError?'<p class="os-warning" role="alert">'+esc(candidateError)+'</p>':'')+
-    sourcePanel+diffPanel+candidatePanel+
+    sourcePanel+diffPanel+candidatePanel+disagreementPanel+
     '<section class="os-panel"><div class="os-panel-heading"><div><h2>Capture a candidate claim</h2>'+
     '<p>The exact quote and content digest become immutable private provenance. No deadline, eligibility, funding or portal state is promoted automatically.</p></div></div>'+
     capture+'</section>'+

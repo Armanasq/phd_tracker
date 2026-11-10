@@ -13,7 +13,7 @@ const cleanId = value => String(value||"").trim().toLowerCase().replace(/[^a-z0-
 const opt = (items,value) => choose(items,value);
 
 export function createConsole({notify,onChange,navigate,getRecords,getSourceRecords,onReload,getView}) {
- const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:"",jobs:[],jobsError:"",observability:null,observabilityError:"",sourceObservations:[],sourceObservationsLoading:false,sourceObservationsError:"",sourceObservationFilter:"all",sourceClaims:[],sourceClaimError:"",sourceClaimFilter:"all",selectedClaimObservation:null,claimObservationText:null,sourceClaimLoading:false,sourceTextDiff:null,sourceDiffError:"",claimReviewHistory:null,evaluationReport:null,evaluationsError:"",evaluationsLoading:false,evaluationProvider:"all",evaluationAgent:"all",sourceDateCandidates:null,sourceCandidateError:""};
+ const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:"",jobs:[],jobsError:"",observability:null,observabilityError:"",sourceObservations:[],sourceObservationsLoading:false,sourceObservationsError:"",sourceObservationFilter:"all",sourceClaims:[],sourceClaimError:"",sourceClaimFilter:"all",selectedClaimObservation:null,claimObservationText:null,sourceClaimLoading:false,sourceTextDiff:null,sourceDiffError:"",claimReviewHistory:null,evaluationReport:null,evaluationsError:"",evaluationsLoading:false,evaluationProvider:"all",evaluationAgent:"all",sourceDateCandidates:null,sourceCandidateError:"",sourceConflicts:null,sourceConflictsError:""};
  let connectionGeneration=0;
  function clearPrivateState(){
   state.online=false;state.data=null;state.jobs=[];state.jobsError="";state.observability=null;state.observabilityError="";
@@ -22,6 +22,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   state.selectedClaimObservation=null;state.claimObservationText=null;state.sourceTextDiff=null;
   state.sourceDiffError="";state.claimReviewHistory=null;
   state.sourceDateCandidates=null;state.sourceCandidateError="";
+  state.sourceConflicts=null;state.sourceConflictsError="";
   state.evaluationReport=null;state.evaluationsError="";state.evaluationsLoading=false;
   state.schedulePreview=null;state.workflowPreview=null;state.scheduleTick=null;
   state.diagnostics=null;state.latestBackup=null;state.lastAnswer=null;
@@ -112,12 +113,13 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    const data=await request("/api/bootstrap");
    if(data.security?.local_only!==true||!Array.isArray(data.catalog?.providers))
     throw new Error("Private runtime identity could not be verified");
-   const [jobs,observations,evidence,observed,evaluation]=await Promise.all([
+   const [jobs,observations,evidence,observed,evaluation,conflicts]=await Promise.all([
     request("/api/jobs").catch(error=>({error:String(error.message||error)})),
     request("/api/source-observations").catch(error=>({error:String(error.message||error)})),
     request("/api/source-claims").catch(error=>({error:String(error.message||error)})),
     request("/api/observability").catch(error=>({error:String(error.message||error)})),
     request("/api/evaluations").catch(error=>({error:String(error.message||error)})),
+    request("/api/source-claims/conflicts").catch(error=>({error:String(error.message||error)})),
    ]);
    if(generation!==connectionGeneration)return false;
    state.online=true;state.data=data;
@@ -127,6 +129,8 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    state.sourceObservations=Array.isArray(observations.observations)?observations.observations:[];
    state.sourceClaimError=evidence.error||"";
    state.sourceClaims=Array.isArray(evidence.claims)?evidence.claims:[];
+   state.sourceConflictsError=conflicts.error||"";
+   state.sourceConflicts=conflicts.schema_version===1?conflicts:null;
    state.observabilityError=observed?.error||(observed?.schema_version!==1?"Private observability returned an invalid response":"");
    state.observability=observed?.schema_version===1?observed:null;
    state.evaluationsError=evaluation.error||"";
@@ -511,7 +515,8 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
     provider:state.evaluationProvider,agent:state.evaluationAgent,loading:state.evaluationsLoading});
   if(name==="source-observations")return renderSourceObservations({records:state.sourceObservations,loading:state.sourceObservationsLoading,error:state.sourceObservationsError,filter:state.sourceObservationFilter,message:state.message});
   if(name==="source-claims")return renderSourceClaims({observations:state.sourceObservations,claims:state.sourceClaims,selectedId:state.selectedClaimObservation,sourceText:state.claimObservationText,diff:state.sourceTextDiff,diffError:state.sourceDiffError,error:state.sourceClaimError,filter:state.sourceClaimFilter,message:state.message,loading:state.sourceClaimLoading,reviewHistory:state.claimReviewHistory,
-    dateCandidates:state.sourceDateCandidates,candidateError:state.sourceCandidateError});
+    dateCandidates:state.sourceDateCandidates,candidateError:state.sourceCandidateError,
+    disagreements:state.sourceConflicts,disagreementError:state.sourceConflictsError});
   return '';
  }
  function selectConnection(id) {state.selectedProvider=id;state.models={};onChange();}
@@ -554,10 +559,14 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    const generation=connectionGeneration;
    state.sourceClaimLoading=true;state.sourceClaimError="";onChange();
    try{
-    const [observed,claims]=await Promise.all([request("/api/source-observations"),request("/api/source-claims")]);
+    const [observed,claims,conflicts]=await Promise.all([
+      request("/api/source-observations"),request("/api/source-claims"),request("/api/source-claims/conflicts")]);
     if(generation!==connectionGeneration)return;
-    if(!Array.isArray(observed.observations)||!Array.isArray(claims.claims))throw new Error("Invalid private evidence response");
+    if(!Array.isArray(observed.observations)||!Array.isArray(claims.claims)||
+       conflicts.schema_version!==1||!Array.isArray(conflicts.conflicts))
+      throw new Error("Invalid private evidence response");
     state.sourceObservations=observed.observations;state.sourceClaims=claims.claims;
+    state.sourceConflicts=conflicts;state.sourceConflictsError="";
     state.claimObservationText=null;state.sourceTextDiff=null;state.sourceDiffError="";state.sourceDateCandidates=null;state.sourceCandidateError="";
    }catch(error){if(generation===connectionGeneration)state.sourceClaimError=short(error.message,240);}
    finally{if(generation===connectionGeneration){state.sourceClaimLoading=false;onChange();}}
