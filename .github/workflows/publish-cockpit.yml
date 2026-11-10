@@ -89,6 +89,8 @@ jobs:
           node --check site/modules/local-records.mjs
           node --test tests/local_records.test.mjs
           node --check site/modules/lens.mjs
+          node --check site/modules/sse-client.mjs
+          node --test tests/streaming.test.mjs
           node --check site/modules/console.mjs
           node --check site/modules/discovery.mjs
           node --check site/modules/runtime-capabilities.mjs
