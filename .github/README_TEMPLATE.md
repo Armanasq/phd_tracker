@@ -21,6 +21,7 @@ PhD Atlas brings application records, supporting sources, preparation tasks, con
 | First-run setup & Deployment | Check an independent fork's source policy, local-model connectivity, public release and runtime boundaries; export a nonsecret setup summary. |
 | Research & EvidenceGraph | Examine the [evidence workflow](assets/readme/evidence_flow.svg), [portfolio frontier](data/portfolio_frontier.json) and [generated research report](docs/RESEARCH_REPORT.md). |
 | Atlas assistant | Use direct browser-local OpenAI-compatible inference on Pages, or configured local/cloud providers through the *private* runtime; responses are proposals, not completed actions. |
+| Agent evaluations | Inspect actual local model calls, citation-ID coverage, provider failure rates, latency and workflow stage results; no fabricated quality scores. |
 
 The [public workspace](https://armanasq.github.io/phd_tracker/) works without an AI provider and exposes 25 canonical routes (private workflows require the local runtime). In hosted **Settings**, users can connect to a model on their own computer via an explicitly configured HTTP loopback `/v1` endpoint, subject to browser permissions and server CORS. No cloud key is stored on Pages. A provider preset, search result or model-produced suggestion is not proof of current availability, admission eligibility or a submitted application.
 

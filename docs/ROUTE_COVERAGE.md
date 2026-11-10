@@ -52,6 +52,7 @@ Updated 2026-11-10. This is a source-backed route inventory, not a product featu
 - `tests/browser_model*.mjs`: endpoint restrictions, model probing, direct inference and ephemeral history.
 - `tests/browser_lens_smoke.cjs`: real browser path from Settings to the global assistant and new routes.
 - `tests/test_workflow_plan.py`: multi-agent preflight and no partial cloud execution.
+- `tests/test_phd_evaluations.py` and `tests/evaluations.test.mjs`: bounded, private inference metrics and XSS-safe evaluation presentation.
 - `tests/test_runtime_capabilities.py`: local capability API, correct readiness and secret exclusion.
 - `tests/all_routes_audit.cjs` and `tests/mobile_layout_audit.cjs`: all 26 routes across form factors.
 

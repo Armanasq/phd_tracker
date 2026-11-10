@@ -77,6 +77,15 @@ with store.db:
          "2026-11-10T08:00:00+00:00",200,21,"source_bytes_changed_needs_review",
          visible,text,0,"visible_text_changed"),
     )
+store.put_run("agent", "deadline_auditor", "EXAMPLE-1", "proposed", "ollama", {
+    "model": "synthetic-no-network", "latency_ms": 125,
+    "usage": {"prompt_tokens": 50, "completion_tokens": 20},
+    "prompt_contract_id": "phd_evidence_analysis_v1",
+    "text": "SYNTHETIC PRIVATE RESPONSE MUST NOT LEAK",
+    "claim_audit": {"schema_version": 1, "unknown_reference_links": 1,
+                    "linked_to_unverified_records": 1, "linked_to_reviewed_records": 0,
+                    "unlinked_text_blocks": 1},
+})
 store.close()
 `;
   const seeded=spawnSync('python',['-c',seed,folder],{cwd:root,encoding:'utf8'});
@@ -94,6 +103,17 @@ store.close()
     const privatePage=await browser.newPage({viewport:{width:390,height:844}});
     const errors=[];
     privatePage.on('pageerror',e=>errors.push(e.message));
+    await privatePage.goto(privateUrl+'/index.html#evaluations',{waitUntil:'networkidle'});
+    await privatePage.locator('#body h1').getByText('Agent evaluations').waitFor({timeout:12000});
+    await privatePage.locator('[data-os-eval-provider]').selectOption('ollama');
+    assert.match(await privatePage.locator('#body').innerText(),/deadline_auditor/);
+    assert.match(await privatePage.locator('#body').innerText(),/Unknown citation links/);
+    const evaluation=await (await fetch(privateUrl+'/api/evaluations')).json();
+    assert.equal(evaluation.summary.calls,1);
+    assert.equal(evaluation.summary.unknown_reference_links,1);
+    assert.equal(evaluation.summary.semantic_entailment_verified,false);
+    assert.equal(evaluation.workflow_summaries.length,0);
+    assert.ok(!JSON.stringify(evaluation).includes('SYNTHETIC PRIVATE RESPONSE MUST NOT LEAK'));
     await privatePage.goto(privateUrl+'/index.html#source-observations',{waitUntil:'networkidle'});
     await privatePage.locator('form[data-os-form="source-review"]').waitFor({timeout:15000});
     const form=privatePage.locator('form[data-os-form="source-review"]');
@@ -158,7 +178,7 @@ store.close()
     assert.equal(exported.contains_secrets,false);
     assert.deepEqual(publicErrors,[],'Public first-run setup JavaScript errors');
     await publicPage.close();
-    console.log('Private source review, exact-quote capture, and fork setup smoke passed');
+    console.log('Private evaluation metrics, source review, quote capture, and fork setup smoke passed');
   } finally {
     if(browser)await browser.close();
     child.kill('SIGTERM');
