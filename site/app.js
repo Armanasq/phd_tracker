@@ -514,7 +514,7 @@ function navigation(){
  const next=tracked.filter(r=>open(r)&&r.status!=="submitted"&&remainingDeadlineDays(r)!==null&&remainingDeadlineDays(r)>=0).sort((a,b)=>remainingDeadlineDays(a)-remainingDeadlineDays(b)||priority(b)-priority(a))[0];
  const sidebarDue=$("sidebarDue");
  if(sidebarDue)sidebarDue.innerHTML=next?
-  '<span class="sidebar-deadline-label">NEXT RECORDED CLOSING</span><strong>'+(remainingDeadlineDays(next)===0?'TODAY':remainingDeadlineDays(next)+' DAYS')+'</strong><button type="button" class="sidebar-deadline-link" data-action="record" data-value="'+escapeHTML(next.id)+'">'+escapeHTML(next.name)+'</button><small>'+escapeHTML(stamp(next.deadline))+'</small>':
+  '<span class="sidebar-deadline-label">NEXT RECORDED CLOSING</span><strong>'+(remainingDeadlineDays(next)===0?(verifiedCutoff(next)!==null?'UNDER 24H':'TODAY'):remainingDeadlineDays(next)+' DAYS')+'</strong><button type="button" class="sidebar-deadline-link" data-action="record" data-value="'+escapeHTML(next.id)+'">'+escapeHTML(next.name)+'</button><small>'+escapeHTML(stamp(next.deadline))+'</small>':
   '<span class="sidebar-deadline-label">NEXT RECORDED CLOSING</span><small>No upcoming dated applications</small>';
 }
 function render(){
