@@ -3,10 +3,12 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import time
 from pathlib import Path
 
 from .catalog import PROVIDERS
 from .engine import catalog, run_agent, scheduler_once
+from .job_queue import worker_once
 from .server import ROOT, serve
 from .store import Store, private_directory
 from scripts.instance_config import resolve_repository
@@ -18,6 +20,10 @@ def main() -> None:
     server = commands.add_parser("serve")
     server.add_argument("--port", type=int, default=8765)
     commands.add_parser("scheduler-once")
+    commands.add_parser("worker-once")
+    worker = commands.add_parser("worker-loop")
+    worker.add_argument("--interval-seconds", type=int, default=3)
+    worker.add_argument("--max-jobs", type=int, default=0)
     commands.add_parser("catalog")
     commands.add_parser("diagnostics")
     backup_command = commands.add_parser("backup")
@@ -54,9 +60,27 @@ def main() -> None:
             result = restore_backup(args.filename, sha256=args.sha256, confirm=args.confirm)
         print(json.dumps(result, indent=2, ensure_ascii=False))
         return
+    if args.command == "worker-loop":
+        if not 1 <= args.interval_seconds <= 60 or not 0 <= args.max_jobs <= 100000:
+            parser.error("Worker interval must be 1–60 seconds and max-jobs 0–100000")
     store = Store()
     try:
-        if args.command == "catalog":
+        if args.command == "worker-once":
+            result = worker_once(store, args.repo)
+        elif args.command == "worker-loop":
+            processed = 0
+            try:
+                while not args.max_jobs or processed < args.max_jobs:
+                    value = worker_once(store, args.repo)
+                    if value.get("status") != "idle":
+                        processed += 1
+                        print(json.dumps(value, ensure_ascii=False), flush=True)
+                    else:
+                        time.sleep(args.interval_seconds)
+            except KeyboardInterrupt:
+                pass
+            return
+        elif args.command == "catalog":
             result = catalog(store)
             for item in result["providers"]:
                 item["configured"] = not item["api_key_env"] or bool(os.environ.get(item["api_key_env"]))
