@@ -73,3 +73,15 @@ def test_local_rate_budget_preflight_matches_server_constraints(tmp_path):
         "PHDAI_MAX_WRITES_PER_MINUTE": "100",
     })
     assert not any(item.code in failed and item.status == "error" for item in valid)
+
+
+def test_native_platform_deployment_fails_closed_when_unsupported(tmp_path):
+    root = project(tmp_path)
+    linux = inspect(root, "local-full-stack", {}, platform_name="linux")
+    macos = inspect(root, "local-full-stack", {}, platform_name="darwin")
+    windows = inspect(root, "local-full-stack", {}, platform_name="win32")
+    assert next(item for item in linux if item.code == "native-platform").status == "ok"
+    assert next(item for item in macos if item.code == "native-platform").status == "warning"
+    assert next(item for item in windows if item.code == "native-platform").status == "error"
+    browser = inspect(root, "browser-local", {}, platform_name="win32")
+    assert not any(item.code == "native-platform" for item in browser)

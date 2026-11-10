@@ -4,6 +4,7 @@ import argparse
 import json
 import os
 import re
+import sys
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Mapping
@@ -21,7 +22,7 @@ class Check:
     detail: str
 
 
-def inspect(root: Path, mode: str, env: Mapping[str, str]) -> list[Check]:
+def inspect(root: Path, mode: str, env: Mapping[str, str], *, platform_name: str | None = None) -> list[Check]:
     if mode not in MODES:
         raise ValueError("Unsupported deployment mode")
     root = root.expanduser().resolve()
@@ -63,6 +64,13 @@ def inspect(root: Path, mode: str, env: Mapping[str, str]) -> list[Check]:
             add("data-mode", "ok", "Starter mode does not publish inherited opportunities")
 
     if mode == "local-full-stack":
+        platform = sys.platform if platform_name is None else platform_name
+        if platform.startswith("linux"):
+            add("native-platform", "ok", "Linux native private runtime is covered by Linux CI; live provider verification is separate")
+        elif platform == "darwin":
+            add("native-platform", "warning", "macOS POSIX runtime requires independent native browser, model and restore certification")
+        else:
+            add("native-platform", "error", "Native private runtime is not certified on this OS; use a Linux runtime or static browser-only mode")
         limit = env.get("PHDAI_MAX_CONCURRENT_INFERENCE", "2")
         try:
             valid_limit = 1 <= int(limit) <= 8

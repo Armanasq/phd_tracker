@@ -32,9 +32,11 @@ python -m phd_agents serve --port 8765
 
 Open `http://127.0.0.1:8765/#settings`. Configure a real OpenAI-compatible/other supported endpoint in Settings; local models must already be running. The private server listens only on loopback and is not suitable for internet exposure without an independently designed authentication and reverse-proxy deployment.
 
+**Native platform gate:** The private SQLite runtime and its advisory-lock/owner-only recovery paths are covered by Linux CI. macOS provides the required POSIX primitives but still requires independent native restore/model/browser certification. Native Windows has not been made safe for these private-state contracts; use WSL2/Linux for the Python runtime, or use the static site and browser-local model path without Python persistence. Run `python scripts/deployment_check.py --mode local-full-stack` to inspect the actual platform instead of assuming successful static Pages publication also certifies the private runtime.
+
 ### Fork owner first-run checklist
 
-Open **First-run setup** (`#onboarding`) to inspect the published repository identity, starter/source data mode, supported execution options and real local connection state. Mode selection remains in this browser and **does not change GitHub settings or secrets**. The nonsecret JSON export records the intended target and observed prerequisites, not a deployment certification. The [24-route inventory](ROUTE_COVERAGE.md) distinguishes this setup view from the underlying Deployment capability matrix.
+Open **First-run setup** (`#onboarding`) to inspect the published repository identity, starter/source data mode, supported execution options and real local connection state. Mode selection remains in this browser and **does not change GitHub settings or secrets**. The nonsecret JSON export records the intended target and observed prerequisites, not a deployment certification. The [26-route inventory](ROUTE_COVERAGE.md) distinguishes this setup view from the underlying Deployment capability matrix.
 
 ### Publish your own GitHub Pages site
 
