@@ -1,0 +1,11 @@
+# Opt-in official-source byte observations
+
+Run `python -m phd_agents observe-sources --limit 8` or `--application APPLICATION_ID` locally. External HTTPS requests are **manual and opt-in**, not performed on startup, browsing, scheduled CI, or ordinary model inference. Confirm the relevant website's terms and crawling policy before running.
+
+The observer selects previously reviewed, tracked records with HTTPS institutional source links. It rejects embedded credentials, query strings, redirects, insecure transports, localhost and non-global DNS results; inherited HTTP proxies are disabled. Request timeout is 15 seconds and response data is limited to 1 MB of HTML/plain text. No cookies, applicant data or API keys are sent. Raw website text is **not retained**. Only content hashes, status, timestamp, byte count, source link and application ID are recorded in owner-only SQLite, retaining up to 2,000 observations.
+
+A first observation creates a baseline; a changed content hash raises `source_bytes_changed_needs_review`. A 403/404/redirect/timeout or unsupported response emits `unavailable_no_source_conclusion`, not an assertion that the university closed admissions. `GET /api/source-observations` lists recent private observations with no raw page content. Hash equality does not establish institutional source freshness or verified deadline. This is a byte-drift signal, **not a semantic deadline extractor**, automatic eligibility verifier, or admissions update.
+
+The existing `compare-sources` command reports field-level differences between independently acquired JSON snapshots. For official deadline verification, an operator must still inspect the primary institution page and its effective date, capture evidence, and resolve differences manually. Do not copy private source observations into public Pages exports.
+
+CI: `python -m pytest tests/test_phd_source_observer.py -q` uses a fake HTTPS transport; no real university URL is contacted in tests.

@@ -21,6 +21,9 @@ def main() -> None:
     server.add_argument("--port", type=int, default=8765)
     commands.add_parser("scheduler-once")
     commands.add_parser("worker-once")
+    observe = commands.add_parser("observe-sources")
+    observe.add_argument("--limit", type=int, default=8)
+    observe.add_argument("--application")
     worker = commands.add_parser("worker-loop")
     worker.add_argument("--interval-seconds", type=int, default=3)
     worker.add_argument("--max-jobs", type=int, default=0)
@@ -113,6 +116,11 @@ def main() -> None:
             except KeyboardInterrupt:
                 pass
             return
+        elif args.command == "observe-sources":
+            from .source_observer import run_source_observations
+            result = run_source_observations(
+                store, args.repo, limit=args.limit, application_id=args.application,
+            )
         elif args.command == "catalog":
             result = catalog(store)
             for item in result["providers"]:

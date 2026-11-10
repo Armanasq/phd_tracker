@@ -283,6 +283,9 @@ class ApiHandler(BaseHTTPRequestHandler):
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             self.wfile.write(body)
+        elif path == "/api/source-observations":
+            from .source_observer import recent_observations
+            self.send_json({"observations": recent_observations(store)})
         elif path == "/api/observability":
             self.send_json(report_observability(store))
         elif path == "/api/metrics":
