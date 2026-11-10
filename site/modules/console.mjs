@@ -1,6 +1,7 @@
 import {createOperations} from "./operations.mjs";
 import {createBrowserModel} from "./browser-model.mjs";
 import {renderSourceObservations} from "./source-observations.mjs";
+import {renderSourceClaims,claimCandidates} from "./source-claims.mjs";
 const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const pretty = value => String(value ?? "").replaceAll("_"," ").replace(/\b\w/g, c => c.toUpperCase());
 const short = (value, length=125) => String(value ?? "").slice(0,length);
@@ -11,7 +12,7 @@ const cleanId = value => String(value||"").trim().toLowerCase().replace(/[^a-z0-
 const opt = (items,value) => choose(items,value);
 
 export function createConsole({notify,onChange,navigate,getRecords,getSourceRecords,onReload,getView}) {
- const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:"",jobs:[],observability:null,sourceObservations:[],sourceObservationsLoading:false,sourceObservationsError:"",sourceObservationFilter:"all"};
+ const state = {online:false,loading:false,data:null,tab:"connections",selectedProvider:null,selectedAgent:null,selectedWorkflow:null,showAllProviders:false,models:{},schedulePreview:null,schedulePreviewRequested:false,workflowPreview:null,scheduleTick:null,diagnostics:null,latestBackup:null,busy:false,prompt:"",lastAnswer:null,selectedApplication:"",sourceView:"dashboard",routeDraft:null,message:"",jobs:[],observability:null,sourceObservations:[],sourceObservationsLoading:false,sourceObservationsError:"",sourceObservationFilter:"all",sourceClaims:[],sourceClaimError:"",sourceClaimFilter:"all",selectedClaimObservation:null,claimObservationText:null,sourceClaimLoading:false};
  const providers = () => state.data?.catalog?.providers || [];
  const agents = () => state.data?.catalog?.agents || [];
  const workflows = () => state.data?.catalog?.workflows || [];
@@ -97,6 +98,9 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    const observations=await request("/api/source-observations").catch(error=>({error:String(error.message||error)}));
    state.sourceObservationsError=observations.error||"";
    state.sourceObservations=Array.isArray(observations.observations)?observations.observations:[];
+   const evidence=await request("/api/source-claims").catch(error=>({error:String(error.message||error)}));
+   state.sourceClaimError=evidence.error||"";
+   state.sourceClaims=Array.isArray(evidence.claims)?evidence.claims:[];
    const observed=await request("/api/observability").catch(()=>null);
    state.observability=observed?.schema_version===1?observed:null;
    state.selectedAgent=agents().some(a=>a.id===state.selectedAgent)?state.selectedAgent:(prefs().default_agent||agents()[0]?.id);
@@ -461,6 +465,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   if(name==="automations")return '<section class="os-page">'+heading("AI / WORKFLOW ENGINE","Automations","Compose multi-agent workflows, inspect scheduling rules and control approvals.",btn("Runtime settings","go","settings","quiet"))+workflowPanel()+'</section>';
   if(name==="activity")return activity();
   if(name==="source-observations")return renderSourceObservations({records:state.sourceObservations,loading:state.sourceObservationsLoading,error:state.sourceObservationsError,filter:state.sourceObservationFilter,message:state.message});
+  if(name==="source-claims")return renderSourceClaims({observations:state.sourceObservations,claims:state.sourceClaims,selectedId:state.selectedClaimObservation,sourceText:state.claimObservationText,error:state.sourceClaimError,filter:state.sourceClaimFilter,message:state.message,loading:state.sourceClaimLoading});
   return '';
  }
  function selectConnection(id) {state.selectedProvider=id;state.models={};onChange();}
@@ -481,6 +486,42 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    }catch(error){state.sourceObservationsError=String(error.message||error).slice(0,200);}
    finally{state.sourceObservationsLoading=false;onChange();}
    return;
+  }
+  if(action==="refresh-claim-evidence"){
+   if(!isLive()||state.sourceClaimLoading)return;
+   state.sourceClaimLoading=true;state.sourceClaimError="";onChange();
+   try{
+    const [observed,claims]=await Promise.all([request("/api/source-observations"),request("/api/source-claims")]);
+    if(!Array.isArray(observed.observations)||!Array.isArray(claims.claims))throw new Error("Invalid private evidence response");
+    state.sourceObservations=observed.observations;state.sourceClaims=claims.claims;
+    state.claimObservationText=null;
+   }catch(error){state.sourceClaimError=short(error.message,240);}
+   finally{state.sourceClaimLoading=false;onChange();}
+   return;
+  }
+  if(action==="load-claim-source"){
+   if(!isLive()||state.sourceClaimLoading)return;
+   const source=claimCandidates(state.sourceObservations).find(x=>x.id===state.selectedClaimObservation)||claimCandidates(state.sourceObservations)[0];
+   if(!source)return;
+   state.selectedClaimObservation=source.id;
+   state.claimObservationText=null;state.sourceClaimLoading=true;state.sourceClaimError="";onChange();
+   try{
+    const result=await request("/api/source-observations/"+source.id+"/text");
+    if(result.observation?.id!==source.id)throw new Error("Source observation identifier changed");
+    state.claimObservationText=result.observation;
+   }catch(error){state.sourceClaimError=short(error.message,240);}
+   finally{state.sourceClaimLoading=false;onChange();}
+   return;
+  }
+  if(action==="use-selected-quote"){
+   const selected=window.getSelection()?.toString().trim()||"";
+   const region=document.getElementById("sourceCapturedText");
+   const form=document.querySelector('form[data-os-form="source-claim"]');
+   if(!region||!form||!selected||selected.length>320||selected.length<20||
+      !region.contains(window.getSelection()?.anchorNode)||!region.contains(window.getSelection()?.focusNode)){
+    notify("Highlight 20–320 characters inside the displayed source text.");return;
+   }
+   form.elements.quote.value=selected;form.elements.quote.focus();return;
   }
   if(action==="copy-observer-command"){
    if(!isLive())return;
@@ -618,6 +659,24 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   event.preventDefault();
   if(kind.startsWith("bm-")){try{await browserModel.submit(event);}catch(error){notify(short(error.message,220));}return;}
   const values=Object.fromEntries(new FormData(form));
+  if(kind==="source-claim"){
+   if(!isLive())throw new Error("Source quotation capture requires the private runtime");
+   const identity=Number(values.observation_id),quote=String(values.quote||"").trim();
+   if(!Number.isSafeInteger(identity)||identity<1||quote.length<20||quote.length>320){
+    throw new Error("Select a real observation and a 20–320-character exact source quote");
+   }
+   await change(async()=>{
+    await request("/api/source-claims/capture",{
+     observation_id:identity,claim_type:values.claim_type,
+     quote,candidate_value:values.candidate_value,
+     expected_digest:values.expected_digest,
+    });
+    const response=await request("/api/source-claims");
+    if(!Array.isArray(response.claims))throw new Error("Source quote capture succeeded but refresh failed");
+    state.sourceClaims=response.claims;
+    state.message="Exact source quotation captured privately. The candidate interpretation remains unverified.";
+   });return;
+  }
   if(kind==="source-review"){
    if(!isLive())throw new Error("Private source review requires the local runtime");
    const observationId=Number(values.observation_id);
@@ -725,6 +784,15 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    handleForm(event).catch(error=>notify(short(error.message,220)));
   });
   document.addEventListener("change",event=>{
+   if(event.target.matches("[data-os-claim-observation]")){
+    const id=Number(event.target.value);
+    if(!Number.isSafeInteger(id)||id<1)return;
+    state.selectedClaimObservation=id;
+    state.claimObservationText=null;state.sourceClaimError="";onChange();return;
+   }
+   if(event.target.matches("[data-os-claim-filter]")){
+    state.sourceClaimFilter=event.target.value;onChange();return;
+   }
    if(event.target.matches("[data-os-observation-filter]")){
     state.sourceObservationFilter=event.target.value;
     onChange();return;
