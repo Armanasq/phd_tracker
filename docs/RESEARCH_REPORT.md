@@ -2,7 +2,7 @@
 
 [Overview](../README.md) · [Open workspace](https://armanasq.github.io/phd_tracker/)
 
-**Snapshot:** 2026-11-09. This report is generated from committed evidence, not live admissions information.
+**Snapshot:** 2026-11-10. This report is generated from committed evidence, not live admissions information.
 
 <div align="center">
 
@@ -14,15 +14,15 @@
 
 [**DISCOVER**](#research--application-pipeline) · [**VERIFY**](#opportunity-funnel--actual-deadline-horizons) · [**ANALYZE**](#research-focus-quadrant) · [**PLAN**](#deadline-gantt--application-milestones) · [**SIMULATE**](#interactive-exploration--simulation-lab) · [**EXECUTE**](#github-native-workflow-console)
 
-<sub>Observed 2026-11-09 · Metrics are derived from source snapshots, not example values or inferred admissions outcomes.</sub>
+<sub>Observed 2026-11-10 · Metrics are derived from source snapshots, not example values or inferred admissions outcomes.</sub>
 
 </div>
 
 <table><tr>
-<td align="center" width="16%"><b>OPPORTUNITIES</b><h2>109</h2><sub>dated frontier</sub></td>
-<td align="center" width="16%"><b>UPCOMING</b><h2>20</h2><sub>next seven days</sub></td>
-<td align="center" width="16%"><b>PROOF STATES</b><h2>341</h2><sub>unknown document mentions</sub></td>
-<td align="center" width="16%"><b>RESEARCH</b><h2>39</h2><sub>indexed papers</sub></td>
+<td align="center" width="16%"><b>OPPORTUNITIES</b><h2>107</h2><sub>dated frontier</sub></td>
+<td align="center" width="16%"><b>UPCOMING</b><h2>19</h2><sub>next seven days</sub></td>
+<td align="center" width="16%"><b>PROOF STATES</b><h2>335</h2><sub>unknown document mentions</sub></td>
+<td align="center" width="16%"><b>RESEARCH</b><h2>68</h2><sub>indexed papers</sub></td>
 <td align="center" width="16%"><b>SOURCES</b><h2>1/4</h2><sub>healthy providers</sub></td>
 <td align="center" width="16%"><b>CONTRADICTIONS</b><h2>1</h2><sub>source review flags</sub></td>
 </tr></table>
@@ -39,7 +39,7 @@ The diagram below is **native Mermaid**. GitHub renders it as a diagram, not as 
 flowchart LR
     A["Discovery sources · 4 monitored"] --> B["Ingest & deduplicate"]
     B --> C{"Evidence verification"}
-    C -->|"Source verified"| D["Application frontier · 109"]
+    C -->|"Source verified"| D["Application frontier · 107"]
     C -->|"Unresolved source"| E["Evidence review · 1 conflicts"]
     E --> C
     D --> F["Deadline & proof planning"]
@@ -55,13 +55,13 @@ flowchart LR
 
 ## Opportunity funnel · actual deadline horizons
 
-This Sankey partitions the 109 dated portfolio records by their remaining calendar horizon; it does not imply historical conversion between recruitment stages.
+This Sankey partitions the 107 dated portfolio records by their remaining calendar horizon; it does not imply historical conversion between recruitment stages.
 
 ```mermaid
 sankey-beta
-Recorded frontier,0-7 days,20
-Recorded frontier,8-14 days,12
-Recorded frontier,15-30 days,40
+Recorded frontier,0-7 days,19
+Recorded frontier,8-14 days,13
+Recorded frontier,15-30 days,38
 Recorded frontier,31-60 days,14
 Recorded frontier,61+ days,23
 ```
@@ -84,21 +84,21 @@ Provider health is not an estimate of search completeness. 3 channels are degrad
 
 ```mermaid
 gantt
-    title Recorded PhD deadlines - snapshot 2026-11-09
+    title Recorded PhD deadlines - snapshot 2026-11-10
     dateFormat YYYY-MM-DD
     axisFormat %b %d
     section Final application deadlines
-    N263-05 UCL Gatsby Computational Neuroscience Uni :milestone, d0, 2026-11-09, 0d
-    N263-06 UCL Sainsbury Wellcome Centre fully funde :milestone, d1, 2026-11-09, 0d
-    C06 Swiss Government Excellence Scholarship resea :milestone, d2, 2026-11-10, 0d
-    M07a Southampton MSCA BlueOcean PhD Studentship a :milestone, d3, 2026-11-13, 0d
-    inria 2026-10608 Inria IROKO Montpellier PhD Scie :milestone, d4, 2026-11-13, 0d
-    R26-TIB-ECOAIRE-CAUSAL-NLP TIB Hannover / Leibniz :milestone, d5, 2026-11-14, 0d
-    M15 OIST Graduate School PhD May or Sep 2027 entr :milestone, d6, 2026-11-15, 0d
-    M17 Northeastern University London PhD studentshi :milestone, d7, 2026-11-15, 0d
-    M18 Institute of Science Tokyo International Grad :milestone, d8, 2026-11-15, 0d
-    N263-07 TUM Autonomous Vehicle Systems Johannes B :milestone, d9, 2026-11-15, 0d
-    N263-08 TU Delft OPERA EU Project PhD Safe Planni :milestone, d10, 2026-11-15, 0d
+    C06 Swiss Government Excellence Scholarship resea :milestone, d0, 2026-11-10, 0d
+    M07a Southampton MSCA BlueOcean PhD Studentship a :milestone, d1, 2026-11-13, 0d
+    inria 2026-10608 Inria IROKO Montpellier PhD Scie :milestone, d2, 2026-11-13, 0d
+    R26-TIB-ECOAIRE-CAUSAL-NLP TIB Hannover / Leibniz :milestone, d3, 2026-11-14, 0d
+    M15 OIST Graduate School PhD May or Sep 2027 entr :milestone, d4, 2026-11-15, 0d
+    M17 Northeastern University London PhD studentshi :milestone, d5, 2026-11-15, 0d
+    M18 Institute of Science Tokyo International Grad :milestone, d6, 2026-11-15, 0d
+    N263-07 TUM Autonomous Vehicle Systems Johannes B :milestone, d7, 2026-11-15, 0d
+    N263-08 TU Delft OPERA EU Project PhD Safe Planni :milestone, d8, 2026-11-15, 0d
+    N263-09 International Max Planck Research School  :milestone, d9, 2026-11-15, 0d
+    N263-10 BMW AI Robotics / RoboTac and TU/e Eindho :milestone, d10, 2026-11-15, 0d
 ```
 
 <details>
@@ -109,7 +109,7 @@ xychart-beta
     title "Application deadline horizon"
     x-axis ["0-7d", "8-14d", "15-30d", "31-60d", "61+d"]
     y-axis "Application records" 0 --> 40
-    bar [20, 12, 40, 14, 23]
+    bar [19, 13, 38, 14, 23]
 ```
 
 </details>
@@ -117,17 +117,17 @@ xychart-beta
 ## Global opportunities · interactive GitHub map
 
 ```geojson
-{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"title":"Germany: 3 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":3,"sample_source_ids":"N263-09, N263-07, N264-10","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[13.405,52.52]}},{"type":"Feature","properties":{"title":"United Kingdom: 18 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":18,"sample_source_ids":"N263-05, N263-06, M17","marker-color":"#19b5b6","marker-size":"large"},"geometry":{"type":"Point","coordinates":[-0.1276,51.5072]}},{"type":"Feature","properties":{"title":"Netherlands: 8 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":8,"sample_source_ids":"N263-10, N263-08, N264-03","marker-color":"#19b5b6","marker-size":"large"},"geometry":{"type":"Point","coordinates":[4.9041,52.3676]}},{"type":"Feature","properties":{"title":"Switzerland: 10 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":10,"sample_source_ids":"C06, M23, M24","marker-color":"#19b5b6","marker-size":"large"},"geometry":{"type":"Point","coordinates":[7.4474,46.948]}},{"type":"Feature","properties":{"title":"Norway: 6 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":6,"sample_source_ids":"M19, M20, M21","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[10.7522,59.9139]}},{"type":"Feature","properties":{"title":"Sweden: 3 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":3,"sample_source_ids":"N264-07, N264-09, R26-KTH-AGENTIC-EMBODIED","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[18.0632,59.3346]}},{"type":"Feature","properties":{"title":"Denmark: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"N264-08","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[12.5683,55.6761]}},{"type":"Feature","properties":{"title":"Japan: 6 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":6,"sample_source_ids":"M18, M15, C15-NAGOYA","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[139.6917,35.6895]}},{"type":"Feature","properties":{"title":"France: 3 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":3,"sample_source_ids":"inria:2026-10608, inria:2026-10570, inria:2026-10454","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[2.3522,48.8566]}},{"type":"Feature","properties":{"title":"Italy: 3 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":3,"sample_source_ids":"N264-05, N264-04, R26-AI4I-TRUSTWORTHY-GENERALIST","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[12.4964,41.9028]}},{"type":"Feature","properties":{"title":"Cyprus: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"R26-UCY-SKEYES","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[33.3823,35.1856]}},{"type":"Feature","properties":{"title":"Luxembourg: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"M26","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[6.1319,49.6116]}},{"type":"Feature","properties":{"title":"United States: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"R26-GWU-EPIC","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[-77.0369,38.9072]}},{"type":"Feature","properties":{"title":"Canada: 8 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":8,"sample_source_ids":"M33, M31, M34","marker-color":"#19b5b6","marker-size":"large"},"geometry":{"type":"Point","coordinates":[-75.6972,45.4215]}},{"type":"Feature","properties":{"title":"Australia: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"M43a","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[149.13,-35.2809]}},{"type":"Feature","properties":{"title":"Austria: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"R26-VIENNA-EXOSPHERE","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[16.3738,48.2082]}}]}
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"title":"Germany: 3 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":3,"sample_source_ids":"N263-09, N263-07, N264-10","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[13.405,52.52]}},{"type":"Feature","properties":{"title":"United Kingdom: 16 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":16,"sample_source_ids":"M17, N263-11, M25","marker-color":"#19b5b6","marker-size":"large"},"geometry":{"type":"Point","coordinates":[-0.1276,51.5072]}},{"type":"Feature","properties":{"title":"Netherlands: 8 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":8,"sample_source_ids":"N263-10, N263-08, N264-03","marker-color":"#19b5b6","marker-size":"large"},"geometry":{"type":"Point","coordinates":[4.9041,52.3676]}},{"type":"Feature","properties":{"title":"Switzerland: 10 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":10,"sample_source_ids":"C06, M23, M24","marker-color":"#19b5b6","marker-size":"large"},"geometry":{"type":"Point","coordinates":[7.4474,46.948]}},{"type":"Feature","properties":{"title":"Norway: 6 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":6,"sample_source_ids":"M19, M20, M21","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[10.7522,59.9139]}},{"type":"Feature","properties":{"title":"Sweden: 3 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":3,"sample_source_ids":"N264-07, N264-09, R26-KTH-AGENTIC-EMBODIED","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[18.0632,59.3346]}},{"type":"Feature","properties":{"title":"Denmark: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"N264-08","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[12.5683,55.6761]}},{"type":"Feature","properties":{"title":"Japan: 6 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":6,"sample_source_ids":"M18, M15, C15-NAGOYA","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[139.6917,35.6895]}},{"type":"Feature","properties":{"title":"France: 3 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":3,"sample_source_ids":"inria:2026-10608, inria:2026-10570, inria:2026-10454","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[2.3522,48.8566]}},{"type":"Feature","properties":{"title":"Italy: 3 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":3,"sample_source_ids":"N264-05, N264-04, R26-AI4I-TRUSTWORTHY-GENERALIST","marker-color":"#9f61e8","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[12.4964,41.9028]}},{"type":"Feature","properties":{"title":"Cyprus: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"R26-UCY-SKEYES","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[33.3823,35.1856]}},{"type":"Feature","properties":{"title":"Luxembourg: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"M26","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[6.1319,49.6116]}},{"type":"Feature","properties":{"title":"United States: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"R26-GWU-EPIC","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[-77.0369,38.9072]}},{"type":"Feature","properties":{"title":"Canada: 8 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":8,"sample_source_ids":"M33, M31, M34","marker-color":"#19b5b6","marker-size":"large"},"geometry":{"type":"Point","coordinates":[-75.6972,45.4215]}},{"type":"Feature","properties":{"title":"Australia: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"M43a","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[149.13,-35.2809]}},{"type":"Feature","properties":{"title":"Austria: 1 application records","description":"Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university","count":1,"sample_source_ids":"R26-VIENNA-EXOSPHERE","marker-color":"#4384ff","marker-size":"medium"},"geometry":{"type":"Point","coordinates":[16.3738,48.2082]}}]}
 ```
 
-**74/109** applications have unambiguous institution-name country matches, aggregated into **16** country markers. The markers are at representative capital locations, **not university campus coordinates**. The remaining 35 records are deliberately excluded from the geographic visualization rather than assigned guessed locations.
+**72/107** applications have unambiguous institution-name country matches, aggregated into **16** country markers. The markers are at representative capital locations, **not university campus coordinates**. The remaining 35 records are deliberately excluded from the geographic visualization rather than assigned guessed locations.
 
 <details>
 <summary><b>Explore country counts and mapped source IDs</b></summary>
 
 | Country aggregation | Example application IDs |
 |:--|:--|
-| United Kingdom: 18 application records | N263-05, N263-06, M17 |
+| United Kingdom: 16 application records | M17, N263-11, M25 |
 | Switzerland: 10 application records | C06, M23, M24 |
 | Netherlands: 8 application records | N263-10, N263-08, N264-03 |
 | Canada: 8 application records | M33, M31, M34 |
@@ -234,25 +234,25 @@ quadrantChart
     quadrant-3 Monitor
     quadrant-4 Deadline execution
     R01: [0.990, 0.500]
-    R02: [0.990, 0.250]
-    R03: [0.989, 0.500]
+    R02: [0.967, 0.375]
+    R03: [0.967, 0.125]
     R04: [0.956, 0.375]
-    R05: [0.956, 0.125]
-    R06: [0.944, 0.375]
-    R07: [0.933, 0.750]
-    R08: [0.933, 0.250]
-    R09: [0.933, 0.125]
-    R10: [0.933, 0.250]
-    R11: [0.933, 0.375]
-    R12: [0.933, 0.625]
-    R13: [0.933, 0.625]
-    R14: [0.933, 0.125]
-    R15: [0.933, 0.500]
+    R05: [0.944, 0.750]
+    R06: [0.944, 0.250]
+    R07: [0.944, 0.125]
+    R08: [0.944, 0.250]
+    R09: [0.944, 0.375]
+    R10: [0.944, 0.625]
+    R11: [0.944, 0.625]
+    R12: [0.944, 0.125]
+    R13: [0.944, 0.500]
+    R14: [0.944, 0.500]
+    R15: [0.933, 0.750]
     R16: [0.933, 0.500]
-    R17: [0.922, 0.750]
-    R18: [0.922, 0.500]
-    R19: [0.922, 0.375]
-    R20: [0.922, 0.250]
+    R17: [0.933, 0.375]
+    R18: [0.933, 0.250]
+    R19: [0.922, 0.750]
+    R20: [0.911, 0.750]
 ```
 
 [See application records and exact source IDs](../data/experience_view.json) · [Open the research radar](../data/research_radar.json)
@@ -319,13 +319,13 @@ The controls below invoke **real GitHub workflows and repository forms**, not in
 
 | Days left | Deadline | Opportunity | Primary evidence |
 |:--|:--|:--|:--|
-| **0d** | 2026-11-09 | UCL Gatsby Computational Neuroscience Unit, PhD in Machine Learning and Theoretical Neuros | [Source](https://www.ucl.ac.uk/life-sciences/gatsby/study-and-work/gatsby-unit-phd-programme) |
-| **0d** | 2026-11-09 | UCL Sainsbury Wellcome Centre, fully funded PhD in Neural Circuits and Behaviour, 2027 int | [Source](https://www.swc.science/content/apply-our-phd-programme) |
-| **1d** | 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | [Source](https://www.sbfi.admin.ch/scholarships_eng) |
-| **4d** | 2026-11-13 | Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacancy ref 3522426D | [Source](https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10) |
-| **4d** | 2026-11-13 | Inria IROKO Montpellier — PhD Scientific AI and Spatiotemporal Biodiversity Modelling | [Source](https://jobs.inria.fr/public/classic/en/offres/2026-10608) |
-| **5d** | 2026-11-14 | TIB Hannover / Leibniz University — Doctoral Researcher in NLP and Causal AI for Scientifi | [Source](https://www.leibniz-gemeinschaft.de/en/careers/jobs/detail/job/show/Job/research-associatedoctoral-researcher-natural-language-processing-and-causal-ai-for-scientific-reasoning-mfd) |
-| **6d** | 2026-11-15 | OIST Graduate School PhD, May or Sep 2027 entry (Admissions Workshop 2027) | [Source](https://www.oist.jp/admissions/phd-program/apply-phd) |
+| **0d** | 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | [Source](https://www.sbfi.admin.ch/scholarships_eng) |
+| **3d** | 2026-11-13 | Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacancy ref 3522426D | [Source](https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10) |
+| **3d** | 2026-11-13 | Inria IROKO Montpellier — PhD Scientific AI and Spatiotemporal Biodiversity Modelling | [Source](https://jobs.inria.fr/public/classic/en/offres/2026-10608) |
+| **4d** | 2026-11-14 | TIB Hannover / Leibniz University — Doctoral Researcher in NLP and Causal AI for Scientifi | [Source](https://www.leibniz-gemeinschaft.de/en/careers/jobs/detail/job/show/Job/research-associatedoctoral-researcher-natural-language-processing-and-causal-ai-for-scientific-reasoning-mfd) |
+| **5d** | 2026-11-15 | OIST Graduate School PhD, May or Sep 2027 entry (Admissions Workshop 2027) | [Source](https://www.oist.jp/admissions/phd-program/apply-phd) |
+| **5d** | 2026-11-15 | Northeastern University London, PhD studentship: Algorithms/Hardware Co-Design for Bayesia | [Source](https://www.jobs.ac.uk/job/DTI287/) |
+| **5d** | 2026-11-15 | Institute of Science Tokyo, International Graduate Program IGP(A) Fall 2027 with MEXT reco | [Source](https://admissions.isct.ac.jp/en/013/graduate/programs/igp/igp-a) |
 
 <details>
 <summary><b>Advanced visual research laboratory: diagrams and source contracts</b></summary>
@@ -346,7 +346,7 @@ The following are generated Mermaid artifacts and can be opened independently on
 
 </details>
 
-<sub>EvidenceGraph · Reproducible · Generated from source data · Observation: 2026-11-09. Research papers are not vacancy notices. Unknown document readiness is not confirmed missing documentation. GitHub README renders Mermaid, GeoJSON and linked STL natively; rich JavaScript interactions run in the downloadable browser application.</sub>
+<sub>EvidenceGraph · Reproducible · Generated from source data · Observation: 2026-11-10. Research papers are not vacancy notices. Unknown document readiness is not confirmed missing documentation. GitHub README renders Mermaid, GeoJSON and linked STL natively; rich JavaScript interactions run in the downloadable browser application.</sub>
 
 
 <details>
@@ -354,13 +354,13 @@ The following are generated Mermaid artifacts and can be opened independently on
 
 <div align="center">
 
-<a href="https://github.com/Armanasq/phd_tracker/actions/workflows/experience-lab.yml"><img src="../assets/readme/kinetic_cover.svg" width="100%" alt="Animated research intelligence cover with 109 actual future application records on deadline orbits" /></a>
+<a href="https://github.com/Armanasq/phd_tracker/actions/workflows/experience-lab.yml"><img src="../assets/readme/kinetic_cover.svg" width="100%" alt="Animated research intelligence cover with 107 actual future application records on deadline orbits" /></a>
 
 **THIS IS AN EXECUTABLE RESEARCH WORKSPACE, NOT A STATIC TRACKER.**
 
 [**RUN AN INTERACTIVE SCENARIO**](https://github.com/Armanasq/phd_tracker/actions/workflows/experience-lab.yml) · [**OPERATE SOURCE ALERTS**](https://github.com/Armanasq/phd_tracker/issues/1) · [**DOWNLOAD ONE-FILE APP**](../dashboard/index.html) · [**OPENING GUIDE**](../dashboard/README.md) · [**INSPECT RAW EVIDENCE**](../data/experience_view.json)
 
-<sub>Regenerated from committed evidence. Snapshot 2026-11-09 · 109 frontier records · 1 source conflict(s). Real actions run through GitHub or the browser application.</sub>
+<sub>Regenerated from committed evidence. Snapshot 2026-11-10 · 107 frontier records · 1 source conflict(s). Real actions run through GitHub or the browser application.</sub>
 
 </div>
 
@@ -434,18 +434,18 @@ Edges encode recorded mentions, not guessed document absence or admission probab
 
 </details>
 
-## Upcoming records · observation 2026-11-09
+## Upcoming records · observation 2026-11-10
 
 | Horizon | Date | Application | Primary source |
 |:--|:--|:--|:--|
-| **0d** | 2026-11-09 | UCL Gatsby Computational Neuroscience Unit, PhD in Machine Learning and Theoretical Neuroscience, 2027 | [Evidence](https://www.ucl.ac.uk/life-sciences/gatsby/study-and-work/gatsby-unit-phd-programme) |
-| **0d** | 2026-11-09 | UCL Sainsbury Wellcome Centre, fully funded PhD in Neural Circuits and Behaviour, 2027 intake | [Evidence](https://www.swc.science/content/apply-our-phd-programme) |
-| **1d** | 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | [Evidence](https://www.sbfi.admin.ch/scholarships_eng) |
-| **4d** | 2026-11-13 | Inria IROKO Montpellier — PhD Scientific AI and Spatiotemporal Biodiversity Modelling | [Evidence](https://jobs.inria.fr/public/classic/en/offres/2026-10608) |
-| **4d** | 2026-11-13 | Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacancy ref 3522426DA (jobs.soton.ac.uk) | [Evidence](https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10) |
-| **5d** | 2026-11-14 | TIB Hannover / Leibniz University — Doctoral Researcher in NLP and Causal AI for Scientific Reasoning (EcoAIRE | [Evidence](https://www.leibniz-gemeinschaft.de/en/careers/jobs/detail/job/show/Job/research-associatedoctoral-researcher-natural-language-processing-and-causal-ai-for-scientific-reasoning-mfd) |
-| **6d** | 2026-11-15 | BMW AI Robotics / RoboTac and TU/e Eindhoven, PhD World Models &amp; Visuo-Tactile Foundation Models (2 research t | [Evidence](https://www.robotac.eu/open-positions) |
-| **6d** | 2026-11-15 | Institute of Science Tokyo, International Graduate Program IGP(A) Fall 2027 with MEXT recommendation | [Evidence](https://admissions.isct.ac.jp/en/013/graduate/programs/igp/igp-a) |
+| **0d** | 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | [Evidence](https://www.sbfi.admin.ch/scholarships_eng) |
+| **3d** | 2026-11-13 | Inria IROKO Montpellier — PhD Scientific AI and Spatiotemporal Biodiversity Modelling | [Evidence](https://jobs.inria.fr/public/classic/en/offres/2026-10608) |
+| **3d** | 2026-11-13 | Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacancy ref 3522426DA (jobs.soton.ac.uk) | [Evidence](https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10) |
+| **4d** | 2026-11-14 | TIB Hannover / Leibniz University — Doctoral Researcher in NLP and Causal AI for Scientific Reasoning (EcoAIRE | [Evidence](https://www.leibniz-gemeinschaft.de/en/careers/jobs/detail/job/show/Job/research-associatedoctoral-researcher-natural-language-processing-and-causal-ai-for-scientific-reasoning-mfd) |
+| **5d** | 2026-11-15 | BMW AI Robotics / RoboTac and TU/e Eindhoven, PhD World Models &amp; Visuo-Tactile Foundation Models (2 research t | [Evidence](https://www.robotac.eu/open-positions) |
+| **5d** | 2026-11-15 | Institute of Science Tokyo, International Graduate Program IGP(A) Fall 2027 with MEXT recommendation | [Evidence](https://admissions.isct.ac.jp/en/013/graduate/programs/igp/igp-a) |
+| **5d** | 2026-11-15 | International Max Planck Research School for Intelligent Systems (IMPRS-IS), 2027 doctoral recruitment | [Evidence](https://imprs.is.mpg.de/application) |
+| **5d** | 2026-11-15 | Northeastern University London, PhD studentship: Algorithms/Hardware Co-Design for Bayesian and Ising Models ( | [Evidence](https://www.jobs.ac.uk/job/DTI287/) |
 
 [Complete action agenda](../docs/TODAY.md) · [Workbook](../PhD_Action_List.xlsx) · [Calendar feed](../calendar/phd_deadlines.ics)
 
@@ -477,11 +477,11 @@ These are working combinations of existing interaction methods; no unverified cl
 
 ### Navigate the command center
 
-[**01 · Act now**](#01--execute--2026-11-09) · [**02 · Decide next**](#02--next-decisions-not-just-a-countdown) · [**03 · Verify sources**](#03--evidence-backed-search-and-auditability) · [**04 · Data model**](#04--all-worksheets-participate) · [**05 · Controls**](#05--github-as-a-private-operating-interface) · [**06 · Engineering**](#06--research-contributions-not-cosmetic-features)
+[**01 · Act now**](#01--execute--2026-11-10) · [**02 · Decide next**](#02--next-decisions-not-just-a-countdown) · [**03 · Verify sources**](#03--evidence-backed-search-and-auditability) · [**04 · Data model**](#04--all-worksheets-participate) · [**05 · Controls**](#05--github-as-a-private-operating-interface) · [**06 · Engineering**](#06--research-contributions-not-cosmetic-features)
 
 | Priority | Immediate route | Outcome |
 |:--|:--|:--|
-| **Submit / verify** | [Open today’s 2 application deadline(s)](../docs/TODAY.md) | Prevent missing a final deadline; confirm portal status and submission receipts |
+| **Submit / verify** | [Open today’s 1 application deadline(s)](../docs/TODAY.md) | Prevent missing a final deadline; confirm portal status and submission receipts |
 | **Plan the workload** | [Today's execution plan](../docs/TODAY.md) | Separate actual application deadlines from supporting steps and shared tasks |
 | **Resolve uncertainty** | [Review proof obligations](../data/portfolio_frontier.json) | Identify funding restrictions, portal contradictions, and missing evidence |
 | **Explore opportunities** | [Discovery inbox](../data/discovered_candidates.json) | Evaluate new leads before any promotion into the application list |
@@ -491,15 +491,15 @@ These are working combinations of existing interaction methods; no unverified cl
 
 | Time critical | Source assurance | Applicant decisions | Research horizon |
 |:--|:--|:--|:--|
-| **1** deadline(s) in ≤3 days; **18** in the next 7 days | **1/4** active providers reporting healthy; **3** degraded/disabled | **2** dated steps today; **117** older steps with *completion unknown* | **39** indexed papers, research signals only |
+| **2** deadline(s) in ≤3 days; **18** in the next 7 days | **1/4** active providers reporting healthy; **3** degraded/disabled | **29** dated steps today; **118** older steps with *completion unknown* | **68** indexed papers, research signals only |
 | [Review every dated task](../docs/TODAY.md) | [Source diagnostics](../data/discovery_report.json) | [Confirm task status](https://github.com/Armanasq/phd_tracker/issues/1) | [Research radar](../data/research_radar.json) |
 
 **Source consistency:** 7 observations across 7 configured monitors; 5 matched expected anchors and 2 require review. **Degraded sources:** academicpositions, academictransfer, brave.
 
-<sub>Last official-page monitor: 2026-11-09 · last discovery: 2026-11-09 · last publication radar: 2026-11-09. These are observed snapshots, not live counters or a guarantee that any position is still accepting applicants.</sub>
+<sub>Last official-page monitor: 2026-11-10 · last discovery: 2026-11-10 · last publication radar: 2026-11-10. These are observed snapshots, not live counters or a guarantee that any position is still accepting applicants.</sub>
 
 > [!IMPORTANT]
-> **Observed snapshot: 2026-11-09 (Europe/Berlin).** Application deadlines, step dates and shared tasks are different data types. A task dated in the past is **completion-unconfirmed**, not automatically unfinished. Original verdicts are research assessments, not confirmed submission receipts. Primary sources determine final eligibility and deadlines.
+> **Observed snapshot: 2026-11-10 (Europe/Berlin).** Application deadlines, step dates and shared tasks are different data types. A task dated in the past is **completion-unconfirmed**, not automatically unfinished. Original verdicts are research assessments, not confirmed submission receipts. Primary sources determine final eligibility and deadlines.
 
 <a href="../docs/TODAY.md"><img src="../assets/readme/operations.svg" width="100%" alt="Today: distinct application deadlines, scheduled preparation steps, shared tasks and completion-unknown backlog" /></a>
 
@@ -558,27 +558,37 @@ Review source conflicts, snooze or prioritize individual applications and inspec
 > [!NOTE]
 > **Capability transparency:** Inria discovery and private GitHub reminders are operating. AcademicPositions is currently blocked (HTTP 403), AcademicTransfer has zero observed records, and Brave search requires an API key. External notifications, Gmail polling and Google Sheets synchronization are not claimed to be active without their respective configuration. The operational snapshot above is dated and must not be interpreted as real-time eligibility proof.
 
-## 01 · Execute — 2026-11-09
+## 01 · Execute — 2026-11-10
 
-### Submission deadlines today — 2 actionable · 0 explicitly excluded
+### Submission deadlines today — 1 actionable · 0 explicitly excluded
 
 | When | Application / workstream | Action | Source |
 |:--|:--|:--|:--|
-| 2026-11-09 | UCL Gatsby Computational Neuroscience Unit, PhD in Machine Learning and Theoretical Neuroscience, 2027 | Submit Gatsby 2027 portal application before 9 Nov 17:00 GMT; academic references by 10 Nov 23:59 GMT. Joint SWC track available as preference, not a separate application. | [Source page](https://www.ucl.ac.uk/life-sciences/gatsby/study-and-work/gatsby-unit-phd-programme) · Action list · row 35 |
-| 2026-11-09 | UCL Sainsbury Wellcome Centre, fully funded PhD in Neural Circuits and Behaviour, 2027 intake | Apply by 9 Nov 17:00 GMT if pursuing neural circuits; optional joint Gatsby–SWC via this OR Gatsby application, not independently. | [Source page](https://www.swc.science/content/apply-our-phd-programme) · Action list · row 36 |
+| 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | By 29 Oct 2026: email sgs@sbfi.admin.ch asking Iran's scholarship type and deadline and whether an Iranian resident in Turkey applies via Tehran or Ankara route | [Source page](https://www.sbfi.admin.ch/scholarships_eng) · Action list · row 37 |
 
-### Cross-route work — 1 scheduled today
+### Cross-route work — 2 scheduled today
 
 | Date | Cross-application task | Recorded status |
 |:---|:---|:---|
-| 2026-11-09 | Submit UCL Gatsby application by 17:00 GMT; obtain referees' confirmations by 10 Nov. SWC only if neuroscience fit is genuine. · `tsk-2a0787716e82318c` | To do |
+| 2026-11-10 | Settle English tests: UBC wants overall 7 with no band below 6; York asks IELTS 7; Waterloo mentions an 83% equivalency. Book the retest if any band is below the minimum, so the result exists before the 1 to 15 Dec deadlines. · `tsk-78e48091bb3c011d` | To do |
+| 2026-11-10 | Confirm separate Southampton BlueOcean linked project form and ref 3522426DA eligibility; official staff deadline now 13 Nov. · `tsk-4dc7498def77cbd7` | To do |
 
-**Programme-specific steps due today** — 2 distinct records from the *Step timeline* worksheet, not inferred from the final submission date.
+**Programme-specific steps due today** — 29 distinct records from the *Step timeline* worksheet, not inferred from the final submission date.
 
 | When | Application / workstream | Action | Source |
 |:--|:--|:--|:--|
-| 2026-11-09 | UCL Gatsby Computational Neuroscience Unit PhD | Submit Gatsby 2027 doctoral application by 17:00 GMT; ensure detailed ML research interests are specific · `tsk-de242fa099e0f3e3` | [Source page](https://www.ucl.ac.uk/life-sciences/gatsby/study-and-work/gatsby-unit-phd-programme) · Step timeline · row 211 |
-| 2026-11-09 | UCL Sainsbury Wellcome Centre PhD | Submit SWC only if genuine computational neuroscience interest; choose joint Gatsby–SWC as a preference, not duplicate separate application · `tsk-f679495d819f209a` | [Source page](https://www.swc.science/content/apply-our-phd-programme) · Step timeline · row 212 |
+| 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | By 29 Oct 2026: email sgs@sbfi.admin.ch asking Iran's scholarship type and deadline and whether an Iranian resident in Turkey applies via Tehran or Ankara route · `tsk-f4d413183cd2f563` | [Source page](https://www.sbfi.admin.ch/scholarships_eng) · Step timeline · row 228 |
+| 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | By 3 Nov 2026: obtain support letter from a Swiss professor (no help from ESKAS or universities) with their 2-page CV · `tsk-4fa2304d7439fb0f` | [Source page](https://www.sbfi.admin.ch/scholarships_eng) · Step timeline · row 229 |
+| 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | Register in GO ESKAS; ask two professors to upload recommendation letters · `tsk-a078da51c1ff7bec` | [Source page](https://www.sbfi.admin.ch/scholarships_eng) · Step timeline · row 230 |
+| 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | Before the country deadline: upload CV, 2-page motivation letter, 5-page research proposal on ESKAS form, certificates and transcripts, passport copy · `tsk-ef50fe89bd1641d1` | [Source page](https://www.sbfi.admin.ch/scholarships_eng) · Step timeline · row 231 |
+| 2026-11-10 | Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacancy ref 3522426DA (jobs.soton.ac.uk) | Confirm whether BlueOcean linked doctoral project application is required separately, and verify its independent deadline before 13 Nov staff deadline. · `tsk-33738d53760b564a` | [Source page](https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10) · Step timeline · row 226 |
+| 2026-11-10 | Southampton MSCA BlueOcean, application 2 of 2: linked PhD 'Robotic monitoring for place recognition and change detection in  | Verify BlueOcean linked PhD/project form requirements and deadline; earlier 31 Oct date is superseded for staff role but not verified for linked form. · `tsk-c7f9dc906967952d` | [Source page](https://www.jobs.ac.uk/job/DTE958/) · Step timeline · row 227 |
+| 2026-11-10 | OIST Graduate School PhD, May or Sep 2027 entry (Admissions Workshop 2027) | By 2026-11-10 confirm at least 2 recommendation letters have arrived · `tsk-7bd20d737d29c4d9` | [Source page](https://www.oist.jp/admissions/phd-program/apply-phd) · Step timeline · row 224 |
+| 2026-11-10 | NTNU Gjovik, Ph.D. Candidate in Reinforcement Learning for Project Scheduling Problems (Jobbnorge 310778) | By 2026-11-10 write the project outline (max 1,500 words / 4 pages) and motivation letter (max 400 words / 1 page) · `tsk-51dc08e338c5d73d` | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310778) · Step timeline · row 223 |
+| 2026-11-10 | University of Oslo, PhD Research Fellow in Control Theory and Optimization for Edge Computing (Jobbnorge 310583) | By 2026-11-10 line up 2-3 referees with name, relation, email and phone; prepare publication list and cover letter · `tsk-b5f721e9c0b06b94` | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310583) · Step timeline · row 237 |
+| 2026-11-10 | OsloMet PhD Fellow in Trustworthy Generative AI with Knowledge Verification (310467) | By 2026-11-10: assemble application letter, CV, all pages of BSc and MSc diplomas/certificates, MSc thesis, publication list, links to articles · `tsk-7079e73d73cf6818` | [Source page](https://www.oslomet.no/en/work/job-openings/phd-fellow-in-trustworthy-generative-ai-with-knowledge-verification) · Step timeline · row 225 |
+| 2026-11-10 | Mila supervision request (up to three professors) plus separate university application | Create/log in to MyMila applicant portal and shortlist up to three Mila core/associate professors by 2026-11-10 · `tsk-9f9afec0124df9b8` | [Source page](https://mila.quebec/en/supervision-requests/) · Step timeline · row 219 |
+| 2026-11-10 | Mila supervision request (up to three professors) plus separate university application | Prepare and submit the separate application to each professor's partner university/school (deadline set by that university; not on Mila page) - check by 2026-11-10 · `tsk-435de96aadd0e1ea` | [Source page](https://mila.quebec/en/supervision-requests/) · Step timeline · row 220 |
 
 <details>
 <summary><b>Show every scheduled task today, the unconfirmed backlog, and exclusion reasons</b></summary>
@@ -591,7 +601,7 @@ The full execution queue preserves original worksheet row numbers and source IDs
 
 No exclusions on this date.
 
-**Earlier dates with completion unconfirmed:** 117 tasks. 13 are cross-route tasks and 104 are programme timeline steps. They are **not automatically treated as outstanding** until the user confirms progress.
+**Earlier dates with completion unconfirmed:** 118 tasks. 14 are cross-route tasks and 104 are programme timeline steps. They are **not automatically treated as outstanding** until the user confirms progress.
 
 </details>
 
@@ -603,7 +613,6 @@ No exclusions on this date.
 
 | When | Application / workstream | Action | Source |
 |:--|:--|:--|:--|
-| 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | By 29 Oct 2026: email sgs@sbfi.admin.ch asking Iran's scholarship type and deadline and whether an Iranian resident in Turkey applies via Tehran or Ankara route | [Source page](https://www.sbfi.admin.ch/scholarships_eng) · Action list · row 37 |
 | 2026-11-13 | Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacancy ref 3522426DA (jobs.soton.ac.uk) | By 13 Nov 23:59 UK time: submit BlueOcean MSCA staff vacancy ref 3522426DA via jobs.soton.ac.uk. Also confirm and complete any separate PhD/project registration (linked form timing not verified). | [Source page](https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10) · Action list · row 39 |
 | 2026-11-13 | Inria IROKO Montpellier — PhD Scientific AI and Spatiotemporal Biodiversity Modelling | Check research scope and applicant eligibility, then submit directly via Inria portal by 13 Nov; demonstrate reproducible scientific ML and physics-informed modelling experience. | [Source page](https://jobs.inria.fr/public/classic/en/offres/2026-10608) · Action list · row 38 |
 | 2026-11-14 | TIB Hannover / Leibniz University — Doctoral Researcher in NLP and Causal AI for Scientific Reasoning (EcoAIRE), 44/2026 | Apply by 14 Nov using official online form, reference 44/2026. Focus application on evidence-grounded agent architectures, causal research extraction, knowledge graphs and robust RAG/LLM evaluation; confirm con | [Source page](https://www.leibniz-gemeinschaft.de/en/careers/jobs/detail/job/show/Job/research-associatedoctoral-researcher-natural-language-processing-and-causal-ai-for-scientific-reasoning-mfd) · Action list · row 40 |
@@ -621,6 +630,7 @@ No exclusions on this date.
 | 2026-11-16 | AI4I + Politecnico di Torino, funded PhD Agentic System-1/System-2 Architectures for Robot Autonomy | Submit expression of interest plus separate formal Apply@polito doctoral application no later than 16 Nov 14:00 CET. | [Source page](https://ai4i.it/phd-position-on-agentic-and-system-1system-2-architectures-for-robot-autonomy/) · Action list · row 52 |
 | 2026-11-16 | AI4I + Politecnico di Torino, funded PhD Adversarial Robustness in Multimodal Foundation Models | Select Computer Engineering and Systems doctoral call and submit formal PoliTo application by 16 Nov 14:00 CET; align vision/audio/LLM work with multimodal safety. | [Source page](https://ai4i.it/phd-position-on-adversarial-robustness-in-multi-modal-foundation-models/) · Action list · row 51 |
 | 2026-11-16 | AI4I and Politecnico di Torino — PhD Trustworthy Generalist Robot Policies | Submit BOTH the Politecnico di Torino official PhD admission application and the AI4I expression of interest; finish by 16 Nov 14:00 CET. Tailor research statement to runtime assurance, safe adaptation, world m | [Source page](https://ai4i.it/open-calls/phd-position-on-trustworthy-generalist-robot-policies/) · Action list · row 53 |
+| 2026-11-17 | University of Oslo, PhD Research Fellow in Control Theory and Optimization for Edge Computing (Jobbnorge 310583) | By 2026-10-30 email Mathias Hudoba de Badyn (and optionally Tonnes Nygaard) with CV and a short enquiry | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310583) · Action list · row 55 |
 
 | Operating surface | Open | Decision supported |
 |:--|:--|:--|
@@ -647,7 +657,7 @@ No exclusions on this date.
 | inria | ok | 10 | 0 |
 
 - **Contradictory source observations:** 2 monitor finding(s). A published programme deadline is not proof that an application portal is accepting submissions.
-- **Research records:** 39 scholarly articles indexed separately, not counted as available PhD placements.
+- **Research records:** 68 scholarly articles indexed separately, not counted as available PhD placements.
 - **Discovery scope:** without configured Brave credentials, international web search is **disabled**. A healthy workflow cannot imply exhaustive worldwide coverage.
 
 <details>
@@ -813,7 +823,7 @@ The [research radar](../data/research_radar.json) monitors topical publications 
 
 ---
 
-<sub><b>Generated:</b> 2026-11-09. Charts are static SVG snapshots regenerated by GitHub Actions; GitHub READMEs cannot run React or arbitrary JavaScript. This project combines known techniques in source monitoring and orchestration; uniqueness and commercial viability require independent evaluation, not branding claims.</sub>
+<sub><b>Generated:</b> 2026-11-10. Charts are static SVG snapshots regenerated by GitHub Actions; GitHub READMEs cannot run React or arbitrary JavaScript. This project combines known techniques in source monitoring and orchestration; uniqueness and commercial viability require independent evaluation, not branding claims.</sub>
 
 
 </details>
