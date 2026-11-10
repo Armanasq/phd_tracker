@@ -59,6 +59,8 @@ jobs:
       - run: node --check site/modules/operations.mjs
       - run: node --check site/modules/capacity-view.mjs
       - run: node --test tests/capacity_view.test.mjs
+      - run: node --check site/modules/deadline-cutoff.mjs
+      - run: node --test tests/deadline_cutoff.test.mjs
       - run: node --check site/modules/readiness.mjs
       - run: node --check site/modules/readiness-view.mjs
       - run: node --test tests/readiness.test.mjs tests/readiness_view.test.mjs
