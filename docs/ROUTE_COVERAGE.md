@@ -24,6 +24,7 @@ Updated 2026-11-10. This is a source-backed route inventory, not a product featu
 | `#agents` | Private agent registry and deterministic tools | No | Configure agent responsibilities, allowlisted tools and routes |
 | `#automations` | Private workflows, scheduler and model routes | No | Preview workflow routes, configure execution and opt-in schedules |
 | `#activity` | Private model audit ledger | No | Inspect actual private runs and usage |
+| `#source-observations` | Private SQLite observation history, byte-change categories and source URLs | No | Review official-source drift; manual CLI collection only; no factual promotion |
 | `#deployment` | Runtime capability contract | Yes | Inspect trust boundaries and setup options |
 | `#settings` | Browser-local model config or private server config | Yes, different scope | Configure/test endpoints; private mode also exposes models, routing, agents and workflows |
 
@@ -36,7 +37,7 @@ Updated 2026-11-10. This is a source-backed route inventory, not a product featu
 - Browser-local AI does **not** imply access to Python tools, SQLite, cloud secrets or server-side schedules. Only committed public record fields explicitly selected by the user can be included in a local-model prompt.
 - Private `#automations` supports a read-only route preview. A multi-stage workflow must validate all provider routes and fresh cloud consent *before* executing its first stage.
 - Document inventory aggregates only explicitly declared requirements and recorded readiness; an absent document list is unconfirmed, not evidence that documents are unnecessary.
-- Discovery candidates are never automatically promoted, marked eligible, or treated as admitted. A recorded source review may be stale, and a recorded passed date does not prove a programme is permanently closed.
+- Discovery candidates are never automatically promoted, marked eligible, or treated as admitted. Source observation history is private and represents byte changes or unavailable fetches, never semantic deadline or admissions verification. A recorded source review may be stale, and a recorded passed date does not prove a programme is permanently closed.
 - Source records remain distinct from local drafts; uploaded public data must exclude applicant notes, receipts and credentials.
 
 ## Regression gates
@@ -49,7 +50,7 @@ Updated 2026-11-10. This is a source-backed route inventory, not a product featu
 - `tests/browser_lens_smoke.cjs`: real browser path from Settings to the global assistant and new routes.
 - `tests/test_workflow_plan.py`: multi-agent preflight and no partial cloud execution.
 - `tests/test_runtime_capabilities.py`: local capability API, correct readiness and secret exclusion.
-- `tests/all_routes_audit.cjs` and `tests/mobile_layout_audit.cjs`: all 22 routes across form factors.
+- `tests/all_routes_audit.cjs` and `tests/mobile_layout_audit.cjs`: all 23 routes across form factors.
 
 ## Outstanding product boundaries
 
