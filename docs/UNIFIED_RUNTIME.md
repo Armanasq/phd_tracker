@@ -37,6 +37,7 @@ There is no implicit fallback to a remote provider when a local model becomes un
 | Route | Purpose | Side effects |
 |---|---|---|
 | GET `/api/bootstrap` | Configuration, status and user interface initialization | None |
+| GET `/api/capabilities` | Server-supported features, security boundary and active model readiness | None |
 | POST `/api/providers/setup` | Register a provider and optionally store a private credential | Private configuration write |
 | POST `/api/providers/models` | Discover models from a selected endpoint | External catalog request, no applicant evidence |
 | POST `/api/providers/probe` | Test actual inference with a synthetic diagnostic prompt | LLM request, possible cloud charge |
@@ -44,7 +45,8 @@ There is no implicit fallback to a remote provider when a local model becomes un
 | GET/POST `/api/settings` | Read or change persistent runtime and routing policy | Private configuration write on POST |
 | GET `/api/routing` | Inspect resolved per-agent model routes | None |
 | POST `/api/agents/run` | Execute deterministic tools and the resolved model | Model call, private audit event |
-| POST `/api/workflows/run` | Run bounded sequential agents | Model calls, audit records |
+| POST `/api/workflows/preview` | Resolve all workflow routes and disclosure requirements before inference | None |
+| POST `/api/workflows/run` | Preflight all stages, then execute bounded sequential agents | Model calls, audit records |
 | GET `/api/scheduler/preview` | Forecast workflow readiness and blocking reasons | None |
 | POST `/api/scheduler/tick` | Execute eligible scheduled workflows | Model calls subject to approvals and budget |
 | GET `/api/operations` | Read private referees, milestones, conflicts, work queue, research-fit signals | None |
@@ -95,3 +97,11 @@ The loopback API permits two concurrent inference-bearing HTTP requests by defau
 ## Production engineering reference
 
 The [backend engineering and operations guide](BACKEND_ENGINEERING.md) specifies the exact request semantics, SQLite concurrency and recovery model, inference admission limits, scheduled cloud-call reservations, credential forwarding rules and remaining constraints.
+
+## Route-level consistency and execution preflight
+
+The public frontend now exposes separate **Discovery** and **Deployment** routes. Discovery groups research candidates by explicit source-review state, recorded deadline status and staged promotion; it neither invents rankings nor equates candidates with submitted applications. Deployment reports which features are available in the current browser/runtime session and explicitly identifies cloud-hosting capabilities that are not implemented.
+
+The floating Ask Atlas panel and full Copilot page share one browser-local model client when the private backend is absent. The local model must pass a real inference probe before either can send prompts. Only user-entered prompts and explicitly selected committed public opportunity fields are forwarded; no Python agent tools or private SQLite data are available in this mode. Browser-local sessions are kept in memory and are not presented as private runtime conversation records.
+
+For private workflows, `POST /api/workflows/preview` resolves every stage's effective provider, model and cloud-disclosure requirement without invoking a model. Execution performs this preflight before the first stage, so a later unresolved route or missing cloud consent cannot waste earlier stage calls. The preview does not establish provider availability, admission evidence, cloud budget, or scheduled due time. `GET /api/capabilities` exposes a narrow operational capability contract with no API keys.
