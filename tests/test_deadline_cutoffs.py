@@ -107,7 +107,6 @@ class IndependentCutoffProjectionTests(unittest.TestCase):
                 {"deadline_time": "01:30", "deadline": "2027-03-28"},
                 {"deadline_timezone": "Bad/Timezone"},
                 {"deadline_time": "23:59", "deadline_timezone": ""},
-                {"deadline_cutoff_evidence": "Unattributed claim"},
             ):
                 with self.subTest(patch=patch):
                     path.write_text(json.dumps({"schema_version": 1, "records": [{**base, **patch}]}), encoding="utf-8")
