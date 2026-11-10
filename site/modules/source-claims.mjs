@@ -65,7 +65,7 @@ export function renderSourceClaims({observations=[],claims=[],selectedId=null,so
       })[item.owner_review_decision]||"Not reviewed")+'</small>'+
       (link?'<a href="'+esc(link)+'" target="_blank" rel="noopener noreferrer">Inspect source</a>':'')+
       '<button type="button" class="os-btn quiet" data-os-action="claim-history" data-id="'+esc(item.id)+'">Review history</button>'+
-      (reviewHistory?.claim_id===item.id?
+      (reviewHistory&&Number.isSafeInteger(item.id)&&item.id>0&&reviewHistory.claim_id===item.id?
         '<div class="os-review-history"><h3>Owner review history</h3>'+
         (reviewHistory.reviews||[]).map(entry=>
           '<article><strong>'+esc(({
