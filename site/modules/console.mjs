@@ -347,10 +347,10 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
    model_capability_mismatch:"Model capability mismatch"};
   const rows=(plan.workflows||[]).map(w=>
    '<div class="os-schedule-row"><div><strong>'+esc(w.label)+'</strong><small>'+esc(pretty(w.schedule))+
-   ' · '+esc(w.stages.map(x=>x.agent_id+" → "+x.model).join(" / "))+
+   ' · '+esc(w.stages.map(x=>x.agent_id+" → "+x.model).join(" / "))+'</small>'+
    (w.stages.some(x=>(x.capability_blockers||[]).length)?
      '<small>Incompatible requirements: '+esc(w.stages.flatMap(x=>x.capability_blockers||[]).join(", "))+'</small>':'')+
-   '</small></div>'+
+   '</div>'+
    '<span class="os-badge '+(w.state==="due"?"good":w.state==="disabled"||w.state==="manual_only"?"":"warn")+'">'+esc(labels[w.state]||w.state)+'</span></div>').join("");
   const results=state.scheduleTick?.results||[];
   return '<section class="os-panel"><div class="os-panel-heading"><div><h2>Automation execution plan</h2><p>Read-only status, agent model assignments and reasons for skipped workflows</p></div>'+
