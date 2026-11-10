@@ -3,12 +3,16 @@ const storageKey = () => "phd-atlas-browser-model-v1:" + location.origin + locat
 
 export function normalizeLoopbackEndpoint(value) {
   const raw = String(value ?? "").trim();
+  if (!/^http:\/\/(?:localhost|127\.0\.0\.1|\[::1\])(?::[0-9]{1,5})?\/v1\/?$/i.test(raw)) {
+    throw new Error("Only HTTP localhost, 127.0.0.1, or [::1] endpoints ending in /v1 are allowed.");
+  }
   let url;
   try { url = new URL(raw); } catch { throw new Error("Enter a valid local model URL."); }
   if (url.protocol !== "http:" || !["localhost", "127.0.0.1", "[::1]"].includes(url.hostname.toLowerCase()) ||
       url.username || url.password || url.search || url.hash || url.pathname.replace(/\/+$/, "") !== "/v1") {
     throw new Error("Use an HTTP loopback endpoint ending in /v1; remote hosts, credentials, and query strings are prohibited.");
   }
+  if (url.port && (Number(url.port) < 1 || Number(url.port) > 65535)) throw new Error("Invalid local port.");
   return url.origin + "/v1";
 }
 
