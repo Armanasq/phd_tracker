@@ -5,7 +5,7 @@ export const VIEWS=Object.freeze([
   ["contacts","users","Contacts"],["updates","clock","Updates"],["compare","compare","Compare"],
   ["review","shield","Verification"],["archive","archive","Archive"],["sources","database","Sources"],
   ["ai","sparkles","Copilot"],["agents","bot","Agents"],["automations","flow","Automations"],
-  ["activity","activity","Run history"],["deployment","settings","Deployment"],["settings","settings","Settings"]
+  ["activity","activity","Run history"],["source-observations","database","Source observations"],["deployment","settings","Deployment"],["settings","settings","Settings"]
 ].map(entry=>Object.freeze(entry)));
 
 const ALIASES=Object.freeze({
@@ -22,7 +22,10 @@ const ALIASES=Object.freeze({
   workflows:"automations",
   setup:"deployment",
   runtime:"deployment",
-  verification:"review"
+  verification:"review",
+  "source-drift":"source-observations",
+  observations:"source-observations",
+  "source-monitor":"source-observations"
 });
 const IDS=new Set(VIEWS.map(([id])=>id));
 
