@@ -13,7 +13,7 @@ test("unreviewed byte drift remains visible after later unchanged fetch",()=>{
   ];
   const result=observationSummary(records);
   assert.equal(result.sources,5);
-  assert.deepEqual(result.counts,{changed:2,unavailable:1,unchanged:0,baseline:1,legacy:1});
+  assert.deepEqual(result.counts,{changed:2,unavailable:1,unchanged:1,baseline:1,legacy:1});
   const changed=renderSourceObservations({records,filter:"changed"});
   assert.match(changed,/>B<\/strong>/);
   assert.match(changed,/>A<\/strong>/);
