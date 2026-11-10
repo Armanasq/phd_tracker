@@ -83,6 +83,7 @@ class SourceQuoteSpanTests(unittest.TestCase):
         )
         conn.commit()
         conn.close()
+        oldpath.chmod(0o600)
         migrated = Store(oldpath)
         try:
             historical = source_claims(migrated)
