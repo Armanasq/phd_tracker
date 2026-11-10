@@ -27,7 +27,7 @@ from .scheduler_preview import scheduler_preview
 from .toolkit import TOOL_NAMES, DEFAULT_TOOLS
 from time import perf_counter
 from .calendar import line_items
-from .engine import catalog, owner_records, run_agent, run_workflow, scheduler_once, selected
+from .engine import catalog, owner_records, run_agent, run_workflow, workflow_plan, scheduler_once, selected
 from .store import ConflictError, Store, default_path
 from .recovery import runtime_lock
 
@@ -434,6 +434,12 @@ class ApiHandler(BaseHTTPRequestHandler):
         elif path.startswith("/api/conversations/") and path.endswith("/delete"):
             identity = unquote(path[len("/api/conversations/"):-len("/delete")].strip("/"))
             self.send_json({"deleted": store.delete_conversation(identity)})
+        elif path == "/api/workflows/preview":
+            self.send_json(workflow_plan(
+                store, workflow_id=data["workflow_id"],
+                provider_id=data.get("provider_id"),
+                cloud_consent=data.get("cloud_consent") is True,
+            ))
         elif path == "/api/workflows/run":
             self.inference_reply(path, data, lambda: run_workflow(store, root,
                                         workflow_id=data["workflow_id"], provider_id=data.get("provider_id"),
