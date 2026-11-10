@@ -28,6 +28,7 @@ jobs:
     timeout-minutes: 15
     env:
       PHD_ATLAS_REPOSITORY: ${{ github.repository }}
+      PHD_ATLAS_COMPOSE_PROJECT: phdatlas-ci-${{ github.run_id }}
       PHD_ATLAS_DATA_MODE: starter
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
