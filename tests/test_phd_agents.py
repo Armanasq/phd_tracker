@@ -158,6 +158,43 @@ class AgentExecutionTests(unittest.TestCase):
         self.assertEqual(len(self.store.runs()), 1)
         self.assertTrue("untrusted" in call.call_args.args[2])
 
+    def test_captured_source_quote_is_unverified_agent_context(self):
+        import hashlib
+        from phd_agents.source_text import extract_visible_text
+        from phd_agents.source_observer import observe_record
+        from phd_agents.source_claims import capture_source_claim
+        text = "Official page says applications close on 15 December 2026."
+        original = text.encode("utf-8")
+        record = make_record()
+        observation = observe_record(self.store, "APP1", record["source_url"],
+                                     fetcher=lambda _: {
+                                         "status": "fetched", "http_status": 200,
+                                         "content_length": len(original),
+                                         "content_sha256": hashlib.sha256(original).hexdigest(),
+                                         **extract_visible_text(original, "text/plain"),
+                                     })
+        claim = capture_source_claim(
+            self.store, observation_id=observation["id"], claim_type="deadline",
+            quote=text, candidate_value="2026-12-15",
+            expected_digest=observation["content_sha256"],
+        )
+        citation = "SRC-" + str(claim["id"])
+        answer = "Candidate date still needs review. [claim:" + citation + "]"
+        with patch("phd_agents.engine.owner_records", return_value=(self.data, [record])):
+            with patch("phd_agents.engine.invoke",
+                       return_value=ModelReply(answer, "stub-model", {}, "ollama")) as invoke:
+                result = run_agent(self.store, Path(self.tmp.name), agent_id="portfolio_planner",
+                                   provider_id="ollama", application_id="APP1", input_text="Check deadline evidence")
+        prompt = invoke.call_args.args[2]
+        self.assertIn("source_claims", prompt)
+        self.assertIn("exact_captured_source_quote_not_verified_interpretation", prompt)
+        self.assertIn("Official page says applications close", prompt)
+        self.assertEqual(result["source_claim_refs"], [citation])
+        self.assertEqual(result["claim_audit"]["linked_to_unverified_records"], 1)
+        self.assertEqual(result["claim_audit"]["linked_to_reviewed_records"], 0)
+        self.assertFalse(result["claim_audit"]["semantic_entailment_verified"])
+        self.assertEqual(self.store.get_application("APP1")["version"], 0)
+
     def test_manual_cloud_run_requires_fresh_consent_even_when_route_is_approved(self):
         from phd_agents.routing import ModelRoute
         from phd_agents.engine import run_workflow

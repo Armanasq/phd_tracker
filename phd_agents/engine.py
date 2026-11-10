@@ -19,6 +19,7 @@ from .evidence_pack import bounded_evidence
 from .relevance import select_evidence
 from .proof_queue import evidence_work_queue
 from .claim_audit import audit_generated_claims
+from .source_claims import source_claims
 
 def paper_radar_for_instance(root: Path, source: dict[str, Any]) -> list[dict[str, Any]]:
     instance = source.get("instance", {})
@@ -123,6 +124,22 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str | Non
         )} for claim in owner_claims
         if claim.get("application_id") in visible_record_ids
     ][:10]
+    evidence["source_claims"] = [
+        {
+            "id": "SRC-" + str(item["id"]),
+            "application_id": item["application_id"],
+            "field": item["claim_type"],
+            "assertion": item["candidate_value"],
+            "status": item["verification"],
+            "source_url": item["source_url"],
+            "observed_at": item["captured_at"],
+            "excerpt": item["exact_quote"],
+            "source_sha256": item["source_digest"],
+            "evidence_scope": "exact_captured_source_quote_not_verified_interpretation",
+        }
+        for item in source_claims(store, limit=200)
+        if item["application_id"] in visible_record_ids
+    ][:6]
     tool_names = agent.get("tools") if isinstance(agent.get("tools"), list) else DEFAULT_TOOLS.get(agent_id, [])
     private = {kind: (owner_claims if kind == "evidence" else store.items(kind))
                for kind in ("profile", "referee", "reference", "milestone", "evidence")}
@@ -167,13 +184,19 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str | Non
     available_claims = visible_evidence.get("claim_registry", [])
     if not isinstance(available_claims, list):
         available_claims = []
-    claim_audit = audit_generated_claims(reply.content, evidence_refs, available_claims)
+    source_quotes = visible_evidence.get("source_claims", [])
+    if not isinstance(source_quotes, list):
+        source_quotes = []
+    claim_audit = audit_generated_claims(
+        reply.content, evidence_refs, available_claims + source_quotes,
+    )
     run_id = store.put_run("workflow" if workflow_id else "agent", agent_id, application_id,
                            "proposed", provider_id,
                            {"text": reply.content, "model": reply.model, "usage": reply.usage, "latency_ms": reply.latency_ms,
                             "workflow_id": workflow_id, "tools": [x["name"] for x in tool_pack["tools"]], "source_as_of": source.get("as_of"),
                             "evidence_refs": evidence_refs, "retrieval_method": retrieval["method"],
                              "claim_audit": claim_audit,
+                            "source_claim_refs": [claim.get("id") for claim in source_quotes],
                             "notice": "AI output is a proposal; no application or communication was changed"})
     thread_id = store.save_conversation_turn(
         conversation_id=conversation_id, agent_id=agent_id, application_id=application_id,
@@ -184,6 +207,7 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str | Non
             "route_source": route.source, "model": reply.model, "usage": reply.usage, "latency_ms": reply.latency_ms, "text": reply.content,
             "conversation_id": thread_id, "evidence_refs": evidence_refs, "evidence_truncated": evidence_truncated,
             "retrieval_method": retrieval["method"], "claim_audit": claim_audit,
+            "source_claim_refs": [claim.get("id") for claim in source_quotes],
             "status": "proposed", "tools": [x["name"] for x in tool_pack["tools"]], "source_as_of": source.get("as_of")}
 
 def workflow_plan(store: Store, *, workflow_id: str, provider_id: str | None = None,
