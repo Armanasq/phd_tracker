@@ -87,6 +87,10 @@ Illustrative operator objectives use the previous 24 hours, at least 20 complete
 
 The synthetic, credential-free adapter suite (`tests/test_phd_provider_contracts.py`) verifies the request envelope and response contract for local OpenAI-compatible gateways, OpenAI, Gemini gateway, OpenRouter, Groq, Azure v1, Azure versioned deployments and Anthropic Messages. It validates routing paths, provider-specific authentication headers, token-limit parameter names, native SSE delta order, bounded response parsing, invalid usage handling and failure redaction. It does **not** certify live vendor credentials, model availability, quotas or CORS/Local Network Access behavior.
 
+## Conservative source-reference audit of AI guidance
+
+The private agent adds bounded, application-scoped owner evidence records to its context and requests explicit `[source:APPLICATION_ID]` or `[claim:EVIDENCE_ID]` references for factual statements. `phd_agents/claim_audit.py` checks whether cited IDs were actually provided in that inference request and whether their recorded review status and primary HTTPS link are present. It counts missing, unknown and unverified reference links, and persists an audit summary alongside each proposed model run. **A valid citation tag is not semantic entailment**, and the report always says `requires_human_fact_check`. It does not fabricate verified claims from source IDs or automatically submit/adopt generated advice. Tests: `tests/test_phd_claim_audit.py`.
+
 ## Release quality gates
 
 - Run Python and JavaScript tests for every backend or private frontend change.

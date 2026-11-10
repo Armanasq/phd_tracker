@@ -17,6 +17,7 @@ from .routing import resolve_route
 from .evidence_pack import bounded_evidence
 from .relevance import select_evidence
 from .proof_queue import evidence_work_queue
+from .claim_audit import audit_generated_claims
 
 def paper_radar_for_instance(root: Path, source: dict[str, Any]) -> list[dict[str, Any]]:
     instance = source.get("instance", {})
@@ -103,15 +104,27 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str | Non
                     "summary": source.get("meta", {}), "date": today.isoformat(),
                     "agenda": agenda(records, today, 12),
                     "source_health": source.get("providers", [])}
+    owner_claims = store.items("evidence")
     proof_queue=evidence_work_queue(records, store.items("milestone"), store.items("reference"),
-                                    store.items("evidence"), today, limit=15)["items"]
+                                    owner_claims, today, limit=15)["items"]
     if application_id:
         proof_queue=[item for item in proof_queue if item["application_id"]==application_id]
     evidence["proof_queue"]=[{"application_id":item["application_id"], "kind":item["kind"],
                                 "action":item["action"], "proof_needed":item["proof_needed"]}
                                for item in proof_queue[:10]]
+    visible_record_ids = {application_id} if application_id else {
+        ref["application_id"] for ref in retrieval["references"]
+    }
+    evidence["claim_registry"] = [
+        {field: claim.get(field) for field in (
+            "id", "application_id", "field", "assertion", "status", "source_url",
+            "observed_at", "excerpt"
+        )} for claim in owner_claims
+        if claim.get("application_id") in visible_record_ids
+    ][:10]
     tool_names = agent.get("tools") if isinstance(agent.get("tools"), list) else DEFAULT_TOOLS.get(agent_id, [])
-    private = {kind: store.items(kind) for kind in ("profile", "referee", "reference", "milestone", "evidence")}
+    private = {kind: (owner_claims if kind == "evidence" else store.items(kind))
+               for kind in ("profile", "referee", "reference", "milestone", "evidence")}
     papers = paper_radar_for_instance(root, source) if "paper_radar" in tool_names else []
     tool_pack = run_tools(tool_names, data=source, records=records, private=private,
                           today=today, application_id=application_id, papers=papers)
@@ -136,7 +149,9 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str | Non
               evidence_json + "\n</evidence>\n" + history_block + "\nApplicant request:\n" +
               (input_text.strip() or "Analyze the evidence and produce the most valuable actionable, explicitly provisional findings.") +
               "\n\nOutput a concise, evidence-grounded analysis with proposed next actions and open proof obligations. " +
-              "Do not report any external action as completed.")
+              "Do not report any external action as completed. " +
+              "For a factual statement, cite [source:APPLICATION_ID] or [claim:EVIDENCE_ID] when its listed record is relevant. " +
+              "Citations link to source records, not proof that a statement is true.")
     inference_started = perf_counter()
     try:
         reply = (invoke_stream(provider, system, prompt, on_delta)
@@ -148,11 +163,16 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str | Non
                        "workflow_id": workflow_id, "source_as_of": source.get("as_of"),
                        "latency_ms": round((perf_counter() - inference_started) * 1000)})
         raise
+    available_claims = visible_evidence.get("claim_registry", [])
+    if not isinstance(available_claims, list):
+        available_claims = []
+    claim_audit = audit_generated_claims(reply.content, evidence_refs, available_claims)
     run_id = store.put_run("workflow" if workflow_id else "agent", agent_id, application_id,
                            "proposed", provider_id,
                            {"text": reply.content, "model": reply.model, "usage": reply.usage, "latency_ms": reply.latency_ms,
                             "workflow_id": workflow_id, "tools": [x["name"] for x in tool_pack["tools"]], "source_as_of": source.get("as_of"),
                             "evidence_refs": evidence_refs, "retrieval_method": retrieval["method"],
+                             "claim_audit": claim_audit,
                             "notice": "AI output is a proposal; no application or communication was changed"})
     thread_id = store.save_conversation_turn(
         conversation_id=conversation_id, agent_id=agent_id, application_id=application_id,
@@ -162,7 +182,7 @@ def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str | Non
     return {"id": run_id, "agent_id": agent_id, "provider_id": provider_id,
             "route_source": route.source, "model": reply.model, "usage": reply.usage, "latency_ms": reply.latency_ms, "text": reply.content,
             "conversation_id": thread_id, "evidence_refs": evidence_refs, "evidence_truncated": evidence_truncated,
-            "retrieval_method": retrieval["method"],
+            "retrieval_method": retrieval["method"], "claim_audit": claim_audit,
             "status": "proposed", "tools": [x["name"] for x in tool_pack["tools"]], "source_as_of": source.get("as_of")}
 
 def workflow_plan(store: Store, *, workflow_id: str, provider_id: str | None = None,
