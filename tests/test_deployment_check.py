@@ -1,0 +1,50 @@
+import json
+
+from scripts.deployment_check import inspect
+
+
+def project(tmp_path):
+    for relative in ("site/index.html", "scripts/build_workspace.py", "phd_agents/server.py", "requirements-intelligence.txt"):
+        file = tmp_path / relative
+        file.parent.mkdir(parents=True, exist_ok=True)
+        file.touch()
+    return tmp_path
+
+
+def test_starter_fork(tmp_path):
+    results = inspect(project(tmp_path), "pages", {"PHD_ATLAS_REPOSITORY": "example/phd_tracker"})
+    assert not any(item.status == "error" for item in results)
+    assert next(item for item in results if item.code == "data-mode").status == "ok"
+
+
+def test_missing_source_is_blocked(tmp_path):
+    results = inspect(project(tmp_path), "pages", {"PHD_ATLAS_DATA_MODE": "source"})
+    assert next(item for item in results if item.code == "data-mode").status == "error"
+
+
+def test_source_schema_is_checked(tmp_path):
+    root = project(tmp_path)
+    source = root / "data/user_opportunities.json"
+    source.parent.mkdir(exist_ok=True)
+    source.write_text(json.dumps({"schema_version": 1, "records": [{"id": "test"}]}))
+    results = inspect(root, "pages", {"PHD_ATLAS_DATA_MODE": "source"})
+    assert next(item for item in results if item.code == "data-mode").status == "ok"
+
+
+def test_local_secrets_outside_repo(tmp_path):
+    root = project(tmp_path)
+    env = {"PHDAI_PRIVATE_DIR": str(root / "state"), "PHDAI_MAX_CONCURRENT_INFERENCE": "9"}
+    results = inspect(root, "local-full-stack", env)
+    assert {item.code for item in results if item.status == "error"} == {"private-storage", "inference-limit"}
+
+
+def test_cloud_mode_fails_closed(tmp_path):
+    results = inspect(project(tmp_path), "cloud-full-stack", {})
+    assert next(item for item in results if item.code == "cloud-backend").status == "error"
+
+
+def test_actions_does_not_disclose_credential(tmp_path):
+    secret = "do-not-echo-this-credential"
+    results = inspect(project(tmp_path), "actions", {"PHD_ATLAS_ENABLE_HOSTED_AI": "true", "PHD_ATLAS_AI_BASE_URL": "https://model.example/v1", "PHD_ATLAS_AI_MODEL": "example", "PHD_ATLAS_AI_API_KEY": secret})
+    assert secret not in json.dumps([item.detail for item in results])
+    assert next(item for item in results if item.code == "hosted-key").status == "ok"
