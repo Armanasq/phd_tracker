@@ -273,6 +273,7 @@ export function createBrowserModel({notify, onChange, navigate, getSourceRecords
 
   function input(event) {if(event.target.id === "bmPrompt")state.prompt = event.target.value;}
   return {render,action,submit,input,ask,cancel:()=>state.controller?.abort(),
+    history:()=>state.messages.map(row=>({role:row.role,content:row.content})),
     status:()=>({verified:state.verified,busy:state.busy,model:state.model,endpoint:state.baseUrl,streaming:state.streaming}),
     activeModel:()=>state.model,activeLabel:()=>state.verified?"Local browser model":"Local model not tested",
     isVerified:()=>state.verified};
