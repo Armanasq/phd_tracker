@@ -24,7 +24,7 @@
       "@type": "prov:Entity",
       "schema:name": "EvidenceGraph observation snapshot",
       "schema:dateModified": {
-        "@value": "2026-11-09",
+        "@value": "2026-11-10",
         "@type": "xsd:date"
       },
       "prov:wasDerivedFrom": [
@@ -46,15 +46,15 @@
       "readinessState": "unknown"
     },
     {
-      "@id": "urn:phdtracker:document:recommendations",
-      "@type": "prov:Entity",
-      "schema:name": "Reference letters and referees",
-      "readinessState": "unknown"
-    },
-    {
       "@id": "urn:phdtracker:document:transcripts",
       "@type": "prov:Entity",
       "schema:name": "Official transcripts",
+      "readinessState": "unknown"
+    },
+    {
+      "@id": "urn:phdtracker:document:recommendations",
+      "@type": "prov:Entity",
+      "schema:name": "Reference letters and referees",
       "readinessState": "unknown"
     },
     {
@@ -64,70 +64,16 @@
       "readinessState": "unknown"
     },
     {
-      "@id": "urn:phdtracker:document:english_proof",
-      "@type": "prov:Entity",
-      "schema:name": "English proficiency evidence",
-      "readinessState": "unknown"
-    },
-    {
       "@id": "urn:phdtracker:document:research_portfolio",
       "@type": "prov:Entity",
       "schema:name": "Research portfolio and publications",
       "readinessState": "unknown"
     },
     {
-      "@id": "urn:phdtracker:application:N263-05",
+      "@id": "urn:phdtracker:document:english_proof",
       "@type": "prov:Entity",
-      "schema:name": "UCL Gatsby Computational Neuroscience Unit, PhD in Machine Learning and Theoretical Neuroscience, 2027",
-      "applicationDeadline": {
-        "@value": "2026-11-09",
-        "@type": "xsd:date"
-      },
-      "applicantDecision": "Go",
-      "documentMention": [
-        {
-          "@id": "urn:phdtracker:document:academic_cv"
-        },
-        {
-          "@id": "urn:phdtracker:document:english_proof"
-        },
-        {
-          "@id": "urn:phdtracker:document:recommendations"
-        },
-        {
-          "@id": "urn:phdtracker:document:transcripts"
-        }
-      ],
-      "prov:wasDerivedFrom": {
-        "@id": "urn:phdtracker:dataset:portfolio-frontier"
-      },
-      "schema:citation": {
-        "@id": "https://www.ucl.ac.uk/life-sciences/gatsby/study-and-work/gatsby-unit-phd-programme"
-      }
-    },
-    {
-      "@id": "urn:phdtracker:application:N263-06",
-      "@type": "prov:Entity",
-      "schema:name": "UCL Sainsbury Wellcome Centre, fully funded PhD in Neural Circuits and Behaviour, 2027 intake",
-      "applicationDeadline": {
-        "@value": "2026-11-09",
-        "@type": "xsd:date"
-      },
-      "applicantDecision": "Go with risk",
-      "documentMention": [
-        {
-          "@id": "urn:phdtracker:document:academic_cv"
-        },
-        {
-          "@id": "urn:phdtracker:document:recommendations"
-        }
-      ],
-      "prov:wasDerivedFrom": {
-        "@id": "urn:phdtracker:dataset:portfolio-frontier"
-      },
-      "schema:citation": {
-        "@id": "https://www.swc.science/content/apply-our-phd-programme"
-      }
+      "schema:name": "English proficiency evidence",
+      "readinessState": "unknown"
     },
     {
       "@id": "urn:phdtracker:application:C06",

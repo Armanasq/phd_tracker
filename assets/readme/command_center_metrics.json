@@ -1,14 +1,14 @@
 {
-  "rendered_as_of": "2026-11-09",
+  "rendered_as_of": "2026-11-10",
   "task_counts": {
-    "deadline_actions": 2,
+    "deadline_actions": 1,
     "priority_reviews": 0,
     "unverified_dates": 0,
     "excluded_deadlines": 0,
-    "timeline_tasks": 2,
-    "shared_tasks": 1,
-    "total_distinct_scheduled_actions": 5,
-    "source_row_events_scheduled_today": 5,
+    "timeline_tasks": 29,
+    "shared_tasks": 2,
+    "total_distinct_scheduled_actions": 32,
+    "source_row_events_scheduled_today": 32,
     "linked_past_steps_not_recounted": 0
   },
   "source_tabs": 15,

@@ -2,6 +2,307 @@
   "schema_version": 1,
   "papers": [
     {
+      "id": "arxiv:2611.12038",
+      "title": "DPGS-SLAM: Diffusion-Prior and Provenance-Aware Monocular Gaussian Splatting SLAM for Dynamic Visual Sensing",
+      "authors": [
+        "Yifan Luo",
+        "Takafumi Matsumaru",
+        "Vibekananda Dutta",
+        "Xin He"
+      ],
+      "abstract_excerpt": "This paper presents DPGS-SLAM (Diffusion-Prior and Provenance-Aware Monocular Gaussian Splatting SLAM) for dense mapping in environments containing dynamic objects. Dynamic observations can contaminate camera tracking and scene reconstruction in visual SLAM (simultaneous localization and mapping). Although 3DGS (3D Gaussian splatting) enables efficient dense mapping, existing 3DGS-SLAM systems may exhibit instability when dynamic objects violate their underlying static-scene assumption. Excluding dynamic observations can reduce their influence on tracking and mapping, but m",
+      "paper_url": "https://arxiv.org/abs/2611.12038",
+      "published": "2026-11-09",
+      "topic": "slam",
+      "relevance_score": 13,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T05:11:22+00:00",
+      "first_seen": "2026-11-10T05:11:22+00:00",
+      "last_seen": "2026-11-10T05:11:22+00:00"
+    },
+    {
+      "id": "arxiv:2611.11869",
+      "title": "Action Representation for Spatial Generalization in Robot World Models",
+      "authors": [
+        "Yuhang Sun"
+      ],
+      "abstract_excerpt": "Spatial generalization in robot world models depends on whether action representations capture the physical relationships that remain valid across changing spatial configurations. Yet different coordinates can describe the same interaction, whereas similar motions can produce different outcomes when local physical conditions change. How these distinctions affect learned prediction remains insufficiently understood. This study evaluates matched action representations defined in world, object, and surface coordinate frames using a controlled robotic peeling benchmark. Global ",
+      "paper_url": "https://arxiv.org/abs/2611.11869",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 12,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T05:11:22+00:00",
+      "first_seen": "2026-11-10T05:11:22+00:00",
+      "last_seen": "2026-11-10T05:11:22+00:00"
+    },
+    {
+      "id": "arxiv:2611.11934",
+      "title": "Scale-Consistent Monocular Fisheye Visual Odometry via Spherical Bundle Adjustment-Guided Unsupervised Depth Learning",
+      "authors": [
+        "Wanhui Luo",
+        "Hongbo Zhao",
+        "Yi Zhou",
+        "Qijun Chen",
+        "Yiming Nie",
+        "Rui Fan"
+      ],
+      "abstract_excerpt": "The wide field of view of fisheye cameras and the simplicity of a monocular setup make monocular fisheye visual odometry (VO) attractive for robotic localization and mapping. Nevertheless, scale drift remains a major challenge over long trajectories. Unsupervised depth learning can help to mitigate this issue, but the pronounced distortion of fisheye images poses challenges for accurate depth estimation. This article presents S$^2$D-FVO, a monocular fisheye VO framework integrating spherical bundle adjustment (SBA)-guided unsupervised depth learning to improve scale consist",
+      "paper_url": "https://arxiv.org/abs/2611.11934",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 11,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T05:11:22+00:00",
+      "first_seen": "2026-11-10T05:11:22+00:00",
+      "last_seen": "2026-11-10T05:11:22+00:00"
+    },
+    {
+      "id": "arxiv:2611.11996",
+      "title": "OASIS: Optimization-Aware Subgoal Inference with Safety Constraints for Autonomous Mobile Robot Navigation",
+      "authors": [
+        "Arian Hajizadeha",
+        "Javad Pourrafia",
+        "Negar Shenavara",
+        "Sana Bashiria",
+        "Seyed Majid Esmailzadeh"
+      ],
+      "abstract_excerpt": "Navigation in dynamic environments requires mobile robots to make progress toward their goals while respecting motion limits and avoiding surrounding obstacles. Learned subgoal policies can guide model predictive control beyond its local prediction horizon, but a geometrically suitable subgoal does not necessarily lead to a successfully solved control problem. This paper proposes OASIS, a hierarchical navigation framework that incorporates recent optimization outcomes into reinforcement learning-based subgoal generation. A high-level policy trained using Soft Actor--Critic ",
+      "paper_url": "https://arxiv.org/abs/2611.11996",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 9,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T05:11:22+00:00",
+      "first_seen": "2026-11-10T05:11:22+00:00",
+      "last_seen": "2026-11-10T05:11:22+00:00"
+    },
+    {
+      "id": "arxiv:2611.11887",
+      "title": "How Many Candidates Does a One-Step World Model Need? A Random-Codebook Account of Nearest-of-m Training on Frozen DINO Tokens",
+      "authors": [
+        "Yong Hwi Song",
+        "Keon Myung Lee"
+      ],
+      "abstract_excerpt": "One-step stochastic world models avoid the mode averaging of deterministic feature predictors without the tens of network evaluations per step that diffusion and flow matching require. The simplest such objective is nearest-of-m matching (conditional implicit maximum likelihood estimation, IMLE): draw m candidate futures and pull only the one closest to the observed outcome. Recent work conjectures that a small m suffices for feature-space world models and that a strictly proper energy score should replace the hard minimum. We test both claims with one-step world models on ",
+      "paper_url": "https://arxiv.org/abs/2611.11887",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 9,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T05:11:22+00:00",
+      "first_seen": "2026-11-10T05:11:22+00:00",
+      "last_seen": "2026-11-10T05:11:22+00:00"
+    },
+    {
+      "id": "arxiv:2611.11868",
+      "title": "Fade to... Red? Scheduling Coloured Noise Exploration Supports Efficient Robot Learning with Reduced Movement Jerk",
+      "authors": [
+        "Francisco M. López",
+        "Francisco Cruz"
+      ],
+      "abstract_excerpt": "Exploration in deep reinforcement learning (RL) for continuous control is commonly driven by temporally uncorrelated Gaussian (white) action noise, which leads to jerky motions with locally constrained exploration. In contrast, temporally correlated coloured noise, particularly pink noise, has been shown to support more efficient exploration in RL. Motivated by these findings, we inquire whether scheduling changes to the noise colour over the course of training can outperform white noise for continuous control robotics. We perform a systematic study of 49 linear schedules b",
+      "paper_url": "https://arxiv.org/abs/2611.11868",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 8,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T05:11:22+00:00",
+      "first_seen": "2026-11-10T05:11:22+00:00",
+      "last_seen": "2026-11-10T05:11:22+00:00"
+    },
+    {
+      "id": "arxiv:2611.12017",
+      "title": "Grasp-Taxonomy Conditioning as a Mode Switch for Dexterous Grasping of Climbing Holds",
+      "authors": [
+        "Rumi Loghmani",
+        "Abraham George",
+        "Amir Barati Farimani"
+      ],
+      "abstract_excerpt": "Dexterous grasping in robotics relies on distinct hand configurations depending on object geometry. We introduce BetaGrasp, a 3D diffusion policy that conditions a DP3-style point-cloud policy on a four-class grasp label (crimp, sloper, pinch, and jug), running on a Franka arm with a 16-DoF LEAP hand. We also introduce a climbing-hold benchmark: a spring testbed whose ratchet gives a slip-force reading in newtons. In our analysis the policy's point-cloud encoder did not separate the four holds, so the scan alone gave it little to choose a grasp from. Without the label (a DP",
+      "paper_url": "https://arxiv.org/abs/2611.12017",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 6,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T05:11:22+00:00",
+      "first_seen": "2026-11-10T05:11:22+00:00",
+      "last_seen": "2026-11-10T05:11:22+00:00"
+    },
+    {
+      "id": "arxiv:2611.11981",
+      "title": "Thermo-VLA: A Thermal-Aware Vision-Language-Action Model with Gated Residual Modulation for Robotic Manipulation",
+      "authors": [
+        "Jingxuan Chen",
+        "Junshi Luo",
+        "Chencheng Dong",
+        "Xiaojian Nie",
+        "Tongge Huang",
+        "Qiang Huang"
+      ],
+      "abstract_excerpt": "Recent Vision-Language-Action (VLA) models have begun incorporating thermal sensing, but existing approaches typically treat thermal images as ordinary visual inputs, providing limited support for temperature-aware relational reasoning in manipulation. To address this limitation, we propose Thermo-VLA with a ThermoRes Encoder, which decomposes thermal images into cold and hot attribute representations and injects them into the RGB token through language-conditioned residual modulation, enabling temperature-driven target selection and continuous manipulation. We further cons",
+      "paper_url": "https://arxiv.org/abs/2611.11981",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 6,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T05:11:22+00:00",
+      "first_seen": "2026-11-10T05:11:22+00:00",
+      "last_seen": "2026-11-10T05:11:22+00:00"
+    },
+    {
+      "id": "arxiv:2611.11941",
+      "title": "Flip Anything with Agentic Robotics Self-Learning",
+      "authors": [
+        "Shuangyu Xie",
+        "Kaiyuan Chen",
+        "Ken Goldberg"
+      ],
+      "abstract_excerpt": "Flipping is a fundamental robotic manipulation skill that requires reorienting a target object in a stable pose on a planar support surface by rotating it 180$^\\circ$ about an axis parallel to the support surface -- think of flipping a coin from heads to tails. Although flipping is a common objective in industrial tasks such as parts inspection, mechanical assembly, and tool use, coding a bimanual robot with grippers to flip diverse objects is a significant challenge. In this paper, we show that a coding agent can autonomously develop and refine object-flipping strategies t",
+      "paper_url": "https://arxiv.org/abs/2611.11941",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 6,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T05:11:22+00:00",
+      "first_seen": "2026-11-10T05:11:22+00:00",
+      "last_seen": "2026-11-10T05:11:22+00:00"
+    },
+    {
+      "id": "arxiv:2611.11940",
+      "title": "Reliability-Adaptive Multimodal Relative Pose Tracking for Underwater Leader-Follower Robots",
+      "authors": [
+        "Mingyang Yang",
+        "Zeyu Sha",
+        "Xiaorui Wang",
+        "Jun Wang",
+        "David Chen Wang",
+        "Feitian Zhang"
+      ],
+      "abstract_excerpt": "Underwater leader-follower formation control requires continuous relative-pose estimation despite degraded sensing conditions and limited onboard computation. This paper presents a reliability-adaptive multimodal perception framework for six-degree-of-freedom relative-pose tracking between two moving underwater robots. The framework integrates complementary visual, acoustic-ranging, and hydrodynamic measurements while accounting for their distinct physical characteristics and time-varying reliability. It adaptively weights modality contributions and models temporal dependen",
+      "paper_url": "https://arxiv.org/abs/2611.11940",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 6,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T05:11:22+00:00",
+      "first_seen": "2026-11-10T05:11:22+00:00",
+      "last_seen": "2026-11-10T05:11:22+00:00"
+    },
+    {
+      "id": "arxiv:2611.11885",
+      "title": "Design of a hybrid tendon-linkage finger with coupled and adaptive motion",
+      "authors": [
+        "Hyojae Kang",
+        "Giup Seo",
+        "Jae-Young Lee",
+        "Yeong Jae Park",
+        "Jongwoo Park",
+        "Hyunmin Do",
+        "So-Hee Park",
+        "Dongil Park",
+        "Jeongdo Ahn"
+      ],
+      "abstract_excerpt": "Dexterous robotic fingers require coordinated joint motion and adaptability to object contact, while independently actuating multiple joints increases the complexity of the transmission mechanism. This paper presents a hybrid tendon--linkage robotic finger with four mechanical degrees of freedom driven by three actuators. The MCP abduction/adduction joint is driven through a bevel gear, while MCP and PIP flexion/extension are driven by separate bidirectional tendon transmissions. The DIP joint is not independently actuated but is coupled to the PIP joint through a four-bar ",
+      "paper_url": "https://arxiv.org/abs/2611.11885",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 6,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T05:11:22+00:00",
+      "first_seen": "2026-11-10T05:11:22+00:00",
+      "last_seen": "2026-11-10T05:11:22+00:00"
+    },
+    {
+      "id": "arxiv:2611.11842",
+      "title": "A Benchmark and Layered Evaluation Protocol for Evidence-Grounded Shared Belief Updating in Connected Robotics",
+      "authors": [
+        "Ranulfo Bezerra",
+        "Kimitoshi Yamazaki"
+      ],
+      "abstract_excerpt": "Connected physical systems fuse observations from robots, IoT sensors, and edge-AI modules into a shared account of the world, yet most evaluations score only the final answer or action and cannot tell whether a method attributed the evidence, updated its belief, handled contradictions, and justified its decision. We argue that shared reasoning in Connected Robotics should be evaluated as an evidence-to-belief trajectory, and introduce the Connected Robotics Evidence Graph (CREG) Benchmark to make that trajectory measurable. CREG comprises 350 deterministically generated sc",
+      "paper_url": "https://arxiv.org/abs/2611.11842",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 6,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T05:11:22+00:00",
+      "first_seen": "2026-11-10T05:11:22+00:00",
+      "last_seen": "2026-11-10T05:11:22+00:00"
+    },
+    {
+      "id": "arxiv:2611.11830",
+      "title": "ROS2MR: Connecting ROS 2 Motion Planning to Mixed-Reality Trajectory Visualization",
+      "authors": [
+        "Santiago Berrezueta-Guzman",
+        "Habiba-Loai Khalil",
+        "Andrei Koshelev",
+        "Stefan Wagner"
+      ],
+      "abstract_excerpt": "Mixed reality (MR) allows users to inspect planned robot motion within their physical surroundings, but displaying trajectories from robotics software requires converting their joint configurations and timing into a format the MR application can play back. This paper presents ROS2MR, an extension of the MR-Robotics LAB platform that converts YAML-serialized ROS 2 joint trajectories, including MoveIt motion plans, into the platform's existing JSON playback format. The converter validates the input, maps arm joints by name, and resamples the trajectory at a nominal rate of 30",
+      "paper_url": "https://arxiv.org/abs/2611.11830",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 6,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T05:11:22+00:00",
+      "first_seen": "2026-11-10T05:11:22+00:00",
+      "last_seen": "2026-11-10T05:11:22+00:00"
+    },
+    {
+      "id": "arxiv:2611.11809",
+      "title": "Budget-aware Correspondence-driven View Selection for Real-time 3D Perception of Mobile Robots",
+      "authors": [
+        "Vaishnav Ramesh",
+        "Jacob Carter",
+        "Shivali J. Patel",
+        "Sanjeev J. Koppal",
+        "Md Jahidul Islam"
+      ],
+      "abstract_excerpt": "3D visual perception and scene reconstruction are critical for autonomous robots and intelligent transportation, yet real-world deployments often generate long, redundant image sequences that hinder downstream processing. This report investigates BCVS (budget-aware correspondence-driven view sampling), a pose-free view selection algorithm that offers 22+ FPS on a CPU, enabling online filtering for efficient 3D perception by mobile robots. Unlike existing approaches that rely on full structure-from-motion (SfM) pipelines or camera pose estimation, BCVS employs a purely corre",
+      "paper_url": "https://arxiv.org/abs/2611.11809",
+      "published": "2026-11-09",
+      "topic": "robot_learning",
+      "relevance_score": 6,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T05:11:22+00:00",
+      "first_seen": "2026-11-10T05:11:22+00:00",
+      "last_seen": "2026-11-10T05:11:22+00:00"
+    },
+    {
+      "id": "arxiv:2611.10239",
+      "title": "DASH-SLAM: Calibration-Free Metric Monocular SLAM via Depth Scale Propagation",
+      "authors": [
+        "Otavio Ribas",
+        "Jacopo Panerati",
+        "Pierre-Yves Lajoie"
+      ],
+      "abstract_excerpt": "Geometric foundation models estimate dense geometry and camera parameters from monocular images, but reliable SLAM also requires consistent scale and accurate data association across successive reconstructions. We present DASH-SLAM, a monocular SLAM system that integrates metric depth predictions from pretrained Depth Anything 3 into a shared-keyframe pose graph without task-specific fine-tuning. DASH-SLAM derives scale corrections from depth ratios at shared anchor images and accumulates them across reconstructions, with a damping factor controlling their influence. These ",
+      "paper_url": "https://arxiv.org/abs/2611.10239",
+      "published": "2026-11-06",
+      "topic": "slam",
+      "relevance_score": 8,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-10T05:11:22+00:00",
+      "first_seen": "2026-11-10T05:11:22+00:00",
+      "last_seen": "2026-11-10T05:11:22+00:00"
+    },
+    {
       "id": "arxiv:2611.09864",
       "title": "Grasp-TAGS: Task-Aware Grasp Selection via Critic Distillation for Prehensile Loco-Manipulation",
       "authors": [
@@ -120,7 +421,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-09T21:05:03+00:00"
+      "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
       "id": "arxiv:2611.08372",
@@ -515,7 +816,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-09T21:05:03+00:00"
+      "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
       "id": "arxiv:2611.03932",
@@ -534,7 +835,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-09T21:05:03+00:00"
+      "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
       "id": "arxiv:2611.03106",
@@ -552,7 +853,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-09T21:05:03+00:00"
+      "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
       "id": "arxiv:2611.00482",
@@ -569,7 +870,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-09T21:05:03+00:00"
+      "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
       "id": "arxiv:2610.41768",
@@ -589,7 +890,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-09T21:05:03+00:00"
+      "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
       "id": "arxiv:2610.41602",
@@ -610,7 +911,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-09T21:05:03+00:00"
+      "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
       "id": "arxiv:2610.39385",
@@ -632,7 +933,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-09T21:05:03+00:00"
+      "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
       "id": "arxiv:2610.39691",
@@ -655,7 +956,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-09T21:05:03+00:00"
+      "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
       "id": "arxiv:2610.38141",
@@ -681,7 +982,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-09T21:05:03+00:00"
+      "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
       "id": "arxiv:2610.37111",
@@ -701,7 +1002,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-09T21:05:03+00:00"
+      "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
       "id": "arxiv:2610.36454",
@@ -724,7 +1025,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-09T21:05:03+00:00"
+      "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
       "id": "arxiv:2610.35642",
@@ -742,7 +1043,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-09T21:05:03+00:00"
+      "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
       "id": "arxiv:2610.36312",
@@ -766,7 +1067,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-09T21:05:03+00:00"
+      "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
       "id": "arxiv:2610.34041",
@@ -784,7 +1085,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-09T21:05:03+00:00"
+      "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
       "id": "arxiv:2610.33174",
@@ -806,7 +1107,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-09T21:05:03+00:00"
+      "last_seen": "2026-11-10T05:11:22+00:00"
     },
     {
       "id": "arxiv:2610.31221",

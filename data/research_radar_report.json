@@ -1,9 +1,25 @@
 {
-  "as_of": "2026-11-09",
-  "fetched": 23,
-  "new_ids": [],
-  "new_count": 0,
-  "total_retained": 39,
+  "as_of": "2026-11-10",
+  "fetched": 31,
+  "new_ids": [
+    "arxiv:2611.12038",
+    "arxiv:2611.10239",
+    "arxiv:2611.12017",
+    "arxiv:2611.11996",
+    "arxiv:2611.11981",
+    "arxiv:2611.11941",
+    "arxiv:2611.11940",
+    "arxiv:2611.11934",
+    "arxiv:2611.11887",
+    "arxiv:2611.11885",
+    "arxiv:2611.11869",
+    "arxiv:2611.11868",
+    "arxiv:2611.11842",
+    "arxiv:2611.11830",
+    "arxiv:2611.11809"
+  ],
+  "new_count": 15,
+  "total_retained": 54,
   "source_errors": [],
   "classification": "research_signal_only"
 }

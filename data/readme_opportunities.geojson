@@ -22,10 +22,10 @@
     {
       "type": "Feature",
       "properties": {
-        "title": "United Kingdom: 18 application records",
+        "title": "United Kingdom: 16 application records",
         "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
-        "count": 18,
-        "sample_source_ids": "N263-05, N263-06, M17",
+        "count": 16,
+        "sample_source_ids": "M17, N263-11, M25",
         "marker-color": "#19b5b6",
         "marker-size": "large"
       },
