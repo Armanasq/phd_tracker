@@ -18,9 +18,9 @@ PhD Atlas brings application records, supporting sources, preparation tasks, con
 | Dashboard, Calendar & Pipeline | Prioritize work and distinguish recorded dates from confirmed closing times. |
 | Verification, Sources & Archive | Inspect provenance, conflicting claims, excluded routes and incomplete evidence. |
 | Research & EvidenceGraph | Examine the [evidence workflow](assets/readme/evidence_flow.svg), [portfolio frontier](data/portfolio_frontier.json) and [generated research report](docs/RESEARCH_REPORT.md). |
-| Atlas assistant | Use configured local or cloud-compatible inference providers through the *private* runtime; responses are proposals, not completed actions. |
+| Atlas assistant | Use direct browser-local OpenAI-compatible inference on Pages, or configured local/cloud providers through the *private* runtime; responses are proposals, not completed actions. |
 
-The [public workspace](https://armanasq.github.io/phd_tracker/) works without an AI provider. A provider preset, search result or model-produced suggestion is not proof of current availability, admission eligibility or a submitted application.
+The [public workspace](https://armanasq.github.io/phd_tracker/) works without an AI provider. In hosted **Settings**, users can connect to a model on their own computer via an explicitly configured HTTP loopback `/v1` endpoint, subject to browser permissions and server CORS. No cloud key is stored on Pages. A provider preset, search result or model-produced suggestion is not proof of current availability, admission eligibility or a submitted application.
 
 ## Run locally
 
@@ -40,7 +40,7 @@ Open `http://127.0.0.1:8000/` for the static application. For personal AI settin
 python -m phd_agents serve --port 8765
 ```
 
-Open `http://127.0.0.1:8765/`, then configure **Settings → Connections**, test the selected model, and explicitly activate any cloud provider. See [private runtime operations](phd_agents/README.md) and [unified workspace setup](site/README.md). The runtime binds to loopback; API keys and private SQLite conversations are not deployed to GitHub Pages.
+Open `http://127.0.0.1:8765/`, then configure **Settings → Connections**, test the selected model, and explicitly activate any cloud provider. On Linux, the same private runtime can also run under [Docker Compose](docs/DOCKER_LOCAL.md) with per-instance persistent volumes. Verify your environment using `python scripts/deployment_check.py --mode local-full-stack`. See [private runtime operations](phd_agents/README.md), [deployment architecture](docs/DEPLOYMENT_ARCHITECTURE.md) and [unified workspace setup](site/README.md). The runtime binds to loopback; API keys and private SQLite conversations are not deployed to GitHub Pages.
 
 ## Evidence and state
 
@@ -79,11 +79,11 @@ The repository About description, website and topics are versioned in [metadata 
 
 ## Backend runtime and recovery
 
-The optional private Python service includes atomic applicant-state updates, scheduled-run SQLite leases, cloud-call reservations, credential-bound model providers, inference admission limits, retry idempotency, and verified local backups. These functions run on **private loopback**; GitHub Pages remains read-only. See [backend engineering and operations](docs/BACKEND_ENGINEERING.md) for API semantics, recovery, concurrency and limitations.
+The optional private Python service includes atomic applicant-state updates, scheduled-run SQLite leases, cloud-call reservations, credential-bound model providers, inference admission limits, retry idempotency, and verified local backups. These functions run on **private loopback**. GitHub Pages cannot execute private backend tools, although its browser-only mode can invoke a user-configured local model. See [backend engineering and operations](docs/BACKEND_ENGINEERING.md) for API semantics, recovery, concurrency and limitations.
 
 ## Engineering
 
-The application separates read-only public evidence from local agent execution. It uses a static JavaScript frontend, source normalization and verification scripts, deterministic application checks, a Python orchestration layer and SQLite for private state.
+The application separates public evidence and user-triggered browser-local model inference from privileged private agent execution. It uses a static JavaScript frontend, source normalization and verification scripts, deterministic application checks, a Python orchestration layer and SQLite for private state.
 
 | Directory | Responsibility |
 | --- | --- |
