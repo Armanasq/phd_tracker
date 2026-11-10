@@ -38,7 +38,7 @@ export function createBrowserModel({notify, onChange, navigate, getSourceRecords
   const loaded = (() => {try { return JSON.parse(localStorage.getItem(storageKey()) || "{}"); } catch {return {};}})();
   const state = {baseUrl:typeof loaded.baseUrl === "string" ? loaded.baseUrl : "http://127.0.0.1:11434/v1",
     model:typeof loaded.model === "string" ? loaded.model : "",verified:false,discovered:[],
-    status:"Not tested",error:"",busy:false,controller:null,streaming:true,
+    status:"Not tested",error:"",busy:false,controller:null,
     prompt:"",selectedRecord:"",messages:[],answer:"",usage:null,calls:0,
     streaming:loaded.streaming !== false};
 
@@ -70,7 +70,7 @@ export function createBrowserModel({notify, onChange, navigate, getSourceRecords
       '<label class="os-field"><span>Local endpoint</span><input name="baseUrl" type="url" required value="' + escapeHTML(state.baseUrl) + '" placeholder="http://127.0.0.1:8000/v1"></label>' +
       '<label class="os-field"><span>Model ID</span><input name="model" type="text" maxlength="160" value="' + escapeHTML(state.model) + '" placeholder="Exact deployed model ID" list="bm-models"></label>' +
       '<datalist id="bm-models">' + state.discovered.map(x => '<option value="' + escapeHTML(x) + '"></option>').join("") + '</datalist>' +
-      '<label class="os-field"><span>Response transport</span><label><input type="checkbox" name="streaming" ' + (state.streaming ? 'checked' : '') + '> Stream tokens when the endpoint supports SSE</label></label>' +
+      '<label class="os-field"><span>Response transport</span><span class="bm-checkbox"><input type="checkbox" name="streaming" ' + (state.streaming ? 'checked' : '') + '> Stream tokens when the endpoint supports SSE</span></label>' +
       '<div class="os-actions"><button type="submit" class="os-btn primary" ' + (state.busy ? "disabled" : "") + '>Save connection</button>' +
       button("Discover models","discover","quiet",state.busy) + button("Test inference","test","quiet",state.busy) + '</div></form>' +
       '<p class="os-note" role="status">Status: ' + escapeHTML(state.status) + (state.verified ? " · Verified this session" : " · No verified inference in this session") + '</p>' + notice() +
