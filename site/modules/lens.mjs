@@ -35,6 +35,7 @@ export function mountAtlasLens({getRecords,getPublicRecords,getView,getSelectedA
    state.verified=Boolean(route?.allowed&&route?.state==="responded");
  }
  function clearThread(){
+   if(state.direct&&!state.busy)browserModel?.clear?.();
    state.conversationId=null;state.turns=[];state.historyOpen=false;state.error="";
    try{localStorage.removeItem(threadStorageKey)}catch{}
  }
@@ -192,9 +193,44 @@ export function mountAtlasLens({getRecords,getPublicRecords,getView,getSelectedA
    if(next!==state.applicationId){clearThread();state.applicationId=next}
    if(state.open)render();
  }
+ async function submitBrowser(text) {
+   state.error="";state.draft="";state.partial="";
+   const turn={role:"user",text};
+   state.turns.push(turn);
+   state.busy=true;
+   state.abort={abort:()=>browserModel?.cancel?.()};
+   const sequence=++requestSequence;
+   render();
+   try{
+     const answer=await browserModel.ask(text,{recordId:state.applicationId,onChunk:content=>{
+       if(sequence!==requestSequence)return;
+       state.partial=content;
+       const target=byId("lensPartial");
+       if(target)target.textContent=content;
+     }});
+     if(sequence!==requestSequence)return;
+     state.turns=(browserModel.history?.()||[]).map(item=>({
+       role:item.role,text:item.content,model:answer.model,provider:"browser_local",
+       agent:"browser_local",tools:[],openTrace:false
+     }));
+     try{Promise.resolve(onRunComplete?.(answer)).catch(()=>{})}catch{}
+   }catch(error){
+     if(sequence!==requestSequence)return;
+     if(state.turns.at(-1)===turn)state.turns.pop();
+     state.draft=text;
+     state.error=short(error.message||"Inference failed",240);
+   }finally{
+     if(sequence===requestSequence){
+       state.busy=false;state.abort=null;state.partial="";render();
+       const history=byId("lensHistory");
+       if(history)history.scrollTop=history.scrollHeight;
+     }
+   }
+ }
  async function submit(value){
    const text=String(value??state.draft).trim();
    if(!text||state.busy||!state.connected||!state.verified)return;
+   if(state.direct){await submitBrowser(text);return;}
    const route=state.routes[state.agent];
    const destination=state.providers.find(provider=>provider.id===route?.provider_id);
    if(!destination){
