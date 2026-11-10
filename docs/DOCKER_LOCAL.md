@@ -18,14 +18,14 @@ docker compose -f compose.local-linux.yml up --build -d
 docker compose -f compose.local-linux.yml ps
 ```
 
-Set `PHD_ATLAS_REPOSITORY` to your own fork identity. Open `http://127.0.0.1:8765/#settings`, configure an actual running OpenAI-compatible model endpoint, and run the model inference probe. No provider or agent is automatically granted cloud access.
+Set `PHD_ATLAS_REPOSITORY` to your own fork identity and `PHD_ATLAS_COMPOSE_PROJECT` to a unique lowercase project name for this installation. Different forks must use different Compose project names to prevent accidental state-volume reuse. Open `http://127.0.0.1:8765/#settings`, configure an actual running OpenAI-compatible model endpoint, and run the model inference probe. No provider or agent is automatically granted cloud access.
 
 The Compose file deliberately uses `network_mode: host` because the existing private API refuses non-loopback clients. Docker Desktop host networking requires separate enablement and is not a validated cross-platform deployment. On macOS or Windows, use the documented native Python runtime instead. **Do not replace `127.0.0.1` with `0.0.0.0` or publish this container to a public interface.**
 
 ## Data and operations
 
-- Private SQLite state and saved provider credentials: named volume `phd-atlas-local_private_state`
-- Generated public workspace snapshot: named volume `phd-atlas-local_generated_site`
+- Private SQLite state and saved provider credentials: project-scoped named volume `<your-compose-project>_private_state`
+- Generated public workspace snapshot: project-scoped named volume `<your-compose-project>_generated_site`
 - Filesystem: read-only except named volumes and a bounded temporary directory
 - Runtime: non-root UID 10001, no additional Linux capabilities, no-new-privileges
 
