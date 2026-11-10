@@ -136,6 +136,22 @@ function publicSourceRecord(row){
   const value=safeText(row[key]??"",max,"published "+key);
   if(value)retained[key]=value;
  }
+ const clock=row.deadline_time??null,zone=row.deadline_timezone??null;
+ const verified=row.deadline_cutoff_verified===true;
+ if(row.deadline_cutoff_verified!==undefined&&typeof row.deadline_cutoff_verified!=="boolean")throw new TypeError("Invalid published cutoff verification");
+ if((clock===null)!==(zone===null))throw new TypeError("Published cutoff clock and timezone must be paired");
+ if(clock!==null){
+  if(typeof clock!=="string"||!/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(clock)||typeof zone!=="string"||zone.length>80)throw new TypeError("Invalid published cutoff clock or timezone");
+  try{new Intl.DateTimeFormat("en-GB",{timeZone:zone}).format(new Date())}catch{throw new TypeError("Invalid published cutoff IANA timezone")}
+  retained.deadline_time=clock;
+  retained.deadline_timezone=zone;
+  const cutoffNote=safeText(row.deadline_cutoff_evidence??"",400,"published cutoff evidence");
+  if(cutoffNote)retained.deadline_cutoff_evidence=cutoffNote;
+  if(verified){
+   if(deadlineType!=="final"||!["source_verified","owner_verified"].includes(verification)||!source||!sourceDate||!evidence||cutoffNote.length<12||!retained.deadline)throw new TypeError("Source-attested final cutoff proof is incomplete");
+   retained.deadline_cutoff_verified=true;
+  }
+ }else if(verified||row.deadline_cutoff_evidence)throw new TypeError("Cutoff evidence requires time and timezone");
  if(row.duplicate_submission_advisory===true)retained.duplicate_submission_advisory=true;
  return retained;
 }

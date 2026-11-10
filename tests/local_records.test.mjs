@@ -89,3 +89,24 @@ test("publishing additional opportunities preserves existing fork records and st
  assert.throws(()=>exportIndependentSource([row],"2026-11-09","Europe/Berlin",[{...existing,id}]),/Duplicate opportunity/);
  assert.throws(()=>exportIndependentSource([],"2026-11-09","UTC",[{...existing,source_date:null}]),/source date/);
 });
+
+test("independent source re-export preserves verified final cutoff fields but not derived UTC state",()=>{
+ const existing={
+  id:"FORK-CUTOFF",name:"Illustrative official call",record_type:"tracked",
+  deadline:"2027-06-01",deadline_type:"final",deadline_time:"23:59",
+  deadline_timezone:"Europe/London",deadline_cutoff_verified:true,
+  deadline_cutoff_utc:"2027-06-01T22:59:00Z",
+  deadline_cutoff_evidence:"Official page states closing at 23:59 London",
+  source_url:"https://example.edu/call",source_date:"2026-11-09",
+  evidence:"Original official page reviewed",verification:"source_verified",
+ };
+ const reexported=exportIndependentSource([],"2026-11-09","UTC",[existing]);
+ const record=reexported.records[0];
+ assert.equal(record.deadline_cutoff_verified,true);
+ assert.equal(record.deadline_time,"23:59");
+ assert.equal(record.deadline_timezone,"Europe/London");
+ assert.equal(record.deadline_cutoff_evidence,existing.deadline_cutoff_evidence);
+ assert.equal("deadline_cutoff_utc" in record,false);
+ assert.throws(()=>exportIndependentSource([],"2026-11-09","UTC",[{...existing,deadline_timezone:null}]),/paired/);
+ assert.throws(()=>exportIndependentSource([],"2026-11-09","UTC",[{...existing,deadline_cutoff_evidence:""}]),/proof/);
+});
