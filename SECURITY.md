@@ -41,3 +41,13 @@ Allow only the Pages origin in a local server's CORS policy, rather than using w
 Forks must supply their own GitHub Actions secrets and review every public-data source before publication. Linux Docker deployments must set unique `PHD_ATLAS_COMPOSE_PROJECT` values to avoid reusing private SQLite/credential volumes. The `.env` file, local database, backups, credential files and personal applicant documents must never be committed or uploaded to Pages. The local credential file is permission-restricted but **not encrypted at rest**.
 
 No cloud deployment mode or login screen is considered production-ready until its server-side identity, authorization, storage isolation, CSRF, rate limits and credential boundaries are independently verified. See [deployment architecture](docs/DEPLOYMENT_ARCHITECTURE.md).
+
+## Institutional source text and provenance
+
+The private, opt-in HTTPS source observer retains at most 24,000 characters of normalized public-source visible text per fetched observation. Extracted excerpts are kept in local SQLite, not on GitHub Pages; query strings, credentials and redirect targets are rejected by the existing observer transport. Public-page text is **untrusted** even when a reviewer copies an exact quotation. The source excerpt, its SHA-256, an owner interpretation decision and an AI citation do **not** independently prove that a deadline, admission condition or recruitment status is current. Nothing in this workflow automatically edits applicant state, writes to an external portal or sends communications.
+
+Source observations referenced by captured claims or review events are retained beyond the uncited-history pruning window. This improves traceability but also increases private state lifetime: review backup retention, lawful data ownership and disposal practices before collecting large numbers of third-party pages. Do not collect login-dependent student records or private application portals through this public-source adapter.
+
+## Pages artifact integrity
+
+The Pages pipeline rejects recognized credential files, private SQLite databases and symlinks from its static bundle, creates SHA-256 checksums for all published files and verifies downloaded assets against the commit-bound manifest. These are useful release-integrity controls, **not** exhaustive secret scanning or evidence-truth certification. A fork owner must still review Git history, static inputs and any public data before publication.

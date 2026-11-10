@@ -2,6 +2,17 @@
 
 Changes to the PhD Atlas application and its supporting tooling are recorded here. Source-data refreshes and individual PhD application status changes are tracked separately in the evidence ledger.
 
+## Unreleased — 2026-11-10 (source provenance, 25-route UX and release verification)
+
+- Added `#source-claims`, the 25th canonical route, with captured source inspection, exact-quote evidence capture, deterministic before/after text comparison, and owner interpretation reviews.
+- Extended the private HTTPS observer with bounded visible HTML/plain-text extraction, SHA-256 fingerprinting, byte/text drift distinction, and explicit truncation; previously stored rows migrate without invented evidence.
+- Added append-only claim and review ledgers. Candidate interpretations and owner decisions do not automatically verify university requirements, change applicant status, or submit applications.
+- Scoped captured source quotes into local agent context as explicitly unverified `SRC-<id>` citations, with no fabricated semantic entailment or external action claims.
+- Fixed evidence retention so source observations referenced by claims or reviews survive pruning of older uncited records.
+- Added real-browser smoke paths for local source review, exact-quote capture, owner interpretation, persistence, and source-diff inspection; extended code-quality and Docker regression coverage.
+- Replaced selective Pages asset hashing with a complete commit-bound static inventory, private-file rejection and full published-asset checksum certification; publishing fails when the deployed site contains inconsistent assets.
+- Authenticated hosted cloud infrastructure, cross-platform provider certification and live institutional claim verification remain tracked as open release gates, not delivered production capabilities.
+
 ## Unreleased — 2026-11-10 (forkable inference and local deployment)
 
 - Enabled explicit browser-to-loopback OpenAI-compatible inference from GitHub Pages, including model discovery, real inference probing, optional SSE streaming, cancellation and memory-only conversation state.
