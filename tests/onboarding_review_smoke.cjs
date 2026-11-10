@@ -130,7 +130,16 @@ store.close()
     await privatePage.locator('[data-os-action="load-claim-source"]').waitFor({timeout:15000});
     await privatePage.locator('[data-os-action="load-claim-source"]').click();
     await privatePage.locator('#sourceCapturedText').getByText('Doctoral applications close on 15 December 2026.').waitFor({timeout:10000});
+    await privatePage.locator('[data-os-action="suggest-source-dates"]').click();
+    await privatePage.getByText('Date mentions for manual review',{exact:true}).waitFor({timeout:10000});
+    const candidates=await (await fetch(privateUrl+'/api/source-observations/'+saved.observations[0].id+'/candidates')).json();
+    assert.equal(candidates.result.semantic_claim_verified,false);
+    assert.equal(candidates.result.candidate_count,1);
+    assert.equal(candidates.result.candidates[0].normalized_date,'2026-12-15');
+    await privatePage.locator('[data-os-action="fill-source-candidate"]').first().click();
     const capture=privatePage.locator('form[data-os-form="source-claim"]');
+    assert.equal(await capture.locator('[name="candidate_value"]').inputValue(),'2026-12-15');
+    assert.match(await capture.locator('[name="quote"]').inputValue(),/Doctoral applications close on/);
     await capture.locator('[name="claim_type"]').selectOption('deadline');
     await capture.locator('[name="candidate_value"]').fill('2026-12-15');
     await capture.locator('[name="quote"]').fill('Doctoral applications close on 15 December 2026.');
@@ -178,7 +187,7 @@ store.close()
     assert.equal(exported.contains_secrets,false);
     assert.deepEqual(publicErrors,[],'Public first-run setup JavaScript errors');
     await publicPage.close();
-    console.log('Private evaluation metrics, source review, quote capture, and fork setup smoke passed');
+    console.log('Private evaluation metrics, candidate-date review, quote capture, and fork setup smoke passed');
   } finally {
     if(browser)await browser.close();
     child.kill('SIGTERM');

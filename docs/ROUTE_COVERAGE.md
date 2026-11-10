@@ -26,7 +26,7 @@ Updated 2026-11-10. This is a source-backed route inventory, not a product featu
 | `#activity` | Private model audit ledger | No | Inspect actual private runs and usage |
 | `#evaluations` | Private aggregated run ledger, citation audit and workflow stage outcomes | No | Inspect measured provider/agent failures, token reports, latency and provenance; filter recent traces |
 | `#source-observations` | Private SQLite observation history, byte-change categories and source URLs | No | Review official-source drift; manual CLI collection only; no factual promotion |
-| `#source-claims` | Private retained source excerpts and exact-quote candidate claims | No | Inspect observed text, capture provenance to SQLite without promoting facts |
+| `#source-claims` | Private retained source excerpts, deterministic date candidates, and exact-quote claims | No | Preview date mentions and ambiguity, prepare exact quotations, persist only on explicit owner review; no fact promotion |
 | `#onboarding` | Public deployment identity, model probe and runtime capability checks | Yes | Choose deployment mode, inspect requirements and export a nonsecret setup summary; no GitHub changes |
 | `#deployment` | Runtime capability contract | Yes | Inspect trust boundaries and setup options |
 | `#settings` | Browser-local model config or private server config | Yes, different scope | Configure/test endpoints; private mode also exposes models, routing, agents and workflows |

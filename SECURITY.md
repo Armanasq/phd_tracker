@@ -55,3 +55,7 @@ The Pages pipeline rejects recognized credential files, private SQLite databases
 ### Static asset allowlist
 
 Release generation allows only ordinary static asset formats (HTML, JavaScript, CSS, JSON, XML, Markdown, text, supported images/fonts and WebAssembly), and rejects hidden directories, recognized private/credential/backup paths, database auxiliary files, arbitrary logs, spreadsheets and other unexpected artifacts. This is a file-boundary check rather than content-level secret detection: private values can still be embedded in an otherwise valid JSON or JS file, so independent source-data review remains mandatory for each public fork.
+
+### Date candidate extraction limitations
+
+The private bounded date parser is deterministic; it does not scrape additional hosts, invoke cloud AI, or send data to a portal. Every candidate remains provisional. Date normalization does not establish a deadline cutoff time or timezone, and multiple deadlines may refer to different programmes or applicant groups. The UI never commits a candidate without an explicit owner action and an exact captured source hash. Neither the extracted date nor an owner's interpretation should be exposed as verified institutional policy without independently confirming the source and applicant scope.
