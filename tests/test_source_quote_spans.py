@@ -41,6 +41,7 @@ class SourceQuoteSpanTests(unittest.TestCase):
         record = self.observe(content)
         quote = "Applications close on 15 December 2026."
         result = self.capture(record, quote)
+        self.assertEqual(result["schema_version"], 2)
         self.assertEqual(result["matching_occurrences"], 1)
         self.assertEqual(result["span_start"], content.index(quote))
         self.assertEqual(result["span_end"], result["span_start"] + len(quote))
@@ -86,6 +87,7 @@ class SourceQuoteSpanTests(unittest.TestCase):
         try:
             historical = source_claims(migrated)
             self.assertEqual(len(historical), 1)
+            self.assertEqual(historical[0]["schema_version"], 2)
             self.assertIsNone(historical[0]["span_start"])
             self.assertIsNone(historical[0]["source_text_sha256"])
             self.assertIsNone(historical[0]["matching_occurrences"])

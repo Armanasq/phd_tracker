@@ -74,6 +74,11 @@ export function renderSourceClaims({observations=[],claims=[],selectedId=null,so
       '<small>'+esc(item.captured_at)+' · Observation #'+esc(item.observation_id)+'</small>'+
       '<p class="os-evidence-quote">'+esc(item.exact_quote)+'</p>'+
       '<small>Candidate: '+esc(item.candidate_value)+' · Captured quote, factual interpretation unverified</small>'+
+      '<small>Source location: '+esc(item.matching_occurrences>1?
+        'Quote appears '+item.matching_occurrences+' times; unique span unknown':
+        item.span_start!=null&&item.span_end!=null?
+          'normalized characters '+item.span_start+'–'+item.span_end:
+          'Unrecorded / legacy evidence')+'</small>'+
       '<small>Owner review: '+esc(({
         needs_recheck:"Needs further review",
         owner_interpretation_supported:"Owner considers the interpretation supported (unverified)",

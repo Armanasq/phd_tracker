@@ -81,7 +81,7 @@ def capture_source_claim(
             ),
         )
         row = store.db.execute(
-            "SELECT id,observation_id,application_id,source_url,source_digest,"
+            "SELECT 2 AS schema_version,id,observation_id,application_id,source_url,source_digest,"
             "claim_type,exact_quote,candidate_value,quote_digest,captured_at,verification,"
             "source_text_sha256,span_start,span_end,matching_occurrences "
             "FROM source_claims WHERE observation_id=? AND claim_type=? "
@@ -97,7 +97,7 @@ def source_claims(store: Store, *, limit: int = 200) -> list[dict[str, Any]]:
     if type(limit) is not int or not 1 <= limit <= 500:
         raise ValueError("Source claim list limit must be 1–500")
     return [dict(row) for row in store.db.execute(
-        "SELECT c.id,c.observation_id,c.application_id,c.source_url,c.source_digest,"
+        "SELECT 2 AS schema_version,c.id,c.observation_id,c.application_id,c.source_url,c.source_digest,"
         "c.claim_type,c.exact_quote,c.candidate_value,c.quote_digest,c.captured_at,c.verification,"
         "c.source_text_sha256,c.span_start,c.span_end,c.matching_occurrences,"
         "r.decision AS owner_review_decision,r.reviewed_at AS owner_reviewed_at "

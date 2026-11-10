@@ -120,3 +120,13 @@ test("date suggestions remain unverified until explicit manual capture",()=>{
  assert.ok(!untrusted.includes("<img"));
  assert.match(untrusted,/&lt;script&gt;/);
 });
+
+test("quote provenance distinguishes unique, repeated, and legacy locations",()=>{
+ const base={id:17,observation_id:9,application_id:"APP1",source_url:"https://university.example",
+   source_digest:"a".repeat(64),quote_digest:"b".repeat(64),claim_type:"deadline",
+   exact_quote:"Applications close on 15 December 2026.",
+   candidate_value:"2026-12-15",captured_at:"2026-11-10"};
+ assert.match(renderSourceClaims({claims:[{...base,span_start:15,span_end:54,matching_occurrences:1}]}),/normalized characters 15–54/);
+ assert.match(renderSourceClaims({claims:[{...base,matching_occurrences:2,span_start:null,span_end:null}]}),/Quote appears 2 times; unique span unknown/);
+ assert.match(renderSourceClaims({claims:[base]}),/Unrecorded \/ legacy evidence/);
+});
