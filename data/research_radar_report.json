@@ -1,23 +1,8 @@
 {
   "as_of": "2026-11-10",
   "fetched": 31,
-  "new_ids": [
-    "arxiv:2611.12452",
-    "arxiv:2611.12824",
-    "arxiv:2611.12818",
-    "arxiv:2611.12806",
-    "arxiv:2611.12804",
-    "arxiv:2611.12732",
-    "arxiv:2611.12678",
-    "arxiv:2611.12676",
-    "arxiv:2611.12567",
-    "arxiv:2611.12378",
-    "arxiv:2611.12351",
-    "arxiv:2611.12855",
-    "arxiv:2611.12805",
-    "arxiv:2611.12557"
-  ],
-  "new_count": 14,
+  "new_ids": [],
+  "new_count": 0,
   "total_retained": 68,
   "source_errors": [],
   "classification": "research_signal_only"
