@@ -10,6 +10,7 @@ import {candidateQueue} from "./modules/discovery.mjs";
 import {runtimeCapabilities} from "./modules/runtime-capabilities.mjs";
 import {portfolioDocumentInventory} from "./modules/documents.mjs";
 import {VIEWS,resolveWorkspaceRoute} from "./modules/routes.mjs";
+import {assessOnboarding,renderOnboarding,SETUP_MODES} from "./modules/onboarding.mjs";
 import {mountAtlasLens} from "./modules/lens.mjs";
 import {auditWorkspace} from "./modules/assurance.mjs";
 import {renderAssurance,renderCoverage} from "./modules/assurance-view.mjs";
@@ -180,6 +181,10 @@ function applications(){
  '<div class="info">Deadline dates may omit portal cutoff times and time zones. Source review does not establish current availability. Device-local records are never published automatically. Source-record edits require explicit GitHub confirmation.</div>'+
  statCard("Application registry",toolbar(list)+(list.length?table(list,true):'<div class="empty">No records match these filters. Clear filters or select a saved view.</div>'));
 }
+function onboardingView(){
+ const report=assessOnboarding(state.data,{mode:state.prefs.onboardingMode,privateConnected:aiConsole.isLive(),browserModelVerified:aiConsole.browserModel.isVerified()});
+ return heading("First-run setup","Configure an independent fork with explicit capability checks, public data ownership and local-only model access.",button("Deployment matrix","nav","deployment"))+renderOnboarding(report);
+}
 function deploymentView(){
  const report=runtimeCapabilities({privateConnected:aiConsole.isLive(),privateModelVerified:aiConsole.isVerified(),browserModelVerified:aiConsole.browserModel.isVerified()});
  const labels={private:"Private Python workspace", "browser-local":"Browser-local model","static":"Public static workspace"};
@@ -187,7 +192,8 @@ function deploymentView(){
   '<div class="mini-row"><div><strong>'+escapeHTML(item.label)+'</strong><small>'+escapeHTML(item.reason)+'</small></div>'+
   pill(item.available?"Available":item.id==="cloud_batch"?"Requires fork setup":"Unavailable",item.available?"green":"neutral")+'</div>').join("");
  return heading("Deployment & capabilities","Inspect execution boundaries, connect a provider, and deploy an independent fork without exposing secrets.",
-   button("Configure model","nav","settings","primary")+
+   button("First-run setup","nav","onboarding","primary")+
+   button("Configure model","nav","settings")+
    button("Self-hosting guide","url",ownerRepo()+"/blob/main/docs/SELF_HOSTING.md"))+
   '<div class="kpis">'+kpi("Execution mode",labels[report.mode],"Determined from this browser session")+
   kpi("Available capabilities",report.available.length,"Verified or supported locally")+
@@ -552,7 +558,10 @@ async function importLocalBackup(file){
   notify(result.imported+" opportunity records imported; "+result.skipped+" existing IDs preserved.");
  }catch(error){notify("Import rejected: "+String(error.message||error))}
 }
-function exportData(kind){const filename="phd-atlas-"+TODAY();if(kind==="csv"){const cols=["id","name","country","deadline","deadline_kind","deadline_time","deadline_timezone","deadline_cutoff_verified","deadline_cutoff_utc","verification","status","next_step","source_url","funding","eligibility"];exportFile(filename+"-applications.csv",asCSV(sortList(filters(records())),cols),"text/csv;charset=utf-8")}else if(kind==="contacts"){exportFile(filename+"-contacts.csv",asCSV(records().filter(r=>r.faculty!=="Not recorded"),["id","name","faculty","contact_status","followup","source_url"]),"text/csv;charset=utf-8")}else if(kind==="ics"){exportFile(filename+"-deadlines.ics",calendar(),"text/calendar;charset=utf-8")}else if(kind==="drafts"){exportFile(filename+"-local-drafts.json",JSON.stringify({as_of:TODAY(),drafts:state.drafts,local_records:state.localRecords},null,2),"application/json")}else if(kind==="local"){exportFile(filename+"-local-records.json",JSON.stringify({schema_version:1,exported_at:new Date().toISOString(),local_records:state.localRecords},null,2),"application/json")}else if(kind==="github-source"){exportFile("user_opportunities.json",JSON.stringify(exportIndependentSource(state.localRecords,TODAY(),state.data.timezone||"UTC",state.data.instance?.type==="independent"&&state.data.instance?.data_mode==="source"?state.data.records:[]),null,2),"application/json")}else{exportFile(filename+"-workspace.json",JSON.stringify({source_snapshot:state.data,local_drafts:state.drafts,local_records:state.localRecords},null,2),"application/json")}}
+function exportData(kind){const filename="phd-atlas-"+TODAY();if(kind==="csv"){const cols=["id","name","country","deadline","deadline_kind","deadline_time","deadline_timezone","deadline_cutoff_verified","deadline_cutoff_utc","verification","status","next_step","source_url","funding","eligibility"];exportFile(filename+"-applications.csv",asCSV(sortList(filters(records())),cols),"text/csv;charset=utf-8")}else if(kind==="contacts"){exportFile(filename+"-contacts.csv",asCSV(records().filter(r=>r.faculty!=="Not recorded"),["id","name","faculty","contact_status","followup","source_url"]),"text/csv;charset=utf-8")}else if(kind==="ics"){exportFile(filename+"-deadlines.ics",calendar(),"text/calendar;charset=utf-8")}else if(kind==="drafts"){exportFile(filename+"-local-drafts.json",JSON.stringify({as_of:TODAY(),drafts:state.drafts,local_records:state.localRecords},null,2),"application/json")}else if(kind==="local"){exportFile(filename+"-local-records.json",JSON.stringify({schema_version:1,exported_at:new Date().toISOString(),local_records:state.localRecords},null,2),"application/json")}else if(kind==="setup"){
+  const report=assessOnboarding(state.data,{mode:state.prefs.onboardingMode,privateConnected:aiConsole.isLive(),browserModelVerified:aiConsole.browserModel.isVerified()});
+  exportFile(filename+"-setup-summary.json",JSON.stringify({schema_version:1,repository:report.repository,target:report.mode,public_data_mode:report.data_mode,public_records:report.records,checks:report.steps.map(({id,status})=>({id,status})),contains_secrets:false},null,2),"application/json");
+ }else if(kind==="github-source"){exportFile("user_opportunities.json",JSON.stringify(exportIndependentSource(state.localRecords,TODAY(),state.data.timezone||"UTC",state.data.instance?.type==="independent"&&state.data.instance?.data_mode==="source"?state.data.records:[]),null,2),"application/json")}else{exportFile(filename+"-workspace.json",JSON.stringify({source_snapshot:state.data,local_drafts:state.drafts,local_records:state.localRecords},null,2),"application/json")}}
 const ICONS={
  home:'<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16M10 10v10"/>',
  file:'<path d="M7 3.5h8l3 3V20H7zM15 3.5v4h3M10 12h5M10 16h5"/>',
@@ -594,7 +603,7 @@ function navigation(){
 function render(){
  if(!state.data)return;
  navigation();
- const views={dashboard,calendar:calendarView,applications,discovery:discoveryView,deployment:deploymentView,documents:documentsView,readiness,pipeline,contacts,actions,ledger:ledgerView,updates,compare,review,archive,sources};
+ const views={dashboard,calendar:calendarView,applications,discovery:discoveryView,deployment:deploymentView,onboarding:onboardingView,documents:documentsView,readiness,pipeline,contacts,actions,ledger:ledgerView,updates,compare,review,archive,sources};
  const intelligence=["ai","agents","automations","activity","source-observations","settings","operations"].includes(state.view);
  const freshness=freshnessState(state.data.as_of,TODAY());
  const note=["aging","stale","unknown","future"].includes(freshness.state)
@@ -724,6 +733,10 @@ function events(){
  document.addEventListener("change",e=>{
   const t=e.target;
   if(t.id==="workspaceSection"){go(t.value);return}
+  if(t.id==="onboardingMode"){
+   if(!SETUP_MODES.some(([id])=>id===t.value))return;
+   state.prefs.onboardingMode=t.value;saveStore(PREFS,state.prefs);render();return;
+  }
   if(t.id==="localImportFile"){const file=t.files?.[0];if(file)importLocalBackup(file);return}
   if(t.id==="ledgerType"){ledgerType=t.value;ledgerPage=1;render();return}
   if(t.matches("[data-stage-id]")){stageStatus(t.dataset.stageId,t.value);return}
