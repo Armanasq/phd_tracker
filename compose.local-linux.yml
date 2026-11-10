@@ -1,4 +1,4 @@
-name: phd-atlas-local
+name: ${PHD_ATLAS_COMPOSE_PROJECT:?Set a unique lowercase Compose project name in .env}
 
 services:
   atlas:
