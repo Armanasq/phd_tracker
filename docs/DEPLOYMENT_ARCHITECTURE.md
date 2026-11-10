@@ -95,3 +95,7 @@ These are proposed contracts, **not implemented endpoints**. Keep request/respon
 6. Every release includes source-linked run logs and an observable artifact tied to the deployed commit.
 
 Related documentation: [SELF_HOSTING.md](SELF_HOSTING.md), [DOCKER_LOCAL.md](DOCKER_LOCAL.md), [HOSTED_ACTIONS_AI.md](HOSTED_ACTIONS_AI.md), [UNIFIED_RUNTIME.md](UNIFIED_RUNTIME.md).
+
+## Local workflow execution audit
+
+Multi-stage agent workflows now resolve and verify every model route before inference, explicitly freeze the selected provider ID for each stage, and persist a versioned `workflow_summary` event. Successful runs record the ordered stage run IDs and provider route IDs without duplicating full model texts; a later-stage failure records a separate failed summary with its failed stage and completed stage IDs, then reports a recoverable audit reference. Partial stages remain unverified proposals. This is traceability for the local sequential runtime, **not** durable remote-job replay, automatic rollback, cancellation or authenticated hosted orchestration. Those capabilities remain tracked in [Issue #11](https://github.com/Armanasq/phd_tracker/issues/11).

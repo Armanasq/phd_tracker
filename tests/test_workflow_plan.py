@@ -77,6 +77,55 @@ class WorkflowPreflightTests(unittest.TestCase):
             self.assertEqual(len(result["steps"]), 2)
             self.assertEqual(call.call_count, 2)
 
+    def test_partial_stage_failure_has_durable_audit_and_no_retry_inference(self) -> None:
+        from phd_agents.engine import WorkflowExecutionError
+        from phd_agents.providers import ProviderError
+
+        states = {"ollama": {"state": "responded"}, "openai": {"state": "responded"}}
+
+        def fake_run(store, root, *, agent_id, **kwargs):
+            if agent_id == "portfolio_planner":
+                return {"id": "run-first", "agent_id": agent_id,
+                        "text": "Unverified first-stage proposal", "usage": {}, "tools": []}
+            raise ProviderError("Sensitive upstream error should not be copied into audit")
+
+        with patch("phd_agents.engine.provider_states", return_value=states):
+            with patch("phd_agents.engine.run_agent", side_effect=fake_run) as called:
+                with self.assertRaises(WorkflowExecutionError) as raised:
+                    run_workflow(self.store, self.root, workflow_id="mixed_routes",
+                                 cloud_consent=True)
+        self.assertEqual(called.call_count, 2)
+        self.assertEqual(called.call_args_list[0].kwargs["provider_id"], "ollama")
+        self.assertEqual(called.call_args_list[1].kwargs["provider_id"], "openai")
+        error = raised.exception
+        self.assertEqual(error.stage, 2)
+        rows = [row for row in self.store.runs() if row["kind"] == "workflow_summary"]
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(rows[0]["status"], "failed")
+        self.assertEqual(rows[0]["failed_stage"], 2)
+        self.assertEqual(rows[0]["completed_run_ids"], ["run-first"])
+        self.assertEqual(rows[0]["error_type"], "ProviderError")
+        self.assertNotIn("Sensitive upstream error", json.dumps(rows))
+
+    def test_successful_workflow_records_a_separate_execution_summary(self) -> None:
+        states = {"ollama": {"state": "responded"}, "openai": {"state": "responded"}}
+
+        def fake_run(store, root, *, agent_id, **kwargs):
+            return {"id": "run-" + agent_id, "agent_id": agent_id,
+                    "text": "Unverified proposal", "usage": {}, "tools": []}
+
+        with patch("phd_agents.engine.provider_states", return_value=states):
+            with patch("phd_agents.engine.run_agent", side_effect=fake_run):
+                result = run_workflow(self.store, self.root,
+                                      workflow_id="mixed_routes", cloud_consent=True)
+        summary = next(row for row in self.store.runs() if row["kind"] == "workflow_summary")
+        self.assertEqual(result["workflow_execution_id"], summary["id"])
+        self.assertEqual(result["schema_version"], 1)
+        self.assertEqual(summary["completed_run_ids"], ["run-portfolio_planner", "run-research_fit"])
+        self.assertEqual(summary["provider_routes"], ["ollama", "openai"])
+        self.assertEqual(summary["status"], "proposed")
+        self.assertNotIn("Unverified proposal", json.dumps(summary))
+
     def test_invalid_second_route_fails_before_inference(self) -> None:
         save_settings(self.store, {"agent_routes": {"portfolio_planner": "ollama", "research_fit": "openai"}})
         with self.assertRaises(ValueError):

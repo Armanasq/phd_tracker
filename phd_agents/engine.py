@@ -65,6 +65,17 @@ def owner_records(store: Store, root: Path) -> tuple[dict[str, Any], list[dict[s
             record["deadline_time_verified"] = True
     return source, records
 
+class WorkflowExecutionError(RuntimeError):
+    def __init__(self, workflow_id: str, stage: int, audit_run_id: str):
+        self.workflow_id = workflow_id
+        self.stage = stage
+        self.audit_run_id = audit_run_id
+        super().__init__(
+            f"Workflow {workflow_id} stopped at stage {stage}; "
+            f"review private run {audit_run_id} before retrying"
+        )
+
+
 def run_agent(store: Store, root: Path, *, agent_id: str, provider_id: str | None = None,
               application_id: str | None = None, input_text: str = "",
               cloud_consent: bool = False, workflow_id: str | None = None,
@@ -250,6 +261,8 @@ def workflow_plan(store: Store, *, workflow_id: str, provider_id: str | None = N
     if cloud_providers and not workflow.get("cloud_consent"):
         scheduled_approval = False
     return {
+        "schema_version": 1,
+        "execution_mode": "sequential_bounded",
         "workflow_id": workflow_id,
         "schedule": workflow.get("schedule", "manual"),
         "enabled": bool(workflow.get("enabled")),
@@ -280,18 +293,45 @@ def run_workflow(store: Store, root: Path, *, workflow_id: str,
     if input_text:
         objective += "\n\n" + input_text
     outputs = []
-    for index, agent_id in enumerate(agent_ids):
+    for index, stage in enumerate(preview["stages"]):
+        agent_id = stage["agent_id"]
         prior = "\n\nPrevious agent proposals (unverified, no actions taken):\n" + "\n".join(
             x["agent_id"] + ": " + x["text"][:900] for x in outputs
         ) if outputs else ""
-        route_override = provider_id if provider_id not in (None, "", "auto") else workflow.get("provider_id", "auto")
-        result = run_agent(store, root, agent_id=agent_id, provider_id=route_override,
-                           application_id=application_id,
-                           input_text=("Workflow step " + str(index + 1) + "/" + str(len(agent_ids)) +
-                                       ": " + objective + prior)[:5000],
-                           cloud_consent=cloud_consent, workflow_id=workflow_id)
+        try:
+            result = run_agent(
+                store, root, agent_id=agent_id, provider_id=stage["provider_id"],
+                application_id=application_id,
+                input_text=("Workflow step " + str(index + 1) + "/" + str(len(agent_ids)) +
+                            ": " + objective + prior)[:5000],
+                cloud_consent=cloud_consent, workflow_id=workflow_id,
+            )
+        except (ProviderError, ValueError, PermissionError, OSError, RuntimeError) as error:
+            audit_id = store.put_run(
+                "workflow_summary", workflow_id, application_id, "failed", "multi_route",
+                {
+                    "schema_version": 1, "workflow_id": workflow_id,
+                    "failed_stage": index + 1, "stage_count": len(agent_ids),
+                    "failed_agent_id": agent_id, "failed_provider_id": stage["provider_id"],
+                    "error_type": type(error).__name__,
+                    "completed_run_ids": [item["id"] for item in outputs],
+                    "notice": "Earlier agent outputs are unverified proposals; no external action was taken",
+                },
+            )
+            raise WorkflowExecutionError(workflow_id, index + 1, audit_id) from error
         outputs.append(result)
-    return {**outputs[-1], "workflow_id": workflow_id,
+    summary_id = store.put_run(
+        "workflow_summary", workflow_id, application_id, "proposed", "multi_route",
+        {
+            "schema_version": 1, "workflow_id": workflow_id,
+            "stage_count": len(agent_ids),
+            "completed_run_ids": [item["id"] for item in outputs],
+            "provider_routes": [stage["provider_id"] for stage in preview["stages"]],
+            "notice": "All stages returned proposals; no application or communication was changed",
+        },
+    )
+    return {**outputs[-1], "workflow_id": workflow_id, "workflow_execution_id": summary_id,
+            "schema_version": 1,
             "steps": [{"run_id": x["id"], "agent_id": x["agent_id"],
                        "text": x["text"], "usage": x["usage"], "tools": x["tools"]} for x in outputs],
             "status": "proposed"}
