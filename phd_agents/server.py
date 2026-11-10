@@ -31,6 +31,7 @@ from .calendar import line_items
 from .engine import catalog, owner_records, run_agent, run_workflow, workflow_plan, scheduler_once, selected
 from .store import ConflictError, Store, default_path
 from .job_queue import enqueue_local_agent, list_jobs, job_status, cancel_job
+from .request_budget import RequestBudget
 from .recovery import runtime_lock
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -70,6 +71,15 @@ class ApiServer(ThreadingHTTPServer):
             raise ValueError("Inference concurrency limit must be between 1 and 8")
         self.inference_slots = BoundedSemaphore(slots)
         self.inference_limit = slots
+        try:
+            max_inference_minute = int(os.environ.get("PHDAI_MAX_INFERENCE_PER_MINUTE", "30"))
+            max_writes_minute = int(os.environ.get("PHDAI_MAX_WRITES_PER_MINUTE", "180"))
+        except ValueError as error:
+            raise ValueError("Request rate budgets must be integers") from error
+        self.request_budget = RequestBudget(
+            inference_per_minute=max_inference_minute,
+            writes_per_minute=max_writes_minute,
+        )
         super().__init__(address, ApiHandler)
         self.store = store
         self.root = Path(root)
@@ -172,6 +182,9 @@ class ApiHandler(BaseHTTPRequestHandler):
             "/api/agents/run", "/api/agents/stream", "/api/workflows/run", "/api/providers/probe",
             "/api/providers/models", "/api/scheduler/tick",
         }
+        if method == "POST" and not self.server.request_budget.admit("inference" if costly else "write"):
+            self.send_json({"error": "Private runtime request budget exceeded; retry after the window resets"}, 429)
+            return
         if costly and not self.server.inference_slots.acquire(blocking=False):
             self.send_json({"error": "Inference capacity reached; retry after an active request finishes"}, 429)
             return

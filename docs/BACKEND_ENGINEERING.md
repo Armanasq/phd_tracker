@@ -91,6 +91,10 @@ The synthetic, credential-free adapter suite (`tests/test_phd_provider_contracts
 
 The private agent adds bounded, application-scoped owner evidence records to its context and requests explicit `[source:APPLICATION_ID]` or `[claim:EVIDENCE_ID]` references for factual statements. `phd_agents/claim_audit.py` checks whether cited IDs were actually provided in that inference request and whether their recorded review status and primary HTTPS link are present. It counts missing, unknown and unverified reference links, and persists an audit summary alongside each proposed model run. **A valid citation tag is not semantic entailment**, and the report always says `requires_human_fact_check`. It does not fabricate verified claims from source IDs or automatically submit/adopt generated advice. Tests: `tests/test_phd_claim_audit.py`.
 
+## Local request-rate admission
+
+The loopback HTTP server uses a thread-safe sliding 60-second admission budget in addition to its existing inference concurrency limit. The default is 30 costly inference/model-probe requests and 180 other POST writes per minute; `PHDAI_MAX_INFERENCE_PER_MINUTE` and `PHDAI_MAX_WRITES_PER_MINUTE` may be adjusted within validated bounds. Exhaustion responds HTTP 429 without executing a model or mutating state, while local GET health/diagnostic checks remain available. These budgets are **per private process**, not authenticated per-user or distributed hosted rate limits; they do not make the service safe to publish. Regression: `tests/test_phd_request_budget.py`.
+
 ## Release quality gates
 
 - Run Python and JavaScript tests for every backend or private frontend change.
