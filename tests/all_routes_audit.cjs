@@ -89,7 +89,7 @@ async function main(){
    await page.goto(publicUrl+'/ai-studio.html#providers',{waitUntil:'domcontentloaded'});
    await page.waitForURL('**/index.html#settings');
    await page.locator('#body h1').first().waitFor({timeout:12000});
-   assert.match(await page.locator('#body').innerText(),/private workspace/i);
+   assert.match(await page.locator('#body').innerText(),/local model connection/i);
 
   }finally{await page.close()}
   await fs.writeFile(path.join(out,'all-routes-audit.json'),JSON.stringify({status:'pass',checks:results.length,results},null,2));
