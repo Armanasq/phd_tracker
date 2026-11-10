@@ -5,7 +5,7 @@ const path=require('node:path');
 const http=require('node:http');
 const {chromium}=require('playwright');
 
-const routes=['dashboard','applications','readiness','operations','actions','ledger','calendar','pipeline','contacts','updates','compare','review','archive','sources','ai','agents','automations','activity','settings'];
+const routes=['dashboard','applications','discovery','readiness','operations','actions','ledger','calendar','pipeline','contacts','updates','compare','review','archive','sources','ai','agents','automations','activity','deployment','settings'];
 const widths=[320,360,375,390,430,768];
 
 async function main(){
