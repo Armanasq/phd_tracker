@@ -59,6 +59,16 @@ digest = hashlib.sha256(b"official source bytes").hexdigest()
 text = "Doctoral applications close on 15 December 2026."
 visible = hashlib.sha256(text.encode("utf-8")).hexdigest()
 with store.db:
+    previous = "Doctoral applications close on 11 December 2026."
+    store.db.execute(
+        "INSERT INTO source_observations(application_id,source_url,status,content_sha256,"
+        "observed_at,http_status,content_length,drift,visible_text_sha256,"
+        "visible_text_excerpt,visible_text_truncated,text_drift) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+        ("EXAMPLE-1","https://university.example/program","fetched",
+         hashlib.sha256(previous.encode()).hexdigest(),
+         "2026-11-09T08:00:00+00:00",200,len(previous),"baseline_only",
+         hashlib.sha256(previous.encode()).hexdigest(),previous,0,"not_comparable"),
+    )
     store.db.execute(
         "INSERT INTO source_observations(application_id,source_url,status,content_sha256,"
         "observed_at,http_status,content_length,drift,visible_text_sha256,"
@@ -109,6 +119,12 @@ store.close()
     const captured=await (await fetch(privateUrl+'/api/source-claims')).json();
     assert.equal(captured.claims.length,1);
     assert.equal(captured.claims[0].verification,'source_quote_observed_not_fact_verified');
+    await privatePage.locator('[data-os-action="compare-claim-source"]').click();
+    await privatePage.getByText('Visible text comparison',{exact:true}).waitFor({timeout:10000});
+    const difference=await (await fetch(privateUrl+'/api/source-observations/'+saved.observations[0].id+'/diff')).json();
+    assert.equal(difference.diff.status,'visible_text_changed');
+    assert.ok(difference.diff.possible_topics.includes('deadline'));
+    assert.equal(difference.diff.semantic_claim_verified,false);
     await privatePage.reload({waitUntil:'networkidle'});
     await privatePage.locator('.os-evidence-quote').getByText('Doctoral applications close on 15 December 2026.').waitFor({timeout:10000});
     assert.deepEqual(errors,[],'Private source review and claim capture JavaScript errors');

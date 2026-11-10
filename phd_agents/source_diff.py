@@ -71,14 +71,16 @@ def compare_source_text(store: Store, observation_id: int) -> dict[str, Any]:
             continue
         before = " ".join(old_words[start_old:end_old])[:350]
         after = " ".join(new_words[start_new:end_new])[:350]
-        combined = (before + " " + after).casefold()
+        preceding = " ".join(old_words[max(0, start_old - 7):start_old])[:140]
+        following = " ".join(new_words[end_new:end_new + 7])[:140]
+        combined = (preceding + " " + before + " " + after + " " + following).casefold()
         possible.update(kind for kind, terms in _TOPICS.items() if any(term in combined for term in terms))
         changes.append({
             "type": operation,
             "before": before,
             "after": after,
-            "before_context": " ".join(old_words[max(0, start_old - 7):start_old])[:140],
-            "after_context": " ".join(new_words[end_new:end_new + 7])[:140],
+            "before_context": preceding,
+            "after_context": following,
         })
     result.update({
         "status": "visible_text_changed",

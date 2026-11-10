@@ -36,6 +36,7 @@ class SourceDiffTests(unittest.TestCase):
         self.assertTrue(result["comparison_complete"])
         self.assertIn("15", str(result["changes"]))
         self.assertIn("20", str(result["changes"]))
+        self.assertIn("deadline", result["possible_topics"])
         self.assertFalse(result["semantic_claim_verified"])
         self.assertEqual(compare_source_text(self.store, first["id"])["status"], "no_preceding_observation")
 
