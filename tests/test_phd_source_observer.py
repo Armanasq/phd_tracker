@@ -76,7 +76,7 @@ class PrivateSourceObservationTests(unittest.TestCase):
         db_path.chmod(0o600)
         migrated = Store(db_path)
         self.addCleanup(migrated.close)
-            history = recent_observations(migrated)
+        history = recent_observations(migrated)
         self.assertEqual(len(history), 1)
         self.assertIsNone(history[0]["drift"])
         result = observe_record(migrated, "legacy", self.url,
