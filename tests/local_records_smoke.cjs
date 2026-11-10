@@ -100,6 +100,7 @@ async function main(){
   assert.ok(!(await page.locator("#body").innerText()).includes("Robotics and perception PhD"));
   await page.locator("#localImportFile").setInputFiles(backup);
   await page.locator("#workspaceSection").selectOption("applications");
+  await page.waitForFunction(()=>document.querySelector("#body")?.textContent?.includes("Robotics and perception PhD"),{timeout:10000});
   assert.ok((await page.locator("#body").innerText()).includes("Robotics and perception PhD"));
   await page.reload({waitUntil:"networkidle"});
   await page.locator("#workspaceSection").selectOption("applications");
