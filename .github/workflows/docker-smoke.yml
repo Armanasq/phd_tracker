@@ -1,0 +1,71 @@
+name: PhD Atlas | Docker Local Runtime Smoke
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - Dockerfile
+      - .dockerignore
+      - .env.example
+      - compose.local-linux.yml
+      - scripts/deployment_check.py
+      - tests/test_deployment_check.py
+      - phd_agents/**
+      - scripts/build_workspace.py
+      - .github/workflows/docker-smoke.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phd-atlas-local-container-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PHD_ATLAS_REPOSITORY: ${{ github.repository }}
+      PHD_ATLAS_DATA_MODE: starter
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Validate configuration
+        run: |
+          python scripts/deployment_check.py --mode local-full-stack
+          docker compose -f compose.local-linux.yml config --quiet
+      - name: Build and start private container
+        run: |
+          docker compose -f compose.local-linux.yml up --build -d
+          for attempt in $(seq 1 45); do
+            if curl --fail --silent --show-error --max-time 4 http://127.0.0.1:8765/api/health > /tmp/phd-atlas-health.json; then
+              break
+            fi
+            sleep 2
+          done
+          python - <<'PY'
+          import json
+          data=json.load(open('/tmp/phd-atlas-health.json',encoding='utf-8'))
+          assert data['status']=='ok'
+          assert data['mode']=='loopback_private'
+          PY
+      - name: Validate UI and persistence contract
+        run: |
+          curl --fail --silent --show-error http://127.0.0.1:8765/ > /tmp/phd-atlas-index.html
+          grep -q '<html' /tmp/phd-atlas-index.html
+          python - <<'PY'
+          import json
+          import urllib.request
+          with urllib.request.urlopen('http://127.0.0.1:8765/api/bootstrap',timeout=10) as response:
+              payload=json.load(response)
+          assert payload['security']['local_only'] is True
+          assert isinstance(payload['catalog']['agents'],list)
+          assert isinstance(payload['records'],list)
+          PY
+      - name: Diagnostics on failure
+        if: failure()
+        run: docker compose -f compose.local-linux.yml logs --no-color --tail=150 atlas
+      - name: Tear down ephemeral test volumes
+        if: always()
+        run: docker compose -f compose.local-linux.yml down --volumes --remove-orphans
