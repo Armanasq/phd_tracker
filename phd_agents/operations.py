@@ -165,4 +165,9 @@ def research_fit_signals(profile: dict[str, Any], records: list[dict[str, Any]])
 
 def resource_schedule(records: list[dict[str, Any]], as_of: date, hours_per_week: float, profile: dict[str, Any] | None = None) -> dict[str, Any]:
     from .capacity import joint_capacity_schedule
-    return joint_capacity_schedule(records, as_of, hours_per_week, profile)
+    report = joint_capacity_schedule(records, as_of, hours_per_week, profile)
+    report["unallocated_shared_documents"] = [row for row in report["unallocated"] if row["task_type"] == "document"]
+    report["unallocated"] = [row for row in report["unallocated"] if row["task_type"] == "application"]
+    report["scheduled_shared_documents"] = [row for row in report["scheduled"] if row["task_type"] == "document"]
+    report["scheduled"] = [row for row in report["scheduled"] if row["task_type"] == "application"]
+    return report
