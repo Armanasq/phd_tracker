@@ -1,4 +1,5 @@
 import {storageKey} from "./storage.mjs";
+import {consumeAgentStream} from "./sse-client.mjs";
 const byId=id=>document.getElementById(id);
 const escapeHTML=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const short=(value,n=160)=>String(value??"").slice(0,n);
@@ -14,7 +15,7 @@ const prompts=[
 ];
 export function mountAtlasLens({getRecords,getPublicRecords,getView,getSelectedApplication,openSettings,onFocusApplication,onRunComplete,browserModel}){
  if(byId("atlasLens"))return;
- const state={open:false,expanded:false,busy:false,connected:false,verified:false,provider:"",model:"",agent:"",agents:[],applicationId:"",turns:[],draft:"",trace:null,abort:null,error:"",sourceAsOf:"",providerStates:{},providers:[],routes:{},routeSource:"",routeState:"",routeReason:"",direct:false,partial:"",conversationId:null,conversations:[],historyOpen:false,hydrated:false};
+ const state={open:false,expanded:false,busy:false,connected:false,verified:false,provider:"",model:"",agent:"",agents:[],applicationId:"",turns:[],draft:"",trace:null,abort:null,error:"",sourceAsOf:"",providerStates:{},providers:[],routes:{},routeSource:"",routeState:"",routeReason:"",direct:false,partial:"",streaming:false,conversationId:null,conversations:[],historyOpen:false,hydrated:false};
  const root=document.createElement("div");root.id="atlasLens";document.body.appendChild(root);
  const focusable='button:not([disabled]),select:not([disabled]),textarea:not([disabled]),a[href]';
  let focusReturn=null;let requestSequence=0;
@@ -125,11 +126,13 @@ export function mountAtlasLens({getRecords,getPublicRecords,getView,getSelectedA
  }
  function render(){
  const live=state.connected&&state.verified;
+ const provider=state.providers.find(x=>x.id===state.routes[state.agent]?.provider_id);
+ const supportsNativeStream=!state.direct&&["openai_compatible","azure_openai","azure_deployment"].includes(provider?.kind);
  root.innerHTML='<button type="button" class="lens-launcher" data-lens="toggle" aria-label="Ask Atlas assistant" aria-haspopup="dialog" aria-expanded="'+state.open+'"><span class="lens-launcher-icon">'+svg("lens")+'</span><span class="lens-launcher-word"><strong>Ask Atlas</strong><small>Assistant</small></span><span class="lens-live-dot '+(live?"online":"")+'"></span></button>'+
  '<section class="lens-panel '+(state.expanded?"expanded":"")+'" id="atlasLensPanel" role="dialog" aria-modal="false" aria-label="Atlas Lens research assistant" '+(state.open?"":"hidden")+'>'+
  '<header class="lens-header"><div class="lens-identity"><span class="lens-symbol" aria-hidden="true">'+svg("lens")+'</span><div class="lens-identity-copy"><strong>Atlas assistant</strong><small>'+(live?"Verified · "+escapeHTML(short(state.model,42)):state.connected?"Route not verified · "+escapeHTML(short(state.model,35)):"No verified inference route")+'</small></div></div><div class="lens-header-tools"><button type="button" class="lens-icon-btn" data-lens="history" title="'+(state.direct?"Session-only chat":"Recent conversations")+'" aria-label="Recent conversations" aria-expanded="'+state.historyOpen+'" '+(state.direct?"disabled":"")+'>'+svg("history")+'</button><button type="button" class="lens-icon-btn" data-lens="settings" title="Model settings" aria-label="Model settings">'+svg("settings")+'</button><button type="button" class="lens-icon-btn" data-lens="new" title="New conversation" aria-label="New conversation" '+(state.busy?"disabled":"")+'>'+svg("plus")+'</button><button type="button" class="lens-icon-btn" data-lens="expand" title="'+(state.expanded?"Compact panel":"Expand workspace")+'" aria-label="'+(state.expanded?"Compact panel":"Expand workspace")+'">'+svg(state.expanded?"shrink":"expand")+'</button><button type="button" class="lens-icon-btn" data-lens="close" title="Close assistant" aria-label="Close assistant">'+svg("close")+'</button></div></header>'+historyMenu()+
  '<div class="lens-context"><span class="lens-context-prefix">Context</span><select aria-label="Application context" id="lensScope" '+(state.busy?"disabled":"")+'>'+contextOptions()+'</select><span class="lens-context-arrow">⌄</span><span class="lens-provider" title="'+escapeHTML(state.model||"No verified model")+'"><i class="lens-status-dot '+(live?"online":"")+'"></i><span>'+escapeHTML(short(state.provider||"Offline",21))+'</span></span></div>'+
- '<div class="lens-layout"><div class="lens-main"><div class="lens-history" id="lensHistory" aria-live="polite" aria-relevant="additions">'+feed()+'</div><div class="lens-composer-area"><form id="lensForm" class="lens-composer"><textarea id="lensInput" aria-label="Ask Atlas Lens" maxlength="1600" rows="1" placeholder="'+(state.connected?"Ask about deadlines, evidence, or research fit…":"Connect a model to ask about your applications…")+'" '+(state.busy?"disabled":"")+'>'+escapeHTML(state.draft)+'</textarea><button class="lens-send" type="'+(state.busy?"button":"submit")+'" data-lens="'+(state.busy?"stop":"send")+'" aria-label="'+(state.busy?"Stop waiting (model may continue)":"Send message")+'" '+(!state.connected||(!state.verified&&!state.busy)?"disabled":"")+'>'+svg(state.busy?"stop":"send")+'</button></form><div class="lens-composer-bottom"><select id="lensAgent" class="lens-agent-select" aria-label="Research agent" '+(!state.connected||state.busy||state.direct?"disabled":"")+'>'+agentOptions()+'</select><span class="lens-composer-hint">Enter to send · Shift+Enter for line</span></div></div></div>'+sidecar()+'</div>'+
+ '<div class="lens-layout"><div class="lens-main"><div class="lens-history" id="lensHistory" aria-live="polite" aria-relevant="additions">'+feed()+'</div><div class="lens-composer-area"><form id="lensForm" class="lens-composer"><textarea id="lensInput" aria-label="Ask Atlas Lens" maxlength="1600" rows="1" placeholder="'+(state.connected?"Ask about deadlines, evidence, or research fit…":"Connect a model to ask about your applications…")+'" '+(state.busy?"disabled":"")+'>'+escapeHTML(state.draft)+'</textarea><button class="lens-send" type="'+(state.busy?"button":"submit")+'" data-lens="'+(state.busy?"stop":"send")+'" aria-label="'+(state.busy?"Stop waiting (model may continue)":"Send message")+'" '+(!state.connected||(!state.verified&&!state.busy)?"disabled":"")+'>'+svg(state.busy?"stop":"send")+'</button></form><div class="lens-composer-bottom"><select id="lensAgent" class="lens-agent-select" aria-label="Research agent" '+(!state.connected||state.busy||state.direct?"disabled":"")+'>'+agentOptions()+'</select><span class="lens-composer-hint">Enter to send · Shift+Enter for line</span>'+(supportsNativeStream?'<label class="lens-stream-mode"><input id="lensStreaming" type="checkbox" '+(state.streaming?"checked":"")+' '+(state.busy?"disabled":"")+'><span>Stream tokens</span></label>':"")+'</div></div></div>'+sidecar()+'</div>'+
  '<footer class="lens-footer-status"><span>Read-only suggestions · Verify against sources</span><span>'+(state.busy?"Processing":live?(state.direct?"Browser-local inference ready":"Private inference ready"):"Read-only preview")+'</span></footer></section>';
  }
  function setOpen(v){
@@ -243,7 +246,7 @@ export function mountAtlasLens({getRecords,getPublicRecords,getView,getSelectedA
      cloudConsent=window.confirm("Send "+scope+" and your message to "+destination.label+" ("+destination.base_url+")? This provider may incur charges. Your consent applies only to this request. No applications or emails will be submitted.");
      if(!cloudConsent)return;
    }
-   state.draft="";state.error="";
+   state.draft="";state.error="";state.partial="";
    const turn={role:"user",text};state.turns.push(turn);
    const controller=new AbortController();state.abort=controller;state.busy=true;
    const sequence=++requestSequence;
@@ -253,12 +256,23 @@ export function mountAtlasLens({getRecords,getPublicRecords,getView,getSelectedA
        cloud_consent:cloudConsent,
        ...(state.applicationId?{application_id:state.applicationId}:{}),
        ...(state.conversationId?{conversation_id:state.conversationId}:{})};
+     const nativeStream=state.streaming&&["openai_compatible","azure_openai","azure_deployment"].includes(destination.kind);
      const headers={"Content-Type":"application/json"};
-     if(globalThis.crypto?.randomUUID)headers["Idempotency-Key"]=globalThis.crypto.randomUUID();
-     const response=await fetch("./api/agents/run",{method:"POST",
+     if(!nativeStream&&globalThis.crypto?.randomUUID)headers["Idempotency-Key"]=globalThis.crypto.randomUUID();
+     const response=await fetch(nativeStream?"./api/agents/stream":"./api/agents/run",{method:"POST",
        headers,body:JSON.stringify(body),signal:controller.signal});
-     let result={};try{result=await response.json()}catch{}
-     if(!response.ok)throw Error(result.error||"The model request failed");
+     if(!response.ok){
+       let issue={};try{issue=await response.json()}catch{}
+       throw Error(issue.error||"The model request failed");
+     }
+     const result=nativeStream?await consumeAgentStream(response,{
+       signal:controller.signal,onDelta:content=>{
+         if(sequence!==requestSequence)return;
+         state.partial=content;
+         const target=byId("lensPartial");
+         if(target)target.textContent=content;
+       }
+     }):await response.json();
      if(sequence!==requestSequence)return;
      state.conversationId=result.conversation_id||state.conversationId;
      if(state.conversationId){try{localStorage.setItem(threadStorageKey,state.conversationId)}catch{}}
@@ -278,7 +292,7 @@ export function mountAtlasLens({getRecords,getPublicRecords,getView,getSelectedA
        :short(error.message||"Inference failed",240);
    }finally{
      if(sequence===requestSequence){
-       state.busy=false;state.abort=null;render();
+       state.busy=false;state.abort=null;state.partial="";render();
        const h=byId("lensHistory");if(h)h.scrollTop=h.scrollHeight;
      }
    }
@@ -303,7 +317,7 @@ export function mountAtlasLens({getRecords,getPublicRecords,getView,getSelectedA
  });
  root.addEventListener("submit",event=>{if(event.target.id!=="lensForm")return;event.preventDefault();submit();});
  root.addEventListener("input",event=>{if(event.target.id==="lensInput")state.draft=event.target.value;});
- root.addEventListener("change",event=>{if(event.target.id==="lensScope")context(event.target.value);if(event.target.id==="lensAgent"&&!state.busy){if(state.agent!==event.target.value){clearThread();state.agent=event.target.value;syncRoute();render();byId("lensInput")?.focus()}}});
+ root.addEventListener("change",event=>{if(event.target.id==="lensStreaming"){state.streaming=event.target.checked;return}if(event.target.id==="lensScope")context(event.target.value);if(event.target.id==="lensAgent"&&!state.busy){if(state.agent!==event.target.value){clearThread();state.agent=event.target.value;syncRoute();render();byId("lensInput")?.focus()}}});
  root.addEventListener("keydown",event=>{
  if(event.target.id==="lensInput"&&event.key==="Enter"&&!event.shiftKey&&!event.isComposing){event.preventDefault();submit();}
  if(event.key==="Escape"&&state.open){event.preventDefault();setOpen(false);}
