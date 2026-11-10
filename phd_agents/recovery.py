@@ -151,6 +151,47 @@ def _sync_directory(directory: Path) -> None:
         os.close(descriptor)
 
 
+def drill_backup(
+    name: str, *, state_path: Path | None = None, sha256: str | None = None,
+) -> dict[str, object]:
+    if os.name != "posix":
+        raise RuntimeError("Isolated restore drill requires POSIX file locks")
+    state = (Path(state_path) if state_path is not None else default_path()).expanduser()
+    expected = verify_backup(name, state_path=state, sha256=sha256)
+    source = state.parent / "backups" / name
+    with tempfile.TemporaryDirectory(prefix="phd-atlas-restore-drill-") as temporary:
+        directory = Path(temporary)
+        backup_directory = directory / "backups"
+        backup_directory.mkdir(mode=0o700)
+        copied = backup_directory / name
+        _copy_private(source, copied)
+        target = directory / "restored.sqlite3"
+        restored = restore_backup(
+            name, state_path=target, sha256=expected["sha256"], confirm=True,
+        )
+        if _file_digest(target) != expected["sha256"]:
+            raise ValueError("Drill restored state does not match the source backup")
+        if stat.S_IMODE(target.stat().st_mode) != 0o600:
+            raise PermissionError("Drill restored state is not owner-only")
+        _verify_database(target)
+        uri = "file:" + quote(str(target.absolute())) + "?mode=ro&immutable=1"
+        with sqlite3.connect(uri, uri=True, timeout=5) as database:
+            tables = sorted(item[0] for item in database.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'"
+            ))
+        return {
+            "status": "passed",
+            "source": name,
+            "sha256": restored["sha256"],
+            "restored_in_isolation": True,
+            "private_file_mode": "0o600",
+            "tables_verified": tables,
+            "source_state_modified": False,
+            "credentials_restored": False,
+            "off_host_encryption_verified": False,
+        }
+
+
 def restore_backup(
     name: str, *, state_path: Path | None = None, sha256: str | None = None,
     confirm: bool = False,
