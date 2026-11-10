@@ -8,10 +8,11 @@ from .secrets import read_secret
 import time
 from typing import Any
 from urllib.error import HTTPError, URLError
-from urllib.request import Request, build_opener
+from urllib.request import Request, build_opener, ProxyHandler
 from urllib.parse import quote
 
 from .providers import NoRedirect, ProviderError, validate_url, validate_credential_binding
+from .egress import PinnedHTTPHandler, PinnedHTTPSHandler
 from .catalog import PROVIDERS
 from .store import Store, utcnow
 
@@ -111,7 +112,10 @@ def model_list(provider: dict[str, Any], timeout: int = 12) -> dict[str, Any]:
             headers["Authorization"] = "Bearer " + api_key
     started = time.perf_counter()
     try:
-        with build_opener(NoRedirect()).open(Request(endpoint, headers=headers), timeout=timeout) as response:
+        with build_opener(NoRedirect(), ProxyHandler({}),
+                          PinnedHTTPHandler(local=bool(provider["local"])),
+                          PinnedHTTPSHandler(local=bool(provider["local"]))).open(
+                              Request(endpoint, headers=headers), timeout=timeout) as response:
             raw = response.read(1_000_001)
     except HTTPError as error:
         raise ProviderError("Model catalog endpoint returned HTTP " + str(error.code)) from error
