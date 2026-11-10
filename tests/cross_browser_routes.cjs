@@ -40,11 +40,13 @@ async function checkEngine(name,type,urls,routes,results){
    for(const [device,width,height] of [['desktop',1440,900],['mobile',390,844]]){
     const context=await browser.newContext({viewport:{width,height},reducedMotion:'reduce'});
     const page=await context.newPage(),errors=[];
+    let activeRoute='bootstrap';
     page.on('pageerror',error=>errors.push(error.message));
     try{
      await page.goto(url+'/index.html#dashboard',{waitUntil:'domcontentloaded'});
      await page.locator('#body h1').first().waitFor({timeout:20000});
      for(const view of routes){
+      activeRoute=view;
       if(width<=980)await page.locator('#workspaceSection').selectOption(view);
       else await page.locator('#navigation [data-action="nav"][data-value="'+view+'"]').click();
       await page.waitForFunction(expected=>location.hash==='#'+expected,view);
@@ -65,10 +67,12 @@ async function checkEngine(name,type,urls,routes,results){
      if(mode==='private'){
       if(width<=980)await page.locator('#workspaceSection').selectOption('operations');
       else await page.locator('#navigation [data-action="nav"][data-value="operations"]').click();
-      await page.locator('.ops-kpi-strip').waitFor({timeout:15000});
+      await page.locator('.os-kpi-strip.ops-metrics').waitFor({timeout:15000});
       assert.doesNotMatch(await page.locator('#body').innerText(),/Connect the private workspace/);
      }
      assert.deepEqual(errors,[],name+' '+mode+' '+device+' JavaScript failures');
+    }catch(error){
+     throw new Error(name+' '+mode+' '+device+' '+activeRoute+': '+String(error.message).slice(0,360));
     }finally{await context.close();}
    }
   }
