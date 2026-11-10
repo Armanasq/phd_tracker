@@ -9,6 +9,8 @@ on:
     paths:
       - site/**
       - scripts/build_workspace.py
+      - scripts/site_manifest.py
+      - tests/test_site_manifest.py
       - scripts/hosted_ai_advisories.py
       - tests/test_hosted_ai_advisories.py
       - tests/hosted_ai.test.mjs
@@ -99,6 +101,12 @@ jobs:
           node --test tests/documents.test.mjs
           node --check site/modules/routes.mjs
           node --test tests/routes.test.mjs
+          node --check site/modules/source-claims.mjs
+          node --test tests/source_claims.test.mjs
+          node --check site/modules/source-observations.mjs
+          node --test tests/source_observations.test.mjs
+          node --check site/modules/onboarding.mjs
+          node --test tests/onboarding.test.mjs
           node --check site/modules/browser-model.mjs
           node --test tests/browser_model.test.mjs tests/browser_model_integration.test.mjs tests/browser_model_streaming.test.mjs
           node --check site/modules/assurance.mjs
@@ -137,15 +145,8 @@ jobs:
           test -s site/evidencegraph/index.html
       - name: Generate commit-bound release manifest
         run: |
-          python - <<'PY'
-          import hashlib, json, os
-          from pathlib import Path
-          root = Path("site")
-          assets = ["index.html", "app.js", "assurance.css", "responsive.css", "modules/assurance.mjs", "modules/assurance-view.mjs", "modules/domain.mjs", "modules/storage.mjs", "modules/local-records.mjs", "modules/deadline-cutoff.mjs", "modules/hosted-ai.mjs", "modules/readiness.mjs", "modules/readiness-view.mjs", "modules/capacity-view.mjs", "data/workspace.json", "instance.json", "sitemap.xml"]
-          digests = {path: hashlib.sha256((root / path).read_bytes()).hexdigest() for path in assets}
-          manifest = {"schema_version": 1, "commit": os.environ["GITHUB_SHA"], "sha256": digests}
-          (root / "release-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
-          PY
+          python scripts/site_manifest.py --site site --commit "$GITHUB_SHA"
+          python -m unittest discover -s tests -p 'test_site_manifest.py'
       - name: Save standalone site archive for offline review
         uses: actions/upload-artifact@v4
         with:
@@ -181,9 +182,11 @@ jobs:
                curl -fsSL --max-time 15 "$base/modules/readiness-view.mjs?revision=$GITHUB_SHA" -o /tmp/phd-hosted-readiness-view.mjs &&
                curl -fsSL --max-time 15 "$base/modules/capacity-view.mjs?revision=$GITHUB_SHA" -o /tmp/phd-hosted-capacity-view.mjs &&
                curl -fsSL --max-time 15 "$base/modules/assurance.mjs?revision=$GITHUB_SHA" -o /tmp/phd-hosted-assurance.mjs &&
+               curl -fsSL --max-time 15 "$base/modules/source-claims.mjs?revision=$GITHUB_SHA" -o /tmp/phd-hosted-claims.mjs &&
+               grep -q "renderSourceClaims" /tmp/phd-hosted-claims.mjs &&
                curl -fsSL --max-time 15 "$base/responsive.css?revision=$GITHUB_SHA" -o /tmp/phd-hosted-responsive.css &&
                curl -fsSL --max-time 15 "$base/release-manifest.json?revision=$GITHUB_SHA" -o /tmp/phd-hosted-manifest.json &&
-               python -c 'import hashlib,json,os; m=json.load(open("/tmp/phd-hosted-manifest.json")); assert m["commit"]==os.environ["GITHUB_SHA"]; assert hashlib.sha256(open("/tmp/phd-hosted-assurance.mjs","rb").read()).hexdigest()==m["sha256"]["modules/assurance.mjs"]; assert hashlib.sha256(open("/tmp/phd-hosted-responsive.css","rb").read()).hexdigest()==m["sha256"]["responsive.css"]; assert hashlib.sha256(open("/tmp/phd-hosted-storage.mjs","rb").read()).hexdigest()==m["sha256"]["modules/storage.mjs"]; assert hashlib.sha256(open("/tmp/phd-hosted-local-records.mjs","rb").read()).hexdigest()==m["sha256"]["modules/local-records.mjs"]; assert hashlib.sha256(open("/tmp/phd-hosted-deadline-cutoff.mjs","rb").read()).hexdigest()==m["sha256"]["modules/deadline-cutoff.mjs"]; assert hashlib.sha256(open("/tmp/phd-hosted-readiness.mjs","rb").read()).hexdigest()==m["sha256"]["modules/readiness.mjs"]; assert hashlib.sha256(open("/tmp/phd-hosted-readiness-view.mjs","rb").read()).hexdigest()==m["sha256"]["modules/readiness-view.mjs"]; assert hashlib.sha256(open("/tmp/phd-hosted-capacity-view.mjs","rb").read()).hexdigest()==m["sha256"]["modules/capacity-view.mjs"]' &&
+               python -c 'import hashlib,json,os; m=json.load(open("/tmp/phd-hosted-manifest.json")); assert m["commit"]==os.environ["GITHUB_SHA"]; assert hashlib.sha256(open("/tmp/phd-hosted-assurance.mjs","rb").read()).hexdigest()==m["sha256"]["modules/assurance.mjs"]; assert hashlib.sha256(open("/tmp/phd-hosted-claims.mjs","rb").read()).hexdigest()==m["sha256"]["modules/source-claims.mjs"]; assert m["asset_count"]==len(m["sha256"]); assert hashlib.sha256(open("/tmp/phd-hosted-responsive.css","rb").read()).hexdigest()==m["sha256"]["responsive.css"]; assert hashlib.sha256(open("/tmp/phd-hosted-storage.mjs","rb").read()).hexdigest()==m["sha256"]["modules/storage.mjs"]; assert hashlib.sha256(open("/tmp/phd-hosted-local-records.mjs","rb").read()).hexdigest()==m["sha256"]["modules/local-records.mjs"]; assert hashlib.sha256(open("/tmp/phd-hosted-deadline-cutoff.mjs","rb").read()).hexdigest()==m["sha256"]["modules/deadline-cutoff.mjs"]; assert hashlib.sha256(open("/tmp/phd-hosted-readiness.mjs","rb").read()).hexdigest()==m["sha256"]["modules/readiness.mjs"]; assert hashlib.sha256(open("/tmp/phd-hosted-readiness-view.mjs","rb").read()).hexdigest()==m["sha256"]["modules/readiness-view.mjs"]; assert hashlib.sha256(open("/tmp/phd-hosted-capacity-view.mjs","rb").read()).hexdigest()==m["sha256"]["modules/capacity-view.mjs"]' &&
                curl -fsSL --max-time 15 "$base/favicon.svg?revision=$GITHUB_SHA" -o /tmp/phd-hosted-icon.svg &&
                grep -q '<svg' /tmp/phd-hosted-icon.svg &&
                curl -fsSL --max-time 15 "$base/sitemap.xml?revision=$GITHUB_SHA" -o /tmp/phd-hosted-sitemap.xml &&
