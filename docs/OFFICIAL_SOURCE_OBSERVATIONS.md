@@ -9,3 +9,12 @@ A first observation creates a baseline; a changed content hash raises `source_by
 The existing `compare-sources` command reports field-level differences between independently acquired JSON snapshots. For official deadline verification, an operator must still inspect the primary institution page and its effective date, capture evidence, and resolve differences manually. Do not copy private source observations into public Pages exports.
 
 CI: `python -m pytest tests/test_phd_source_observer.py -q` uses a fake HTTPS transport; no real university URL is contacted in tests.
+
+
+## Review workspace
+
+The private `#source-observations` route displays recent observations from `GET /api/source-observations`, one latest entry per tracked application/source URL. The saved `drift` classification is immutable for each observation; SQLite schema migration leaves historic classifications unknown rather than inventing a previous comparison outcome. Review categories are **changed bytes**, **unavailable**, **unchanged bytes**, **baseline**, or **legacy unknown**.
+
+The UI offers manual history refresh and a command to perform another observation locally. It does **not** initiate network collection, store source HTML, authenticate university portals, or infer official deadline/eligibility changes. Data access remains limited to the loopback private API. The public Pages build does not have access to this history.
+
+Remaining semantic proof requirements are tracked in [Issue #8](https://github.com/Armanasq/phd_tracker/issues/8).
