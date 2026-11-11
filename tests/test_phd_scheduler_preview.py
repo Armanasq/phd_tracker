@@ -102,7 +102,7 @@ class SchedulerPreviewTests(unittest.TestCase):
             save_settings(self.store,{"max_cloud_model_calls_per_day":2})
             self.assertEqual({w["id"]:w for w in scheduler_preview(self.store,self.now)["workflows"]}["my_cloud"]["state"],"due")
         with patch.dict("os.environ",{"OPENAI_API_KEY":""}):
-            self.assertEqual({w["id"]:w for w in scheduler_preview(self.store,self.now)["workflows"]}["my_cloud"]["state"],"provider_not_approved")
+            self.assertEqual({w["id"]:w for w in scheduler_preview(self.store,self.now)["workflows"]}["my_cloud"]["state"],"provider_reverification_required")
 
 
 if __name__=="__main__":
