@@ -58,10 +58,10 @@
     {
       "type": "Feature",
       "properties": {
-        "title": "Switzerland: 10 application records",
+        "title": "Switzerland: 9 application records",
         "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
-        "count": 10,
-        "sample_source_ids": "C06, M23, M24",
+        "count": 9,
+        "sample_source_ids": "M23, M24, M29",
         "marker-color": "#19b5b6",
         "marker-size": "large"
       },

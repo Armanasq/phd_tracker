@@ -1,59 +1,30 @@
-# Execution plan — 2026-11-10
+# Execution plan — 2026-11-11
 
 [← Repository cockpit](../README.md) · [Tracker workbook](../PhD_Action_List.xlsx) · [Import task calendar](../calendar/phd_deadlines.ics) · [Private Action Center](../../issues/1) · [Full machine-readable ledger](../data/execution_plan.json)
 
-> **As of 2026-11-10, Europe/Berlin.** This plan is generated from original workbook rows. It distinguishes application deadlines from step dates and explicit cross-route tasks. A dated Step timeline task has no recorded completion flag; it is not automatically labelled incomplete.
+> **As of 2026-11-11, Europe/Berlin.** This plan is generated from original workbook rows. It distinguishes application deadlines from step dates and explicit cross-route tasks. A dated Step timeline task has no recorded completion flag; it is not automatically labelled incomplete.
 
-## A. Application submission deadlines today (1)
+## A. Application submission deadlines today (0)
 
 | When | Application / workstream | Action | Source |
 |:--|:--|:--|:--|
-| 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | By 29 Oct 2026: email sgs@sbfi.admin.ch asking Iran's scholarship type and deadline and whether an Iranian resident in Turkey applies via Tehran or Ankara route | [Source page](https://www.sbfi.admin.ch/scholarships_eng) · Action list · row 37 |
+| — | None in the current snapshot | — | — |
 
-## B. Shared actions due today (2)
+## B. Shared actions due today (0)
 
 | Date | Cross-application task | Recorded status |
 |:---|:---|:---|
-| 2026-11-10 | Settle English tests: UBC wants overall 7 with no band below 6; York asks IELTS 7; Waterloo mentions an 83% equivalency. Book the retest if any band is below the minimum, so the result exists before the 1 to 15 Dec deadlines. · `tsk-78e48091bb3c011d` | To do |
-| 2026-11-10 | Confirm separate Southampton BlueOcean linked project form and ref 3522426DA eligibility; official staff deadline now 13 Nov. · `tsk-4dc7498def77cbd7` | To do |
+| — | None scheduled today | — |
 
-## C. All programme steps explicitly dated today (29)
+## C. All programme steps explicitly dated today (0)
 
 To confirm a task, copy its stable `tsk-...` identifier from the table and comment `/done TASK_ID` on the [private Action Center](../../issues/1). Use `/reopen TASK_ID` to undo. These commands update a separate completion ledger, not the original source rows.
 
 | When | Application / workstream | Action | Source |
 |:--|:--|:--|:--|
-| 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | By 29 Oct 2026: email sgs@sbfi.admin.ch asking Iran's scholarship type and deadline and whether an Iranian resident in Turkey applies via Tehran or Ankara route · `tsk-f4d413183cd2f563` | [Source page](https://www.sbfi.admin.ch/scholarships_eng) · Step timeline · row 228 |
-| 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | By 3 Nov 2026: obtain support letter from a Swiss professor (no help from ESKAS or universities) with their 2-page CV · `tsk-4fa2304d7439fb0f` | [Source page](https://www.sbfi.admin.ch/scholarships_eng) · Step timeline · row 229 |
-| 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | Register in GO ESKAS; ask two professors to upload recommendation letters · `tsk-a078da51c1ff7bec` | [Source page](https://www.sbfi.admin.ch/scholarships_eng) · Step timeline · row 230 |
-| 2026-11-10 | Swiss Government Excellence Scholarship (research/PhD), 2027-2028 | Before the country deadline: upload CV, 2-page motivation letter, 5-page research proposal on ESKAS form, certificates and transcripts, passport copy · `tsk-ef50fe89bd1641d1` | [Source page](https://www.sbfi.admin.ch/scholarships_eng) · Step timeline · row 231 |
-| 2026-11-10 | Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacancy ref 3522426DA (jobs.soton.ac.uk) | Confirm whether BlueOcean linked doctoral project application is required separately, and verify its independent deadline before 13 Nov staff deadline. · `tsk-33738d53760b564a` | [Source page](https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10) · Step timeline · row 226 |
-| 2026-11-10 | Southampton MSCA BlueOcean, application 2 of 2: linked PhD 'Robotic monitoring for place recognition and change detection in  | Verify BlueOcean linked PhD/project form requirements and deadline; earlier 31 Oct date is superseded for staff role but not verified for linked form. · `tsk-c7f9dc906967952d` | [Source page](https://www.jobs.ac.uk/job/DTE958/) · Step timeline · row 227 |
-| 2026-11-10 | OIST Graduate School PhD, May or Sep 2027 entry (Admissions Workshop 2027) | By 2026-11-10 confirm at least 2 recommendation letters have arrived · `tsk-7bd20d737d29c4d9` | [Source page](https://www.oist.jp/admissions/phd-program/apply-phd) · Step timeline · row 224 |
-| 2026-11-10 | NTNU Gjovik, Ph.D. Candidate in Reinforcement Learning for Project Scheduling Problems (Jobbnorge 310778) | By 2026-11-10 write the project outline (max 1,500 words / 4 pages) and motivation letter (max 400 words / 1 page) · `tsk-51dc08e338c5d73d` | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310778) · Step timeline · row 223 |
-| 2026-11-10 | University of Oslo, PhD Research Fellow in Control Theory and Optimization for Edge Computing (Jobbnorge 310583) | By 2026-11-10 line up 2-3 referees with name, relation, email and phone; prepare publication list and cover letter · `tsk-b5f721e9c0b06b94` | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310583) · Step timeline · row 237 |
-| 2026-11-10 | OsloMet PhD Fellow in Trustworthy Generative AI with Knowledge Verification (310467) | By 2026-11-10: assemble application letter, CV, all pages of BSc and MSc diplomas/certificates, MSc thesis, publication list, links to articles · `tsk-7079e73d73cf6818` | [Source page](https://www.oslomet.no/en/work/job-openings/phd-fellow-in-trustworthy-generative-ai-with-knowledge-verification) · Step timeline · row 225 |
-| 2026-11-10 | Mila supervision request (up to three professors) plus separate university application | Create/log in to MyMila applicant portal and shortlist up to three Mila core/associate professors by 2026-11-10 · `tsk-9f9afec0124df9b8` | [Source page](https://mila.quebec/en/supervision-requests/) · Step timeline · row 219 |
-| 2026-11-10 | Mila supervision request (up to three professors) plus separate university application | Prepare and submit the separate application to each professor's partner university/school (deadline set by that university; not on Mila page) - check by 2026-11-10 · `tsk-435de96aadd0e1ea` | [Source page](https://mila.quebec/en/supervision-requests/) · Step timeline · row 220 |
-| 2026-11-10 | Mila supervision request (up to three professors) plus separate university application | Mail original documents by post if Universite de Montreal is the university · `tsk-46bd31eec464b696` | [Source page](https://mila.quebec/en/supervision-requests/) · Step timeline · row 221 |
-| 2026-11-10 | Mila supervision request (up to three professors) plus separate university application | If admitted (notified January-April), apply for CAQ and study permit · `tsk-903f774d15075d0d` | [Source page](https://mila.quebec/en/supervision-requests/) · Step timeline · row 222 |
-| 2026-11-10 | Exeter EPSRC DLA studentships, Department of Engineering, Sept 2027 entry (ref 6014): Physics-Aware Graph Neural Networks for | Ask two referees to email references from institutional accounts to PGRApplicants@exeter.ac.uk; request by 2026-11-10 · `tsk-4672da98bb8fb412` | [Source page](https://www.exeter.ac.uk/study/funding/award/?id=6014) · Step timeline · row 216 |
-| 2026-11-10 | Exeter EPSRC DLA studentships, Mathematics and Statistics, Sept 2027 entry (ref 6019): Uncertainty quantification for healthc | Request two referee emails from institutional accounts by 2026-11-10 · `tsk-f6f6537ee86b1ae7` | [Source page](https://www.exeter.ac.uk/study/funding/award/?id=6019) · Step timeline · row 217 |
-| 2026-11-10 | University of Edinburgh EPSRC Centre for Doctoral Training in Machine Learning Systems (PhD, Round 1) | Identify and contact a potential supervisor (stage 1 'Get support from a supervisor') by 2026-11-10 · `tsk-4f1cce242da6a02b` | [Source page](https://informatics.ed.ac.uk/cdt-in-machine-learning-systems/apply/application-process-and-guidance/application-deadlines) · Step timeline · row 236 |
-| 2026-11-10 | University of Alberta, Computing Science PhD, Fall 2027 (Amii) | Select research area and identify up to three potential supervisors; email them by 2026-11-10 (admitted only if a professor agrees to supervise) · `tsk-3ab1f1c50cf2296f` | [Source page](https://www.ualberta.ca/en/computing-science/graduate-studies/programs-and-admissions/applications-and-admissions/index.html) · Step timeline · row 234 |
-| 2026-11-10 | UBC Computer Science PhD, September 2027 | Request three referees by 2026-11-10; letters due by 2027-01-06 (cs.ubc.ca) or 2027-01-15 (grad.ubc.ca) · `tsk-bfbbbe99e86d4c51` | [Source page](https://www.cs.ubc.ca/students/grad/admissions) · Step timeline · row 232 |
-| 2026-11-10 | McGill University, Electrical and Computer Engineering PhD, Fall 2027 | Review the 10 research areas and pick up to 2; contact potential supervisors by 2026-11-10 · `tsk-752c8b95e512919b` | [Source page](https://www.mcgill.ca/ece/graduate/graduate/deadlines) · Step timeline · row 218 |
-| 2026-11-10 | UCL Gatsby Computational Neuroscience Unit PhD | Check academic letters received before Gatsby's separate referee deadline · `tsk-4452935a132270eb` | [Source page](https://www.ucl.ac.uk/life-sciences/gatsby/study-and-work/gatsby-unit-phd-programme) · Step timeline · row 233 |
-| 2026-11-10 | University of Sydney ARIAM Research Hub PhD Scholarship (Faculty of Engineering, supervisor must be an ARIAM Chief Investigat | Identify an ARIAM Chief Investigator working on SLAM or robot learning and email by 2026-11-10 · `tsk-4bfccd5a1a9c1c4c` | [Source page](https://www.sydney.edu.au/scholarships/b/ariam-research-hub-phd-scholarships.html) · Step timeline · row 239 |
-| 2026-11-10 | University of Sydney ARIAM Research Hub PhD Scholarship (Faculty of Engineering, supervisor must be an ARIAM Chief Investigat | Apply for PhD admission at Sydney Engineering with an RTP application; scholarship considered automatically after unconditional offer · `tsk-ef9ecc756cf4de4a` | [Source page](https://www.sydney.edu.au/scholarships/b/ariam-research-hub-phd-scholarships.html) · Step timeline · row 240 |
-| 2026-11-10 | University of Sydney ARIAM Research Hub PhD Scholarship (Faculty of Engineering, supervisor must be an ARIAM Chief Investigat | Confirm in writing that international fees are covered (RTP fee offset) · `tsk-5c7124dd46b1933a` | [Source page](https://www.sydney.edu.au/scholarships/b/ariam-research-hub-phd-scholarships.html) · Step timeline · row 241 |
-| 2026-11-10 | University of Bern, Machine Learning in Medicine Lab (Prof. Lisa Koch): PhD in Machine Learning in Medicine, multimodal healt | By 2026-11-10 write one-page cover letter (motivation and something you are proud of) and tie it to physics-informed and clinical AI work · `tsk-9129eabf6e9e7ecb` | [Source page](https://mlm-lab.ch/jobs/) · Step timeline · row 235 |
-| 2026-11-10 | ETH Zurich, Prof George Haller (Nonlinear Dynamics): PhD in Modeling and Control of Nonlinear Dynamical Systems from Data | 2026-11-10: prepare motivation letter, CV, transcripts, publication list, referee contacts · `tsk-c6efb8a204aa2121` | [Source page](https://jobs.ethz.ch/job/view/JOPG_ethz_fV3FNoofTG427Xo88T) · Step timeline · row 215 |
-| 2026-11-10 | ETH Zurich / PSI X-ray Imaging Professorship (Prof Marco Stampanoni): Doctoral Position in sparse reconstruction of virtual h | 2026-11-10: prepare motivation letter, CV, transcripts, publication list, referee contacts · `tsk-563721c56110d6f6` | [Source page](https://jobs.ethz.ch/job/view/JOPG_ethz_pGJRE5rDAavyV6eLYI) · Step timeline · row 213 |
-| 2026-11-10 | ETH Zurich D-BSSE Basel (Prof Dagmar Iber): PhD in Computational Methods for Digital Twins of Embryonic Development and Disea | 2026-11-10: prepare motivation letter, CV, transcripts, publication list, referee contacts · `tsk-29d7dc3e681400f9` | [Source page](https://jobs.ethz.ch/job/view/JOPG_ethz_eMp6VK8Hmtj3lkloXX) · Step timeline · row 214 |
-| 2026-11-10 | University of Surrey (Vision, Speech and Signal Processing), Smart optical design: AI tools for cinematic camera lenses (Voli | 2026-11-10: email Dr Marco Volino (m.volino@surrey.ac.uk) with CV · `tsk-3ebda1a6e43662b0` | [Source page](https://www.surrey.ac.uk/fees-and-funding/studentships/smart-optical-design-ai-tools-next-generation-cinematic-camera-lenses) · Step timeline · row 238 |
+| — | None in the current snapshot | — | — |
 
-## D. Application deadlines within seven days (18)
+## D. Application deadlines within seven days (20)
 
 | When | Application / workstream | Action | Source |
 |:--|:--|:--|:--|
@@ -75,10 +46,12 @@ To confirm a task, copy its stable `tsk-...` identifier from the table and comme
 | 2026-11-16 | AI4I + Politecnico di Torino, funded PhD Adversarial Robustness in Multimodal Foundation Models | Select Computer Engineering and Systems doctoral call and submit formal PoliTo application by 16 Nov 14:00 CET; align vision/audio/LLM work with multimodal safety. | [Source page](https://ai4i.it/phd-position-on-adversarial-robustness-in-multi-modal-foundation-models/) · Action list · row 51 |
 | 2026-11-16 | AI4I and Politecnico di Torino — PhD Trustworthy Generalist Robot Policies | Submit BOTH the Politecnico di Torino official PhD admission application and the AI4I expression of interest; finish by 16 Nov 14:00 CET. Tailor research statement to runtime assurance, safe adaptation, world m | [Source page](https://ai4i.it/open-calls/phd-position-on-trustworthy-generalist-robot-policies/) · Action list · row 53 |
 | 2026-11-17 | University of Oslo, PhD Research Fellow in Control Theory and Optimization for Edge Computing (Jobbnorge 310583) | By 2026-10-30 email Mathias Hudoba de Badyn (and optionally Tonnes Nygaard) with CV and a short enquiry | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310583) · Action list · row 55 |
+| 2026-11-18 | UiO Integreat PhD Research Fellow in Structured Vision-Language Models (310559) | By 4 Nov 2026: email 2-3 referees; contact Adin Ramirez Rivera (adinr@uio.no) with CV | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310559) · Action list · row 57 |
+| 2026-11-18 | OsloMet PhD Fellow in Trustworthy Generative AI with Knowledge Verification (310467) | By 2026-11-04: check whether the Tehran MSc and BSc need pre-approval for foreign education (page says foreign education needs pre-approval, approval letter attached); start it if so | [Source page](https://www.oslomet.no/en/work/job-openings/phd-fellow-in-trustworthy-generative-ai-with-knowledge-verification) · Action list · row 56 |
 
 ## E. Earlier tasks, completion status unconfirmed
 
-There are **118** pre-2026-11-10 tasks with no confirmed completion status and whose final application deadline has not definitively passed, including **104** programme steps and **14** cross-route tasks. These represent *review work*, not automatic missed deadlines.
+There are **142** pre-2026-11-11 tasks with no confirmed completion status and whose final application deadline has not definitively passed, including **126** programme steps and **16** cross-route tasks. These represent *review work*, not automatic missed deadlines.
 
 | When | Application / workstream | Action | Source |
 |:--|:--|:--|:--|

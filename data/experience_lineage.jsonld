@@ -24,7 +24,7 @@
       "@type": "prov:Entity",
       "schema:name": "EvidenceGraph observation snapshot",
       "schema:dateModified": {
-        "@value": "2026-11-10",
+        "@value": "2026-11-11",
         "@type": "xsd:date"
       },
       "prov:wasDerivedFrom": [
@@ -74,36 +74,6 @@
       "@type": "prov:Entity",
       "schema:name": "English proficiency evidence",
       "readinessState": "unknown"
-    },
-    {
-      "@id": "urn:phdtracker:application:C06",
-      "@type": "prov:Entity",
-      "schema:name": "Swiss Government Excellence Scholarship (research/PhD), 2027-2028",
-      "applicationDeadline": {
-        "@value": "2026-11-10",
-        "@type": "xsd:date"
-      },
-      "applicantDecision": "Check first",
-      "documentMention": [
-        {
-          "@id": "urn:phdtracker:document:academic_cv"
-        },
-        {
-          "@id": "urn:phdtracker:document:recommendations"
-        },
-        {
-          "@id": "urn:phdtracker:document:research_statement"
-        },
-        {
-          "@id": "urn:phdtracker:document:transcripts"
-        }
-      ],
-      "prov:wasDerivedFrom": {
-        "@id": "urn:phdtracker:dataset:portfolio-frontier"
-      },
-      "schema:citation": {
-        "@id": "https://www.sbfi.admin.ch/scholarships_eng"
-      }
     },
     {
       "@id": "urn:phdtracker:application:inria%3A2026-10608",

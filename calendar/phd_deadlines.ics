@@ -7,779 +7,8 @@ X-WR-CALNAME:PhD Intelligence - Source-backed dates
 X-WR-CALDESC:All-day reminders. Closing times and completion states requi
  re verification.
 BEGIN:VEVENT
-UID:tsk-29d7dc3e681400f9@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: ETH Zurich D-BSSE Basel (Prof Dagmar 
- Iber): PhD in Computational Methods for Digital Twins of Embryonic Devel
- opment and Disease
-DESCRIPTION:Action: 2026-11-10: prepare motivation letter\, CV\, transcri
- pts\, publication list\, referee contacts\nStatus: completion_unconfirme
- d\nOriginal source: Step timeline row 214\nOfficial URL: https://jobs.et
- hz.ch/job/view/JOPG_ethz_eMp6VK8Hmtj3lkloXX\nFinal programme deadline: u
- nconfirmed / not applicable\nOriginal note: Rolling\nAll-day date. DO NO
- T infer a closing time from this event.\nConfirm actual portal availabil
- ity and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://jobs.ethz.ch/job/view/JOPG_ethz_eMp6VK8Hmtj3lkloXX
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-33738d53760b564a@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: Southampton MSCA BlueOcean PhD Studen
- tship\, application 1 of 2: staff vacancy ref 3522426DA (jobs.soton.ac.u
- k)
-DESCRIPTION:Action: Confirm whether BlueOcean linked doctoral project app
- lication is required separately\, and verify its independent deadline be
- fore 13 Nov staff deadline.\nStatus: completion_unconfirmed\nOriginal so
- urce: Step timeline row 226\nOfficial URL: https://jobs.soton.ac.uk/Vaca
- ncies.aspx?cat=1065&type=10\nFinal programme deadline: 2026-10-31\nOrigi
- nal note: 2026-10-31 00:00:00\nAll-day date. DO NOT infer a closing time
-  from this event.\nConfirm actual portal availability and individual eli
- gibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-3ab1f1c50cf2296f@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: University of Alberta\, Computing Sci
- ence PhD\, Fall 2027 (Amii)
-DESCRIPTION:Action: Select research area and identify up to three potenti
- al supervisors\; email them by 2026-11-10 (admitted only if a professor 
- agrees to supervise)\nStatus: completion_unconfirmed\nOriginal source: S
- tep timeline row 234\nOfficial URL: https://www.ualberta.ca/en/computing
- -science/graduate-studies/programs-and-admissions/applications-and-admis
- sions/index.html\nFinal programme deadline: 2026-12-15\nOriginal note: 2
- 026-12-15 00:00:00\nAll-day date. DO NOT infer a closing time from this 
- event.\nConfirm actual portal availability and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.ualberta.ca/en/computing-science/graduate-studies/program
- s-and-admissions/applications-and-admissions/index.html
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-3ebda1a6e43662b0@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: University of Surrey (Vision\, Speech
-  and Signal Processing)\, Smart optical design: AI tools for cinematic c
- amera lenses (Volino\, Guillemaut)\, April 2027 start
-DESCRIPTION:Action: 2026-11-10: email Dr Marco Volino (m.volino@surrey.ac
- .uk) with CV\nStatus: completion_unconfirmed\nOriginal source: Step time
- line row 238\nOfficial URL: https://www.surrey.ac.uk/fees-and-funding/st
- udentships/smart-optical-design-ai-tools-next-generation-cinematic-camer
- a-lenses\nFinal programme deadline: 2027-01-17\nOriginal note: 2027-01-1
- 7 00:00:00\nAll-day date. DO NOT infer a closing time from this event.\n
- Confirm actual portal availability and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.surrey.ac.uk/fees-and-funding/studentships/smart-optical-
- design-ai-tools-next-generation-cinematic-camera-lenses
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-435de96aadd0e1ea@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: Mila supervision request (up to three
-  professors) plus separate university application
-DESCRIPTION:Action: Prepare and submit the separate application to each p
- rofessor's partner university/school (deadline set by that university\; 
- not on Mila page) - check by 2026-11-10\nStatus: completion_unconfirmed\
- nOriginal source: Step timeline row 220\nOfficial URL: https://mila.queb
- ec/en/supervision-requests/\nFinal programme deadline: 2026-12-01\nOrigi
- nal note: 2026-12-01 00:00:00\nAll-day date. DO NOT infer a closing time
-  from this event.\nConfirm actual portal availability and individual eli
- gibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://mila.quebec/en/supervision-requests/
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-4452935a132270eb@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: UCL Gatsby Computational Neuroscience
-  Unit PhD
-DESCRIPTION:Action: Check academic letters received before Gatsby's separ
- ate referee deadline\nStatus: completion_unconfirmed\nOriginal source: S
- tep timeline row 233\nOfficial URL: https://www.ucl.ac.uk/life-sciences/
- gatsby/study-and-work/gatsby-unit-phd-programme\nFinal programme deadlin
- e: 2026-11-09\nOriginal note: 2026-11-09 00:00:00\nAll-day date. DO NOT 
- infer a closing time from this event.\nConfirm actual portal availabilit
- y and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.ucl.ac.uk/life-sciences/gatsby/study-and-work/gatsby-unit
- -phd-programme
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-4672da98bb8fb412@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentships\, Depar
- tment of Engineering\, Sept 2027 entry (ref 6014): Physics-Aware Graph N
- eural Networks for Robust Short-Term Visibility Forecasting (supervisor 
- surname Zhou per PDF name)
-DESCRIPTION:Action: Ask two referees to email references from institution
- al accounts to PGRApplicants@exeter.ac.uk\; request by 2026-11-10\nStatu
- s: completion_unconfirmed\nOriginal source: Step timeline row 216\nOffic
- ial URL: https://www.exeter.ac.uk/study/funding/award/?id=6014\nFinal pr
- ogramme deadline: 2026-12-08\nOriginal note: 2026-12-08 00:00:00\nAll-da
- y date. DO NOT infer a closing time from this event.\nConfirm actual por
- tal availability and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.exeter.ac.uk/study/funding/award/?id=6014
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-46bd31eec464b696@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: Mila supervision request (up to three
-  professors) plus separate university application
-DESCRIPTION:Action: Mail original documents by post if Universite de Mont
- real is the university\nStatus: completion_unconfirmed\nOriginal source:
-  Step timeline row 221\nOfficial URL: https://mila.quebec/en/supervision
- -requests/\nFinal programme deadline: 2026-12-01\nOriginal note: 2026-12
- -01 00:00:00\nAll-day date. DO NOT infer a closing time from this event.
- \nConfirm actual portal availability and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://mila.quebec/en/supervision-requests/
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-4bfccd5a1a9c1c4c@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: University of Sydney ARIAM Research H
- ub PhD Scholarship (Faculty of Engineering\, supervisor must be an ARIAM
-  Chief Investigator)
-DESCRIPTION:Action: Identify an ARIAM Chief Investigator working on SLAM 
- or robot learning and email by 2026-11-10\nStatus: completion_unconfirme
- d\nOriginal source: Step timeline row 239\nOfficial URL: https://www.syd
- ney.edu.au/scholarships/b/ariam-research-hub-phd-scholarships.html\nFina
- l programme deadline: unconfirmed / not applicable\nOriginal note: Rolli
- ng\nAll-day date. DO NOT infer a closing time from this event.\nConfirm 
- actual portal availability and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.sydney.edu.au/scholarships/b/ariam-research-hub-phd-schol
- arships.html
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-4dc7498def77cbd7@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SHARED PREPARATION TASK: New official Southampton deadline 13 Nov
- \, supersedes old 31 Oct/4 Nov\; linked form date still unclear.
-DESCRIPTION:Action: Confirm separate Southampton BlueOcean linked project
-  form and ref 3522426DA eligibility\; official staff deadline now 13 Nov
- .\nStatus: explicit_to_do\nOriginal source: What I need to do row 19\nOf
- ficial URL: not linked\nFinal programme deadline: unconfirmed / not appl
- icable\nOriginal note: New official Southampton deadline 13 Nov\, supers
- edes old 31 Oct/4 Nov\; linked form date still unclear.\nAll-day date. D
- O NOT infer a closing time from this event.\nConfirm actual portal avail
- ability and individual eligibility.
-CATEGORIES:SHARED PREPARATION TASK
-STATUS:TENTATIVE
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SHARED PREPARATION TASK — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-4f1cce242da6a02b@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: University of Edinburgh EPSRC Centre 
- for Doctoral Training in Machine Learning Systems (PhD\, Round 1)
-DESCRIPTION:Action: Identify and contact a potential supervisor (stage 1 
- 'Get support from a supervisor') by 2026-11-10\nStatus: completion_uncon
- firmed\nOriginal source: Step timeline row 236\nOfficial URL: https://in
- formatics.ed.ac.uk/cdt-in-machine-learning-systems/apply/application-pro
- cess-and-guidance/application-deadlines\nFinal programme deadline: 2026-
- 12-14\nOriginal note: 2026-12-14 00:00:00\nAll-day date. DO NOT infer a 
- closing time from this event.\nConfirm actual portal availability and in
- dividual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://informatics.ed.ac.uk/cdt-in-machine-learning-systems/apply/ap
- plication-process-and-guidance/application-deadlines
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-4fa2304d7439fb0f@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: Swiss Government Excellence Scholarsh
- ip (research/PhD)\, 2027-2028
-DESCRIPTION:Action: By 3 Nov 2026: obtain support letter from a Swiss pro
- fessor (no help from ESKAS or universities) with their 2-page CV\nStatus
- : completion_unconfirmed\nOriginal source: Step timeline row 229\nOffici
- al URL: https://www.sbfi.admin.ch/scholarships_eng\nFinal programme dead
- line: 2026-11-10\nOriginal note: 2026-11-10 00:00:00\nAll-day date. DO N
- OT infer a closing time from this event.\nConfirm actual portal availabi
- lity and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.sbfi.admin.ch/scholarships_eng
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-51dc08e338c5d73d@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: NTNU Gjovik\, Ph.D. Candidate in Rein
- forcement Learning for Project Scheduling Problems (Jobbnorge 310778)
-DESCRIPTION:Action: By 2026-11-10 write the project outline (max 1\,500 w
- ords / 4 pages) and motivation letter (max 400 words / 1 page)\nStatus: 
- completion_unconfirmed\nOriginal source: Step timeline row 223\nOfficial
-  URL: https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310778\n
- Final programme deadline: 2026-11-16\nOriginal note: 2026-11-16 00:00:00
- \nAll-day date. DO NOT infer a closing time from this event.\nConfirm ac
- tual portal availability and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310778
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-563721c56110d6f6@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: ETH Zurich / PSI X-ray Imaging Profes
- sorship (Prof Marco Stampanoni): Doctoral Position in sparse reconstruct
- ion of virtual histology images
-DESCRIPTION:Action: 2026-11-10: prepare motivation letter\, CV\, transcri
- pts\, publication list\, referee contacts\nStatus: completion_unconfirme
- d\nOriginal source: Step timeline row 213\nOfficial URL: https://jobs.et
- hz.ch/job/view/JOPG_ethz_pGJRE5rDAavyV6eLYI\nFinal programme deadline: u
- nconfirmed / not applicable\nOriginal note: Rolling\nAll-day date. DO NO
- T infer a closing time from this event.\nConfirm actual portal availabil
- ity and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://jobs.ethz.ch/job/view/JOPG_ethz_pGJRE5rDAavyV6eLYI
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-5c7124dd46b1933a@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: University of Sydney ARIAM Research H
- ub PhD Scholarship (Faculty of Engineering\, supervisor must be an ARIAM
-  Chief Investigator)
-DESCRIPTION:Action: Confirm in writing that international fees are covere
- d (RTP fee offset)\nStatus: completion_unconfirmed\nOriginal source: Ste
- p timeline row 241\nOfficial URL: https://www.sydney.edu.au/scholarships
- /b/ariam-research-hub-phd-scholarships.html\nFinal programme deadline: u
- nconfirmed / not applicable\nOriginal note: Rolling\nAll-day date. DO NO
- T infer a closing time from this event.\nConfirm actual portal availabil
- ity and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.sydney.edu.au/scholarships/b/ariam-research-hub-phd-schol
- arships.html
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-7079e73d73cf6818@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: OsloMet PhD Fellow in Trustworthy Gen
- erative AI with Knowledge Verification (310467)
-DESCRIPTION:Action: By 2026-11-10: assemble application letter\, CV\, all
-  pages of BSc and MSc diplomas/certificates\, MSc thesis\, publication l
- ist\, links to articles\nStatus: completion_unconfirmed\nOriginal source
- : Step timeline row 225\nOfficial URL: https://www.oslomet.no/en/work/jo
- b-openings/phd-fellow-in-trustworthy-generative-ai-with-knowledge-verifi
- cation\nFinal programme deadline: 2026-11-18\nOriginal note: 2026-11-18 
- 00:00:00\nAll-day date. DO NOT infer a closing time from this event.\nCo
- nfirm actual portal availability and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.oslomet.no/en/work/job-openings/phd-fellow-in-trustworthy
- -generative-ai-with-knowledge-verification
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-752c8b95e512919b@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: McGill University\, Electrical and Co
- mputer Engineering PhD\, Fall 2027
-DESCRIPTION:Action: Review the 10 research areas and pick up to 2\; conta
- ct potential supervisors by 2026-11-10\nStatus: completion_unconfirmed\n
- Original source: Step timeline row 218\nOfficial URL: https://www.mcgill
- .ca/ece/graduate/graduate/deadlines\nFinal programme deadline: 2026-12-1
- 5\nOriginal note: 2026-12-15 00:00:00\nAll-day date. DO NOT infer a clos
- ing time from this event.\nConfirm actual portal availability and indivi
- dual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.mcgill.ca/ece/graduate/graduate/deadlines
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-78e48091bb3c011d@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SHARED PREPARATION TASK: IELTS 7.0 meets most but not necessarily
-  per-band minimums.
-DESCRIPTION:Action: Settle English tests: UBC wants overall 7 with no ban
- d below 6\; York asks IELTS 7\; Waterloo mentions an 83% equivalency. Bo
- ok the retest if any band is below the minimum\, so the result exists be
- fore the 1 to 15 Dec deadlines.\nStatus: explicit_to_do\nOriginal source
- : What I need to do row 18\nOfficial URL: not linked\nFinal programme de
- adline: unconfirmed / not applicable\nOriginal note: IELTS 7.0 meets mos
- t but not necessarily per-band minimums.\nAll-day date. DO NOT infer a c
- losing time from this event.\nConfirm actual portal availability and ind
- ividual eligibility.
-CATEGORIES:SHARED PREPARATION TASK
-STATUS:TENTATIVE
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SHARED PREPARATION TASK — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-7bd20d737d29c4d9@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: OIST Graduate School PhD\, May or Sep
-  2027 entry (Admissions Workshop 2027)
-DESCRIPTION:Action: By 2026-11-10 confirm at least 2 recommendation lette
- rs have arrived\nStatus: completion_unconfirmed\nOriginal source: Step t
- imeline row 224\nOfficial URL: https://www.oist.jp/admissions/phd-progra
- m/apply-phd\nFinal programme deadline: 2026-11-15\nOriginal note: 2026-1
- 1-15 00:00:00\nAll-day date. DO NOT infer a closing time from this event
- .\nConfirm actual portal availability and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.oist.jp/admissions/phd-program/apply-phd
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-903f774d15075d0d@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: Mila supervision request (up to three
-  professors) plus separate university application
-DESCRIPTION:Action: If admitted (notified January-April)\, apply for CAQ 
- and study permit\nStatus: completion_unconfirmed\nOriginal source: Step 
- timeline row 222\nOfficial URL: https://mila.quebec/en/supervision-reque
- sts/\nFinal programme deadline: 2026-12-01\nOriginal note: 2026-12-01 00
- :00:00\nAll-day date. DO NOT infer a closing time from this event.\nConf
- irm actual portal availability and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://mila.quebec/en/supervision-requests/
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-9129eabf6e9e7ecb@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: University of Bern\, Machine Learning
-  in Medicine Lab (Prof. Lisa Koch): PhD in Machine Learning in Medicine\
- , multimodal health data
-DESCRIPTION:Action: By 2026-11-10 write one-page cover letter (motivation
-  and something you are proud of) and tie it to physics-informed and clin
- ical AI work\nStatus: completion_unconfirmed\nOriginal source: Step time
- line row 235\nOfficial URL: https://mlm-lab.ch/jobs/\nFinal programme de
- adline: 2026-11-30\nOriginal note: 2026-11-30 00:00:00\nAll-day date. DO
-  NOT infer a closing time from this event.\nConfirm actual portal availa
- bility and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://mlm-lab.ch/jobs/
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-95afd5b86060f8bd@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:APPLICATION DEADLINE: Swiss Government Excellence Scholarship (re
- search/PhD)\, 2027-2028
-DESCRIPTION:Action: By 29 Oct 2026: email sgs@sbfi.admin.ch asking Iran's
-  scholarship type and deadline and whether an Iranian resident in Turkey
-  applies via Tehran or Ankara route\nStatus: deadline_unconfirmed\nOrigi
- nal source: Action list row 37\nOfficial URL: https://www.sbfi.admin.ch/
- scholarships_eng\nFinal programme deadline: 2026-11-10\nOriginal note: (
- assumed) No single deadline on sbfi.admin.ch\; deadlines are by country 
- of origin and via Swiss representations. Other embassy pages show 13 Nov
-  2026 (Ethiopia)\, 20 Nov 2\nAll-day date. DO NOT infer a closing time f
- rom this event.\nConfirm actual portal availability and individual eligi
- bility.
-CATEGORIES:APPLICATION DEADLINE
-STATUS:TENTATIVE
-URL:https://www.sbfi.admin.ch/scholarships_eng
-BEGIN:VALARM
-TRIGGER:-P7D
-ACTION:DISPLAY
-DESCRIPTION:APPLICATION DEADLINE — check original source
-END:VALARM
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:APPLICATION DEADLINE — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-9f9afec0124df9b8@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: Mila supervision request (up to three
-  professors) plus separate university application
-DESCRIPTION:Action: Create/log in to MyMila applicant portal and shortlis
- t up to three Mila core/associate professors by 2026-11-10\nStatus: comp
- letion_unconfirmed\nOriginal source: Step timeline row 219\nOfficial URL
- : https://mila.quebec/en/supervision-requests/\nFinal programme deadline
- : 2026-12-01\nOriginal note: 2026-12-01 00:00:00\nAll-day date. DO NOT i
- nfer a closing time from this event.\nConfirm actual portal availability
-  and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://mila.quebec/en/supervision-requests/
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-a078da51c1ff7bec@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: Swiss Government Excellence Scholarsh
- ip (research/PhD)\, 2027-2028
-DESCRIPTION:Action: Register in GO ESKAS\; ask two professors to upload r
- ecommendation letters\nStatus: completion_unconfirmed\nOriginal source: 
- Step timeline row 230\nOfficial URL: https://www.sbfi.admin.ch/scholarsh
- ips_eng\nFinal programme deadline: 2026-11-10\nOriginal note: 2026-11-10
-  00:00:00\nAll-day date. DO NOT infer a closing time from this event.\nC
- onfirm actual portal availability and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.sbfi.admin.ch/scholarships_eng
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-b5f721e9c0b06b94@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: University of Oslo\, PhD Research Fel
- low in Control Theory and Optimization for Edge Computing (Jobbnorge 310
- 583)
-DESCRIPTION:Action: By 2026-11-10 line up 2-3 referees with name\, relati
- on\, email and phone\; prepare publication list and cover letter\nStatus
- : completion_unconfirmed\nOriginal source: Step timeline row 237\nOffici
- al URL: https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310583
- \nFinal programme deadline: 2026-11-17\nOriginal note: 2026-11-17 00:00:
- 00\nAll-day date. DO NOT infer a closing time from this event.\nConfirm 
- actual portal availability and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310583
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-bfbbbe99e86d4c51@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: UBC Computer Science PhD\, September 
- 2027
-DESCRIPTION:Action: Request three referees by 2026-11-10\; letters due by
-  2027-01-06 (cs.ubc.ca) or 2027-01-15 (grad.ubc.ca)\nStatus: completion_
- unconfirmed\nOriginal source: Step timeline row 232\nOfficial URL: https
- ://www.cs.ubc.ca/students/grad/admissions\nFinal programme deadline: 202
- 6-12-15\nOriginal note: 2026-12-15 00:00:00\nAll-day date. DO NOT infer 
- a closing time from this event.\nConfirm actual portal availability and 
- individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.cs.ubc.ca/students/grad/admissions
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-c6efb8a204aa2121@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: ETH Zurich\, Prof George Haller (Nonl
- inear Dynamics): PhD in Modeling and Control of Nonlinear Dynamical Syst
- ems from Data
-DESCRIPTION:Action: 2026-11-10: prepare motivation letter\, CV\, transcri
- pts\, publication list\, referee contacts\nStatus: completion_unconfirme
- d\nOriginal source: Step timeline row 215\nOfficial URL: https://jobs.et
- hz.ch/job/view/JOPG_ethz_fV3FNoofTG427Xo88T\nFinal programme deadline: u
- nconfirmed / not applicable\nOriginal note: Rolling\nAll-day date. DO NO
- T infer a closing time from this event.\nConfirm actual portal availabil
- ity and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://jobs.ethz.ch/job/view/JOPG_ethz_fV3FNoofTG427Xo88T
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-c7f9dc906967952d@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: Southampton MSCA BlueOcean\, applicat
- ion 2 of 2: linked PhD 'Robotic monitoring for place recognition and cha
- nge detection in dynamic underwater environments' (phdscanner\, lead sup
- ervisor Prof Blair Thornton)
-DESCRIPTION:Action: Verify BlueOcean linked PhD/project form requirements
-  and deadline\; earlier 31 Oct date is superseded for staff role but not
-  verified for linked form.\nStatus: completion_unconfirmed\nOriginal sou
- rce: Step timeline row 227\nOfficial URL: https://www.jobs.ac.uk/job/DTE
- 958/\nFinal programme deadline: 2026-10-31\nOriginal note: 2026-10-31 00
- :00:00\nAll-day date. DO NOT infer a closing time from this event.\nConf
- irm actual portal availability and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.jobs.ac.uk/job/DTE958/
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-ef50fe89bd1641d1@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: Swiss Government Excellence Scholarsh
- ip (research/PhD)\, 2027-2028
-DESCRIPTION:Action: Before the country deadline: upload CV\, 2-page motiv
- ation letter\, 5-page research proposal on ESKAS form\, certificates and
-  transcripts\, passport copy\nStatus: completion_unconfirmed\nOriginal s
- ource: Step timeline row 231\nOfficial URL: https://www.sbfi.admin.ch/sc
- holarships_eng\nFinal programme deadline: 2026-11-10\nOriginal note: 202
- 6-11-10 00:00:00\nAll-day date. DO NOT infer a closing time from this ev
- ent.\nConfirm actual portal availability and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.sbfi.admin.ch/scholarships_eng
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-ef9ecc756cf4de4a@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: University of Sydney ARIAM Research H
- ub PhD Scholarship (Faculty of Engineering\, supervisor must be an ARIAM
-  Chief Investigator)
-DESCRIPTION:Action: Apply for PhD admission at Sydney Engineering with an
-  RTP application\; scholarship considered automatically after unconditio
- nal offer\nStatus: completion_unconfirmed\nOriginal source: Step timelin
- e row 240\nOfficial URL: https://www.sydney.edu.au/scholarships/b/ariam-
- research-hub-phd-scholarships.html\nFinal programme deadline: unconfirme
- d / not applicable\nOriginal note: Rolling\nAll-day date. DO NOT infer a
-  closing time from this event.\nConfirm actual portal availability and i
- ndividual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.sydney.edu.au/scholarships/b/ariam-research-hub-phd-schol
- arships.html
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-f4d413183cd2f563@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: Swiss Government Excellence Scholarsh
- ip (research/PhD)\, 2027-2028
-DESCRIPTION:Action: By 29 Oct 2026: email sgs@sbfi.admin.ch asking Iran's
-  scholarship type and deadline and whether an Iranian resident in Turkey
-  applies via Tehran or Ankara route\nStatus: completion_unconfirmed\nOri
- ginal source: Step timeline row 228\nOfficial URL: https://www.sbfi.admi
- n.ch/scholarships_eng\nFinal programme deadline: 2026-11-10\nOriginal no
- te: 2026-11-10 00:00:00\nAll-day date. DO NOT infer a closing time from 
- this event.\nConfirm actual portal availability and individual eligibili
- ty.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.sbfi.admin.ch/scholarships_eng
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:tsk-f6f6537ee86b1ae7@phd-tracker.local
-DTSTAMP:20261110T000000Z
-DTSTART;VALUE=DATE:20261110
-DTEND;VALUE=DATE:20261111
-SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentships\, Mathe
- matics and Statistics\, Sept 2027 entry (ref 6019): Uncertainty quantifi
- cation for healthcare models: a route to precision medicine (Salter per 
- PDF name)
-DESCRIPTION:Action: Request two referee emails from institutional account
- s by 2026-11-10\nStatus: completion_unconfirmed\nOriginal source: Step t
- imeline row 217\nOfficial URL: https://www.exeter.ac.uk/study/funding/aw
- ard/?id=6019\nFinal programme deadline: 2026-12-08\nOriginal note: 2026-
- 12-08 00:00:00\nAll-day date. DO NOT infer a closing time from this even
- t.\nConfirm actual portal availability and individual eligibility.
-CATEGORIES:SCHEDULED APPLICATION STEP
-STATUS:TENTATIVE
-URL:https://www.exeter.ac.uk/study/funding/award/?id=6019
-BEGIN:VALARM
-TRIGGER:-P1D
-ACTION:DISPLAY
-DESCRIPTION:SCHEDULED APPLICATION STEP — check original source
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
 UID:tsk-1c81800306739e6f@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261112
 DTEND;VALUE=DATE:20261113
 SUMMARY:SCHEDULED APPLICATION STEP: University of Oslo\, PhD Research Fel
@@ -803,7 +32,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-4b6d624b3ab659bf@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261112
 DTEND;VALUE=DATE:20261113
 SUMMARY:SCHEDULED APPLICATION STEP: NTNU Gjovik\, Ph.D. Candidate in Rein
@@ -827,7 +56,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-d946736d8ff3a3d1@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261112
 DTEND;VALUE=DATE:20261113
 SUMMARY:SCHEDULED APPLICATION STEP: University of Bath URSA (Faculty of E
@@ -853,7 +82,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-fca00b890c33ae13@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261112
 DTEND;VALUE=DATE:20261113
 SUMMARY:SHARED PREPARATION TASK: IMPRS-IS closes 15 Nov AoE\; faculty mus
@@ -876,7 +105,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-238e9289d068afdc@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261113
 DTEND;VALUE=DATE:20261114
 SUMMARY:APPLICATION DEADLINE: Inria IROKO Montpellier — PhD Scientific 
@@ -908,7 +137,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-42987d46f4e55a58@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261113
 DTEND;VALUE=DATE:20261114
 SUMMARY:SCHEDULED APPLICATION STEP: University of British Columbia (Vanco
@@ -933,7 +162,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-4ca1f0cdb1c967b2@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261113
 DTEND;VALUE=DATE:20261114
 SUMMARY:SCHEDULED APPLICATION STEP: University of Sydney Research Trainin
@@ -958,7 +187,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-4d3f1a78919a8ef3@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261113
 DTEND;VALUE=DATE:20261114
 SUMMARY:SCHEDULED APPLICATION STEP: Southampton MSCA BlueOcean staff vaca
@@ -981,7 +210,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-51b9cf6bbca1ffd3@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261113
 DTEND;VALUE=DATE:20261114
 SUMMARY:APPLICATION DEADLINE: Southampton MSCA BlueOcean PhD Studentship\
@@ -1012,7 +241,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-5ed43fc7d2b831ab@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261113
 DTEND;VALUE=DATE:20261114
 SUMMARY:SCHEDULED APPLICATION STEP: York University - PhD Electrical Engi
@@ -1037,7 +266,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-66fd266824607338@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261113
 DTEND;VALUE=DATE:20261114
 SUMMARY:SCHEDULED APPLICATION STEP: Inria IROKO Montpellier — PhD Scien
@@ -1062,7 +291,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-9b54a4da67523b00@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261113
 DTEND;VALUE=DATE:20261114
 SUMMARY:SCHEDULED APPLICATION STEP: Southampton MSCA BlueOcean PhD Studen
@@ -1086,7 +315,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-9f9214ee0019f9f5@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261113
 DTEND;VALUE=DATE:20261114
 SUMMARY:SHARED PREPARATION TASK: NTNU 308639\, 310778\, 310363\, 310379\,
@@ -1109,7 +338,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-bd2f558ab1ceed68@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261113
 DTEND;VALUE=DATE:20261114
 SUMMARY:SCHEDULED APPLICATION STEP: UEA / ARIES NERC DTP studentships (en
@@ -1132,7 +361,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-c7e1f3a14f93f955@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261113
 DTEND;VALUE=DATE:20261114
 SUMMARY:SCHEDULED APPLICATION STEP: Saitama University ESITI - MEXT Schol
@@ -1155,7 +384,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-3547b65e633dfab7@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261114
 DTEND;VALUE=DATE:20261115
 SUMMARY:SCHEDULED APPLICATION STEP: TIB Hannover / Leibniz University —
@@ -1186,7 +415,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-daadc346479011f4@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261114
 DTEND;VALUE=DATE:20261115
 SUMMARY:APPLICATION DEADLINE: TIB Hannover / Leibniz University — Docto
@@ -1225,7 +454,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f4fc33527605357b@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261114
 DTEND;VALUE=DATE:20261115
 SUMMARY:SCHEDULED APPLICATION STEP: OsloMet PhD Fellow in Trustworthy Gen
@@ -1249,7 +478,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-020a2b372a8e63d5@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: McMaster University\, Computing and S
@@ -1274,7 +503,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-098c237cf30c6433@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: BMW RoboTac PhD World Models and Visu
@@ -1297,7 +526,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-0a010f458ddcec91@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: OIST Graduate School PhD\, May or Sep
@@ -1319,7 +548,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-0fe5640904a5fa65@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
@@ -1343,7 +572,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-16dbb2b87c8a1aaf@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: University of Bern\, Machine Learning
@@ -1366,7 +595,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-17dc3e8277822a5c@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:APPLICATION DEADLINE: TUM Autonomous Vehicle Systems (Johannes Be
@@ -1395,7 +624,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-222cdc46bc9bf432@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: SFU Engineering Science PhD (Fall 202
@@ -1421,7 +650,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-2386ea4f2f863424@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: ETH Zurich\, Prof George Haller (Nonl
@@ -1445,7 +674,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-29c62a34e33164ec@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:APPLICATION DEADLINE: Northeastern University London\, PhD studen
@@ -1476,7 +705,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-333ec63b90a37672@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:APPLICATION DEADLINE: International Max Planck Research School fo
@@ -1506,7 +735,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-3557c052cfe0f485@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: TUM PhD Mobile Manipulation for Human
@@ -1529,7 +758,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-483153f0d0da681c@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:APPLICATION DEADLINE: Institute of Science Tokyo\, International 
@@ -1561,7 +790,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-6228a6f0a482bc32@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:APPLICATION DEADLINE: University of Amsterdam / Ericsson\, PhD Cl
@@ -1591,7 +820,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-6666e0409dd12111@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: Glasgow Graduate School scholarships 
@@ -1616,7 +845,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-717cb69e4e6a67e8@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: ETH Zurich / PSI X-ray Imaging Profes
@@ -1640,7 +869,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-797321071abb740c@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
@@ -1663,7 +892,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-7f038c30d03fa7ec@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SHARED PREPARATION TASK: All four have 15 Nov deadlines\; confirm
@@ -1685,7 +914,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-80bf2912e8e5711e@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:APPLICATION DEADLINE: University of Birmingham\, Fully Funded PhD
@@ -1717,7 +946,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-81ff23acad5b29bf@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: ETH Zurich D-BSSE Basel (Prof Dagmar 
@@ -1741,7 +970,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-89f0e8f4cae77815@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: SFU Computing Science PhD (Fall 2027)
@@ -1765,7 +994,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-9aa3afa67c540294@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: Institute of Science Tokyo\, Internat
@@ -1789,7 +1018,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-9c1a3fd900da5100@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: Institute of Science Tokyo\, Internat
@@ -1811,7 +1040,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-a316bd24ce5227b0@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
@@ -1834,7 +1063,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-a6ac3faacf6f2f9d@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: ETH Zurich RobotX PhD Fellowship 2027
@@ -1856,7 +1085,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-ac6f3ada44bf4f08@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: ETH Zurich Soft Robotics Lab (Katzsch
@@ -1883,7 +1112,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-b7275b714b245a6b@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: University of Alberta\, Computing Sci
@@ -1908,7 +1137,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-beceeca5b1de60a7@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: NTNU PhD Candidate in Multispectral W
@@ -1930,7 +1159,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-ca963aa6538222b9@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:APPLICATION DEADLINE: University of Amsterdam\, PhD Accountable a
@@ -1961,7 +1190,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-dd5e8e19a490a6fa@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
@@ -1984,7 +1213,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-e1864fa184cdd000@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: ESA Networking/Partnering Initiative 
@@ -2010,7 +1239,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-e624cff69d2f82d8@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:APPLICATION DEADLINE: OIST Graduate School PhD\, May or Sep 2027 
@@ -2042,7 +1271,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-e65a78ead6b73212@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
@@ -2065,7 +1294,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-e83b9253de0b1785@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
@@ -2088,7 +1317,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-edb3b2504e9addfc@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:APPLICATION DEADLINE: BMW AI Robotics / RoboTac and TU/e Eindhove
@@ -2119,7 +1348,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f2a8d6d8c909cb30@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: ETH Zurich\, Julia Vogt (Medical Data
@@ -2144,7 +1373,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-fbd4bbeff44ab679@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:APPLICATION DEADLINE: TU Delft OPERA EU Project\, PhD Safe Planni
@@ -2176,7 +1405,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-fd8be329cb75bd78@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: IMPRS-IS Intelligent Systems PhD 2027
@@ -2198,7 +1427,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-ffe1c127dc32c2b1@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261115
 DTEND;VALUE=DATE:20261116
 SUMMARY:SCHEDULED APPLICATION STEP: UBC Computer Science PhD\, September 
@@ -2221,7 +1450,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-13cbd07c3959e82d@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261116
 DTEND;VALUE=DATE:20261117
 SUMMARY:SCHEDULED APPLICATION STEP: Saitama University ESITI - MEXT Schol
@@ -2245,7 +1474,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-158d3985c4ce4040@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261116
 DTEND;VALUE=DATE:20261117
 SUMMARY:SCHEDULED APPLICATION STEP: Oxford DPhil Engineering Science stud
@@ -2270,7 +1499,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-186c1ea205b92fc2@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261116
 DTEND;VALUE=DATE:20261117
 SUMMARY:SCHEDULED APPLICATION STEP: EPFL EDIC (Computer and Communication
@@ -2296,7 +1525,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-216eeb2ee0339896@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261116
 DTEND;VALUE=DATE:20261117
 SUMMARY:APPLICATION DEADLINE: AI4I + Politecnico di Torino\, funded PhD A
@@ -2327,7 +1556,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-306f9ac6688fc0e8@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261116
 DTEND;VALUE=DATE:20261117
 SUMMARY:APPLICATION DEADLINE: AI4I + Politecnico di Torino\, funded PhD A
@@ -2358,7 +1587,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-6eccffb8de2fe499@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261116
 DTEND;VALUE=DATE:20261117
 SUMMARY:SCHEDULED APPLICATION STEP: NTNU Gjovik\, Ph.D. Candidate in Rein
@@ -2380,7 +1609,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-86ce722058950848@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261116
 DTEND;VALUE=DATE:20261117
 SUMMARY:SCHEDULED APPLICATION STEP: EPFL EDIC (Computer and Communication
@@ -2405,7 +1634,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-91d9dbecb62e370c@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261116
 DTEND;VALUE=DATE:20261117
 SUMMARY:APPLICATION DEADLINE: NTNU Gjovik\, Ph.D. Candidate in Reinforcem
@@ -2434,7 +1663,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-be5b30cc8847e7ac@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261116
 DTEND;VALUE=DATE:20261117
 SUMMARY:SCHEDULED APPLICATION STEP: AI4I + Politecnico di Torino PhD Agen
@@ -2459,7 +1688,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-cd27557e7261a989@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261116
 DTEND;VALUE=DATE:20261117
 SUMMARY:APPLICATION DEADLINE: AI4I and Politecnico di Torino — PhD Trus
@@ -2494,7 +1723,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-d9da0c6576fb87f1@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261116
 DTEND;VALUE=DATE:20261117
 SUMMARY:SHARED PREPARATION TASK: AI4I / PoliTo System-1/System-2 Robotics
@@ -2518,7 +1747,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-e42e054ec68a2a89@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261116
 DTEND;VALUE=DATE:20261117
 SUMMARY:SCHEDULED APPLICATION STEP: AI4I and Politecnico di Torino — Ph
@@ -2546,7 +1775,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-3f33dc6fb2910a10@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261117
 DTEND;VALUE=DATE:20261118
 SUMMARY:APPLICATION DEADLINE: University of Oslo\, PhD Research Fellow in
@@ -2574,7 +1803,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-68e4158bb54f78d4@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261117
 DTEND;VALUE=DATE:20261118
 SUMMARY:SCHEDULED APPLICATION STEP: University of Oslo\, PhD Research Fel
@@ -2598,7 +1827,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-34fc5bc7c4061352@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261118
 DTEND;VALUE=DATE:20261119
 SUMMARY:SCHEDULED APPLICATION STEP: UiO Integreat PhD Research Fellow in 
@@ -2621,7 +1850,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-38f4a5fba12de559@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261118
 DTEND;VALUE=DATE:20261119
 SUMMARY:SCHEDULED APPLICATION STEP: OsloMet PhD Fellow in Trustworthy Gen
@@ -2646,7 +1875,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-4239e7d50b7fcd51@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261118
 DTEND;VALUE=DATE:20261119
 SUMMARY:SCHEDULED APPLICATION STEP: Oxford DPhil Engineering Science stud
@@ -2670,7 +1899,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-7b8cc34e02d78ef0@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261118
 DTEND;VALUE=DATE:20261119
 SUMMARY:SCHEDULED APPLICATION STEP: UiO Integreat PhD Research Fellow in 
@@ -2693,7 +1922,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-807b0c2653039677@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261118
 DTEND;VALUE=DATE:20261119
 SUMMARY:SCHEDULED APPLICATION STEP: UEA / Earlham Institute - Decoding an
@@ -2719,7 +1948,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-a689d6f19416097e@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261118
 DTEND;VALUE=DATE:20261119
 SUMMARY:APPLICATION DEADLINE: OsloMet PhD Fellow in Trustworthy Generativ
@@ -2751,7 +1980,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-b2fbf744bea65cea@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261118
 DTEND;VALUE=DATE:20261119
 SUMMARY:SCHEDULED APPLICATION STEP: OsloMet PhD Fellow in Trustworthy Gen
@@ -2776,7 +2005,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-bdf379c57aacb475@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261118
 DTEND;VALUE=DATE:20261119
 SUMMARY:SCHEDULED APPLICATION STEP: UiO Integreat PhD Research Fellow in 
@@ -2799,7 +2028,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-efaa400203e4ab32@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261118
 DTEND;VALUE=DATE:20261119
 SUMMARY:APPLICATION DEADLINE: UiO Integreat PhD Research Fellow in Struct
@@ -2828,7 +2057,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f62d7c2c8927c25b@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261118
 DTEND;VALUE=DATE:20261119
 SUMMARY:SCHEDULED APPLICATION STEP: UEA / Norwich Research Park Bioscienc
@@ -2854,7 +2083,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-0e540be9ce3edfcc@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261119
 DTEND;VALUE=DATE:20261120
 SUMMARY:SCHEDULED APPLICATION STEP: NTNU CAPTURE MSCA DN PhD in Colour an
@@ -2876,7 +2105,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-1dc99f2cb00fd9a7@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261119
 DTEND;VALUE=DATE:20261120
 SUMMARY:SCHEDULED APPLICATION STEP: NTNU CAPTURE MSCA DN PhD in Explainab
@@ -2899,7 +2128,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-39f9b929bf9de697@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261119
 DTEND;VALUE=DATE:20261120
 SUMMARY:SCHEDULED APPLICATION STEP: NTNU CAPTURE MSCA DN PhD in Colour an
@@ -2922,7 +2151,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-4e150106e626c1cd@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261119
 DTEND;VALUE=DATE:20261120
 SUMMARY:SCHEDULED APPLICATION STEP: University of Bristol UKRI CDT in Pra
@@ -2944,7 +2173,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-63014455647ecea9@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261119
 DTEND;VALUE=DATE:20261120
 SUMMARY:APPLICATION DEADLINE: NTNU CAPTURE MSCA DN PhD in Colour and Imag
@@ -2972,7 +2201,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-637fd382f47fae01@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261119
 DTEND;VALUE=DATE:20261120
 SUMMARY:APPLICATION DEADLINE: NTNU CAPTURE MSCA DN PhD in Explainable AI 
@@ -3000,7 +2229,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-8a09bb5a487fa330@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261119
 DTEND;VALUE=DATE:20261120
 SUMMARY:SCHEDULED APPLICATION STEP: NTNU CAPTURE MSCA DN PhD in Explainab
@@ -3023,7 +2252,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-8ab315dcf5d37b1e@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261119
 DTEND;VALUE=DATE:20261120
 SUMMARY:SCHEDULED APPLICATION STEP: NTNU CAPTURE MSCA DN PhD in Explainab
@@ -3046,7 +2275,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-c1a96511142ff356@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261119
 DTEND;VALUE=DATE:20261120
 SUMMARY:SCHEDULED APPLICATION STEP: NTNU CAPTURE MSCA DN PhD in Colour an
@@ -3069,7 +2298,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-ee69a0df57d57e44@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261119
 DTEND;VALUE=DATE:20261120
 SUMMARY:APPLICATION DEADLINE: NTNU PhD Candidate in Multispectral Wireles
@@ -3098,7 +2327,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f0acbb6963bd7c58@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261119
 DTEND;VALUE=DATE:20261120
 SUMMARY:SCHEDULED APPLICATION STEP: NTNU CAPTURE MSCA DN PhD in Explainab
@@ -3120,7 +2349,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f58a0747f446a708@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261119
 DTEND;VALUE=DATE:20261120
 SUMMARY:SCHEDULED APPLICATION STEP: NTNU PhD Candidate in Multispectral W
@@ -3143,7 +2372,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-1aafdd143d7f39da@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261120
 DTEND;VALUE=DATE:20261121
 SUMMARY:SCHEDULED APPLICATION STEP: Saitama University ESITI - MEXT Schol
@@ -3166,7 +2395,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-286a98e4f2ce840e@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261120
 DTEND;VALUE=DATE:20261121
 SUMMARY:SCHEDULED APPLICATION STEP: University of Oxford Intelligent Eart
@@ -3188,7 +2417,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-28f7e44b2997c96b@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261120
 DTEND;VALUE=DATE:20261121
 SUMMARY:SCHEDULED APPLICATION STEP: University of Toronto MIE\, CLIMB Lab
@@ -3212,7 +2441,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-37e9503fee4fa83b@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261120
 DTEND;VALUE=DATE:20261121
 SUMMARY:SCHEDULED APPLICATION STEP: York University - PhD Electrical Engi
@@ -3237,7 +2466,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-84f150b10c5696db@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261120
 DTEND;VALUE=DATE:20261121
 SUMMARY:SCHEDULED APPLICATION STEP: University of Edinburgh UKRI AI CDT i
@@ -3261,7 +2490,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-969446572349be14@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261120
 DTEND;VALUE=DATE:20261121
 SUMMARY:SCHEDULED APPLICATION STEP: Memorial University - PhD Engineering
@@ -3286,7 +2515,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-a3a442c1c9677cbc@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261120
 DTEND;VALUE=DATE:20261121
 SUMMARY:APPLICATION DEADLINE: University of Vienna — Two FWF-funded PhD
@@ -3318,7 +2547,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-a71dd7f5030b25a3@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261120
 DTEND;VALUE=DATE:20261121
 SUMMARY:SCHEDULED APPLICATION STEP: University of Vienna — Two FWF-fund
@@ -3344,7 +2573,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-b190f05dc7d13829@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261120
 DTEND;VALUE=DATE:20261121
 SUMMARY:SCHEDULED APPLICATION STEP: ETH Zurich RobotX PhD Fellowship 2027
@@ -3367,7 +2596,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-beedf2e9433e5451@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261120
 DTEND;VALUE=DATE:20261121
 SUMMARY:SCHEDULED APPLICATION STEP: EPFL LAMD (Neuchatel) - PhD position 
@@ -3393,7 +2622,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-c064f6a7cd522693@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261120
 DTEND;VALUE=DATE:20261121
 SUMMARY:SHARED PREPARATION TASK: Check each page for its parallel-applica
@@ -3416,7 +2645,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-c10475f4a1c98877@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261120
 DTEND;VALUE=DATE:20261121
 SUMMARY:SCHEDULED APPLICATION STEP: EPFL EDEE (Electrical Engineering) do
@@ -3440,7 +2669,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-d77f1a6023650074@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261120
 DTEND;VALUE=DATE:20261121
 SUMMARY:SCHEDULED APPLICATION STEP: University of Luxembourg YADIAS (IAS 
@@ -3464,7 +2693,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-e3145afd0fa6d64b@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261120
 DTEND;VALUE=DATE:20261121
 SUMMARY:SCHEDULED APPLICATION STEP: King's College London\, PhD in Human-
@@ -3488,7 +2717,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-e5c61954d192cb81@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261120
 DTEND;VALUE=DATE:20261121
 SUMMARY:SCHEDULED APPLICATION STEP: Inria ASTRA Paris — PhD Enforcing P
@@ -3514,7 +2743,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f991116cc4d52eda@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261120
 DTEND;VALUE=DATE:20261121
 SUMMARY:APPLICATION DEADLINE: Inria ASTRA Paris — PhD Enforcing Persist
@@ -3546,7 +2775,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-6de82ac3f9ce0b9d@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261121
 DTEND;VALUE=DATE:20261122
 SUMMARY:SCHEDULED APPLICATION STEP: TU/e + TUM Physics-Informed Cardiac M
@@ -3571,7 +2800,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-aa570b6c878f6441@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261121
 DTEND;VALUE=DATE:20261122
 SUMMARY:APPLICATION DEADLINE: TU/e Eindhoven + TUM\, PhD Physics-Informed
@@ -3602,7 +2831,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-3306508ad4d4d750@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261122
 DTEND;VALUE=DATE:20261123
 SUMMARY:APPLICATION DEADLINE: ETH Zurich\, Julia Vogt (Medical Data Scien
@@ -3634,7 +2863,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-6f8bf7ca0e2286ce@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261122
 DTEND;VALUE=DATE:20261123
 SUMMARY:SCHEDULED APPLICATION STEP: ETH Zurich Soft Robotics Lab (Katzsch
@@ -3661,7 +2890,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-9dcab2dc97e47502@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261122
 DTEND;VALUE=DATE:20261123
 SUMMARY:SCHEDULED APPLICATION STEP: Institute of Science Tokyo\, Internat
@@ -3684,7 +2913,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-a7482e119c0a5ec9@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261122
 DTEND;VALUE=DATE:20261123
 SUMMARY:SCHEDULED APPLICATION STEP: ETH Zurich\, Julia Vogt (Medical Data
@@ -3709,7 +2938,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-0b859839ab8041f2@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261123
 DTEND;VALUE=DATE:20261124
 SUMMARY:SCHEDULED APPLICATION STEP: University of Cyprus — V4RL SkEyes 
@@ -3733,7 +2962,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-56ded222aa7b0718@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261123
 DTEND;VALUE=DATE:20261124
 SUMMARY:APPLICATION DEADLINE: Université de Toulouse BEST / CNRS CROSSIN
@@ -3769,7 +2998,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-79a16c595b5a5cc0@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261123
 DTEND;VALUE=DATE:20261124
 SUMMARY:APPLICATION DEADLINE: University of Cyprus — V4RL SkEyes ERC fu
@@ -3798,7 +3027,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-dbf2f5995d32df9d@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261123
 DTEND;VALUE=DATE:20261124
 SUMMARY:SCHEDULED APPLICATION STEP: Université de Toulouse BEST / CNRS C
@@ -3826,7 +3055,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-0b97c0c5f00a032e@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261124
 DTEND;VALUE=DATE:20261125
 SUMMARY:APPLICATION DEADLINE: Linkoeping University CHASS\, PhD Optimal M
@@ -3854,7 +3083,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-2f2ba8cad2fb4b96@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261124
 DTEND;VALUE=DATE:20261125
 SUMMARY:SHARED PREPARATION TASK: LiU 24 Nov\; Aalborg 29 Nov\; Uppsala 30
@@ -3877,7 +3106,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-4104363cec721ef1@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261124
 DTEND;VALUE=DATE:20261125
 SUMMARY:APPLICATION DEADLINE: Nagoya University Graduate School of Inform
@@ -3910,7 +3139,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-7171cc9948b1208d@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261124
 DTEND;VALUE=DATE:20261125
 SUMMARY:SCHEDULED APPLICATION STEP: Nagoya University Graduate School of 
@@ -3935,7 +3164,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-7ab727acf374c693@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261124
 DTEND;VALUE=DATE:20261125
 SUMMARY:SCHEDULED APPLICATION STEP: Mila supervision request (up to three
@@ -3958,7 +3187,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-7b10f19c9d64fe34@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261124
 DTEND;VALUE=DATE:20261125
 SUMMARY:SCHEDULED APPLICATION STEP: Linkoeping University CHASS PhD Drone
@@ -3981,7 +3210,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-87f165db1ffc3d85@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261124
 DTEND;VALUE=DATE:20261125
 SUMMARY:SCHEDULED APPLICATION STEP: Nagoya University Graduate School of 
@@ -4007,7 +3236,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-a4a00819a22ff6e0@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261124
 DTEND;VALUE=DATE:20261125
 SUMMARY:SCHEDULED APPLICATION STEP: EPFL EDIC (Computer and Communication
@@ -4031,7 +3260,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-a94b2a4c7a3d8f2a@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261124
 DTEND;VALUE=DATE:20261125
 SUMMARY:SCHEDULED APPLICATION STEP: Nagoya University Graduate School of 
@@ -4058,7 +3287,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-bb4151e4345b90aa@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261124
 DTEND;VALUE=DATE:20261125
 SUMMARY:SCHEDULED APPLICATION STEP: Memorial University - PhD Engineering
@@ -4082,7 +3311,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-e50caee0a5e0b314@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261124
 DTEND;VALUE=DATE:20261125
 SUMMARY:SCHEDULED APPLICATION STEP: Nagoya University Graduate School of 
@@ -4108,7 +3337,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-e973c0ac79c90d36@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261124
 DTEND;VALUE=DATE:20261125
 SUMMARY:SCHEDULED APPLICATION STEP: Mila supervision request (up to three
@@ -4130,7 +3359,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-02c12d77ef311bc7@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261125
 DTEND;VALUE=DATE:20261126
 SUMMARY:SCHEDULED APPLICATION STEP: University of Bern\, Machine Learning
@@ -4153,7 +3382,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-0d3d577ea2373b96@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261125
 DTEND;VALUE=DATE:20261126
 SUMMARY:SCHEDULED APPLICATION STEP: York University - PhD Electrical Engi
@@ -4178,7 +3407,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-1f7dffe46a4748b6@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261125
 DTEND;VALUE=DATE:20261126
 SUMMARY:SCHEDULED APPLICATION STEP: ELLIS PhD Program\, 2026 call (admiss
@@ -4200,7 +3429,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-232ab9dca8922ae8@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261125
 DTEND;VALUE=DATE:20261126
 SUMMARY:SCHEDULED APPLICATION STEP: UEA / Norwich Research Park Bioscienc
@@ -4227,7 +3456,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-398d5702e2ec14f2@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261125
 DTEND;VALUE=DATE:20261126
 SUMMARY:SHARED PREPARATION TASK: All close between 1 and 15 Dec.
@@ -4249,7 +3478,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-568374a7542dc627@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261125
 DTEND;VALUE=DATE:20261126
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentships\, Mathe
@@ -4274,7 +3503,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-769dd0b2182dcd07@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261125
 DTEND;VALUE=DATE:20261126
 SUMMARY:SCHEDULED APPLICATION STEP: University of Bern\, Machine Learning
@@ -4297,7 +3526,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-89ca7e0f9069d19a@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261125
 DTEND;VALUE=DATE:20261126
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentships\, Depar
@@ -4322,7 +3551,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-c5b64ddf50418469@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261125
 DTEND;VALUE=DATE:20261126
 SUMMARY:SCHEDULED APPLICATION STEP: ELLIS PhD Program\, 2026 call (admiss
@@ -4346,7 +3575,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-e261f0b457e9f2ef@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261125
 DTEND;VALUE=DATE:20261126
 SUMMARY:SCHEDULED APPLICATION STEP: UEA / Earlham Institute - Decoding an
@@ -4372,7 +3601,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f91098cd91b18354@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261125
 DTEND;VALUE=DATE:20261126
 SUMMARY:SCHEDULED APPLICATION STEP: University of Edinburgh EPSRC Centre 
@@ -4397,7 +3626,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-fa21fd4bdaaf23cb@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261125
 DTEND;VALUE=DATE:20261126
 SUMMARY:SCHEDULED APPLICATION STEP: Gates Cambridge Scholarship (PhD\, 20
@@ -4420,7 +3649,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-04b3411c83ee2353@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261126
 DTEND;VALUE=DATE:20261127
 SUMMARY:SCHEDULED APPLICATION STEP: ETH Zurich RobotX PhD Fellowship 2027
@@ -4443,7 +3672,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-be056d3f8747fdbc@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261126
 DTEND;VALUE=DATE:20261127
 SUMMARY:SCHEDULED APPLICATION STEP: University of Bath URSA (Faculty of E
@@ -4468,7 +3697,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-0e0a51c81d765102@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261127
 DTEND;VALUE=DATE:20261128
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
@@ -4493,7 +3722,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-1c9b67f4473d56b7@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261127
 DTEND;VALUE=DATE:20261128
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
@@ -4517,7 +3746,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-21e56e05f4d9d46e@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261127
 DTEND;VALUE=DATE:20261128
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
@@ -4541,7 +3770,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-2d3b67aca71427dd@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261127
 DTEND;VALUE=DATE:20261128
 SUMMARY:SCHEDULED APPLICATION STEP: Saitama University ESITI - MEXT Schol
@@ -4564,7 +3793,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-4808962b99e75d89@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261127
 DTEND;VALUE=DATE:20261128
 SUMMARY:SCHEDULED APPLICATION STEP: Saitama University ESITI - MEXT Schol
@@ -4587,7 +3816,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-a22123f7737c2c13@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261127
 DTEND;VALUE=DATE:20261128
 SUMMARY:SCHEDULED APPLICATION STEP: EPFL LAMD (Neuchatel) - PhD position 
@@ -4611,7 +3840,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-a7770e87b73e85e8@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261127
 DTEND;VALUE=DATE:20261128
 SUMMARY:APPLICATION DEADLINE: ETH Zurich RobotX PhD Fellowship 2027
@@ -4640,7 +3869,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-b78020e4b8ae482c@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261127
 DTEND;VALUE=DATE:20261128
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
@@ -4664,7 +3893,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-d480a466016e7191@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261127
 DTEND;VALUE=DATE:20261128
 SUMMARY:SCHEDULED APPLICATION STEP: EPFL LAMD (Neuchatel) - PhD position 
@@ -4689,7 +3918,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-e1bf2419009227c7@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261127
 DTEND;VALUE=DATE:20261128
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
@@ -4713,7 +3942,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f3bf2dcc7a68b8e2@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261127
 DTEND;VALUE=DATE:20261128
 SUMMARY:SCHEDULED APPLICATION STEP: ETH Zurich Soft Robotics Lab (Katzsch
@@ -4741,7 +3970,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-fe94882b35f3218f@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261127
 DTEND;VALUE=DATE:20261128
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
@@ -4765,7 +3994,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-04ce4c5d4bdcc7f1@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261129
 DTEND;VALUE=DATE:20261130
 SUMMARY:SCHEDULED APPLICATION STEP: University of Bath URSA (Faculty of E
@@ -4790,7 +4019,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-1cb984f439877942@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261129
 DTEND;VALUE=DATE:20261130
 SUMMARY:APPLICATION DEADLINE: University of Bath URSA (Faculty of Enginee
@@ -4822,7 +4051,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-367a6a870773155a@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261129
 DTEND;VALUE=DATE:20261130
 SUMMARY:SCHEDULED APPLICATION STEP: University of Bath URSA (Faculty of E
@@ -4846,7 +4075,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-3dc01fbe39ff235d@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261129
 DTEND;VALUE=DATE:20261130
 SUMMARY:SCHEDULED APPLICATION STEP: University of Bamberg — Full-time d
@@ -4872,7 +4101,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-4282007d4d533892@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261129
 DTEND;VALUE=DATE:20261130
 SUMMARY:SCHEDULED APPLICATION STEP: Aalborg University ROX6G Multi-Robot 
@@ -4896,7 +4125,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-db4ba0dd56e7e332@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261129
 DTEND;VALUE=DATE:20261130
 SUMMARY:APPLICATION DEADLINE: University of Bamberg — Full-time doctora
@@ -4929,7 +4158,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-fa352e993c740398@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261129
 DTEND;VALUE=DATE:20261130
 SUMMARY:APPLICATION DEADLINE: Aalborg University ROX6G\, PhD Safe Multi-R
@@ -4959,7 +4188,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-0186029c335da1a6@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:APPLICATION DEADLINE: University of Bern\, Machine Learning in Me
@@ -4988,7 +4217,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-052f183f65bf4511@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: UEC Tokyo (Graduate School of Informa
@@ -5013,7 +4242,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-054ab6f27c67586b@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:APPLICATION DEADLINE: Uppsala University\, PhD Signal Processing:
@@ -5044,7 +4273,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-1bd1285aaadeac56@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:APPLICATION DEADLINE: Saitama University ESITI - MEXT Scholarship
@@ -5074,7 +4303,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-2793c6ed2b90f6d6@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: University of Luxembourg YADIAS (IAS 
@@ -5097,7 +4326,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-2e92eb901e1f2864@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: McGill University\, Electrical and Co
@@ -5120,7 +4349,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-319e47530fd78bb0@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:APPLICATION DEADLINE: ETH Zurich Soft Robotics Lab (Katzschmann):
@@ -5153,7 +4382,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-32c0f81ed36b42d7@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: University of Edinburgh UKRI AI CDT i
@@ -5177,7 +4406,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-3dfab45c3a3c7d1a@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: Toronto Metropolitan University\, Dr 
@@ -5201,7 +4430,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-45549b6d2751ed85@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: UEA / Norwich Research Park Bioscienc
@@ -5226,7 +4455,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-477032fa4ead497f@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: Cambridge Trust funding (Cambridge In
@@ -5250,7 +4479,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-5d8dcaaf71cc056a@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: Gates Cambridge Scholarship (PhD\, 20
@@ -5274,7 +4503,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-715856e19aa6b27f@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: ESA Networking/Partnering Initiative 
@@ -5298,7 +4527,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-719abcb5620cda92@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: UEA / Earlham Institute - Decoding an
@@ -5324,7 +4553,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-7384b8e78a6161c9@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: Victoria University of Wellington\, W
@@ -5349,7 +4578,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-7bd9acb369ef0cdf@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: McMaster University\, Computing and S
@@ -5374,7 +4603,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-7db7d5b2894e75a0@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:APPLICATION DEADLINE: University of Luxembourg YADIAS (IAS Young 
@@ -5405,7 +4634,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-8990066040ddd8d4@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: University of Alberta\, Computing Sci
@@ -5430,7 +4659,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-9774d50413815537@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: ESA Networking/Partnering Initiative 
@@ -5455,7 +4684,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-b016828521954fef@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: ESA Networking/Partnering Initiative 
@@ -5480,7 +4709,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-b39881830369f5ce@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: McGill University\, Electrical and Co
@@ -5503,7 +4732,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-b8737e68707de2ed@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: Uppsala University Wireless Spatial I
@@ -5527,7 +4756,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-c1929e4a8f7b313f@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:APPLICATION DEADLINE: EPFL LAMD (Neuchatel) - PhD position in Int
@@ -5559,7 +4788,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-c2e9ccdc63f3ea66@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:APPLICATION DEADLINE: University of Edinburgh UKRI AI CDT in Desi
@@ -5590,7 +4819,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-c8ac675262791fbd@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:APPLICATION DEADLINE: Inria MIND Palaiseau — PhD Pretrained Mul
@@ -5622,7 +4851,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-d034853f41994033@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: Cambridge Trust funding (Cambridge In
@@ -5645,7 +4874,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-d30f596927a2ea67@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: Toronto Metropolitan University\, Dr 
@@ -5670,7 +4899,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f75a949ff5168654@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:APPLICATION DEADLINE: UEA / Norwich Research Park Biosciences DTP
@@ -5703,7 +4932,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f7d00778c3c6de99@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:SCHEDULED APPLICATION STEP: Inria MIND Palaiseau — PhD Pretrain
@@ -5728,7 +4957,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-fb0f2643e4c334bf@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:APPLICATION DEADLINE: UEA / Earlham Institute - Decoding and Desi
@@ -5762,7 +4991,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-039db81ac5730af3@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:APPLICATION DEADLINE: EPFL EDEE (Electrical Engineering) doctoral
@@ -5791,7 +5020,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-0c7aed658c4811e4@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:PRIORITY REVIEW DATE (NOT FINAL): George Washington University 
@@ -5822,7 +5051,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-16b20bd4ae63600a@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:SCHEDULED APPLICATION STEP: Waterloo ECE PhD\, Stephen L. Smith (
@@ -5845,7 +5074,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-2753a09f1b90b30a@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:APPLICATION DEADLINE: Memorial University - PhD Engineering and A
@@ -5877,7 +5106,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-5524825a7738d371@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:APPLICATION DEADLINE: Max Planck School Biomedical AI (BMAI)\, fu
@@ -5906,7 +5135,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-56887574b6ee4e34@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:APPLICATION DEADLINE: University of Osaka\, Trans-Pacific Hub Gra
@@ -5939,7 +5168,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-5d6f448777294614@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:SCHEDULED APPLICATION STEP: York University - PhD Electrical Engi
@@ -5963,7 +5192,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-684915dd3930dc23@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:SCHEDULED APPLICATION STEP: SFU Engineering Science PhD (Fall 202
@@ -5988,7 +5217,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-6cdb72df88f2ad81@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:SCHEDULED APPLICATION STEP: Max Planck School Biomedical AI PhD 2
@@ -6011,7 +5240,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-933dc04df32e4eca@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:SCHEDULED APPLICATION STEP: EPFL EDEE (Electrical Engineering) do
@@ -6034,7 +5263,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-9d34455d23e47a7b@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:SCHEDULED APPLICATION STEP: Memorial University - PhD Engineering
@@ -6057,7 +5286,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-a47d09cc167b1373@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:APPLICATION DEADLINE: York University - PhD Electrical Engineerin
@@ -6088,7 +5317,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-b2e2c530edb88181@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:SCHEDULED APPLICATION STEP: SFU Computing Science PhD (Fall 2027)
@@ -6111,7 +5340,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-b4652115d82b187d@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:APPLICATION DEADLINE: Mila supervision request (up to three profe
@@ -6140,7 +5369,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-cf730f5609485cd0@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:SCHEDULED APPLICATION STEP: EPFL EDIC (Computer and Communication
@@ -6163,7 +5392,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-d0383f4c70900225@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:APPLICATION DEADLINE: EPFL EDIC (Computer and Communication Scien
@@ -6195,7 +5424,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-e3e3a860212cdc9f@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:APPLICATION DEADLINE: TU Delft / ING\, PhD AI for Software Reuse 
@@ -6226,7 +5455,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f8e33757f632839c@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:SHARED PREPARATION TASK: BMAI school formal deadline 1 Dec 23:59 
@@ -6249,7 +5478,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-023a137091a41dec@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261202
 DTEND;VALUE=DATE:20261203
 SUMMARY:SCHEDULED APPLICATION STEP: Oxford DPhil Engineering Science stud
@@ -6273,7 +5502,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-25c7d517bc34156b@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261202
 DTEND;VALUE=DATE:20261203
 SUMMARY:APPLICATION DEADLINE: Oxford DPhil Engineering Science studentshi
@@ -6304,7 +5533,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-4cfe2bcdc40a8846@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261202
 DTEND;VALUE=DATE:20261203
 SUMMARY:APPLICATION DEADLINE: Stanford Oceans — BluePEARL Lab PhD in Ro
@@ -6338,7 +5567,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-ecc603552f7490ff@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261202
 DTEND;VALUE=DATE:20261203
 SUMMARY:SCHEDULED APPLICATION STEP: Stanford Oceans — BluePEARL Lab PhD
@@ -6364,7 +5593,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-0308c7bc02e49d07@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261203
 DTEND;VALUE=DATE:20261204
 SUMMARY:SCHEDULED APPLICATION STEP: KTH Royal Institute of Technology —
@@ -6389,7 +5618,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-1cf1ac858b6b2d27@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261203
 DTEND;VALUE=DATE:20261204
 SUMMARY:APPLICATION DEADLINE: KTH Royal Institute of Technology — PhD A
@@ -6420,7 +5649,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-532087cc41277d1b@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261204
 DTEND;VALUE=DATE:20261205
 SUMMARY:SCHEDULED APPLICATION STEP: University of Oxford Intelligent Eart
@@ -6444,7 +5673,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-dcff0fa0aebf0aec@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261204
 DTEND;VALUE=DATE:20261205
 SUMMARY:SHARED PREPARATION TASK: Refereeing platforms usually need 2 to 3
@@ -6467,7 +5696,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-21ee81119a66cc02@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261205
 DTEND;VALUE=DATE:20261206
 SUMMARY:SCHEDULED APPLICATION STEP: University of Surrey fully funded PhD
@@ -6493,7 +5722,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-74c617a5934e0ab6@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261205
 DTEND;VALUE=DATE:20261206
 SUMMARY:SCHEDULED APPLICATION STEP: King's College London\, PhD in Human-
@@ -6517,7 +5746,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-116a6bb9f87d00c3@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:APPLICATION DEADLINE: Exeter EPSRC DLA studentship\, Sept 2027 en
@@ -6549,7 +5778,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-119ffe619505a0e3@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:APPLICATION DEADLINE: Exeter EPSRC DLA studentship\, Sept 2027 en
@@ -6580,7 +5809,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-1451816570cbeb30@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:APPLICATION DEADLINE: Cambridge Trust funding (Cambridge Internat
@@ -6609,7 +5838,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-149dd838dd886dac@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:APPLICATION DEADLINE: Exeter EPSRC DLA studentships\, Mathematics
@@ -6641,7 +5870,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-23bdaeea4fb8d51b@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:APPLICATION DEADLINE: University of Amsterdam AMLab\, multiple Ph
@@ -6672,7 +5901,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-2c9abc23d6aae0cf@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:SCHEDULED APPLICATION STEP: University of Alberta\, Computing Sci
@@ -6697,7 +5926,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-34de4fc928644ab2@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentships\, Depar
@@ -6722,7 +5951,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-35eb17c010076922@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:APPLICATION DEADLINE: Gates Cambridge Scholarship (PhD\, 2027/28 
@@ -6752,7 +5981,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-60b86c3b8992c937@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
@@ -6775,7 +6004,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-646d5e625c47c0ef@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:APPLICATION DEADLINE: Exeter EPSRC DLA studentship\, Sept 2027 en
@@ -6806,7 +6035,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-68c23bad6d670c84@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
@@ -6829,7 +6058,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-88bedee899c2974f@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
@@ -6852,7 +6081,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-a47a6917aa57d5dc@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:APPLICATION DEADLINE: Exeter EPSRC DLA studentship\, Sept 2027 en
@@ -6883,7 +6112,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-b3d4ade8e960dabb@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:APPLICATION DEADLINE: Exeter EPSRC DLA studentships\, Department 
@@ -6916,7 +6145,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-c0c300e8e8f4b6f8@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:APPLICATION DEADLINE: Exeter EPSRC DLA studentship\, Sept 2027 en
@@ -6947,7 +6176,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-cccae714614b99e2@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentships\, Mathe
@@ -6971,7 +6200,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-cf39cf58e6292e1b@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
@@ -6995,7 +6224,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-dd7d87d75ce506c7@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
@@ -7018,7 +6247,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-e72657da41b59fc1@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:APPLICATION DEADLINE: Exeter EPSRC DLA studentship\, Sept 2027 en
@@ -7049,7 +6278,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-e9fe1725a8b6e837@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:SCHEDULED APPLICATION STEP: Exeter EPSRC DLA studentship\, Sept 2
@@ -7072,7 +6301,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f6b698377f528f28@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261208
 DTEND;VALUE=DATE:20261209
 SUMMARY:APPLICATION DEADLINE: Exeter EPSRC DLA 2027\, Public Health and S
@@ -7103,7 +6332,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-0578889c09bc7f2a@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261210
 DTEND;VALUE=DATE:20261211
 SUMMARY:SCHEDULED APPLICATION STEP: University of Toronto MIE\, CLIMB Lab
@@ -7126,7 +6355,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-085d9f92b6e6b9da@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261210
 DTEND;VALUE=DATE:20261211
 SUMMARY:SCHEDULED APPLICATION STEP: SFU Engineering Science PhD (Fall 202
@@ -7151,7 +6380,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-1b6a55681c3eb67b@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261210
 DTEND;VALUE=DATE:20261211
 SUMMARY:SCHEDULED APPLICATION STEP: University of Surrey fully funded PhD
@@ -7176,7 +6405,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-34b9b109ca5195f5@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261210
 DTEND;VALUE=DATE:20261211
 SUMMARY:SCHEDULED APPLICATION STEP: Max Planck School Biomedical AI PhD 2
@@ -7199,7 +6428,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-56001187a0e211ea@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261210
 DTEND;VALUE=DATE:20261211
 SUMMARY:SCHEDULED APPLICATION STEP: UEA / ARIES NERC DTP studentships (en
@@ -7222,7 +6451,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-a470ac1a9ecee82a@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261210
 DTEND;VALUE=DATE:20261211
 SUMMARY:SCHEDULED APPLICATION STEP: University of Edinburgh EPSRC Centre 
@@ -7247,7 +6476,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-56fb75c8161198c2@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261211
 DTEND;VALUE=DATE:20261212
 SUMMARY:SCHEDULED APPLICATION STEP: University of Sydney Faculty of Engin
@@ -7272,7 +6501,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-d8cb2c341d68567a@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261211
 DTEND;VALUE=DATE:20261212
 SUMMARY:SCHEDULED APPLICATION STEP: University of Sydney Research Trainin
@@ -7296,7 +6525,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-55ba154f8bd20fdb@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261214
 DTEND;VALUE=DATE:20261215
 SUMMARY:APPLICATION DEADLINE: University of Edinburgh EPSRC Centre for Do
@@ -7328,7 +6557,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-067cbfe52b021170@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: EPFL EDRS (Robotics\, Control and Int
@@ -7352,7 +6581,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-0f28ad1883891cef@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:APPLICATION DEADLINE: McGill University School of Computer Scienc
@@ -7381,7 +6610,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-0fc746674f0b900b@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: McMaster University\, Computing and S
@@ -7406,7 +6635,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-1dbfb4e69d6586e6@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: Glasgow Graduate School scholarships 
@@ -7432,7 +6661,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-29f9f570e962929c@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: Glasgow Graduate School scholarships 
@@ -7457,7 +6686,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-3a8b5b5d8c10f6bf@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:APPLICATION DEADLINE: McGill University\, Electrical and Computer
@@ -7487,7 +6716,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-3f7de8738a5f2bf7@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: EPFL EDRS (Robotics\, Control and Int
@@ -7511,7 +6740,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-41e726da20261efd@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: Imperial College London President's P
@@ -7536,7 +6765,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-5cead17cb20c923d@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:APPLICATION DEADLINE: University of Alberta\, Computing Science P
@@ -7568,7 +6797,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-6154812f9082e508@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:APPLICATION DEADLINE: EPFL EDRS (Robotics\, Control and Intellige
@@ -7600,7 +6829,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-70882e9576bfef13@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: McGill University\, Electrical and Co
@@ -7624,7 +6853,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-7395be167fab4824@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: University of British Columbia (Vanco
@@ -7649,7 +6878,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-786b570344d7238f@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: UBC Computer Science PhD\, September 
@@ -7673,7 +6902,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-7ea59702f814050a@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: University of Toronto MIE\, CLIMB Lab
@@ -7696,7 +6925,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-83ff613972d299ff@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: SFU Computing Science PhD (Fall 2027)
@@ -7719,7 +6948,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-88f7cafb2e8fa849@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: Victoria University of Wellington\, W
@@ -7743,7 +6972,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-ac15fe00bde2cf59@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: University of Surrey (Vision\, Speech
@@ -7769,7 +6998,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-bc3ddc1676d70bb3@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: EPFL EDRS (Robotics\, Control and Int
@@ -7793,7 +7022,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-c6f7ca5d4925c3b2@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: Bristol PhD studentship\, learning an
@@ -7818,7 +7047,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-d20e11e70727213f@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: EPFL EDRS (Robotics\, Control and Int
@@ -7842,7 +7071,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-d589f5b46d9af611@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: EPFL EDRS (Robotics\, Control and Int
@@ -7867,7 +7096,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-edf6558616cdaccd@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:APPLICATION DEADLINE: UBC Computer Science PhD\, September 2027
@@ -7896,7 +7125,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-ff07c0ef037d33e3@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261215
 DTEND;VALUE=DATE:20261216
 SUMMARY:SCHEDULED APPLICATION STEP: Concordia Mechanical\, Industrial and
@@ -7921,7 +7150,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-68f7c52d15775455@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261216
 DTEND;VALUE=DATE:20261217
 SUMMARY:SCHEDULED APPLICATION STEP: UEA / ARIES NERC DTP studentships (en
@@ -7945,7 +7174,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-841d53bd5be46a27@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261216
 DTEND;VALUE=DATE:20261217
 SUMMARY:APPLICATION DEADLINE: UEA / ARIES NERC DTP studentships (entry 1 
@@ -7976,7 +7205,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-d9f5426ee828105b@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261216
 DTEND;VALUE=DATE:20261217
 SUMMARY:SCHEDULED APPLICATION STEP: UEA / ARIES NERC DTP studentships (en
@@ -8000,7 +7229,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-092530ab4e74cb61@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261218
 DTEND;VALUE=DATE:20261219
 SUMMARY:SCHEDULED APPLICATION STEP: University of Sydney Research Trainin
@@ -8025,7 +7254,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-15b4d28e985a84e5@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261218
 DTEND;VALUE=DATE:20261219
 SUMMARY:APPLICATION DEADLINE: University of Manchester — PDS Safe and M
@@ -8057,7 +7286,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-2a6f8c6def6a0dad@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261218
 DTEND;VALUE=DATE:20261219
 SUMMARY:SCHEDULED APPLICATION STEP: University of Sydney Faculty of Engin
@@ -8082,7 +7311,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-2b92a6edff37d4a6@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261218
 DTEND;VALUE=DATE:20261219
 SUMMARY:SCHEDULED APPLICATION STEP: University of Manchester President's 
@@ -8107,7 +7336,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-331f06491a7a788c@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261218
 DTEND;VALUE=DATE:20261219
 SUMMARY:SCHEDULED APPLICATION STEP: University of Sydney Research Trainin
@@ -8132,7 +7361,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-436d0282c2e1337b@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261218
 DTEND;VALUE=DATE:20261219
 SUMMARY:SCHEDULED APPLICATION STEP: University of Manchester President's 
@@ -8158,7 +7387,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-5d05402856116d5e@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261218
 DTEND;VALUE=DATE:20261219
 SUMMARY:APPLICATION DEADLINE: University of Manchester President's Doctor
@@ -8191,7 +7420,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-634d65025ec218ac@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261218
 DTEND;VALUE=DATE:20261219
 SUMMARY:SCHEDULED APPLICATION STEP: University of Manchester President's 
@@ -8216,7 +7445,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f14f680f34de47a7@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261218
 DTEND;VALUE=DATE:20261219
 SUMMARY:APPLICATION DEADLINE: University of Sydney Research Training Prog
@@ -8248,7 +7477,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f4aaf8fd5df774e6@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261218
 DTEND;VALUE=DATE:20261219
 SUMMARY:SCHEDULED APPLICATION STEP: University of Oxford Intelligent Eart
@@ -8272,7 +7501,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f6cabc76ffcdfebe@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261218
 DTEND;VALUE=DATE:20261219
 SUMMARY:SCHEDULED APPLICATION STEP: University of Manchester — PDS Safe
@@ -8299,7 +7528,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-fa5548947eaa7ad4@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261218
 DTEND;VALUE=DATE:20261219
 SUMMARY:SCHEDULED APPLICATION STEP: University of Melbourne MDHS graduate
@@ -8322,7 +7551,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-504692e26b6e0077@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261220
 DTEND;VALUE=DATE:20261221
 SUMMARY:SCHEDULED APPLICATION STEP: King's College London\, PhD in Human-
@@ -8345,7 +7574,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-80ef2583e7eaea2c@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261220
 DTEND;VALUE=DATE:20261221
 SUMMARY:SCHEDULED APPLICATION STEP: University of Surrey fully funded PhD
@@ -8371,7 +7600,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-886a72f4d36d348e@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261220
 DTEND;VALUE=DATE:20261221
 SUMMARY:SCHEDULED APPLICATION STEP: SFU Engineering Science PhD (Fall 202
@@ -8396,7 +7625,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-9a994f6e71ee9d3a@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261220
 DTEND;VALUE=DATE:20261221
 SUMMARY:SCHEDULED APPLICATION STEP: Waterloo ECE PhD\, Stephen L. Smith (
@@ -8420,7 +7649,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-ce3224f0e22d69e0@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261220
 DTEND;VALUE=DATE:20261221
 SUMMARY:APPLICATION DEADLINE: University of Surrey fully funded PhD: pred
@@ -8451,7 +7680,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-8da53c5e5ed32565@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20261224
 DTEND;VALUE=DATE:20261225
 SUMMARY:SCHEDULED APPLICATION STEP: Hokkaido University e3 MEXT Universit
@@ -8476,7 +7705,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-2e5d5111031be1f5@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270101
 DTEND;VALUE=DATE:20270102
 SUMMARY:SCHEDULED APPLICATION STEP: University of Toronto MIE\, CLIMB Lab
@@ -8498,7 +7727,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-0130a629c6f9604c@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270104
 DTEND;VALUE=DATE:20270105
 SUMMARY:SCHEDULED APPLICATION STEP: Toyohashi University of Technology In
@@ -8523,7 +7752,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-7b3f9283ac197f32@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270104
 DTEND;VALUE=DATE:20270105
 SUMMARY:APPLICATION DEADLINE: Toyohashi University of Technology Internat
@@ -8555,7 +7784,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-9cddf9df571651bd@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270104
 DTEND;VALUE=DATE:20270105
 SUMMARY:SCHEDULED APPLICATION STEP: Toyohashi University of Technology In
@@ -8581,7 +7810,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-d790a87edefffcb6@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270104
 DTEND;VALUE=DATE:20270105
 SUMMARY:SCHEDULED APPLICATION STEP: Imperial College London President's P
@@ -8605,7 +7834,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f58638a55104cf67@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270104
 DTEND;VALUE=DATE:20270105
 SUMMARY:SCHEDULED APPLICATION STEP: Toyohashi University of Technology In
@@ -8631,7 +7860,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-4414c7ed8c4cc660@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270106
 DTEND;VALUE=DATE:20270107
 SUMMARY:APPLICATION DEADLINE: University of Oxford Intelligent Earth CDT 
@@ -8660,7 +7889,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-549b36c9122dccdc@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270106
 DTEND;VALUE=DATE:20270107
 SUMMARY:SCHEDULED APPLICATION STEP: University of Oxford Intelligent Eart
@@ -8682,7 +7911,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-a33411d9512969d9@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270106
 DTEND;VALUE=DATE:20270107
 SUMMARY:SCHEDULED APPLICATION STEP: University of Oxford Intelligent Eart
@@ -8705,7 +7934,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-340c3f12e98ad407@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270107
 DTEND;VALUE=DATE:20270108
 SUMMARY:SCHEDULED APPLICATION STEP: Hokkaido University e3 MEXT Universit
@@ -8731,7 +7960,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-3c6fa2b81cb86df4@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270107
 DTEND;VALUE=DATE:20270108
 SUMMARY:SCHEDULED APPLICATION STEP: Hokkaido University e3 MEXT Universit
@@ -8755,7 +7984,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-4d25650eebc0fc78@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270107
 DTEND;VALUE=DATE:20270108
 SUMMARY:SCHEDULED APPLICATION STEP: University of Edinburgh EPSRC Centre 
@@ -8780,7 +8009,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-fda51537f5f6e9a5@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270107
 DTEND;VALUE=DATE:20270108
 SUMMARY:SCHEDULED APPLICATION STEP: University of Edinburgh EPSRC Centre 
@@ -8804,7 +8033,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-2f07e54d355f355e@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270108
 DTEND;VALUE=DATE:20270109
 SUMMARY:SCHEDULED APPLICATION STEP: UEC Tokyo (Graduate School of Informa
@@ -8829,7 +8058,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-428ea7b742e4de76@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270108
 DTEND;VALUE=DATE:20270109
 SUMMARY:APPLICATION DEADLINE: UCL 50 fully funded 4-year EPSRC PhD studen
@@ -8859,7 +8088,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-5fec31f936457f57@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270108
 DTEND;VALUE=DATE:20270109
 SUMMARY:SCHEDULED APPLICATION STEP: SFU Engineering Science PhD (Fall 202
@@ -8883,7 +8112,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-7dd4508e14ea97ec@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270108
 DTEND;VALUE=DATE:20270109
 SUMMARY:SCHEDULED APPLICATION STEP: UEC Tokyo (Graduate School of Informa
@@ -8909,7 +8138,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-8f67fd4076e5d684@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270108
 DTEND;VALUE=DATE:20270109
 SUMMARY:SCHEDULED APPLICATION STEP: SFU Engineering Science PhD (Fall 202
@@ -8933,7 +8162,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-d7599ccc1682cbbc@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270108
 DTEND;VALUE=DATE:20270109
 SUMMARY:SHARED PREPARATION TASK: UEC route only.
@@ -8953,7 +8182,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-dab0457387e77eb4@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270108
 DTEND;VALUE=DATE:20270109
 SUMMARY:SCHEDULED APPLICATION STEP: King's College London\, PhD in Human-
@@ -8977,7 +8206,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f7a0945d737922d6@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270110
 DTEND;VALUE=DATE:20270111
 SUMMARY:SCHEDULED APPLICATION STEP: University of Surrey (Vision\, Speech
@@ -9002,7 +8231,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-0636839b0e0f823e@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270111
 DTEND;VALUE=DATE:20270112
 SUMMARY:APPLICATION DEADLINE: King's College London\, PhD in Human-Robot 
@@ -9031,7 +8260,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-da419e6ef4456d88@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270111
 DTEND;VALUE=DATE:20270112
 SUMMARY:SCHEDULED APPLICATION STEP: Imperial College London President's P
@@ -9058,7 +8287,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-e6bdcedb0535e88e@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270111
 DTEND;VALUE=DATE:20270112
 SUMMARY:APPLICATION DEADLINE: Imperial College London President's PhD Sch
@@ -9091,7 +8320,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f82b425649a2b350@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270111
 DTEND;VALUE=DATE:20270112
 SUMMARY:SCHEDULED APPLICATION STEP: Imperial College London President's P
@@ -9116,7 +8345,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-1679806148e02b97@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270112
 DTEND;VALUE=DATE:20270113
 SUMMARY:SCHEDULED APPLICATION STEP: SFU Computing Science PhD (Fall 2027)
@@ -9138,7 +8367,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-c7c2f3d1bbb0578f@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270112
 DTEND;VALUE=DATE:20270113
 SUMMARY:SCHEDULED APPLICATION STEP: SFU Computing Science PhD (Fall 2027)
@@ -9162,7 +8391,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-004c1fa1fcf052e7@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:SCHEDULED APPLICATION STEP: University of Toronto UTIAS (Aerospac
@@ -9187,7 +8416,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-06a97cda794f732d@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:APPLICATION DEADLINE: University of Toronto MIE\, CLIMB Lab (Pakp
@@ -9217,7 +8446,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-07c680cc469bf15a@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:APPLICATION DEADLINE: Waterloo ECE PhD\, Stephen L. Smith (Autono
@@ -9247,7 +8476,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-1cea4824e2c6b234@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:APPLICATION DEADLINE: University of Amsterdam EVELYN\, 2 PhDs AI 
@@ -9278,7 +8507,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-2710ae0f24974a91@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:APPLICATION DEADLINE: University of British Columbia (Vancouver) 
@@ -9310,7 +8539,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-4788d6354be13b94@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:PRIORITY REVIEW DATE (NOT FINAL): ETH Zurich IDEAL Lab — Doctor
@@ -9342,7 +8571,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-495a61adb0fa0d1e@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:SCHEDULED APPLICATION STEP: Waterloo ECE PhD\, Stephen L. Smith (
@@ -9365,7 +8594,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-639f4193c6e6fd99@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:SCHEDULED APPLICATION STEP: University of British Columbia (Vanco
@@ -9390,7 +8619,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-7e3f26ea90559bee@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:SCHEDULED APPLICATION STEP: University of Alberta\, Computing Sci
@@ -9415,7 +8644,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-847e2485dbf35abf@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:SCHEDULED APPLICATION STEP: Waterloo ECE PhD\, Stephen L. Smith (
@@ -9438,7 +8667,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-8512f12fa6b2d4ad@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:SCHEDULED APPLICATION STEP: University of Toronto MIE\, CLIMB Lab
@@ -9462,7 +8691,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-8a366aaac4d019e5@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:APPLICATION DEADLINE: University of Warwick Biomedical AI PhD (jo
@@ -9489,7 +8718,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-92e7b85e16cdc608@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:APPLICATION DEADLINE: University of Toronto UTIAS (Aerospace Stud
@@ -9523,7 +8752,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-9b37ab64b539e71f@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:SCHEDULED APPLICATION STEP: University of Toronto UTIAS (Aerospac
@@ -9550,7 +8779,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-ac8bdcd4eb60960f@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:APPLICATION DEADLINE: SFU Engineering Science PhD (Fall 2027)
@@ -9582,7 +8811,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-c81d43ad172d62ae@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:SCHEDULED APPLICATION STEP: University of Toronto UTIAS (Aerospac
@@ -9608,7 +8837,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-d30c9e773e3d6411@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:SCHEDULED APPLICATION STEP: University of Amsterdam EVELYN AI for
@@ -9633,7 +8862,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f1592718777c127d@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:SCHEDULED APPLICATION STEP: Bristol PhD studentship\, learning an
@@ -9658,7 +8887,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-fb9cddafc3dd16cb@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270115
 DTEND;VALUE=DATE:20270116
 SUMMARY:SCHEDULED APPLICATION STEP: University of Toronto UTIAS (Aerospac
@@ -9683,7 +8912,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-47ba2f5e2d677b84@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270117
 DTEND;VALUE=DATE:20270118
 SUMMARY:APPLICATION DEADLINE: University of Surrey (Vision\, Speech and S
@@ -9714,7 +8943,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-c9505307d8d06aa8@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270118
 DTEND;VALUE=DATE:20270119
 SUMMARY:SCHEDULED APPLICATION STEP: OIST Graduate School PhD\, May or Sep
@@ -9737,7 +8966,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-8d3a0b27160da183@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270119
 DTEND;VALUE=DATE:20270120
 SUMMARY:APPLICATION DEADLINE: Durham University: Efficient Physical AI fo
@@ -9766,7 +8995,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-e203ccc5c236e9c6@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270119
 DTEND;VALUE=DATE:20270120
 SUMMARY:APPLICATION DEADLINE: SFU Computing Science PhD (Fall 2027)
@@ -9797,7 +9026,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-1268573d86964d91@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270120
 DTEND;VALUE=DATE:20270121
 SUMMARY:APPLICATION DEADLINE: NAIST doctoral course (Information Science)
@@ -9830,7 +9059,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-2063430f436ba381@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270120
 DTEND;VALUE=DATE:20270121
 SUMMARY:SCHEDULED APPLICATION STEP: NAIST doctoral course (Information Sc
@@ -9855,7 +9084,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-4315dd35a4fbf6ff@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270120
 DTEND;VALUE=DATE:20270121
 SUMMARY:SCHEDULED APPLICATION STEP: NAIST doctoral course (Information Sc
@@ -9882,7 +9111,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-a41675b683b49e28@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270120
 DTEND;VALUE=DATE:20270121
 SUMMARY:SCHEDULED APPLICATION STEP: NAIST doctoral course (Information Sc
@@ -9909,7 +9138,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-b8db57f94abe6757@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270120
 DTEND;VALUE=DATE:20270121
 SUMMARY:SCHEDULED APPLICATION STEP: NAIST doctoral course (Information Sc
@@ -9934,7 +9163,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-b0a8ee6de3e6cb3c@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270122
 DTEND;VALUE=DATE:20270123
 SUMMARY:SCHEDULED APPLICATION STEP: University of Tokyo Graduate School o
@@ -9959,7 +9188,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-bc0486eaeb5694cb@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270122
 DTEND;VALUE=DATE:20270123
 SUMMARY:SCHEDULED APPLICATION STEP: University of Tokyo Graduate School o
@@ -9985,7 +9214,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-cc923d514cba7d72@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270122
 DTEND;VALUE=DATE:20270123
 SUMMARY:APPLICATION DEADLINE: University of Tokyo Graduate School of Fron
@@ -10014,7 +9243,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-2a4533ad342cdb31@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270124
 DTEND;VALUE=DATE:20270125
 SUMMARY:SCHEDULED APPLICATION STEP: Glasgow Graduate School scholarships 
@@ -10040,7 +9269,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-b2fce59a52ad738b@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270124
 DTEND;VALUE=DATE:20270125
 SUMMARY:SCHEDULED APPLICATION STEP: Bristol PhD studentship\, learning an
@@ -10066,7 +9295,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-ee9ae3a6d2352df5@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270125
 DTEND;VALUE=DATE:20270126
 SUMMARY:APPLICATION DEADLINE: University of West London\, AI optimisation
@@ -10097,7 +9326,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-003d5972f79bdf2e@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270131
 DTEND;VALUE=DATE:20270201
 SUMMARY:SCHEDULED APPLICATION STEP: Bristol PhD studentship\, learning an
@@ -10121,7 +9350,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-34d0b413f975269a@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270131
 DTEND;VALUE=DATE:20270201
 SUMMARY:SCHEDULED APPLICATION STEP: Concordia Mechanical\, Industrial and
@@ -10146,7 +9375,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-4b3a27b4786188d4@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270131
 DTEND;VALUE=DATE:20270201
 SUMMARY:APPLICATION DEADLINE: Bristol PhD studentship\, learning and deci
@@ -10177,7 +9406,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-724d9341fd640ad4@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270131
 DTEND;VALUE=DATE:20270201
 SUMMARY:SCHEDULED APPLICATION STEP: University of British Columbia (Vanco
@@ -10202,7 +9431,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-858857b0acaac8e1@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270131
 DTEND;VALUE=DATE:20270201
 SUMMARY:APPLICATION DEADLINE: Glasgow Graduate School scholarships (Colle
@@ -10234,7 +9463,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-8bf1a9cb79b2bcd5@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270131
 DTEND;VALUE=DATE:20270201
 SUMMARY:SCHEDULED APPLICATION STEP: Glasgow Graduate School scholarships 
@@ -10258,7 +9487,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-d8a9bfbd827b5b24@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270131
 DTEND;VALUE=DATE:20270201
 SUMMARY:SCHEDULED APPLICATION STEP: McMaster University\, Computing and S
@@ -10283,7 +9512,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-860df3db60bc15b2@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270201
 DTEND;VALUE=DATE:20270202
 SUMMARY:SCHEDULED APPLICATION STEP: Victoria University of Wellington\, W
@@ -10307,7 +9536,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-15396d11c4e8dfd0@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270205
 DTEND;VALUE=DATE:20270206
 SUMMARY:SCHEDULED APPLICATION STEP: Hokkaido University e3 MEXT Universit
@@ -10332,7 +9561,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-8bf4702b0a81e755@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270215
 DTEND;VALUE=DATE:20270216
 SUMMARY:SCHEDULED APPLICATION STEP: Concordia Mechanical\, Industrial and
@@ -10357,7 +9586,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-cb7619674a70ead7@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270215
 DTEND;VALUE=DATE:20270216
 SUMMARY:SCHEDULED APPLICATION STEP: Victoria University of Wellington\, W
@@ -10382,7 +9611,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-e34c01a09babe59f@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270215
 DTEND;VALUE=DATE:20270216
 SUMMARY:SCHEDULED APPLICATION STEP: McMaster University\, Computing and S
@@ -10406,7 +9635,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-263e7011cacbf88f@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270228
 DTEND;VALUE=DATE:20270301
 SUMMARY:SCHEDULED APPLICATION STEP: Monash Graduate Scholarship (stipend)
@@ -10432,7 +9661,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-51d1651043d04150@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270228
 DTEND;VALUE=DATE:20270301
 SUMMARY:APPLICATION DEADLINE: Monash Graduate Scholarship (stipend) plus 
@@ -10464,7 +9693,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-aeaeb4db9726115b@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270228
 DTEND;VALUE=DATE:20270301
 SUMMARY:SCHEDULED APPLICATION STEP: Monash Graduate Scholarship (stipend)
@@ -10489,7 +9718,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-cf0ef467fbd557d4@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270228
 DTEND;VALUE=DATE:20270301
 SUMMARY:APPLICATION DEADLINE: McMaster University\, Computing and Softwar
@@ -10521,7 +9750,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-e8ed719508af9756@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270228
 DTEND;VALUE=DATE:20270301
 SUMMARY:SCHEDULED APPLICATION STEP: Monash Graduate Scholarship (stipend)
@@ -10548,7 +9777,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-3cc60dabed702aab@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270301
 DTEND;VALUE=DATE:20270302
 SUMMARY:SCHEDULED APPLICATION STEP: Concordia Mechanical\, Industrial and
@@ -10572,7 +9801,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-5b5b30f0b1d94aca@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270301
 DTEND;VALUE=DATE:20270302
 SUMMARY:SCHEDULED APPLICATION STEP: Victoria University of Wellington\, W
@@ -10596,7 +9825,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-f86db23138c8d631@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270301
 DTEND;VALUE=DATE:20270302
 SUMMARY:APPLICATION DEADLINE: Victoria University of Wellington\, Welling
@@ -10628,7 +9857,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-fe8de9df956d980d@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270301
 DTEND;VALUE=DATE:20270302
 SUMMARY:PRIORITY REVIEW DATE (NOT FINAL): Concordia Mechanical\, Industri
@@ -10660,7 +9889,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:tsk-004fa00dafe36919@phd-tracker.local
-DTSTAMP:20261110T000000Z
+DTSTAMP:20261111T000000Z
 DTSTART;VALUE=DATE:20270303
 DTEND;VALUE=DATE:20270304
 SUMMARY:SCHEDULED APPLICATION STEP: Institute of Science Tokyo\, Internat

@@ -2,6 +2,245 @@
   "schema_version": 1,
   "papers": [
     {
+      "id": "arxiv:2611.13528",
+      "title": "GEMOR-GS: Global Extrinsic-calibration-refined Mapping and Online Relocalization for 3D Gaussian-Splatting SLAM",
+      "authors": [
+        "Yuchen Yang",
+        "Ming Ding",
+        "Xinyu Wu",
+        "Hesheng Wang"
+      ],
+      "abstract_excerpt": "Photorealistic and metrically consistent world representations are a primary requirement for LiDAR--inertial--visual SLAM systems that serve robots over continuous operation. 3D Gaussian splatting makes such representations attainable by supplying an explicit, renderable, and queryable scene model. We present GEMOR-GS (Global Extrinsic-calibration-refined Mapping and Online Relocalization for 3D Gaussian-Splatting SLAM) to make the Gaussian map geometrically accurate, globally refined, and re-enterable, providing a better appearance for robot perception and decision-making.",
+      "paper_url": "https://arxiv.org/abs/2611.13528",
+      "published": "2026-11-10",
+      "topic": "slam",
+      "relevance_score": 22,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-11T11:57:14+00:00",
+      "first_seen": "2026-11-11T11:57:14+00:00",
+      "last_seen": "2026-11-11T11:57:14+00:00"
+    },
+    {
+      "id": "arxiv:2611.14048",
+      "title": "LaST0.5: A Generalist World Action Model with Interaction-Centric Latent Reasoning",
+      "authors": [
+        "Xuheng Zhang",
+        "Yiming Zhang",
+        "Jialin Gao",
+        "Hao Chen",
+        "Jiaming Liu",
+        "Ji Li",
+        "Runzhong Huang",
+        "Yinxi Wang",
+        "Chenyang Gu",
+        "Zihan Yang",
+        "Yaowei Liu",
+        "Zhonghao Yan",
+        "Ziyu Guo",
+        "Renrui Zhang"
+      ],
+      "abstract_excerpt": "World Action Models (WAMs) have recently emerged as a promising paradigm for robotic manipulation, endowing policies with strong capabilities for modeling temporal and physical dynamics. Existing WAMs, encompassing both video-first action prediction and joint video-action modeling, directly transfer global physical representations from world models to action generation. However, global scene representations may underemphasize local robot-object interactions, creating a mismatch between representations optimized for world evolution and those required for manipulation. To bri",
+      "paper_url": "https://arxiv.org/abs/2611.14048",
+      "published": "2026-11-10",
+      "topic": "robot_learning",
+      "relevance_score": 12,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-11T11:57:14+00:00",
+      "first_seen": "2026-11-11T11:57:14+00:00",
+      "last_seen": "2026-11-11T11:57:14+00:00"
+    },
+    {
+      "id": "arxiv:2611.14115",
+      "title": "LEASH: Stay Safe in Agentic Robotics",
+      "authors": [
+        "Qinfeng Zhu",
+        "Weiguang Zhao",
+        "Ke Sun",
+        "Xihao Guo",
+        "Yunxi Jiang",
+        "Rui Zhang",
+        "Lei Fan",
+        "Kaizhu Huang"
+      ],
+      "abstract_excerpt": "Foundation models such as GPT and Claude have shown strong capabilities in spatial understanding and embodied intelligence. These advances make agentic robotics a promising path toward artificial general intelligence in robotics. However, we find that using foundation models to control robots poses serious safety risks, and comprehensive safety evaluation is still lacking. We introduce RoboRisk, a comprehensive benchmark for evaluating safety in agentic robotics. Its 92 simulated tasks and 13 physical-robot tasks fall into five categories: Task-level Refusal (T), Plan Repai",
+      "paper_url": "https://arxiv.org/abs/2611.14115",
+      "published": "2026-11-10",
+      "topic": "robot_learning",
+      "relevance_score": 10,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-11T11:57:14+00:00",
+      "first_seen": "2026-11-11T11:57:14+00:00",
+      "last_seen": "2026-11-11T11:57:14+00:00"
+    },
+    {
+      "id": "arxiv:2611.14186",
+      "title": "Koopman Model-Based Reinforcement Learning",
+      "authors": [
+        "Wenjian Hao",
+        "Paulo C. Heredia",
+        "Shaoshuai Mou"
+      ],
+      "abstract_excerpt": "We propose a Koopman model-based reinforcement learning (K-MBRL) algorithm for controlling nonlinear robotic systems with unknown dynamics. The K-MBRL learns a control policy by minimizing an approximate policy objective that combines the analytical immediate cost with an estimate of the future cost evaluated at the one-step predicted state. To this end, we develop a stochastic Koopman operator-based learning method to approximate the unknown nonlinear dynamics in a linear representation, while a critic function estimates the remaining future cost. This formulation offers t",
+      "paper_url": "https://arxiv.org/abs/2611.14186",
+      "published": "2026-11-10",
+      "topic": "robot_learning",
+      "relevance_score": 8,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-11T11:57:14+00:00",
+      "first_seen": "2026-11-11T11:57:14+00:00",
+      "last_seen": "2026-11-11T11:57:14+00:00"
+    },
+    {
+      "id": "arxiv:2611.14111",
+      "title": "Model-Free Runtime Measurement of Task-Relevant Information",
+      "authors": [
+        "Dimitris Panagopoulos",
+        "Adolfo Perrusquía",
+        "Yang Xing",
+        "Weisi Guo"
+      ],
+      "abstract_excerpt": "Autonomous systems increasingly monitor physical kinematics, environmental states and task completion outcomes. While existing work provides methods to plan information seeking actions and interpret acquired observations, current approaches do not monitor whether the live process of information gathering is functioning properly. Consequently, such systems can remain operationally active without resolving outstanding mission requirements. To address this limitation, we introduce Acquisition-State Telemetry (AST), a model free architecture that evaluates ongoing information a",
+      "paper_url": "https://arxiv.org/abs/2611.14111",
+      "published": "2026-11-10",
+      "topic": "robot_learning",
+      "relevance_score": 8,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-11T11:57:14+00:00",
+      "first_seen": "2026-11-11T11:57:14+00:00",
+      "last_seen": "2026-11-11T11:57:14+00:00"
+    },
+    {
+      "id": "arxiv:2611.14025",
+      "title": "HiPFuse: Real-Time LiDAR Semantic Segmentation for Robotic Perception on Edge Devices",
+      "authors": [
+        "Haiyang Wu",
+        "George Vosselman",
+        "Ville Lehtola"
+      ],
+      "abstract_excerpt": "Real-time robotic perception requires accurate LiDAR semantics under limited resources. Bird's-eye-view (BEV) aggregation is efficient but can mix differently labeled surfaces in columns. We present HiPFuse, a point-BEV fusion framework that exchanges point and height-partitioned BEV features across horizontal scales, combining point-wise detail with 2D spatial context from one LiDAR scan. Fixed height assignments preserve separate vertical aggregation groups, with auxiliary supervision of initial BEV features using targets from the same 3D cells. A dual-scale BEV context m",
+      "paper_url": "https://arxiv.org/abs/2611.14025",
+      "published": "2026-11-10",
+      "topic": "robot_learning",
+      "relevance_score": 8,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-11T11:57:14+00:00",
+      "first_seen": "2026-11-11T11:57:14+00:00",
+      "last_seen": "2026-11-11T11:57:14+00:00"
+    },
+    {
+      "id": "arxiv:2611.14062",
+      "title": "A human-in-the-loop Control Paradigm for Construction Robotics: From VR-Guided Teleoperation to Semi-Autonomous Dual-Arm Operation",
+      "authors": [
+        "Jinhua Chen",
+        "Xiaoji Xu",
+        "Zhongyuan Liao",
+        "Huang Zhenmin",
+        "Zhang Ye",
+        "Changying Xiang"
+      ],
+      "abstract_excerpt": "Construction tasks in hazardous and unstructured environments require both human adaptability and robotic precision, yet existing approaches often treat teleoperation and autonomy as separate control modes. This paper presents a human-in-the-loop control paradigm that enables structured transitions among VR-guided teleoperation, semi-autonomous shared control, and rule-based autonomous execution for contact-rich dual-arm construction tasks. The proposed system combines immersive VR guidance, a manually defined library of reusable skill primitives, and a shared-autonomy fram",
+      "paper_url": "https://arxiv.org/abs/2611.14062",
+      "published": "2026-11-10",
+      "topic": "robot_learning",
+      "relevance_score": 6,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-11T11:57:14+00:00",
+      "first_seen": "2026-11-11T11:57:14+00:00",
+      "last_seen": "2026-11-11T11:57:14+00:00"
+    },
+    {
+      "id": "arxiv:2611.13983",
+      "title": "Optimization-Based Path Planning for Industrial Manipulators: Experimental Validation in Additive Manufacturing",
+      "authors": [
+        "Shiva Ganesh Murali",
+        "Valentin Bhend",
+        "Deepak Ingole",
+        "Gabriele Fadini",
+        "Alisa Rupenyan"
+      ],
+      "abstract_excerpt": "Robotic additive manufacturing requires joint paths that reconcile robot feasibility with process-specific geometry. We develop an offline optimization-based path planner that combines joint-path regularity and self-collision penalties with process costs and constraints, so that a new process enters through its own reference, residuals, and tolerances. Full-path and boundary-coupled chunked optimization handle references of different lengths. Iterative Weight Tuning (IWT) determines the cost weights from the gaps between Key Performance Indicators (KPIs) and their targets. ",
+      "paper_url": "https://arxiv.org/abs/2611.13983",
+      "published": "2026-11-10",
+      "topic": "robot_learning",
+      "relevance_score": 6,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-11T11:57:14+00:00",
+      "first_seen": "2026-11-11T11:57:14+00:00",
+      "last_seen": "2026-11-11T11:57:14+00:00"
+    },
+    {
+      "id": "arxiv:2611.14060",
+      "title": "Where Do Vision-Language Models Get Left and Right? Position-Code Counterfactuals in Qwen2.5-VL, Qwen3-VL and InternVL3",
+      "authors": [
+        "Enhao Cui",
+        "Junzhi Yang",
+        "Yaoshun Lin",
+        "Yuhan Feng",
+        "Zijian Chen"
+      ],
+      "abstract_excerpt": "A vision-language model may take left-right direction from the orientation of image content within patches, its vision transformer's (ViT) position code, or token positions and order in its language model (LLM). Ablations show the ViT code is necessary; we test sufficiency by mirroring only a position code. In Qwen2.5-VL-7B, Qwen3-VL-4B and InternVL3-2B, mirroring ViT width positions reproduces the flipped-image answer on 84.3-93.2% of CV-Bench left-right questions (Qwen2.5-VL-3B: 87.5%, partly a left fallback). With two options, this also counts disruption; a half-grid shi",
+      "paper_url": "https://arxiv.org/abs/2611.14060",
+      "published": "2026-11-10",
+      "topic": "medical_ai",
+      "relevance_score": 5,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-11T11:57:14+00:00",
+      "first_seen": "2026-11-11T11:57:14+00:00",
+      "last_seen": "2026-11-11T11:57:14+00:00"
+    },
+    {
+      "id": "arxiv:2611.13971",
+      "title": "TransGHOST: Real-Time, Synthesis-Free Reconstruction of Instrument-Occluded Regions in Ophthalmic Microsurgery",
+      "authors": [
+        "Niran Nataraj",
+        "Maina Sogabe",
+        "Masamichi Yamashita",
+        "Norihiko Ito",
+        "Kenji Kawashima"
+      ],
+      "abstract_excerpt": "Intraoperative scene perception in ophthalmic microsurgery is limited by instrument occlusion: when a tool enters the high-magnification field, it conceals tissue from both the surgeon and the perception components of robot-assisted systems that process the video. Generative inpainting can remove the occluder but replaces the missing image content with synthesis, which is unsuitable when visual provenance matters. Many video inpainters also depend on future frames and cannot operate online. We present TransGHOST, a causal reference-guided reconstruction pipeline whose non-g",
+      "paper_url": "https://arxiv.org/abs/2611.13971",
+      "published": "2026-11-10",
+      "topic": "robot_learning",
+      "relevance_score": 5,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-11T11:57:14+00:00",
+      "first_seen": "2026-11-11T11:57:14+00:00",
+      "last_seen": "2026-11-11T11:57:14+00:00"
+    },
+    {
+      "id": "arxiv:2611.14518",
+      "title": "Toward Foundation Detection Models via Example-Based Grounding in EM-DETR",
+      "authors": [
+        "Sheethal Bhat",
+        "Bogdan Georgescu",
+        "Awais Mansoor",
+        "Florin C. Ghesu",
+        "Sasa Grbic",
+        "Andreas Maier"
+      ],
+      "abstract_excerpt": "DeepLearning (DL)-based Computer-Aided Diagnostic (CAD) systems have shown great promise in supporting clinicians, but their performance heavily depends on the availability of large, well-annotated datasets. In medical lesion detection, the scarcity of comprehensive, stan dardized annotations and the heterogeneity of existing datasets limit the development of robust foundation models. In this work, we introduce a novel approach to building a multi-domain foundation model for le sion detection by integrating diverse medical image datasets annotated for both anatomical struct",
+      "paper_url": "https://arxiv.org/abs/2611.14518",
+      "published": "2026-11-10",
+      "topic": "medical_ai",
+      "relevance_score": 4,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-11T11:57:14+00:00",
+      "first_seen": "2026-11-11T11:57:14+00:00",
+      "last_seen": "2026-11-11T11:57:14+00:00"
+    },
+    {
       "id": "arxiv:2611.12038",
       "title": "DPGS-SLAM: Diffusion-Prior and Provenance-Aware Monocular Gaussian Splatting SLAM for Dynamic Visual Sensing",
       "authors": [
@@ -19,7 +258,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-10T05:11:22+00:00",
       "first_seen": "2026-11-10T05:11:22+00:00",
-      "last_seen": "2026-11-10T21:25:18+00:00"
+      "last_seen": "2026-11-11T11:57:14+00:00"
     },
     {
       "id": "arxiv:2611.12732",
@@ -280,7 +519,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-10T07:19:19+00:00",
       "first_seen": "2026-11-10T07:19:19+00:00",
-      "last_seen": "2026-11-10T21:25:18+00:00"
+      "last_seen": "2026-11-11T11:57:14+00:00"
     },
     {
       "id": "arxiv:2611.11868",
@@ -586,6 +825,25 @@
       "last_seen": "2026-11-10T21:25:18+00:00"
     },
     {
+      "id": "arxiv:2611.12949",
+      "title": "Maze Runner: Autonomous Maze Navigation with Line-Based Localization and Control Barrier Functions",
+      "authors": [
+        "Alvaro J. Gaona",
+        "Lucas Gómez-Velayos",
+        "Peter Pasuy-Quevedo"
+      ],
+      "abstract_excerpt": "Maze navigation requires localization from sparse, repetitive geometry, planning through narrow corridors, and control that stays safe when the estimate or the map is wrong. We present Maze Runner, an open autonomy stack in C++ and ROS 2 that addresses these needs end to end on a simulated Husarion ROSbot XL with a 2D LiDAR in Gazebo. Perception extracts wall lines from each scan with RANSAC and total least squares, with per-line uncertainty. The same line front end feeds two estimators: an Extended Kalman Filter (EKF) that localizes against a line map built from the maze m",
+      "paper_url": "https://arxiv.org/abs/2611.12949",
+      "published": "2026-11-06",
+      "topic": "slam",
+      "relevance_score": 20,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-11T11:57:14+00:00",
+      "first_seen": "2026-11-11T11:57:14+00:00",
+      "last_seen": "2026-11-11T11:57:14+00:00"
+    },
+    {
       "id": "arxiv:2611.10239",
       "title": "DASH-SLAM: Calibration-Free Metric Monocular SLAM via Depth Scale Propagation",
       "authors": [
@@ -602,7 +860,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-10T05:11:22+00:00",
       "first_seen": "2026-11-10T05:11:22+00:00",
-      "last_seen": "2026-11-10T21:25:18+00:00"
+      "last_seen": "2026-11-11T11:57:14+00:00"
     },
     {
       "id": "arxiv:2611.09864",
@@ -723,7 +981,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T21:25:18+00:00"
+      "last_seen": "2026-11-11T11:57:14+00:00"
     },
     {
       "id": "arxiv:2611.08372",
@@ -1118,7 +1376,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T21:25:18+00:00"
+      "last_seen": "2026-11-11T11:57:14+00:00"
     },
     {
       "id": "arxiv:2611.03932",
@@ -1137,7 +1395,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T21:25:18+00:00"
+      "last_seen": "2026-11-11T11:57:14+00:00"
     },
     {
       "id": "arxiv:2611.03106",
@@ -1155,7 +1413,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T21:25:18+00:00"
+      "last_seen": "2026-11-11T11:57:14+00:00"
     },
     {
       "id": "arxiv:2611.00482",
@@ -1172,7 +1430,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T21:25:18+00:00"
+      "last_seen": "2026-11-11T11:57:14+00:00"
     },
     {
       "id": "arxiv:2610.41768",
@@ -1192,7 +1450,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T21:25:18+00:00"
+      "last_seen": "2026-11-11T11:57:14+00:00"
     },
     {
       "id": "arxiv:2610.41602",
@@ -1213,7 +1471,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T21:25:18+00:00"
+      "last_seen": "2026-11-11T11:57:14+00:00"
     },
     {
       "id": "arxiv:2610.39385",
@@ -1235,7 +1493,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T21:25:18+00:00"
+      "last_seen": "2026-11-11T11:57:14+00:00"
     },
     {
       "id": "arxiv:2610.39691",
@@ -1258,7 +1516,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T21:25:18+00:00"
+      "last_seen": "2026-11-11T11:57:14+00:00"
     },
     {
       "id": "arxiv:2610.38141",
@@ -1284,7 +1542,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T21:25:18+00:00"
+      "last_seen": "2026-11-11T11:57:14+00:00"
     },
     {
       "id": "arxiv:2610.37111",
@@ -1304,7 +1562,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T21:25:18+00:00"
+      "last_seen": "2026-11-11T11:57:14+00:00"
     },
     {
       "id": "arxiv:2610.36454",
@@ -1327,7 +1585,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T21:25:18+00:00"
+      "last_seen": "2026-11-11T11:57:14+00:00"
     },
     {
       "id": "arxiv:2610.35642",
@@ -1369,7 +1627,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-10T21:25:18+00:00"
+      "last_seen": "2026-11-11T11:57:14+00:00"
     },
     {
       "id": "arxiv:2610.34041",
