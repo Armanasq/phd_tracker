@@ -146,7 +146,7 @@ class Store:
                 ON source_claim_reviews(claim_id,id);
             CREATE TABLE IF NOT EXISTS worker_jobs(
                 id TEXT PRIMARY KEY,agent_id TEXT NOT NULL,provider_id TEXT NOT NULL,
-                application_id TEXT,input_text TEXT NOT NULL,status TEXT NOT NULL,
+                provider_fingerprint TEXT,application_id TEXT,input_text TEXT NOT NULL,status TEXT NOT NULL,
                 attempts INTEGER NOT NULL,max_attempts INTEGER NOT NULL,
                 available_at TEXT NOT NULL,lease_token TEXT,lease_expires_at TEXT,
                 run_id TEXT,error_type TEXT,cancel_requested INTEGER NOT NULL DEFAULT 0,
@@ -179,6 +179,9 @@ class Store:
             ):
                 if field not in observed_columns:
                     self.db.execute(f"ALTER TABLE source_observations ADD COLUMN {field} {definition}")
+            job_columns = {item["name"] for item in self.db.execute("PRAGMA table_info(worker_jobs)")}
+            if "provider_fingerprint" not in job_columns:
+                self.db.execute("ALTER TABLE worker_jobs ADD COLUMN provider_fingerprint TEXT")
             claim_columns = {item["name"] for item in self.db.execute("PRAGMA table_info(source_claims)")}
             for field, definition in (
                 ("source_text_sha256", "TEXT"),

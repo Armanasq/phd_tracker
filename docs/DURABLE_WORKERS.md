@@ -19,12 +19,12 @@ The local Python runtime now exposes an opt-in SQLite-backed work queue for **lo
 | GET | `/api/jobs/{id}` | Per-job state, attempts, timestamps, run ID and redacted error type |
 | POST | `/api/jobs/{id}/cancel` | Queued work becomes canceled; an active job records a cancellation request |
 
-The private HTTP API still enforces exact loopback Host/Origin and optional server token. Static GitHub Pages cannot invoke these privileged endpoints. The provider ID is captured at enqueue time, and each worker independently re-resolves it. If a provider is reconfigured to cloud, execution fails closed instead of transmitting applicant data.
+The private HTTP API still enforces exact loopback Host/Origin and optional server token. Static GitHub Pages cannot invoke these privileged endpoints. The provider ID and a SHA-256 fingerprint of the configured endpoint, model and adapter parameters are captured at enqueue time. Workers re-resolve the route and refuse any mismatched configuration, including a local-to-cloud change, before invoking the model. A second fingerprint check at agent entry prevents an edit between worker preflight and inference. Pending jobs created before fingerprint support cannot be safely bound to the originally selected model; they terminate with `UnpinnedLegacyJob` and must be deliberately enqueued again.
 
 ## Delivery semantics
 
 - The queue survives browser closure and runtime restart; its state is in the private, backed-up SQLite database.
-- Atomic claims use a ten-minute lease token and concurrent worker fencing. Expired claims may be reattempted up to the configured limit (1–3), with a bounded delay after recoverable failures.
+- Atomic claims use a ten-minute lease token and concurrent worker fencing. Expired claims may be reattempted up to the configured limit (1–3), with a bounded delay after recoverable failures. Route mismatches and unpinned legacy jobs fail terminally on the first claim and cannot consume model calls or retry against a changed endpoint.
 - A crashed worker can cause **at-least-once** local inference, not exactly-once execution. Repeated inference can consume GPU time. The model call itself is not idempotent.
 - Queued cancellation prevents execution. For a running call, cancellation is cooperative; the call may still complete and be recorded as successful. The UI never claims that a remote request was forcibly terminated.
 - The queue admits at most 100 queued/running jobs per private database. Each job input is bounded to 5,000 characters, and public status responses never include the prompt.

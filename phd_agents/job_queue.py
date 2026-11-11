@@ -9,6 +9,7 @@ from typing import Any
 
 from .engine import catalog, run_agent, selected
 from .routing import resolve_route
+from .route_contract import provider_route_fingerprint
 from .store import ConflictError, Store
 
 _JOB_ID = re.compile(r"^[0-9a-f]{32}$")
@@ -47,10 +48,11 @@ def enqueue_local_agent(
         if occupied >= 100:
             raise PermissionError("Background job queue has reached its bounded capacity")
         store.db.execute(
-            "INSERT INTO worker_jobs(id,agent_id,provider_id,application_id,input_text,status,"
-            "attempts,max_attempts,available_at,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?)",
-            (identity, agent_id, route.provider["id"], application_id, input_text,
-             "queued", 0, max_attempts, now, now, now),
+            "INSERT INTO worker_jobs(id,agent_id,provider_id,provider_fingerprint,application_id,"
+            "input_text,status,attempts,max_attempts,available_at,created_at,updated_at)"
+            " VALUES(?,?,?,?,?,?,?,?,?,?,?,?)",
+            (identity, agent_id, route.provider["id"], provider_route_fingerprint(route.provider),
+             application_id, input_text, "queued", 0, max_attempts, now, now, now),
         )
         store._audit("job:queued", identity)
     return job_status(store, identity)
@@ -130,8 +132,12 @@ def claim_job(store: Store, *, now: datetime | None = None) -> tuple[str, str] |
 
 
 def finish_job(store: Store, identity: str, token: str, *,
-               run_id: str | None = None, error_type: str | None = None) -> dict[str, Any]:
-    if not _JOB_ID.fullmatch(str(token)) or (run_id is None) == (error_type is None):
+               run_id: str | None = None, error_type: str | None = None,
+               terminal: bool = False) -> dict[str, Any]:
+    if (
+        not _JOB_ID.fullmatch(str(token)) or (run_id is None) == (error_type is None)
+        or type(terminal) is not bool or (terminal and run_id is not None)
+    ):
         raise ValueError("Job completion requires a lease token and one result type")
     now = _utc_now()
     with store.db:
@@ -147,6 +153,9 @@ def finish_job(store: Store, identity: str, token: str, *,
             available = _iso(now)
         elif row["cancel_requested"]:
             status = "canceled"
+            available = _iso(now)
+        elif terminal:
+            status = "failed"
             available = _iso(now)
         elif row["attempts"] >= row["max_attempts"]:
             status = "failed"
@@ -172,12 +181,19 @@ def worker_once(store: Store, root: Path) -> dict[str, Any]:
     try:
         options = catalog(store)
         route = resolve_route(store, options["providers"], row["agent_id"], row["provider_id"])
-        if not route.provider["local"]:
-            raise PermissionError("Provider route changed; queued local job cannot be redirected to cloud")
+        fingerprint = row["provider_fingerprint"]
+        if not isinstance(fingerprint, str) or not re.fullmatch(r"[a-f0-9]{64}", fingerprint):
+            return finish_job(store, identity, token, error_type="UnpinnedLegacyJob", terminal=True)
+        if not route.provider["local"] or provider_route_fingerprint(route.provider) != fingerprint:
+            return finish_job(store, identity, token, error_type="ProviderRouteChanged", terminal=True)
         result = run_agent(
             store, root, agent_id=row["agent_id"], provider_id=row["provider_id"],
             application_id=row["application_id"], input_text=row["input_text"], cloud_consent=False,
+            expected_provider_fingerprint=fingerprint,
         )
         return finish_job(store, identity, token, run_id=result["id"])
     except (RuntimeError, ValueError, KeyError, PermissionError, OSError) as error:
-        return finish_job(store, identity, token, error_type=type(error).__name__)
+        return finish_job(
+            store, identity, token, error_type=type(error).__name__,
+            terminal=isinstance(error, ConflictError),
+        )
