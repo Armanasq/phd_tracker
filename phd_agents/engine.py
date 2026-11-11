@@ -404,7 +404,13 @@ def scheduler_once(store: Store, root: Path, *, now: datetime | None = None) -> 
             result.append({"workflow_id": workflow["id"], "status": "skipped", "reason": "cloud_consent_missing"})
             continue
         if any(not route.approved for route in routes):
-            result.append({"workflow_id": workflow["id"], "status": "skipped", "reason": "cloud_provider_not_approved"})
+            missing = [route.provider["id"] for route in routes if not route.approved]
+            reason = (
+                "cloud_provider_not_approved"
+                if any(identity not in preferences["approved_cloud_providers"] for identity in missing)
+                else "cloud_provider_reverification_required"
+            )
+            result.append({"workflow_id": workflow["id"], "status": "skipped", "reason": reason})
             continue
         needed = sum(not route.provider["local"] for route in routes)
         token, reason = store.schedule_claim(

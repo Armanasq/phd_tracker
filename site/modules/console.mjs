@@ -343,6 +343,7 @@ export function createConsole({notify,onChange,navigate,getRecords,getSourceReco
   if(!plan)return '<section class="os-panel"><div class="os-panel-heading"><div><h2>Automation execution plan</h2><p>Preparing an execution forecast without invoking models.</p></div></div></section>';
   const labels={due:"Ready to attempt",disabled:"Disabled",manual_only:"Manual",already_executed:"Completed this period",
    cloud_disclosure_not_approved:"Disclosure approval required",provider_not_approved:"Cloud provider not activated",
+   provider_reverification_required:"Provider model or credentials need a fresh inference test",
    cloud_budget_disabled:"Cloud budget disabled",cloud_daily_limit:"Daily cloud limit reached",
    model_capability_mismatch:"Model capability mismatch"};
   const rows=(plan.workflows||[]).map(w=>

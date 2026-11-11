@@ -66,6 +66,28 @@ class SchedulerPreviewTests(unittest.TestCase):
             "SELECT period FROM schedule_claims WHERE id='visual_daily'",
         ).fetchone())
 
+    def test_stale_cloud_probe_is_distinguished_from_missing_owner_approval(self) -> None:
+        self.store.put_custom("workflow", workflow_spec({
+            "id": "stale_cloud", "agent_id": "portfolio_planner",
+            "provider_id": "openai", "schedule": "daily",
+            "enabled": True, "cloud_consent": True,
+        }))
+        with patch.dict("os.environ", {"OPENAI_API_KEY": "synthetic-old-key"}):
+            remember_check(self.store, "openai", status="responded", model="synthetic")
+            save_settings(self.store, {"approved_cloud_providers": ["openai"]})
+        with patch.dict("os.environ", {"OPENAI_API_KEY": "rotated-new-key"}):
+            preview = {w["id"]: w for w in scheduler_preview(self.store, self.now)["workflows"]}["stale_cloud"]
+            self.assertEqual(preview["state"], "provider_reverification_required")
+            self.assertFalse(preview["would_attempt"])
+            self.assertEqual(preview["stages"][0]["connection_status"], "needs_reverification")
+            with patch("phd_agents.engine.run_workflow") as model:
+                outcomes = scheduler_once(self.store, Path(self.folder.name), now=self.now)
+                self.assertIn({
+                    "workflow_id": "stale_cloud", "status": "skipped",
+                    "reason": "cloud_provider_reverification_required",
+                }, outcomes)
+                model.assert_not_called()
+
     def test_cloud_needs_both_approval_and_budget(self) -> None:
         self.store.put_custom("workflow",workflow_spec({
             "id":"my_cloud","agent_id":"portfolio_planner","provider_id":"openai",

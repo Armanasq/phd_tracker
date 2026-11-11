@@ -46,7 +46,12 @@ def scheduler_preview(store: Store, now: datetime | None = None) -> dict[str, An
         elif cloud_count and not workflow.get("cloud_consent"):
             state = "cloud_disclosure_not_approved"
         elif any(not step.approved for step in route_steps):
-            state = "provider_not_approved"
+            unapproved = [step.provider["id"] for step in route_steps if not step.approved]
+            state = (
+                "provider_not_approved"
+                if any(identity not in prefs["approved_cloud_providers"] for identity in unapproved)
+                else "provider_reverification_required"
+            )
         elif cloud_count and prefs["max_cloud_model_calls_per_day"] == 0:
             state = "cloud_budget_disabled"
         elif cloud_count and used + cloud_count > prefs["max_cloud_model_calls_per_day"]:
