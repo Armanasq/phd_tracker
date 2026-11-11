@@ -15,6 +15,7 @@ from .providers import NoRedirect, ProviderError, validate_url, validate_credent
 from .egress import PinnedHTTPHandler, PinnedHTTPSHandler
 from .catalog import PROVIDERS
 from .store import Store, utcnow
+from .route_contract import provider_route_fingerprint
 
 
 def credential_fingerprint(provider: dict[str, Any]) -> str:
@@ -56,18 +57,22 @@ def provider_state(provider: dict[str, Any], last: dict[str, Any] | None = None)
     state = "needs_setup" if reason else "ready_to_test"
     previous = prior.get("status")
     if not reason and previous in {"responded", "reachable"}:
-        previous_fingerprint = prior.get("credential_fingerprint")
-        current_fingerprint = credential_fingerprint(provider)
-        if env and (not isinstance(previous_fingerprint, str) or previous_fingerprint != current_fingerprint):
+        if prior.get("route_fingerprint") != provider_route_fingerprint(provider):
             state = "needs_reverification"
-            reason = "Provider credential has changed or was never fingerprinted; test the connection"
+            reason = "Provider endpoint, model or inference settings changed; test the connection"
+        elif env and prior.get("credential_fingerprint") != credential_fingerprint(provider):
+            state = "needs_reverification"
+            reason = "Provider credential has changed; test the connection"
         elif not connection_fresh(prior.get("checked_at")):
             state = "stale"
             reason = "Provider check is older than 24 hours; test again"
         else:
             state = previous
     elif not reason and previous == "failed":
-        state = "failed"
+        if prior.get("route_fingerprint") == provider_route_fingerprint(provider) and (
+            not env or prior.get("credential_fingerprint") == credential_fingerprint(provider)
+        ):
+            state = "failed"
     return {
         "provider_id": provider["id"], "state": state, "reason": reason,
         "credential_source": ("environment" if env and os.environ.get(env) else "private_store" if env and read_secret(env) else "none"),
@@ -144,12 +149,24 @@ def model_list(provider: dict[str, Any], timeout: int = 12) -> dict[str, Any]:
 
 def remember_check(store: Store, provider_id: str, *, status: str, model: str = "",
                    latency_ms: int | None = None, model_count: int | None = None,
-                   error: str = "") -> None:
-    provider = next((p for p in store.catalog("provider", PROVIDERS) if p["id"] == provider_id), None)
-    if provider is None:
-        raise ValueError("Unknown provider for connection check")
+                   error: str = "", checked_provider: dict[str, Any] | None = None,
+                   checked_credential_fingerprint: str | None = None) -> None:
+    provider = checked_provider if checked_provider is not None else next(
+        (p for p in store.catalog("provider", PROVIDERS) if p["id"] == provider_id), None
+    )
+    if provider is None or provider.get("id") != provider_id:
+        raise ValueError("Unknown or mismatched provider for connection check")
+    fingerprint = (
+        credential_fingerprint(provider)
+        if checked_credential_fingerprint is None else checked_credential_fingerprint
+    )
+    if not isinstance(fingerprint, str) or (
+        fingerprint and (len(fingerprint) != 64 or any(c not in "0123456789abcdef" for c in fingerprint))
+    ):
+        raise ValueError("Invalid captured credential fingerprint")
     store.put_custom("connection", {
         "id": provider_id, "status": status, "model": model[:160], "latency_ms": latency_ms,
         "model_count": model_count, "error": error[:180], "checked_at": utcnow(),
-        "credential_fingerprint": credential_fingerprint(provider),
+        "credential_fingerprint": fingerprint,
+        "route_fingerprint": provider_route_fingerprint(provider),
     })

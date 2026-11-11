@@ -11,9 +11,9 @@ from unittest.mock import patch
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
-from phd_agents.catalog import PROVIDERS
+from phd_agents.catalog import PROVIDERS, provider_spec
 from phd_agents.connectivity import model_list, provider_state, provider_states, remember_check
-from phd_agents.providers import validate_url, invoke
+from phd_agents.providers import ModelReply, validate_url, invoke
 from phd_agents.server import ApiServer
 from phd_agents.settings import DEFAULTS, read_settings, save_settings
 from phd_agents.store import Store
@@ -56,8 +56,43 @@ class SettingsAndConnectivityTests(unittest.TestCase):
         self.assertEqual(provider_states(self.store, [local])["ollama"]["state"], "ready_to_test")
         remember_check(self.store, "ollama", status="responded", model="sample", latency_ms=25)
         self.assertEqual(provider_states(self.store, [local])["ollama"]["state"], "responded")
+        recorded = self.store.get_custom("connection")[0]
+        self.assertEqual(len(recorded["route_fingerprint"]), 64)
+        self.assertEqual(provider_state({**local, "model": "changed"}, recorded)["state"], "needs_reverification")
+        self.assertEqual(provider_state({**local, "base_url": "http://127.0.0.1:11999/v1"}, recorded)["state"], "needs_reverification")
+        self.assertEqual(provider_state({**local, "max_output_tokens": 128}, recorded)["state"], "needs_reverification")
+        self.store.put_custom("connection", {k: v for k, v in recorded.items() if k != "route_fingerprint"})
+        self.assertEqual(provider_states(self.store, [local])["ollama"]["state"], "needs_reverification")
         self.store.put_custom("provider", {**local, "model": "changed"})
         self.assertEqual(provider_states(self.store, [{**local, "model": "changed"}])["ollama"]["state"], "ready_to_test")
+
+    def test_provider_change_during_live_probe_does_not_verify_new_route(self) -> None:
+        server = ApiServer(("127.0.0.1", 0), store=self.store, root=Path(self.temp.name))
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        endpoint = f"http://127.0.0.1:{server.server_port}"
+        try:
+            def change_route(*args, **kwargs):
+                local = next(p for p in self.store.catalog("provider", PROVIDERS) if p["id"] == "ollama")
+                self.store.put_custom("provider", provider_spec({**local, "model": "other-model"}))
+                return ModelReply("Provider connection successful.", "old-model", {}, "ollama", 12)
+
+            request = Request(
+                endpoint + "/api/providers/probe",
+                data=json.dumps({"provider_id": "ollama"}).encode(),
+                headers={"Content-Type": "application/json"}, method="POST",
+            )
+            with patch("phd_agents.server.invoke", side_effect=change_route) as probe:
+                with self.assertRaises(HTTPError) as failed:
+                    urlopen(request, timeout=5)
+            self.assertEqual(failed.exception.code, 409)
+            self.assertEqual(probe.call_count, 1)
+            current = next(p for p in self.store.catalog("provider", PROVIDERS) if p["id"] == "ollama")
+            self.assertEqual(provider_states(self.store, [current])["ollama"]["state"], "needs_reverification")
+        finally:
+            server.shutdown()
+            thread.join(timeout=5)
+            server.server_close()
 
     def test_provider_state_expires_and_detects_credential_rotation(self) -> None:
         from phd_agents.connectivity import connection_fresh

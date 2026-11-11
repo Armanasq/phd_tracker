@@ -50,11 +50,28 @@ class AutomaticRoutingTests(unittest.TestCase):
         with patch.dict("os.environ", {"OPENAI_API_KEY": "synthetic-only-test-key"}):
             remember_check(self.store, "openai", status="responded", model="gpt-test")
             self.assertEqual(save_settings(self.store, {"approved_cloud_providers": ["openai"]})["approved_cloud_providers"], ["openai"])
-        route = resolve_route(self.store, self.providers, "portfolio_planner", "openai")
-        self.assertTrue(route.approved)
+            route = resolve_route(self.store, self.providers, "portfolio_planner", "openai")
+            self.assertTrue(route.approved)
+        self.assertFalse(resolve_route(self.store, self.providers, "portfolio_planner", "openai").approved)
+        with patch.dict("os.environ", {"OPENAI_API_KEY": "rotated-synthetic-test-key"}):
+            self.assertFalse(resolve_route(self.store, self.providers, "portfolio_planner", "openai").approved)
+            remember_check(self.store, "openai", status="responded", model="gpt-test")
+            self.assertTrue(resolve_route(self.store, self.providers, "portfolio_planner", "openai").approved)
         self.store.put_custom("provider", provider_spec(next(p for p in self.providers if p["id"] == "openai")))
         self.assertEqual(read_settings(self.store)["approved_cloud_providers"], [])
         self.assertFalse(resolve_route(self.store, catalog(self.store)["providers"], "portfolio_planner", "openai").approved)
+
+    def test_stale_probe_disables_approved_cloud_route_without_dropping_owner_consent(self):
+        with patch.dict("os.environ", {"OPENAI_API_KEY": "synthetic-key"}):
+            remember_check(self.store, "openai", status="responded", model="gpt-test")
+            save_settings(self.store, {"approved_cloud_providers": ["openai"]})
+            row = next(p for p in self.store.get_custom("connection") if p["id"] == "openai")
+            self.store.put_custom("connection", {**row, "checked_at": "2020-01-01T00:00:00+00:00"})
+            route = resolve_route(self.store, self.providers, "portfolio_planner", "openai")
+            self.assertFalse(route.approved)
+            self.assertEqual(read_settings(self.store)["approved_cloud_providers"], ["openai"])
+            remember_check(self.store, "openai", status="responded", model="gpt-test")
+            self.assertTrue(resolve_route(self.store, self.providers, "portfolio_planner", "openai").approved)
 
     def test_custom_endpoint_uses_saved_default(self):
         self.store.put_custom("provider", provider_spec({

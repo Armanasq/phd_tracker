@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from .settings import read_settings
+from .connectivity import provider_states
 from .store import Store
 
 
@@ -27,8 +28,10 @@ def resolve_route(store: Store, providers: list[dict[str, Any]], agent_id: str,
     provider = next((item for item in providers if item["id"] == identity), None)
     if provider is None:
         raise ValueError("Selected inference provider is not registered: " + str(identity))
-    return ModelRoute(provider, source, bool(provider["local"] or
-                      identity in preferences["approved_cloud_providers"]))
+    approved = bool(provider["local"])
+    if not approved and identity in preferences["approved_cloud_providers"]:
+        approved = provider_states(store, [provider])[identity]["state"] == "responded"
+    return ModelRoute(provider, source, approved)
 
 
 def routing_status(store: Store, providers: list[dict[str, Any]],

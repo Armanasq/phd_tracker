@@ -17,7 +17,8 @@ from .domain import agenda, plan_capacity, preflight, today_in
 from .operations import evidence_conflicts, milestones_for, referee_matrix, research_fit_signals, resource_schedule
 from .proof_queue import evidence_work_queue
 from .providers import invoke, ProviderError
-from .connectivity import model_list, provider_states, remember_check
+from .connectivity import credential_fingerprint, model_list, provider_states, remember_check
+from .route_contract import provider_route_fingerprint
 from .settings import read_settings, save_settings
 from .routing import resolve_route, routing_status
 from .secrets import read_secret, write_secret
@@ -530,12 +531,18 @@ class ApiHandler(BaseHTTPRequestHandler):
             provider = selected(catalog(store)["providers"], data["provider_id"], "provider")
             if not provider["local"] and data.get("cloud_consent") is not True:
                 raise PermissionError("Cloud provider connection checks require explicit consent")
+            route_fingerprint = provider_route_fingerprint(provider)
+            captured = {
+                "checked_provider": provider,
+                "checked_credential_fingerprint": credential_fingerprint(provider),
+            }
             started = perf_counter()
             try:
                 if path == "/api/providers/models":
                     result = model_list(provider)
                     remember_check(store, provider["id"], status="reachable",
-                                   latency_ms=result["latency_ms"], model_count=result["model_count"])
+                                   latency_ms=result["latency_ms"], model_count=result["model_count"],
+                                   **captured)
                 else:
                     response = invoke(provider, "Answer with one short sentence.",
                                       "Respond with the exact text: Provider connection successful.", timeout=18)
@@ -543,12 +550,19 @@ class ApiHandler(BaseHTTPRequestHandler):
                               "model": response.model, "response": response.content[:600],
                               "usage": response.usage}
                     remember_check(store, provider["id"], status="responded", model=response.model,
-                                   latency_ms=round((perf_counter() - started) * 1000))
+                                   latency_ms=round((perf_counter() - started) * 1000),
+                                   **captured)
             except (OSError, RuntimeError, ValueError) as error:
                 remember_check(store, provider["id"], status="failed",
                                latency_ms=round((perf_counter() - started) * 1000),
-                               error=str(error))
+                               error=str(error), **captured)
                 raise
+            current = selected(catalog(store)["providers"], provider["id"], "provider")
+            if (
+                provider_route_fingerprint(current) != route_fingerprint
+                or credential_fingerprint(current) != captured["checked_credential_fingerprint"]
+            ):
+                raise ConflictError("Provider configuration or credentials changed during check; probe again")
             self.send_json(result)
         elif path.startswith("/api/private/"):
             parts = path.removeprefix("/api/private/").split("/")
