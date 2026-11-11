@@ -76,9 +76,11 @@ class SchedulerPreviewTests(unittest.TestCase):
         with patch.dict("os.environ",{"OPENAI_API_KEY":"synthetic-test-key"}):
             remember_check(self.store,"openai",status="responded",model="synthetic-model")
             save_settings(self.store,{"approved_cloud_providers":["openai"]})
-        self.assertEqual({w["id"]:w for w in scheduler_preview(self.store,self.now)["workflows"]}["my_cloud"]["state"],"cloud_budget_disabled")
-        save_settings(self.store,{"max_cloud_model_calls_per_day":2})
-        self.assertEqual({w["id"]:w for w in scheduler_preview(self.store,self.now)["workflows"]}["my_cloud"]["state"],"due")
+            self.assertEqual({w["id"]:w for w in scheduler_preview(self.store,self.now)["workflows"]}["my_cloud"]["state"],"cloud_budget_disabled")
+            save_settings(self.store,{"max_cloud_model_calls_per_day":2})
+            self.assertEqual({w["id"]:w for w in scheduler_preview(self.store,self.now)["workflows"]}["my_cloud"]["state"],"due")
+        with patch.dict("os.environ",{"OPENAI_API_KEY":""}):
+            self.assertEqual({w["id"]:w for w in scheduler_preview(self.store,self.now)["workflows"]}["my_cloud"]["state"],"provider_not_approved")
 
 
 if __name__=="__main__":

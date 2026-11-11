@@ -58,17 +58,17 @@ class MetricsTests(unittest.TestCase):
         with patch.dict("os.environ", {"OPENAI_API_KEY": "synthetic-test-only"}):
             remember_check(self.store, "openai", status="responded", model="verified-test-model")
             save_settings(self.store, {"approved_cloud_providers": ["openai"]})
-        now = datetime(2026, 11, 9, 8, 0, tzinfo=timezone.utc)
-        with patch("phd_agents.engine.run_workflow", return_value={"id": "run1"}) as run:
-            disabled = scheduler_once(self.store, Path(self.folder.name), now=now)
-            self.assertEqual(disabled[0]["reason"], "cloud_budget_disabled")
-            save_settings(self.store, {"max_cloud_model_calls_per_day": 1})
-            insufficient = scheduler_once(self.store, Path(self.folder.name), now=now)
-            self.assertEqual(insufficient[0]["reason"], "daily_cloud_model_call_cap")
-            save_settings(self.store, {"max_cloud_model_calls_per_day": 2})
-            approved = scheduler_once(self.store, Path(self.folder.name), now=now)
-            self.assertEqual(approved[0]["status"], "proposed")
-            self.assertEqual(run.call_count, 1)
+            now = datetime(2026, 11, 9, 8, 0, tzinfo=timezone.utc)
+            with patch("phd_agents.engine.run_workflow", return_value={"id": "run1"}) as run:
+                disabled = scheduler_once(self.store, Path(self.folder.name), now=now)
+                self.assertEqual(disabled[0]["reason"], "cloud_budget_disabled")
+                save_settings(self.store, {"max_cloud_model_calls_per_day": 1})
+                insufficient = scheduler_once(self.store, Path(self.folder.name), now=now)
+                self.assertEqual(insufficient[0]["reason"], "daily_cloud_model_call_cap")
+                save_settings(self.store, {"max_cloud_model_calls_per_day": 2})
+                approved = scheduler_once(self.store, Path(self.folder.name), now=now)
+                self.assertEqual(approved[0]["status"], "proposed")
+                self.assertEqual(run.call_count, 1)
         for invalid in (-1, 101, 0.5, True):
             with self.subTest(invalid=invalid), self.assertRaises(ValueError):
                 save_settings(self.store, {"max_cloud_model_calls_per_day": invalid})
