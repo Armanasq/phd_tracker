@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "as_of": "2026-11-11",
+  "as_of": "2026-11-12",
   "timezone": "Europe/Berlin",
   "policy": "Observed snapshot, not live availability. Unknown is not false. Document mention does not imply missing. Simulations never change application state.",
   "metrics": {
     "tracked": 106,
     "future": 106,
-    "next_seven_days": 20,
+    "next_seven_days": 23,
     "unknown_document_mentions": 331,
     "source_conflicts": 1,
     "research_papers": 80
@@ -17,7 +17,7 @@
       "name": "Inria IROKO Montpellier — PhD Scientific AI and Spatiotemporal Biodiversity Modelling",
       "country": "France",
       "deadline": "2026-11-13",
-      "days": 2,
+      "days": 1,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -35,7 +35,7 @@
       "name": "Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacancy ref 3522426DA (jobs.soton.ac.uk)",
       "country": null,
       "deadline": "2026-11-13",
-      "days": 2,
+      "days": 1,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -57,7 +57,7 @@
       "name": "TIB Hannover / Leibniz University — Doctoral Researcher in NLP and Causal AI for Scientific Reasoning (EcoAIRE), 44/2026",
       "country": null,
       "deadline": "2026-11-14",
-      "days": 3,
+      "days": 2,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -79,7 +79,7 @@
       "name": "BMW AI Robotics / RoboTac and TU/e Eindhoven, PhD World Models & Visuo-Tactile Foundation Models (2 research topics)",
       "country": "Netherlands",
       "deadline": "2026-11-15",
-      "days": 4,
+      "days": 3,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -105,7 +105,7 @@
       "name": "Institute of Science Tokyo, International Graduate Program IGP(A) Fall 2027 with MEXT recommendation",
       "country": "Japan",
       "deadline": "2026-11-15",
-      "days": 4,
+      "days": 3,
       "decision": "Check first",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -123,7 +123,7 @@
       "name": "International Max Planck Research School for Intelligent Systems (IMPRS-IS), 2027 doctoral recruitment",
       "country": "Germany",
       "deadline": "2026-11-15",
-      "days": 4,
+      "days": 3,
       "decision": "Go",
       "readiness": "source_conflict",
       "documents": [
@@ -149,7 +149,7 @@
       "name": "Northeastern University London, PhD studentship: Algorithms/Hardware Co-Design for Bayesian and Ising Models (Rajendran; ref R143025)",
       "country": "United Kingdom",
       "deadline": "2026-11-15",
-      "days": 4,
+      "days": 3,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -169,7 +169,7 @@
       "name": "OIST Graduate School PhD, May or Sep 2027 entry (Admissions Workshop 2027)",
       "country": "Japan",
       "deadline": "2026-11-15",
-      "days": 4,
+      "days": 3,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -197,7 +197,7 @@
       "name": "TU Delft OPERA EU Project, PhD Safe Planning and Decision-Making under Uncertainty for Long-Horizon Robot Autonomy",
       "country": "Netherlands",
       "deadline": "2026-11-15",
-      "days": 4,
+      "days": 3,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -219,7 +219,7 @@
       "name": "TUM Autonomous Vehicle Systems (Johannes Betz), PhD Mobile Manipulation for Humanoid Robots",
       "country": "Germany",
       "deadline": "2026-11-15",
-      "days": 4,
+      "days": 3,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -239,7 +239,7 @@
       "name": "University of Amsterdam / Ericsson, PhD Cloud-Native and AI-Native 6G Networks (#15041)",
       "country": "Netherlands",
       "deadline": "2026-11-15",
-      "days": 4,
+      "days": 3,
       "decision": "Check first",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -263,7 +263,7 @@
       "name": "University of Amsterdam, PhD Accountable and Responsible AI (SafeGenAI / LLM4LM; #15581)",
       "country": "Netherlands",
       "deadline": "2026-11-15",
-      "days": 4,
+      "days": 3,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -287,7 +287,7 @@
       "name": "University of Birmingham, Fully Funded PhD in Integrated Intelligent Safe Environment (IISE) for Nuclear Robotics",
       "country": "United Kingdom",
       "deadline": "2026-11-15",
-      "days": 4,
+      "days": 3,
       "decision": "Check first",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -305,7 +305,7 @@
       "name": "AI4I + Politecnico di Torino, funded PhD Adversarial Robustness in Multimodal Foundation Models",
       "country": "Italy",
       "deadline": "2026-11-16",
-      "days": 5,
+      "days": 4,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -327,7 +327,7 @@
       "name": "AI4I + Politecnico di Torino, funded PhD Agentic System-1/System-2 Architectures for Robot Autonomy",
       "country": "Italy",
       "deadline": "2026-11-16",
-      "days": 5,
+      "days": 4,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -351,7 +351,7 @@
       "name": "AI4I and Politecnico di Torino — PhD Trustworthy Generalist Robot Policies",
       "country": "Italy",
       "deadline": "2026-11-16",
-      "days": 5,
+      "days": 4,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -371,7 +371,7 @@
       "name": "NTNU Gjovik, Ph.D. Candidate in Reinforcement Learning for Project Scheduling Problems (Jobbnorge 310778)",
       "country": "Norway",
       "deadline": "2026-11-16",
-      "days": 5,
+      "days": 4,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -399,7 +399,7 @@
       "name": "University of Oslo, PhD Research Fellow in Control Theory and Optimization for Edge Computing (Jobbnorge 310583)",
       "country": "Norway",
       "deadline": "2026-11-17",
-      "days": 6,
+      "days": 5,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -427,7 +427,7 @@
       "name": "OsloMet PhD Fellow in Trustworthy Generative AI with Knowledge Verification (310467)",
       "country": "Norway",
       "deadline": "2026-11-18",
-      "days": 7,
+      "days": 6,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -455,7 +455,7 @@
       "name": "UiO Integreat PhD Research Fellow in Structured Vision-Language Models (310559)",
       "country": null,
       "deadline": "2026-11-18",
-      "days": 7,
+      "days": 6,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -483,7 +483,7 @@
       "name": "NTNU CAPTURE MSCA DN PhD in Colour and Image Enhancement for Wireless Capsule Endoscopy (310592), Gjovik",
       "country": "Norway",
       "deadline": "2026-11-19",
-      "days": 8,
+      "days": 7,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -509,7 +509,7 @@
       "name": "NTNU CAPTURE MSCA DN PhD in Explainable AI for Capsule Endoscopy (310379), Gjovik",
       "country": "Norway",
       "deadline": "2026-11-19",
-      "days": 8,
+      "days": 7,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -535,7 +535,7 @@
       "name": "NTNU PhD Candidate in Multispectral Wireless Capsule Endoscopy (WCE), CAPTURE MSCA Doctoral Network (310363)",
       "country": "Norway",
       "deadline": "2026-11-19",
-      "days": 8,
+      "days": 7,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -553,7 +553,7 @@
       "name": "Inria ASTRA Paris — PhD Enforcing Persistence in Generative World Models for Robotics",
       "country": "France",
       "deadline": "2026-11-20",
-      "days": 9,
+      "days": 8,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -575,7 +575,7 @@
       "name": "University of Vienna — Two FWF-funded PhDs in Efficient, Expressive and Robust Graph Neural Networks (EXOSPHERE)",
       "country": "Austria",
       "deadline": "2026-11-20",
-      "days": 9,
+      "days": 8,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -593,7 +593,7 @@
       "name": "TU/e Eindhoven + TUM, PhD Physics-Informed Generative AI for Dynamic Cardiac MRI (PRIMA-CMR)",
       "country": "Netherlands",
       "deadline": "2026-11-21",
-      "days": 10,
+      "days": 9,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -615,7 +615,7 @@
       "name": "ETH Zurich, Julia Vogt (Medical Data Science group): PhD in Machine Learning and Medical Data Science",
       "country": "Switzerland",
       "deadline": "2026-11-22",
-      "days": 11,
+      "days": 10,
       "decision": "Check first",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -637,7 +637,7 @@
       "name": "University of Cyprus — V4RL SkEyes ERC funded PhD in robotics, computer vision and aerial SLAM (Margarita Chli)",
       "country": "Cyprus",
       "deadline": "2026-11-23",
-      "days": 12,
+      "days": 11,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -663,7 +663,7 @@
       "name": "Université de Toulouse BEST / CNRS CROSSING — France–Australia PhD in World Models, Drone Swarms and Autonomous Agent Safety",
       "country": null,
       "deadline": "2026-11-23",
-      "days": 12,
+      "days": 11,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -683,7 +683,7 @@
       "name": "Linkoeping University CHASS, PhD Optimal Motion Planning for Drone Swarms (LiU-2026-04767)",
       "country": "Sweden",
       "deadline": "2026-11-24",
-      "days": 13,
+      "days": 12,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -701,7 +701,7 @@
       "name": "Nagoya University Graduate School of Informatics, October 2027 doctoral entry (MEXT, Data Science Education Program)",
       "country": "Japan",
       "deadline": "2026-11-24",
-      "days": 13,
+      "days": 12,
       "decision": "Check first",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -723,7 +723,7 @@
       "name": "ETH Zurich RobotX PhD Fellowship 2027",
       "country": "Switzerland",
       "deadline": "2026-11-27",
-      "days": 16,
+      "days": 15,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -749,7 +749,7 @@
       "name": "Aalborg University ROX6G, PhD Safe Multi-Robot Planning and Control under Connectivity Constraints (#2026/1218)",
       "country": "Denmark",
       "deadline": "2026-11-29",
-      "days": 18,
+      "days": 17,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -775,7 +775,7 @@
       "name": "University of Bamberg — Full-time doctoral researcher in Robotics and Machine Learning (Robot Learning), MII-202611-ROB",
       "country": null,
       "deadline": "2026-11-29",
-      "days": 18,
+      "days": 17,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -797,7 +797,7 @@
       "name": "University of Bath URSA (Faculty of Engineering & Design), Cathryn Mitchell, ionospheric modelling/PNT",
       "country": "United Kingdom",
       "deadline": "2026-11-29",
-      "days": 18,
+      "days": 17,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -823,7 +823,7 @@
       "name": "EPFL LAMD (Neuchatel) - PhD position in Integrated Design and Optimization, MSCA-DN TurboImpact",
       "country": "Switzerland",
       "deadline": "2026-11-30",
-      "days": 19,
+      "days": 18,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -847,7 +847,7 @@
       "name": "ETH Zurich Soft Robotics Lab (Katzschmann): Doctoral Positions in Robot Learning and Soft, Musculoskeletal, and Biohybrid Robotics",
       "country": "Switzerland",
       "deadline": "2026-11-30",
-      "days": 19,
+      "days": 18,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -871,7 +871,7 @@
       "name": "Inria MIND Palaiseau — PhD Pretrained Multimodal Neuroimaging Models for Predicting Individual Cognition",
       "country": "France",
       "deadline": "2026-11-30",
-      "days": 19,
+      "days": 18,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -891,7 +891,7 @@
       "name": "Saitama University ESITI - MEXT Scholarship (University Recommendation), October 2027 intake",
       "country": "Japan",
       "deadline": "2026-11-30",
-      "days": 19,
+      "days": 18,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -913,7 +913,7 @@
       "name": "UEA / Earlham Institute - Decoding and Designing DNA Replication Origins Using Genome Language Models (NIEDUSZYNSKI_E27DTP)",
       "country": "United Kingdom",
       "deadline": "2026-11-30",
-      "days": 19,
+      "days": 18,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -937,7 +937,7 @@
       "name": "UEA / Norwich Research Park Biosciences DTP - Can blood reveal the body? Trustworthy AI for tissue gene expression (SHERIFF_E27DTP)",
       "country": "United Kingdom",
       "deadline": "2026-11-30",
-      "days": 19,
+      "days": 18,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -961,7 +961,7 @@
       "name": "University of Bern, Machine Learning in Medicine Lab (Prof. Lisa Koch): PhD in Machine Learning in Medicine, multimodal health data",
       "country": "Switzerland",
       "deadline": "2026-11-30",
-      "days": 19,
+      "days": 18,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -983,7 +983,7 @@
       "name": "University of Edinburgh UKRI AI CDT in Designing Responsible Natural Language Processing, 2027 entry",
       "country": "United Kingdom",
       "deadline": "2026-11-30",
-      "days": 19,
+      "days": 18,
       "decision": "Check first",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1001,7 +1001,7 @@
       "name": "University of Luxembourg YADIAS (IAS Young Academics Doctoral Fellowships), MSCA-COFUND",
       "country": "Luxembourg",
       "deadline": "2026-11-30",
-      "days": 19,
+      "days": 18,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1021,7 +1021,7 @@
       "name": "Uppsala University, PhD Signal Processing: Multimodal Environment Modeling for Wireless Spatial Intelligence (UFV-PA 2026/2989)",
       "country": "Sweden",
       "deadline": "2026-11-30",
-      "days": 19,
+      "days": 18,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1047,7 +1047,7 @@
       "name": "EPFL EDEE (Electrical Engineering) doctoral programme, December 2026 round (lab chosen after admission)",
       "country": "Switzerland",
       "deadline": "2026-12-01",
-      "days": 20,
+      "days": 19,
       "decision": "Check first",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1069,7 +1069,7 @@
       "name": "EPFL EDIC (Computer and Communication Sciences) doctoral programme, Round 1",
       "country": "Switzerland",
       "deadline": "2026-12-01",
-      "days": 20,
+      "days": 19,
       "decision": "Check first",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1095,7 +1095,7 @@
       "name": "George Washington University — EPIC Lab visual-inertial perception, SLAM and physical AI PhD (Chuchu Chen), Fall 2027",
       "country": "United States",
       "deadline": "2026-12-01",
-      "days": 20,
+      "days": 19,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1121,7 +1121,7 @@
       "name": "Max Planck School Biomedical AI (BMAI), funded PhD cohort starting September 2027",
       "country": "Germany",
       "deadline": "2026-12-01",
-      "days": 20,
+      "days": 19,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1145,7 +1145,7 @@
       "name": "Memorial University - PhD Engineering and Applied Science, Fall 2027 admission",
       "country": "Canada",
       "deadline": "2026-12-01",
-      "days": 20,
+      "days": 19,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1171,7 +1171,7 @@
       "name": "Mila supervision request (up to three professors) plus separate university application",
       "country": "Canada",
       "deadline": "2026-12-01",
-      "days": 20,
+      "days": 19,
       "decision": "Go",
       "readiness": "no_unresolved_detected_requirements",
       "documents": [],
@@ -1185,7 +1185,7 @@
       "name": "TU Delft / ING, PhD AI for Software Reuse and Reliable Agentic Development (vacancy 3997)",
       "country": "Netherlands",
       "deadline": "2026-12-01",
-      "days": 20,
+      "days": 19,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1207,7 +1207,7 @@
       "name": "University of Osaka, Trans-Pacific Hub Graduate Program in Advanced Bio-Information Synergy (Bioengineering, MEXT, doctoral course, Oct 2027 enrolment)",
       "country": "Japan",
       "deadline": "2026-12-01",
-      "days": 20,
+      "days": 19,
       "decision": "Check first",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1229,7 +1229,7 @@
       "name": "York University - PhD Electrical Engineering and Computer Science (Lassonde), Fall",
       "country": "Canada",
       "deadline": "2026-12-01",
-      "days": 20,
+      "days": 19,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1255,7 +1255,7 @@
       "name": "Oxford DPhil Engineering Science studentship: Data-driven Control Engineering for Large-scale Uncertain Systems (ref 27ENGCO_AP; Papachristodoulou, Margellos)",
       "country": "United Kingdom",
       "deadline": "2026-12-02",
-      "days": 21,
+      "days": 20,
       "decision": "Long shot",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1281,7 +1281,7 @@
       "name": "Stanford Oceans — BluePEARL Lab PhD in Robot Learning for Marine Robotics (Fall 2027)",
       "country": null,
       "deadline": "2026-12-02",
-      "days": 21,
+      "days": 20,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1307,7 +1307,7 @@
       "name": "KTH Royal Institute of Technology — PhD Agentic & Embodied AI for Adaptive Manufacturing Systems (PA-2026-3497)",
       "country": "Sweden",
       "deadline": "2026-12-03",
-      "days": 22,
+      "days": 21,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1333,7 +1333,7 @@
       "name": "Cambridge Trust funding (Cambridge International Scholarship) via the same Cambridge PhD application",
       "country": "United Kingdom",
       "deadline": "2026-12-08",
-      "days": 27,
+      "days": 26,
       "decision": "Check first",
       "readiness": "no_unresolved_detected_requirements",
       "documents": [],
@@ -1347,7 +1347,7 @@
       "name": "Exeter EPSRC DLA 2027, Public Health and Sport Sciences: Computer vision to predict falls from everyday movement in older adults (Taleshi)",
       "country": null,
       "deadline": "2026-12-08",
-      "days": 27,
+      "days": 26,
       "decision": "Long shot",
       "readiness": "no_unresolved_detected_requirements",
       "documents": [],
@@ -1361,7 +1361,7 @@
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6010): AI and Image Processing for Diabetic Retinopathy Smart Cameras (Vaughan and Ye, Clinical and Biomedical Sciences)",
       "country": null,
       "deadline": "2026-12-08",
-      "days": 27,
+      "days": 26,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1383,7 +1383,7 @@
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): Explainable AI for Early Dementia Detection and Deployment (Dong, Computer Science)",
       "country": null,
       "deadline": "2026-12-08",
-      "days": 27,
+      "days": 26,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1405,7 +1405,7 @@
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): R2T2-Med: Resource-Aware AI for Scalable and Deployable Medical Image Analysis (Zhang, Computer Science)",
       "country": null,
       "deadline": "2026-12-08",
-      "days": 27,
+      "days": 26,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1427,7 +1427,7 @@
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): Sovereign Agentic AI: Distilling Small Language Model Agents for Local Deployment (Wang and Huang, Computer Science)",
       "country": null,
       "deadline": "2026-12-08",
-      "days": 27,
+      "days": 26,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1449,7 +1449,7 @@
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6014): Multiscale Scientific Machine Learning Digital Twins for High-Torque Electric Propulsion under Extreme Duty Cycles (Engineering)",
       "country": null,
       "deadline": "2026-12-08",
-      "days": 27,
+      "days": 26,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1471,7 +1471,7 @@
       "name": "Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6015): Physics-Informed AI and Experimental Modelling of Ocean Mixing (Messias, Geography)",
       "country": null,
       "deadline": "2026-12-08",
-      "days": 27,
+      "days": 26,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1493,7 +1493,7 @@
       "name": "Exeter EPSRC DLA studentships, Department of Engineering, Sept 2027 entry (ref 6014): Physics-Aware Graph Neural Networks for Robust Short-Term Visibility Forecasting (supervisor surname Zhou per PDF ",
       "country": null,
       "deadline": "2026-12-08",
-      "days": 27,
+      "days": 26,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1515,7 +1515,7 @@
       "name": "Exeter EPSRC DLA studentships, Mathematics and Statistics, Sept 2027 entry (ref 6019): Uncertainty quantification for healthcare models: a route to precision medicine (Salter per PDF name)",
       "country": null,
       "deadline": "2026-12-08",
-      "days": 27,
+      "days": 26,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1537,7 +1537,7 @@
       "name": "Gates Cambridge Scholarship (PhD, 2027/28 entry, Round 2 all other eligible applicants)",
       "country": "United Kingdom",
       "deadline": "2026-12-08",
-      "days": 27,
+      "days": 26,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1559,7 +1559,7 @@
       "name": "University of Amsterdam AMLab, multiple PhD positions Symmetries and Their Breaking in Deep Learning (Simons grant)",
       "country": "Netherlands",
       "deadline": "2026-12-08",
-      "days": 27,
+      "days": 26,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1585,7 +1585,7 @@
       "name": "University of Edinburgh EPSRC Centre for Doctoral Training in Machine Learning Systems (PhD, Round 1)",
       "country": "United Kingdom",
       "deadline": "2026-12-14",
-      "days": 33,
+      "days": 32,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1605,7 +1605,7 @@
       "name": "EPFL EDRS (Robotics, Control and Intelligent Systems) doctoral programme",
       "country": "Switzerland",
       "deadline": "2026-12-15",
-      "days": 34,
+      "days": 33,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1631,7 +1631,7 @@
       "name": "McGill University School of Computer Science PhD, Fall 2027 (international deadline)",
       "country": "Canada",
       "deadline": "2026-12-15",
-      "days": 34,
+      "days": 33,
       "decision": "Check first",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1651,7 +1651,7 @@
       "name": "McGill University, Electrical and Computer Engineering PhD, Fall 2027",
       "country": "Canada",
       "deadline": "2026-12-15",
-      "days": 34,
+      "days": 33,
       "decision": "Check first",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1673,7 +1673,7 @@
       "name": "UBC Computer Science PhD, September 2027",
       "country": null,
       "deadline": "2026-12-15",
-      "days": 34,
+      "days": 33,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1695,7 +1695,7 @@
       "name": "University of Alberta, Computing Science PhD, Fall 2027 (Amii)",
       "country": null,
       "deadline": "2026-12-15",
-      "days": 34,
+      "days": 33,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1721,7 +1721,7 @@
       "name": "UEA / ARIES NERC DTP studentships (entry 1 Oct 2027)",
       "country": "United Kingdom",
       "deadline": "2026-12-16",
-      "days": 35,
+      "days": 34,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1743,7 +1743,7 @@
       "name": "University of Manchester President's Doctoral Scholar (PDS) Award",
       "country": "United Kingdom",
       "deadline": "2026-12-18",
-      "days": 37,
+      "days": 36,
       "decision": "Check first",
       "readiness": "no_unresolved_detected_requirements",
       "documents": [],
@@ -1757,7 +1757,7 @@
       "name": "University of Manchester — PDS Safe and Multi-Fidelity Optimisation of Satellite Constellations for a Changing Planet",
       "country": "United Kingdom",
       "deadline": "2026-12-18",
-      "days": 37,
+      "days": 36,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1781,7 +1781,7 @@
       "name": "University of Sydney Research Training Program (RTP) international stipend + fee offset, 2027 commencement",
       "country": "Australia",
       "deadline": "2026-12-18",
-      "days": 37,
+      "days": 36,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1799,7 +1799,7 @@
       "name": "University of Surrey fully funded PhD: predictability in Romance verbal inflection (Linguistics)",
       "country": null,
       "deadline": "2026-12-20",
-      "days": 39,
+      "days": 38,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1821,7 +1821,7 @@
       "name": "Toyohashi University of Technology International Doctoral Degree Program with MEXT (university recommendation)",
       "country": null,
       "deadline": "2027-01-04",
-      "days": 54,
+      "days": 53,
       "decision": "Check first",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1847,7 +1847,7 @@
       "name": "University of Oxford Intelligent Earth CDT (AI for the environment), September 2027 entry",
       "country": "United Kingdom",
       "deadline": "2027-01-06",
-      "days": 56,
+      "days": 55,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1869,7 +1869,7 @@
       "name": "UCL 50 fully funded 4-year EPSRC PhD studentships in engineering and physical sciences",
       "country": "United Kingdom",
       "deadline": "2027-01-08",
-      "days": 58,
+      "days": 57,
       "decision": "Check first",
       "readiness": "no_unresolved_detected_requirements",
       "documents": [],
@@ -1883,7 +1883,7 @@
       "name": "Imperial College London President's PhD Scholarships 2027/28, round 2",
       "country": "United Kingdom",
       "deadline": "2027-01-11",
-      "days": 61,
+      "days": 60,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1905,7 +1905,7 @@
       "name": "King's College London, PhD in Human-Robot Interaction (CO-STAR, Dr Oya Celiktutan, SAIR lab), Oct 2027 entry",
       "country": null,
       "deadline": "2027-01-11",
-      "days": 61,
+      "days": 60,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1931,7 +1931,7 @@
       "name": "ETH Zurich IDEAL Lab — Doctoral Positions in Machine Learning for Engineering Design (Mark Fuge)",
       "country": "Switzerland",
       "deadline": "2027-01-15",
-      "days": 65,
+      "days": 64,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1955,7 +1955,7 @@
       "name": "SFU Engineering Science PhD (Fall 2027)",
       "country": null,
       "deadline": "2027-01-15",
-      "days": 65,
+      "days": 64,
       "decision": "Check first",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1977,7 +1977,7 @@
       "name": "University of Amsterdam EVELYN, 2 PhDs AI for Science (multimodal retrieval / mechanistic interpretability)",
       "country": "Netherlands",
       "deadline": "2027-01-15",
-      "days": 65,
+      "days": 64,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -1999,7 +1999,7 @@
       "name": "University of British Columbia (Vancouver) PhD in Electrical and Computer Engineering, September 2027",
       "country": "Canada",
       "deadline": "2027-01-15",
-      "days": 65,
+      "days": 64,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -2023,7 +2023,7 @@
       "name": "University of Toronto MIE, CLIMB Lab (Pakpong Chirarattananon), PhD September 2027",
       "country": "Canada",
       "deadline": "2027-01-15",
-      "days": 65,
+      "days": 64,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -2047,7 +2047,7 @@
       "name": "University of Toronto UTIAS (Aerospace Studies) PhD, Fall 2027, guaranteed funding, supervisor required (space robotics, SLAM, navigation labs)",
       "country": "Canada",
       "deadline": "2027-01-15",
-      "days": 65,
+      "days": 64,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -2071,7 +2071,7 @@
       "name": "University of Warwick Biomedical AI PhD (jobs.ac.uk DTF911)",
       "country": null,
       "deadline": "2027-01-15",
-      "days": 65,
+      "days": 64,
       "decision": "Check first",
       "readiness": "no_unresolved_detected_requirements",
       "documents": [],
@@ -2085,7 +2085,7 @@
       "name": "Waterloo ECE PhD, Stephen L. Smith (Autonomous Systems Lab)",
       "country": null,
       "deadline": "2027-01-15",
-      "days": 65,
+      "days": 64,
       "decision": "Check first",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -2105,7 +2105,7 @@
       "name": "University of Surrey (Vision, Speech and Signal Processing), Smart optical design: AI tools for cinematic camera lenses (Volino, Guillemaut), April 2027 start",
       "country": null,
       "deadline": "2027-01-17",
-      "days": 67,
+      "days": 66,
       "decision": "Long shot",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -2125,7 +2125,7 @@
       "name": "Durham University: Efficient Physical AI for Real-World Robotics, funded PhD studentship (jobs.ac.uk DTI242)",
       "country": null,
       "deadline": "2027-01-19",
-      "days": 69,
+      "days": 68,
       "decision": "Check first",
       "readiness": "no_unresolved_detected_requirements",
       "documents": [],
@@ -2139,7 +2139,7 @@
       "name": "SFU Computing Science PhD (Fall 2027)",
       "country": null,
       "deadline": "2027-01-19",
-      "days": 69,
+      "days": 68,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -2165,7 +2165,7 @@
       "name": "NAIST doctoral course (Information Science), 2027 admission, with MEXT IPGP scholarship",
       "country": null,
       "deadline": "2027-01-20",
-      "days": 70,
+      "days": 69,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -2187,7 +2187,7 @@
       "name": "University of Tokyo Graduate School of Frontier Sciences (GSFS) fall 2027 regular degree with MEXT University Recommendation (General) - scholarship may not continue",
       "country": "Japan",
       "deadline": "2027-01-22",
-      "days": 72,
+      "days": 71,
       "decision": "Check first",
       "readiness": "no_unresolved_detected_requirements",
       "documents": [],
@@ -2201,7 +2201,7 @@
       "name": "University of West London, AI optimisation of green roofs PhD studentship",
       "country": null,
       "deadline": "2027-01-25",
-      "days": 75,
+      "days": 74,
       "decision": "Check first",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -2223,7 +2223,7 @@
       "name": "Bristol PhD studentship, learning and decision making under uncertainty in public health (Mengyan Zhang)",
       "country": null,
       "deadline": "2027-01-31",
-      "days": 81,
+      "days": 80,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -2245,7 +2245,7 @@
       "name": "Glasgow Graduate School scholarships (College of Science and Engineering, any supervisor)",
       "country": null,
       "deadline": "2027-01-31",
-      "days": 81,
+      "days": 80,
       "decision": "Go",
       "readiness": "no_unresolved_detected_requirements",
       "documents": [],
@@ -2259,7 +2259,7 @@
       "name": "McMaster University, Computing and Software, PhD (Sept 2027 intake)",
       "country": null,
       "deadline": "2027-02-28",
-      "days": 109,
+      "days": 108,
       "decision": "Check first",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -2283,7 +2283,7 @@
       "name": "Monash Graduate Scholarship (stipend) plus Monash International Tuition Scholarship (fees), PhD, International Round 1 2027",
       "country": null,
       "deadline": "2027-02-28",
-      "days": 109,
+      "days": 108,
       "decision": "Go with risk",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -2309,7 +2309,7 @@
       "name": "Concordia Mechanical, Industrial and Aerospace Engineering PhD (Fall 2027)",
       "country": null,
       "deadline": "2027-03-01",
-      "days": 110,
+      "days": 109,
       "decision": "Go",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -2329,7 +2329,7 @@
       "name": "Victoria University of Wellington, Wellington Doctoral Scholarship (round 2 per earlier sweep)",
       "country": null,
       "deadline": "2027-03-01",
-      "days": 110,
+      "days": 109,
       "decision": "Later round",
       "readiness": "requires_readiness_confirmation",
       "documents": [
@@ -2353,7 +2353,7 @@
       "name": "University of Wollongong, University Postgraduate Award (UPA), international PhD",
       "country": null,
       "deadline": "2027-05-23",
-      "days": 193,
+      "days": 192,
       "decision": "Later round",
       "readiness": "no_unresolved_detected_requirements",
       "documents": [],
@@ -3055,8 +3055,46 @@
   ],
   "clocks": {
     "submission_deadlines": [],
-    "preparation_steps": [],
-    "shared_tasks": []
+    "preparation_steps": [
+      {
+        "id": "tsk-4b6d624b3ab659bf",
+        "source_id": "M19",
+        "name": "NTNU Gjovik, Ph.D. Candidate in Reinforcement Learning for Project Scheduling Problems (Jobbnorge 310778)",
+        "action": "By 2026-11-12 obtain English proof (IELTS Academic 6.5, no section below 5.5, accepted); candidate holds 7.0, component scores to be checked",
+        "due": "2026-11-12",
+        "state": "completion_unconfirmed",
+        "source": "https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310778"
+      },
+      {
+        "id": "tsk-1c81800306739e6f",
+        "source_id": "M20",
+        "name": "University of Oslo, PhD Research Fellow in Control Theory and Optimization for Edge Computing (Jobbnorge 310583)",
+        "action": "By 2026-11-12 prepare English proof if applicable (outside EU/EEA, see UiO PhD regulations)",
+        "due": "2026-11-12",
+        "state": "completion_unconfirmed",
+        "source": "https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310583"
+      },
+      {
+        "id": "tsk-d946736d8ff3a3d1",
+        "source_id": "M25",
+        "name": "University of Bath URSA (Faculty of Engineering & Design), Cathryn Mitchell, ionospheric modelling/PNT",
+        "action": "By 2026-11-12: scan degree certificates and transcripts with authorised English translations of any non-English ones; update CV; write personal statement (motivation, why UK, why you deserve funding)",
+        "due": "2026-11-12",
+        "state": "completion_unconfirmed",
+        "source": "https://www.bath.ac.uk/campaigns/university-research-studentship-award-ursa/"
+      }
+    ],
+    "shared_tasks": [
+      {
+        "id": "tsk-fca00b890c33ae13",
+        "source_id": "CROSS-0020",
+        "name": "IMPRS-IS closes 15 Nov AoE; faculty must be valid program supervisors.",
+        "action": "Ask IMPRS three academic referees to finalize recommendations; tailor IMPRS selection to faculty in robot perception and SLAM.",
+        "due": "2026-11-12",
+        "state": "explicit_to_do",
+        "source": ""
+      }
+    ]
   },
   "insights": {
     "deadline_collisions": [
@@ -3568,7 +3606,7 @@
         "id": "inria:2026-10608",
         "name": "Inria IROKO Montpellier — PhD Scientific AI and Spatiotemporal Biodiversity Modelling",
         "deadline": "2026-11-13",
-        "days": 2,
+        "days": 1,
         "reasons": [
           "1 mentioned documents with unknown readiness"
         ],
@@ -3578,7 +3616,7 @@
         "id": "M07a",
         "name": "Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacancy ref 3522426DA (jobs.soton.ac.uk)",
         "deadline": "2026-11-13",
-        "days": 2,
+        "days": 1,
         "reasons": [
           "3 mentioned documents with unknown readiness"
         ],
@@ -3588,7 +3626,7 @@
         "id": "R26-TIB-ECOAIRE-CAUSAL-NLP",
         "name": "TIB Hannover / Leibniz University — Doctoral Researcher in NLP and Causal AI for Scientific Reasoning (EcoAIRE), 44/2026",
         "deadline": "2026-11-14",
-        "days": 3,
+        "days": 2,
         "reasons": [
           "3 mentioned documents with unknown readiness"
         ],
@@ -3598,7 +3636,7 @@
         "id": "N263-09",
         "name": "International Max Planck Research School for Intelligent Systems (IMPRS-IS), 2027 doctoral recruitment",
         "deadline": "2026-11-15",
-        "days": 4,
+        "days": 3,
         "reasons": [
           "1 source/evidence obligations",
           "4 mentioned documents with unknown readiness"
@@ -3609,7 +3647,7 @@
         "id": "N263-10",
         "name": "BMW AI Robotics / RoboTac and TU/e Eindhoven, PhD World Models & Visuo-Tactile Foundation Models (2 research topics)",
         "deadline": "2026-11-15",
-        "days": 4,
+        "days": 3,
         "reasons": [
           "5 mentioned documents with unknown readiness"
         ],
@@ -3619,7 +3657,7 @@
         "id": "M18",
         "name": "Institute of Science Tokyo, International Graduate Program IGP(A) Fall 2027 with MEXT recommendation",
         "deadline": "2026-11-15",
-        "days": 4,
+        "days": 3,
         "reasons": [
           "1 mentioned documents with unknown readiness"
         ],
@@ -3629,7 +3667,7 @@
         "id": "M17",
         "name": "Northeastern University London, PhD studentship: Algorithms/Hardware Co-Design for Bayesian and Ising Models (Rajendran; ref R143025)",
         "deadline": "2026-11-15",
-        "days": 4,
+        "days": 3,
         "reasons": [
           "2 mentioned documents with unknown readiness"
         ],
@@ -3639,7 +3677,7 @@
         "id": "M15",
         "name": "OIST Graduate School PhD, May or Sep 2027 entry (Admissions Workshop 2027)",
         "deadline": "2026-11-15",
-        "days": 4,
+        "days": 3,
         "reasons": [
           "6 mentioned documents with unknown readiness"
         ],
@@ -3649,7 +3687,7 @@
         "id": "N263-08",
         "name": "TU Delft OPERA EU Project, PhD Safe Planning and Decision-Making under Uncertainty for Long-Horizon Robot Autonomy",
         "deadline": "2026-11-15",
-        "days": 4,
+        "days": 3,
         "reasons": [
           "3 mentioned documents with unknown readiness"
         ],
@@ -3659,7 +3697,7 @@
         "id": "N263-07",
         "name": "TUM Autonomous Vehicle Systems (Johannes Betz), PhD Mobile Manipulation for Humanoid Robots",
         "deadline": "2026-11-15",
-        "days": 4,
+        "days": 3,
         "reasons": [
           "2 mentioned documents with unknown readiness"
         ],
@@ -3669,7 +3707,7 @@
         "id": "N264-03",
         "name": "University of Amsterdam / Ericsson, PhD Cloud-Native and AI-Native 6G Networks (#15041)",
         "deadline": "2026-11-15",
-        "days": 4,
+        "days": 3,
         "reasons": [
           "4 mentioned documents with unknown readiness"
         ],
@@ -3679,7 +3717,7 @@
         "id": "N264-02",
         "name": "University of Amsterdam, PhD Accountable and Responsible AI (SafeGenAI / LLM4LM; #15581)",
         "deadline": "2026-11-15",
-        "days": 4,
+        "days": 3,
         "reasons": [
           "4 mentioned documents with unknown readiness"
         ],
@@ -3689,7 +3727,7 @@
         "id": "N263-11",
         "name": "University of Birmingham, Fully Funded PhD in Integrated Intelligent Safe Environment (IISE) for Nuclear Robotics",
         "deadline": "2026-11-15",
-        "days": 4,
+        "days": 3,
         "reasons": [
           "1 mentioned documents with unknown readiness"
         ],
@@ -3699,7 +3737,7 @@
         "id": "N264-05",
         "name": "AI4I + Politecnico di Torino, funded PhD Adversarial Robustness in Multimodal Foundation Models",
         "deadline": "2026-11-16",
-        "days": 5,
+        "days": 4,
         "reasons": [
           "3 mentioned documents with unknown readiness"
         ],
@@ -3709,7 +3747,7 @@
         "id": "N264-04",
         "name": "AI4I + Politecnico di Torino, funded PhD Agentic System-1/System-2 Architectures for Robot Autonomy",
         "deadline": "2026-11-16",
-        "days": 5,
+        "days": 4,
         "reasons": [
           "4 mentioned documents with unknown readiness"
         ],
@@ -3719,7 +3757,7 @@
         "id": "R26-AI4I-TRUSTWORTHY-GENERALIST",
         "name": "AI4I and Politecnico di Torino — PhD Trustworthy Generalist Robot Policies",
         "deadline": "2026-11-16",
-        "days": 5,
+        "days": 4,
         "reasons": [
           "2 mentioned documents with unknown readiness"
         ],
@@ -3729,7 +3767,7 @@
         "id": "M19",
         "name": "NTNU Gjovik, Ph.D. Candidate in Reinforcement Learning for Project Scheduling Problems (Jobbnorge 310778)",
         "deadline": "2026-11-16",
-        "days": 5,
+        "days": 4,
         "reasons": [
           "6 mentioned documents with unknown readiness"
         ],
@@ -3739,7 +3777,7 @@
         "id": "M20",
         "name": "University of Oslo, PhD Research Fellow in Control Theory and Optimization for Edge Computing (Jobbnorge 310583)",
         "deadline": "2026-11-17",
-        "days": 6,
+        "days": 5,
         "reasons": [
           "6 mentioned documents with unknown readiness"
         ],
@@ -3749,7 +3787,7 @@
         "id": "M21",
         "name": "OsloMet PhD Fellow in Trustworthy Generative AI with Knowledge Verification (310467)",
         "deadline": "2026-11-18",
-        "days": 7,
+        "days": 6,
         "reasons": [
           "6 mentioned documents with unknown readiness"
         ],
@@ -3759,7 +3797,7 @@
         "id": "C07-UiO-310559",
         "name": "UiO Integreat PhD Research Fellow in Structured Vision-Language Models (310559)",
         "deadline": "2026-11-18",
-        "days": 7,
+        "days": 6,
         "reasons": [
           "6 mentioned documents with unknown readiness"
         ],
@@ -3769,7 +3807,7 @@
         "id": "C07-NTNU-310592",
         "name": "NTNU CAPTURE MSCA DN PhD in Colour and Image Enhancement for Wireless Capsule Endoscopy (310592), Gjovik",
         "deadline": "2026-11-19",
-        "days": 8,
+        "days": 7,
         "reasons": [
           "5 mentioned documents with unknown readiness"
         ],
@@ -3779,7 +3817,7 @@
         "id": "C07-NTNU-310379",
         "name": "NTNU CAPTURE MSCA DN PhD in Explainable AI for Capsule Endoscopy (310379), Gjovik",
         "deadline": "2026-11-19",
-        "days": 8,
+        "days": 7,
         "reasons": [
           "5 mentioned documents with unknown readiness"
         ],
@@ -3789,7 +3827,7 @@
         "id": "M22",
         "name": "NTNU PhD Candidate in Multispectral Wireless Capsule Endoscopy (WCE), CAPTURE MSCA Doctoral Network (310363)",
         "deadline": "2026-11-19",
-        "days": 8,
+        "days": 7,
         "reasons": [
           "1 mentioned documents with unknown readiness"
         ],
@@ -3799,7 +3837,7 @@
         "id": "inria:2026-10570",
         "name": "Inria ASTRA Paris — PhD Enforcing Persistence in Generative World Models for Robotics",
         "deadline": "2026-11-20",
-        "days": 9,
+        "days": 8,
         "reasons": [
           "3 mentioned documents with unknown readiness"
         ],
@@ -3809,7 +3847,7 @@
         "id": "R26-VIENNA-EXOSPHERE",
         "name": "University of Vienna — Two FWF-funded PhDs in Efficient, Expressive and Robust Graph Neural Networks (EXOSPHERE)",
         "deadline": "2026-11-20",
-        "days": 9,
+        "days": 8,
         "reasons": [
           "1 mentioned documents with unknown readiness"
         ],
@@ -3819,7 +3857,7 @@
         "id": "N264-06",
         "name": "TU/e Eindhoven + TUM, PhD Physics-Informed Generative AI for Dynamic Cardiac MRI (PRIMA-CMR)",
         "deadline": "2026-11-21",
-        "days": 10,
+        "days": 9,
         "reasons": [
           "3 mentioned documents with unknown readiness"
         ],
@@ -3829,7 +3867,7 @@
         "id": "M23",
         "name": "ETH Zurich, Julia Vogt (Medical Data Science group): PhD in Machine Learning and Medical Data Science",
         "deadline": "2026-11-22",
-        "days": 11,
+        "days": 10,
         "reasons": [
           "3 mentioned documents with unknown readiness"
         ],
@@ -3839,7 +3877,7 @@
         "id": "R26-UCY-SKEYES",
         "name": "University of Cyprus — V4RL SkEyes ERC funded PhD in robotics, computer vision and aerial SLAM (Margarita Chli)",
         "deadline": "2026-11-23",
-        "days": 12,
+        "days": 11,
         "reasons": [
           "1 source/evidence obligations",
           "4 mentioned documents with unknown readiness"
@@ -3850,7 +3888,7 @@
         "id": "R26-TOULOUSE-BEST-CROSSING",
         "name": "Université de Toulouse BEST / CNRS CROSSING — France–Australia PhD in World Models, Drone Swarms and Autonomous Agent Safety",
         "deadline": "2026-11-23",
-        "days": 12,
+        "days": 11,
         "reasons": [
           "2 mentioned documents with unknown readiness"
         ],
@@ -3860,7 +3898,7 @@
         "id": "N264-07",
         "name": "Linkoeping University CHASS, PhD Optimal Motion Planning for Drone Swarms (LiU-2026-04767)",
         "deadline": "2026-11-24",
-        "days": 13,
+        "days": 12,
         "reasons": [
           "1 mentioned documents with unknown readiness"
         ],
@@ -3870,7 +3908,7 @@
         "id": "C15-NAGOYA",
         "name": "Nagoya University Graduate School of Informatics, October 2027 doctoral entry (MEXT, Data Science Education Program)",
         "deadline": "2026-11-24",
-        "days": 13,
+        "days": 12,
         "reasons": [
           "3 mentioned documents with unknown readiness"
         ],
@@ -3880,7 +3918,7 @@
         "id": "M24",
         "name": "ETH Zurich RobotX PhD Fellowship 2027",
         "deadline": "2026-11-27",
-        "days": 16,
+        "days": 15,
         "reasons": [
           "5 mentioned documents with unknown readiness"
         ],
@@ -3890,7 +3928,7 @@
         "id": "N264-08",
         "name": "Aalborg University ROX6G, PhD Safe Multi-Robot Planning and Control under Connectivity Constraints (#2026/1218)",
         "deadline": "2026-11-29",
-        "days": 18,
+        "days": 17,
         "reasons": [
           "5 mentioned documents with unknown readiness"
         ],
@@ -3900,7 +3938,7 @@
         "id": "R26-BAMBERG-ROBOT-LEARNING",
         "name": "University of Bamberg — Full-time doctoral researcher in Robotics and Machine Learning (Robot Learning), MII-202611-ROB",
         "deadline": "2026-11-29",
-        "days": 18,
+        "days": 17,
         "reasons": [
           "3 mentioned documents with unknown readiness"
         ],
@@ -3910,7 +3948,7 @@
         "id": "M25",
         "name": "University of Bath URSA (Faculty of Engineering & Design), Cathryn Mitchell, ionospheric modelling/PNT",
         "deadline": "2026-11-29",
-        "days": 18,
+        "days": 17,
         "reasons": [
           "5 mentioned documents with unknown readiness"
         ],
@@ -3920,7 +3958,7 @@
         "id": "M29",
         "name": "EPFL LAMD (Neuchatel) - PhD position in Integrated Design and Optimization, MSCA-DN TurboImpact",
         "deadline": "2026-11-30",
-        "days": 19,
+        "days": 18,
         "reasons": [
           "4 mentioned documents with unknown readiness"
         ],
@@ -3930,7 +3968,7 @@
         "id": "M27",
         "name": "ETH Zurich Soft Robotics Lab (Katzschmann): Doctoral Positions in Robot Learning and Soft, Musculoskeletal, and Biohybrid Robotics",
         "deadline": "2026-11-30",
-        "days": 19,
+        "days": 18,
         "reasons": [
           "4 mentioned documents with unknown readiness"
         ],
@@ -3940,7 +3978,7 @@
         "id": "inria:2026-10454",
         "name": "Inria MIND Palaiseau — PhD Pretrained Multimodal Neuroimaging Models for Predicting Individual Cognition",
         "deadline": "2026-11-30",
-        "days": 19,
+        "days": 18,
         "reasons": [
           "2 mentioned documents with unknown readiness"
         ],
@@ -3950,7 +3988,7 @@
         "id": "M28",
         "name": "Saitama University ESITI - MEXT Scholarship (University Recommendation), October 2027 intake",
         "deadline": "2026-11-30",
-        "days": 19,
+        "days": 18,
         "reasons": [
           "3 mentioned documents with unknown readiness"
         ],
@@ -3960,7 +3998,7 @@
         "id": "M30-NIEDUSZYNSKI",
         "name": "UEA / Earlham Institute - Decoding and Designing DNA Replication Origins Using Genome Language Models (NIEDUSZYNSKI_E27DTP)",
         "deadline": "2026-11-30",
-        "days": 19,
+        "days": 18,
         "reasons": [
           "4 mentioned documents with unknown readiness"
         ],
@@ -3970,7 +4008,7 @@
         "id": "M30-SHERIFF",
         "name": "UEA / Norwich Research Park Biosciences DTP - Can blood reveal the body? Trustworthy AI for tissue gene expression (SHERIFF_E27DTP)",
         "deadline": "2026-11-30",
-        "days": 19,
+        "days": 18,
         "reasons": [
           "4 mentioned documents with unknown readiness"
         ],
@@ -3980,7 +4018,7 @@
         "id": "SC01",
         "name": "University of Bern, Machine Learning in Medicine Lab (Prof. Lisa Koch): PhD in Machine Learning in Medicine, multimodal health data",
         "deadline": "2026-11-30",
-        "days": 19,
+        "days": 18,
         "reasons": [
           "3 mentioned documents with unknown readiness"
         ],
@@ -3990,7 +4028,7 @@
         "id": "SE-U01",
         "name": "University of Edinburgh UKRI AI CDT in Designing Responsible Natural Language Processing, 2027 entry",
         "deadline": "2026-11-30",
-        "days": 19,
+        "days": 18,
         "reasons": [
           "1 mentioned documents with unknown readiness"
         ],
@@ -4000,7 +4038,7 @@
         "id": "M26",
         "name": "University of Luxembourg YADIAS (IAS Young Academics Doctoral Fellowships), MSCA-COFUND",
         "deadline": "2026-11-30",
-        "days": 19,
+        "days": 18,
         "reasons": [
           "2 mentioned documents with unknown readiness"
         ],
@@ -4010,7 +4048,7 @@
         "id": "N264-09",
         "name": "Uppsala University, PhD Signal Processing: Multimodal Environment Modeling for Wireless Spatial Intelligence (UFV-PA 2026/2989)",
         "deadline": "2026-11-30",
-        "days": 19,
+        "days": 18,
         "reasons": [
           "5 mentioned documents with unknown readiness"
         ],
@@ -4020,7 +4058,7 @@
         "id": "R26-GWU-EPIC",
         "name": "George Washington University — EPIC Lab visual-inertial perception, SLAM and physical AI PhD (Chuchu Chen), Fall 2027",
         "deadline": "2026-12-01",
-        "days": 20,
+        "days": 19,
         "reasons": [
           "1 source/evidence obligations",
           "4 mentioned documents with unknown readiness"
@@ -4031,7 +4069,7 @@
         "id": "SE-U03",
         "name": "EPFL EDEE (Electrical Engineering) doctoral programme, December 2026 round (lab chosen after admission)",
         "deadline": "2026-12-01",
-        "days": 20,
+        "days": 19,
         "reasons": [
           "3 mentioned documents with unknown readiness"
         ],
@@ -4041,7 +4079,7 @@
         "id": "M32",
         "name": "EPFL EDIC (Computer and Communication Sciences) doctoral programme, Round 1",
         "deadline": "2026-12-01",
-        "days": 20,
+        "days": 19,
         "reasons": [
           "5 mentioned documents with unknown readiness"
         ],
@@ -4051,7 +4089,7 @@
         "id": "N264-10",
         "name": "Max Planck School Biomedical AI (BMAI), funded PhD cohort starting September 2027",
         "deadline": "2026-12-01",
-        "days": 20,
+        "days": 19,
         "reasons": [
           "4 mentioned documents with unknown readiness"
         ],
@@ -4061,7 +4099,7 @@
         "id": "M33",
         "name": "Memorial University - PhD Engineering and Applied Science, Fall 2027 admission",
         "deadline": "2026-12-01",
-        "days": 20,
+        "days": 19,
         "reasons": [
           "5 mentioned documents with unknown readiness"
         ],

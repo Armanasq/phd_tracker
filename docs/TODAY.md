@@ -1,8 +1,8 @@
-# Execution plan — 2026-11-11
+# Execution plan — 2026-11-12
 
 [← Repository cockpit](../README.md) · [Tracker workbook](../PhD_Action_List.xlsx) · [Import task calendar](../calendar/phd_deadlines.ics) · [Private Action Center](../../issues/1) · [Full machine-readable ledger](../data/execution_plan.json)
 
-> **As of 2026-11-11, Europe/Berlin.** This plan is generated from original workbook rows. It distinguishes application deadlines from step dates and explicit cross-route tasks. A dated Step timeline task has no recorded completion flag; it is not automatically labelled incomplete.
+> **As of 2026-11-12, Europe/Berlin.** This plan is generated from original workbook rows. It distinguishes application deadlines from step dates and explicit cross-route tasks. A dated Step timeline task has no recorded completion flag; it is not automatically labelled incomplete.
 
 ## A. Application submission deadlines today (0)
 
@@ -10,21 +10,23 @@
 |:--|:--|:--|:--|
 | — | None in the current snapshot | — | — |
 
-## B. Shared actions due today (0)
+## B. Shared actions due today (1)
 
 | Date | Cross-application task | Recorded status |
 |:---|:---|:---|
-| — | None scheduled today | — |
+| 2026-11-12 | Ask IMPRS three academic referees to finalize recommendations; tailor IMPRS selection to faculty in robot perception and SLAM. · `tsk-fca00b890c33ae13` | To do |
 
-## C. All programme steps explicitly dated today (0)
+## C. All programme steps explicitly dated today (3)
 
 To confirm a task, copy its stable `tsk-...` identifier from the table and comment `/done TASK_ID` on the [private Action Center](../../issues/1). Use `/reopen TASK_ID` to undo. These commands update a separate completion ledger, not the original source rows.
 
 | When | Application / workstream | Action | Source |
 |:--|:--|:--|:--|
-| — | None in the current snapshot | — | — |
+| 2026-11-12 | NTNU Gjovik, Ph.D. Candidate in Reinforcement Learning for Project Scheduling Problems (Jobbnorge 310778) | By 2026-11-12 obtain English proof (IELTS Academic 6.5, no section below 5.5, accepted); candidate holds 7.0, component scores to be checked · `tsk-4b6d624b3ab659bf` | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310778) · Step timeline · row 242 |
+| 2026-11-12 | University of Oslo, PhD Research Fellow in Control Theory and Optimization for Edge Computing (Jobbnorge 310583) | By 2026-11-12 prepare English proof if applicable (outside EU/EEA, see UiO PhD regulations) · `tsk-1c81800306739e6f` | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310583) · Step timeline · row 244 |
+| 2026-11-12 | University of Bath URSA (Faculty of Engineering & Design), Cathryn Mitchell, ionospheric modelling/PNT | By 2026-11-12: scan degree certificates and transcripts with authorised English translations of any non-English ones; update CV; write personal statement (motivation, why UK, why you deserve funding) · `tsk-d946736d8ff3a3d1` | [Source page](https://www.bath.ac.uk/campaigns/university-research-studentship-award-ursa/) · Step timeline · row 243 |
 
-## D. Application deadlines within seven days (20)
+## D. Application deadlines within seven days (23)
 
 | When | Application / workstream | Action | Source |
 |:--|:--|:--|:--|
@@ -48,10 +50,13 @@ To confirm a task, copy its stable `tsk-...` identifier from the table and comme
 | 2026-11-17 | University of Oslo, PhD Research Fellow in Control Theory and Optimization for Edge Computing (Jobbnorge 310583) | By 2026-10-30 email Mathias Hudoba de Badyn (and optionally Tonnes Nygaard) with CV and a short enquiry | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310583) · Action list · row 55 |
 | 2026-11-18 | UiO Integreat PhD Research Fellow in Structured Vision-Language Models (310559) | By 4 Nov 2026: email 2-3 referees; contact Adin Ramirez Rivera (adinr@uio.no) with CV | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310559) · Action list · row 57 |
 | 2026-11-18 | OsloMet PhD Fellow in Trustworthy Generative AI with Knowledge Verification (310467) | By 2026-11-04: check whether the Tehran MSc and BSc need pre-approval for foreign education (page says foreign education needs pre-approval, approval letter attached); start it if so | [Source page](https://www.oslomet.no/en/work/job-openings/phd-fellow-in-trustworthy-generative-ai-with-knowledge-verification) · Action list · row 56 |
+| 2026-11-19 | NTNU CAPTURE MSCA DN PhD in Explainable AI for Capsule Endoscopy (310379), Gjovik | By 5 Nov 2026: email Prof. Kiran Raja to confirm fit and export-control status for Iranian national | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310379) · Action list · row 59 |
+| 2026-11-19 | NTNU CAPTURE MSCA DN PhD in Colour and Image Enhancement for Wireless Capsule Endoscopy (310592), Gjovik | By 5 Nov 2026: email Marius Pedersen about fit and export-control status | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310592) · Action list · row 58 |
+| 2026-11-19 | NTNU PhD Candidate in Multispectral Wireless Capsule Endoscopy (WCE), CAPTURE MSCA Doctoral Network (310363) | By 2026-10-31: obtain the full Jobbnorge advert in a normal browser (page body did not load here) and confirm document list and referee count | [Source page](https://capture-dn.eu/index.php/vacant-positions/) · Action list · row 60 |
 
 ## E. Earlier tasks, completion status unconfirmed
 
-There are **142** pre-2026-11-11 tasks with no confirmed completion status and whose final application deadline has not definitively passed, including **126** programme steps and **16** cross-route tasks. These represent *review work*, not automatic missed deadlines.
+There are **142** pre-2026-11-12 tasks with no confirmed completion status and whose final application deadline has not definitively passed, including **126** programme steps and **16** cross-route tasks. These represent *review work*, not automatic missed deadlines.
 
 | When | Application / workstream | Action | Source |
 |:--|:--|:--|:--|
