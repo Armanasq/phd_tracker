@@ -1,37 +1,41 @@
-# Execution plan — 2026-11-12
+# Execution plan — 2026-11-13
 
 [← Repository cockpit](../README.md) · [Tracker workbook](../PhD_Action_List.xlsx) · [Import task calendar](../calendar/phd_deadlines.ics) · [Private Action Center](../../issues/1) · [Full machine-readable ledger](../data/execution_plan.json)
 
-> **As of 2026-11-12, Europe/Berlin.** This plan is generated from original workbook rows. It distinguishes application deadlines from step dates and explicit cross-route tasks. A dated Step timeline task has no recorded completion flag; it is not automatically labelled incomplete.
+> **As of 2026-11-13, Europe/Berlin.** This plan is generated from original workbook rows. It distinguishes application deadlines from step dates and explicit cross-route tasks. A dated Step timeline task has no recorded completion flag; it is not automatically labelled incomplete.
 
-## A. Application submission deadlines today (0)
-
-| When | Application / workstream | Action | Source |
-|:--|:--|:--|:--|
-| — | None in the current snapshot | — | — |
-
-## B. Shared actions due today (1)
-
-| Date | Cross-application task | Recorded status |
-|:---|:---|:---|
-| 2026-11-12 | Ask IMPRS three academic referees to finalize recommendations; tailor IMPRS selection to faculty in robot perception and SLAM. · `tsk-fca00b890c33ae13` | To do |
-
-## C. All programme steps explicitly dated today (3)
-
-To confirm a task, copy its stable `tsk-...` identifier from the table and comment `/done TASK_ID` on the [private Action Center](../../issues/1). Use `/reopen TASK_ID` to undo. These commands update a separate completion ledger, not the original source rows.
-
-| When | Application / workstream | Action | Source |
-|:--|:--|:--|:--|
-| 2026-11-12 | NTNU Gjovik, Ph.D. Candidate in Reinforcement Learning for Project Scheduling Problems (Jobbnorge 310778) | By 2026-11-12 obtain English proof (IELTS Academic 6.5, no section below 5.5, accepted); candidate holds 7.0, component scores to be checked · `tsk-4b6d624b3ab659bf` | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310778) · Step timeline · row 242 |
-| 2026-11-12 | University of Oslo, PhD Research Fellow in Control Theory and Optimization for Edge Computing (Jobbnorge 310583) | By 2026-11-12 prepare English proof if applicable (outside EU/EEA, see UiO PhD regulations) · `tsk-1c81800306739e6f` | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310583) · Step timeline · row 244 |
-| 2026-11-12 | University of Bath URSA (Faculty of Engineering & Design), Cathryn Mitchell, ionospheric modelling/PNT | By 2026-11-12: scan degree certificates and transcripts with authorised English translations of any non-English ones; update CV; write personal statement (motivation, why UK, why you deserve funding) · `tsk-d946736d8ff3a3d1` | [Source page](https://www.bath.ac.uk/campaigns/university-research-studentship-award-ursa/) · Step timeline · row 243 |
-
-## D. Application deadlines within seven days (23)
+## A. Application submission deadlines today (2)
 
 | When | Application / workstream | Action | Source |
 |:--|:--|:--|:--|
 | 2026-11-13 | Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacancy ref 3522426DA (jobs.soton.ac.uk) | By 13 Nov 23:59 UK time: submit BlueOcean MSCA staff vacancy ref 3522426DA via jobs.soton.ac.uk. Also confirm and complete any separate PhD/project registration (linked form timing not verified). | [Source page](https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10) · Action list · row 39 |
 | 2026-11-13 | Inria IROKO Montpellier — PhD Scientific AI and Spatiotemporal Biodiversity Modelling | Check research scope and applicant eligibility, then submit directly via Inria portal by 13 Nov; demonstrate reproducible scientific ML and physics-informed modelling experience. | [Source page](https://jobs.inria.fr/public/classic/en/offres/2026-10608) · Action list · row 38 |
+
+## B. Shared actions due today (1)
+
+| Date | Cross-application task | Recorded status |
+|:---|:---|:---|
+| 2026-11-13 | Convert Tehran grades for Norway and attach the grading-system explanation (B or better is required for NTNU, UiO, OsloMet). · `tsk-9f9214ee0019f9f5` | To do |
+
+## C. All programme steps explicitly dated today (8)
+
+To confirm a task, copy its stable `tsk-...` identifier from the table and comment `/done TASK_ID` on the [private Action Center](../../issues/1). Use `/reopen TASK_ID` to undo. These commands update a separate completion ledger, not the original source rows.
+
+| When | Application / workstream | Action | Source |
+|:--|:--|:--|:--|
+| 2026-11-13 | Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacancy ref 3522426DA (jobs.soton.ac.uk) | VERIFIED UPDATE 4 NOV: Southampton MSCA BlueOcean staff vacancy ref 3522426DA official application closes 13 Nov 23:59 UK time, not 31 Oct. · `tsk-9b54a4da67523b00` | [Source page](https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10) · Step timeline · row 247 |
+| 2026-11-13 | Southampton MSCA BlueOcean staff vacancy ref 3522426DA | Submit official staff recruitment application by 23:59 UK time; confirm linked PhD/project application requirements · `tsk-4d3f1a78919a8ef3` | [Source page](https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10) · Step timeline · row 248 |
+| 2026-11-13 | Saitama University ESITI - MEXT Scholarship (University Recommendation), October 2027 intake | Request official transcripts with grading-system explanation and graduation certificates (BSc and MSc) from University of Tehran, by 2026-11-13 · `tsk-c7e1f3a14f93f955` | [Source page](https://park.saitama-u.ac.jp/~rese/admission.html) · Step timeline · row 246 |
+| 2026-11-13 | York University - PhD Electrical Engineering and Computer Science (Lassonde), Fall | Draft one-page statement of purpose and previous experience, plus statement of interest (York guidance 500-1,000 words) and CV, by 2026-11-13 · `tsk-5ed43fc7d2b831ab` | [Source page](https://futurestudents.yorku.ca/graduate/programs/electrical-engineering-and-computer-science) · Step timeline · row 252 |
+| 2026-11-13 | UEA / ARIES NERC DTP studentships (entry 1 Oct 2027) | By 2026-11-13 email each shortlisted project's supervisor (recommended on page) with CV and short fit note · `tsk-bd2f558ab1ceed68` | [Source page](https://www.aries-dtp.ac.uk/applications) · Step timeline · row 249 |
+| 2026-11-13 | University of Sydney Research Training Program (RTP) international stipend + fee offset, 2027 commencement | By 2026-11-13 email engineering.hdr@sydney.edu.au with CV and research area to identify a supervisor (stated on the Faculty page as the contact) · `tsk-4ca1f0cdb1c967b2` | [Source page](https://www.sydney.edu.au/scholarships/australian-government-research-training-program/rtp-international.html) · Step timeline · row 251 |
+| 2026-11-13 | University of British Columbia (Vancouver) PhD in Electrical and Computer Engineering, September 2027 | By 2026-11-13 browse ECE faculty profiles and email prospective supervisors (encouraged, not required) with CV and fit note · `tsk-42987d46f4e55a58` | [Source page](https://www.grad.ubc.ca/prospective-students/graduate-degree-programs/phd-electrical-computer-engineering) · Step timeline · row 250 |
+| 2026-11-13 | Inria IROKO Montpellier — PhD Scientific AI and Spatiotemporal Biodiversity Modelling | Check research scope and applicant eligibility, then submit directly via Inria portal by 13 Nov; demonstrate reproducible scientific ML and physics-informed modelling experience. \[External deadline: Final appli · `tsk-66fd266824607338` | [Source page](https://jobs.inria.fr/public/classic/en/offres/2026-10608) · Step timeline · row 245 |
+
+## D. Application deadlines within seven days (23)
+
+| When | Application / workstream | Action | Source |
+|:--|:--|:--|:--|
 | 2026-11-14 | TIB Hannover / Leibniz University — Doctoral Researcher in NLP and Causal AI for Scientific Reasoning (EcoAIRE), 44/2026 | Apply by 14 Nov using official online form, reference 44/2026. Focus application on evidence-grounded agent architectures, causal research extraction, knowledge graphs and robust RAG/LLM evaluation; confirm con | [Source page](https://www.leibniz-gemeinschaft.de/en/careers/jobs/detail/job/show/Job/research-associatedoctoral-researcher-natural-language-processing-and-causal-ai-for-scientific-reasoning-mfd) · Action list · row 40 |
 | 2026-11-15 | OIST Graduate School PhD, May or Sep 2027 entry (Admissions Workshop 2027) | By 2026-10-29 browse faculty and units (including Yamada MLDS and Pao Chan units) at https://www.oist.jp/research/faculty-members and check supervisor availability at https://www.oist.jp/admissions/phd-program/ | [Source page](https://www.oist.jp/admissions/phd-program/apply-phd) · Action list · row 45 |
 | 2026-11-15 | Northeastern University London, PhD studentship: Algorithms/Hardware Co-Design for Bayesian and Ising Models (Rajendran; ref  | By 2026-10-29 email b.rajendran@nulondon.ac.uk with a short informal enquiry (confirm post still open given rolling shortlisting; ask about visa) | [Source page](https://www.jobs.ac.uk/job/DTI287/) · Action list · row 44 |
@@ -53,10 +57,12 @@ To confirm a task, copy its stable `tsk-...` identifier from the table and comme
 | 2026-11-19 | NTNU CAPTURE MSCA DN PhD in Explainable AI for Capsule Endoscopy (310379), Gjovik | By 5 Nov 2026: email Prof. Kiran Raja to confirm fit and export-control status for Iranian national | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310379) · Action list · row 59 |
 | 2026-11-19 | NTNU CAPTURE MSCA DN PhD in Colour and Image Enhancement for Wireless Capsule Endoscopy (310592), Gjovik | By 5 Nov 2026: email Marius Pedersen about fit and export-control status | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310592) · Action list · row 58 |
 | 2026-11-19 | NTNU PhD Candidate in Multispectral Wireless Capsule Endoscopy (WCE), CAPTURE MSCA Doctoral Network (310363) | By 2026-10-31: obtain the full Jobbnorge advert in a normal browser (page body did not load here) and confirm document list and referee count | [Source page](https://capture-dn.eu/index.php/vacant-positions/) · Action list · row 60 |
+| 2026-11-20 | University of Vienna — Two FWF-funded PhDs in Efficient, Expressive and Robust Graph Neural Networks (EXOSPHERE) | Inspect the official PDF to choose algorithmic/numerical robustness or theoretical expressivity track. Apply following the institutional announcement by 20 Nov. | [Source page](https://taa.cs.univie.ac.at/news/story/exosphere) · Action list · row 62 |
+| 2026-11-20 | Inria ASTRA Paris — PhD Enforcing Persistence in Generative World Models for Robotics | Apply through Inria before 20 Nov; frame proposal around persistent world models, long-horizon planning, robust robot control and multimodal state estimation. Confirm role is still open despite earlier listed s | [Source page](https://jobs.inria.fr/public/classic/en/offres/2026-10570) · Action list · row 61 |
 
 ## E. Earlier tasks, completion status unconfirmed
 
-There are **142** pre-2026-11-12 tasks with no confirmed completion status and whose final application deadline has not definitively passed, including **126** programme steps and **16** cross-route tasks. These represent *review work*, not automatic missed deadlines.
+There are **146** pre-2026-11-13 tasks with no confirmed completion status and whose final application deadline has not definitively passed, including **129** programme steps and **17** cross-route tasks. These represent *review work*, not automatic missed deadlines.
 
 | When | Application / workstream | Action | Source |
 |:--|:--|:--|:--|

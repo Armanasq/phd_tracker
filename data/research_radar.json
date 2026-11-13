@@ -2,6 +2,360 @@
   "schema_version": 1,
   "papers": [
     {
+      "id": "arxiv:2611.17160",
+      "title": "XBot-Omni: An Omni-Modal Model for Embodied Understanding and Interaction",
+      "authors": [
+        "Kerui Gu",
+        "Xing Fu",
+        "Shuoyang Sun",
+        "Cheng Peng",
+        "Jingru Duan",
+        "Huayu Gu",
+        "Zhenyu Chen",
+        "Jiaxin Huang",
+        "Cheng Wen",
+        "Rui Zhen",
+        "Kairui Chen",
+        "Zhihui Peng",
+        "Shaoli Huang"
+      ],
+      "abstract_excerpt": "Embodied interaction requires an agent to integrate multimodal perception with verbal and nonverbal behaviors to effectively communicate its intentions, including speech, body motion, and facial expressions. We present XBot-Omni, a Thinker--Talker--Actor architecture that extends the Omni paradigm to robotic modalities, including body motion and facial expressions, with ``X'' representing the extensibility to robotic-specific modalities. The Thinker processes text, images, audio, and video to formulate contextually appropriate responses, which are then realized by the Talke",
+      "paper_url": "https://arxiv.org/abs/2611.17160",
+      "published": "2026-11-12",
+      "topic": "robot_learning",
+      "relevance_score": 13,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-13T12:21:07+00:00",
+      "first_seen": "2026-11-13T12:21:07+00:00",
+      "last_seen": "2026-11-13T12:21:07+00:00"
+    },
+    {
+      "id": "arxiv:2611.16752",
+      "title": "AgriSense: Vision-Language Decision Support and Robotic Intervention in a Virtual Greenhouse Copy title",
+      "authors": [
+        "Lyes Saad Saoud",
+        "Oualid Doukhi",
+        "Reza Ghorbani",
+        "Moussa Ayyash"
+      ],
+      "abstract_excerpt": "Autonomous greenhouse management increasingly requires robotic systems that integrate perception, navigation, environmental regulation, and plant-level intervention. This paper presents AgriSense, a framework combining an Isaac Sim virtual greenhouse, a quadruped mobile manipulator, RGB and LiDAR-inertial sensing, environmental control, and supervised vision-language decision support. Frozen DINOv2 and BERT encoders, together with structured environmental inputs, support joint prediction of twelve environmental references, a target zone, and an intervention flag. Checkpoint",
+      "paper_url": "https://arxiv.org/abs/2611.16752",
+      "published": "2026-11-12",
+      "topic": "robot_learning",
+      "relevance_score": 13,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-13T12:21:07+00:00",
+      "first_seen": "2026-11-13T12:21:07+00:00",
+      "last_seen": "2026-11-13T12:21:07+00:00"
+    },
+    {
+      "id": "arxiv:2611.17238",
+      "title": "HEIR: Harness Egocentric Intent for Human-Robot Interactions",
+      "authors": [
+        "Yichi Zhang",
+        "Bo Wang",
+        "Zhenghan Zhu",
+        "Yutong Han",
+        "Jiayin Zou",
+        "Gao Kejun",
+        "Chang Liu",
+        "Shaoxuan Xie",
+        "Chi Zhang",
+        "Shi Haoyang",
+        "Zongxuan Lai",
+        "Sen Cui",
+        "Guocai Yao",
+        "Miao Liu"
+      ],
+      "abstract_excerpt": "For robots to assist, serve, and collaborate with humans, they must not only interpret human requests conveyed through language and multimodal intentional cues, but also execute long-horizon tasks that interleave navigation and manipulation. In this paper, we introduce HEIR, a resource for studying how to Harness Egocentric Intent for Human-Robot Interaction. HEIR pairs human speech, measured gaze, and egocentric video with robot observations and teleoperated navigation-manipulation trajectories, while each session preserves successive episodes, with each request fulfilled ",
+      "paper_url": "https://arxiv.org/abs/2611.17238",
+      "published": "2026-11-12",
+      "topic": "robot_learning",
+      "relevance_score": 10,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-13T12:21:07+00:00",
+      "first_seen": "2026-11-13T12:21:07+00:00",
+      "last_seen": "2026-11-13T12:21:07+00:00"
+    },
+    {
+      "id": "arxiv:2611.17318",
+      "title": "Spatial Foundry: A Multimodal Dataset for Spatial Intelligence",
+      "authors": [
+        "Ethan Lin",
+        "Yang Song"
+      ],
+      "abstract_excerpt": "Spatial intelligence requires connecting visual observations to the geometry, objects, and persistent state of an environment. Images alone leave these relationships implicit, while disconnected annotations make it difficult to study appearance, camera motion, and scene changes under a common reference. We introduce Spatial Foundry, a collection of 5,280 furnished residential 3D scene configurations with editable assets and aligned visual, geometric, and temporal data. Its modalities include floor plans, perspective and panoramic RGB, metric depth, point clouds, meshes, ins",
+      "paper_url": "https://arxiv.org/abs/2611.17318",
+      "published": "2026-11-12",
+      "topic": "medical_ai",
+      "relevance_score": 9,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-13T12:21:07+00:00",
+      "first_seen": "2026-11-13T12:21:07+00:00",
+      "last_seen": "2026-11-13T12:21:07+00:00"
+    },
+    {
+      "id": "arxiv:2611.16472",
+      "title": "RGB-D SLAM on the Edge: Benchmarking and Profiling RTAB-Map and ORB-SLAM3 on the Raspberry Pi 5",
+      "authors": [
+        "Himanshu Patil",
+        "Jaideep Joshi",
+        "Rohit Saluja",
+        "Ganesh Ramakrishnan"
+      ],
+      "abstract_excerpt": "Micro aerial vehicles that operate without GPS often run SLAM on ARM-based edge boards, yet there is little published data on how standard RGB-D SLAM systems behave on such hardware. We benchmark RTAB-Map and ORB-SLAM3 on the Raspberry Pi 5 using six TUM RGB-D sequences at three image resolutions, recording tracking coverage, trajectory error, time per frame, memory, CPU load and temperature for every run, and we profile both systems at the stage and function level. RTAB-Map was configured to process and keep every frame, so its back end runs on every frame rather than at i",
+      "paper_url": "https://arxiv.org/abs/2611.16472",
+      "published": "2026-11-12",
+      "topic": "slam",
+      "relevance_score": 8,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-13T12:21:07+00:00",
+      "first_seen": "2026-11-13T12:21:07+00:00",
+      "last_seen": "2026-11-13T12:21:07+00:00"
+    },
+    {
+      "id": "arxiv:2611.17110",
+      "title": "SALA: Semantically Aligned Latent Actions Enable Dual-Axis Scaling of Embodied Foundation Models",
+      "authors": [
+        "Jiachun Jin",
+        "Zetong Zhou",
+        "Haonan Wang",
+        "Xiao Yang",
+        "Jun Zhu",
+        "Zhijie Deng"
+      ],
+      "abstract_excerpt": "Embodied foundation models hinge on diverse robot interaction data, which are costly to collect. Egocentric human videos offer a complementary source of experience, and latent action models (LAMs) provide a popular means of leveraging these videos for policy supervision. Compared with world-action models (WAMs), LAMs can offer greater training efficiency and potentially lower inference costs by avoiding explicit pixel prediction during policy learning and execution. However, most existing LAMs learn latent actions solely through video reconstruction, which can cause their r",
+      "paper_url": "https://arxiv.org/abs/2611.17110",
+      "published": "2026-11-12",
+      "topic": "robot_learning",
+      "relevance_score": 7,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-13T12:21:07+00:00",
+      "first_seen": "2026-11-13T12:21:07+00:00",
+      "last_seen": "2026-11-13T12:21:07+00:00"
+    },
+    {
+      "id": "arxiv:2611.16725",
+      "title": "Safe and Efficient Navigation Considering Texting Pedestrians via Attention-Aware Cost-map Tuning",
+      "authors": [
+        "Shunya Tadano",
+        "Yusuke Tamura",
+        "Ankit A. Ravankar",
+        "Yasuhisa Hirata"
+      ],
+      "abstract_excerpt": "Smartphone-distracted pedestrians deviate from social norms unpredictably and cannot be relied upon to yield to approaching robots -- a safety challenge that existing navigation methods are poorly equipped to handle, since they treat all pedestrians uniformly regardless of attention state. We propose an attention-aware navigation framework that classifies each pedestrian as attentive or distracted in real-time using 3D skeletal features and a Random Forest classifier, then dynamically widens cost-map safety margins around distracted individuals to drive proactive avoidance.",
+      "paper_url": "https://arxiv.org/abs/2611.16725",
+      "published": "2026-11-12",
+      "topic": "robot_learning",
+      "relevance_score": 7,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-13T12:21:07+00:00",
+      "first_seen": "2026-11-13T12:21:07+00:00",
+      "last_seen": "2026-11-13T12:21:07+00:00"
+    },
+    {
+      "id": "arxiv:2611.16872",
+      "title": "ACE-CaP-0: Real-World Code-as-Policies in the Era of Experience",
+      "authors": [
+        "ACE-CaP Team",
+        "Changxu Wei",
+        "Yunpeng Qing",
+        "Guozheng Ma",
+        "Bowen Liu",
+        "Zexin He",
+        "Yilun Kong",
+        "Haoming Gu",
+        "Jingyuan Liu",
+        "Tianyu Zhu",
+        "Jianfei Wang",
+        "Junqiang Kou",
+        "Huinan Mo",
+        "Hao Lv"
+      ],
+      "abstract_excerpt": "Recent advances in frontier models have pushed the boundaries of agentic robot control, enabling agents to perform complex robotic tasks through reasoning and interaction. However, repeated calls to these models during execution can substantially increase task completion time. Code as Policies (CaP) offers a route for coding agents to acquire physical skills through experience and retain them in executable programs, allowing the reasoning invested in development to be reused across runs. Developing reliable code policies while limiting the cost of physical experimentation r",
+      "paper_url": "https://arxiv.org/abs/2611.16872",
+      "published": "2026-11-12",
+      "topic": "robot_learning",
+      "relevance_score": 6,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-13T12:21:07+00:00",
+      "first_seen": "2026-11-13T12:21:07+00:00",
+      "last_seen": "2026-11-13T12:21:07+00:00"
+    },
+    {
+      "id": "arxiv:2611.16645",
+      "title": "Rethinking Actions: Continuity-Aware Priors for World-Model Planning",
+      "authors": [
+        "Shaobo Yang",
+        "Zichen Ai",
+        "Ziyang Ma",
+        "Qian Yang",
+        "Bin Fang"
+      ],
+      "abstract_excerpt": "Actions in expert demonstrations exhibit temporal structure. An ordered-versus-shuffled analysis across five environments confirms this dependence. We ask whether action proposals that better reflect expert continuity can improve visual world-model planning. Rather than imposing generic smoothness, we learn continuations from the temporal structure of demonstrated actions. Our locality-gated deep-kernel Gaussian-process prior, LG-DKGP, combines recent and longer-range executed action history, predicts a neural continuation, and learns a temporal Gaussian-process (GP) residu",
+      "paper_url": "https://arxiv.org/abs/2611.16645",
+      "published": "2026-11-12",
+      "topic": "robot_learning",
+      "relevance_score": 6,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-13T12:21:07+00:00",
+      "first_seen": "2026-11-13T12:21:07+00:00",
+      "last_seen": "2026-11-13T12:21:07+00:00"
+    },
+    {
+      "id": "arxiv:2611.16632",
+      "title": "Reins: Frontier Multimodal Models Driving Real Robot Arms on Long-Horizon Tasks, Zero-Shot",
+      "authors": [
+        "Pengfei Ye",
+        "Zhiyang Dou",
+        "Yuxiang Ma",
+        "Haonan Chen",
+        "Heng Yang",
+        "Edward H. Adelson"
+      ],
+      "abstract_excerpt": "Frontier models such as GPT-6.1 Sol, GPT-6 Astra and Claude Opus 5.5 can now plan and call tools, yet they still struggle to drive real robots through long-horizon, contact-rich manipulation, blind while the arm moves and while they think. We present Reins, a harness in which an off-the-shelf model operates a dual-arm robot with 3D perception tools and atomic actions that report contact and grip. The model chains actions in one call, each with a condition that must hold, stopping at the first that fails; a second instance, the narrator, watches the cameras continuously and ",
+      "paper_url": "https://arxiv.org/abs/2611.16632",
+      "published": "2026-11-12",
+      "topic": "robot_learning",
+      "relevance_score": 6,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-13T12:21:07+00:00",
+      "first_seen": "2026-11-13T12:21:07+00:00",
+      "last_seen": "2026-11-13T12:21:07+00:00"
+    },
+    {
+      "id": "arxiv:2611.17077",
+      "title": "SALT: State-Aligned Low-Rank Transfer for Single-Temporal Cross-Dataset Structural Localization in Remote Sensing",
+      "authors": [
+        "Aggelos Psiris",
+        "Georgios Angelidis",
+        "Giorgos Sfikas",
+        "Maria Vakalopoulou",
+        "Thomas Lagkas",
+        "Panagiotis Sarigiannidis",
+        "Georgios Th. Papadopoulos"
+      ],
+      "abstract_excerpt": "Change detection in remote sensing conventionally relies on spatially aligned bi-temporal imagery, which may be unavailable or unreliable in practical scenarios. Recent single-temporal approaches address this limitation by learning structural evidence, such as building regions, from a labeled source dataset and transferring it to unseen target imagery using only the current image. However, adaptation to the source dataset can over-specialize pretrained features and reduce their cross-dataset generalization, a risk that this paper argues is higher when the feature adaptation",
+      "paper_url": "https://arxiv.org/abs/2611.17077",
+      "published": "2026-11-12",
+      "topic": "medical_ai",
+      "relevance_score": 5,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-13T12:21:07+00:00",
+      "first_seen": "2026-11-13T12:21:07+00:00",
+      "last_seen": "2026-11-13T12:21:07+00:00"
+    },
+    {
+      "id": "arxiv:2611.16925",
+      "title": "Report of the 8th LSVOS Challenge: Mobile Unified Multimodal Understanding",
+      "authors": [
+        "Chang Liu",
+        "Henghui Ding",
+        "Tong Yang",
+        "Dayoung Kil",
+        "Seong-heum Kim",
+        "Qilin Xiang",
+        "Ronghao Zheng",
+        "Ziyang Zhang",
+        "Shanlin Jiang",
+        "Ruohan Shi",
+        "Qilin Fan",
+        "Chengfeng Qiu",
+        "Kaifeng Wei"
+      ],
+      "abstract_excerpt": "This report summarizes the Mobile Unified Multimodal Understanding (MUMU) track of the 8th Large-scale Video Object Segmentation (LSVOS) Challenge, held in conjunction with ECCV 2026. MUMU asks for a single unified model that jointly performs multi-concept image tagging over quality, scene, and event vocabularies, open-vocabulary object detection, and concise image captioning, within a budget of 0.5B parameters and 8 GB of peak inference memory. Submissions are ranked by a weighted task score scaled by an efficiency factor. We describe the tasks, rules, and evaluation proto",
+      "paper_url": "https://arxiv.org/abs/2611.16925",
+      "published": "2026-11-12",
+      "topic": "medical_ai",
+      "relevance_score": 5,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-13T12:21:07+00:00",
+      "first_seen": "2026-11-13T12:21:07+00:00",
+      "last_seen": "2026-11-13T12:21:07+00:00"
+    },
+    {
+      "id": "arxiv:2611.17302",
+      "title": "FLEX-LBP: Learning Local Binary Patterns with Exact Binary Inference for Texture Classification",
+      "authors": [
+        "Mohamed Alimoussa",
+        "Amal El Kaid"
+      ],
+      "abstract_excerpt": "Local Binary Patterns (LBP) remain among the most widely used texture descriptors, from industrial inspection to medical imaging. Yet their radius, sampling angles, color transform and thresholds are fixed by hand for each dataset. We present FLEX-LBP, which learns these parameters by backpropagation while every forward pass computes exact binary codes and hard histogram counts. A straight-through estimator acts only in the backward pass, so the deployed descriptor is an interpretable hard-binary LBP with 90 learnable parameters and unchanged inference cost. In a controlled",
+      "paper_url": "https://arxiv.org/abs/2611.17302",
+      "published": "2026-11-12",
+      "topic": "medical_ai",
+      "relevance_score": 4,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-13T12:21:07+00:00",
+      "first_seen": "2026-11-13T12:21:07+00:00",
+      "last_seen": "2026-11-13T12:21:07+00:00"
+    },
+    {
+      "id": "arxiv:2611.17163",
+      "title": "UAV-Flow++: A Unified Suite for Benchmarking and Learning Language-Guided UAV Flight",
+      "authors": [
+        "Donglin Yang",
+        "Xiangyu Wang",
+        "Yantong Zhong",
+        "Wenhao Zheng",
+        "Zihan Ding",
+        "Yue Liao",
+        "Hongsheng Li",
+        "Ke Xu",
+        "Si Liu"
+      ],
+      "abstract_excerpt": "Language-guided UAV navigation has largely focused on long-horizon route planning, leaving short-range, object-relative flight maneuvers underexplored. To address this gap, we formulate Flying-on-a-Word (Flow), a task requiring a UAV to convert concise natural-language instruction, egocentric visual observation, and current state dynamics into continuous flight actions. Flow encompasses both primitive motion commands and complex object-interactive behaviors, assessing motion intent comprehension and spatial context grounding. To enable policy learning and closed-loop evalua",
+      "paper_url": "https://arxiv.org/abs/2611.17163",
+      "published": "2026-11-12",
+      "topic": "robot_learning",
+      "relevance_score": 4,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-13T12:21:07+00:00",
+      "first_seen": "2026-11-13T12:21:07+00:00",
+      "last_seen": "2026-11-13T12:21:07+00:00"
+    },
+    {
+      "id": "arxiv:2611.17142",
+      "title": "FORGE: Force-Aware Multi-Granularity Control for Efficient Humanoid Loco-Manipulation",
+      "authors": [
+        "Liangjun Xing",
+        "Ke Fan",
+        "Kailin Li",
+        "Bin Wang",
+        "Xiaojie Niu",
+        "Qingwei Ben",
+        "Jiafei Cao",
+        "Wei Yao",
+        "Yebin Liu",
+        "Jingbo Wang",
+        "Weinan Zhang"
+      ],
+      "abstract_excerpt": "Humanoid loco-manipulation requires coordinated locomotion, balance regulation, and manipulation under frequent contacts, making teleoperated demonstration collection difficult: a practical controller must simultaneously provide precision, stability, and contact awareness. We propose FORGE, a force-aware multi-granularity control system with a coarse-to-fine command space spanning velocity navigation, planar foot placement, wrist-pose tracking, and optional force-conditioning inputs. Policy training requires no full-body human motion trajectories or joint-angle references; ",
+      "paper_url": "https://arxiv.org/abs/2611.17142",
+      "published": "2026-11-12",
+      "topic": "robot_learning",
+      "relevance_score": 4,
+      "source_type": "research_publication_not_a_job",
+      "hiring_status": "unknown_not_inferred",
+      "observed_at": "2026-11-13T12:21:07+00:00",
+      "first_seen": "2026-11-13T12:21:07+00:00",
+      "last_seen": "2026-11-13T12:21:07+00:00"
+    },
+    {
       "id": "arxiv:2611.13528",
       "title": "GEMOR-GS: Global Extrinsic-calibration-refined Mapping and Online Relocalization for 3D Gaussian-Splatting SLAM",
       "authors": [
@@ -19,7 +373,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-11T11:57:14+00:00",
       "first_seen": "2026-11-11T11:57:14+00:00",
-      "last_seen": "2026-11-12T21:54:46+00:00"
+      "last_seen": "2026-11-13T12:21:07+00:00"
     },
     {
       "id": "arxiv:2611.14048",
@@ -258,7 +612,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-10T05:11:22+00:00",
       "first_seen": "2026-11-10T05:11:22+00:00",
-      "last_seen": "2026-11-12T21:54:46+00:00"
+      "last_seen": "2026-11-13T12:21:07+00:00"
     },
     {
       "id": "arxiv:2611.12732",
@@ -519,7 +873,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-10T07:19:19+00:00",
       "first_seen": "2026-11-10T07:19:19+00:00",
-      "last_seen": "2026-11-12T21:54:46+00:00"
+      "last_seen": "2026-11-13T12:21:07+00:00"
     },
     {
       "id": "arxiv:2611.11868",
@@ -841,7 +1195,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-11T11:57:14+00:00",
       "first_seen": "2026-11-11T11:57:14+00:00",
-      "last_seen": "2026-11-12T21:54:46+00:00"
+      "last_seen": "2026-11-13T12:21:07+00:00"
     },
     {
       "id": "arxiv:2611.10239",
@@ -860,7 +1214,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-10T05:11:22+00:00",
       "first_seen": "2026-11-10T05:11:22+00:00",
-      "last_seen": "2026-11-12T21:54:46+00:00"
+      "last_seen": "2026-11-13T12:21:07+00:00"
     },
     {
       "id": "arxiv:2611.09864",
@@ -981,7 +1335,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-12T21:54:46+00:00"
+      "last_seen": "2026-11-13T12:21:07+00:00"
     },
     {
       "id": "arxiv:2611.08372",
@@ -1376,7 +1730,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-12T21:54:46+00:00"
+      "last_seen": "2026-11-13T12:21:07+00:00"
     },
     {
       "id": "arxiv:2611.03932",
@@ -1395,7 +1749,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-12T21:54:46+00:00"
+      "last_seen": "2026-11-13T12:21:07+00:00"
     },
     {
       "id": "arxiv:2611.03106",
@@ -1413,7 +1767,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-12T21:54:46+00:00"
+      "last_seen": "2026-11-13T12:21:07+00:00"
     },
     {
       "id": "arxiv:2611.00482",
@@ -1430,7 +1784,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-12T21:54:46+00:00"
+      "last_seen": "2026-11-13T12:21:07+00:00"
     },
     {
       "id": "arxiv:2610.41768",
@@ -1450,7 +1804,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-12T21:54:46+00:00"
+      "last_seen": "2026-11-13T12:21:07+00:00"
     },
     {
       "id": "arxiv:2610.41602",
@@ -1471,7 +1825,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-12T21:54:46+00:00"
+      "last_seen": "2026-11-13T12:21:07+00:00"
     },
     {
       "id": "arxiv:2610.39385",
@@ -1493,7 +1847,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-12T21:54:46+00:00"
+      "last_seen": "2026-11-13T12:21:07+00:00"
     },
     {
       "id": "arxiv:2610.39691",
@@ -1516,7 +1870,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-12T21:54:46+00:00"
+      "last_seen": "2026-11-13T12:21:07+00:00"
     },
     {
       "id": "arxiv:2610.38141",
@@ -1542,7 +1896,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-12T21:54:46+00:00"
+      "last_seen": "2026-11-13T12:21:07+00:00"
     },
     {
       "id": "arxiv:2610.37111",
@@ -1562,7 +1916,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-12T21:54:46+00:00"
+      "last_seen": "2026-11-13T12:21:07+00:00"
     },
     {
       "id": "arxiv:2610.36454",
@@ -1585,7 +1939,7 @@
       "hiring_status": "unknown_not_inferred",
       "observed_at": "2026-11-06T07:47:14+00:00",
       "first_seen": "2026-11-06T07:47:14+00:00",
-      "last_seen": "2026-11-12T21:54:46+00:00"
+      "last_seen": "2026-11-13T12:21:07+00:00"
     },
     {
       "id": "arxiv:2610.35642",

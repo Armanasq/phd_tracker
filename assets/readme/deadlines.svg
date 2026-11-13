@@ -1,30 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="962" height="503" viewBox="0 0 962 503" role="img" aria-label="Application deadline timeline sorted by days remaining"><title>Application deadline timeline sorted by days remaining</title><defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#091425"/><stop offset="1" stop-color="#15243B"/></linearGradient></defs><rect width="962" height="503" fill="url(#bg)" rx="20"/><text x="24" y="37" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="17" font-weight="700" fill="#EAF2FB" >DEADLINE FRONTIER</text>
 <text x="24" y="60" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="400" fill="#9CB0C6" >Next 14 days · incomplete / unconfirmed status</text>
 <rect x="24" y="80" width="914" height="46" rx="12" fill="#142039" stroke="#294057"/>
-<text x="37" y="109" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" fill="#FA98A0" >1d</text>
+<text x="37" y="109" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" fill="#FA98A0" >0d</text>
 <text x="96" y="108" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="500" fill="#EAF2FB" >Inria IROKO Montpellier — PhD Scientific AI and Spatiotemporal Biodiversity...</text>
 <text x="917" y="108" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="500" fill="#9CB0C6" text-anchor="end">2026-11-13</text>
 <rect x="24" y="135" width="914" height="46" rx="12" fill="#142039" stroke="#294057"/>
-<text x="37" y="164" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" fill="#FA98A0" >1d</text>
+<text x="37" y="164" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" fill="#FA98A0" >0d</text>
 <text x="96" y="163" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="500" fill="#EAF2FB" >Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacan...</text>
 <text x="917" y="163" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="500" fill="#9CB0C6" text-anchor="end">2026-11-13</text>
 <rect x="24" y="190" width="914" height="46" rx="12" fill="#142039" stroke="#294057"/>
-<text x="37" y="219" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" fill="#FA98A0" >2d</text>
+<text x="37" y="219" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" fill="#FA98A0" >1d</text>
 <text x="96" y="218" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="500" fill="#EAF2FB" >TIB Hannover / Leibniz University — Doctoral Researcher in NLP and Causal A...</text>
 <text x="917" y="218" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="500" fill="#9CB0C6" text-anchor="end">2026-11-14</text>
 <rect x="24" y="245" width="914" height="46" rx="12" fill="#142039" stroke="#294057"/>
-<text x="37" y="274" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" fill="#FFCA85" >3d</text>
+<text x="37" y="274" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" fill="#FA98A0" >2d</text>
 <text x="96" y="273" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="500" fill="#EAF2FB" >BMW AI Robotics / RoboTac and TU/e Eindhoven, PhD World Models &amp; Visuo-Tact...</text>
 <text x="917" y="273" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="500" fill="#9CB0C6" text-anchor="end">2026-11-15</text>
 <rect x="24" y="300" width="914" height="46" rx="12" fill="#142039" stroke="#294057"/>
-<text x="37" y="329" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" fill="#FFCA85" >3d</text>
+<text x="37" y="329" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" fill="#FA98A0" >2d</text>
 <text x="96" y="328" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="500" fill="#EAF2FB" >Institute of Science Tokyo, International Graduate Program IGP(A) Fall 2027...</text>
 <text x="917" y="328" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="500" fill="#9CB0C6" text-anchor="end">2026-11-15</text>
 <rect x="24" y="355" width="914" height="46" rx="12" fill="#142039" stroke="#294057"/>
-<text x="37" y="384" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" fill="#FFCA85" >3d</text>
+<text x="37" y="384" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" fill="#FA98A0" >2d</text>
 <text x="96" y="383" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="500" fill="#EAF2FB" >International Max Planck Research School for Intelligent Systems (IMPRS-IS)...</text>
 <text x="917" y="383" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="500" fill="#9CB0C6" text-anchor="end">2026-11-15</text>
 <rect x="24" y="410" width="914" height="46" rx="12" fill="#142039" stroke="#294057"/>
-<text x="37" y="439" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" fill="#FFCA85" >3d</text>
+<text x="37" y="439" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="15" font-weight="700" fill="#FA98A0" >2d</text>
 <text x="96" y="438" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="500" fill="#EAF2FB" >Northeastern University London, PhD studentship: Algorithms/Hardware Co-Des...</text>
 <text x="917" y="438" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="500" fill="#9CB0C6" text-anchor="end">2026-11-15</text></svg>
