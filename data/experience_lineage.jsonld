@@ -24,7 +24,7 @@
       "@type": "prov:Entity",
       "schema:name": "EvidenceGraph observation snapshot",
       "schema:dateModified": {
-        "@value": "2026-11-13",
+        "@value": "2026-11-14",
         "@type": "xsd:date"
       },
       "prov:wasDerivedFrom": [
@@ -52,15 +52,15 @@
       "readinessState": "unknown"
     },
     {
-      "@id": "urn:phdtracker:document:recommendations",
-      "@type": "prov:Entity",
-      "schema:name": "Reference letters and referees",
-      "readinessState": "unknown"
-    },
-    {
       "@id": "urn:phdtracker:document:research_statement",
       "@type": "prov:Entity",
       "schema:name": "Research statement / SOP",
+      "readinessState": "unknown"
+    },
+    {
+      "@id": "urn:phdtracker:document:recommendations",
+      "@type": "prov:Entity",
+      "schema:name": "Reference letters and referees",
       "readinessState": "unknown"
     },
     {
@@ -74,54 +74,6 @@
       "@type": "prov:Entity",
       "schema:name": "English proficiency evidence",
       "readinessState": "unknown"
-    },
-    {
-      "@id": "urn:phdtracker:application:inria%3A2026-10608",
-      "@type": "prov:Entity",
-      "schema:name": "Inria IROKO Montpellier — PhD Scientific AI and Spatiotemporal Biodiversity Modelling",
-      "applicationDeadline": {
-        "@value": "2026-11-13",
-        "@type": "xsd:date"
-      },
-      "applicantDecision": "Go with risk",
-      "documentMention": [
-        {
-          "@id": "urn:phdtracker:document:academic_cv"
-        }
-      ],
-      "prov:wasDerivedFrom": {
-        "@id": "urn:phdtracker:dataset:portfolio-frontier"
-      },
-      "schema:citation": {
-        "@id": "https://jobs.inria.fr/public/classic/en/offres/2026-10608"
-      }
-    },
-    {
-      "@id": "urn:phdtracker:application:M07a",
-      "@type": "prov:Entity",
-      "schema:name": "Southampton MSCA BlueOcean PhD Studentship, application 1 of 2: staff vacancy ref 3522426DA (jobs.soton.ac.uk)",
-      "applicationDeadline": {
-        "@value": "2026-11-13",
-        "@type": "xsd:date"
-      },
-      "applicantDecision": "Go",
-      "documentMention": [
-        {
-          "@id": "urn:phdtracker:document:academic_cv"
-        },
-        {
-          "@id": "urn:phdtracker:document:recommendations"
-        },
-        {
-          "@id": "urn:phdtracker:document:transcripts"
-        }
-      ],
-      "prov:wasDerivedFrom": {
-        "@id": "urn:phdtracker:dataset:portfolio-frontier"
-      },
-      "schema:citation": {
-        "@id": "https://jobs.soton.ac.uk/Vacancies.aspx?cat=1065&type=10"
-      }
     },
     {
       "@id": "urn:phdtracker:application:R26-TIB-ECOAIRE-CAUSAL-NLP",

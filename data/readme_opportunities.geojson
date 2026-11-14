@@ -148,11 +148,11 @@
     {
       "type": "Feature",
       "properties": {
-        "title": "France: 3 application records",
+        "title": "France: 2 application records",
         "description": "Country-level aggregate inferred from an unambiguous institution name; pin placed at representative capital city, not at a university",
-        "count": 3,
-        "sample_source_ids": "inria:2026-10608, inria:2026-10570, inria:2026-10454",
-        "marker-color": "#9f61e8",
+        "count": 2,
+        "sample_source_ids": "inria:2026-10570, inria:2026-10454",
+        "marker-color": "#4384ff",
         "marker-size": "medium"
       },
       "geometry": {
