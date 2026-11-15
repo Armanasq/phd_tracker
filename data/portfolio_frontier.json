@@ -3,8 +3,8 @@
   "as_of": "2026-11-15",
   "explicit_readiness_policy": "Unknown inputs remain unknown. Mentioned documents are not evidence of missing documents.",
   "active_future_opportunities": 103,
-  "source_conflict_count": 0,
-  "source_health_warning_count": 1,
+  "source_conflict_count": 1,
+  "source_health_warning_count": 0,
   "resource_frontier": [
     {
       "resource_id": "academic_cv",
@@ -318,7 +318,7 @@
       "days_to_deadline": 0,
       "opportunity": "International Max Planck Research School for Intelligent Systems (IMPRS-IS), 2027 doctoral recruitment",
       "decision": "Go",
-      "readiness": "source_health_unverified",
+      "readiness": "source_conflict",
       "document_mentions": [
         "academic_cv",
         "research_statement",
@@ -339,7 +339,7 @@
       ],
       "explicit_tasks_remaining": [],
       "evidence_proof_obligations": [
-        "Source monitor unable to validate live page: unavailable"
+        "Official page requires rechecking: contradiction_closed_portal"
       ],
       "next_step": "Apply by 15 Nov end of day Anywhere on Earth (AoE); select eligible primary faculty and tailor motivation. Stuttgart SIR openings may be accessed via this SAME application.",
       "source_url": "https://imprs.is.mpg.de/application"

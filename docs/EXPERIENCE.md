@@ -6,7 +6,7 @@
 
 [**RUN AN INTERACTIVE SCENARIO**](../../actions/workflows/experience-lab.yml) · [**OPERATE SOURCE ALERTS**](../../issues/1) · [**DOWNLOAD ONE-FILE APP**](../dashboard/index.html) · [**OPENING GUIDE**](../dashboard/README.md) · [**INSPECT RAW EVIDENCE**](../data/experience_view.json)
 
-<sub>Regenerated from committed evidence. Snapshot 2026-11-15 · 103 frontier records · 0 source conflict(s). Real actions run through GitHub or the browser application.</sub>
+<sub>Regenerated from committed evidence. Snapshot 2026-11-15 · 103 frontier records · 1 source conflict(s). Real actions run through GitHub or the browser application.</sub>
 
 </div>
 

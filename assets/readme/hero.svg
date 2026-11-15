@@ -22,5 +22,5 @@
 <text x="898" y="328" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="400" fill="#9CB0C6" >Awaiting independent review</text>
 <rect x="40" y="370" width="1100" height="44" rx="12" fill="#10263A" stroke="#28495C"/>
 <text x="59" y="397" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="700" fill="#78E2CE" >EVIDENCE STATUS</text>
-<text x="263" y="397" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#FFCA85" >1 contradictions require review</text>
+<text x="263" y="397" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="13" font-weight="600" fill="#FFCA85" >2 contradictions require review</text>
 <text x="1130" y="397" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" font-weight="500" fill="#9CB0C6" text-anchor="end">SOURCE VERIFIED ≠ ELIGIBILITY VERIFIED</text></svg>

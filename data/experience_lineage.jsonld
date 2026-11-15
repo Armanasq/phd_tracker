@@ -159,7 +159,7 @@
         "@id": "https://imprs.is.mpg.de/application"
       },
       "proofObligation": [
-        "Source monitor unable to validate live page: unavailable"
+        "Official page requires rechecking: contradiction_closed_portal"
       ]
     },
     {
@@ -2913,6 +2913,21 @@
       },
       "schema:citation": {
         "@id": "https://www.epfl.ch/labs/create/create-lab/openings/"
+      }
+    },
+    {
+      "@id": "urn:phdtracker:observation:N263-09-PORTAL",
+      "@type": "prov:Entity",
+      "sourceFindingStatus": "contradiction_closed_portal",
+      "expectedDeadline": "2026-11-15",
+      "prov:wasDerivedFrom": {
+        "@id": "urn:phdtracker:dataset:source-monitor"
+      },
+      "schema:citation": {
+        "@id": "https://imprs-is-apply.tue.mpg.de/registration/imprs-is-2026"
+      },
+      "associatedApplication": {
+        "@id": "urn:phdtracker:application:N263-09"
       }
     }
   ]

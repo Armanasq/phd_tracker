@@ -8,7 +8,7 @@
     "future": 103,
     "next_seven_days": 24,
     "unknown_document_mentions": 324,
-    "source_conflicts": 0,
+    "source_conflicts": 1,
     "research_papers": 95
   },
   "applications": [
@@ -63,7 +63,7 @@
       "deadline": "2026-11-15",
       "days": 0,
       "decision": "Go",
-      "readiness": "source_health_unverified",
+      "readiness": "source_conflict",
       "documents": [
         "academic_cv",
         "recommendations",
@@ -77,7 +77,7 @@
         "transcripts"
       ],
       "proof_obligations": [
-        "Source monitor unable to validate live page: unavailable"
+        "Official page requires rechecking: contradiction_closed_portal"
       ],
       "source": "https://imprs.is.mpg.de/application",
       "next_step": "Apply by 15 Nov end of day Anywhere on Earth (AoE); select eligible primary faculty and tailor motivation. Stuttgart SIR openings may be accessed via this SAME application."
@@ -2667,7 +2667,7 @@
   "source_checks": {
     "anchor_present": 5,
     "review_source_changed": 1,
-    "unavailable": 1
+    "contradiction_closed_portal": 1
   },
   "research": [
     {
@@ -3821,6 +3821,15 @@
         "expected_deadline": "2026-11-13",
         "source": "https://www.epfl.ch/labs/create/create-lab/openings/",
         "is_linked": false
+      },
+      {
+        "observation_id": "N263-09-PORTAL",
+        "application_id": "N263-09",
+        "application_name": "International Max Planck Research School for Intelligent Systems (IMPRS-IS), 2027 doctoral recruitment",
+        "status": "contradiction_closed_portal",
+        "expected_deadline": "2026-11-15",
+        "source": "https://imprs-is-apply.tue.mpg.de/registration/imprs-is-2026",
+        "is_linked": true
       }
     ],
     "verification_queue": [
