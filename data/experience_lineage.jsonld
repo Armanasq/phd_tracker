@@ -24,7 +24,7 @@
       "@type": "prov:Entity",
       "schema:name": "EvidenceGraph observation snapshot",
       "schema:dateModified": {
-        "@value": "2026-11-14",
+        "@value": "2026-11-15",
         "@type": "xsd:date"
       },
       "prov:wasDerivedFrom": [
@@ -46,6 +46,12 @@
       "readinessState": "unknown"
     },
     {
+      "@id": "urn:phdtracker:document:recommendations",
+      "@type": "prov:Entity",
+      "schema:name": "Reference letters and referees",
+      "readinessState": "unknown"
+    },
+    {
       "@id": "urn:phdtracker:document:transcripts",
       "@type": "prov:Entity",
       "schema:name": "Official transcripts",
@@ -55,12 +61,6 @@
       "@id": "urn:phdtracker:document:research_statement",
       "@type": "prov:Entity",
       "schema:name": "Research statement / SOP",
-      "readinessState": "unknown"
-    },
-    {
-      "@id": "urn:phdtracker:document:recommendations",
-      "@type": "prov:Entity",
-      "schema:name": "Reference letters and referees",
       "readinessState": "unknown"
     },
     {
@@ -74,33 +74,6 @@
       "@type": "prov:Entity",
       "schema:name": "English proficiency evidence",
       "readinessState": "unknown"
-    },
-    {
-      "@id": "urn:phdtracker:application:R26-TIB-ECOAIRE-CAUSAL-NLP",
-      "@type": "prov:Entity",
-      "schema:name": "TIB Hannover / Leibniz University — Doctoral Researcher in NLP and Causal AI for Scientific Reasoning (EcoAIRE), 44/2026",
-      "applicationDeadline": {
-        "@value": "2026-11-14",
-        "@type": "xsd:date"
-      },
-      "applicantDecision": "Go",
-      "documentMention": [
-        {
-          "@id": "urn:phdtracker:document:academic_cv"
-        },
-        {
-          "@id": "urn:phdtracker:document:research_statement"
-        },
-        {
-          "@id": "urn:phdtracker:document:transcripts"
-        }
-      ],
-      "prov:wasDerivedFrom": {
-        "@id": "urn:phdtracker:dataset:portfolio-frontier"
-      },
-      "schema:citation": {
-        "@id": "https://www.leibniz-gemeinschaft.de/en/careers/jobs/detail/job/show/Job/research-associatedoctoral-researcher-natural-language-processing-and-causal-ai-for-scientific-reasoning-mfd"
-      }
     },
     {
       "@id": "urn:phdtracker:application:N263-10",
@@ -186,7 +159,7 @@
         "@id": "https://imprs.is.mpg.de/application"
       },
       "proofObligation": [
-        "Official page requires rechecking: contradiction_closed_portal"
+        "Source monitor unable to validate live page: unavailable"
       ]
     },
     {
@@ -2940,21 +2913,6 @@
       },
       "schema:citation": {
         "@id": "https://www.epfl.ch/labs/create/create-lab/openings/"
-      }
-    },
-    {
-      "@id": "urn:phdtracker:observation:N263-09-PORTAL",
-      "@type": "prov:Entity",
-      "sourceFindingStatus": "contradiction_closed_portal",
-      "expectedDeadline": "2026-11-15",
-      "prov:wasDerivedFrom": {
-        "@id": "urn:phdtracker:dataset:source-monitor"
-      },
-      "schema:citation": {
-        "@id": "https://imprs-is-apply.tue.mpg.de/registration/imprs-is-2026"
-      },
-      "associatedApplication": {
-        "@id": "urn:phdtracker:application:N263-09"
       }
     }
   ]

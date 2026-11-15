@@ -1,31 +1,10 @@
-# Execution plan — 2026-11-14
+# Execution plan — 2026-11-15
 
 [← Repository cockpit](../README.md) · [Tracker workbook](../PhD_Action_List.xlsx) · [Import task calendar](../calendar/phd_deadlines.ics) · [Private Action Center](../../issues/1) · [Full machine-readable ledger](../data/execution_plan.json)
 
-> **As of 2026-11-14, Europe/Berlin.** This plan is generated from original workbook rows. It distinguishes application deadlines from step dates and explicit cross-route tasks. A dated Step timeline task has no recorded completion flag; it is not automatically labelled incomplete.
+> **As of 2026-11-15, Europe/Berlin.** This plan is generated from original workbook rows. It distinguishes application deadlines from step dates and explicit cross-route tasks. A dated Step timeline task has no recorded completion flag; it is not automatically labelled incomplete.
 
-## A. Application submission deadlines today (1)
-
-| When | Application / workstream | Action | Source |
-|:--|:--|:--|:--|
-| 2026-11-14 | TIB Hannover / Leibniz University — Doctoral Researcher in NLP and Causal AI for Scientific Reasoning (EcoAIRE), 44/2026 | Apply by 14 Nov using official online form, reference 44/2026. Focus application on evidence-grounded agent architectures, causal research extraction, knowledge graphs and robust RAG/LLM evaluation; confirm con | [Source page](https://www.leibniz-gemeinschaft.de/en/careers/jobs/detail/job/show/Job/research-associatedoctoral-researcher-natural-language-processing-and-causal-ai-for-scientific-reasoning-mfd) · Action list · row 40 |
-
-## B. Shared actions due today (0)
-
-| Date | Cross-application task | Recorded status |
-|:---|:---|:---|
-| — | None scheduled today | — |
-
-## C. All programme steps explicitly dated today (2)
-
-To confirm a task, copy its stable `tsk-...` identifier from the table and comment `/done TASK_ID` on the [private Action Center](../../issues/1). Use `/reopen TASK_ID` to undo. These commands update a separate completion ledger, not the original source rows.
-
-| When | Application / workstream | Action | Source |
-|:--|:--|:--|:--|
-| 2026-11-14 | OsloMet PhD Fellow in Trustworthy Generative AI with Knowledge Verification (310467) | By 2026-11-14: optional pre-submission questions to Baifan Zhou (baifan.zhou@oslomet.no) · `tsk-f4fc33527605357b` | [Source page](https://www.oslomet.no/en/work/job-openings/phd-fellow-in-trustworthy-generative-ai-with-knowledge-verification) · Step timeline · row 253 |
-| 2026-11-14 | TIB Hannover / Leibniz University — Doctoral Researcher in NLP and Causal AI for Scientific Reasoning (EcoAIRE), 44/2026 | Apply by 14 Nov using official online form, reference 44/2026. Focus application on evidence-grounded agent architectures, causal research extraction, knowledge graphs and robust RAG/LLM evaluation; confirm con · `tsk-3547b65e633dfab7` | [Source page](https://www.leibniz-gemeinschaft.de/en/careers/jobs/detail/job/show/Job/research-associatedoctoral-researcher-natural-language-processing-and-causal-ai-for-scientific-reasoning-mfd) · Step timeline · row 254 |
-
-## D. Application deadlines within seven days (23)
+## A. Application submission deadlines today (10)
 
 | When | Application / workstream | Action | Source |
 |:--|:--|:--|:--|
@@ -39,6 +18,51 @@ To confirm a task, copy its stable `tsk-...` identifier from the table and comme
 | 2026-11-15 | University of Birmingham, Fully Funded PhD in Integrated Intelligent Safe Environment (IISE) for Nuclear Robotics | Before applying, ask Dr Davis whether Iranian nationality and degree meet project/UK nuclear-security eligibility; email CV and 0.5-page fit summary by 15 Nov if allowed. | [Source page](https://www.jobs.ac.uk/job/DTM113/phd-studentship-phd-in-an-integrated-intelligent-safe-environment-iise-in-the-nuclear-industry) · Action list · row 50 |
 | 2026-11-15 | University of Amsterdam, PhD Accountable and Responsible AI (SafeGenAI / LLM4LM; #15581) | Apply promptly; UvA may close before 15 Nov if a candidate is selected. Specify evidential grounding, source traceability and evaluation. | [Source page](https://werkenbij.uva.nl/en/vacancies/phd-position-in-accountable-and-responsible-ai-netherlands-15581) · Action list · row 49 |
 | 2026-11-15 | University of Amsterdam / Ericsson, PhD Cloud-Native and AI-Native 6G Networks (#15041) | Check if domain and foreign MSc meet criteria before drafting; if so submit by 15 Nov. | [Source page](https://werkenbij.uva.nl/en/vacancies/phd-position-in-cloud-native-and-ai-native-6g-networks-netherlands-15041) · Action list · row 48 |
+
+## B. Shared actions due today (1)
+
+| Date | Cross-application task | Recorded status |
+|:---|:---|:---|
+| 2026-11-15 | Finish TUM humanoid and TU Delft OPERA applications, RoboTac single-PDF email, and IMPRS-IS portal submission. · `tsk-7f038c30d03fa7ec` | To do |
+
+## C. All programme steps explicitly dated today (27)
+
+To confirm a task, copy its stable `tsk-...` identifier from the table and comment `/done TASK_ID` on the [private Action Center](../../issues/1). Use `/reopen TASK_ID` to undo. These commands update a separate completion ledger, not the original source rows.
+
+| When | Application / workstream | Action | Source |
+|:--|:--|:--|:--|
+| 2026-11-15 | OIST Graduate School PhD, May or Sep 2027 entry (Admissions Workshop 2027) | By 2026-11-15 23:59 JST pay JPY 5,000 fee and submit in the portal · `tsk-0a010f458ddcec91` | [Source page](https://www.oist.jp/admissions/phd-program/apply-phd) · Step timeline · row 275 |
+| 2026-11-15 | Institute of Science Tokyo, International Graduate Program IGP(A) Fall 2027 with MEXT recommendation | By 2026-11-15 have the consent letter submitted · `tsk-9c1a3fd900da5100` | [Source page](https://admissions.isct.ac.jp/en/013/graduate/programs/igp/igp-a) · Step timeline · row 271 |
+| 2026-11-15 | Institute of Science Tokyo, International Graduate Program IGP(A) Fall 2027 with MEXT recommendation | By 2026-11-15 complete the forms: Field of Study and Study Program, Evaluation sheet with Recommendation, and Application for Individual Assessment of Admission Eligibility if required · `tsk-9aa3afa67c540294` | [Source page](https://admissions.isct.ac.jp/en/013/graduate/programs/igp/igp-a) · Step timeline · row 272 |
+| 2026-11-15 | NTNU PhD Candidate in Multispectral Wireless Capsule Endoscopy (WCE), CAPTURE MSCA Doctoral Network (310363) | By 2026-11-15: prepare documents per the advert (not retrievable here) · `tsk-beceeca5b1de60a7` | [Source page](https://capture-dn.eu/index.php/vacant-positions/) · Step timeline · row 274 |
+| 2026-11-15 | ETH Zurich, Julia Vogt (Medical Data Science group): PhD in Machine Learning and Medical Data Science | By 2026-11-15: prepare cover letter, CV, transcripts and degree certificates, one publication/thesis/writing sample · `tsk-f2a8d6d8c909cb30` | [Source page](https://www.applykite.com/positions/phd-in-machine-learning-and-medical-data-science-at-eth-zurich-7wdy7wpsqv) · Step timeline · row 261 |
+| 2026-11-15 | ETH Zurich RobotX PhD Fellowship 2027 | By 2026-11-15: get English transcripts for BSc and MSc with local grading scale · `tsk-a6ac3faacf6f2f9d` | [Source page](https://robotx.ethz.ch/education/open-positions.html) · Step timeline · row 259 |
+| 2026-11-15 | ETH Zurich Soft Robotics Lab (Katzschmann): Doctoral Positions in Robot Learning and Soft, Musculoskeletal, and Biohybrid Rob | By 2026-11-15: get English transcripts with local grading scale; pick MSc thesis or representative project report in English (draft acceptable); up to two publications/preprints (optional) · `tsk-ac6f3ada44bf4f08` | [Source page](https://academicpositions.com/ad/eth-zurich/2026/doctoral-positions-in-robot-learning-and-soft-musculoskeletal-and-biohybrid-robotics/252189) · Step timeline · row 260 |
+| 2026-11-15 | University of Alberta, Computing Science PhD, Fall 2027 (Amii) | Take or confirm IELTS result with bands (7.0 overall, 6.5 each band required) by 2026-11-15 · `tsk-b7275b714b245a6b` | [Source page](https://www.ualberta.ca/en/computing-science/graduate-studies/programs-and-admissions/applications-and-admissions/index.html) · Step timeline · row 280 |
+| 2026-11-15 | UBC Computer Science PhD, September 2027 | Name faculty you want to work with; contacting them beforehand is encouraged but not required; do this by 2026-11-15 · `tsk-ffe1c127dc32c2b1` | [Source page](https://www.cs.ubc.ca/students/grad/admissions) · Step timeline · row 279 |
+| 2026-11-15 | SFU Engineering Science PhD (Fall 2027) | By 2026-11-15 pick 2-3 Engineering Science faculty (SLAM, inertial, medical AI fit) from the school faculty list and email each to confirm willingness to supervise (a willing supervisor is required before admis · `tsk-222cdc46bc9bf432` | [Source page](https://www.sfu.ca/students/calendar/2027/spring/programs/engineering-science/doctor-of-philosophy.html) · Step timeline · row 277 |
+| 2026-11-15 | SFU Computing Science PhD (Fall 2027) | By 2026-11-15 shortlist Computing Science faculty and email them your CV (the page does not require a supervisor, but contact is advisable; this is my suggestion, not a page requirement) · `tsk-89f0e8f4cae77815` | [Source page](https://www.sfu.ca/fas/study/future-graduates/apply/computing-science.html) · Step timeline · row 276 |
+| 2026-11-15 | Glasgow Graduate School scholarships (College of Science and Engineering, any supervisor) | By 2026-11-15 search for and email potential supervisors (the School page advises contacting one before applying) · `tsk-6666e0409dd12111` | [Source page](https://www.gla.ac.uk/schools/computing/postgraduateresearch/prospectivestudents/scholarshipsandfundingopportunities/studentshipinformation) · Step timeline · row 269 |
+| 2026-11-15 | McMaster University, Computing and Software, PhD (Sept 2027 intake) | By 2026-11-15 shortlist at least 3 CAS faculty members whose work matches (SLAM, inertial estimation, medical AI); the application requires naming 3 potential supervisors · `tsk-020a2b372a8e63d5` | [Source page](https://www.eng.mcmaster.ca//app/uploads/2025/11/CAS-Graduate-Information-1.pdf) · Step timeline · row 273 |
+| 2026-11-15 | ESA Networking/Partnering Initiative (NPI) co-funded PhD (host university in ESA Member State) | By 2026-11-15 identify host-university supervisors in ESA Member States with ESA-relevant robotics/autonomy topics (NPI focus: Spaceship ECSAT - robotics, autonomy, sample curation for exploration) · `tsk-e1864fa184cdd000` | [Source page](https://www.esa.int/Space_in_Member_States/United_Kingdom/Networking_Partnering_Initiative) · Step timeline · row 256 |
+| 2026-11-15 | TUM PhD Mobile Manipulation for Humanoid Robots | Submit robotics application subject to confirming German-language requirement · `tsk-3557c052cfe0f485` | [Source page](https://www.mos.ed.tum.de/en/avs/career/our-jobs/ki-motorsport-1/) · Step timeline · row 278 |
+| 2026-11-15 | IMPRS-IS Intelligent Systems PhD 2027 | Submit two-page motivation, CV, transcripts, supervisor preferences and 3 referees by end-of-day AoE · `tsk-fd8be329cb75bd78` | [Source page](https://imprs.is.mpg.de/application) · Step timeline · row 270 |
+| 2026-11-15 | BMW RoboTac PhD World Models and Visuo-Tactile Foundation Models | Email one English PDF with max one-page cover, CV, transcripts and two referee contacts to robotac@bmw.de · `tsk-098c237cf30c6433` | [Source page](https://www.robotac.eu/open-positions) · Step timeline · row 255 |
+| 2026-11-15 | University of Bern, Machine Learning in Medicine Lab (Prof. Lisa Koch): PhD in Machine Learning in Medicine, multimodal healt | By 2026-11-15 assemble CV and full BSc and MSc transcripts · `tsk-16dbb2b87c8a1aaf` | [Source page](https://mlm-lab.ch/jobs/) · Step timeline · row 281 |
+| 2026-11-15 | Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): R2T2-Med: Resource-Aware AI for Scalable and Deployable Medica | Request two references from institutional email accounts by 2026-11-15 · `tsk-a316bd24ce5227b0` | [Source page](https://www.exeter.ac.uk/study/funding/award/?id=6011) · Step timeline · row 265 |
+| 2026-11-15 | Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6014): Multiscale Scientific Machine Learning Digital Twins for High- | Request two references from institutional email accounts by 2026-11-15 · `tsk-0fe5640904a5fa65` | [Source page](https://www.exeter.ac.uk/study/funding/award/?id=6014) · Step timeline · row 267 |
+| 2026-11-15 | Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6015): Physics-Informed AI and Experimental Modelling of Ocean Mixing | Request two references from institutional email accounts by 2026-11-15 · `tsk-797321071abb740c` | [Source page](https://www.exeter.ac.uk/study/funding/award/?id=6015) · Step timeline · row 268 |
+| 2026-11-15 | Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6010): AI and Image Processing for Diabetic Retinopathy Smart Cameras | Request two references from institutional email accounts by 2026-11-15 · `tsk-e65a78ead6b73212` | [Source page](https://www.exeter.ac.uk/study/funding/award/?id=6010) · Step timeline · row 263 |
+| 2026-11-15 | Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): Explainable AI for Early Dementia Detection and Deployment (Do | Request two references from institutional email accounts by 2026-11-15 · `tsk-dd5e8e19a490a6fa` | [Source page](https://www.exeter.ac.uk/study/funding/award/?id=6011) · Step timeline · row 264 |
+| 2026-11-15 | Exeter EPSRC DLA studentship, Sept 2027 entry (award id 6011): Sovereign Agentic AI: Distilling Small Language Model Agents f | Request two references from institutional email accounts by 2026-11-15 · `tsk-e83b9253de0b1785` | [Source page](https://www.exeter.ac.uk/study/funding/award/?id=6011) · Step timeline · row 266 |
+| 2026-11-15 | ETH Zurich, Prof George Haller (Nonlinear Dynamics): PhD in Modeling and Control of Nonlinear Dynamical Systems from Data | 2026-11-15: submit through the ETH online portal (email applications are not considered) · `tsk-2386ea4f2f863424` | [Source page](https://jobs.ethz.ch/job/view/JOPG_ethz_fV3FNoofTG427Xo88T) · Step timeline · row 262 |
+| 2026-11-15 | ETH Zurich / PSI X-ray Imaging Professorship (Prof Marco Stampanoni): Doctoral Position in sparse reconstruction of virtual h | 2026-11-15: submit through the ETH online portal (email applications are not considered) · `tsk-717cb69e4e6a67e8` | [Source page](https://jobs.ethz.ch/job/view/JOPG_ethz_pGJRE5rDAavyV6eLYI) · Step timeline · row 257 |
+| 2026-11-15 | ETH Zurich D-BSSE Basel (Prof Dagmar Iber): PhD in Computational Methods for Digital Twins of Embryonic Development and Disea | 2026-11-15: submit through the ETH online portal (email applications are not considered) · `tsk-81ff23acad5b29bf` | [Source page](https://jobs.ethz.ch/job/view/JOPG_ethz_eMp6VK8Hmtj3lkloXX) · Step timeline · row 258 |
+
+## D. Application deadlines within seven days (14)
+
+| When | Application / workstream | Action | Source |
+|:--|:--|:--|:--|
 | 2026-11-16 | NTNU Gjovik, Ph.D. Candidate in Reinforcement Learning for Project Scheduling Problems (Jobbnorge 310778) | By 2026-10-30 email Yongping Liu with a short enquiry and CV | [Source page](https://www.jobbnorge.no/en/available-jobs/joblisting/pdf/310778) · Action list · row 54 |
 | 2026-11-16 | AI4I + Politecnico di Torino, funded PhD Agentic System-1/System-2 Architectures for Robot Autonomy | Submit expression of interest plus separate formal Apply@polito doctoral application no later than 16 Nov 14:00 CET. | [Source page](https://ai4i.it/phd-position-on-agentic-and-system-1system-2-architectures-for-robot-autonomy/) · Action list · row 52 |
 | 2026-11-16 | AI4I + Politecnico di Torino, funded PhD Adversarial Robustness in Multimodal Foundation Models | Select Computer Engineering and Systems doctoral call and submit formal PoliTo application by 16 Nov 14:00 CET; align vision/audio/LLM work with multimodal safety. | [Source page](https://ai4i.it/phd-position-on-adversarial-robustness-in-multi-modal-foundation-models/) · Action list · row 51 |
@@ -52,10 +76,11 @@ To confirm a task, copy its stable `tsk-...` identifier from the table and comme
 | 2026-11-20 | University of Vienna — Two FWF-funded PhDs in Efficient, Expressive and Robust Graph Neural Networks (EXOSPHERE) | Inspect the official PDF to choose algorithmic/numerical robustness or theoretical expressivity track. Apply following the institutional announcement by 20 Nov. | [Source page](https://taa.cs.univie.ac.at/news/story/exosphere) · Action list · row 62 |
 | 2026-11-20 | Inria ASTRA Paris — PhD Enforcing Persistence in Generative World Models for Robotics | Apply through Inria before 20 Nov; frame proposal around persistent world models, long-horizon planning, robust robot control and multimodal state estimation. Confirm role is still open despite earlier listed s | [Source page](https://jobs.inria.fr/public/classic/en/offres/2026-10570) · Action list · row 61 |
 | 2026-11-21 | TU/e Eindhoven + TUM, PhD Physics-Informed Generative AI for Dynamic Cardiac MRI (PRIMA-CMR) | Submit before 21 Nov, possibly sooner if vacancy fills; foreground uncertainty-aware reconstruction and scientific ML. | [Source page](https://www.academictransfer.com/en/jobs/364936/phd-in-physics-informed-generative-ai-for-dynamic-cardiac-mri/) · Action list · row 63 |
+| 2026-11-22 | ETH Zurich, Julia Vogt (Medical Data Science group): PhD in Machine Learning and Medical Data Science | By 2026-10-31: find the original ETH jobs.ethz.ch advert (not located) and confirm the deadline and portal | [Source page](https://www.applykite.com/positions/phd-in-machine-learning-and-medical-data-science-at-eth-zurich-7wdy7wpsqv) · Action list · row 64 |
 
 ## E. Earlier tasks, completion status unconfirmed
 
-There are **152** pre-2026-11-14 tasks with no confirmed completion status and whose final application deadline has not definitively passed, including **134** programme steps and **18** cross-route tasks. These represent *review work*, not automatic missed deadlines.
+There are **153** pre-2026-11-15 tasks with no confirmed completion status and whose final application deadline has not definitively passed, including **135** programme steps and **18** cross-route tasks. These represent *review work*, not automatic missed deadlines.
 
 | When | Application / workstream | Action | Source |
 |:--|:--|:--|:--|
@@ -101,7 +126,16 @@ The following earlier preparation steps are **not** additional November 6 submis
 
 | When | Application / workstream | Action | Source |
 |:--|:--|:--|:--|
-| — | None in the current snapshot | — | — |
+| 2026-10-29 | OIST Graduate School PhD, May or Sep 2027 entry (Admissions Workshop 2027) | By 2026-10-29 browse faculty and units (including Yamada MLDS and Pao Chan units) at https://www.oist.jp/research/faculty-members and check supervisor availability at https://www.oist.jp/admissions/phd-program/ · `tsk-42046fea5f5e7553` | [Source page](https://www.oist.jp/admissions/phd-program/apply-phd) · Step timeline · row 43 |
+| 2026-10-29 | Northeastern University London, PhD studentship: Algorithms/Hardware Co-Design for Bayesian and Ising Models (Rajendran; ref  | By 2026-10-29 email b.rajendran@nulondon.ac.uk with a short informal enquiry (confirm post still open given rolling shortlisting; ask about visa) · `tsk-f34b67f1ac0376ad` | [Source page](https://www.jobs.ac.uk/job/DTI287/) · Step timeline · row 40 |
+| 2026-10-29 | Institute of Science Tokyo, International Graduate Program IGP(A) Fall 2027 with MEXT recommendation | By 2026-10-29 download the IGP(A) application guide PDF from the info_url page and read it (the page says applicants must always refer to it); identify a theme/programme (PSIL, IPSSS, eMAT, Sustainable Bio-Econ · `tsk-079dc4537be5498f` | [Source page](https://admissions.isct.ac.jp/en/013/graduate/programs/igp/igp-a) · Step timeline · row 39 |
+| 2026-10-30 | OIST Graduate School PhD, May or Sep 2027 entry (Admissions Workshop 2027) | By 2026-10-30 enter 2-5 recommenders in the portal so letters are requested (OIST must receive at least 2 before you can submit; applicants cannot send letters themselves); faculty-level only · `tsk-b3d725655384e5a1` | [Source page](https://www.oist.jp/admissions/phd-program/apply-phd) · Step timeline · row 68 |
+| 2026-10-30 | Institute of Science Tokyo, International Graduate Program IGP(A) Fall 2027 with MEXT recommendation | By 2026-10-30 email the relevant programme contact for the consent letter (programme contacts are on the page) · `tsk-3582dd3fa15dac93` | [Source page](https://admissions.isct.ac.jp/en/013/graduate/programs/igp/igp-a) · Step timeline · row 62 |
+| 2026-11-04 | Northeastern University London, PhD studentship: Algorithms/Hardware Co-Design for Bayesian and Ising Models (Rajendran; ref  | By 2026-11-04 write covering letter explaining how you meet the requirements and why the project; update CV; merge both into a single PDF · `tsk-84f1f38ffb659ff3` | [Source page](https://www.jobs.ac.uk/job/DTI287/) · Step timeline · row 167 |
+| 2026-11-06 | Northeastern University London, PhD studentship: Algorithms/Hardware Co-Design for Bayesian and Ising Models (Rajendran; ref  | By 2026-11-06 submit through the Workday Apply button quoting R143025 and state whether you are likely to need a visa (submit early because rolling shortlisting) · `tsk-f8eaf110cccf9704` | [Source page](https://www.jobs.ac.uk/job/DTI287/) · Step timeline · row 191 |
+| 2026-11-06 | Northeastern University London, PhD studentship: Algorithms/Hardware Co-Design for Bayesian and Ising Models (Rajendran; ref  | Interviews planned during November 2026 · `tsk-2ec2bc131756d750` | [Source page](https://www.jobs.ac.uk/job/DTI287/) · Step timeline · row 192 |
+| 2026-11-08 | OIST Graduate School PhD, May or Sep 2027 entry (Admissions Workshop 2027) | By 2026-11-08 write statement of purpose (max 800 words / 3,000 characters), update CV, assemble transcripts and diplomas with English explanation if needed, passport photo page and ID photo (within last 3 mont · `tsk-b88005de80b87f1f` | [Source page](https://www.oist.jp/admissions/phd-program/apply-phd) · Step timeline · row 209 |
+| 2026-11-10 | OIST Graduate School PhD, May or Sep 2027 entry (Admissions Workshop 2027) | By 2026-11-10 confirm at least 2 recommendation letters have arrived · `tsk-7bd20d737d29c4d9` | [Source page](https://www.oist.jp/admissions/phd-program/apply-phd) · Step timeline · row 224 |
 
 ## G. Explicitly excluded application deadlines today
 

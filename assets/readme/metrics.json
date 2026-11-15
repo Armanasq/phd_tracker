@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-14",
+  "generated_at": "2026-11-15",
   "applications": 194,
-  "future": 104,
-  "due_14d": 30,
+  "future": 103,
+  "due_14d": 32,
   "source_leads": 23,
-  "contradictions": 2,
+  "contradictions": 1,
   "providers": {
     "academicpositions": {
       "observed": 0,
